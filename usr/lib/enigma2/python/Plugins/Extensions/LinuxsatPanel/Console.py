@@ -3,7 +3,7 @@
 # RAED & mfaraj57 &  (c) 2018
 
 from __future__ import print_function
-from . import _
+# from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -114,7 +114,7 @@ class Console(Screen):
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:
-                self['text'].appendText(_('Execution finished!!'))
+                self['text'].appendText('Execution finished!!')
             if self.finishedCallback is not None:
                 self.finishedCallback()
             if not self.errorOcurred and self.closeOnSuccess:
@@ -136,7 +136,7 @@ class Console(Screen):
         if self.finished:
             self.closeConsole()
         else:
-            self.cancel_msg = self.session.openWithCallback(self.cancelCallback, MessageBox, _('Cancel execution?'), type=MessageBox.TYPE_YESNO, default=False)
+            self.cancel_msg = self.session.openWithCallback(self.cancelCallback, MessageBox, 'Cancel execution?', type=MessageBox.TYPE_YESNO, default=False)
 
     def cancelCallback(self, ret=None):
         self.cancel_msg = None
