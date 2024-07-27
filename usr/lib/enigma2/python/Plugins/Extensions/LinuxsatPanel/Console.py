@@ -3,7 +3,7 @@
 # RAED & mfaraj57 &  (c) 2018
 
 from __future__ import print_function
-
+from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
