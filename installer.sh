@@ -1,9 +1,9 @@
 #!/bin/bash
 
-## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/tree/main/installer.sh -O - | /bin/sh
+## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh?token=GHSAT0AAAAAACUSXBJRO7QIN4JRH7IDF7ZSZVFMT6Q -O - | /bin/sh
 ## Only This 2 lines to edit with new version ######
 version='2.0'
-changelog='\nInit Project'
+changelog='Init Project'
 ##############################################################
 TMPPATH=/tmp/LinuxsatPanel-main
 FILEPATH=/tmp/main.tar.gz
