@@ -1,4 +1,6 @@
-======================================================================
+| ======================================================================
+![](https://komarev.com/ghpvc/?username=Belfagor2005)
+
 LINUXSAT-SUPPORT PANEL ADDONS
 
 2024.07.20 INIT UPDATE PANEL PLUGIN
@@ -24,4 +26,6 @@ code open to everyone. by Lululla
 
 Support on:
 linuxsat-support.com
-======================================================================
+| ======================================================================
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/screenshot.png?token=GHSAT0AAAAAACUSXBJRUSGOCJXI4KIO7KVWZVFMIMQ">
