@@ -60,8 +60,8 @@ class Console(Screen):
             self.skinName = [skin, 'Console']
         self.errorOcurred = False
         self['text'] = ScrollLabel('')
-        self['key_red'] = StaticText(_('Cancel'))
-        self['key_green'] = StaticText(_('Hide'))
+        self['key_red'] = StaticText('Cancel')
+        self['key_green'] = StaticText('Hide')
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
                                     {"ok": self.cancel,
                                      "up": self["text"].pageUp,
@@ -90,7 +90,7 @@ class Console(Screen):
 
     def startRun(self):
         if self.showStartStopText:
-            self['text'].setText(_('Execution progress') + '\n\n')
+            self['text'].setText('Execution progress') + '\n\n'
         print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
         if self.container.execute(self.cmdlist[self.run]):
             self.runFinished(-1)
@@ -120,8 +120,8 @@ class Console(Screen):
             if not self.errorOcurred and self.closeOnSuccess:
                 self.closeConsole()
             else:
-                self['text'].appendText(_('\nPress OK or Exit to abort!'))
-                self['key_red'].setText(_('Exit'))
+                self['text'].appendText('\nPress OK or Exit to abort!')
+                self['key_red'].setText('Exit')
                 self['key_green'].setText('')
 
     def toggleHideShow(self):
