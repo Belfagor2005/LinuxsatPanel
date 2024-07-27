@@ -1,0 +1,13 @@
+﻿#!/bin/sh
+
+dreamos='/var/lib/dpkg/status'
+if [ -d $dreamos ]; then
+	rm -rf /usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel
+	dpkg -r enigma2-plugin-extensions-linuxsat-panel
+else
+	opkg remove enigma2-plugin-extensions-linuxsat-panel
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel
+fi
+echo "Plugin removed! You should restart enigma2 now!"
+exit 0
+
