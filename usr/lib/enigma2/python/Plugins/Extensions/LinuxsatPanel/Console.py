@@ -63,15 +63,13 @@ class Console(Screen):
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Hide'))
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
-            {
-            "ok": self.cancel,
-            "up": self["text"].pageUp,
-            "down": self["text"].pageDown,
-            "red": self.cancel,
-            "green": self.toggleHideShow,
-            "blue": self.restartenigma,
-            "exit": self.cancel,
-            }, -1)
+                                    {"ok": self.cancel,
+                                     "up": self["text"].pageUp,
+                                     "down": self["text"].pageDown,
+                                     "red": self.cancel,
+                                     "green": self.toggleHideShow,
+                                     "blue": self.restartenigma,
+                                     "exit": self.cancel}, -1)
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
         self.newtitle = title == 'Console' and _('Console') or title
         self.cancel_msg = None
@@ -112,6 +110,7 @@ class Console(Screen):
                 lastpage = self['text'].isAtLastPage()
             except:
                 lastpage = self['text']
+            print('lastpage', lastpage)
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:
