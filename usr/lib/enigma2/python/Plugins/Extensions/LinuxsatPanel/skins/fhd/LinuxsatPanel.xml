@@ -1,0 +1,54 @@
+<screen name="LinuxsatPanelFHD" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
+    <ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel.png" backgroundColor="#25062748" alphatest="on"/>
+    <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
+    <widget name="info" position="1218,190" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+    <widget source="session.VideoPicture" render="Pig" position="1218,535" size="606,339" zPosition="1" backgroundColor="#ff000000"/>
+	<!-- clock -->
+	<widget source="global.CurrentTime" render="Label" position="1514,931" size="410,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+		<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget source="global.CurrentTime" render="Label" position="1559,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
+		<convert type="ClockToText">Format %A %d %B</convert>
+	</widget>
+    <widget name="frame" position="80,200" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/pic_frame2.png" zPosition="3" alphatest="on" />
+    <widget source="label1" render="Label" position="50,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap1" position="80,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label2" render="Label" position="280,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap2" position="310,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label3" render="Label" position="490,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap3" position="520,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label4" render="Label" position="700,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap4" position="730,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label5" render="Label" position="910,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap5" position="940,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label6" render="Label" position="50,585" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap6" position="80,425" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label7" render="Label" position="280,585" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap7" position="310,425" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label8" render="Label" position="490,585" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap8" position="520,425" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label9" render="Label" position="700,585" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap9" position="730,425" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label10" render="Label" position="910,585" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap10" position="940,425" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label11" render="Label" position="50,795" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap11" position="80,635" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label12" render="Label" position="280,795" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap12" position="310,635" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label13" render="Label" position="490,795" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap13" position="520,635" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label14" render="Label" position="700,795" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap14" position="730,635" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label15" render="Label" position="910,795" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap15" position="940,635" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label16" render="Label" position="50,1005" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap16" position="80,845" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label17" render="Label" position="280,1005" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap17" position="310,845" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label18" render="Label" position="490,1005" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap18" position="520,845" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label19" render="Label" position="700,1005" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap19" position="730,845" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+    <widget source="label20" render="Label" position="910,1005" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
+    <widget name="pixmap20" position="940,845" size="150,150" zPosition="2" transparent="1" alphatest="on"/>
+</screen>

@@ -1,0 +1,312 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LinuxsatPanel\n"
+"POT-Creation-Date: 2024-07-27 16:25+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: 沙鸥 lexlong <804381256@qq.com>\n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: plugin.py\n"
+
+#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1200
+msgid "Please Wait..."
+msgstr ""
+
+#: plugin.py:869
+msgid "Exit"
+msgstr "退出"
+
+#: plugin.py:870
+msgid "Install"
+msgstr ""
+
+#: plugin.py:871
+msgid "Remove"
+msgstr "删除"
+
+#: plugin.py:872
+msgid "Restart enigma"
+msgstr "是否现在重新启动GUI"
+
+#: plugin.py:889
+msgid "Load Category..."
+msgstr ""
+
+#: plugin.py:913
+msgid "Category: "
+msgstr ""
+
+#: plugin.py:946 plugin.py:956
+msgid "Unknow Image!"
+msgstr ""
+
+#: plugin.py:968
+#, python-format
+msgid "Do you want to install %s?"
+msgstr ""
+
+#: plugin.py:988 plugin.py:1144
+#, python-format
+msgid ""
+"Installing %s\n"
+"Please Wait..."
+msgstr ""
+
+#: plugin.py:1085
+msgid "Download page get failed ..."
+msgstr ""
+
+#: plugin.py:1095
+msgid "Sorting Terrestrial channels with Lcn rules Completed"
+msgstr ""
+
+#: plugin.py:1102
+msgid "Do you want to install?"
+msgstr ""
+
+#: plugin.py:1150
+msgid "Settings Not Installed ..."
+msgstr ""
+
+#: plugin.py:1161
+msgid "Do you want to remove?"
+msgstr ""
+
+#: plugin.py:1175
+#, python-format
+msgid "Removing %s"
+msgstr ""
+
+#: plugin.py:1181
+msgid "Do you want to restart Gui Interface?"
+msgstr ""
+
+#: plugin.py:1233
+msgid "Unable to download updates!"
+msgstr ""
+
+#: plugin.py:1353 plugin.py:1357
+msgid "Free Space:"
+msgstr ""
+
+#: plugin.py:1353 plugin.py:1357
+msgid "of"
+msgstr ""
+
+#: plugin.py:1368
+msgid "Check Connection!"
+msgstr ""
+
+#: plugin.py:1392
+msgid "Linuxsat Panel"
+msgstr ""
+
+#~ msgid "interval"
+#~ msgstr "间隔"
+
+#~ msgid "fixed time"
+#~ msgstr "预定时间"
+
+#~ msgid "Back"
+#~ msgstr "返回"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#, python-format
+#~ msgid "Last channel update: %s"
+#~ msgstr "频道更新选项: %s"
+
+#, fuzzy
+#~| msgid "Server for Player used"
+#~ msgid "Server for Player Used"
+#~ msgstr "使用的播放器服务器"
+
+#, fuzzy, python-format
+#~| msgid "Server for player. Use it: %s"
+#~ msgid ""
+#~ "Server for player.\n"
+#~ "Now %s"
+#~ msgstr "播放器服务器，使用: %s"
+
+#, fuzzy
+#~| msgid "Ipv6 state lan (On/Off), now is:"
+#~ msgid "Ipv6 State Of Lan (On/Off)"
+#~ msgstr "Ipv6状态局域网（开/关） ，现在是："
+
+#, fuzzy, python-format
+#~| msgid "Active or Disactive lan Ipv6, now is: %s"
+#~ msgid ""
+#~ "Active or Disactive lan Ipv6.\n"
+#~ "Now %s"
+#~ msgstr "启用或禁用局域网Ipv6,当前是：%s"
+
+#~ msgid "Movie Services Reference"
+#~ msgstr "电影服务参考"
+
+#~ msgid "Configure service Reference Iptv-Gstreamer-Exteplayer3"
+#~ msgstr "配置服务引用Dvb-Iptv-Gstreamer-Exteplayer3"
+
+#~ msgid "Select Fonts"
+#~ msgstr "选择字体"
+
+#, fuzzy
+#~| msgid "Configure Fonts. Eg:Arabic or other."
+#~ msgid ""
+#~ "Configure Fonts.\n"
+#~ "Eg:Arabic or other language."
+#~ msgstr "配置字体,例如：阿拉伯语或其他."
+
+#~ msgid "Link in Main Menu"
+#~ msgstr "主菜单中显示插件"
+
+#, fuzzy
+#~| msgid "Schedule type:"
+#~ msgid "Scheduled Bouquet Update:"
+#~ msgstr "计划类型:"
+
+#~ msgid "Active Automatic Bouquet Update"
+#~ msgstr "主动自动列表更新"
+
+#~ msgid "Schedule type:"
+#~ msgstr "计划类型:"
+
+#~ msgid "At an interval of hours or at a fixed time"
+#~ msgstr "每隔几个小时或固定时间"
+
+#~ msgid "Update interval (minutes):"
+#~ msgstr "更新间隔（分钟） ："
+
+#~ msgid "Configure every interval of minutes from now"
+#~ msgstr "从现在起每隔几分钟配置一次"
+
+#~ msgid "Time to start update:"
+#~ msgstr "开始更新的时间："
+
+#~ msgid "Configure at a fixed time"
+#~ msgstr "在固定时间配置"
+
+#~ msgid "SELECT YOUR CHOICE"
+#~ msgstr "请选择"
+
+#~ msgid "Ipv6 [Off]?"
+#~ msgstr "Ipv6 [关]?"
+
+#~ msgid "Ipv6 [On]?"
+#~ msgstr "Ipv6 [开]?"
+
+#~ msgid ""
+#~ "Settings saved successfully !\n"
+#~ "you need to restart the GUI\n"
+#~ "to apply the new configuration!\n"
+#~ "Do you want to Restart the GUI now?"
+#~ msgstr ""
+#~ "设置保存成功！\n"
+#~ "您需要重新启动GUI\n"
+#~ "应用新配置！\n"
+#~ "是否要立即重新启动GUI?"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "是否关闭而不保存设置？"
+
+#~ msgid "HALIGN"
+#~ msgstr "HALIGN"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "%s\n"
+#~| "\n"
+#~| "\n"
+#~| "Thanks:\n"
+#~| "@KiddaC\n"
+#~| "@oktus\n"
+#~| "All staff Linuxsat-support.com\n"
+#~| "Corvoboys - Forum\n"
+#~| "\n"
+#~| "This plugin is free,\n"
+#~| "no stream direct on server\n"
+#~| "but only free channel found on the net"
+#~ msgid ""
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Thanks:\n"
+#~ "@KiddaC\n"
+#~ "@oktus\n"
+#~ "Qu4k3\n"
+#~ "All staff Linuxsat-support.com\n"
+#~ "Corvoboys - Forum\n"
+#~ "\n"
+#~ "This plugin is free,\n"
+#~ "no stream direct on server\n"
+#~ "but only free channel found on the net"
+#~ msgstr ""
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "谢谢：\n"
+#~ "@ KiddaC\n"
+#~ "@ oktus\n"
+#~ "所有员工Linuxsat-support.com\n"
+#~ "Corvoboys -论坛\n"
+#~ "\n"
+#~ "这个插件是免费的，\n"
+#~ "服务器上没有直接流\n"
+#~ "但只有在网上找到免费频道"
+
+#~ msgid "Info Vavoo"
+#~ msgstr "Vavoo相关"
+
+#~ msgid "Remove all Vavoo Favorite Bouquet?"
+#~ msgstr "删除所有Vavoo收藏的分组？"
+
+#~ msgid "Vavoo Favorites List have been removed"
+#~ msgstr "Vavoo收藏夹列表已被删除"
+
+#~ msgid "Export"
+#~ msgstr "导出"
+
+#~ msgid "Search"
+#~ msgstr "搜索"
+
+#~ msgid "Filter this category..."
+#~ msgstr "筛选此类别..."
+
+#~ msgid "No channels found in search!!!"
+#~ msgstr "搜索中未找到频道！"
+
+#~ msgid ""
+#~ "Do you want to Convert to favorite .tv ?\n"
+#~ "\n"
+#~ "Attention!! It may take some time\n"
+#~ "depending on the number of streams contained !!!"
+#~ msgstr ""
+#~ "是否要转换为收藏的.tv ？\n"
+#~ "\n"
+#~ "注意！ ！这可能需要一些时间\n"
+#~ "取决于包含的流数量！ ！ ！"
+
+#, python-format
+#~ msgid ""
+#~ "bouquets reloaded..\n"
+#~ "With %s channel"
+#~ msgstr ""
+#~ "频道群已重新加载.\n"
+#~ "使用%s频道"
+
+#~ msgid "Download Error"
+#~ msgstr "下载错误"
+
+#~ msgid "Resolution Change Failed"
+#~ msgstr "设置更改失败"
+
+#~ msgid "Vavoo Stream Live"
+#~ msgstr "Vavoo直播"
+
+#~ msgid "Automatic bouquet update (schedule):"
+#~ msgstr "自动列表更新（时间表）："

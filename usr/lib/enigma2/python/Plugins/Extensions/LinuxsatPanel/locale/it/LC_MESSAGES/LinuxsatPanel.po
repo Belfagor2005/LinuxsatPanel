@@ -1,0 +1,112 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LinuxsatPanel\n"
+"POT-Creation-Date: 2024-07-26 17:51+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: plugin.py\n"
+
+#: plugin.py:429 plugin.py:697 plugin.py:904 plugin.py:1217
+msgid "Please Wait..."
+msgstr "Attendi Prego..."
+
+#: plugin.py:886
+msgid "Exit"
+msgstr "Esci"
+
+#: plugin.py:887
+msgid "Install"
+msgstr "Installa/Aggiorna"
+
+#: plugin.py:888
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: plugin.py:889
+msgid "Restart enigma"
+msgstr "Riavvia Enigma"
+
+#: plugin.py:906
+msgid "Load Category..."
+msgstr "Carico Categoria..."
+
+#: plugin.py:930
+msgid "Category: "
+msgstr "Categoria: "
+
+#: plugin.py:963 plugin.py:973
+msgid "Unknow Image!"
+msgstr "Immagine non corretta!"
+
+#: plugin.py:985
+#, python-format
+msgid "Do you want to install %s?"
+msgstr "Vuoi installare %s ?"
+
+#: plugin.py:1005 plugin.py:1161
+#, python-format
+msgid ""
+"Installing %s\n"
+"Please Wait..."
+msgstr ""
+"Installa %s\n"
+"Attendere Prego..."
+
+#: plugin.py:1102
+msgid "Download page get failed ..."
+msgstr ""
+
+#: plugin.py:1112
+msgid "Sorting Terrestrial channels with Lcn rules Completed"
+msgstr ""
+
+#: plugin.py:1119
+msgid "Do you want to install?"
+msgstr "Vuoi installare ?"
+
+#: plugin.py:1167
+msgid "Settings Not Installed ..."
+msgstr ""
+
+#: plugin.py:1178
+msgid "Do you want to remove?"
+msgstr "Vuoi rimuovere ?"
+
+#: plugin.py:1192
+#, python-format
+msgid "Removing %s"
+msgstr "Rimuovo %s"
+
+#: plugin.py:1198
+msgid "Do you want to restart Gui Interface?"
+msgstr "Vuoi riavviare l'Interfaccia Grafica?"
+
+#: plugin.py:1250
+msgid "Unable to download updates!"
+msgstr "Impossibile scaricare aggiornamento!"
+
+#: plugin.py:1370 plugin.py:1374
+msgid "Free Space:"
+msgstr ""
+
+#: plugin.py:1370 plugin.py:1374
+msgid "of"
+msgstr ""
+
+#: plugin.py:1385
+msgid "Check Connection!"
+msgstr "Controlla Connessione!"
+
+#: plugin.py:1409
+msgid "Linuxsat Panel"
+msgstr "Linuxsat Panel"
+
+#~ msgid "Wait  please..."
+#~ msgstr "Attendi prego..."

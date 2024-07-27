@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: LinuxsatPanel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-27 16:23+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: @Kqiqi1\n"
+"Language-Team: *\n"
+"Language: sq_AL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: plugin.py\n"
+
+#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1200
+msgid "Please Wait..."
+msgstr ""
+
+#: plugin.py:869
+msgid "Exit"
+msgstr "Dalje"
+
+#: plugin.py:870
+msgid "Install"
+msgstr ""
+
+#: plugin.py:871
+msgid "Remove"
+msgstr "Fshije"
+
+#: plugin.py:872
+msgid "Restart enigma"
+msgstr "Të rindizet GUI tani"
+
+#: plugin.py:889
+msgid "Load Category..."
+msgstr ""
+
+#: plugin.py:913
+msgid "Category: "
+msgstr ""
+
+#: plugin.py:946 plugin.py:956
+msgid "Unknow Image!"
+msgstr ""
+
+#: plugin.py:968
+#, python-format
+msgid "Do you want to install %s?"
+msgstr ""
+
+#: plugin.py:988 plugin.py:1144
+#, python-format
+msgid ""
+"Installing %s\n"
+"Please Wait..."
+msgstr ""
+
+#: plugin.py:1085
+msgid "Download page get failed ..."
+msgstr ""
+
+#: plugin.py:1095
+msgid "Sorting Terrestrial channels with Lcn rules Completed"
+msgstr ""
+
+#: plugin.py:1102
+msgid "Do you want to install?"
+msgstr ""
+
+#: plugin.py:1150
+msgid "Settings Not Installed ..."
+msgstr ""
+
+#: plugin.py:1161
+msgid "Do you want to remove?"
+msgstr ""
+
+#: plugin.py:1175
+#, python-format
+msgid "Removing %s"
+msgstr ""
+
+#: plugin.py:1181
+msgid "Do you want to restart Gui Interface?"
+msgstr ""
+
+#: plugin.py:1233
+msgid "Unable to download updates!"
+msgstr ""
+
+#: plugin.py:1353 plugin.py:1357
+msgid "Free Space:"
+msgstr ""
+
+#: plugin.py:1353 plugin.py:1357
+msgid "of"
+msgstr ""
+
+#: plugin.py:1368
+msgid "Check Connection!"
+msgstr ""
+
+#: plugin.py:1392
+msgid "Linuxsat Panel"
+msgstr ""

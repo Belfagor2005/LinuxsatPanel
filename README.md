@@ -28,5 +28,5 @@ Support on:
 linuxsat-support.com
 |======================================================================
 
-<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/screenshot.png?token=GHSAT0AAAAAACUSXBJRUSGOCJXI4KIO7KVWZVFMIMQ">
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/screenshot.png">
 
