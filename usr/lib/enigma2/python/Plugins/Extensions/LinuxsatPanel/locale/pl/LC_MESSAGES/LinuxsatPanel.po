@@ -1,10 +1,11 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-07-27 16:24+0200\n"
+"POT-Creation-Date: 2024-07-28 19:36+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Warder\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,9 +14,9 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1200
+#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1198
 msgid "Please Wait..."
-msgstr ""
+msgstr "Proszę czekać..."
 
 #: plugin.py:869
 msgid "Exit"
@@ -23,7 +24,7 @@ msgstr "Wyjście"
 
 #: plugin.py:870
 msgid "Install"
-msgstr ""
+msgstr "Instaluj"
 
 #: plugin.py:871
 msgid "Remove"
@@ -31,77 +32,79 @@ msgstr "Usuń"
 
 #: plugin.py:872
 msgid "Restart enigma"
-msgstr ""
+msgstr "Ponowne uruchomienie enigmy"
 
 #: plugin.py:889
 msgid "Load Category..."
-msgstr ""
+msgstr "Załaduj kategorię..."
 
 #: plugin.py:913
 msgid "Category: "
-msgstr ""
+msgstr "Kategoria: "
 
 #: plugin.py:946 plugin.py:956
 msgid "Unknow Image!"
-msgstr ""
+msgstr "Nieznany obraz!"
 
 #: plugin.py:968
 #, python-format
 msgid "Do you want to install %s?"
-msgstr ""
+msgstr "Czy chcesz zainstalować %s?"
 
-#: plugin.py:988 plugin.py:1144
+#: plugin.py:988 plugin.py:1142
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
+"Instalowanie %s\n"
+"Proszę czekać..."
 
-#: plugin.py:1085
+#: plugin.py:1083
 msgid "Download page get failed ..."
-msgstr ""
+msgstr "Strona pobierania nie powiodła się..."
 
-#: plugin.py:1095
+#: plugin.py:1093
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
-msgstr ""
+msgstr "Sortowanie kanałów naziemnych według reguł Lcn zostało zakończone"
 
-#: plugin.py:1102
+#: plugin.py:1100
 msgid "Do you want to install?"
-msgstr ""
+msgstr "Czy chcesz zainstalować?"
 
-#: plugin.py:1150
+#: plugin.py:1148
 msgid "Settings Not Installed ..."
-msgstr ""
+msgstr "Ustawienia nie zostały zainstalowane..."
 
-#: plugin.py:1161
+#: plugin.py:1159
 msgid "Do you want to remove?"
-msgstr ""
+msgstr "Czy chcesz usunąć?"
 
-#: plugin.py:1175
+#: plugin.py:1173
 #, python-format
 msgid "Removing %s"
-msgstr ""
+msgstr "Usuwanie %s"
 
-#: plugin.py:1181
+#: plugin.py:1179
 msgid "Do you want to restart Gui Interface?"
-msgstr ""
+msgstr "Czy chcesz ponownie uruchomić interfejs Gui?"
 
-#: plugin.py:1233
+#: plugin.py:1231
 msgid "Unable to download updates!"
-msgstr ""
+msgstr "Nie można pobrać aktualizacji!"
 
-#: plugin.py:1353 plugin.py:1357
+#: plugin.py:1351 plugin.py:1355
 msgid "Free Space:"
-msgstr ""
+msgstr "Wolna przestrzeń:"
 
-#: plugin.py:1353 plugin.py:1357
+#: plugin.py:1351 plugin.py:1355
 msgid "of"
-msgstr ""
+msgstr "z"
 
-#: plugin.py:1368
+#: plugin.py:1366
 msgid "Check Connection!"
-msgstr ""
+msgstr "Sprawdź połączenie!"
 
-#: plugin.py:1392
+#: plugin.py:1390
 msgid "Linuxsat Panel"
-msgstr ""
+msgstr "Panel Linuxsat"
