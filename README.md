@@ -5,6 +5,7 @@ LINUXSAT-SUPPORT PANEL ADDONS
 
 <img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/LinuxsatPanel.png">
 
+[![Python package](https://github.com/Belfagor2005/LinuxsatPanel/actions/workflows/pylint.yml/badge.svg)](https://github.com/Belfagor2005/LinuxsatPanel/actions/workflows/pylint.yml)
 
 2024.07.20 INIT UPDATE PANEL PLUGIN
 
