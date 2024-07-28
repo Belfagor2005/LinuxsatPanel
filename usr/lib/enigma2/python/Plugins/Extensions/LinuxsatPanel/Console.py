@@ -71,7 +71,7 @@ class Console(Screen):
                                      "blue": self.restartenigma,
                                      "exit": self.cancel}, -1)
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
-        self.newtitle = title == 'Console' and _('Console') or title
+        self.newtitle = title == 'Console' or title
         self.cancel_msg = None
         self.onShown.append(self.updateTitle)
         self.container = eConsoleAppContainer()
