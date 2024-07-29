@@ -122,6 +122,49 @@ if sslverify:
             return ctx
 
 
+'''
+# def make_request(url):
+    # try:
+        # import requests
+        # response = requests.get(url, verify=False)
+        # if response.status_code == 200:
+            # # link = requests.get(url, headers={'User-Agent': AgentRequest}, timeout=15, verify=False, stream=True).text
+        # # return link
+    # # except ImportError:
+            # req = Request(url)
+            # req.add_header('User-Agent', AgentRequest)
+            # response = urlopen(req, None, 10)
+
+            # if PY3:
+                # url = response.read().decode("utf-8")
+            # else:
+                # url = response.read().encode("utf-8")
+
+            # response.close()
+            # return url
+
+    # except ImportError:
+        # return
+'''
+
+
+def make_request(url):
+    try:
+        import requests
+        response = requests.get(url, verify=False, timeout=5)
+        if response.status_code == 200:
+            link = requests.get(url, headers={'User-Agent': AgentRequest}, timeout=10, verify=False, stream=True).text
+            return link
+    except ImportError:
+        req = Request(url)
+        req.add_header('User-Agent', 'E2 Plugin Lululla')
+        response = urlopen(req, None, 10)
+        link = response.read().decode('utf-8')
+        response.close()
+        return link
+    return
+
+
 if isFHD():
     skin_path = plugin_path + '/skins/fhd/'
     picfold = plugin_path + "/LSicons2/"
@@ -841,7 +884,7 @@ class LSChannel(Screen):
             url = 'http://www.manutek.it/isetting/index.php'
 
         if 'morpheus' in name.lower():
-            url = 'https://github.com/morpheus883/enigma2-zipped'
+            url = 'http://github.com/morpheus883/enigma2-zipped'
 
         if 'vhannibal 1' in name.lower():
             url = 'https://www.vhannibal.net/asd.php'
@@ -973,6 +1016,9 @@ class addInstall(Screen):
             dest = "/tmp"
             # cmd1 = "wget -P '" + dest + "' '" + self.url + "'"
             cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
+
+            # cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
+
             if ".deb" in self.plug:
                 cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
             if ".ipk" in self.plug:
@@ -985,16 +1031,20 @@ class addInstall(Screen):
                 cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
             cmd3 = "rm '/tmp/" + self.plug + "'"
             cmd = cmd1 + " && " + cmd2 + " && " + cmd3
+            print('cmd okclicked:', cmd2)
             title = (_("Installing %s\nPlease Wait...") % self.iname)
             self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
-        data = checkGZIP(self.fxml)
-        r = data
+        r = make_request(self.fxml)
+        if PY3:
+            import six
+            r = six.ensure_str(r)
         self.names = []
         self.urls = []
         try:
+
             if 'ciefp' in self.name.lower():
                 n1 = r.find('title="README.txt', 0)
                 n2 = r.find('href="#readme">', n1)
@@ -1009,6 +1059,7 @@ class addInstall(Screen):
                         self.names.append(name.strip())
                         self.urls.append(url.strip())
                         self.downloading = True
+
             if 'cyrus' in self.name.lower():
                 n1 = r.find('name="Sat">', 0)
                 n2 = r.find("/ruleset>", n1)
@@ -1040,38 +1091,45 @@ class addInstall(Screen):
                     self.downloading = True
 
             if 'morpheus' in self.name.lower():
-                regex = 'name":"E2_Morph883_(.*?).zip".*?path":"(.*?)"'
+                regex = 'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
+                # n1 = r.find('title="README.txt', 0)
+                # n2 = r.find('href="#readme">', n1)
+                # r = r[n1:n2]
                 match = re.compile(regex).findall(r)
-                # print('match:', match)
+                print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         url = url.replace('blob', 'raw')
-                        url = 'https://github.com/morpheus883/enigma2-zipped/raw/master/' + url
+                        url = 'https://github.com' + url
                         name = 'Morph883 ' + name
+                        if name in self.names:
+                            continue
                         self.names.append(name.strip())
                         self.urls.append(url.strip())
                         self.downloading = True
 
             if 'vhannibal 1' in self.name.lower():
-                match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(data)
-                # print('match:', match)
+                match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
+                print('match:', match)
                 for url, name, date in match:
-                    name = name.replace('Vhannibal', '').replace('&#127381;', '') + ' ' + date
+                    name = str(name) + ' ' + date
                     url = "https://www.vhannibal.net/" + url
+                    print('url vhan1:', url)
                     self.names.append(name.strip())
                     self.urls.append(url.strip())
                     self.downloading = True
 
             if 'vhannibal 2' in self.name.lower():
                 regex = '<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
-                match = re.compile(regex).findall(data)
-                # print('match:', match)
+                match = re.compile(regex).findall(r)
+                print('match:', match)
                 for url, date in match:
                     if '.php' in url.lower():
                         continue
                     name = url
                     name = name.replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
+                    print('url vhan2:', url)
                     self.names.append(name.strip())
                     self.urls.append(url.strip())
                     self.downloading = True
@@ -1118,10 +1176,21 @@ class addInstall(Screen):
                 # with open(dest, 'wb') as f:
                     # f.write(r.content)
                 '''
-                with open(dest, 'wb') as f:
-                    f.write(checkGZIP(url))
-                    f.close()
-
+                '''
+                # with open(dest, 'w') as f:
+                    # f.write(checkGZIP(url))
+                    # # f.write(make_request(url))
+                    # f.close()
+                '''
+                '''
+                # write_file(url, dest)
+                # import requests
+                # r = requests.get(url)
+                # with open(dest, 'wb') as f:
+                    # f.write(r.content)
+                '''
+                from six.moves.urllib.request import urlretrieve
+                urlretrieve(url, dest)
                 if os.path.exists(dest) and '.zip' in dest:
                     fdest1 = "/tmp/unzipped"
                     fdest2 = "/etc/enigma2"
@@ -1143,7 +1212,6 @@ class addInstall(Screen):
                     self.session.openWithCallback(self.yes, Console, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
                                                   closeOnSuccess=False)
-
             else:
                 self['info'].setText(_('Settings Not Installed ...'))
 
@@ -1289,11 +1357,30 @@ def add_skin_font():
     addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
 
 
+def write_file(url, dest):
+    try:
+        import requests
+        r = requests.get(url)
+        with open(dest, 'wb') as f:
+            f.write(r.content)
+        return
+    except Exception as e:
+        print('write file failur: ', e)
+
+
 def checkGZIP(url):
+    url = url
     from io import StringIO
     import gzip
     import requests
-    hdr = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3'}
+    import sys
+    if sys.version_info[0] == 3:
+        from urllib.request import (urlopen, Request)
+        # unicode = str
+        # PY3 = True
+    else:
+        from urllib2 import (urlopen, Request)
+    hdr = {"User-Agent": AgentRequest}
     response = None
     request = Request(url, headers=hdr)
     try:
@@ -1301,15 +1388,16 @@ def checkGZIP(url):
         if response.info().get('Content-Encoding') == 'gzip':
             buffer = StringIO(response.read())
             deflatedContent = gzip.GzipFile(fileobj=buffer)
-            if PY3:
+            if sys.version_info[0] == 3:
                 return deflatedContent.read().decode('utf-8')
             else:
                 return deflatedContent.read()
         else:
-            if PY3:
+            if sys.version_info[0] == 3:
                 return response.read().decode('utf-8')
             else:
                 return response.read()
+
     except requests.exceptions.RequestException as e:
         print("Request error:", e)
     except Exception as e:

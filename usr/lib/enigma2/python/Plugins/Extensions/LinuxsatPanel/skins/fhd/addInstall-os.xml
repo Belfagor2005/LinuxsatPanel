@@ -2,7 +2,7 @@
 	<ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
 	<widget source="session.VideoPicture" render="Pig" position="1218,535" size="606,339" zPosition="1" backgroundColor="#ff000000"/>
-	<widget name="list" position="80,258" size="1000,645" scrollbarMode="showOnDemand" zPosition="4" backgroundColor="#404040" foregroundColor="white" backgroundColorSelected="#404040" foregroundColorSelected="#fec51b"/>
+	<widget name="list" position="80,258" size="1000,645" scrollbarMode="showOnDemand" zPosition="4" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b"/>
 	<widget name="info" position="80,178" zPosition="4" size="1000,70" font="lsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
 	<widget name="fspace" position="78,912" zPosition="4" size="1000,65" font="lbsat;32" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/red.png" position="90,990" size="45,45" zPosition="4" alphatest="on"/>
