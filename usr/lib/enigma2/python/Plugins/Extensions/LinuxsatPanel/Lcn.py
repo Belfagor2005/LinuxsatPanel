@@ -9,18 +9,19 @@ import re
 import glob
 import shutil
 
+
 # ===============================================================================
 # LinuxsatPanel Plugin
 #
 # mod. by Lululla at 20240720
 #
-# ATTENTION PLEASE...    
+# ATTENTION PLEASE...
 # This is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
 # Software Foundation; either version 2, or (at your option) any later
 # version.
-# You must not remove the credits at  
-# all and you must make the modified  
+# You must not remove the credits at
+# all and you must make the modified
 # code open to everyone. by Lululla
 # ===============================================================================
 
@@ -38,6 +39,8 @@ TrasponderListNewLamedb = plugin_path + '/temp/TrasponderListNewLamedb'
 ServOldLamedb = plugin_path + '/temp/ServiceListOldLamedb'
 TransOldLamedb = plugin_path + '/temp/TrasponderListOldLamedb'
 TerChArch = plugin_path + '/temp/TerrestrialChannelListArchive'
+IptvChArch = plugin_path + '/temp'
+e2etc = '/etc/enigma2'
 ee2ldb = '/etc/enigma2/lamedb'
 
 
@@ -48,6 +51,10 @@ def ReloadBouquets(x):
     except ImportError:
         eDVBDB = None
     print("\n----Reloading bouquets----")
+
+    # print("\n----Reloading Iptv----")
+    # copy_files_to_enigma2
+
     global setx
     if x == 1:
         setx = 0
@@ -65,6 +72,7 @@ def ReloadBouquets(x):
         os.system("wget -qO - http://127.0.0.1/web/servicelistreload?mode=4 > /dev/null 2>&1 &")
         print("wGET: bouquets reloaded...")
     return  # x
+
 
 def Bouquet():
     for file in os.listdir("/etc/enigma2/"):
@@ -261,6 +269,32 @@ def terrestrial():
     return
 
 
+def SearchIPTV():
+    iptv_list = []
+    for iptv_file in sorted(glob.glob("/etc/enigma2/userbouquet.*.tv")):
+        usbq = open(iptv_file, "r").read()
+        usbq_lines = usbq.strip().lower()
+        if "http" in usbq_lines:
+            iptv_list.append(os.path.basename(iptv_file))
+
+    if not iptv_list:
+        return False
+    else:
+        return iptv_list
+
+
+def keepiptv():
+    iptv_to_save = SearchIPTV()
+    print('iptv_to_save:', iptv_to_save)
+    if iptv_to_save:
+        for iptv in iptv_to_save:
+            cmnd = "cp -rf /etc/enigma2/" + iptv + " " + IptvChArch + '/' + iptv
+            print('cmnd:', cmnd)
+            os.system(cmnd)
+        return True
+    return False
+
+
 def terrestrial_rest():
     if LamedbRestore():
         TransferBouquetTerrestrialFinal()
@@ -285,6 +319,26 @@ def terrestrial_rest():
                 os.system('mv -f /etc/enigma2/new_bouquets.tv /etc/enigma2/bouquets.tv')
         if os.path.exists('/etc/enigma2/lcndb'):
             lcnstart()
+
+
+def copy_files_to_enigma2():
+    IptvChArch = plugin_path + '/temp'
+    enigma2_folder = "/etc/enigma2"
+    bouquet_file = os.path.join(enigma2_folder, "bouquets.tv")
+
+    # Copia i file dalla cartella temporanea a /etc/enigma2
+    for filename in os.listdir(IptvChArch):
+        if filename.endswith(".tv"):
+            src_path = os.path.join(IptvChArch, filename)
+            dst_path = os.path.join(enigma2_folder, filename)
+            shutil.copy(src_path, dst_path)
+
+            # Aggiungi il nome del file al file bouquet.tv
+            with open(bouquet_file, "r+") as f:
+                line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(filename)
+                if line not in f:
+                    f.write(line)
+    print("Operazione completata!")
 
 
 def lcnstart():

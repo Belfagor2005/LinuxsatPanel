@@ -20,6 +20,7 @@ from . Lcn import (
     LCN,
     terrestrial,
     ReloadBouquets,
+    keepiptv,
 )
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -38,6 +39,7 @@ from os import path as os_path
 import codecs
 import os
 import re
+import shutil
 import ssl
 import sys
 # import six
@@ -1170,6 +1172,8 @@ class addInstall(Screen):
                 if 'dtt' not in url.lower():
                     setx = 1
                     terrestrial()
+                if keepiptv():
+                    print('-----save iptv channels-----')
                 '''
                 # import requests
                 # r = requests.get(url)
@@ -1207,15 +1211,24 @@ class addInstall(Screen):
                     os.system('rm -rf /etc/enigma2/*.tv')
                     os.system('rm -rf /etc/enigma2/*.del')
                     os.system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
-
+                    os.system("rm -rf /tmp/unzipped")
+                    os.system("rm -rf /tmp/settings.zip")
                     title = (_("Installing %s\nPlease Wait...") % self.name)
-                    self.session.openWithCallback(self.yes, Console, title=_(title),
+                    self.session.openWithCallback(self.pas, Console, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
+                                                  finishedCallback=self.yes,
                                                   closeOnSuccess=False)
+                    # self.yes()
             else:
                 self['info'].setText(_('Settings Not Installed ...'))
 
+    def pas(self, call=None):
+        pass
+
     def yes(self):
+        print('^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^')
+        copy_files_to_enigma2()
+        print('^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^')
         ReloadBouquets(setx)
 
     def remove(self):
@@ -1403,6 +1416,26 @@ def checkGZIP(url):
     except Exception as e:
         print("Unexpected error:", e)
     return None
+
+
+def copy_files_to_enigma2():
+    IptvChArch = plugin_path + '/temp'
+    enigma2_folder = "/etc/enigma2"
+    bouquet_file = os.path.join(enigma2_folder, "bouquets.tv")
+
+    # Copia i file dalla cartella temporanea a /etc/enigma2
+    for filename in os.listdir(IptvChArch):
+        if filename.endswith(".tv"):
+            src_path = os.path.join(IptvChArch, filename)
+            dst_path = os.path.join(enigma2_folder, filename)
+            shutil.copy(src_path, dst_path)
+
+            # Aggiungi il nome del file al file bouquet.tv
+            with open(bouquet_file, "r+") as f:
+                line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(filename)
+                if line not in f:
+                    f.write(line)
+    print("Operazione completata!")
 
 
 def CheckConn(host='www.google.com', port=80, timeout=3):
