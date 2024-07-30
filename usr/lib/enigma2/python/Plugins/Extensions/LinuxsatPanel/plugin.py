@@ -282,41 +282,41 @@ class LinuxsatPanel(Screen):
         self.pics = []
         self.titles = []
 
-        list.append("Backup ")  # ok
-        self.titles.append("Backup")  # ok
-        self.pics.append(picfold + "Backup.png")  # ok
+        list.append("Backup ")
+        self.titles.append("Backup")
+        self.pics.append(picfold + "Backup.png")
 
-        list.append("Bouquets ")  # ok
-        self.titles.append("Bouquets ")  # ok
-        self.pics.append(picfold + "Bouquets.png")  # ok
+        list.append("Bouquets ")
+        self.titles.append("Bouquets ")
+        self.pics.append(picfold + "Bouquets.png")
 
-        list.append("Library ")  # ok
-        self.titles.append("Library ")  # ok
-        self.pics.append(picfold + "Library.png")  # ok
+        list.append("Library ")
+        self.titles.append("Library ")
+        self.pics.append(picfold + "Library.png")
 
-        list.append("Dvb-Usb ")  # ok
-        self.titles.append("Dvb-Usb ")  # ok
-        self.pics.append(picfold + "usb-tuner-drivers.png")  # ok
+        list.append("Dvb-Usb ")
+        self.titles.append("Dvb-Usb ")
+        self.pics.append(picfold + "usb-tuner-drivers.png")
 
-        list.append("Epg ")  # ok
-        self.titles.append("Epg-Tools ")  # ok
-        self.pics.append(picfold + "plugin-epg.png")  # ok
+        list.append("Epg ")
+        self.titles.append("Epg-Tools ")
+        self.pics.append(picfold + "plugin-epg.png")
 
-        list.append("Feeds Image ")  # OK
-        self.titles.append("Feeds Oe2.0 ")  # OK
-        self.pics.append(picfold + "Feeds2.0.png")  # OK
+        list.append("Feeds Image ")
+        self.titles.append("Feeds Oe2.0 ")
+        self.pics.append(picfold + "Feeds2.0.png")
 
-        list.append("Feeds Image ")  # OK
-        self.titles.append("Feeds Oe2.5/2.6 ")  # OK
-        self.pics.append(picfold + "Feeds2.2.png")  # OK
+        list.append("Feeds Image ")
+        self.titles.append("Feeds Oe2.5/2.6 ")
+        self.pics.append(picfold + "Feeds2.2.png")
 
-        list.append("Games ")  # ok
-        self.titles.append("Games ")  # ok
-        self.pics.append(picfold + "Game.png")  # ok
+        list.append("Games ")
+        self.titles.append("Games ")
+        self.pics.append(picfold + "Game.png")
 
-        list.append("Iptv ")  # ok
-        self.titles.append("Iptv ")  # ok
-        self.pics.append(picfold + "iptv-streaming.png")  # ok
+        list.append("Iptv ")
+        self.titles.append("Iptv ")
+        self.pics.append(picfold + "iptv-streaming.png")
 
         list.append("Channel List ")
         self.titles.append("Channel List")
@@ -324,111 +324,111 @@ class LinuxsatPanel(Screen):
 
         list.append("Kiddac Oe2.0 ")
         self.titles.append("Kiddac Zone Oe2.0 ")
-        self.pics.append(picfold + "KiddaC1.png")  # ok Lululla Zone
+        self.pics.append(picfold + "KiddaC1.png")
 
         list.append("Kiddac Oe2.5/2.6 ")
         self.titles.append("Kiddac Zone Oe2.5/2.6 ")
-        self.pics.append(picfold + "KiddaC2.png")  # ok Lululla Zone
+        self.pics.append(picfold + "KiddaC2.png")
 
         list.append("Lululla Zone Oe2.0 ")
         self.titles.append("Lululla Zone Oe2.0 ")
-        self.pics.append(picfold + "oe2.0.png")  # ok Lululla Zone
+        self.pics.append(picfold + "oe2.0.png")
 
         list.append("Lululla Zone Oe2.5/2.6 ")
         self.titles.append("Lululla Zone Oe2.5/2.6 ")
-        self.pics.append(picfold + "oe2.5-2.6.png")  # ok Lululla Zone
+        self.pics.append(picfold + "oe2.5-2.6.png")
 
         list.append("Oe2.5/2.6 Plugins ")
         self.titles.append("Oe2.5/2.6 Plugins ")
         self.pics.append(picfold + "OE2.2-Plugins.png")
 
-        list.append("Mediaplayer-Youtube ")  # ok
-        self.titles.append("MP-YT ")  # ok
-        self.pics.append(picfold + "mediayou.png")  # ok
+        list.append("Mediaplayer-Youtube ")
+        self.titles.append("MP-YT ")
+        self.pics.append(picfold + "mediayou.png")
 
-        list.append("MultiBoot ")  # ok
-        self.titles.append("MultiBoot ")  # ok
-        self.pics.append(picfold + "multiboot.png")  # ok
+        list.append("MultiBoot ")
+        self.titles.append("MultiBoot ")
+        self.pics.append(picfold + "multiboot.png")
 
-        list.append("Multimedia ")  # ok
-        self.titles.append("Multimedia ")  # ok
-        self.pics.append(picfold + "Multimedia.png")  # ok
+        list.append("Multimedia ")
+        self.titles.append("Multimedia ")
+        self.pics.append(picfold + "Multimedia.png")
 
-        list.append("Panels Addons ")  # ok
-        self.titles.append("Panels Addons ")  # ok
-        self.pics.append(picfold + "Panels.png")  # ok
+        list.append("Panels Addons ")
+        self.titles.append("Panels Addons ")
+        self.pics.append(picfold + "Panels.png")
 
-        list.append("Picons ")  # ok
-        self.titles.append("Picons-Tools ")  # ok
-        self.pics.append(picfold + "picons.png")  # ok
+        list.append("Picons ")
+        self.titles.append("Picons-Tools ")
+        self.pics.append(picfold + "picons.png")
 
-        list.append("Radio ")  # ok
-        self.titles.append("Radio-Tools ")  # ok
-        self.pics.append(picfold + "Radio.png")  # ok
+        list.append("Radio ")
+        self.titles.append("Radio-Tools ")
+        self.pics.append(picfold + "Radio.png")
 
-        list.append("Skins | FHD ")  # ok
-        self.titles.append("Skins | FHD")  # ok
-        self.pics.append(picfold + "SkinFHD.png")  # ok
+        list.append("Skins | FHD ")
+        self.titles.append("Skins | FHD")
+        self.pics.append(picfold + "SkinFHD.png")
 
-        list.append("Skins | HD ")  # ok
-        self.titles.append("Skins | HD ")  # ok
-        self.pics.append(picfold + "SkinHD.png")  # ok
+        list.append("Skins | HD ")
+        self.titles.append("Skins | HD ")
+        self.pics.append(picfold + "SkinHD.png")
 
         list.append("Skins Fhd-Hd Oe2.5/2.6 ")
         self.titles.append("Skins Oe2.5/2.6 ")
         self.pics.append(picfold + "OE2.2-Skins.png")
 
-        list.append("Softcams ")  # ok
-        self.titles.append("SoftcamsOE2.0 ")  # ok
-        self.pics.append(picfold + "SOE20.png")  # ok
+        list.append("Softcams ")
+        self.titles.append("SoftcamsOE2.0 ")
+        self.pics.append(picfold + "SOE20.png")
 
-        list.append("Softcams ")  # ok
-        self.titles.append("SoftcamsOe2.5/2.6 ")  # ok
-        self.pics.append(picfold + "SOE22.png")  # ok
+        list.append("Softcams ")
+        self.titles.append("SoftcamsOe2.5/2.6 ")
+        self.pics.append(picfold + "SOE22.png")
 
         list.append("Keys Tools Oe2.0 ")
-        self.titles.append("SoftCam-Tools2.0 ")  # ok
-        self.pics.append(picfold + "key-updater.png")  # ok
+        self.titles.append("SoftCam-Tools2.0 ")
+        self.pics.append(picfold + "key-updater.png")
 
         list.append("Keys Tools Oe2.5/2.6 ")
-        self.titles.append("SoftCam-Tools2.2 ")  # ok
-        self.pics.append(picfold + "key-updater1.png")  # ok
+        self.titles.append("SoftCam-Tools2.2 ")
+        self.pics.append(picfold + "key-updater1.png")
 
-        list.append("Sport ")  # ok
-        self.titles.append("Sport ")  # ok
-        self.pics.append(picfold + "sport.png")  # ok
+        list.append("Sport ")
+        self.titles.append("Sport ")
+        self.pics.append(picfold + "sport.png")
 
-        list.append("Streamlink ")  # ok
-        self.titles.append("Streamlink ")  # ok
-        self.pics.append(picfold + "streamlink.png")  # ok
+        list.append("Streamlink ")
+        self.titles.append("Streamlink ")
+        self.pics.append(picfold + "streamlink.png")
 
-        list.append("Utility ")  # ok
-        self.titles.append("Utiliy ")  # ok
-        self.pics.append(picfold + "utility.png")  # ok
+        list.append("Utility ")
+        self.titles.append("Utiliy ")
+        self.pics.append(picfold + "utility.png")
 
-        list.append("Vpn Oe2.0 ")  # ok
-        self.titles.append("Vpn-Oe2.0 ")  # ok
-        self.pics.append(picfold + "vpn.png")  # ok
+        list.append("Vpn Oe2.0 ")
+        self.titles.append("Vpn-Oe2.0 ")
+        self.pics.append(picfold + "vpn.png")
 
-        list.append("Weather ")  # ok
-        self.titles.append("Weather-Tools ")  # OK
-        self.pics.append(picfold + "weather.png")  # OK
+        list.append("Weather ")
+        self.titles.append("Weather-Tools ")
+        self.pics.append(picfold + "weather.png")
 
-        list.append("Forecast ")  # ok
-        self.titles.append("Weather-Foreca")  # OK
-        self.pics.append(picfold + "weather-forecast.png")  # OK
+        list.append("Forecast ")
+        self.titles.append("Weather-Foreca")
+        self.pics.append(picfold + "weather-forecast.png")
 
-        list.append("Webcam ")  # ok
-        self.titles.append("Webcam ")  # ok
-        self.pics.append(picfold + "webcam.png")  # ok
+        list.append("Webcam ")
+        self.titles.append("Webcam ")
+        self.pics.append(picfold + "webcam.png")
 
-        list.append("Adult Oe2.0 ")  # ok Lululla Zone
-        self.titles.append("Adult Oe2.0 ")  # ok
-        self.pics.append(picfold + "18+deb.png")  # ok
+        list.append("Adult Oe2.0 ")
+        self.titles.append("Adult Oe2.0 ")
+        self.pics.append(picfold + "18+deb.png")
 
-        list.append("Adult Oe2.5/2.6 ")  # ok Lululla Zone
-        self.titles.append("Adult Oe2.5/2.6 ")  # ok
-        self.pics.append(picfold + "18+.png")  # ok
+        list.append("Adult Oe2.5/2.6 ")
+        self.titles.append("Adult Oe2.5/2.6 ")
+        self.pics.append(picfold + "18+.png")
 
         list.append("Other Oe2.0 ")
         self.titles.append("Other Oe2.0 ")
@@ -438,13 +438,13 @@ class LinuxsatPanel(Screen):
         self.titles.append("Other Oe2.5/2.6 ")
         self.pics.append(picfold + "Other1.png")
 
-        list.append("Information ")  # ok
-        self.titles.append("Information ")  # ok
-        self.pics.append(picfold + "Information.png")  # ok
+        list.append("Information ")
+        self.titles.append("Information ")
+        self.pics.append(picfold + "Information.png")
 
-        list.append("About ")  # ok
-        self.titles.append("About ")  # ok
-        self.pics.append(picfold + "about.png")  # ok
+        list.append("About ")
+        self.titles.append("About ")
+        self.pics.append(picfold + "about.png")
 
         self.names = list
         self["frame"] = MovingPixmap()
@@ -690,29 +690,29 @@ class LSChannel(Screen):
         self.pics = []
         self.titles = []
 
-        list.append("CIEFP ")  # ok
-        self.titles.append("CIEFP")  # ok
-        self.pics.append(picfold + "ciefp.png")  # ok
+        list.append("CIEFP ")
+        self.titles.append("CIEFP")
+        self.pics.append(picfold + "ciefp.png")
 
-        list.append("CYRUS ")  # ok
-        self.titles.append("CYRUS ")  # ok
-        self.pics.append(picfold + "cyrus.png")  # ok
+        list.append("CYRUS ")
+        self.titles.append("CYRUS ")
+        self.pics.append(picfold + "cyrus.png")
 
-        list.append("MANUTEK ")  # ok
-        self.titles.append("MANUTEK ")  # ok
-        self.pics.append(picfold + "manutek.png")  # ok
+        list.append("MANUTEK ")
+        self.titles.append("MANUTEK ")
+        self.pics.append(picfold + "manutek.png")
 
-        list.append("MORPHEUS ")  # ok
-        self.titles.append("MORPHEUS ")  # ok
-        self.pics.append(picfold + "morpheus883.png")  # ok
+        list.append("MORPHEUS ")
+        self.titles.append("MORPHEUS ")
+        self.pics.append(picfold + "morpheus883.png")
 
-        list.append("VHANNIBAL 1 ")  # OK
-        self.titles.append("VHANNIBAL 1 ")  # OK
-        self.pics.append(picfold + "vhannibal1.png")  # OK
+        list.append("VHANNIBAL 1 ")
+        self.titles.append("VHANNIBAL 1 ")
+        self.pics.append(picfold + "vhannibal1.png")
 
-        list.append("VHANNIBAL 2 ")  # OK
-        self.titles.append("VHANNIBAL 2 ")  # OK
-        self.pics.append(picfold + "vhannibal2.png")  # OK
+        list.append("VHANNIBAL 2 ")
+        self.titles.append("VHANNIBAL 2 ")
+        self.pics.append(picfold + "vhannibal2.png")
 
         self.names = list
         self["frame"] = MovingPixmap()
@@ -737,6 +737,7 @@ class LSChannel(Screen):
                                      "up": self.key_up,
                                      "down": self.key_down,
                                      "info": self.key_info,
+                                     "1": self.list_sort,
                                      "menu": self.closeRecursive})
 
         ln = len(self.names)
@@ -747,12 +748,11 @@ class LSChannel(Screen):
         self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
-    '''
+
     def list_sort(self):  # for future
         self.names.sort(key=lambda i: i[0], reverse=True)
         self.names.reverse()
         self.openTest()
-    '''
 
     def paintFrame(self):
         try:
@@ -1019,8 +1019,6 @@ class addInstall(Screen):
             # cmd1 = "wget -P '" + dest + "' '" + self.url + "'"
             cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
 
-            # cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
-
             if ".deb" in self.plug:
                 cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
             if ".ipk" in self.plug:
@@ -1031,9 +1029,11 @@ class addInstall(Screen):
                 cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
             elif ".bz2" in self.plug and "gz" in self.plug:
                 cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
+
             cmd3 = "rm '/tmp/" + self.plug + "'"
             cmd = cmd1 + " && " + cmd2 + " && " + cmd3
             print('cmd okclicked:', cmd2)
+
             title = (_("Installing %s\nPlease Wait...") % self.iname)
             self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
 
@@ -1086,8 +1086,10 @@ class addInstall(Screen):
                 print('match:', match)
                 for url in match:
                     name = url
+                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")  
+                    if name in self.names:
+                        continu
                     url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
-                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
                     self.urls.append(url.strip())
                     self.names.append(name.strip())
                     self.downloading = True
@@ -1101,11 +1103,11 @@ class addInstall(Screen):
                 print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
-                        url = url.replace('blob', 'raw')
-                        url = 'https://github.com' + url
                         name = 'Morph883 ' + name
                         if name in self.names:
-                            continue
+                            continue                        
+                        url = url.replace('blob', 'raw')
+                        url = 'https://github.com' + url
                         self.names.append(name.strip())
                         self.urls.append(url.strip())
                         self.downloading = True
@@ -1115,6 +1117,8 @@ class addInstall(Screen):
                 print('match:', match)
                 for url, name, date in match:
                     name = str(name) + ' ' + date
+                    if name in self.names:
+                        continue
                     url = "https://www.vhannibal.net/" + url
                     print('url vhan1:', url)
                     self.names.append(name.strip())
@@ -1128,8 +1132,9 @@ class addInstall(Screen):
                 for url, date in match:
                     if '.php' in url.lower():
                         continue
-                    name = url
-                    name = name.replace('&#127381;', '').replace("%20", " ") + ' ' + date
+                    name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
+                    if name in self.names:
+                        continue
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
                     print('url vhan2:', url)
                     self.names.append(name.strip())
@@ -1160,7 +1165,7 @@ class addInstall(Screen):
                                       _("Do you want to install?"),
                                       MessageBox.TYPE_YESNO)
 
-    def okRun1(self, answer):
+    def okRun1(self, answer=False):
         dest = "/tmp/settings.zip"
         if answer:
             global setx
@@ -1218,7 +1223,6 @@ class addInstall(Screen):
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
                                                   finishedCallback=self.yes,
                                                   closeOnSuccess=False)
-                    # self.yes()
             else:
                 self['info'].setText(_('Settings Not Installed ...'))
 
