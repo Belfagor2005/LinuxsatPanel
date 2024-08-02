@@ -8,10 +8,7 @@ import sys
 import re
 import glob
 import shutil
-
-
 # ===============================================================================
-# LinuxsatPanel Plugin
 #
 # mod. by Lululla at 20240720
 #

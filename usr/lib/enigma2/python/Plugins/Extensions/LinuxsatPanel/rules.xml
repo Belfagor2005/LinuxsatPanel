@@ -1,0 +1,30 @@
+<!-- Rules created on 24/03/2022 by Lululla -->
+<rules>
+	<ruleset name="Default">
+		<!-- no "renumber" rules... keep the exact order from original lcn -->
+		<rule type="marker" position="1000">Duplicati</rule>				
+	</ruleset>	
+	<ruleset name="Italy">		
+		<rule type="marker" position="0">Intrattenimento</rule>
+		<rule type="marker" position="10">Emittenti Locali</rule>
+		<rule type="marker" position="20">Semi-Generalisti</rule>
+		<rule type="marker" position="40">Bambini e Ragazzi</rule>
+		<rule type="marker" position="48">Informazione e Cultura</rule>
+		<rule type="marker" position="58">Sport</rule>
+		<rule type="marker" position="66">Musica</rule>
+		<rule type="marker" position="71">Emittenti Regionali</rule>		
+		<rule type="marker" position="101">Canali Test</rule>		
+		<rule type="marker" position="171">Emittenti Regionali H264</rule>			
+		<rule type="marker" position="204">Promo H264</rule>			
+		<rule type="marker" position="230">Emittenti Regionali</rule>			
+		<rule type="marker" position="409">Premio</rule>	
+		<rule type="marker" position="417">Europa7</rule>		
+		<rule type="marker" position="455">Canali Sky</rule>			
+		<rule type="marker" position="500">Provvisori</rule>		
+		<rule type="marker" position="601">Emittenti Regionali</rule>	
+		<rule type="marker" position="710">Radio Regionali</rule>	
+		<rule type="marker" position="801">Servizi Regionali</rule>			
+		<rule type="marker" position="824">Duplicati</rule>		
+		<rule type="marker" position="1000">Duplicati</rule>				
+	</ruleset>		
+</rules>

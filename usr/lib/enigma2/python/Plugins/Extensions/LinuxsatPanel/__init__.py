@@ -7,26 +7,28 @@
 #
 # rewritten by Lululla at 20240720
 #
-# ATTENTION PLEASE...    
+# ATTENTION PLEASE...
 # This is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
 # Software Foundation; either version 2, or (at your option) any later
 # version.
-# You must not remove the credits at  
-# all and you must make the modified  
+# You must not remove the credits at
+# all and you must make the modified
 # code open to everyone. by Lululla
 # ======================================================================
 
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import getDesktop
+from os import path as os_path
 import gettext
 import os
+import sys
 
 descplug = "Linuxsat-Support.com (Addons Panel)"
 PluginLanguageDomain = 'LinuxsatPanel'
 PluginLanguagePath = 'Extensions/LinuxsatPanel/locale'
-
+plugin_path = os.path.dirname(sys.modules[__name__].__file__)
 infourl = 'https://patbuweb.com/xml/info.txt'
 abouturl = 'https://patbuweb.com/xml/about.txt'
 xmlurl = 'http://patbuweb.com/xml/addons_2024.xml'
@@ -34,6 +36,17 @@ xmlurl = 'http://patbuweb.com/xml/addons_2024.xml'
 isDreamOS = False
 if os.path.exists("/var/lib/dpkg/status"):
     isDreamOS = True
+
+
+def CheckConn(host='www.google.com', port=80, timeout=3):
+    import socket
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        return True
+    except Exception as e:
+        print('error: ', e)
+        return False
 
 
 def wgetsts():
@@ -86,8 +99,44 @@ def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
 
+
 AgentRequest = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3'
 
+
+def add_skin_font():
+    from enigma import addFont
+    FNTPath = os_path.join(plugin_path + "/fonts")
+    # addFont(filename, name, scale, isReplacement, render)
+    addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
+    addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
+    addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
+
+
+# KiddaC code
+def convert_size(size_bytes):
+    import math
+    if size_bytes == 0:
+        return "0B"
+    size_name = ("B", "KB", "MB", "GB", "TB")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+    return "%s %s" % (s, size_name[i])
+
+
+# KiddaC code
+def freespace():
+    try:
+        stat = os.statvfs('/')
+        free_bytes = stat.f_bfree * stat.f_bsize
+        total_bytes = stat.f_blocks * stat.f_bsize
+        fspace = convert_size(float(free_bytes))
+        total_space = convert_size(float(total_bytes))
+        spacestr = _("Free Space:") + " " + str(fspace) + " " + _("of") + " " + str(total_space)
+        return spacestr
+    except Exception as e:
+        print("Error getting disk space:", e)
+        return _("Free Space:") + " -?- " + _("of") + " -?-"
 
 # self.token = "ZUp6enk4cko4ZzBKTlBMTFNxN3djd25MOHEzeU5Zak1Bdkd6S3lPTmdqSjhxeUxMSTBNOFRhUGNBMjBCVmxBTzlBPT0K"
 # def check(self, token):

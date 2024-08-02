@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-07-28 19:36+0200\n"
+"POT-Creation-Date: 2024-08-02 13:52+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Warder\n"
@@ -14,44 +14,48 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1198
+#: plugin.py:438 plugin.py:718 plugin.py:934 plugin.py:1295
 msgid "Please Wait..."
 msgstr "Пожалуйста, подождите..."
 
-#: plugin.py:869
+#: plugin.py:439 plugin.py:719
+msgid "0 Sort"
+msgstr "0 Порядок"
+
+#: plugin.py:916
 msgid "Exit"
 msgstr "Выход"
 
-#: plugin.py:870
+#: plugin.py:917
 msgid "Install"
 msgstr "Установить"
 
-#: plugin.py:871
+#: plugin.py:918
 msgid "Remove"
 msgstr "Удалить"
 
-#: plugin.py:872
+#: plugin.py:919
 msgid "Restart enigma"
 msgstr "Перезапуск энигмы"
 
-#: plugin.py:889
+#: plugin.py:936
 msgid "Load Category..."
 msgstr "Категория загрузки..."
 
-#: plugin.py:913
+#: plugin.py:960
 msgid "Category: "
 msgstr "Категория: "
 
-#: plugin.py:946 plugin.py:956
+#: plugin.py:993 plugin.py:1003
 msgid "Unknow Image!"
 msgstr "Неизвестный Имидж!"
 
-#: plugin.py:968
+#: plugin.py:1015
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Вы хотите установить %s?"
 
-#: plugin.py:988 plugin.py:1142
+#: plugin.py:1039 plugin.py:1228
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -60,51 +64,49 @@ msgstr ""
 "Установка %s\n"
 "Пожалуйста, подождите..."
 
-#: plugin.py:1083
+#: plugin.py:1155
 msgid "Download page get failed ..."
 msgstr "Страница загрузки не удалась..."
 
-#: plugin.py:1093
+#: plugin.py:1165
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Сортировка наземных каналов по правилам Lcn завершена"
 
-#: plugin.py:1100
+#: plugin.py:1172
 msgid "Do you want to install?"
 msgstr "Вы хотите установить?"
 
-#: plugin.py:1148
+#: plugin.py:1239
 msgid "Settings Not Installed ..."
 msgstr "Настройки не установлены..."
 
-#: plugin.py:1159
+#: plugin.py:1256
 msgid "Do you want to remove?"
 msgstr "Вы хотите удалить?"
 
-#: plugin.py:1173
+#: plugin.py:1270
 #, python-format
 msgid "Removing %s"
 msgstr "Удаление %s"
 
-#: plugin.py:1179
+#: plugin.py:1276
 msgid "Do you want to restart Gui Interface?"
 msgstr "Вы хотите перезапустить интерфейс Gui?"
 
-#: plugin.py:1231
+#: plugin.py:1328
 msgid "Unable to download updates!"
 msgstr "Невозможно загрузить обновления!"
 
-#: plugin.py:1351 plugin.py:1355
-msgid "Free Space:"
-msgstr "Свободное место:"
-
-#: plugin.py:1351 plugin.py:1355
-msgid "of"
-msgstr "из"
-
-#: plugin.py:1366
+#: plugin.py:1544
 msgid "Check Connection!"
 msgstr "Проверьте подключение!"
 
-#: plugin.py:1390
+#: plugin.py:1565
 msgid "Linuxsat Panel"
 msgstr "Панель Linuxsat"
+
+#~ msgid "Free Space:"
+#~ msgstr "Свободное место:"
+
+#~ msgid "of"
+#~ msgstr "из"

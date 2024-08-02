@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-
 # import zlib, base64
 # exec zlib.decompress(base64.b64decode(''))
 from . import (
     _,
+    add_skin_font,
     wgetsts,
     AgentRequest,
     isFHD,
@@ -14,6 +14,8 @@ from . import (
     abouturl,
     xmlurl,
     descplug,
+    freespace,
+    CheckConn,
 )
 from .Console import Console
 from . Lcn import (
@@ -21,8 +23,10 @@ from . Lcn import (
     terrestrial,
     ReloadBouquets,
     keepiptv,
+    copy_files_to_enigma2,
 )
 from Components.ActionMap import ActionMap
+from Components.AVSwitch import AVSwitch
 from Components.Button import Button
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -35,11 +39,11 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import (SCOPE_PLUGINS, resolveFilename, fileExists)
-from os import path as os_path
+# from os import path as os_path
 import codecs
 import os
 import re
-import shutil
+# import shutil
 import ssl
 import sys
 # import six
@@ -51,6 +55,7 @@ from enigma import (
     # getDesktop,
     gFont,
     loadPNG,
+    ePicLoad,
 )
 
 
@@ -124,32 +129,6 @@ if sslverify:
             return ctx
 
 
-'''
-# def make_request(url):
-    # try:
-        # import requests
-        # response = requests.get(url, verify=False)
-        # if response.status_code == 200:
-            # # link = requests.get(url, headers={'User-Agent': AgentRequest}, timeout=15, verify=False, stream=True).text
-        # # return link
-    # # except ImportError:
-            # req = Request(url)
-            # req.add_header('User-Agent', AgentRequest)
-            # response = urlopen(req, None, 10)
-
-            # if PY3:
-                # url = response.read().decode("utf-8")
-            # else:
-                # url = response.read().encode("utf-8")
-
-            # response.close()
-            # return url
-
-    # except ImportError:
-        # return
-'''
-
-
 def make_request(url):
     try:
         import requests
@@ -218,14 +197,14 @@ def LPshowlist(data, list):
 
 class LinuxsatPanel(Screen):
 
-    def __init__(self, session, data):
+    def __init__(self, session):
+        # def __init__(self, session, data):
+        Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-
-        Screen.__init__(self, session)
-        self.data = data
-
+        self.data = checkGZIP(xmlurl)
+        # self.data = data
         if isFHD():
             self.pos = []
             self.pos.append([80, 200])
@@ -289,10 +268,6 @@ class LinuxsatPanel(Screen):
         list.append("Bouquets ")
         self.titles.append("Bouquets ")
         self.pics.append(picfold + "Bouquets.png")
-
-        list.append("Library ")
-        self.titles.append("Library ")
-        self.pics.append(picfold + "Library.png")
 
         list.append("Dvb-Usb ")
         self.titles.append("Dvb-Usb ")
@@ -362,6 +337,10 @@ class LinuxsatPanel(Screen):
         self.titles.append("Picons-Tools ")
         self.pics.append(picfold + "picons.png")
 
+        list.append("Python Library ")
+        self.titles.append("Python Library ")
+        self.pics.append(picfold + "Library.png")
+
         list.append("Radio ")
         self.titles.append("Radio-Tools ")
         self.pics.append(picfold + "Radio.png")
@@ -378,14 +357,6 @@ class LinuxsatPanel(Screen):
         self.titles.append("Skins Oe2.5/2.6 ")
         self.pics.append(picfold + "OE2.2-Skins.png")
 
-        list.append("Softcams ")
-        self.titles.append("SoftcamsOE2.0 ")
-        self.pics.append(picfold + "SOE20.png")
-
-        list.append("Softcams ")
-        self.titles.append("SoftcamsOe2.5/2.6 ")
-        self.pics.append(picfold + "SOE22.png")
-
         list.append("Keys Tools Oe2.0 ")
         self.titles.append("SoftCam-Tools2.0 ")
         self.pics.append(picfold + "key-updater.png")
@@ -393,6 +364,14 @@ class LinuxsatPanel(Screen):
         list.append("Keys Tools Oe2.5/2.6 ")
         self.titles.append("SoftCam-Tools2.2 ")
         self.pics.append(picfold + "key-updater1.png")
+
+        list.append("Softcams ")
+        self.titles.append("SoftcamsOE2.0 ")
+        self.pics.append(picfold + "SOE20.png")
+
+        list.append("Softcams ")
+        self.titles.append("SoftcamsOe2.5/2.6 ")
+        self.pics.append(picfold + "SOE22.png")
 
         list.append("Sport ")
         self.titles.append("Sport ")
@@ -414,7 +393,7 @@ class LinuxsatPanel(Screen):
         self.titles.append("Weather-Tools ")
         self.pics.append(picfold + "weather.png")
 
-        list.append("Forecast ")
+        list.append("Weather Forecast ")
         self.titles.append("Weather-Foreca")
         self.pics.append(picfold + "weather-forecast.png")
 
@@ -438,15 +417,17 @@ class LinuxsatPanel(Screen):
         self.titles.append("Other Oe2.5/2.6 ")
         self.pics.append(picfold + "Other1.png")
 
-        list.append("Information ")
+        list.append(" Information ")
         self.titles.append("Information ")
         self.pics.append(picfold + "Information.png")
 
-        list.append("About ")
+        list.append(" About ")
         self.titles.append("About ")
         self.pics.append(picfold + "about.png")
 
         self.names = list
+        self.combined_data = zip(self.names, self.titles, self.pics)
+
         self["frame"] = MovingPixmap()
         i = 0
         while i < 20:
@@ -455,6 +436,7 @@ class LinuxsatPanel(Screen):
             i += 1
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
+        self['sort'] = Label(_('0 Sort'))
         self["actions"] = ActionMap(["OkCancelActions",
                                      "MenuActions",
                                      "DirectionActions",
@@ -464,6 +446,7 @@ class LinuxsatPanel(Screen):
                                      "InfoActions",],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
+                                     "0": self.list_sort,
                                      "left": self.key_left,
                                      "right": self.key_right,
                                      "up": self.key_up,
@@ -479,12 +462,21 @@ class LinuxsatPanel(Screen):
         self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
-    '''
     def list_sort(self):  # for future
-        self.names.sort(key=lambda i: i[0], reverse=True)
-        self.names.reverse()
+        # self.combined_data = zip(self.names, self.titles, self.pics)
+        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        print("Lista ordinata:", sorted_list)
+        print("Titoli ordinati:", sorted_titles)
+        print("Immagini ordinate:", sorted_pics)
+        
+        # self.combined_data = sorted_data
+
+        self.names = sorted_list
+        self.titles = sorted_titles
+        self.pics = sorted_pics
+
         self.openTest()
-    '''
 
     def paintFrame(self):
         try:
@@ -627,13 +619,11 @@ class LinuxsatPanel(Screen):
 class LSChannel(Screen):
 
     def __init__(self, session, name):
+        Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-
-        Screen.__init__(self, session)
         self.name = name
-
         if isFHD():
             self.pos = []
             self.pos.append([80, 200])
@@ -715,6 +705,9 @@ class LSChannel(Screen):
         self.pics.append(picfold + "vhannibal2.png")
 
         self.names = list
+        
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        
         self["frame"] = MovingPixmap()
         i = 0
         while i < 20:
@@ -723,21 +716,21 @@ class LSChannel(Screen):
             i += 1
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
+        self['sort'] = Label(_('0 Sort'))
         self["actions"] = ActionMap(["OkCancelActions",
                                      "MenuActions",
                                      "DirectionActions",
                                      "NumberActions",
                                      "EPGSelectActions",
-                                     "EPGSelectActions",
                                      "InfoActions",],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
+                                     "0": self.list_sort,
                                      "left": self.key_left,
                                      "right": self.key_right,
                                      "up": self.key_up,
                                      "down": self.key_down,
                                      "info": self.key_info,
-                                     "1": self.list_sort,
                                      "menu": self.closeRecursive})
 
         ln = len(self.names)
@@ -748,10 +741,20 @@ class LSChannel(Screen):
         self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
-
     def list_sort(self):  # for future
-        self.names.sort(key=lambda i: i[0], reverse=True)
-        self.names.reverse()
+        
+        # self.combined_data = zip(self.names, self.titles, self.pics)
+        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        print("Lista ordinata:", sorted_list)
+        print("Titoli ordinati:", sorted_titles)
+        print("Immagini ordinate:", sorted_pics)
+        # self.combined_data = sorted_data
+        
+        self.names = sorted_list
+        self.titles = sorted_titles
+        self.pics = sorted_pics
+
         self.openTest()
 
     def paintFrame(self):
@@ -900,14 +903,12 @@ class LSChannel(Screen):
 class addInstall(Screen):
 
     def __init__(self, session, data, name, dest):
-
+        Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'addInstall.xml')
         if os.path.exists('/var/lib/dpkg/info'):
             skin = os.path.join(skin_path, 'addInstall-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-
-        Screen.__init__(self, session)
         self.fxml = str(data)
         self.name = name
         self.dest = dest
@@ -1045,6 +1046,7 @@ class addInstall(Screen):
             r = six.ensure_str(r)
         self.names = []
         self.urls = []
+        name = url = date = ''
         try:
 
             if 'ciefp' in self.name.lower():
@@ -1058,9 +1060,10 @@ class addInstall(Screen):
                     if url.find('.zip') != -1:
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
-                        self.names.append(name.strip())
-                        self.urls.append(url.strip())
+                        name = name
                         self.downloading = True
+                        # self.names.append(name.strip())
+                        # self.urls.append(url.strip())
 
             if 'cyrus' in self.name.lower():
                 n1 = r.find('name="Sat">', 0)
@@ -1076,9 +1079,9 @@ class addInstall(Screen):
                         if 'Sat' in name.lower():
                             continue
                         name = name + ' ' + date
-                        self.names.append(name.strip())
-                        self.urls.append(url.strip())
                         self.downloading = True
+                        # self.names.append(name.strip())
+                        # self.urls.append(url.strip())
 
             if 'manutek' in self.name.lower():
                 regex = 'href="/isetting/.*?file=(.+?).zip">'
@@ -1086,13 +1089,13 @@ class addInstall(Screen):
                 print('match:', match)
                 for url in match:
                     name = url
-                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")  
+                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
                     if name in self.names:
-                        continu
+                        continue
                     url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
-                    self.urls.append(url.strip())
-                    self.names.append(name.strip())
                     self.downloading = True
+                    # self.urls.append(url.strip())
+                    # self.names.append(name.strip())
 
             if 'morpheus' in self.name.lower():
                 regex = 'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
@@ -1105,12 +1108,12 @@ class addInstall(Screen):
                     if url.find('.zip') != -1:
                         name = 'Morph883 ' + name
                         if name in self.names:
-                            continue                        
+                            continue
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
-                        self.names.append(name.strip())
-                        self.urls.append(url.strip())
                         self.downloading = True
+                        # self.names.append(name.strip())
+                        # self.urls.append(url.strip())
 
             if 'vhannibal 1' in self.name.lower():
                 match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
@@ -1121,9 +1124,9 @@ class addInstall(Screen):
                         continue
                     url = "https://www.vhannibal.net/" + url
                     print('url vhan1:', url)
-                    self.names.append(name.strip())
-                    self.urls.append(url.strip())
                     self.downloading = True
+                    # self.names.append(name.strip())
+                    # self.urls.append(url.strip())
 
             if 'vhannibal 2' in self.name.lower():
                 regex = '<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
@@ -1137,9 +1140,12 @@ class addInstall(Screen):
                         continue
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
                     print('url vhan2:', url)
-                    self.names.append(name.strip())
-                    self.urls.append(url.strip())
                     self.downloading = True
+                    # self.names.append(name.strip())
+                    # self.urls.append(url.strip())
+
+            self.names.append(name.strip())
+            self.urls.append(url.strip())
 
             self['key_green'].show()
             LPshowlist(self.names, self["list"])
@@ -1154,7 +1160,7 @@ class addInstall(Screen):
             lcn.read()
             if len(lcn.lcnlist) >= 1:
                 lcn.writeBouquet()
-                lcn.ReloadBouquets(setx)
+                ReloadBouquets(setx)
                 self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
                                   MessageBox.TYPE_INFO,
                                   timeout=5)
@@ -1219,17 +1225,22 @@ class addInstall(Screen):
                     os.system("rm -rf /tmp/unzipped")
                     os.system("rm -rf /tmp/settings.zip")
                     title = (_("Installing %s\nPlease Wait...") % self.name)
-                    self.session.openWithCallback(self.pas, Console, title=_(title),
+                    self.session.openWithCallback(self.yes, Console, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
-                                                  finishedCallback=self.yes,
                                                   closeOnSuccess=False)
+                    '''
+                    # self.session.openWithCallback(self.yes, Console, title=_(title),
+                                                  # cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
+                                                  # finishedCallback=self.yes,
+                                                  # closeOnSuccess=False)
+                    '''
             else:
                 self['info'].setText(_('Settings Not Installed ...'))
 
     def pas(self, call=None):
         pass
 
-    def yes(self):
+    def yes(self, call=None):
         print('^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^')
         copy_files_to_enigma2()
         print('^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^')
@@ -1346,6 +1357,7 @@ class LSinfo(Screen):
                 print('arkget= ', arkFull)
             img = os.popen('cat /etc/issue').read().strip('\n\r')
             img = img.replace('\\l', '')
+            python = os.popen('python -V').read().strip('\n\r')
             arc = os.popen('uname -m').read().strip('\n\r')
             ifg = os.popen('wget -qO - ifconfig.me').read().strip('\n\r')
             libs = os.popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
@@ -1353,11 +1365,10 @@ class LSinfo(Screen):
                 libsssl = libs
             info = '%s V.%s\n\n' % (descplug, currversion)
             info += 'Suggested by: @masterG - @oktus - @pcd\n'
-            info += 'All code was rewritten by @Lululla maintener\n'
-            info += 'Date 2024.07.20\n'
+            info += 'All code was rewritten by @Lululla - Date 2024.07.20\n'
             info += 'Designs and Graphics by @oktus\n'
             info += 'Support on: Linuxsat-support.com\n\n'
-            info += 'Current IP Wan: %s\nImage: %sCpu: %s\nArch. Info: %s\nLibssl(oscam):\n%s\n' % (ifg, img, arc, arkFull, libsssl)
+            info += 'Current IP Wan: %s\nImage: %sCpu: %s\nPython Version: %s\nArch. Info: %s\nLibssl(oscam):\n%s\n' % (ifg, img, arc, python, arkFull, libsssl)
         except Exception as e:
             print("Error ", e)
             info = checkGZIP(infourl)
@@ -1365,24 +1376,113 @@ class LSinfo(Screen):
         self['list'].setText(info)
 
 
-def add_skin_font():
-    from enigma import addFont
-    FNTPath = os_path.join(plugin_path + "/fonts")
-    # addFont(filename, name, scale, isReplacement, render)
-    addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
-    addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
-    addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
+class startLP(Screen):
+    def __init__(self, session):
+        self.session = session
+        global _session, first
+        _session = session
+        first = True
+        Screen.__init__(self, session)
+        skin = os.path.join(skin_path, 'startLP.xml')
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+        self["poster"] = Pixmap()
+        self["version"] = Label('Wait Please... Linuxsat Panel V."' + currversion)
+        self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
+        # self.texts = ["Load plugin...", "Linuxsat Panel V." + currversion, "WELCOME!!!"]
+        # self.current_text_index = 0
+        self.onLayoutFinish.append(self.loadDefaultImage)
 
+    '''
+    # def change_text(self):
+        # import threading
+        # def update_text():
+            # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
+            # self['version'].setText(self.texts[self.current_text_index])
+            # print('current_text_index:', self.current_text_index)
 
-def write_file(url, dest):
-    try:
-        import requests
-        r = requests.get(url)
-        with open(dest, 'wb') as f:
-            f.write(r.content)
+        # threading.Timer(2.0, update_text).start()
+        # currversion = '1'
+        # self.texts = ["Load plugin...", "Linuxsat Panel V." + currversion, "WELCOME!!!"]
+        # self.current_text_index = 0
+
+        # from time import sleep
+
+        # def starters():
+            # for text in self.texts:
+                # print('text=', text)
+                # # print('texts:', self.texts)
+                # self['version'].setText(self.texts[self.current_text_index])
+                # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
+                # # self.current_text_index += 1
+                # sleep(3.0)
+
+                # if self.current_text_index == len(self.texts) - 1:
+                    # print("timer threading work!")
+                    # # data = checkGZIP(xmlurl)
+                    # self.session.open(LinuxsatPanel)
+                    # # self.session.openWithCallback(self.passe, LinuxsatPanel)
+                # self.close()
+        # starters()
+        '''
+
+    def clsgo(self):
+        if first is True:
+            self.session.openWithCallback(self.passe, LinuxsatPanel)
+        else:
+            self.close()
+
+    def passe(self, rest=None):
+        global first
+        first = False
+        self.close()
+
+    def loadDefaultImage(self):
+        self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
+        self.timer = eTimer()
+        if fileExists('/var/lib/dpkg/status'):
+            self.timer_conn = self.timer.timeout.connect(self.decodeImage)
+        else:
+            self.timer.callback.append(self.decodeImage)
+        self.timer.start(100, True)
+
+        self.timerx = eTimer()
+        if fileExists('/var/lib/dpkg/status'):
+            self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
+        else:
+            self.timerx.callback.append(self.clsgo)
+        self.timerx.start(3000, True)
+        '''
+        # import threading
+        # def update_text():
+            # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
+            # self['version'].setText(self.texts[self.current_text_index])
+            # print('current_text_index:', self.current_text_index)
+            # if self.current_text_index == len(self.texts) - 1:
+                # print("timer threading work!")
+                # self.clsgo()
+        # threading.Timer(2.0, update_text).start()
+        # self.change_text()
+        '''
+
+    def decodeImage(self):
+        pixmapx = self.fldpng
+        if fileExists(pixmapx):
+            size = self['poster'].instance.size()
+            self.picload = ePicLoad()
+            self.scale = AVSwitch().getFramebufferScale()
+            self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
+            # _l = self.picload.PictureData.get()
+            # del self.picload
+            if fileExists("/var/lib/dpkg/status"):
+                self.picload.startDecode(pixmapx, False)
+            else:
+                self.picload.startDecode(pixmapx, 0, 0, False)
+            ptr = self.picload.getData()
+            if ptr is not None:
+                self['poster'].instance.setPixmap(ptr)
+                self['poster'].show()
         return
-    except Exception as e:
-        print('write file failur: ', e)
 
 
 def checkGZIP(url):
@@ -1422,70 +1522,22 @@ def checkGZIP(url):
     return None
 
 
-def copy_files_to_enigma2():
-    IptvChArch = plugin_path + '/temp'
-    enigma2_folder = "/etc/enigma2"
-    bouquet_file = os.path.join(enigma2_folder, "bouquets.tv")
-
-    # Copia i file dalla cartella temporanea a /etc/enigma2
-    for filename in os.listdir(IptvChArch):
-        if filename.endswith(".tv"):
-            src_path = os.path.join(IptvChArch, filename)
-            dst_path = os.path.join(enigma2_folder, filename)
-            shutil.copy(src_path, dst_path)
-
-            # Aggiungi il nome del file al file bouquet.tv
-            with open(bouquet_file, "r+") as f:
-                line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(filename)
-                if line not in f:
-                    f.write(line)
-    print("Operazione completata!")
-
-
-def CheckConn(host='www.google.com', port=80, timeout=3):
-    import socket
-    try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
-        return True
-    except Exception as e:
-        print('error: ', e)
-        return False
-
-
-# KiddaC code
-def convert_size(size_bytes):
-    import math
-    if size_bytes == 0:
-        return "0B"
-    size_name = ("B", "KB", "MB", "GB", "TB")
-    i = int(math.floor(math.log(size_bytes, 1024)))
-    p = math.pow(1024, i)
-    s = round(size_bytes / p, 2)
-    return "%s %s" % (s, size_name[i])
-
-
-# KiddaC code
-def freespace():
-    try:
-        stat = os.statvfs('/')
-        free_bytes = stat.f_bfree * stat.f_bsize
-        total_bytes = stat.f_blocks * stat.f_bsize
-        fspace = convert_size(float(free_bytes))
-        total_space = convert_size(float(total_bytes))
-        spacestr = _("Free Space:") + " " + str(fspace) + " " + _("of") + " " + str(total_space)
-        return spacestr
-    except Exception as e:
-        print("Error getting disk space:", e)
-        return _("Free Space:") + " -?- " + _("of") + " -?-"
+# def add_skin_font():
+    # from enigma import addFont
+    # FNTPath = os_path.join(plugin_path + "/fonts")
+    # # addFont(filename, name, scale, isReplacement, render)
+    # addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
+    # addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
+    # addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
 
 
 def menustart():
     try:
         if CheckConn():
-            xml = xmlurl
-            data = checkGZIP(xml)
-            _session.open(LinuxsatPanel, data)
+            # xml = xmlurl
+            # data = checkGZIP(xml)
+            # _session.open(LinuxsatPanel, data)
+            _session.open(startLP)
         else:
             _session.open(MessageBox,
                           _('Check Connection!'),
@@ -1501,7 +1553,6 @@ def main(session, **kwargs):
     try:
         global _session
         _session = session
-        # add_skin_font()
         menustart()
     except:
         import traceback
@@ -1510,14 +1561,17 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-    if menuid == 'mainmenu':
-        from Tools.BoundFunction import boundFunction
-        return [(_('Linuxsat Panel'),
-                 boundFunction(main, showExtentionMenuOption=True),
-                 descplug,
-                 -1)]
-    else:
-        return []
+    return [(_('Linuxsat Panel'), main, descplug, 44)] if menuid == "mainmenu" else []
+    '''
+    # if menuid == 'mainmenu':
+        # from Tools.BoundFunction import boundFunction
+        # return [(_('Linuxsat Panel'),
+                 # boundFunction(menustart, showExtentionMenuOption=True),
+                 # descplug,
+                 # -1)]
+    # else:
+        # return []
+    '''
 
 
 def Plugins(**kwargs):
