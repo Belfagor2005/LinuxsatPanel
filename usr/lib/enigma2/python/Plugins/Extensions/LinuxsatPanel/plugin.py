@@ -592,16 +592,16 @@ class LinuxsatPanel(Screen):
         return
 
     def key_info(self):
-        self.session.open(LSinfo, "Information ")
+        self.session.open(LSinfo, " Information ")
 
     def okbuttonClick(self):
         self.idx = self.index
         if self.idx is None:
             return
         name = self.names[self.idx]
-        if name == "Information ":
+        if name == " Information ":
             self.session.open(LSinfo, name)
-        elif name == "About ":
+        elif name == " About ":
             self.session.open(LSinfo, name)
 
         elif name == "Channel List ":
