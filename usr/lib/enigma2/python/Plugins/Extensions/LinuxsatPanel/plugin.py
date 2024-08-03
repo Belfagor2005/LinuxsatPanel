@@ -871,7 +871,7 @@ class LSChannel(Screen):
         return
 
     def key_info(self):
-        self.session.open(LSinfo, "Information ")
+        self.session.open(LSinfo, " Information ")
 
     def okbuttonClick(self):
         self.idx = self.index
@@ -1316,12 +1316,14 @@ class LSinfo(Screen):
 
     def startRun(self):
         try:
-            if self.name == "Information ":
+            if self.name == " Information ":
                 self.infoBox()
-            else:
+            elif self.name == " About ":
                 url = abouturl
                 ab = checkGZIP(url)
-                self['list'].setText(ab)
+                self['list'].setText(ab)                
+            else:
+                return
         except Exception as e:
             print(e)
             self['list'].setText(_('Unable to download updates!'))
