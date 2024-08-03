@@ -29,9 +29,14 @@ descplug = "Linuxsat-Support.com (Addons Panel)"
 PluginLanguageDomain = 'LinuxsatPanel'
 PluginLanguagePath = 'Extensions/LinuxsatPanel/locale'
 plugin_path = os.path.dirname(sys.modules[__name__].__file__)
-infourl = 'https://patbuweb.com/xml/info.txt'
-abouturl = 'https://patbuweb.com/xml/about.txt'
-xmlurl = 'http://patbuweb.com/xml/addons_2024.xml'
+# infourl = 'https://patbuweb.com/xml/info.txt'
+# abouturl = 'https://patbuweb.com/xml/about.txt'
+# xmlurl = 'http://patbuweb.com/xml/addons_2024.xml'
+
+infourl = 'https://github.com/Belfagor2005/upload/raw/main/fill/info.txt'
+abouturl = 'https://github.com/Belfagor2005/upload/raw/main/fill/about.txt'
+xmlurl = 'https://github.com/Belfagor2005/upload/raw/main/fill/addons_2024.xml'
+
 
 isDreamOS = False
 if os.path.exists("/var/lib/dpkg/status"):

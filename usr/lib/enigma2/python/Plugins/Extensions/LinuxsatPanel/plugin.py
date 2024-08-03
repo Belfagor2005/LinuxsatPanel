@@ -469,7 +469,7 @@ class LinuxsatPanel(Screen):
         print("Lista ordinata:", sorted_list)
         print("Titoli ordinati:", sorted_titles)
         print("Immagini ordinate:", sorted_pics)
-        
+
         # self.combined_data = sorted_data
 
         self.names = sorted_list
@@ -705,9 +705,9 @@ class LSChannel(Screen):
         self.pics.append(picfold + "vhannibal2.png")
 
         self.names = list
-        
+
         self.combined_data = zip(self.names, self.titles, self.pics)
-        
+
         self["frame"] = MovingPixmap()
         i = 0
         while i < 20:
@@ -742,7 +742,7 @@ class LSChannel(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
-        
+
         # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
@@ -750,7 +750,7 @@ class LSChannel(Screen):
         print("Titoli ordinati:", sorted_titles)
         print("Immagini ordinate:", sorted_pics)
         # self.combined_data = sorted_data
-        
+
         self.names = sorted_list
         self.titles = sorted_titles
         self.pics = sorted_pics
@@ -1014,29 +1014,48 @@ class addInstall(Screen):
                                           MessageBox, _("Do you want to install %s?") % self.iname,
                                           MessageBox.TYPE_YESNO)
 
+    def retfile(self, dest):
+        import requests
+        response = requests.get(self.url)
+        if response.status_code == 200:
+            with open(dest, 'wb') as f:
+                f.write(response.content)
+            print(f"File {dest} scaricato correttamente.")
+            return True
+        else:
+            print(f"Errore durante il download del file. Codice di stato: {response.status_code}")
+        return False
+
     def okClicked(self, answer=False):
         if answer:
             dest = "/tmp"
             # cmd1 = "wget -P '" + dest + "' '" + self.url + "'"
-            cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
+            # cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
 
-            if ".deb" in self.plug:
-                cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
-            if ".ipk" in self.plug:
-                cmd2 = "opkg install --force-overwrite '/tmp/" + self.plug + "'"
-            elif ".zip" in self.plug:
-                cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
-            elif ".tar" in self.plug and "gz" in self.plug:
-                cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
-            elif ".bz2" in self.plug and "gz" in self.plug:
-                cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
+            folddest = dest + '/' + self.plug
+            if self.retfile(folddest):
+                print('folddest:', folddest)
+                # print('cmd1=', cmd1)
 
-            cmd3 = "rm '/tmp/" + self.plug + "'"
-            cmd = cmd1 + " && " + cmd2 + " && " + cmd3
-            print('cmd okclicked:', cmd2)
+                if ".deb" in self.plug:
+                    cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
+                if ".ipk" in self.plug:
+                    cmd2 = "opkg install --force-overwrite '/tmp/" + self.plug + "'"
+                elif ".zip" in self.plug:
+                    cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
+                elif ".tar" in self.plug and "gz" in self.plug:
+                    cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
+                elif ".bz2" in self.plug and "gz" in self.plug:
+                    cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
 
-            title = (_("Installing %s\nPlease Wait...") % self.iname)
-            self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
+                cmd3 = "rm '/tmp/" + self.plug + "'"
+                # cmd = str(cmd1) + " && " + cmd2 + " && " + cmd3
+                cmd = cmd2 + " && " + cmd3
+                print('cmd2 okclicked:', cmd2)
+                print('cmd okclicked:', cmd)
+
+                title = (_("Installing %s\nPlease Wait...") % self.iname)
+                self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
@@ -1321,7 +1340,7 @@ class LSinfo(Screen):
             elif self.name == " About ":
                 url = abouturl
                 ab = checkGZIP(url)
-                self['list'].setText(ab)                
+                self['list'].setText(ab)
             else:
                 return
         except Exception as e:
