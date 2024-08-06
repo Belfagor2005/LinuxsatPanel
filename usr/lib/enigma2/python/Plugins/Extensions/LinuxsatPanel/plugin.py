@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# import zlib, base64
-# exec zlib.decompress(base64.b64decode(''))
 from . import (
     _,
     add_skin_font,
@@ -41,22 +39,18 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import (SCOPE_PLUGINS, resolveFilename, fileExists)
-# from os import path as os_path
 from datetime import datetime
 import codecs
 import json
 import os
 import re
-# import shutil
 import ssl
 import sys
-# import six
 from enigma import (
     RT_VALIGN_CENTER,
     RT_HALIGN_LEFT,
     eListboxPythonMultiContent,
     eTimer,
-    # getDesktop,
     gFont,
     loadPNG,
     ePicLoad,
@@ -148,13 +142,6 @@ def make_request(url):
         response.close()
         return link
     return
-
-
-def refreshPlugins():
-    from Components.PluginComponent import plugins
-    from Tools.Directories import SCOPE_PLUGINS, resolveFilename
-    plugins.clearPluginList()
-    plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
 if isFHD():
@@ -482,11 +469,9 @@ class LinuxsatPanel(Screen):
         print("Immagini ordinate:", sorted_pics)
 
         # self.combined_data = sorted_data
-
         self.names = sorted_list
         self.titles = sorted_titles
         self.pics = sorted_pics
-
         self.openTest()
 
     def paintFrame(self):
@@ -753,7 +738,6 @@ class LSChannel(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
-
         # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
@@ -761,7 +745,6 @@ class LSChannel(Screen):
         print("Titoli ordinati:", sorted_titles)
         print("Immagini ordinate:", sorted_pics)
         # self.combined_data = sorted_data
-
         self.names = sorted_list
         self.titles = sorted_titles
         self.pics = sorted_pics
@@ -1377,8 +1360,8 @@ class LSinfo(Screen):
                                                                    'down': self.Down,
                                                                    'left': self.Up,
                                                                    'right': self.Down,
-                                                                   'yellow': self.update_me,
-                                                                   'green': self.update_dev,
+                                                                   # 'yellow': self.update_me,
+                                                                   'green': self.update_me,
                                                                    'yellow_long': self.update_dev,
                                                                    'info_long': self.update_dev,
                                                                    'infolong': self.update_dev,
@@ -1694,6 +1677,13 @@ def b64decoder(s):
         if PY3:
             output = output.decode('utf-8')
         return output
+
+
+def refreshPlugins():
+    from Components.PluginComponent import plugins
+    from Tools.Directories import SCOPE_PLUGINS, resolveFilename
+    plugins.clearPluginList()
+    plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
 def menustart():
