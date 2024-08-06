@@ -16,15 +16,18 @@ from . import (
     descplug,
     freespace,
     CheckConn,
+    installer_url,
+    developer_url,
 )
 from .Console import Console
-from . Lcn import (
+from .Lcn import (
     LCN,
     terrestrial,
     ReloadBouquets,
     keepiptv,
     copy_files_to_enigma2,
 )
+from . import Utils
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
@@ -40,7 +43,9 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import (SCOPE_PLUGINS, resolveFilename, fileExists)
 # from os import path as os_path
+from datetime import datetime
 import codecs
+import json
 import os
 import re
 # import shutil
@@ -146,6 +151,13 @@ def make_request(url):
     return
 
 
+def refreshPlugins():
+    from Components.PluginComponent import plugins
+    from Tools.Directories import SCOPE_PLUGINS, resolveFilename
+    plugins.clearPluginList()
+    plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
+
 if isFHD():
     skin_path = plugin_path + '/skins/fhd/'
     picfold = plugin_path + "/LSicons2/"
@@ -165,11 +177,11 @@ class LPSlist(MenuList):
         if isFHD():
             self.l.setItemHeight(50)
             textfont = int(34)
-            self.l.setFont(0, gFont('lmsat', textfont))
+            self.l.setFont(0, gFont('lsat', textfont))
         if isHD():
             self.l.setItemHeight(35)
             textfont = int(22)
-            self.l.setFont(0, gFont('lmsat', textfont))
+            self.l.setFont(0, gFont('lsat', textfont))
 
 
 def LPListEntry(name, item):
@@ -938,8 +950,8 @@ class addInstall(Screen):
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'],
                                     {'ok': self.message,
                                      'green': self.message,
-                                     'cancel': self.close,
-                                     'red': self.close,
+                                     'cancel': self.exitnow,
+                                     'red': self.exitnow,
                                      'blue': self.restart,
                                      'yellow': self.remove}, -2)
         self.timer = eTimer()
@@ -968,13 +980,38 @@ class addInstall(Screen):
         match = re.compile(regex, re.DOTALL).findall(self.fxml)
         self.names = []
         self.urls = []
+        items = []
         for name, url in match:
+
+            item = name + "###" + url
+            items.append(item)
+        items.sort()
+        for item in items:
+            name = item.split('###')[0]
+            url = item.split('###')[1]
+
             self.names.append(name)
             self.urls.append(url)
         LPshowlist(self.names, self["list"])
         self['key_green'].show()
         self['key_yellow'].show()
         self['key_blue'].show()
+
+    '''
+    # def openTest(self):
+        # print('self.xml: ', self.fxml)
+        # regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
+        # match = re.compile(regex, re.DOTALL).findall(self.fxml)
+        # self.names = []
+        # self.urls = []
+        # for name, url in match:
+            # self.names.append(name)
+            # self.urls.append(url)
+        # LPshowlist(self.names, self["list"])
+        # self['key_green'].show()
+        # self['key_yellow'].show()
+        # self['key_blue'].show()
+    '''
 
     def message(self):
         if self.dest is not None:
@@ -1065,9 +1102,11 @@ class addInstall(Screen):
             r = six.ensure_str(r)
         self.names = []
         self.urls = []
+        items = []
+        a = 0
         name = url = date = ''
         try:
-
+            # if a == 0:
             if 'ciefp' in self.name.lower():
                 n1 = r.find('title="README.txt', 0)
                 n2 = r.find('href="#readme">', n1)
@@ -1081,8 +1120,9 @@ class addInstall(Screen):
                         url = 'https://github.com' + url
                         name = name
                         self.downloading = True
-                        # self.names.append(name.strip())
-                        # self.urls.append(url.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
 
             if 'cyrus' in self.name.lower():
                 n1 = r.find('name="Sat">', 0)
@@ -1099,8 +1139,9 @@ class addInstall(Screen):
                             continue
                         name = name + ' ' + date
                         self.downloading = True
-                        # self.names.append(name.strip())
-                        # self.urls.append(url.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
 
             if 'manutek' in self.name.lower():
                 regex = 'href="/isetting/.*?file=(.+?).zip">'
@@ -1109,12 +1150,11 @@ class addInstall(Screen):
                 for url in match:
                     name = url
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
-                    if name in self.names:
-                        continue
                     url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
                     self.downloading = True
-                    # self.urls.append(url.strip())
-                    # self.names.append(name.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
 
             if 'morpheus' in self.name.lower():
                 regex = 'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
@@ -1126,26 +1166,25 @@ class addInstall(Screen):
                 for name, url in match:
                     if url.find('.zip') != -1:
                         name = 'Morph883 ' + name
-                        if name in self.names:
-                            continue
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
                         self.downloading = True
-                        # self.names.append(name.strip())
-                        # self.urls.append(url.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
 
             if 'vhannibal 1' in self.name.lower():
                 match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
                 print('match:', match)
                 for url, name, date in match:
-                    name = str(name) + ' ' + date
-                    if name in self.names:
-                        continue
+                    # name = str(name) + ' ' + date
+                    name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "https://www.vhannibal.net/" + url
                     print('url vhan1:', url)
                     self.downloading = True
-                    # self.names.append(name.strip())
-                    # self.urls.append(url.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
 
             if 'vhannibal 2' in self.name.lower():
                 regex = '<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
@@ -1155,16 +1194,23 @@ class addInstall(Screen):
                     if '.php' in url.lower():
                         continue
                     name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
-                    if name in self.names:
-                        continue
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
                     print('url vhan2:', url)
                     self.downloading = True
                     # self.names.append(name.strip())
                     # self.urls.append(url.strip())
 
-            self.names.append(name.strip())
-            self.urls.append(url.strip())
+                    item = name + "###" + url
+                    items.append(item)
+                    items.sort()
+
+            for item in items:
+                name = item.split('###')[0]
+                url = item.split('###')[1]
+                if name in self.names:
+                    continue
+                self.names.append(name.strip())
+                self.urls.append(url.strip())
 
             self['key_green'].show()
             LPshowlist(self.names, self["list"])
@@ -1298,6 +1344,11 @@ class addInstall(Screen):
         if answer:
             self.session.open(TryQuitMainloop, 3)
 
+    def exitnow(self):
+        if not os.path.exists('/var/lib/dpkg/info'):
+            refreshPlugins()
+        self.close()
+
 
 class LSinfo(Screen):
 
@@ -1313,18 +1364,47 @@ class LSinfo(Screen):
         info = _('Please Wait...')
         self.labeltext = ('')
         self['list'] = ScrollLabel(info)
+        # self['actions'] = ActionMap(['OkCancelActions',
+                                     # 'ColorActions',
+                                     # 'DirectionActions'], {'cancel': self.close,
+                                                           # 'red': self.close,
+                                                           # 'ok': self.ok,
+                                                           # 'up': self.Up,
+                                                           # 'down': self.Down,
+                                                           # 'left': self.Up,
+                                                           # 'right': self.Down,
+                                                           # }, -1)
+
         self['actions'] = ActionMap(['OkCancelActions',
                                      'ColorActions',
-                                     'DirectionActions'], {'cancel': self.close,
-                                                           'red': self.close,
-                                                           'ok': self.ok,
-                                                           'up': self.Up,
-                                                           'down': self.Down,
-                                                           'left': self.Up,
-                                                           'right': self.Down,
-                                                           }, -1)
+                                     'DirectionActions',
+                                     'HotkeyActions',
+                                     'InfobarEPGActions',
+                                     'ChannelSelectBaseActions'], {'ok': self.close,
+                                                                   'back': self.close,
+                                                                   'cancel': self.close,
+                                                                   'up': self.Up,
+                                                                   'down': self.Down,
+                                                                   'left': self.Up,
+                                                                   'right': self.Down,
+                                                                   'yellow': self.update_me,
+                                                                   'green': self.update_dev,
+                                                                   'yellow_long': self.update_dev,
+                                                                   'info_long': self.update_dev,
+                                                                   'infolong': self.update_dev,
+                                                                   'showEventInfoPlugin': self.update_dev,
+                                                                   'red': self.close}, -1)
 
         self.setTitle(titlex)
+        
+        self.Update = False
+        self.timer = eTimer()
+        if os.path.exists('/var/lib/dpkg/status'):
+            self.timer_conn = self.timer.timeout.connect(self.check_vers)
+        else:
+            self.timer.callback.append(self.check_vers)
+        self.timer.start(500, 1)
+        
         self.timer = eTimer()
         if os.path.exists('/var/lib/dpkg/info'):
             self.timer_conn = self.timer.timeout.connect(self.startRun)
@@ -1332,6 +1412,60 @@ class LSinfo(Screen):
             self.timer.callback.append(self.startRun)
         self.timer.start(1000, 1)
         # self.onLayoutFinish.append(self.startRun)
+
+
+    def check_vers(self):
+        remote_version = '0.0'
+        remote_changelog = ''
+        req = Utils.Request(Utils.b64decoder(installer_url), headers={'User-Agent': 'Mozilla/5.0'})
+        page = Utils.urlopen(req).read()
+        if PY3:
+            data = page.decode("utf-8")
+        else:
+            data = page.encode("utf-8")
+        if data:
+            lines = data.split("\n")
+            for line in lines:
+                if line.startswith("version"):
+                    remote_version = line.split("=")
+                    remote_version = line.split("'")[1]
+                if line.startswith("changelog"):
+                    remote_changelog = line.split("=")
+                    remote_changelog = line.split("'")[1]
+                    break
+        self.new_version = remote_version
+        self.new_changelog = remote_changelog
+        # if float(currversion) < float(remote_version):
+        if currversion < remote_version:
+            self.Update = True
+            # self['key_yellow'].show()
+            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress yellow button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
+        self['key_green'].show()
+
+    def update_me(self):
+        if self.Update is True:
+            self.session.openWithCallback(self.install_update, MessageBox, _("New version %s is available.\n\nChangelog: %s \n\nDo you want to install it now?") % (self.new_version, self.new_changelog), MessageBox.TYPE_YESNO)
+        else:
+            self.session.open(MessageBox, _("Congrats! You already have the latest version..."),  MessageBox.TYPE_INFO, timeout=4)
+
+    def update_dev(self):
+        req = Utils.Request(Utils.b64decoder(developer_url), headers={'User-Agent': 'Mozilla/5.0'})
+        page = Utils.urlopen(req).read()
+        data = json.loads(page)
+        remote_date = data['pushed_at']
+        strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
+        remote_date = strp_remote_date.strftime('%Y-%m-%d')
+        self.session.openWithCallback(self.install_update, MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date), MessageBox.TYPE_YESNO)
+
+    def install_update(self, answer=False):
+        if answer:
+            self.session.open(Console, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + Utils.b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
+        else:
+            self.session.open(MessageBox, _("Update Aborted!"),  MessageBox.TYPE_INFO, timeout=3)
+
+    def myCallback(self, result=None):
+        print('result:', result)
+        return
 
     def startRun(self):
         try:
@@ -1543,15 +1677,6 @@ def checkGZIP(url):
     return None
 
 
-# def add_skin_font():
-    # from enigma import addFont
-    # FNTPath = os_path.join(plugin_path + "/fonts")
-    # # addFont(filename, name, scale, isReplacement, render)
-    # addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
-    # addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
-    # addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
-
-
 def menustart():
     try:
         if CheckConn():
@@ -1583,16 +1708,6 @@ def main(session, **kwargs):
 
 def menu(menuid, **kwargs):
     return [(_('Linuxsat Panel'), main, descplug, 44)] if menuid == "mainmenu" else []
-    '''
-    # if menuid == 'mainmenu':
-        # from Tools.BoundFunction import boundFunction
-        # return [(_('Linuxsat Panel'),
-                 # boundFunction(menustart, showExtentionMenuOption=True),
-                 # descplug,
-                 # -1)]
-    # else:
-        # return []
-    '''
 
 
 def Plugins(**kwargs):

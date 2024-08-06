@@ -1,10 +1,11 @@
 #!/bin/bash
-
 ## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/sh
+
 ## Only This 2 lines to edit with new version ######
-version='2.0'
-changelog='Init Project'
+version='2.1'
+changelog='\nAdd Locale Language'
 ##############################################################
+
 TMPPATH=/tmp/LinuxsatPanel-main
 FILEPATH=/tmp/main.tar.gz
 
@@ -49,22 +50,25 @@ else
 	echo ""
 	if [ $OSTYPE = "DreamOs" ]; then
 		apt-get update && apt-get install python-requests -y
+	 
 	elif [ $PYTHON = "PY3" ]; then
 		opkg update && opkg --force-reinstall --force-overwrite install python3-requests
 	elif [ $PYTHON = "PY2" ]; then
+	  
 		opkg update && opkg --force-reinstall --force-overwrite install python-requests
+	
 	fi
 fi
 echo ""
 
 ## Remove tmp directory
-## [ -r $TMPPATH ] && rm -f $TMPPATH > /dev/null 2>&1
+[ -r $TMPPATH ] && rm -f $TMPPATH > /dev/null 2>&1
 
 ## Remove tmp directory
-## [ -r $FILEPATH ] && rm -f $FILEPATH > /dev/null 2>&1
+[ -r $FILEPATH ] && rm -f $FILEPATH > /dev/null 2>&1
 
 ## Remove old plugin directory
-## [ -r $PLUGINPATH ] && rm -rf $PLUGINPATH
+[ -r $PLUGINPATH ] && rm -rf $PLUGINPATH
 
 ## Download and install plugin
 ## check depends packges
@@ -79,12 +83,12 @@ else
    echo ""
 fi
 
-# if [ $OSTYPE != "DreamOs" ]; then
-	# opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp
-# fi
+if [ $OSTYPE != "DreamOs" ]; then
+	opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp
+fi
 sleep 2
 
-wget --no-check-certificate 'https://github.com/Belfagor2005/LinuxsatPanel/archive/refs/heads/main.tar.gz'
+wget --no-check-certificate --no-cache --no-dns-cache 'https://github.com/Belfagor2005/LinuxsatPanel/archive/refs/heads/main.tar.gz'
 tar -xzf main.tar.gz
 cp -r 'LinuxsatPanel-main/usr' '/'
 set +e
@@ -94,18 +98,19 @@ sleep 2
 ## Check if plugin installed correctly
 if [ ! -d $PLUGINPATH ]; then
 	echo "Some thing wrong .. Plugin not installed"
-	rm -rf $TMPPATH > /dev/null 2>&1	
+	rm -rf $TMPPATH > /dev/null 2>&1
 	exit 1
 fi
+
 rm -rf $TMPPATH > /dev/null 2>&1
 sync
 echo ""
 echo ""
 echo "#########################################################"
-echo "#        LinuxsatPanel Live INSTALLED SUCCESSFULLY      #"
+echo "#          LinuxsatPanel INSTALLED SUCCESSFULLY         #"
 echo "#                developed by LULULLA                   #"
 echo "#                                                       #"
-echo "#               https://LinuxsatPanel                   #"
+echo "#                  https://corvoboys.org                #"
 echo "#########################################################"
 echo "#           your Device will RESTART Now                #"
 echo "#########################################################"

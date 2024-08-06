@@ -36,7 +36,8 @@ plugin_path = os.path.dirname(sys.modules[__name__].__file__)
 infourl = 'https://github.com/Belfagor2005/upload/raw/main/fill/info.txt'
 abouturl = 'https://github.com/Belfagor2005/upload/raw/main/fill/about.txt'
 xmlurl = 'https://github.com/Belfagor2005/upload/raw/main/fill/addons_2024.xml'
-
+installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
+developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
 
 isDreamOS = False
 if os.path.exists("/var/lib/dpkg/status"):
