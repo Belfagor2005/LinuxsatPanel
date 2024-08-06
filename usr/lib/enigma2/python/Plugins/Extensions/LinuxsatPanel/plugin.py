@@ -27,7 +27,6 @@ from .Lcn import (
     keepiptv,
     copy_files_to_enigma2,
 )
-from . import Utils
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
@@ -1103,7 +1102,7 @@ class addInstall(Screen):
         self.names = []
         self.urls = []
         items = []
-        a = 0
+        # a = 0
         name = url = date = ''
         try:
             # if a == 0:
@@ -1366,17 +1365,6 @@ class LSinfo(Screen):
         self['list'] = ScrollLabel(info)
         self['key_green'] = Button(_('Update'))
         self['key_green'].hide()
-        # self['actions'] = ActionMap(['OkCancelActions',
-                                     # 'ColorActions',
-                                     # 'DirectionActions'], {'cancel': self.close,
-                                                           # 'red': self.close,
-                                                           # 'ok': self.ok,
-                                                           # 'up': self.Up,
-                                                           # 'down': self.Down,
-                                                           # 'left': self.Up,
-                                                           # 'right': self.Down,
-                                                           # }, -1)
-
         self['actions'] = ActionMap(['OkCancelActions',
                                      'ColorActions',
                                      'DirectionActions',
@@ -1398,15 +1386,14 @@ class LSinfo(Screen):
                                                                    'red': self.close}, -1)
 
         self.setTitle(titlex)
-        
         self.Update = False
         self.timerz = eTimer()
         if os.path.exists('/var/lib/dpkg/status'):
             self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
         else:
             self.timerz.callback.append(self.check_vers)
-        self.timerz.start(500, 1)
-        
+        self.timerz.start(200, 1)
+
         self.timer = eTimer()
         if os.path.exists('/var/lib/dpkg/info'):
             self.timer_conn = self.timer.timeout.connect(self.startRun)
@@ -1415,12 +1402,12 @@ class LSinfo(Screen):
         self.timer.start(1000, 1)
         # self.onLayoutFinish.append(self.startRun)
 
-
     def check_vers(self):
+        print('check version online')
         remote_version = '0.0'
         remote_changelog = ''
-        req = Utils.Request(Utils.b64decoder(installer_url), headers={'User-Agent': 'Mozilla/5.0'})
-        page = Utils.urlopen(req).read()
+        req = Request(b64decoder(installer_url), headers={'User-Agent': AgentRequest})
+        page = urlopen(req).read()
         if PY3:
             data = page.decode("utf-8")
         else:
@@ -1437,10 +1424,12 @@ class LSinfo(Screen):
                     break
         self.new_version = remote_version
         self.new_changelog = remote_changelog
-        if float(currversion) < float(remote_version):
-        # if currversion < remote_version:
+        print('self.new_version =', remote_version)
+        print('self.new_changelog =', remote_changelog)
+        print('currversion=', currversion)
+        # if float(currversion) < float(remote_version):
+        if currversion < remote_version:
             self.Update = True
-            # self['key_yellow'].show()
             print('new version onine')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress yellow button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].show()
@@ -1452,8 +1441,8 @@ class LSinfo(Screen):
             self.session.open(MessageBox, _("Congrats! You already have the latest version..."),  MessageBox.TYPE_INFO, timeout=4)
 
     def update_dev(self):
-        req = Utils.Request(Utils.b64decoder(developer_url), headers={'User-Agent': 'Mozilla/5.0'})
-        page = Utils.urlopen(req).read()
+        req = Request(b64decoder(developer_url), headers={'User-Agent': AgentRequest})
+        page = urlopen(req).read()
         data = json.loads(page)
         remote_date = data['pushed_at']
         strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
@@ -1462,7 +1451,7 @@ class LSinfo(Screen):
 
     def install_update(self, answer=False):
         if answer:
-            self.session.open(Console, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + Utils.b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
+            self.session.open(Console, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
         else:
             self.session.open(MessageBox, _("Update Aborted!"),  MessageBox.TYPE_INFO, timeout=3)
 
@@ -1678,6 +1667,33 @@ def checkGZIP(url):
     except Exception as e:
         print("Unexpected error:", e)
     return None
+
+
+def b64decoder(s):
+    s = str(s).strip()
+    import base64
+    try:
+        output = base64.b64decode(s)
+        if PY3:
+            output = output.decode('utf-8')
+        return output
+
+    except Exception:
+        padding = len(s) % 4
+        if padding == 1:
+            print('Invalid base64 string: {}'.format(s))
+            return ""
+        elif padding == 2:
+            s += b'=='
+        elif padding == 3:
+            s += b'='
+        else:
+            return ""
+
+        output = base64.b64decode(s)
+        if PY3:
+            output = output.decode('utf-8')
+        return output
 
 
 def menustart():

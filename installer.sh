@@ -2,8 +2,8 @@
 ## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/sh
 
 ## Only This 2 lines to edit with new version ######
-version='2.1'
-changelog='\nAdd Locale Language'
+version='2.0'
+changelog='\nInit Project started\nAdd Locale Language'
 ##############################################################
 
 TMPPATH=/tmp/LinuxsatPanel-main
