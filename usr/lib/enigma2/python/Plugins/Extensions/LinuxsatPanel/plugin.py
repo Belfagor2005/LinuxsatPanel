@@ -1364,6 +1364,8 @@ class LSinfo(Screen):
         info = _('Please Wait...')
         self.labeltext = ('')
         self['list'] = ScrollLabel(info)
+        self['key_green'] = Button(_('Update'))
+        self['key_green'].hide()
         # self['actions'] = ActionMap(['OkCancelActions',
                                      # 'ColorActions',
                                      # 'DirectionActions'], {'cancel': self.close,
@@ -1398,12 +1400,12 @@ class LSinfo(Screen):
         self.setTitle(titlex)
         
         self.Update = False
-        self.timer = eTimer()
+        self.timerz = eTimer()
         if os.path.exists('/var/lib/dpkg/status'):
-            self.timer_conn = self.timer.timeout.connect(self.check_vers)
+            self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
         else:
-            self.timer.callback.append(self.check_vers)
-        self.timer.start(500, 1)
+            self.timerz.callback.append(self.check_vers)
+        self.timerz.start(500, 1)
         
         self.timer = eTimer()
         if os.path.exists('/var/lib/dpkg/info'):
@@ -1435,12 +1437,13 @@ class LSinfo(Screen):
                     break
         self.new_version = remote_version
         self.new_changelog = remote_changelog
-        # if float(currversion) < float(remote_version):
-        if currversion < remote_version:
+        if float(currversion) < float(remote_version):
+        # if currversion < remote_version:
             self.Update = True
             # self['key_yellow'].show()
+            print('new version onine')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress yellow button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
-        self['key_green'].show()
+            self['key_green'].show()
 
     def update_me(self):
         if self.Update is True:

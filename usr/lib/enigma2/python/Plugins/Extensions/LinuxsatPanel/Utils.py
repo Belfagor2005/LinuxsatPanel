@@ -39,7 +39,6 @@ if PY3:
     # import chardet
     bytes = bytes
     unicode = str
-    range = range
     from urllib.parse import quote
     from urllib.request import urlopen
     from urllib.request import Request
@@ -47,7 +46,6 @@ if PY3:
 
 if PY2:
     str = str
-    range = xrange
     from urllib import quote
     from urllib2 import urlopen
     from urllib2 import Request
