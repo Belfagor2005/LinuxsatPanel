@@ -280,7 +280,7 @@ class LinuxsatPanel(Screen):
         self.pics.append(picfold + "Feeds2.0.png")
 
         list.append("Feeds Image ")
-        self.titles.append("Feeds Oe2.5/2.6 ")
+        self.titles.append("Feeds DreamOS ")
         self.pics.append(picfold + "Feeds2.2.png")
 
         list.append("Games ")
