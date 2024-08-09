@@ -351,7 +351,7 @@ class LinuxsatPanel(Screen):
         self.titles.append("Skins | HD ")
         self.pics.append(picfold + "SkinHD.png")
 
-        list.append("Skins Fhd-Hd Oe2.5/2.6 ")
+        list.append("Skins Fhd-Hd DreamOs ")
         self.titles.append("Skins Oe2.5/2.6 ")
         self.pics.append(picfold + "OE2.2-Skins.png")
 
@@ -1348,6 +1348,8 @@ class LSinfo(Screen):
         self['list'] = ScrollLabel(info)
         self['key_green'] = Button(_('Update'))
         self['key_green'].hide()
+        self["pixmap"] = Pixmap()
+        self["pixmap"].hide()
         self['actions'] = ActionMap(['OkCancelActions',
                                      'ColorActions',
                                      'DirectionActions',
@@ -1383,7 +1385,10 @@ class LSinfo(Screen):
         else:
             self.timer.callback.append(self.startRun)
         self.timer.start(1000, 1)
-        # self.onLayoutFinish.append(self.startRun)
+        self.onLayoutFinish.append(self.pas)
+
+    def pas(self):
+        pass
 
     def check_vers(self):
         print('check version online')
@@ -1416,6 +1421,7 @@ class LSinfo(Screen):
             print('new version onine')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress yellow button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].show()
+            self["pixmap"].show()
 
     def update_me(self):
         if self.Update is True:

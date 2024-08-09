@@ -1,6 +1,6 @@
 <screen name="LSinfo" position="0,0" size="1280,720" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" alphatest="blend"/>
-	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black"/>
+	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
 	<widget name="list" position="52,125" zPosition="99" size="681,540" font="lmsat;21" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" scrollbarForegroundColor="#0049bbff" scrollbarBorderWidth="1" scrollbarBorderColor="#0049bbff" scrollbarWidth="8" />
 	<widget source="session.VideoPicture" render="Pig" position="812,356" size="404,226" zPosition="1" backgroundColor="#ff000000"/>
 	<!-- clock -->
@@ -11,5 +11,6 @@
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 	<widget name="key_green" position="366,680" size="200,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/green.png" position="326,680" size="30,30" zPosition="4" alphatest="on" />
+	<!-- <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/green.png" position="326,680" size="30,30" zPosition="4" alphatest="on" /> -->
+	<widget name="pixmap"  pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/green.png" position="326,680" size="30,30" zPosition="4" alphatest="on" />
 </screen>

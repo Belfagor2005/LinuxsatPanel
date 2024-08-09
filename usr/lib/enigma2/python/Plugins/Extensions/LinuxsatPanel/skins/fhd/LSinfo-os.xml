@@ -11,5 +11,6 @@
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 	<widget name="key_green" position="550,1020" size="300,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="490,1020" size="45,45" zPosition="4" alphatest="on" />
+	<!-- <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="490,1020" size="45,45" zPosition="4" alphatest="on" /> -->
+	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="490,1020" size="45,45" zPosition="4" alphatest="on" />
 </screen>
