@@ -5,10 +5,10 @@
     <widget name="sort" position="1212,955" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
     <widget source="session.VideoPicture" render="Pig" position="1218,535" size="606,339" zPosition="1" backgroundColor="#ff000000"/>
 	<!-- clock -->
-	<widget source="global.CurrentTime" render="Label" position="1514,931" size="410,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1554,931" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Default</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="Label" position="1559,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
+	<widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
     <widget name="frame" position="80,200" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/pic_frame2.png" zPosition="3" alphatest="on" />

@@ -74,7 +74,7 @@ from enigma import (
 # ======================================================================
 
 global setx
-currversion = '2.0'
+currversion = '2.1'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
 _session = ""
@@ -299,20 +299,20 @@ class LinuxsatPanel(Screen):
         self.titles.append("Kiddac Zone Oe2.0 ")
         self.pics.append(picfold + "KiddaC1.png")
 
-        list.append("Kiddac Oe2.5/2.6 ")
-        self.titles.append("Kiddac Zone Oe2.5/2.6 ")
+        list.append("Kiddac DreamOs ")
+        self.titles.append("Kiddac Zone DreamOs ")
         self.pics.append(picfold + "KiddaC2.png")
 
         list.append("Lululla Zone Oe2.0 ")
         self.titles.append("Lululla Zone Oe2.0 ")
         self.pics.append(picfold + "oe2.0.png")
 
-        list.append("Lululla Zone Oe2.5/2.6 ")
-        self.titles.append("Lululla Zone Oe2.5/2.6 ")
+        list.append("Lululla Zone DreamOs ")
+        self.titles.append("Lululla Zone DreamOs ")
         self.pics.append(picfold + "oe2.5-2.6.png")
 
-        list.append("Oe2.5/2.6 Plugins ")
-        self.titles.append("Oe2.5/2.6 Plugins ")
+        list.append("DreamOs Plugins ")
+        self.titles.append("DreamOs Plugins ")
         self.pics.append(picfold + "OE2.2-Plugins.png")
 
         list.append("Mediaplayer-Youtube ")
@@ -343,24 +343,28 @@ class LinuxsatPanel(Screen):
         self.titles.append("Radio-Tools ")
         self.pics.append(picfold + "Radio.png")
 
-        list.append("Skins | FHD ")
-        self.titles.append("Skins | FHD")
-        self.pics.append(picfold + "SkinFHD.png")
+        list.append("Skins | TEAM ")
+        self.titles.append("Skins | TEAM ")
+        self.pics.append(picfold + "skinsteam.png")
 
-        list.append("Skins | HD ")
-        self.titles.append("Skins | HD ")
-        self.pics.append(picfold + "SkinHD.png")
+        # list.append("Skins | FHD ")
+        # self.titles.append("Skins | FHD")
+        # self.pics.append(picfold + "SkinFHD.png")
+
+        # list.append("Skins | HD ")
+        # self.titles.append("Skins | HD ")
+        # self.pics.append(picfold + "SkinHD.png")
 
         list.append("Skins Fhd-Hd DreamOs ")
-        self.titles.append("Skins Oe2.5/2.6 ")
+        self.titles.append("Skins DreamOs ")
         self.pics.append(picfold + "OE2.2-Skins.png")
 
         list.append("Keys Tools Oe2.0 ")
         self.titles.append("SoftCam-Tools2.0 ")
         self.pics.append(picfold + "key-updater.png")
 
-        list.append("Keys Tools Oe2.5/2.6 ")
-        self.titles.append("SoftCam-Tools2.2 ")
+        list.append("Keys Tools DreamOs ")
+        self.titles.append("SoftCam-Tools DreamOs ")
         self.pics.append(picfold + "key-updater1.png")
 
         list.append("Softcams ")
@@ -368,7 +372,7 @@ class LinuxsatPanel(Screen):
         self.pics.append(picfold + "SOE20.png")
 
         list.append("Softcams ")
-        self.titles.append("SoftcamsOe2.5/2.6 ")
+        self.titles.append("Softcams DreamOs ")
         self.pics.append(picfold + "SOE22.png")
 
         list.append("Sport ")
@@ -403,8 +407,8 @@ class LinuxsatPanel(Screen):
         self.titles.append("Adult Oe2.0 ")
         self.pics.append(picfold + "18+deb.png")
 
-        list.append("Adult Oe2.5/2.6 ")
-        self.titles.append("Adult Oe2.5/2.6 ")
+        list.append("Adult DreamOs ")
+        self.titles.append("Adult DreamOs ")
         self.pics.append(picfold + "18+.png")
 
         list.append("Other Oe2.0 ")
@@ -412,7 +416,7 @@ class LinuxsatPanel(Screen):
         self.pics.append(picfold + "Other.png")
 
         list.append("Other DreamOs ")
-        self.titles.append("Other Oe2.5/2.6 ")
+        self.titles.append("Other DreamOs ")
         self.pics.append(picfold + "Other1.png")
 
         list.append(" Information ")
@@ -603,6 +607,9 @@ class LinuxsatPanel(Screen):
         elif name == "Channel List ":
             self.session.open(LSChannel, name)
 
+        elif name == "Skins | TEAM ":
+            self.session.open(LSskin, name)
+
         else:
             title = self.titles[self.idx]
             n1 = self.data.find(title, 0)
@@ -610,6 +617,296 @@ class LinuxsatPanel(Screen):
             fxml = self.data[n1:n2]
             fxml = self.data[n1:n2]
             self.session.open(addInstall, fxml, name, None)
+
+
+class LSskin(Screen):
+
+    def __init__(self, session, name):
+        Screen.__init__(self, session)
+        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+        self.data = checkGZIP(xmlurl)
+        self.name = name
+        if isFHD():
+            self.pos = []
+            self.pos.append([80, 200])
+            self.pos.append([310, 200])
+            self.pos.append([520, 200])
+            self.pos.append([730, 200])
+            self.pos.append([940, 200])
+
+            self.pos.append([80, 425])
+            self.pos.append([310, 425])
+            self.pos.append([520, 425])
+            self.pos.append([730, 425])
+            self.pos.append([940, 425])
+
+            self.pos.append([80, 635])
+            self.pos.append([310, 635])
+            self.pos.append([520, 635])
+            self.pos.append([730, 635])
+            self.pos.append([940, 635])
+
+            self.pos.append([80, 845])
+            self.pos.append([310, 845])
+            self.pos.append([520, 845])
+            self.pos.append([730, 845])
+            self.pos.append([940, 845])
+
+        if isHD():
+            self.pos = []
+            self.pos.append([60, 125])
+            self.pos.append([200, 125])
+            self.pos.append([345, 125])
+            self.pos.append([490, 125])
+            self.pos.append([620, 125])
+
+            self.pos.append([60, 265])
+            self.pos.append([200, 265])
+            self.pos.append([345, 265])
+            self.pos.append([490, 265])
+            self.pos.append([620, 265])
+
+            self.pos.append([60, 405])
+            self.pos.append([200, 405])
+            self.pos.append([345, 405])
+            self.pos.append([490, 405])
+            self.pos.append([620, 405])
+
+            self.pos.append([60, 545])
+            self.pos.append([200, 545])
+            self.pos.append([345, 555])
+            self.pos.append([490, 545])
+            self.pos.append([620, 545])
+
+        list = []
+        self.pics = []
+        self.titles = []
+
+        list.append("Skins All ")
+        self.titles.append("Skins_All ")
+        self.pics.append(picfold + "otherskins.png")
+
+        list.append("Skins | HD ")
+        self.titles.append("Skins | HD ")
+        self.pics.append(picfold + "SkinHD.png")
+
+        list.append("Skins | FHD ")
+        self.titles.append("Skins | FHD")
+        self.pics.append(picfold + "SkinFHD.png")
+
+        list.append("Skins Egami ")
+        self.titles.append("Skins_Egami ")
+        self.pics.append(picfold + "egami.png")
+
+        list.append("Skins HDF ")
+        self.titles.append("Skins_HDF ")
+        self.pics.append(picfold + "hdf.png")
+
+        list.append("Skins OpenBh ")
+        self.titles.append("Skins_OBH ")
+        self.pics.append(picfold + "openbh.png")
+
+        list.append("Skins OPEN ATV ")
+        self.titles.append("Skins_OpenAtv ")
+        self.pics.append(picfold + "openatv.png")
+
+        list.append("Skins OpenPLi ")
+        self.titles.append("Skins_OpenPli ")
+        self.pics.append(picfold + "openpli.png")
+
+        list.append("Skins OpenSpa ")
+        self.titles.append("Skins_OpenSpa ")
+        self.pics.append(picfold + "openspa.png")
+
+        list.append("Skins VTi ")
+        self.titles.append("Skins_Vti ")
+        self.pics.append(picfold + "vti.png")
+
+        list.append("Skins Oe Based ")
+        self.titles.append("Skins_Oebased ")
+        self.pics.append(picfold + "oebased.png")
+
+        self.names = list
+
+        self.combined_data = zip(self.names, self.titles, self.pics)
+
+        self["frame"] = MovingPixmap()
+        i = 0
+        while i < 20:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+        self['info'] = Label()
+        self['info'].setText(_('Please Wait...'))
+        self['sort'] = Label(_('0 Sort'))
+        self["actions"] = ActionMap(["OkCancelActions",
+                                     "MenuActions",
+                                     "DirectionActions",
+                                     "NumberActions",
+                                     "EPGSelectActions",
+                                     "InfoActions",],
+                                    {"ok": self.okbuttonClick,
+                                     "cancel": self.closeNonRecursive,
+                                     "0": self.list_sort,
+                                     "left": self.key_left,
+                                     "right": self.key_right,
+                                     "up": self.key_up,
+                                     "down": self.key_down,
+                                     "info": self.key_info,
+                                     "menu": self.closeRecursive})
+
+        ln = len(self.names)
+        self.npage = int(float(ln / 20)) + 1
+        self.index = 0
+        self.maxentry = len(list) - 1
+        self.ipage = 1
+        self.icount = 0
+        self.onLayoutFinish.append(self.openTest)
+
+    def list_sort(self):  # for future
+        # self.combined_data = zip(self.names, self.titles, self.pics)
+        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        print("Lista ordinata:", sorted_list)
+        print("Titoli ordinati:", sorted_titles)
+        print("Immagini ordinate:", sorted_pics)
+        # self.combined_data = sorted_data
+        self.names = sorted_list
+        self.titles = sorted_titles
+        self.pics = sorted_pics
+
+        self.openTest()
+
+    def paintFrame(self):
+        try:
+            self.idx = self.index
+            name = self.names[self.idx]
+            self['info'].setText(str(name))
+            # information
+            ifr = self.index - (20 * (self.ipage - 1))
+            ipos = self.pos[ifr]
+            self["frame"].moveTo(ipos[0], ipos[1], 1)
+            self["frame"].startMoving()
+        except Exception as e:
+            print('error  in paintframe: ', e)
+
+    def openTest(self):
+        if self.ipage < self.npage:
+            self.maxentry = (20 * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * 20
+
+        elif self.ipage == self.npage:
+            self.maxentry = len(self.pics) - 1
+            self.minentry = (self.ipage - 1) * 20
+            i1 = 0
+            # while i1 < 24:
+            while i1 < 20:
+                self["label" + str(i1 + 1)].setText(" ")
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                i1 += 1
+        self.npics = len(self.pics)
+        i = 0
+        i1 = 0
+        self.picnum = 0
+        ln = self.maxentry - (self.minentry - 1)
+        while i < ln:
+            idx = self.minentry + i
+            # self["label" + str(i + 1)].setText(self.names[idx])
+            pic = self.pics[idx]
+            if not os.path.exists(self.pics[idx]):
+                pic = blpic
+            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+            i += 1
+        self.index = self.minentry
+        self.paintFrame()
+
+    def key_left(self):
+        if not self.index <= 0:
+            self.index -= 1
+            # self.paintFrame()
+        self.paintFrame()
+        '''
+        # ###test
+        # else:
+            # self.paintFrame()
+        '''
+
+    def key_right(self):
+        i = self.npics - 1
+        if self.index == i:
+            self.index = 0
+            self.ipage = 1
+            self.openTest()
+        self.index += 1
+        if self.index > self.maxentry:
+            # # self.index = 0  # att test
+            self.key_down()
+        else:
+            # self.index = 0
+            self.paintFrame()
+
+    def key_up(self):
+        self.index = self.index - 5
+        if self.index < (self.minentry):
+            if self.ipage > 1:
+                self.ipage = self.ipage - 1
+                self.openTest()
+            elif self.ipage == 1:
+                return
+            else:
+                self.index = 0
+            self.paintFrame()
+        else:
+            self.paintFrame()
+
+    def key_down(self):
+        self.index = self.index + 5
+        if self.index > (self.maxentry):
+            if self.ipage < self.npage:
+                self.ipage = self.ipage + 1
+                self.openTest()
+            elif self.ipage == self.npage:
+                self.index = 0
+                self.ipage = 1
+                self.openTest()
+            else:
+                # self.index = 0 # try add test
+                self.paintFrame()
+        else:
+            self.paintFrame()
+
+    def keyNumberGlobal(self, number):
+        number -= 1
+        if len(self["menu"].list) > number:
+            self["menu"].setIndex(number)
+            self.okbuttonClick()
+
+    def closeNonRecursive(self):
+        self.close(False)
+
+    def closeRecursive(self):
+        self.close(True)
+
+    def createSummary(self):
+        return
+
+    def key_info(self):
+        self.session.open(LSinfo, " Information ")
+
+    def okbuttonClick(self):
+        self.idx = self.index
+        if self.idx is None:
+            return
+        name = self.names[self.idx]
+        title = self.titles[self.idx]
+        n1 = self.data.find(title, 0)
+        n2 = self.data.find("</plugins>", n1)
+        fxml = self.data[n1:n2]
+        fxml = self.data[n1:n2]
+        self.session.open(addInstall, fxml, name, None)
+        # self.session.open(addInstall, url, name, '')
 
 
 class LSChannel(Screen):
