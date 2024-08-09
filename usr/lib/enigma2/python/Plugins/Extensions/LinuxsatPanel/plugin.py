@@ -260,7 +260,7 @@ class LinuxsatPanel(Screen):
         self.titles = []
 
         list.append("Backup ")
-        self.titles.append("Backup")
+        self.titles.append("Backup-Tools")
         self.pics.append(picfold + "Backup.png")
 
         list.append("Bouquets ")
@@ -411,7 +411,7 @@ class LinuxsatPanel(Screen):
         self.titles.append("Other Oe2.0 ")
         self.pics.append(picfold + "Other.png")
 
-        list.append("Other Oe2.5/2.6 ")
+        list.append("Other DreamOs ")
         self.titles.append("Other Oe2.5/2.6 ")
         self.pics.append(picfold + "Other1.png")
 
