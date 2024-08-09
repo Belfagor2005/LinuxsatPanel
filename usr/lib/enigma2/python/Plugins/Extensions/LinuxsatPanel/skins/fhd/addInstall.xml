@@ -1,8 +1,8 @@
 <screen name="addInstall" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
-	<widget source="session.VideoPicture" render="Pig" position="1218,535" size="606,339" zPosition="1" backgroundColor="#ff000000"/>
-	<widget name="list" position="80,258" size="1000,650" scrollbarMode="showOnDemand" zPosition="4" itemCornerRadius="19" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" scrollbarForegroundColor="#0049bbff" scrollbarBorderWidth="1" scrollbarBorderColor="#0049bbff" scrollbarWidth="8"/>
+	<widget source="session.VideoPicture" render="Pig" position="1220,535" size="608,345" zPosition="1" backgroundColor="#ff000000" />
+	<widget name="list" position="80,258" size="1000,640" scrollbarMode="showOnDemand" zPosition="4" itemCornerRadius="19" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="8"/>
 	<widget name="info" position="80,178" zPosition="4" size="1000,70" font="lsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
 	<widget name="fspace" position="78,912" zPosition="4" size="1000,65" font="lbsat;32" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
 	<!-- clock -->
@@ -20,5 +20,5 @@
 	<widget name="key_red" position="130,990" size="400,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_green" position="490,990" size="400,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_yellow" position="850,990" size="400,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_blue" position="1210,990" size="400,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="1215,990" size="400,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 </screen>
