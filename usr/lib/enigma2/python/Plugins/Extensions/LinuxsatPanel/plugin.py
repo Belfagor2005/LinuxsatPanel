@@ -28,6 +28,7 @@ from .Lcn import (
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
+from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import (MultiContentEntryText, MultiContentEntryPixmapAlphaTest)
@@ -142,6 +143,17 @@ def make_request(url):
         response.close()
         return link
     return
+
+
+# language
+global lngx
+lngx = 'en'
+try:
+    lngx = config.osd.language.value
+    lngx = lngx[:-3]
+except:
+    lngx = 'en'
+    pass
 
 
 if isFHD():
@@ -1212,7 +1224,7 @@ class addInstall(Screen):
         self['key_green'].hide()
 
         self.LcnOn = False
-        if os.path.exists('/etc/enigma2/lcndb'):
+        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
             self['key_yellow'].show()
             self['key_yellow'] = Button('Lcn')
             self.LcnOn = True
@@ -1591,7 +1603,7 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        if self.dest is not None:
+        if self.dest is not None and lngx == 'it':
             self.Lcn()
         else:
             self.session.openWithCallback(self.removenow,
