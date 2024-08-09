@@ -1728,7 +1728,7 @@ class LSinfo(Screen):
         if currversion < remote_version:
             self.Update = True
             print('new version onine')
-            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress yellow button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
+            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].show()
             self["pixmap"].show()
 
