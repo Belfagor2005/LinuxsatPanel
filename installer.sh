@@ -83,9 +83,9 @@ else
    echo ""
 fi
 
-if [ $OSTYPE != "DreamOs" ]; then
-	opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp
-fi
+# if [ $OSTYPE != "DreamOs" ]; then
+	# opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp
+# fi
 sleep 2
 
 wget --no-check-certificate --no-cache --no-dns-cache 'https://github.com/Belfagor2005/LinuxsatPanel/archive/refs/heads/main.tar.gz'
