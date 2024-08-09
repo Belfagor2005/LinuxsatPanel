@@ -109,6 +109,13 @@ def isHD():
 AgentRequest = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3'
 
 
+def refreshPlugins():
+    from Components.PluginComponent import plugins
+    from Tools.Directories import SCOPE_PLUGINS, resolveFilename
+    plugins.clearPluginList()
+    plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
+
 def add_skin_font():
     from enigma import addFont
     FNTPath = os_path.join(plugin_path + "/fonts")

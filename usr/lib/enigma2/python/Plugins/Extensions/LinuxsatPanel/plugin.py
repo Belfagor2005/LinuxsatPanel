@@ -3,27 +3,28 @@
 
 from . import (
     _,
-    add_skin_font,
-    wgetsts,
     AgentRequest,
+    CheckConn,
+    abouturl,
+    add_skin_font,
+    descplug,
+    developer_url,
+    freespace,
+    infourl,
+    installer_url,
     isFHD,
     isHD,
-    infourl,
-    abouturl,
+    refreshPlugins,
+    wgetsts,
     xmlurl,
-    descplug,
-    freespace,
-    CheckConn,
-    installer_url,
-    developer_url,
 )
 from .Console import Console
 from .Lcn import (
     LCN,
-    terrestrial,
     ReloadBouquets,
-    keepiptv,
     copy_files_to_enigma2,
+    keepiptv,
+    terrestrial,
 )
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
@@ -48,13 +49,13 @@ import re
 import ssl
 import sys
 from enigma import (
-    RT_VALIGN_CENTER,
     RT_HALIGN_LEFT,
+    RT_VALIGN_CENTER,
     eListboxPythonMultiContent,
+    ePicLoad,
     eTimer,
     gFont,
     loadPNG,
-    ePicLoad,
 )
 
 
@@ -208,13 +209,11 @@ def LPshowlist(data, list):
 class LinuxsatPanel(Screen):
 
     def __init__(self, session):
-        # def __init__(self, session, data):
         Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
-        # self.data = data
         if isFHD():
             self.pos = []
             self.pos.append([80, 200])
@@ -358,14 +357,6 @@ class LinuxsatPanel(Screen):
         list.append("Skins | TEAM ")
         self.titles.append("Skins | TEAM ")
         self.pics.append(picfold + "skinsteam.png")
-
-        # list.append("Skins | FHD ")
-        # self.titles.append("Skins | FHD")
-        # self.pics.append(picfold + "SkinFHD.png")
-
-        # list.append("Skins | HD ")
-        # self.titles.append("Skins | HD ")
-        # self.pics.append(picfold + "SkinHD.png")
 
         list.append("Skins Fhd-Hd DreamOs ")
         self.titles.append("Skins DreamOs ")
@@ -1832,7 +1823,7 @@ class startLP(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self["poster"] = Pixmap()
-        self["version"] = Label('Wait Please... Linuxsat Panel V."' + currversion)
+        self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
         # self.texts = ["Load plugin...", "Linuxsat Panel V." + currversion, "WELCOME!!!"]
         # self.current_text_index = 0
@@ -1992,13 +1983,6 @@ def b64decoder(s):
         if PY3:
             output = output.decode('utf-8')
         return output
-
-
-def refreshPlugins():
-    from Components.PluginComponent import plugins
-    from Tools.Directories import SCOPE_PLUGINS, resolveFilename
-    plugins.clearPluginList()
-    plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
 def menustart():
