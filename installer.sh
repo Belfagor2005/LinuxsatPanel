@@ -3,7 +3,7 @@
 
 ## Only This 2 lines to edit with new version ######
 version='2.1'
-changelog='Add Locale Language\nAddScreen Skins Team'
+changelog='\nAdd Locale Language\nAddScreen Skins Team'
 ##############################################################
 
 TMPPATH=/tmp/LinuxsatPanel-main
