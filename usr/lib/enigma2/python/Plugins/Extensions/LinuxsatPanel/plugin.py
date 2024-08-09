@@ -601,9 +601,11 @@ class LinuxsatPanel(Screen):
         self.idx = self.index
         if self.idx is None:
             return
+
         name = self.names[self.idx]
         if name == " Information ":
             self.session.open(LSinfo, name)
+
         elif name == " About ":
             self.session.open(LSinfo, name)
 
@@ -741,6 +743,7 @@ class LSskin(Screen):
             self["label" + str(i + 1)] = StaticText()
             self["pixmap" + str(i + 1)] = Pixmap()
             i += 1
+
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -772,9 +775,9 @@ class LSskin(Screen):
         # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        print("Lista ordinata:", sorted_list)
-        print("Titoli ordinati:", sorted_titles)
-        print("Immagini ordinate:", sorted_pics)
+        # print("Lista ordinata:", sorted_list)
+        # print("Titoli ordinati:", sorted_titles)
+        # print("Immagini ordinate:", sorted_pics)
         # self.combined_data = sorted_data
         self.names = sorted_list
         self.titles = sorted_titles
@@ -1041,9 +1044,9 @@ class LSChannel(Screen):
         # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        print("Lista ordinata:", sorted_list)
-        print("Titoli ordinati:", sorted_titles)
-        print("Immagini ordinate:", sorted_pics)
+        # print("Lista ordinata:", sorted_list)
+        # print("Titoli ordinati:", sorted_titles)
+        # print("Immagini ordinate:", sorted_pics)
         # self.combined_data = sorted_data
         self.names = sorted_list
         self.titles = sorted_titles
@@ -1171,6 +1174,7 @@ class LSChannel(Screen):
         self.idx = self.index
         if self.idx is None:
             return
+
         name = self.names[self.idx]
 
         if 'ciefp' in name.lower():
@@ -1370,8 +1374,8 @@ class addInstall(Screen):
                 cmd3 = "rm '/tmp/" + self.plug + "'"
                 # cmd = str(cmd1) + " && " + cmd2 + " && " + cmd3
                 cmd = cmd2 + " && " + cmd3
-                print('cmd2 okclicked:', cmd2)
-                print('cmd okclicked:', cmd)
+                # print('cmd2 okclicked:', cmd2)
+                # print('cmd okclicked:', cmd)
 
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
                 self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
@@ -1712,13 +1716,13 @@ class LSinfo(Screen):
                     break
         self.new_version = remote_version
         self.new_changelog = remote_changelog
-        print('self.new_version =', remote_version)
-        print('self.new_changelog =', remote_changelog)
-        print('currversion=', currversion)
+        # print('self.new_version =', remote_version)
+        # print('self.new_changelog =', remote_changelog)
+        # print('currversion=', currversion)
         # if float(currversion) < float(remote_version):
         if currversion < remote_version:
             self.Update = True
-            print('new version onine')
+            print('new version online')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].show()
             self["pixmap"].show()
@@ -1786,6 +1790,7 @@ class LSinfo(Screen):
         return str(zarcffll)
 
     def infoBox(self):
+        info = '%s V.%s\n\n' % (descplug, currversion)
         try:
             arkFull = ''
             if self.arckget():
