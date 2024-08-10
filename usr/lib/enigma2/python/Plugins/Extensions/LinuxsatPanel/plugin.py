@@ -610,15 +610,15 @@ class LinuxsatPanel(Screen):
         if 'adult' in name.lower():
             self.session.openWithCallback(self.cancelConfirm, MessageBox, _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
         else:
-            self.okbuttonContinue()
+            self.okbuttonContinue(self.idx)
 
     def cancelConfirm(self, result):
         if not result:
             return
         else:
-            self.okbuttonContinue()
+            self.okbuttonContinue(result)
 
-    def okbuttonContinue(self):
+    def okbuttonContinue(self, result):
         self.idx = self.index
         if self.idx is None:
             return
