@@ -28,10 +28,10 @@ from .Lcn import (
     keepiptv,
     terrestrial,
 )
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
-from Components.config import config
+# from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import (MultiContentEntryText, MultiContentEntryPixmapAlphaTest)
@@ -615,7 +615,7 @@ class LinuxsatPanel(Screen):
         if not result:
             return
         else:
-            self.session.open(okbuttonContinue)
+            self.okbuttonContinue()
 
     def okbuttonContinue(self):
         self.idx = self.index
@@ -1372,10 +1372,10 @@ class addInstall(Screen):
         if response.status_code == 200:
             with open(dest, 'wb') as f:
                 f.write(response.content)
-            print("File {} scaricato correttamente.".format(dest))
+            print("File scaricato correttamente")
             return True
         else:
-            print(f"Errore durante il download del file. Codice di stato: {response.status_code}")
+            print("Errore durante il download del file")
         return False
 
     def okClicked(self, answer=False):
@@ -1806,6 +1806,15 @@ class LSinfo(Screen):
 
     def Up(self):
         self['list'].pageUp()
+
+    '''
+    # def myIp(self):
+        # currentip = '127.0.0.1'
+        # if not os.path.exists('/tmp/currentip'):
+            # os.system('wget -qO- http://ipecho.net/plain > /tmp/currentip')
+        # currentip1 = open('/tmp/currentip', 'r')
+        # return currentip1.read()
+    '''
 
     def arckget(self):
         zarcffll = ''
