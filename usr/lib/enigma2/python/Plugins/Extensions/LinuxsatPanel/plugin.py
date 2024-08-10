@@ -718,9 +718,9 @@ class LSskin(Screen):
         self.titles.append("Skins | HD ")
         self.pics.append(picfold + "SkinHD.png")
 
-        list.append("Skins | FHD ")
-        self.titles.append("Skins | FHD")
-        self.pics.append(picfold + "SkinFHD.png")
+        # list.append("Skins | FHD ")
+        # self.titles.append("Skins | FHD")
+        # self.pics.append(picfold + "SkinFHD.png")
 
         list.append("Skins Egami ")
         self.titles.append("Skins_Egami ")
