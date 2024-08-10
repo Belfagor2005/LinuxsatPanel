@@ -17,8 +17,8 @@
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/green.png" position="306,660" size="30,30" zPosition="4" alphatest="on" />
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/yellow.png" position="563,660" size="30,30" zPosition="4" alphatest="on" />
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/blue.png" position="815,660" size="30,30" zPosition="4" alphatest="on" />
-	<widget name="key_red" position="85,660" size="250,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_green" position="341,660" size="250,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_yellow" position="598,660" size="250,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_red" position="85,660" size="220,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_green" position="341,660" size="220,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_yellow" position="598,660" size="220,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_blue" position="850,662" size="250,30" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 </screen>
