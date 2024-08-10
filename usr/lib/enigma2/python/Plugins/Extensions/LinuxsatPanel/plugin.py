@@ -31,7 +31,7 @@ from .Lcn import (
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
-# from Components.config import config
+from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import (MultiContentEntryText, MultiContentEntryPixmapAlphaTest)
@@ -410,13 +410,14 @@ class LinuxsatPanel(Screen):
         self.titles.append("Webcam ")
         self.pics.append(picfold + "webcam.png")
 
-        list.append("Adult Oe2.0 ")
-        self.titles.append("Adult Oe2.0 ")
-        self.pics.append(picfold + "18+deb.png")
+        if not config.ParentalControl.configured.value:
+            list.append("Adult Oe2.0 ")
+            self.titles.append("Adult Oe2.0 ")
+            self.pics.append(picfold + "18+deb.png")
 
-        list.append("Adult DreamOs ")
-        self.titles.append("Adult DreamOs ")
-        self.pics.append(picfold + "18+.png")
+            list.append("Adult DreamOs ")
+            self.titles.append("Adult DreamOs ")
+            self.pics.append(picfold + "18+.png")
 
         list.append("Other Oe2.0 ")
         self.titles.append("Other Oe2.0 ")
