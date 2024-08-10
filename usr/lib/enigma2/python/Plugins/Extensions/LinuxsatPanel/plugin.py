@@ -1392,7 +1392,7 @@ class addInstall(Screen):
                 if ".deb" in self.plug:
                     cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
                 if ".ipk" in self.plug:
-                    cmd2 = "opkg install --force-overwrite '/tmp/" + self.plug + "'"
+                    cmd2 = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
                 elif ".zip" in self.plug:
                     cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
                 elif ".tar" in self.plug and "gz" in self.plug:
