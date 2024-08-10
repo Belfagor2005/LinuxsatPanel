@@ -121,6 +121,7 @@ locl = "ar", "ae", "bh", "dz", "eg", "in", "iq", "jo", "kw", "lb", "ly", "ma", "
 global lngx
 lngx = 'en'
 try:
+    from Components.config import config
     lngx = config.osd.language.value
     lngx = lngx[:-3]
 except:
