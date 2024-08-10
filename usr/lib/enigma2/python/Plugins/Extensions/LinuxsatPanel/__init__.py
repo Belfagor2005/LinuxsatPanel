@@ -116,13 +116,35 @@ def refreshPlugins():
     plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
+# language
+locl = "ar", "ae", "bh", "dz", "eg", "in", "iq", "jo", "kw", "lb", "ly", "ma", "om", "qa", "sa", "sd", "ss", "sy", "tn", "ye"
+global lngx
+lngx = 'en'
+try:
+    lngx = config.osd.language.value
+    lngx = lngx[:-3]
+except:
+    lngx = 'en'
+    pass
+
+global HALIGN
+from enigma import RT_HALIGN_RIGHT, RT_HALIGN_LEFT
+HALIGN = RT_HALIGN_LEFT
 def add_skin_font():
+    global HALIGN
     from enigma import addFont
     FNTPath = os_path.join(plugin_path + "/fonts")
     # addFont(filename, name, scale, isReplacement, render)
-    addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
-    addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
-    addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
+    if any(s in lngx for s in locl):
+        HALIGN = RT_HALIGN_RIGHT
+        addFont((FNTPath + '/DejaVuSans.ttf'), 'lsat', 100, 1)
+        addFont((FNTPath + '/DejaVuSans.ttf'), 'lmsat', 100, 1)
+        addFont((FNTPath + '/DejaVuSans.ttf'), 'lbsat', 100, 1)
+    else:            
+        addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
+        addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
+        addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
+    
 
 
 # KiddaC code

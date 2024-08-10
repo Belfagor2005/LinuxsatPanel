@@ -14,9 +14,11 @@ from . import (
     installer_url,
     isFHD,
     isHD,
+    lngx,
     refreshPlugins,
     wgetsts,
     xmlurl,
+    HALIGN,
 )
 from .Console import Console
 from .Lcn import (
@@ -26,7 +28,7 @@ from .Lcn import (
     keepiptv,
     terrestrial,
 )
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
 from Components.config import config
@@ -50,6 +52,7 @@ import ssl
 import sys
 from enigma import (
     RT_HALIGN_LEFT,
+    RT_HALIGN_RIGHT,
     RT_VALIGN_CENTER,
     eListboxPythonMultiContent,
     ePicLoad,
@@ -74,13 +77,14 @@ from enigma import (
 # all and you must make the modified
 # code open to everyone. by Lululla
 # ======================================================================
-
+global HALIGN
 global setx
 currversion = '2.1'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
 _session = ""
 setx = 0
+# HALIGN = RT_HALIGN_LEFT
 if PY3:
     from urllib.request import (urlopen, Request)
     unicode = str
@@ -146,15 +150,15 @@ def make_request(url):
     return
 
 
-# language
-global lngx
-lngx = 'en'
-try:
-    lngx = config.osd.language.value
-    lngx = lngx[:-3]
-except:
-    lngx = 'en'
-    pass
+# # language
+# global lngx
+# lngx = 'en'
+# try:
+    # lngx = config.osd.language.value
+    # lngx = lngx[:-3]
+# except:
+    # lngx = 'en'
+    # pass
 
 
 if isFHD():
@@ -189,10 +193,10 @@ def LPListEntry(name, item):
     if fileExists(pngx):
         if isFHD():
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 5), size=(40, 40), png=loadPNG(pngx)))
-            res.append(MultiContentEntryText(pos=(55, 0), size=(950, 50), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(55, 0), size=(920, 50), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
         else:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 7), size=(30, 30), png=loadPNG(pngx)))
-            res.append(MultiContentEntryText(pos=(45, 0), size=(635, 35), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(45, 0), size=(600, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
     return res
 
 
@@ -601,8 +605,24 @@ class LinuxsatPanel(Screen):
         self.idx = self.index
         if self.idx is None:
             return
-
         name = self.names[self.idx]
+        if 'adult' in name.lower():
+            self.session.openWithCallback(self.cancelConfirm, MessageBox, _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
+        else:
+            self.okbuttonContinue()
+
+    def cancelConfirm(self, result):
+        if not result:
+            return
+        else:
+            self.session.open(okbuttonContinue)
+
+    def okbuttonContinue(self):
+        self.idx = self.index
+        if self.idx is None:
+            return
+        name = self.names[self.idx]
+
         if name == " Information ":
             self.session.open(LSinfo, name)
 
@@ -1233,8 +1253,10 @@ class addInstall(Screen):
         self['info'].setText(_('Load Category...'))
         self.icount = 0
         self.downloading = False
-        self['actions'] = ActionMap(['SetupActions', 'ColorActions'],
+        # self["NumberActions"] = NumberActionMap(["NumberActions"], {'0': self.arabicx},)
+        self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'NumberActions'],
                                     {'ok': self.message,
+                                     '0': self.arabicx,
                                      'green': self.message,
                                      'cancel': self.exitnow,
                                      'red': self.exitnow,
@@ -1252,6 +1274,14 @@ class addInstall(Screen):
         else:
             self.onLayoutFinish.append(self.openTest)
 
+    def arabicx(self):
+        global HALIGN
+        if HALIGN == RT_HALIGN_LEFT:
+            HALIGN = RT_HALIGN_RIGHT
+        elif HALIGN == RT_HALIGN_RIGHT:
+            HALIGN = RT_HALIGN_LEFT
+        self.openTest()
+
     def getfreespace(self):
         try:
             self['info'].setText(_('Category: ') + self.name)
@@ -1268,7 +1298,6 @@ class addInstall(Screen):
         self.urls = []
         items = []
         for name, url in match:
-
             item = name + "###" + url
             items.append(item)
         items.sort()
@@ -1343,7 +1372,7 @@ class addInstall(Screen):
         if response.status_code == 200:
             with open(dest, 'wb') as f:
                 f.write(response.content)
-            print(f"File {dest} scaricato correttamente.")
+            print("File {} scaricato correttamente.".format(dest))
             return True
         else:
             print(f"Errore durante il download del file. Codice di stato: {response.status_code}")
