@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-08-02 14:00+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: biko\n"
+"PO-Revision-Date: 2024-08-10 14:00+0200\n"
+"Last-Translator: ostende\n"
+"Language-Team: ostende\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #: plugin.py:438 plugin.py:718 plugin.py:934 plugin.py:1295
 msgid "Please Wait..."
-msgstr ""
+msgstr "يرجى الانتظار..."
 
 #: plugin.py:439 plugin.py:719
 msgid "0 Sort"
-msgstr ""
+msgstr "0 فرز"
 
 #: plugin.py:916
 msgid "Exit"
@@ -28,77 +28,77 @@ msgstr "خروج"
 
 #: plugin.py:917
 msgid "Install"
-msgstr ""
+msgstr "تثبيت"
 
 #: plugin.py:918
 msgid "Remove"
-msgstr ""
+msgstr "إزالة"
 
 #: plugin.py:919
 msgid "Restart enigma"
-msgstr ""
+msgstr "إعادة تشغيل إنيجما"
 
 #: plugin.py:936
 msgid "Load Category..."
-msgstr ""
+msgstr "تحميل الفئة..."
 
 #: plugin.py:960
 msgid "Category: "
-msgstr ""
+msgstr "الفئة: "
 
 #: plugin.py:993 plugin.py:1003
 msgid "Unknow Image!"
-msgstr ""
+msgstr "صورة غير معروفة!"
 
 #: plugin.py:1015
 #, python-format
 msgid "Do you want to install %s?"
-msgstr ""
+msgstr "هل تريد تثبيت %s؟"
 
 #: plugin.py:1039 plugin.py:1228
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
-msgstr ""
+msgstr "تثبيت %s\nيرجى الانتظار..."
 
 #: plugin.py:1155
 msgid "Download page get failed ..."
-msgstr ""
+msgstr "فشل في تحميل الصفحة ..."
 
 #: plugin.py:1165
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
-msgstr ""
+msgstr "تم فرز القنوات الأرضية باستخدام قواعد Lcn"
 
 #: plugin.py:1172
 msgid "Do you want to install?"
-msgstr ""
+msgstr "هل تريد التثبيت؟"
 
 #: plugin.py:1239
 msgid "Settings Not Installed ..."
-msgstr ""
+msgstr "لم يتم تثبيت الإعدادات ..."
 
 #: plugin.py:1256
 msgid "Do you want to remove?"
-msgstr ""
+msgstr "هل تريد الإزالة؟"
 
 #: plugin.py:1270
 #, python-format
 msgid "Removing %s"
-msgstr ""
+msgstr "إزالة %s"
 
 #: plugin.py:1276
 msgid "Do you want to restart Gui Interface?"
-msgstr ""
+msgstr "هل تريد إعادة تشغيل إنيجما؟"
 
 #: plugin.py:1328
 msgid "Unable to download updates!"
-msgstr ""
+msgstr "غير قادر على تنزيل التحديثات!"
 
 #: plugin.py:1544
 msgid "Check Connection!"
-msgstr ""
+msgstr "تحقق من الاتصال!"
 
 #: plugin.py:1565
 msgid "Linuxsat Panel"
-msgstr ""
+msgstr "لوحة Linuxsat"
