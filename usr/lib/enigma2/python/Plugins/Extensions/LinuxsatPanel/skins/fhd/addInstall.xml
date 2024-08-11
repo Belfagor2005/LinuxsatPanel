@@ -13,18 +13,19 @@
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 
-	<!-- 
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/red.png" position="80,990" size="45,45" zPosition="4" alphatest="on" />
+	<!--
+ 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/red.png" position="80,990" size="45,45" zPosition="4" alphatest="on" />
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="440,990" size="45,45" zPosition="4" alphatest="on" />
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/yellow.png" position="800,990" size="45,45" zPosition="4" alphatest="on" />
 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/blue.png" position="1160,990" size="45,45" zPosition="4" alphatest="on" />
-	 -->
 	<eLabel backgroundColor="red" position="80,1035" size="300,6" zPosition="10" />
 	<eLabel backgroundColor="green" position="405,1035" size="300,6" zPosition="10" />
 	<eLabel backgroundColor="yellow" position="730,1035" size="300,6" zPosition="10" />
 	<eLabel backgroundColor="blue" position="1060,1035" size="320,6" zPosition="10" />
+	-->
+	
 	<widget name="key_red" position="80,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_green" position="405,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_yellow" position="730,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_blue" position="1060,990" size="320,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_yellow" position="735,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="1065,990" size="320,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 </screen>
