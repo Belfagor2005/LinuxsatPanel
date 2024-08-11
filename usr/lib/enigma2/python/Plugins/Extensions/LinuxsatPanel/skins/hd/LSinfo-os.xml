@@ -1,5 +1,5 @@
 <screen name="LSinfo" position="0,0" size="1280,720" title="Linuxsat Addons Setup">
-	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" alphatest="blend" />
+	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel3.png" alphatest="blend" />
 	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
 	<widget name="list" position="52,125" zPosition="99" size="681,540" font="lmsat;21" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" />
 	<widget source="session.VideoPicture" render="Pig" position="800,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
