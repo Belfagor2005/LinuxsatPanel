@@ -290,11 +290,11 @@ class LinuxsatPanel(Screen):
         self.titles.append("Epg-Tools ")
         self.pics.append(picfold + "plugin-epg.png")
 
-        list.append("Feeds Image ")
+        list.append("Feeds Image Oe2.0 ")
         self.titles.append("Feeds Oe2.0 ")
         self.pics.append(picfold + "Feeds2.0.png")
 
-        list.append("Feeds Image ")
+        list.append("Feeds Image DreamOS ")
         self.titles.append("Feeds DreamOS ")
         self.pics.append(picfold + "Feeds2.2.png")
 
