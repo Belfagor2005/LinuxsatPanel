@@ -1365,13 +1365,15 @@ class addInstall(Screen):
     def okClicked(self, answer=False):
         if answer:
             dest = "/tmp"
-            folddest = dest + '/' + self.plug
+            if not os.path.exists(dest):
+                os.system('ln -sf  /var/volatile/tmp /tmp')
+            folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
                 print('folddest:', folddest)
                 # print('cmd1=', cmd1)
-
+                cmd2 = ''
                 if ".deb" in self.plug:
-                    cmd2 = "dpkg -i '/tmp/" + self.plug + "'"
+                    cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
                 if ".ipk" in self.plug:
                     cmd2 = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
                 elif ".zip" in self.plug:
@@ -1380,10 +1382,10 @@ class addInstall(Screen):
                     cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
                 elif ".bz2" in self.plug and "gz" in self.plug:
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-
-                cmd3 = "rm '/tmp/" + self.plug + "'"
-                cmd = cmd2 + " && " + cmd3
-
+                else:
+                    return
+                # cmd3 = "rm /tmp/" + self.plug  # + "'"
+                cmd = cmd2  # + " && "  # + cmd3
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
                 self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
 
@@ -1736,9 +1738,11 @@ class LSinfo(Screen):
 
     def update_me(self):
         if self.Update is True:
-            self.session.openWithCallback(self.install_update, MessageBox, _("New version %s is available.\n\nChangelog: %s \n\nDo you want to install it now?") % (self.new_version, self.new_changelog), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(self.install_update, MessageBox, _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (self.new_version, self.new_changelog), MessageBox.TYPE_YESNO)
         else:
-            self.session.open(MessageBox, _("Congrats! You already have the latest version..."),  MessageBox.TYPE_INFO, timeout=4)
+            self.session.open(MessageBox,
+                              _("Congrats! You already have the latest version..."),
+                              MessageBox.TYPE_INFO, timeout=4)
 
     def update_dev(self):
         req = Request(b64decoder(developer_url), headers={'User-Agent': AgentRequest})
@@ -1753,7 +1757,9 @@ class LSinfo(Screen):
         if answer:
             self.session.open(Console, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
         else:
-            self.session.open(MessageBox, _("Update Aborted!"),  MessageBox.TYPE_INFO, timeout=3)
+            self.session.open(MessageBox,
+                              _("Update Aborted!"),
+                              MessageBox.TYPE_INFO, timeout=3)
 
     def myCallback(self, result=None):
         print('result:', result)

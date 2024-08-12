@@ -5,7 +5,7 @@
 	<widget name="info" position="812,121" zPosition="4" size="455,60" font="lmsat; 28" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
 	<widget name="sort" position="806,627" zPosition="4" size="455,60" font="lmsat; 28" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
 	<!-- minitv -->
-	<widget source="session.VideoPicture" render="Pig" position="808,349" size="415,235" zPosition="1" backgroundColor="#ff000000" />
+	<widget source="session.VideoPicture" render="Pig" position="808,300" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
 	<widget source="global.CurrentTime" render="Label" position="1059,600" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Default</convert>
