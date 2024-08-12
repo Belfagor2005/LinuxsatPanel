@@ -1,7 +1,9 @@
 <screen name="addInstall" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
+	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000" />
+	<!-- list -->
 	<widget name="list" position="80,258" size="1000,650" scrollbarMode="showOnDemand" zPosition="4" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b"/>
 	<widget name="info" position="80,178" zPosition="4" size="1000,70" font="lsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
 	<widget name="fspace" position="78,912" zPosition="4" size="1000,65" font="lbsat;32" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
@@ -12,18 +14,7 @@
 	<widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
-
-	<!--
- 	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/red.png" position="80,990" size="45,45" zPosition="4" alphatest="on" />
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="440,990" size="45,45" zPosition="4" alphatest="on" />
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/yellow.png" position="800,990" size="45,45" zPosition="4" alphatest="on" />
-	<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/blue.png" position="1160,990" size="45,45" zPosition="4" alphatest="on" />
-	<eLabel backgroundColor="red" position="80,1035" size="300,6" zPosition="10" />
-	<eLabel backgroundColor="green" position="405,1035" size="300,6" zPosition="10" />
-	<eLabel backgroundColor="yellow" position="730,1035" size="300,6" zPosition="10" />
-	<eLabel backgroundColor="blue" position="1060,1035" size="320,6" zPosition="10" />
-	-->
-	
+	<!-- buttons -->
 	<widget name="key_red" position="80,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_green" position="405,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_yellow" position="735,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />

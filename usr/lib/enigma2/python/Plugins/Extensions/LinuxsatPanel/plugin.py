@@ -84,7 +84,8 @@ plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPan
 PY3 = sys.version_info.major >= 3
 _session = ""
 setx = 0
-# HALIGN = RT_HALIGN_LEFT
+
+
 if PY3:
     from urllib.request import (urlopen, Request)
     unicode = str
@@ -150,17 +151,6 @@ def make_request(url):
     return
 
 
-# # language
-# global lngx
-# lngx = 'en'
-# try:
-    # lngx = config.osd.language.value
-    # lngx = lngx[:-3]
-# except:
-    # lngx = 'en'
-    # pass
-
-
 if isFHD():
     skin_path = plugin_path + '/skins/fhd/'
     picfold = plugin_path + "/LSicons2/"
@@ -174,6 +164,7 @@ if isHD():
     blpic = picfold + "Blank.png"
 
 
+# menulist
 class LPSlist(MenuList):
     def __init__(self, list):
         MenuList.__init__(self, list, True, eListboxPythonMultiContent)
@@ -473,14 +464,12 @@ class LinuxsatPanel(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
-        # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        print("Lista ordinata:", sorted_list)
-        print("Titoli ordinati:", sorted_titles)
-        print("Immagini ordinate:", sorted_pics)
+        # print("Lista ordinata:", sorted_list)
+        # print("Titoli ordinati:", sorted_titles)
+        # print("Immagini ordinate:", sorted_pics)
 
-        # self.combined_data = sorted_data
         self.names = sorted_list
         self.titles = sorted_titles
         self.pics = sorted_pics
@@ -520,7 +509,7 @@ class LinuxsatPanel(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
             if not os.path.exists(self.pics[idx]):
                 pic = blpic
@@ -608,7 +597,9 @@ class LinuxsatPanel(Screen):
             return
         name = self.names[self.idx]
         if 'adult' in name.lower():
-            self.session.openWithCallback(self.cancelConfirm, MessageBox, _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
+            self.session.openWithCallback(self.cancelConfirm,
+                                          MessageBox,
+                                          _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
         else:
             self.okbuttonContinue(self.idx)
 
@@ -718,10 +709,6 @@ class LSskin(Screen):
         self.titles.append("Skins | HD ")
         self.pics.append(picfold + "SkinHD.png")
 
-        # list.append("Skins | FHD ")
-        # self.titles.append("Skins | FHD")
-        # self.pics.append(picfold + "SkinFHD.png")
-
         list.append("Skins Egami ")
         self.titles.append("Skins_Egami ")
         self.pics.append(picfold + "egami.png")
@@ -792,8 +779,7 @@ class LSskin(Screen):
         self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):  # for future
-        # self.combined_data = zip(self.names, self.titles, self.pics)
+    def list_sort(self):
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
         # print("Lista ordinata:", sorted_list)
@@ -840,7 +826,7 @@ class LSskin(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
             if not os.path.exists(self.pics[idx]):
                 pic = blpic
@@ -855,7 +841,7 @@ class LSskin(Screen):
             # self.paintFrame()
         self.paintFrame()
         '''
-        # ###test
+        # # test
         # else:
             # self.paintFrame()
         '''
@@ -933,7 +919,6 @@ class LSskin(Screen):
         fxml = self.data[n1:n2]
         fxml = self.data[n1:n2]
         self.session.open(addInstall, fxml, name, None)
-        # self.session.open(addInstall, url, name, '')
 
 
 class LSChannel(Screen):
@@ -1062,7 +1047,6 @@ class LSChannel(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
-        # self.combined_data = zip(self.names, self.titles, self.pics)
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
         # print("Lista ordinata:", sorted_list)
@@ -1109,7 +1093,7 @@ class LSChannel(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
             if not os.path.exists(self.pics[idx]):
                 pic = blpic
@@ -1124,7 +1108,7 @@ class LSChannel(Screen):
             # self.paintFrame()
         self.paintFrame()
         '''
-        # ###test
+        # # test
         # else:
             # self.paintFrame()
         '''
@@ -1254,7 +1238,6 @@ class addInstall(Screen):
         self['info'].setText(_('Load Category...'))
         self.icount = 0
         self.downloading = False
-        # self["NumberActions"] = NumberActionMap(["NumberActions"], {'0': self.arabicx},)
         self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'NumberActions'],
                                     {'ok': self.message,
                                      '0': self.arabicx,
@@ -1382,9 +1365,6 @@ class addInstall(Screen):
     def okClicked(self, answer=False):
         if answer:
             dest = "/tmp"
-            # cmd1 = "wget -P '" + dest + "' '" + self.url + "'"
-            # cmd1 = ("wget --no-check-certificate -U '%s' -P '" + dest + "' '" + self.url + "'") % AgentRequest
-
             folddest = dest + '/' + self.plug
             if self.retfile(folddest):
                 print('folddest:', folddest)
@@ -1402,10 +1382,7 @@ class addInstall(Screen):
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
 
                 cmd3 = "rm '/tmp/" + self.plug + "'"
-                # cmd = str(cmd1) + " && " + cmd2 + " && " + cmd3
                 cmd = cmd2 + " && " + cmd3
-                # print('cmd2 okclicked:', cmd2)
-                # print('cmd okclicked:', cmd)
 
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
                 self.session.open(Console, _(title), [cmd], closeOnSuccess=False)

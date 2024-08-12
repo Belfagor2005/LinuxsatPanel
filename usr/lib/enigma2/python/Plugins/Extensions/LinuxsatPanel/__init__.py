@@ -18,8 +18,12 @@
 # ======================================================================
 
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import getDesktop
+from Tools.Directories import (resolveFilename, SCOPE_PLUGINS)
+from enigma import (
+    RT_HALIGN_RIGHT,
+    RT_HALIGN_LEFT,
+    getDesktop,
+)
 from os import path as os_path
 import gettext
 import os
@@ -129,8 +133,10 @@ except:
     pass
 
 global HALIGN
-from enigma import RT_HALIGN_RIGHT, RT_HALIGN_LEFT
+
 HALIGN = RT_HALIGN_LEFT
+
+
 def add_skin_font():
     global HALIGN
     from enigma import addFont
@@ -141,11 +147,10 @@ def add_skin_font():
         addFont((FNTPath + '/DejaVuSans.ttf'), 'lsat', 100, 1)
         addFont((FNTPath + '/DejaVuSans.ttf'), 'lmsat', 100, 1)
         addFont((FNTPath + '/DejaVuSans.ttf'), 'lbsat', 100, 1)
-    else:            
+    else:
         addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
         addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
         addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
-    
 
 
 # KiddaC code

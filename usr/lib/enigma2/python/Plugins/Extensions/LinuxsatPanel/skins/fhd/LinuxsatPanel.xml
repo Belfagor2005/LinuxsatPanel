@@ -1,8 +1,10 @@
+<!-- by lululla 01072024 -->
 <screen name="LinuxsatPanelFHD" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
     <ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel.png" backgroundColor="#25062748" alphatest="on"/>
     <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
     <widget name="info" position="1218,190" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
     <widget name="sort" position="1212,955" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
 	<widget source="global.CurrentTime" render="Label" position="1554,931" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
@@ -11,6 +13,7 @@
 	<widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
+	<!-- frames -->
     <widget name="frame" position="80,200" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/pic_frame2.png" zPosition="3" alphatest="on" />
     <widget source="label1" render="Label" position="50,370" size="210,60" font="lsat;30" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white"/>
     <widget name="pixmap1" position="80,200" size="150,150" zPosition="2" transparent="1" alphatest="on"/>

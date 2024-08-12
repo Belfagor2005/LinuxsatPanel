@@ -1,7 +1,10 @@
+<!-- by lululla 01072024 -->
 <screen name="LSinfo" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="-1" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel3.png" alphatest="blend" />
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black" />
-	<widget name="list" position="80,200" size="1010,800" zPosition="99" font="lmsat;32" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" />
+	<!-- list -->
+	<widget name="list" position="80,200" size="1000,765" zPosition="99" font="lmsat;32" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" />
+	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
 	<widget source="global.CurrentTime" render="Label" position="1554,931" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
@@ -10,6 +13,7 @@
 	<widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
-	<widget name="key_green" position="550,1020" size="300,45" valign="center" halign="left" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/green.png" position="490,1020" size="45,45" zPosition="4" alphatest="on" />
+	<!-- buttons -->
+	<widget name="key_green" position="405,990" size="300,45" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/greenk.png" position="406,1022" size="300,40" zPosition="4" alphatest="on" />
 </screen>
