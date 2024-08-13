@@ -1469,11 +1469,12 @@ class addInstall(Screen):
                     items.sort()
 
             if 'vhannibal 1' in self.name.lower():
+                # <td><a href="autosetting/download.php?id=1&action=download">Vhannibal Hot Bird 13°E</a></td>
                 match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
                 print('match:', match)
                 for url, name, date in match:
                     # name = str(name) + ' ' + date
-                    name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
+                    name = str(name).replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "https://www.vhannibal.net/" + url
                     print('url vhan1:', url)
                     self.downloading = True
