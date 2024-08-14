@@ -12,6 +12,7 @@ from . import (
     freespace,
     infourl,
     installer_url,
+    isWQHD,
     isFHD,
     isHD,
     lngx,
@@ -82,7 +83,7 @@ global setx
 currversion = '2.1'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
-_session = ""
+_session = None
 setx = 0
 
 
@@ -150,19 +151,28 @@ def make_request(url):
         return link
     return
 
+global skin_path
+skin_path = ''
 
-if isFHD():
-    skin_path = plugin_path + '/skins/fhd/'
+if isWQHD():
+    skin_path = plugin_path + 'skins/fhd'
     picfold = plugin_path + "/LSicons2/"
     pngx = plugin_path + "/icons2/link.png"
     blpic = picfold + "Blank.png"
 
-if isHD():
-    skin_path = plugin_path + '/skins/hd/'
+elif isFHD():
+    skin_path = plugin_path + 'skins/fhd'
+    picfold = plugin_path + "/LSicons2/"
+    pngx = plugin_path + "/icons2/link.png"
+    blpic = picfold + "Blank.png"
+
+# if isHD():
+else:
+    skin_path = plugin_path + 'skins/hd'
     picfold = plugin_path + "/LSicons/"
     pngx = plugin_path + "/icons/link.png"
     blpic = picfold + "Blank.png"
-
+print('skin path=', skin_path)
 
 # menulist
 class LPSlist(MenuList):
