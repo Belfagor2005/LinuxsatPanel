@@ -267,7 +267,7 @@ class LinuxsatPanel(Screen):
 
             self.pos.append([60, 545])
             self.pos.append([200, 545])
-            self.pos.append([345, 555])
+            self.pos.append([345, 545])
             self.pos.append([490, 545])
             self.pos.append([620, 545])
 
@@ -703,7 +703,7 @@ class LSskin(Screen):
 
             self.pos.append([60, 545])
             self.pos.append([200, 545])
-            self.pos.append([345, 555])
+            self.pos.append([345, 545])
             self.pos.append([490, 545])
             self.pos.append([620, 545])
 
@@ -987,7 +987,7 @@ class LSChannel(Screen):
 
             self.pos.append([60, 545])
             self.pos.append([200, 545])
-            self.pos.append([345, 555])
+            self.pos.append([345, 545])
             self.pos.append([490, 545])
             self.pos.append([620, 545])
 
