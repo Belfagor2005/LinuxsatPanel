@@ -44,7 +44,7 @@
 	<widget source="label14" render="Label" position="470,505" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
 	<widget name="pixmap14" position="490,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 	<widget source="label15" render="Label" position="610,505" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap15" position="625,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap15" position="620,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 	<widget source="label16" render="Label" position="40,645" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
 	<widget name="pixmap16" position="60,545" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 	<widget source="label17" render="Label" position="180,645" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
@@ -54,5 +54,5 @@
 	<widget source="label19" render="Label" position="460,645" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
 	<widget name="pixmap19" position="490,545" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 	<widget source="label20" render="Label" position="600,645" size="140,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap20" position="625,545" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap20" position="620,545" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 </screen>

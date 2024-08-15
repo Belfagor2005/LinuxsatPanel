@@ -3,7 +3,7 @@
 	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel3.png" alphatest="blend" />
 	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
 	<!-- list -->
-	<widget name="list" position="52,125" zPosition="99" size="680,520" font="lmsat;21" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" scrollbarForegroundColor="#0049bbff" scrollbarBorderWidth="1" scrollbarBorderColor="#0049bbff" scrollbarWidth="8" />
+	<widget name="list" position="52,125" zPosition="99" size="680,520" font="lmsat;21" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="5" />
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="800,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->

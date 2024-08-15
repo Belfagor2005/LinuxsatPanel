@@ -151,6 +151,7 @@ def make_request(url):
         return link
     return
 
+
 global skin_path
 skin_path = ''
 
@@ -171,6 +172,7 @@ else:
     pngx = plugin_path + "icons/link.png"
     blpic = picfold + "Blank.png"
 print('skin path=', skin_path)
+
 
 # menulist
 class LPSlist(MenuList):
