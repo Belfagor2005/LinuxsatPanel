@@ -1,0 +1,228 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# RAED & mfaraj57 &  (c) 2018
+# mod ululla 20240720
+
+from __future__ import print_function
+
+from enigma import eConsoleAppContainer
+from Screens.Screen import Screen
+from Components.ActionMap import ActionMap
+from Components.Button import Button
+from Components.ScrollLabel import ScrollLabel
+from Components.Sources.StaticText import StaticText
+from Screens.MessageBox import MessageBox
+from Tools.Directories import (SCOPE_PLUGINS, resolveFilename)
+from enigma import getDesktop
+import sys
+import codecs
+import os
+
+plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+PY2 = sys.version_info[0] == 2
+PY3 = sys.version_info[0] == 3
+
+
+def getDesktopSize():
+    s = getDesktop(0).size()
+    return (s.width(), s.height())
+
+
+def isHD():
+    desktopSize = getDesktopSize()
+    return desktopSize[0] == 1280
+
+
+if isHD():
+    skin_path = plugin_path + '/skins/hd'
+else:
+    skin_path = plugin_path + '/skins/fhd'
+
+
+class lsConsole(Screen):
+    # if isHD():
+        # skin = '''<screen position="center,center" size="1280,720" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
+                        # <ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" backgroundColor="#25062748" alphatest="on" />
+                        # <!-- <eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" /> -->
+                        # <!-- minitv -->
+                        # <widget source="session.VideoPicture" render="Pig" position="800,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
+                        # <widget name="text" position="15,125" size="715,510" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;24" zPosition="6"/>
+                        # <!-- clock -->
+                        # <widget source="global.CurrentTime" render="Label" position="1059,560" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+                            # <convert type="ClockToText">Default</convert>
+                        # </widget>
+                        # <widget source="global.CurrentTime" render="Label" position="1049,600" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
+                            # <convert type="ClockToText">Format %A %d %B</convert>
+                        # </widget>
+                        # <!-- buttons -->
+                        # <widget name="key_red" position="57,660" size="220,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+                        # <widget name="key_green" position="301,660" size="220,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+                        # <widget name="key_blue" position="779,660" size="250,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+                    # </screen>'''
+    # else:
+        # skin = '''<screen position="center,center" size="1920,1080" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
+                        # <ePixmap position="0,0" zPosition="-1" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
+                        # <!-- <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/> -->
+                        # <!-- minitv -->
+                        # <widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000"/>
+                        # <widget name="text" position="20,172" size="1070,790" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;28" zPosition="5" transparent="1"/>
+                        # <!-- <eLabel position="17,172" size="1075,790" zPosition="2" backgroundColor="black"/> -->
+                        # <!-- clock -->
+                        # <widget source="global.CurrentTime" render="Label" position="1554,931" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+                            # <convert type="ClockToText">Default</convert>
+                        # </widget>
+                        # <widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
+                            # <convert type="ClockToText">Format %A %d %B</convert>
+                        # </widget>
+                        # <!-- buttons -->
+                        # <widget name="key_red" position="80,990" size="300,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
+                        # <widget name="key_green" position="405,990" size="300,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
+                        # <widget name="key_blue" position="1065,990" size="320,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
+                    # </screen>'''
+
+    def __init__(self, session, title='Linuxsat-support Console', cmdlist=None, finishedCallback=None, closeOnSuccess=False, showStartStopText=True, skin=None):
+        Screen.__init__(self, session)
+        self.finishedCallback = finishedCallback
+        self.closeOnSuccess = closeOnSuccess
+        self.showStartStopText = showStartStopText
+
+        skin = os.path.join(skin_path, 'lsConsole.xml')
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+        # if skin:
+            # self.skinName = [skin, 'lsConsole']
+        self.errorOcurred = False
+        self.already_shown = False
+        self['text'] = ScrollLabel('')
+
+        # self['key_red'] = StaticText('Cancel')
+        # self['key_green'] = StaticText('Hide/Show')
+        # self['key_blue'] = StaticText('Restart')
+
+        self['key_red'] = Button(_('Cancel'))
+        self['key_green'] = Button(_('Hide/Show'))
+        self['key_blue'] = Button(_('Restart'))
+
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
+                                    {
+                                    "ok": self.cancel,
+                                    "up": self["text"].pageUp,
+                                    "down": self["text"].pageDown,
+                                    "red": self.cancel,
+                                    "green": self.toggleHideShow,
+                                    "blue": self.restartenigma,
+                                    "exit": self.cancel,
+                                    }, -1)
+        self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
+        self.newtitle = title == 'Console' and ('Console') or title
+        self.cancel_msg = None
+        self.onShown.append(self.updateTitle)
+        self.container = eConsoleAppContainer()
+        self.run = 0
+        self.finished = False
+        try:
+            self.container.appClosed.append(self.runFinished)
+            self.container.dataAvail.append(self.dataAvail)
+        except:
+            self.container.appClosed_conn = self.container.appClosed.connect(self.runFinished)
+            self.container.dataAvail_conn = self.container.dataAvail.connect(self.dataAvail)
+        self.onLayoutFinish.append(self.startRun)
+
+    def updateTitle(self):
+        self.setTitle(self.newtitle)
+
+    def startRun(self):
+        if self.showStartStopText:
+            self['text'].setText('Execution progress\n\n')
+        print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
+        if self.container.execute(self.cmdlist[self.run]):
+            self.runFinished(-1)
+
+    def runFinished(self, retval):
+        if retval:
+            self.errorOcurred = True
+            self.show()
+        self.run += 1
+        if self.run != len(self.cmdlist):
+            if self.container.execute(self.cmdlist[self.run]):
+                self.runFinished(-1)
+        else:
+            self.show()
+            self.finished = True
+            try:
+                lastpage = self['text'].isAtLastPage()
+            except:
+                lastpage = self['text']
+            if self.cancel_msg:
+                self.cancel_msg.close()
+            if self.showStartStopText:
+                self['text'].appendText('Execution finished!!')
+            if self.finishedCallback is not None:
+                self.finishedCallback()
+            if not self.errorOcurred and self.closeOnSuccess:
+                self.closeConsole()
+            else:
+                self['text'].appendText('\nPress OK or Exit to abort!')
+                self['key_red'].setText('Exit')
+                self['key_green'].setText('')
+
+    def toggleHideShow(self):
+        if self.finished:
+            return
+        if self.shown:
+            self.hide()
+        else:
+            self.show()
+
+    def show(self):
+        if (self.shown and self.already_shown) or not self.instance:
+            return
+        self.shown = True
+        # DEBUG: self.alreadyShown = True
+        self.already_shown = True
+        self.instance.show()
+        # for x in self.onShow:
+            # x()
+        # for val in list(self.values()) + self.renderer:
+            # if isinstance(val, GUIComponent) or isinstance(val, Source):
+                # val.onShow()
+
+    def cancel(self):
+        if self.finished:
+            self.closeConsole()
+        else:
+            self.cancel_msg = self.session.openWithCallback(self.cancelCallback, MessageBox, 'Cancel execution?', type=MessageBox.TYPE_YESNO, default=False)
+
+    def cancelCallback(self, ret=None):
+        self.cancel_msg = None
+        if ret:
+            try:
+                self.container.appClosed.remove(self.runFinished)
+                self.container.dataAvail.remove(self.dataAvail)
+            except:
+                self.container.appClosed_conn = None
+                self.container.dataAvail_conn = None
+            self.container.kill()
+            self.close()
+
+    def closeConsole(self):
+        if self.finished:
+            try:
+                self.container.appClosed.remove(self.runFinished)
+                self.container.dataAvail.remove(self.dataAvail)
+            except:
+                self.container.appClosed_conn = None
+                self.container.dataAvail_conn = None
+            self.close()
+        else:
+            self.show()
+
+    def dataAvail(self, str):
+        if PY3:
+            self['text'].appendText(str.decode())
+        else:
+            self['text'].appendText(str)
+
+    def restartenigma(self):
+        from Screens.Standby import TryQuitMainloop
+        self.session.open(TryQuitMainloop, 3)

@@ -1,0 +1,19 @@
+<!-- by lululla 01072024 -->
+<screen position="center,center" size="1280,720" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
+	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" backgroundColor="#25062748" alphatest="on" />
+	<!-- <eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" /> -->
+	<!-- minitv -->	
+	<widget source="session.VideoPicture" render="Pig" position="800,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
+	<widget name="text" position="15,125" size="715,510" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;24" zPosition="6"/>
+	<!-- clock -->
+	<widget source="global.CurrentTime" render="Label" position="1059,560" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+		<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget source="global.CurrentTime" render="Label" position="1049,600" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
+		<convert type="ClockToText">Format %A %d %B</convert>
+	</widget>
+	<!-- buttons -->
+	<widget name="key_red" position="57,660" size="220,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_green" position="301,660" size="220,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="779,660" size="250,30" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+</screen>

@@ -21,7 +21,7 @@ from . import (
     xmlurl,
     HALIGN,
 )
-from .Console import Console
+from .lsConsole import lsConsole
 from .Lcn import (
     LCN,
     ReloadBouquets,
@@ -1397,7 +1397,7 @@ class addInstall(Screen):
                 # cmd3 = "rm /tmp/" + self.plug  # + "'"
                 cmd = cmd2  # + " && "  # + cmd3
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
-                self.session.open(Console, _(title), [cmd], closeOnSuccess=False)
+                self.session.open(lsConsole, _(title), [cmd], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
@@ -1596,11 +1596,11 @@ class addInstall(Screen):
                     os.system("rm -rf /tmp/unzipped")
                     os.system("rm -rf /tmp/settings.zip")
                     title = (_("Installing %s\nPlease Wait...") % self.name)
-                    self.session.openWithCallback(self.yes, Console, title=_(title),
+                    self.session.openWithCallback(self.yes, lsConsole, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
                                                   closeOnSuccess=False)
                     '''
-                    # self.session.openWithCallback(self.yes, Console, title=_(title),
+                    # self.session.openWithCallback(self.yes, lsConsole, title=_(title),
                                                   # cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
                                                   # finishedCallback=self.yes,
                                                   # closeOnSuccess=False)
@@ -1638,7 +1638,7 @@ class addInstall(Screen):
             self.iname = ipk[:n2]
             cmd = "opkg remove '" + self.iname + "'"
             title = (_("Removing %s") % self.iname)
-            self.session.open(Console, _(title), [cmd])
+            self.session.open(lsConsole, _(title), [cmd])
 
     def restart(self):
         self.session.openWithCallback(self.restartnow,
@@ -1766,7 +1766,7 @@ class LSinfo(Screen):
 
     def install_update(self, answer=False):
         if answer:
-            self.session.open(Console, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
+            self.session.open(lsConsole, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
         else:
             self.session.open(MessageBox,
                               _("Update Aborted!"),
