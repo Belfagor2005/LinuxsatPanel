@@ -1857,7 +1857,8 @@ class startLP(Screen):
         _session = session
         first = True
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'startLP.xml')
+        if os.path.exists('/var/lib/dpkg/info'):
+            skin = os.path.join(skin_path, 'LSinfo-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self["poster"] = Pixmap()
