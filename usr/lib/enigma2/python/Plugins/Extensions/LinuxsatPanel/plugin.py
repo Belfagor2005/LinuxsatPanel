@@ -156,20 +156,20 @@ global skin_path
 skin_path = ''
 
 if isWQHD():
-    skin_path = plugin_path + 'skins/fhd'
-    picfold = plugin_path + "LSicons2/"
-    pngx = plugin_path + "icons2/link.png"
+    skin_path = plugin_path + '/skins/fhd'
+    picfold = plugin_path + "/LSicons2/"
+    pngx = plugin_path + "/icons2/link.png"
     blpic = picfold + "Blank.png"
 
 elif isFHD():
-    skin_path = plugin_path + 'skins/fhd'
-    picfold = plugin_path + "LSicons2/"
-    pngx = plugin_path + "icons2/link.png"
+    skin_path = plugin_path + '/skins/fhd'
+    picfold = plugin_path + "/LSicons2/"
+    pngx = plugin_path + "/icons2/link.png"
     blpic = picfold + "Blank.png"
 else:
-    skin_path = plugin_path + 'skins/hd'
-    picfold = plugin_path + "LSicons/"
-    pngx = plugin_path + "icons/link.png"
+    skin_path = plugin_path + '/skins/hd'
+    picfold = plugin_path + "/LSicons/"
+    pngx = plugin_path + "/icons/link.png"
     blpic = picfold + "Blank.png"
 print('skin path=', skin_path)
 
