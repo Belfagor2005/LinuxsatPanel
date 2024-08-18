@@ -1,45 +1,34 @@
 #!/bin/sh
-## DESCRIPTION=This script created by Levi45\nKeys Uodater
-###############################################################################
-KeysUpdater="http://levi45.spdns.eu/Addons/Multicam/Keys_Updater.sh"
-SoftcamKeys="http://levi45.spdns.eu/Addons/SoftCam.Key"
-Constantcw="http://levi45.spdns.eu/Addons/constant.cw"
-OscamKeys="http://levi45.spdns.eu/Addons/oscam.keys"
-Oscamconstantcw="http://levi45.spdns.eu/Addons/oscam.constant.cw"
+
+##DESCRIPTION=This script downloads latest CCcam keys & provider info.
+softcam="https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/SoftCam.Key"
+## wicard="http://onlinecolor.ml/keys/SoftCam.Key"
+## ee="http://onlinecolor.ml/center/ee.bin"
+## ee36="http://onlinecolor.ml/center/ee.bin"
+## ee56="http://onlinecolor.ml/sibir/ee.bin"
+## SoftcamKeys="http://sat-linux.com/addons/SoftCam.Key"
+## Constant="http://sat-linux.com/addons/constant.cw"
+## http://levi45.spdns.eu/Addons/SoftCam.Key
+
 echo ""
 echo ""
-echo "Downloading ${KeysUpdater}"
-wget ${KeysUpdater} -O /usr/lib/enigma2/python/Plugins/Extensions/Manager/emu/Keys_Updater.sh || echo "Error: Couldn't connect to ${KeysUpdater}"
-echo ""
-chmod 775 /usr/lib/enigma2/python/Plugins/Extensions/Manager/emu/Keys_Updater.sh
-echo ""
-echo "Downloading ${SoftcamKeys}"
-wget ${SoftcamKeys} -O /usr/keys/SoftCam.Key || echo "Error: Couldn't connect to ${SoftcamKeys}"
-echo ""
-echo "Downloading ${SoftcamKeys}"
-wget ${SoftcamKeys} -O /etc/tuxbox/config/SoftCam.Key || echo "Error: Couldn't connect to ${SoftcamKeys}"
-echo ""
-echo "Downloading ${Constantcw}"
-wget ${Constantcw} -O /etc/tuxbox/config/constant.cw || echo "Error: Couldn't connect to ${Constantcw}"
-echo ""
-echo "Downloading ${Constantcw}"
-wget ${Constantcw} -O /usr/keys/constant.cw || echo "Error: Couldn't connect to ${Constantcw}"
-echo ""
-echo "Downloading ${OscamKeys}"
-wget ${OscamKeys} -O /etc/tuxbox/config/oscam.keys || echo "Error: Couldn't connect to ${OscamKeys}"
-echo ""
-echo "Downloading ${Oscamconstantcw}"
-wget ${Oscamconstantcw} -O /etc/tuxbox/config/oscam.constant.cw || echo "Error: Couldn't connect to ${Oscamconstantcw}"
+
+if [ -f "/usr/keys/SoftCam.Key" ]; then
+   rm -rf "/usr/keys/SoftCam.Key" > /dev/null 2>&1
+fi
+echo "Downloading ${softcam}"
+## wget ${softcam} -O /etc/tuxbox/config/SoftCam.Key || echo "Error: Couldn't connect to ${softcam}"
+wget --no-check-certificate -U 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36' -P '/usr/keys/' ${softcam} || echo "Error: Couldn't connect to ${softcam}"
 echo ""
 echo ""
-echo "#########################################################"
-echo "#                           Levi45                      #"
-echo "#########################################################"
-echo "#              KEYS INSTALLED SUCCESSFULLY              #"
-echo "#########################################################"
-echo "#                    SATELLITE-FORUM.COM                #"
-echo "#########################################################"
-KeyDate=`/bin/date -r /usr/lib/enigma2/python/Plugins/Extensions/Manager/emu/Keys_Updater.sh +%d.%m.%y-%H:%M:%S`
+echo "* Installed Successfully *"
+echo "* E2 Restart Is Required *"
+KeyDate=`/bin/date -r /usr/keys/SoftCam.Key +%d.%m.%y-%H:%M:%S`
 	echo ""
 	echo "UPDATE DATE AND TIME: $KeyDate"
+	echo ""
 exit 0
+
+## wget https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/SoftCam.Key -O /usr/keys/SoftCam.Key																											 
+
+## wget --no-check-certificate -U 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36' -P '/usr/keys/SoftCam.Key' ${softcam}
