@@ -1,5 +1,5 @@
 #!/bin/bash
-# mod by lululla 24/06/2023
+# mod by lululla 24/08/2023
 # Aggiornato il $(date +"%d/%m/%Y")
 
 set -e  # Interrompe l'esecuzione in caso di errori
