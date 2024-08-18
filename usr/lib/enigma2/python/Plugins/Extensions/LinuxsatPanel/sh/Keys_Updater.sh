@@ -29,6 +29,3 @@ KeyDate=`/bin/date -r /usr/keys/SoftCam.Key +%d.%m.%y-%H:%M:%S`
 	echo ""
 exit 0
 
-## wget https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/SoftCam.Key -O /usr/keys/SoftCam.Key																											 
-
-## wget --no-check-certificate -U 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36' -P '/usr/keys/SoftCam.Key' ${softcam}
