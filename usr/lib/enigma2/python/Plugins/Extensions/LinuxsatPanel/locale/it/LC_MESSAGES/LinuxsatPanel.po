@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-10 13:10+0200\n"
+"POT-Creation-Date: 2024-08-19 16:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,15 +13,16 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:447 plugin.py:768 plugin.py:1037 plugin.py:1251 plugin.py:1679
+#: plugin.py:453 plugin.py:769 plugin.py:1026 plugin.py:1359 plugin.py:1618
+#: plugin.py:2007
 msgid "Please Wait..."
 msgstr "Attendi Prego..."
 
-#: plugin.py:448 plugin.py:769 plugin.py:1038
+#: plugin.py:454 plugin.py:770 plugin.py:1027 plugin.py:1360
 msgid "0 Sort"
 msgstr "0 Ordinamento"
 
-#: plugin.py:610
+#: plugin.py:612
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -31,40 +32,49 @@ msgstr ""
 "\n"
 "Sei sicuro di voler continuare?"
 
-#: plugin.py:1233
-msgid "Exit"
-msgstr "Esci"
-
-#: plugin.py:1234
-msgid "Install"
-msgstr "Installa/Aggiorna"
-
-#: plugin.py:1235
-msgid "Remove"
-msgstr "Rimuovi"
-
-#: plugin.py:1236
-msgid "Restart enigma"
-msgstr "Riavvia Enigma"
-
-#: plugin.py:1253
-msgid "Load Category..."
-msgstr "Carico Categoria..."
-
-#: plugin.py:1287
-msgid "Category: "
-msgstr "Categoria: "
-
-#: plugin.py:1344 plugin.py:1354
-msgid "Unknow Image!"
-msgstr "Immagine non corretta!"
-
-#: plugin.py:1366
+#: plugin.py:1579 plugin.py:1715
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Vuoi installare %s ?"
 
-#: plugin.py:1409 plugin.py:1607
+#: plugin.py:1584
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+"Eseguo %s\n"
+"Attendere Prego..."
+
+#: plugin.py:1600
+msgid "Exit"
+msgstr "Esci"
+
+#: plugin.py:1601
+msgid "Install"
+msgstr "Installa/Aggiorna"
+
+#: plugin.py:1602
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: plugin.py:1603
+msgid "Restart enigma"
+msgstr "Riavvia Enigma"
+
+#: plugin.py:1620
+msgid "Load Category..."
+msgstr "Carico Categoria..."
+
+#: plugin.py:1652
+msgid "Category: "
+msgstr "Categoria: "
+
+#: plugin.py:1693 plugin.py:1703
+msgid "Unknow Image!"
+msgstr "Immagine non corretta!"
+
+#: plugin.py:1754 plugin.py:1935
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -73,40 +83,40 @@ msgstr ""
 "Installa %s\n"
 "Attendere Prego..."
 
-#: plugin.py:1534
+#: plugin.py:1880
 msgid "Download page get failed ..."
 msgstr "La pagina di download non è riuscita ..."
 
-#: plugin.py:1544
+#: plugin.py:1890
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Ordinamento dei canali terrestri con regole Lcn completate"
 
-#: plugin.py:1551
+#: plugin.py:1897
 msgid "Do you want to install?"
 msgstr "Vuoi installare ?"
 
-#: plugin.py:1618
+#: plugin.py:1946
 msgid "Settings Not Installed ..."
 msgstr "Liste canali non installate..."
 
-#: plugin.py:1635
+#: plugin.py:1963
 msgid "Do you want to remove?"
 msgstr "Vuoi rimuovere ?"
 
-#: plugin.py:1649
+#: plugin.py:1977
 #, python-format
 msgid "Removing %s"
 msgstr "Rimuovo %s"
 
-#: plugin.py:1655
+#: plugin.py:1983
 msgid "Do you want to restart Gui Interface?"
 msgstr "Vuoi riavviare l'Interfaccia Grafica?"
 
-#: plugin.py:1682
+#: plugin.py:2010
 msgid "Update"
 msgstr "Aggiornare"
 
-#: plugin.py:1755
+#: plugin.py:2080
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -121,12 +131,12 @@ msgstr ""
 "\n"
 "Premere il pulsante verde per avviare l'aggiornamento"
 
-#: plugin.py:1761
+#: plugin.py:2086
 #, python-format
 msgid ""
 "New version %s is available.\n"
 "\n"
-"Changelog: %s \n"
+"Changelog: %s\n"
 "\n"
 "Do you want to install it now?"
 msgstr ""
@@ -136,28 +146,28 @@ msgstr ""
 "\n"
 "Vuoi installarla ora?"
 
-#: plugin.py:1763
+#: plugin.py:2089
 msgid "Congrats! You already have the latest version..."
 msgstr "Congratulazioni! Hai già l'ultima versione..."
 
-#: plugin.py:1772
+#: plugin.py:2099
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Vuoi installare l'aggiornamento (%s)ora ?"
 
-#: plugin.py:1778
+#: plugin.py:2106
 msgid "Update Aborted!"
 msgstr "Aggionamento Annullato!"
 
-#: plugin.py:1796
+#: plugin.py:2125
 msgid "Unable to download updates!"
 msgstr "Impossibile scaricare aggiornamento!"
 
-#: plugin.py:2031
+#: plugin.py:2370
 msgid "Check Connection!"
 msgstr "Controlla Connessione!"
 
-#: plugin.py:2052
+#: plugin.py:2391
 msgid "Linuxsat Panel"
 msgstr "Linuxsat Panel"
 
