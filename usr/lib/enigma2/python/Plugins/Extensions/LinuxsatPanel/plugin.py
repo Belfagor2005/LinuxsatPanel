@@ -247,29 +247,29 @@ class LinuxsatPanel(Screen):
 
         if isHD():
             self.pos = []
-            self.pos.append([60, 125])
-            self.pos.append([200, 125])
-            self.pos.append([345, 125])
-            self.pos.append([490, 125])
-            self.pos.append([620, 125])
+            self.pos.append([65, 135])
+            self.pos.append([200, 135])
+            self.pos.append([345, 135])
+            self.pos.append([485, 135])
+            self.pos.append([620, 135])
 
-            self.pos.append([60, 265])
-            self.pos.append([200, 265])
-            self.pos.append([345, 265])
-            self.pos.append([490, 265])
-            self.pos.append([620, 265])
+            self.pos.append([65, 270])
+            self.pos.append([200, 270])
+            self.pos.append([345, 270])
+            self.pos.append([485, 270])
+            self.pos.append([620, 270])
 
-            self.pos.append([60, 405])
+            self.pos.append([65, 405])
             self.pos.append([200, 405])
             self.pos.append([345, 405])
-            self.pos.append([490, 405])
+            self.pos.append([485, 405])
             self.pos.append([620, 405])
 
-            self.pos.append([60, 545])
-            self.pos.append([200, 545])
-            self.pos.append([345, 545])
-            self.pos.append([490, 545])
-            self.pos.append([620, 545])
+            self.pos.append([65, 540])
+            self.pos.append([200, 540])
+            self.pos.append([345, 540])
+            self.pos.append([485, 540])
+            self.pos.append([620, 540])
 
         list = []
         self.pics = []
@@ -470,7 +470,6 @@ class LinuxsatPanel(Screen):
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
-        self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
@@ -547,10 +546,8 @@ class LinuxsatPanel(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            # # self.index = 0  # att test
             self.key_down()
         else:
-            # self.index = 0
             self.paintFrame()
 
     def key_up(self):
@@ -569,7 +566,7 @@ class LinuxsatPanel(Screen):
 
     def key_down(self):
         self.index = self.index + 5
-        if self.index > (self.maxentry):
+        if self.index > self.maxentry:
             if self.ipage < self.npage:
                 self.ipage = self.ipage + 1
                 self.openTest()
@@ -578,7 +575,6 @@ class LinuxsatPanel(Screen):
                 self.ipage = 1
                 self.openTest()
             else:
-                # self.index = 0 # try add test
                 self.paintFrame()
         else:
             self.paintFrame()
@@ -683,29 +679,29 @@ class LSskin(Screen):
 
         if isHD():
             self.pos = []
-            self.pos.append([60, 125])
-            self.pos.append([200, 125])
-            self.pos.append([345, 125])
-            self.pos.append([490, 125])
-            self.pos.append([620, 125])
+            self.pos.append([65, 135])
+            self.pos.append([200, 135])
+            self.pos.append([345, 135])
+            self.pos.append([485, 135])
+            self.pos.append([620, 135])
 
-            self.pos.append([60, 265])
-            self.pos.append([200, 265])
-            self.pos.append([345, 265])
-            self.pos.append([490, 265])
-            self.pos.append([620, 265])
+            self.pos.append([65, 270])
+            self.pos.append([200, 270])
+            self.pos.append([345, 270])
+            self.pos.append([485, 270])
+            self.pos.append([620, 270])
 
-            self.pos.append([60, 405])
+            self.pos.append([65, 405])
             self.pos.append([200, 405])
             self.pos.append([345, 405])
-            self.pos.append([490, 405])
+            self.pos.append([485, 405])
             self.pos.append([620, 405])
 
-            self.pos.append([60, 545])
-            self.pos.append([200, 545])
-            self.pos.append([345, 545])
-            self.pos.append([490, 545])
-            self.pos.append([620, 545])
+            self.pos.append([65, 540])
+            self.pos.append([200, 540])
+            self.pos.append([345, 540])
+            self.pos.append([485, 540])
+            self.pos.append([620, 540])
 
         list = []
         self.pics = []
@@ -786,7 +782,6 @@ class LSskin(Screen):
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
-        self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):
@@ -848,13 +843,7 @@ class LSskin(Screen):
     def key_left(self):
         if not self.index <= 0:
             self.index -= 1
-            # self.paintFrame()
         self.paintFrame()
-        '''
-        # # test
-        # else:
-            # self.paintFrame()
-        '''
 
     def key_right(self):
         i = self.npics - 1
@@ -864,10 +853,8 @@ class LSskin(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            # # self.index = 0  # att test
             self.key_down()
         else:
-            # self.index = 0
             self.paintFrame()
 
     def key_up(self):
@@ -895,7 +882,6 @@ class LSskin(Screen):
                 self.ipage = 1
                 self.openTest()
             else:
-                # self.index = 0 # try add test
                 self.paintFrame()
         else:
             self.paintFrame()
@@ -967,29 +953,29 @@ class LSChannel(Screen):
 
         if isHD():
             self.pos = []
-            self.pos.append([60, 125])
-            self.pos.append([200, 125])
-            self.pos.append([345, 125])
-            self.pos.append([490, 125])
-            self.pos.append([620, 125])
+            self.pos.append([65, 135])
+            self.pos.append([200, 135])
+            self.pos.append([345, 135])
+            self.pos.append([485, 135])
+            self.pos.append([620, 135])
 
-            self.pos.append([60, 265])
-            self.pos.append([200, 265])
-            self.pos.append([345, 265])
-            self.pos.append([490, 265])
-            self.pos.append([620, 265])
+            self.pos.append([65, 270])
+            self.pos.append([200, 270])
+            self.pos.append([345, 270])
+            self.pos.append([485, 270])
+            self.pos.append([620, 270])
 
-            self.pos.append([60, 405])
+            self.pos.append([65, 405])
             self.pos.append([200, 405])
             self.pos.append([345, 405])
-            self.pos.append([490, 405])
+            self.pos.append([485, 405])
             self.pos.append([620, 405])
 
-            self.pos.append([60, 545])
-            self.pos.append([200, 545])
-            self.pos.append([345, 545])
-            self.pos.append([490, 545])
-            self.pos.append([620, 545])
+            self.pos.append([65, 540])
+            self.pos.append([200, 540])
+            self.pos.append([345, 540])
+            self.pos.append([485, 540])
+            self.pos.append([620, 540])
 
         list = []
         self.pics = []
@@ -1053,7 +1039,6 @@ class LSChannel(Screen):
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
-        self.icount = 0
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):  # for future
@@ -1115,13 +1100,7 @@ class LSChannel(Screen):
     def key_left(self):
         if not self.index <= 0:
             self.index -= 1
-            # self.paintFrame()
         self.paintFrame()
-        '''
-        # # test
-        # else:
-            # self.paintFrame()
-        '''
 
     def key_right(self):
         i = self.npics - 1
@@ -1131,10 +1110,8 @@ class LSChannel(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            # # self.index = 0  # att test
             self.key_down()
         else:
-            # self.index = 0
             self.paintFrame()
 
     def key_up(self):
@@ -1162,7 +1139,6 @@ class LSChannel(Screen):
                 self.ipage = 1
                 self.openTest()
             else:
-                # self.index = 0 # try add test
                 self.paintFrame()
         else:
             self.paintFrame()
@@ -1246,7 +1222,6 @@ class addInstall(Screen):
         self['fspace'].setText(_('Please Wait...'))
         self['info'] = Label()
         self['info'].setText(_('Load Category...'))
-        self.icount = 0
         self.downloading = False
         self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'NumberActions'],
                                     {'ok': self.message,
@@ -1305,22 +1280,6 @@ class addInstall(Screen):
         self['key_green'].show()
         self['key_yellow'].show()
         self['key_blue'].show()
-
-    '''
-    # def openTest(self):
-        # print('self.xml: ', self.fxml)
-        # regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
-        # match = re.compile(regex, re.DOTALL).findall(self.fxml)
-        # self.names = []
-        # self.urls = []
-        # for name, url in match:
-            # self.names.append(name)
-            # self.urls.append(url)
-        # LPshowlist(self.names, self["list"])
-        # self['key_green'].show()
-        # self['key_yellow'].show()
-        # self['key_blue'].show()
-    '''
 
     def message(self):
         if self.dest is not None:
@@ -1556,25 +1515,7 @@ class addInstall(Screen):
                     terrestrial()
                 if keepiptv():
                     print('-----save iptv channels-----')
-                '''
-                # import requests
-                # r = requests.get(url)
-                # with open(dest, 'wb') as f:
-                    # f.write(r.content)
-                '''
-                '''
-                # with open(dest, 'w') as f:
-                    # f.write(checkGZIP(url))
-                    # # f.write(make_request(url))
-                    # f.close()
-                '''
-                '''
-                # write_file(url, dest)
-                # import requests
-                # r = requests.get(url)
-                # with open(dest, 'wb') as f:
-                    # f.write(r.content)
-                '''
+
                 from six.moves.urllib.request import urlretrieve
                 urlretrieve(url, dest)
                 if os.path.exists(dest) and '.zip' in dest:
@@ -1736,9 +1677,6 @@ class LSinfo(Screen):
                     break
         self.new_version = remote_version
         self.new_changelog = remote_changelog
-        # print('self.new_version =', remote_version)
-        # print('self.new_changelog =', remote_changelog)
-        # print('currversion=', currversion)
         # if float(currversion) < float(remote_version):
         if currversion < remote_version:
             self.Update = True

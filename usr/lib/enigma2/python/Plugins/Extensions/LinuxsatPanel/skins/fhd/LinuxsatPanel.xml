@@ -2,8 +2,8 @@
 <screen name="LinuxsatPanelFHD" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
     <ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel.png" backgroundColor="#25062748" alphatest="on"/>
     <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/>
-    <widget name="info" position="1218,190" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
-    <widget name="sort" position="1212,955" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+    <widget name="info" position="1110,180" zPosition="4" size="550,84" font="Regular; 38" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+    <widget name="sort" position="1210,955" zPosition="4" size="700,84" font="lmsat; 42" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
