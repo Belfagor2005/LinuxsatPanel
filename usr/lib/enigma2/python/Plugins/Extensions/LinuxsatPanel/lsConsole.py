@@ -10,7 +10,6 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ScrollLabel import ScrollLabel
-# from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Tools.Directories import (SCOPE_PLUGINS, resolveFilename)
 from enigma import getDesktop
@@ -52,14 +51,8 @@ class lsConsole(Screen):
             self.skin = f.read()
 
         self.errorOcurred = False
-        lastpage = ''
-        self.already_shown = False
+        # lastpage = ''
         self['text'] = ScrollLabel('')
-        '''
-        self['key_red'] = StaticText('Cancel')
-        self['key_green'] = StaticText('Hide/Show')
-        self['key_blue'] = StaticText('Restart')
-        '''
         self['key_red'] = Button(_('Cancel'))
         self['key_green'] = Button(_('Hide/Show'))
         self['key_blue'] = Button(_('Restart'))
@@ -110,10 +103,12 @@ class lsConsole(Screen):
         else:
             self.show()
             self.finished = True
+            '''
             try:
                 lastpage = self['text'].isAtLastPage()
             except:
                 lastpage = self['text']
+            '''
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:
@@ -134,20 +129,6 @@ class lsConsole(Screen):
             self.hide()
         else:
             self.show()
-
-    def show(self):
-        if (self.shown and self.already_shown) or not self.instance:
-            return
-        self.shown = True
-        self.already_shown = True
-        self.instance.show()
-        '''
-        # for x in self.onShow:
-            # x()
-        # for val in list(self.values()) + self.renderer:
-            # if isinstance(val, GUIComponent) or isinstance(val, Source):
-                # val.onShow()
-        '''
 
     def cancel(self):
         if self.finished:
