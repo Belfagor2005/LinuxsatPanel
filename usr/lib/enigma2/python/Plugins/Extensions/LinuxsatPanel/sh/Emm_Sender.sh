@@ -12,7 +12,6 @@ cleanup() {
 # Assicura la pulizia anche in caso di interruzione dello script
 trap cleanup EXIT
 
-clear
 
 # Constanti
 ATR_183E='3F FF 95 00 FF 91 81 71 FE 47 00 54 49 47 45 52 36 30 31 20 52 65 76 4D 38 37 14'
