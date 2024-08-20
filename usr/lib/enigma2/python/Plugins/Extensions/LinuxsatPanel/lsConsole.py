@@ -103,12 +103,12 @@ class lsConsole(Screen):
         else:
             self.show()
             self.finished = True
-            '''
+
             try:
                 lastpage = self['text'].isAtLastPage()
             except:
                 lastpage = self['text']
-            '''
+
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:

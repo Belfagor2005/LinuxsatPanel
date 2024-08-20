@@ -2,15 +2,14 @@
 <screen position="center,center" size="1920,1080" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
 	<ePixmap position="0,0" zPosition="-1" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
 	<!-- <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/> -->
-	<!-- minitv -->
-	<widget source="session.VideoPicture" render="Pig" position="1220,534" size="610,345" zPosition="1" backgroundColor="#ff000000"/>
 	<widget name="text" position="20,172" size="1070,790" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;28" zPosition="5" transparent="1"/>
-	<!-- <eLabel position="17,172" size="1075,790" zPosition="2" backgroundColor="black"/> -->
+	<!-- minitv -->
+	<widget source="session.VideoPicture" render="Pig" position="1219,474" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
-	<widget source="global.CurrentTime" render="Label" position="1554,931" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1555,860" size="350,90" font="lsat; 75" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Default</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="Label" position="1564,988" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
+	<widget source="global.CurrentTime" render="Label" position="1565,920" size="335,54" font="lsat; 24" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="1">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 	<!-- buttons -->

@@ -2,8 +2,9 @@
 ## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/sh
 
 ## Only This 2 lines to edit with new version ######
-version='2.1'
-changelog='\nAdd Locale Language\nAddScreen Skins Team'
+version='2.2'
+changelog='\nAdd Script Panel\Skins hd/fhd fix\nMinor fix'
+
 ##############################################################
 
 TMPPATH=/tmp/LinuxsatPanel-main
@@ -110,7 +111,7 @@ echo "#########################################################"
 echo "#          LinuxsatPanel INSTALLED SUCCESSFULLY         #"
 echo "#                developed by LULULLA                   #"
 echo "#                                                       #"
-echo "#                  https://corvoboys.org                #"
+echo "#               https://corvoboys.org                   #"
 echo "#########################################################"
 echo "#           your Device will RESTART Now                #"
 echo "#########################################################"

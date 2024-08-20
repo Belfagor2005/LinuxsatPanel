@@ -2,19 +2,21 @@
 <screen name="addInstall" position="0,0" size="1280,720" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="0" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" backgroundColor="#25062748" alphatest="on" />
 	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
-	<!-- minitv -->	
-	<widget source="session.VideoPicture" render="Pig" position="800,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- list -->
 	<widget name="list" position="55,170" size="680,425" zPosition="4" scrollbarMode="showOnDemand" itemCornerRadius="19" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" />
-	<widget name="info" position="56,121" zPosition="4" size="680,40" font="lsat; 30" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
+	<widget name="info" position="775,115" zPosition="4" size="455,60" font="Regular; 24" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
 	<widget name="fspace" position="57,604" size="678,44" zPosition="4" font="lbsat;22" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
+	<widget name="sort" position="805,560" zPosition="4" size="455,60" font="lmsat; 28" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+	<!-- minitv -->
+	<widget source="session.VideoPicture" render="Pig" position="802,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
-	<widget source="global.CurrentTime" render="Label" position="1059,560" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1059,600" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Default</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="Label" position="1049,600" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1049,640" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
+
 	<!-- buttons -->
 	<widget name="key_red" position="57,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="key_green" position="301,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />

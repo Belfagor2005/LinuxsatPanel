@@ -7,6 +7,8 @@ from . import (
     CheckConn,
     abouturl,
     add_skin_font,
+    b64decoder,
+    checkGZIP,
     descplug,
     developer_url,
     freespace,
@@ -80,7 +82,7 @@ from enigma import (
 # ======================================================================
 global HALIGN
 global setx
-currversion = '2.1'
+currversion = '2.2'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
 _session = None
@@ -197,7 +199,7 @@ def LPListEntry(name, item):
             res.append(MultiContentEntryText(pos=(55, 0), size=(920, 50), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
         else:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 7), size=(30, 30), png=loadPNG(pngx)))
-            res.append(MultiContentEntryText(pos=(45, 0), size=(600, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(45, 0), size=(615, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
     return res
 
 
@@ -221,29 +223,29 @@ class LinuxsatPanel(Screen):
         self.data = checkGZIP(xmlurl)
         if isFHD():
             self.pos = []
-            self.pos.append([80, 200])
-            self.pos.append([310, 200])
-            self.pos.append([520, 200])
-            self.pos.append([730, 200])
-            self.pos.append([940, 200])
+            self.pos.append([100, 210])
+            self.pos.append([310, 210])
+            self.pos.append([525, 210])
+            self.pos.append([735, 210])
+            self.pos.append([940, 210])
 
-            self.pos.append([80, 425])
-            self.pos.append([310, 425])
-            self.pos.append([520, 425])
-            self.pos.append([730, 425])
-            self.pos.append([940, 425])
+            self.pos.append([100, 420])
+            self.pos.append([310, 420])
+            self.pos.append([525, 420])
+            self.pos.append([735, 420])
+            self.pos.append([940, 420])
 
-            self.pos.append([80, 635])
+            self.pos.append([100, 635])
             self.pos.append([310, 635])
-            self.pos.append([520, 635])
-            self.pos.append([730, 635])
+            self.pos.append([525, 635])
+            self.pos.append([735, 635])
             self.pos.append([940, 635])
 
-            self.pos.append([80, 845])
-            self.pos.append([310, 845])
-            self.pos.append([520, 845])
-            self.pos.append([730, 845])
-            self.pos.append([940, 845])
+            self.pos.append([100, 835])
+            self.pos.append([310, 835])
+            self.pos.append([525, 835])
+            self.pos.append([735, 835])
+            self.pos.append([940, 835])
 
         if isHD():
             self.pos = []
@@ -283,7 +285,7 @@ class LinuxsatPanel(Screen):
         self.titles.append("Bouquets ")
         self.pics.append(picfold + "Bouquets.png")
 
-        list.append("Dvb-Usb ")
+        list.append("DvbUsb Tuners Drivers")
         self.titles.append("Dvb-Usb ")
         self.pics.append(picfold + "usb-tuner-drivers.png")
 
@@ -358,6 +360,10 @@ class LinuxsatPanel(Screen):
         list.append("Radio ")
         self.titles.append("Radio-Tools ")
         self.pics.append(picfold + "Radio.png")
+
+        list.append("Script Installer ")
+        self.titles.append("Script Installer ")
+        self.pics.append(picfold + "script.png")
 
         list.append("Skins | TEAM ")
         self.titles.append("Skins | TEAM ")
@@ -448,15 +454,20 @@ class LinuxsatPanel(Screen):
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
+        self['key_red'] = Label(_('Exit'))
+        self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
                                      "MenuActions",
                                      "DirectionActions",
                                      "NumberActions",
-                                     "EPGSelectActions",
+                                     'ColorActions',
                                      "EPGSelectActions",
                                      "InfoActions",],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
+                                     "exit": self.closeRecursive,
+                                     "back": self.closeNonRecursive,
+                                     "red": self.closeNonRecursive,
                                      "0": self.list_sort,
                                      "left": self.key_left,
                                      "right": self.key_right,
@@ -472,7 +483,9 @@ class LinuxsatPanel(Screen):
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):  # for future
+    def list_sort(self):
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        # test up
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
         # print("Lista ordinata:", sorted_list)
@@ -489,7 +502,6 @@ class LinuxsatPanel(Screen):
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            # information
             ifr = self.index - (20 * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
@@ -506,7 +518,6 @@ class LinuxsatPanel(Screen):
             self.maxentry = len(self.pics) - 1
             self.minentry = (self.ipage - 1) * 20
             i1 = 0
-            # while i1 < 24:
             while i1 < 20:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
@@ -532,11 +543,6 @@ class LinuxsatPanel(Screen):
             self.index -= 1
             # self.paintFrame()
         self.paintFrame()
-        '''
-        # # test
-        # else:
-            # self.paintFrame()
-        '''
 
     def key_right(self):
         i = self.npics - 1
@@ -630,6 +636,9 @@ class LinuxsatPanel(Screen):
         elif name == "Channel List ":
             self.session.open(LSChannel, name)
 
+        elif name == "Script Installer ":
+            self.session.open(ScriptInstaller, name)
+
         elif name == "Skins | TEAM ":
             self.session.open(LSskin, name)
 
@@ -653,29 +662,29 @@ class LSskin(Screen):
         self.name = name
         if isFHD():
             self.pos = []
-            self.pos.append([80, 200])
-            self.pos.append([310, 200])
-            self.pos.append([520, 200])
-            self.pos.append([730, 200])
-            self.pos.append([940, 200])
+            self.pos.append([100, 210])
+            self.pos.append([310, 210])
+            self.pos.append([525, 210])
+            self.pos.append([735, 210])
+            self.pos.append([940, 210])
 
-            self.pos.append([80, 425])
-            self.pos.append([310, 425])
-            self.pos.append([520, 425])
-            self.pos.append([730, 425])
-            self.pos.append([940, 425])
+            self.pos.append([100, 420])
+            self.pos.append([310, 420])
+            self.pos.append([525, 420])
+            self.pos.append([735, 420])
+            self.pos.append([940, 420])
 
-            self.pos.append([80, 635])
+            self.pos.append([100, 635])
             self.pos.append([310, 635])
-            self.pos.append([520, 635])
-            self.pos.append([730, 635])
+            self.pos.append([525, 635])
+            self.pos.append([735, 635])
             self.pos.append([940, 635])
 
-            self.pos.append([80, 845])
-            self.pos.append([310, 845])
-            self.pos.append([520, 845])
-            self.pos.append([730, 845])
-            self.pos.append([940, 845])
+            self.pos.append([100, 835])
+            self.pos.append([310, 835])
+            self.pos.append([525, 835])
+            self.pos.append([735, 835])
+            self.pos.append([940, 835])
 
         if isHD():
             self.pos = []
@@ -757,18 +766,23 @@ class LSskin(Screen):
             self["label" + str(i + 1)] = StaticText()
             self["pixmap" + str(i + 1)] = Pixmap()
             i += 1
-
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
+        self['key_red'] = Label(_('Exit'))
+        self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
                                      "MenuActions",
                                      "DirectionActions",
                                      "NumberActions",
+                                     'ColorActions',
                                      "EPGSelectActions",
                                      "InfoActions",],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
+                                     "exit": self.closeRecursive,
+                                     "back": self.closeNonRecursive,
+                                     "red": self.closeNonRecursive,
                                      "0": self.list_sort,
                                      "left": self.key_left,
                                      "right": self.key_right,
@@ -785,6 +799,8 @@ class LSskin(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def list_sort(self):
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        # test up
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
         # print("Lista ordinata:", sorted_list)
@@ -802,7 +818,6 @@ class LSskin(Screen):
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            # information
             ifr = self.index - (20 * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
@@ -819,7 +834,6 @@ class LSskin(Screen):
             self.maxentry = len(self.pics) - 1
             self.minentry = (self.ipage - 1) * 20
             i1 = 0
-            # while i1 < 24:
             while i1 < 20:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
@@ -927,29 +941,29 @@ class LSChannel(Screen):
         self.name = name
         if isFHD():
             self.pos = []
-            self.pos.append([80, 200])
-            self.pos.append([310, 200])
-            self.pos.append([520, 200])
-            self.pos.append([730, 200])
-            self.pos.append([940, 200])
+            self.pos.append([100, 210])
+            self.pos.append([310, 210])
+            self.pos.append([525, 210])
+            self.pos.append([735, 210])
+            self.pos.append([940, 210])
 
-            self.pos.append([80, 425])
-            self.pos.append([310, 425])
-            self.pos.append([520, 425])
-            self.pos.append([730, 425])
-            self.pos.append([940, 425])
+            self.pos.append([100, 420])
+            self.pos.append([310, 420])
+            self.pos.append([525, 420])
+            self.pos.append([735, 420])
+            self.pos.append([940, 420])
 
-            self.pos.append([80, 635])
+            self.pos.append([100, 635])
             self.pos.append([310, 635])
-            self.pos.append([520, 635])
-            self.pos.append([730, 635])
+            self.pos.append([525, 635])
+            self.pos.append([735, 635])
             self.pos.append([940, 635])
 
-            self.pos.append([80, 845])
-            self.pos.append([310, 845])
-            self.pos.append([520, 845])
-            self.pos.append([730, 845])
-            self.pos.append([940, 845])
+            self.pos.append([100, 835])
+            self.pos.append([310, 835])
+            self.pos.append([525, 835])
+            self.pos.append([735, 835])
+            self.pos.append([940, 835])
 
         if isHD():
             self.pos = []
@@ -1018,14 +1032,20 @@ class LSChannel(Screen):
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
+        self['key_red'] = Label(_('Exit'))
+        self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
                                      "MenuActions",
                                      "DirectionActions",
                                      "NumberActions",
+                                     'ColorActions',
                                      "EPGSelectActions",
                                      "InfoActions",],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
+                                     "exit": self.closeRecursive,
+                                     "back": self.closeNonRecursive,
+                                     "red": self.closeNonRecursive,
                                      "0": self.list_sort,
                                      "left": self.key_left,
                                      "right": self.key_right,
@@ -1041,7 +1061,9 @@ class LSChannel(Screen):
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):  # for future
+    def list_sort(self):
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        # test up
         sorted_data = sorted(self.combined_data, key=lambda x: x[0])
         sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
         # print("Lista ordinata:", sorted_list)
@@ -1059,7 +1081,6 @@ class LSChannel(Screen):
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            # information
             ifr = self.index - (20 * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
@@ -1076,7 +1097,6 @@ class LSChannel(Screen):
             self.maxentry = len(self.pics) - 1
             self.minentry = (self.ipage - 1) * 20
             i1 = 0
-            # while i1 < 24:
             while i1 < 20:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
@@ -1189,6 +1209,410 @@ class LSChannel(Screen):
         self.session.open(addInstall, url, name, '')
 
 
+class ScriptInstaller(Screen):
+
+    def __init__(self, session, name):
+        Screen.__init__(self, session)
+        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+        self.name = name
+        if isFHD():
+            self.pos = []
+            self.pos.append([100, 210])
+            self.pos.append([310, 210])
+            self.pos.append([525, 210])
+            self.pos.append([735, 210])
+            self.pos.append([940, 210])
+
+            self.pos.append([100, 420])
+            self.pos.append([310, 420])
+            self.pos.append([525, 420])
+            self.pos.append([735, 420])
+            self.pos.append([940, 420])
+
+            self.pos.append([100, 635])
+            self.pos.append([310, 635])
+            self.pos.append([525, 635])
+            self.pos.append([735, 635])
+            self.pos.append([940, 635])
+
+            self.pos.append([100, 835])
+            self.pos.append([310, 835])
+            self.pos.append([525, 835])
+            self.pos.append([735, 835])
+            self.pos.append([940, 835])
+
+        if isHD():
+            self.pos = []
+            self.pos.append([65, 135])
+            self.pos.append([200, 135])
+            self.pos.append([345, 135])
+            self.pos.append([485, 135])
+            self.pos.append([620, 135])
+
+            self.pos.append([65, 270])
+            self.pos.append([200, 270])
+            self.pos.append([345, 270])
+            self.pos.append([485, 270])
+            self.pos.append([620, 270])
+
+            self.pos.append([65, 405])
+            self.pos.append([200, 405])
+            self.pos.append([345, 405])
+            self.pos.append([485, 405])
+            self.pos.append([620, 405])
+
+            self.pos.append([65, 540])
+            self.pos.append([200, 540])
+            self.pos.append([345, 540])
+            self.pos.append([485, 540])
+            self.pos.append([620, 540])
+
+        list = []
+        self.pics = []
+        self.titles = []
+
+        list.append("Add Libssl Libcrypto ")
+        self.titles.append("Add Libssl Libcrypto ")
+        self.pics.append(picfold + "AddLibssl.png")
+
+        list.append("Add Symlink Libssl Libcrypto ")
+        self.titles.append("Add Symlink Libssl ")
+        self.pics.append(picfold + "AddSymlink.png")
+
+        list.append("Ajpanel by AMAJamry ")
+        self.titles.append("Ajpanel AMAJamry ")
+        self.pics.append(picfold + "Ajpanel.png")
+
+        list.append("Biss Feed Autokey ")
+        self.titles.append("Biss Feed Autokey ")
+        self.pics.append(picfold + "BissFeedAutokey.png")
+
+        list.append("Chocholousek Picons ")
+        self.titles.append("Chocholousek Picons ")
+        self.pics.append(picfold + "ChocholousekPicons.png")
+
+        list.append("Add Dns Cloudfaire ")
+        self.titles.append("Dns Cloudfaire ")
+        self.pics.append(picfold + "DnsCloudfaire.png")
+
+        list.append("Add Dns Google ")
+        self.titles.append("Dns Google ")
+        self.pics.append(picfold + "DnsGoogle.png")
+
+        list.append("Add Dns Quad9 ")
+        self.titles.append("Dns Quad9 ")
+        self.pics.append(picfold + "DnsQuad9.png")
+
+        list.append("E2player by MOHAMED OS ")
+        self.titles.append("E2player MOHAMED ")
+        self.pics.append(picfold + "E2playerMOHAMED.png")
+
+        list.append("E2player by MAXBAMBY ")
+        self.titles.append("E2player MAXBAMBY ")
+        self.pics.append(picfold + "E2playerMAXBAMBY.png")
+
+        list.append("E2player by ZADMARIO ")
+        self.titles.append("E2player ZADMARIO ")
+        self.pics.append(picfold + "E2playerZADMARIO.png")
+
+        list.append("E2player by XXX ")
+        self.titles.append("E2player XXX ")
+        self.pics.append(picfold + "E2playerXXX.png")
+
+        list.append("History Zap Selector ")
+        self.titles.append("History Zap Selector ")
+        self.pics.append(picfold + "HistoryZapSelector.png")
+
+        list.append("iSetting E2 ")
+        self.titles.append("iSetting E2 ")
+        self.pics.append(picfold + "iSettingE2.png")
+
+        list.append("Levi45 Cam Manager ")
+        self.titles.append("Levi45 Manager ")
+        self.pics.append(picfold + "Levi45Manager.png")
+
+        list.append("Show Mountpoints ")
+        self.titles.append("Mountpoints ")
+        self.pics.append(picfold + "Mountpoints.png")
+
+        list.append("Multistalker By ZIKO ")
+        self.titles.append("Multistalker Ziko ")
+        self.pics.append(picfold + "Multistalker.png")
+
+        list.append("New VirtualKeyboard ")
+        self.titles.append("New VirtualKeyboard ")
+        self.pics.append(picfold + "NewVirtualKeyboard.png")
+
+        list.append("Quicksignal By Raed ")
+        self.titles.append("Quicksignal Raed ")
+        self.pics.append(picfold + "Quicksignal.png")
+
+        list.append("Send Emm TVS ")
+        self.titles.append("Send Emm ")
+        self.pics.append(picfold + "SendEmm.png")
+        
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("ServiceApp Exteplayer ")
+            self.titles.append("ServiceApp Exteplayer ")
+            self.pics.append(picfold + "serviceapp.png")
+
+        list.append("SubSupport Addon ")
+        self.titles.append("Subsupport addon ")
+        self.pics.append(picfold + "SubSupportAddon.png")
+
+        self.names = list
+        # test down
+        self.combined_data = zip(self.names, self.titles, self.pics)
+
+        self["frame"] = MovingPixmap()
+        i = 0
+        while i < 20:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+        self['info'] = Label()
+        self['info'].setText(_('Please Wait...'))
+        self['sort'] = Label(_('0 Sort'))
+        self['key_red'] = Label(_('Exit'))
+        self["pixmap"] = Pixmap()
+        self["actions"] = ActionMap(["OkCancelActions",
+                                     "MenuActions",
+                                     "DirectionActions",
+                                     "NumberActions",
+                                     'ColorActions',
+                                     "EPGSelectActions",
+                                     "InfoActions",],
+                                    {"ok": self.okbuttonClick,
+                                     "cancel": self.closeNonRecursive,
+                                     "exit": self.closeRecursive,
+                                     "back": self.closeNonRecursive,
+                                     "red": self.closeNonRecursive,
+                                     "0": self.list_sort,
+                                     "left": self.key_left,
+                                     "right": self.key_right,
+                                     "up": self.key_up,
+                                     "down": self.key_down,
+                                     "info": self.key_info,
+                                     "menu": self.closeRecursive})
+
+        ln = len(self.names)
+        self.npage = int(float(ln / 20)) + 1
+        self.index = 0
+        self.maxentry = len(list) - 1
+        self.ipage = 1
+        self.onLayoutFinish.append(self.openTest)
+
+    def list_sort(self):
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        # test up
+        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        # print("Lista ordinata:", sorted_list)
+        # print("Titoli ordinati:", sorted_titles)
+        # print("Immagini ordinate:", sorted_pics)
+        # self.combined_data = sorted_data
+        self.names = sorted_list
+        self.titles = sorted_titles
+        self.pics = sorted_pics
+
+        self.openTest()
+
+    def paintFrame(self):
+        try:
+            self.idx = self.index
+            name = self.names[self.idx]
+            self['info'].setText(str(name))
+            # information
+            ifr = self.index - (20 * (self.ipage - 1))
+            ipos = self.pos[ifr]
+            self["frame"].moveTo(ipos[0], ipos[1], 1)
+            self["frame"].startMoving()
+        except Exception as e:
+            print('error  in paintframe: ', e)
+
+    def openTest(self):
+        if self.ipage < self.npage:
+            self.maxentry = (20 * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * 20
+
+        elif self.ipage == self.npage:
+            self.maxentry = len(self.pics) - 1
+            self.minentry = (self.ipage - 1) * 20
+            i1 = 0
+            while i1 < 20:
+                self["label" + str(i1 + 1)].setText(" ")
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                i1 += 1
+        self.npics = len(self.pics)
+        i = 0
+        i1 = 0
+        self.picnum = 0
+        ln = self.maxentry - (self.minentry - 1)
+        while i < ln:
+            idx = self.minentry + i
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            pic = self.pics[idx]
+            if not os.path.exists(self.pics[idx]):
+                pic = blpic
+            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+            i += 1
+        self.index = self.minentry
+        self.paintFrame()
+
+    def key_left(self):
+        if not self.index <= 0:
+            self.index -= 1
+        self.paintFrame()
+
+    def key_right(self):
+        i = self.npics - 1
+        if self.index == i:
+            self.index = 0
+            self.ipage = 1
+            self.openTest()
+        self.index += 1
+        if self.index > self.maxentry:
+            self.key_down()
+        else:
+            self.paintFrame()
+
+    def key_up(self):
+        self.index = self.index - 5
+        if self.index < (self.minentry):
+            if self.ipage > 1:
+                self.ipage = self.ipage - 1
+                self.openTest()
+            elif self.ipage == 1:
+                return
+            else:
+                self.index = 0
+            self.paintFrame()
+        else:
+            self.paintFrame()
+
+    def key_down(self):
+        self.index = self.index + 5
+        if self.index > (self.maxentry):
+            if self.ipage < self.npage:
+                self.ipage = self.ipage + 1
+                self.openTest()
+            elif self.ipage == self.npage:
+                self.index = 0
+                self.ipage = 1
+                self.openTest()
+            else:
+                self.paintFrame()
+        else:
+            self.paintFrame()
+
+    def keyNumberGlobal(self, number):
+        number -= 1
+        if len(self["menu"].list) > number:
+            self["menu"].setIndex(number)
+            self.okbuttonClick()
+
+    def closeNonRecursive(self):
+        self.close(False)
+
+    def closeRecursive(self):
+        self.close(True)
+
+    def createSummary(self):
+        return
+
+    def key_info(self):
+        self.session.open(LSinfo, " Information ")
+
+    def okbuttonClick(self):
+        self.idx = self.index
+        if self.idx is None:
+            return
+
+        self.namev = self.names[self.idx]
+
+        if 'ajpanel' in self.namev.lower():
+            self.url = 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -qO - | /bin/sh'
+
+        if 'mohamed' in self.namev.lower():
+            self.url = 'wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -qO - | /bin/sh'
+
+        if 'maxbambi' in self.namev.lower():
+            self.url = 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -qO - | bash'
+
+        if 'zadmario' in self.namev.lower():
+            self.url = 'wget -qO- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -qO - | bash'
+
+        if 'xxx' in self.namev.lower():
+            self.url = 'wget -qO- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -qO - | bash'
+
+        if 'multistalker' in self.namev.lower():
+            self.url = 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh'
+
+        if 'quicksignal' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -qO - | bash'
+
+        if 'emm' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -qO - | bash'
+
+        if 'libcrypto' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -qO - | bash'
+
+        if 'libcrypto' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -qO - | bash'
+
+        if 'keys upd' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -qO - | bash'
+
+        if 'bissfeed' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -qO - | bash'
+
+        if 'bissfeed' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -qO - | bash'
+
+        if 'dns google' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -qO - | bash'
+
+        if 'couldfire' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -qO - | bash'
+
+        if 'quad9' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -qO - | bash'
+
+        if 'levi45' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -qO - | bash'
+
+        if 'mountpoint' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -qO - | bash'
+
+        if 'history zap' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -qO - | bash'
+
+        if 'isetting' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -qO - | bash'
+
+        if 'virtualkeyb' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/newvirtualkeyboard.sh?inline=false" -qO - | bash'
+
+        if 'subsupport' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
+
+        if 'serviceapp' in self.namev.lower():
+            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
+            self.url = 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp'
+
+
+        self.session.openWithCallback(self.okClicked,
+                                      MessageBox, _("Do you want to install %s?") % self.namev,
+                                      MessageBox.TYPE_YESNO)
+
+    def okClicked(self, answer=False):
+        if answer:
+            title = (_("Executing %s\nPlease Wait...") % self.namev)
+            self.session.open(lsConsole, _(title), [self.url], closeOnSuccess=False)
+
+
 class addInstall(Screen):
 
     def __init__(self, session, data, name, dest):
@@ -1208,11 +1632,16 @@ class addInstall(Screen):
         self['key_yellow'].hide()
         self['key_blue'].hide()
         self['key_green'].hide()
-
+        self['sort'] = Label()
+        if HALIGN == RT_HALIGN_RIGHT:
+            self['sort'].setText(_('0 Halign Left'))
+        else:
+            self['sort'].setText(_('0 Halign Right'))
         self.LcnOn = False
         if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].show()
+            self['key_yellow'].hide()
             self['key_yellow'] = Button('Lcn')
+            self['key_yellow'].show()
             self.LcnOn = True
             print('LcnOn = True')
 
@@ -1247,9 +1676,15 @@ class addInstall(Screen):
         global HALIGN
         if HALIGN == RT_HALIGN_LEFT:
             HALIGN = RT_HALIGN_RIGHT
+            self['sort'].setText(_('0 Halign Left'))
         elif HALIGN == RT_HALIGN_RIGHT:
             HALIGN = RT_HALIGN_LEFT
-        self.openTest()
+            self['sort'].setText(_('0 Halign Right'))
+        # self.openTest()
+        if self.dest is not None:
+            self.downxmlpage()
+        else:
+            self.openTest()
 
     def getfreespace(self):
         try:
@@ -1277,9 +1712,27 @@ class addInstall(Screen):
             self.names.append(name)
             self.urls.append(url)
         LPshowlist(self.names, self["list"])
+        self.buttons()
+
+    def buttons(self):
+        if HALIGN == RT_HALIGN_RIGHT:
+            self['sort'].setText(_('0 Halign Left'))
+        else:
+            self['sort'].setText(_('0 Halign Right'))
+        self.LcnOn = False
+        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+            self['key_yellow'].hide()
+            self['key_yellow'] = Button('Lcn')
+            # self['key_yellow'].show()
+            self.LcnOn = True
+            print('LcnOn = True')
+        # else:
+            # self['key_yellow'].hide()
+            # self['key_yellow'] = Button(_('Remove'))
         self['key_green'].show()
         self['key_yellow'].show()
         self['key_blue'].show()
+        return
 
     def message(self):
         if self.dest is not None:
@@ -1339,7 +1792,6 @@ class addInstall(Screen):
             folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
                 print('folddest:', folddest)
-                # print('cmd1=', cmd1)
                 cmd2 = ''
                 if ".deb" in self.plug:
                     cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
@@ -1476,12 +1928,14 @@ class addInstall(Screen):
                     continue
                 self.names.append(name.strip())
                 self.urls.append(url.strip())
-
+            self['key_yellow'].hide()
             self['key_green'].show()
             LPshowlist(self.names, self["list"])
+            # self.buttons()
         except Exception as e:
             print('downxmlpage get failed: ', str(e))
             self['info'].setText(_('Download page get failed ...'))
+        
 
     def Lcn(self):
         setx = 0
@@ -1505,7 +1959,6 @@ class addInstall(Screen):
         dest = "/tmp/settings.zip"
         if answer:
             global setx
-            # setx = 0
             if self.downloading is True:
                 idx = self["list"].getSelectionIndex()
                 url = self.urls[idx]
@@ -1592,8 +2045,11 @@ class addInstall(Screen):
             self.session.open(TryQuitMainloop, 3)
 
     def exitnow(self):
-        if not os.path.exists('/var/lib/dpkg/info'):
-            refreshPlugins()
+        try:
+            if not os.path.exists('/var/lib/dpkg/info'):
+                refreshPlugins()
+        except Exception as e:
+            print('error on exit!', e)
         self.close()
 
 
@@ -1781,6 +2237,7 @@ class LSinfo(Screen):
             info += 'Designs and Graphics by @oktus\n'
             info += 'Support on: Linuxsat-support.com\n\n'
             info += 'Current IP Wan: %s\nImage: %sCpu: %s\nPython Version: %s\nArch. Info: %s\nLibssl(oscam):\n%s\n' % (ifg, img, arc, python, arkFull, libsssl)
+            info += checkGZIP(infourl)
         except Exception as e:
             print("Error ", e)
             info = checkGZIP(infourl)
@@ -1897,6 +2354,7 @@ class startLP(Screen):
         return
 
 
+'''
 def checkGZIP(url):
     url = url
     from io import StringIO
@@ -1934,6 +2392,7 @@ def checkGZIP(url):
     return None
 
 
+
 def b64decoder(s):
     s = str(s).strip()
     import base64
@@ -1959,6 +2418,7 @@ def b64decoder(s):
         if PY3:
             output = output.decode('utf-8')
         return output
+'''
 
 
 def menustart():

@@ -32,5 +32,19 @@ Support on:
 linuxsat-support.com
 |======================================================================
 
-<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/screenshot.png">
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/1.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/2.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/3.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/4.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/5.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/6.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/7.png">
+
+<img src="https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/screenshot/8.png">
 
