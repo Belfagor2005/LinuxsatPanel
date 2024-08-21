@@ -17,9 +17,9 @@ from . import (
     isWQHD,
     isFHD,
     isHD,
+    RequestUrl,
     lngx,
     refreshPlugins,
-    wgetsts,
     xmlurl,
     HALIGN,
 )
@@ -102,12 +102,6 @@ if sys.version_info >= (2, 7, 9):
         sslContext = ssl._create_unverified_context()
     except:
         sslContext = None
-
-
-try:
-    wgetsts()
-except:
-    pass
 
 
 def ssl_urlopen(url):
@@ -1352,7 +1346,15 @@ class ScriptInstaller(Screen):
         list.append("Send Emm TVS ")
         self.titles.append("Send Emm ")
         self.pics.append(picfold + "SendEmm.png")
-        
+
+        list.append("Send Cline -> CCcam.cfg ")
+        self.titles.append("Send CCcline CCcam ")
+        self.pics.append(picfold + "cccamfreee.png")
+
+        list.append("Send Cline -> oscam.server ")
+        self.titles.append("Send CCcline Oscam ")
+        self.pics.append(picfold + "oscamfree.png")
+
         if not os.path.exists('/var/lib/dpkg/info'):
             list.append("ServiceApp Exteplayer ")
             self.titles.append("ServiceApp Exteplayer ")
@@ -1602,6 +1604,15 @@ class ScriptInstaller(Screen):
             # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
             self.url = 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp'
 
+        if 'cccam.cfg' in self.namev.lower():
+            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
+            self.getcl()
+            return
+
+        if 'oscam.serv' in self.namev.lower():
+            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
+            self.getclsc()
+            return
 
         self.session.openWithCallback(self.okClicked,
                                       MessageBox, _("Do you want to install %s?") % self.namev,
@@ -1611,6 +1622,101 @@ class ScriptInstaller(Screen):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
             self.session.open(lsConsole, _(title), [self.url], closeOnSuccess=False)
+
+    def getcl(self):
+        dest = '/etc/CCcam.cfg'
+        if not fileExists(dest):
+            import shutil
+            shutil.copy2(plugin_path + '/sh/CCcam.cfg', '/etc')
+            self.session.open(MessageBox, _('File not found /etc/CCcam.cfg!\nRestart please...'), type=MessageBox.TYPE_INFO, timeout=8)
+            return
+        os.chmod(dest, 0o755)
+        try:
+            dat = RequestUrl()
+            data = checkGZIP(dat)
+            import re
+            if PY3:
+                import six
+                data = six.ensure_str(data)
+
+            if 'bosscccam' in data.lower():
+                url1 = re.findall(r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>', data)
+
+            elif '15days' in data.lower():
+                url1 = re.findall(r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', data)
+
+            elif 'cccamia' in data:
+                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            elif 'freecccam' in data:
+                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            else:
+                url1 = re.findall(r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            for h, p, u, pw in url1:
+                print(h, p, u, pw)
+                host = 'C: ' + str(h)
+                port = str(p)
+                user = str(u)
+                pasw = str(pw).replace('</h1>', '').replace('</div>', '')
+
+                with open(dest, 'a') as cfgdok:
+                    cfgdok.write('\n' + host + ' ' + port + ' ' + user + ' ' + pasw + '\n')
+
+            self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
+        except Exception as e:
+            print('error on host', str(e))
+
+    def getclsc(self):
+        dest1 = '/etc/tuxbox/config'
+        if not os.path.exists(dest1):
+            os.system('mkdir /etc/tuxbox/config')
+        # os.chmod(dest, 0o755)
+        dest = '/etc/tuxbox/config/oscam.server'        
+        if not fileExists(dest):
+            import shutil
+            shutil.copy2(plugin_path + '/sh/oscam.server', dest)
+            self.session.open(MessageBox, _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...'), type=MessageBox.TYPE_INFO, timeout=8)
+            return
+        try:
+            dat = RequestUrl()
+            data = checkGZIP(dat)
+            import re
+            if PY3:
+                import six
+                data = six.ensure_str(data)
+
+            if 'bosscccam' in data.lower():
+                url1 = re.findall(r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>', data)
+
+            elif '15days' in data.lower():
+                url1 = re.findall(r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', data)
+
+            elif 'cccamia' in data:
+                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            elif 'freecccam' in data:
+                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            else:
+                url1 = re.findall(r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+
+            for h, p, u, pw in url1:
+                print(h, p, u, pw)
+                host = 'C: ' + str(h)
+                port = str(p)
+                user = str(u)
+                pasw = str(pw).replace('</h1>', '').replace('</div>', '')
+
+                with open(dest, 'a') as cfgdok:
+                    cfgdok.write('\n[reader]\nlabel = Server_' + host + '\nenable= 1\nprotocol = cccam\ndevice = ' + host + ',' + port + '\nuser = ' + user + '\npassword = ' + pasw + '\ninactivitytimeout = 30\ngroup = 3\ncccversion = 2.2.1\ncccmaxhops = 0\nccckeepalive = 1\naudisabled = 1\n\n')
+
+            self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
+        except Exception as e:
+            print('error on host', str(e))
+            
+
 
 
 class addInstall(Screen):
@@ -1935,7 +2041,6 @@ class addInstall(Screen):
         except Exception as e:
             print('downxmlpage get failed: ', str(e))
             self['info'].setText(_('Download page get failed ...'))
-        
 
     def Lcn(self):
         setx = 0

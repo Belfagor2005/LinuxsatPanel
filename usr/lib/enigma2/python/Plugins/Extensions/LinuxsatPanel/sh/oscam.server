@@ -1,0 +1,94 @@
+####################### SoftCams ############################
+[reader]
+label                         = constant.cw
+protocol                      = constcw
+device                        = /etc/tuxbox/config/constant.cw
+caid                          = 2600,0B00,0B02,0500,0963,06AD,0940
+group                         = 1
+disablecrccws_only_for        = 0E00:000000
+
+[reader]
+label                         = emulator
+protocol                      = emu
+device                        = /etc/tuxbox/config/SoftCam.key
+services                      = !afn
+disablecrccws_only_for        = 0E00:000000
+caid                          = 0500,0604,090F,0E00,1010,1801,2600,2602,2610,4AE1
+detect                        = cd
+ident                         = 0500:000000,007400,007800,021110,023800;0604:000000;090F:000000;0E00:000000;1010:000000;1801:000000,001101,002111,007301;2600:000000;2602:000000;2610:000000;4AE1:000011,000014,0000FE
+group                         = 1
+emmcache                      = 2,1,2,1
+emu_auproviders               = 0604:010200;0E00:000000;1010:000000;2610:000000;4AE1:000011,000014,0000FE
+
+####################### TVSAT Config settings ############################
+[reader]
+label                         = Tvsat4K_1856
+protocol                      = internal
+device                        = /dev/sci0
+caid                          = 1856
+mod1                          = F4BFC723D85D3999A047DA06BE0C6BF8DE718044723DD2D5DC43CBCBCF93EB5EEDB420E93B9663C46297F07CD2C051BBBC3C15615B9734085973E25886094E975BDE772BCF2E161C10BFB9529523DFB89A23951750A6618F5B8726F441AFAA6BFCBB80D71AE217E9BE041B8341E9FC59
+idird                         = FFFFFFFF
+mod2                          = 892E233D29F3D5EBBB5CFD35ECBB47D1B1E1AE0070CD576B9863B880B35DC470FFCFC83D93DF0CC1AB878C19CCBA1C90EF3570BB23394D1BDC6F477A2B1A4A0AB8800DCE71D011C2D2C117CA7A81885FFC54E9E63C464037879516AD464F1B1A9154A4BF9B9C003CA753D0060FD91B59
+key3588                       = 420877DE3A12F78E7DE2FA84CD4FD7FC5102E557AD02B04755FC66F22B9ED8ED84865B80AF80216FD2A4F031C4FA25978A9EFD92E733279289CACF5FBE7FF70C9075E68D7635B8B777B6AE4B4CEF34695B035796680619D37FF9534EF8FA730C29C339327F6BCBEB4DA3939ED11F117DD01796F49687C32C0BFC146CC23B5A30E83E95575ECB5F8A
+data50                        = B6711C868C3EE72533A4E08C1364B83AEEFDEBE9FB54156A8776D872CBC41FF2E5EA2CBAF4F26A58C521EC53E310FC494354E49ECE6CD0F9631B724FAB0C8BAEC1F66C346AD2DB1CB3871AF44C1E1592
+mod50                         = DB9E1F1BD23C6153444E444D8E6C471E162EC63C599D44F476E0D40C3840E0FDB7B63D174DD73B575543983F2F2DFB94E3644958AE642C91636A6BE55528478EB7A422479598C68E6F1FC9D647BBC4D5
+detect                        = cd
+nagra_read                    = 1
+mhz                           = 500
+group                         = 1
+emmcache                      = 1,2,3,0
+saveemm-unknown               = 1
+saveemm-u                     = 1
+saveemm-s                     = 1
+saveemm-g                     = 1
+deprecated                    = 1
+
+
+
+####################### AFN Config settings ############################
+
+[reader]
+label                         = AFN
+description                   = AFN-EMU
+enable                        = 1
+protocol                      = emu
+device                        = emulator
+caid                          = 0E00
+detect                        = cd
+group                         = 1
+emmcache                      = 1,5,31,1
+emu_auproviders               = 0E00:000000
+auprovid                      = 000E00
+cacheex                       = 1
+cacheex_maxhop                = 1
+cacheex_allow_request         = 1
+services                      = afn
+disablecrccws_only_for        = 0E00:000000
+
+####################### CCcam ############################
+[reader]
+label						= tivusat_card
+protocol					= internal
+device						= /dev/sci0
+services					= tivusat
+lb_whitelist_services		= tivusat
+caid						= 183E,183D
+boxkey						= 34972384
+rsakey						= A92DA72FEEACF2947B003ED652153B189E4043B0138C368BDF6B9ED77DDAD6C0761A2198AEB3FC97A19C9D01CA769B3FFFE4F6E70FA4E0696A8980E18D8C58E11D817121346E3E66457FDD84CFA72589B25B538EFC304361B54845F39E9EFA52D805E5FD86B595B366C35716ABC91FA3DC159C9F4D8164B5
+ecmwhitelist				= 183E@1F1F1F:8C,B7,91;183D@1F1F1F:8C,B7,91
+ecmheaderwhitelist			= 80308ED387,81308ED387
+detect						= cd
+nagra_read					= 1
+mhz							= 450
+cardmhz						= 2700
+ident						= 183E:000000,005411;183D:000000,005411
+group						= 1
+emmcache					= 1,1,2,0
+blockemm-unknown			= 1
+inactivitytimeout			= 30
+group						= 3
+cccversion					= 2.2.1
+cccmaxhops					= 0
+ccckeepalive				= 1
+audisabled					= 1
+
