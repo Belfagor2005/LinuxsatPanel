@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-07-28 15:59+0200\n"
+"POT-Creation-Date: 2024-08-20 22:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -14,44 +14,76 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1198
+#: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
+#: plugin.py:2067
 msgid "Please Wait..."
 msgstr "Proszę czekać..."
 
-#: plugin.py:869
+#: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
+msgid "0 Sort"
+msgstr "0 Sort"
+
+#: plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378 plugin.py:1628
 msgid "Exit"
 msgstr "Wyjście"
 
-#: plugin.py:870
-msgid "Install"
-msgstr "Instaluj"
+#: plugin.py:614
+msgid ""
+"These Panel may contain Adult content\n"
+"\n"
+"are you sure you want to continue?"
+msgstr ""
+"Ten Panel może zawierać treści dla dorosłych\n"
+"\n"
+"czy na pewno chcesz kontynuować?"
 
-#: plugin.py:871
-msgid "Remove"
-msgstr "Usuń"
-
-#: plugin.py:872
-msgid "Restart enigma"
-msgstr "Ponowne uruchomienie enigmy"
-
-#: plugin.py:889
-msgid "Load Category..."
-msgstr "Załaduj kategorię..."
-
-#: plugin.py:913
-msgid "Category: "
-msgstr "Kategoria: "
-
-#: plugin.py:946 plugin.py:956
-msgid "Unknow Image!"
-msgstr "Nieznany obraz!"
-
-#: plugin.py:968
+#: plugin.py:1607 plugin.py:1772
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Czy chcesz zainstalować %s?"
 
-#: plugin.py:988 plugin.py:1142
+#: plugin.py:1612
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+"Wykonywanie %s\n"
+"Proszę czekać..."
+
+#: plugin.py:1629
+msgid "Install"
+msgstr "Instaluj"
+
+#: plugin.py:1630
+msgid "Remove"
+msgstr "Usuń"
+
+#: plugin.py:1631
+msgid "Restart enigma"
+msgstr "Ponowne uruchomienie enigmy"
+
+#: plugin.py:1637 plugin.py:1679 plugin.py:1719
+msgid "0 Halign Left"
+msgstr "0 Wyrównywać po lewej"
+
+#: plugin.py:1639 plugin.py:1682 plugin.py:1721
+msgid "0 Halign Right"
+msgstr "0 Wyrównywać w prawo"
+
+#: plugin.py:1653
+msgid "Load Category..."
+msgstr "Załaduj kategorię..."
+
+#: plugin.py:1691
+msgid "Category: "
+msgstr "Kategoria: "
+
+#: plugin.py:1750 plugin.py:1760
+msgid "Unknow Image!"
+msgstr "Nieznany obraz!"
+
+#: plugin.py:1810 plugin.py:1992
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -60,51 +92,90 @@ msgstr ""
 "Instalowanie %s\n"
 "Proszę czekać..."
 
-#: plugin.py:1083
+#: plugin.py:1937
 msgid "Download page get failed ..."
 msgstr "Strona pobierania nie powiodła się..."
 
-#: plugin.py:1093
+#: plugin.py:1948
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Sortowanie kanałów naziemnych według reguł Lcn zostało zakończone"
 
-#: plugin.py:1100
+#: plugin.py:1955
 msgid "Do you want to install?"
 msgstr "Czy chcesz zainstalować?"
 
-#: plugin.py:1148
+#: plugin.py:2003
 msgid "Settings Not Installed ..."
 msgstr "Ustawienia nie zostały zainstalowane..."
 
-#: plugin.py:1159
+#: plugin.py:2020
 msgid "Do you want to remove?"
 msgstr "Czy chcesz usunąć?"
 
-#: plugin.py:1173
+#: plugin.py:2034
 #, python-format
 msgid "Removing %s"
 msgstr "Usuwanie %s"
 
-#: plugin.py:1179
+#: plugin.py:2040
 msgid "Do you want to restart Gui Interface?"
 msgstr "Czy chcesz ponownie uruchomić interfejs Gui?"
 
-#: plugin.py:1231
+#: plugin.py:2070
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: plugin.py:2140
+#, python-format
+msgid ""
+"New version %s is available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Press green button to start updating"
+msgstr ""
+"Dostępna jest nowa wersja %s\n"
+"\n"
+"Dziennik zmian: %s\n"
+"\n"
+"Naciśnij zielony przycisk, aby rozpocząć aktualizację"
+
+#: plugin.py:2146
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"Dostępna jest nowa wersja %s.\n"
+"\n"
+"Lista zmian: %s \n"
+"\n"
+"Czy chcesz go teraz zainstalować?"
+
+#: plugin.py:2149
+msgid "Congrats! You already have the latest version..."
+msgstr "Gratulacje! Masz już najnowszą wersję..."
+
+#: plugin.py:2159
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Czy chcesz teraz zainstalować aktualizację (%s)?"
+
+#: plugin.py:2166
+msgid "Update Aborted!"
+msgstr "Aktualizacja przerwana!"
+
+#: plugin.py:2185
 msgid "Unable to download updates!"
 msgstr "Nie można pobrać aktualizacji!"
 
-#: plugin.py:1351 plugin.py:1355
-msgid "Free Space:"
-msgstr "Wolna przestrzeń:"
-
-#: plugin.py:1351 plugin.py:1355
-msgid "of"
-msgstr "z"
-
-#: plugin.py:1366
+#: plugin.py:2433
 msgid "Check Connection!"
 msgstr "Sprawdź połączenie!"
 
-#: plugin.py:1390
+#: plugin.py:2454
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"

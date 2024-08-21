@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-07-28 15:59+0200\n"
+"POT-Creation-Date: 2024-08-20 22:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -14,44 +14,76 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1198
+#: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
+#: plugin.py:2067
 msgid "Please Wait..."
 msgstr "Kérem várjon..."
 
-#: plugin.py:869
+#: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
+msgid "0 Sort"
+msgstr "0 Rendezés"
+
+#: plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378 plugin.py:1628
 msgid "Exit"
 msgstr "Kilépés"
 
-#: plugin.py:870
-msgid "Install"
-msgstr "Telepítés"
+#: plugin.py:614
+msgid ""
+"These Panel may contain Adult content\n"
+"\n"
+"are you sure you want to continue?"
+msgstr ""
+"Ezek a panelek felnőtteknek szóló tartalmat tartalmazhatnak\n"
+"\n"
+"biztos, hogy folytatni akarod?"
 
-#: plugin.py:871
-msgid "Remove"
-msgstr "Eltávolítás"
-
-#: plugin.py:872
-msgid "Restart enigma"
-msgstr "Enigma újraindítása"
-
-#: plugin.py:889
-msgid "Load Category..."
-msgstr "Kategória betöltése..."
-
-#: plugin.py:913
-msgid "Category: "
-msgstr "Kategória: "
-
-#: plugin.py:946 plugin.py:956
-msgid "Unknow Image!"
-msgstr "Ismeretlen kép!"
-
-#: plugin.py:968
+#: plugin.py:1607 plugin.py:1772
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Telepíteni szeretné a következőt: %s?"
 
-#: plugin.py:988 plugin.py:1142
+#: plugin.py:1612
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+"%s végrehajtása\n"
+"Kérem, várjon..."
+
+#: plugin.py:1629
+msgid "Install"
+msgstr "Telepítés"
+
+#: plugin.py:1630
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#: plugin.py:1631
+msgid "Restart enigma"
+msgstr "Enigma újraindítása"
+
+#: plugin.py:1637 plugin.py:1679 plugin.py:1719
+msgid "0 Halign Left"
+msgstr "0 Balra igazítás"
+
+#: plugin.py:1639 plugin.py:1682 plugin.py:1721
+msgid "0 Halign Right"
+msgstr "0 Igazítás jobbra"
+
+#: plugin.py:1653
+msgid "Load Category..."
+msgstr "Kategória betöltése..."
+
+#: plugin.py:1691
+msgid "Category: "
+msgstr "Kategória: "
+
+#: plugin.py:1750 plugin.py:1760
+msgid "Unknow Image!"
+msgstr "Ismeretlen kép!"
+
+#: plugin.py:1810 plugin.py:1992
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -60,51 +92,90 @@ msgstr ""
 "%s telepítése\n"
 "Kérlek várj..."
 
-#: plugin.py:1083
+#: plugin.py:1937
 msgid "Download page get failed ..."
 msgstr "Az oldal letöltése sikertelen..."
 
-#: plugin.py:1093
+#: plugin.py:1948
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Földfelszíni csatornák rendezése Lcn szabályokkal kész"
 
-#: plugin.py:1100
+#: plugin.py:1955
 msgid "Do you want to install?"
 msgstr "Szeretné telepíteni?"
 
-#: plugin.py:1148
+#: plugin.py:2003
 msgid "Settings Not Installed ..."
 msgstr "A beállítások nincsenek telepítve..."
 
-#: plugin.py:1159
+#: plugin.py:2020
 msgid "Do you want to remove?"
 msgstr "El szeretné távolítani?"
 
-#: plugin.py:1173
+#: plugin.py:2034
 #, python-format
 msgid "Removing %s"
 msgstr "%s eltávolítása"
 
-#: plugin.py:1179
+#: plugin.py:2040
 msgid "Do you want to restart Gui Interface?"
 msgstr "Szeretné újraindítani a Gui Interface-t?"
 
-#: plugin.py:1231
+#: plugin.py:2070
+msgid "Update"
+msgstr "Frissítés"
+
+#: plugin.py:2140
+#, python-format
+msgid ""
+"New version %s is available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Press green button to start updating"
+msgstr ""
+"Új verzió (%s) elérhető\n"
+"\n"
+"Változásnapló: %s\n"
+"\n"
+"Nyomja meg a zöld gombot a frissítés elindításához"
+
+#: plugin.py:2146
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"Új verzió (%s) elérhető.\n"
+"\n"
+"Változásnapló: %s \n"
+"\n"
+"Most szeretné telepíteni?"
+
+#: plugin.py:2149
+msgid "Congrats! You already have the latest version..."
+msgstr "Gratula! Már megvan a legújabb verzió..."
+
+#: plugin.py:2159
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Szeretné most telepíteni a frissítést (%s)?"
+
+#: plugin.py:2166
+msgid "Update Aborted!"
+msgstr "Frissítés megszakítva!"
+
+#: plugin.py:2185
 msgid "Unable to download updates!"
 msgstr "Nem sikerült letölteni a frissítéseket!"
 
-#: plugin.py:1351 plugin.py:1355
-msgid "Free Space:"
-msgstr "Szabad hely:"
-
-#: plugin.py:1351 plugin.py:1355
-msgid "of"
-msgstr "/"
-
-#: plugin.py:1366
+#: plugin.py:2433
 msgid "Check Connection!"
 msgstr "Ellenőrizze a kapcsolatot!"
 
-#: plugin.py:1390
+#: plugin.py:2454
 msgid "Linuxsat Panel"
 msgstr "Linuxsat panel"

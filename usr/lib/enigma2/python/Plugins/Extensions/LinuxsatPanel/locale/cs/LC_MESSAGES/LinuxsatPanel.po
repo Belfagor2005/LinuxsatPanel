@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-07-28 15:59+0200\n"
+"POT-Creation-Date: 2024-08-20 22:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -14,44 +14,76 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:412 plugin.py:680 plugin.py:887 plugin.py:1198
+#: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
+#: plugin.py:2067
 msgid "Please Wait..."
 msgstr "Prosím, čekej…"
 
-#: plugin.py:869
+#: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
+msgid "0 Sort"
+msgstr "0 Seřadit"
+
+#: plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378 plugin.py:1628
 msgid "Exit"
 msgstr "Odejít"
 
-#: plugin.py:870
-msgid "Install"
-msgstr "Instalovat"
+#: plugin.py:614
+msgid ""
+"These Panel may contain Adult content\n"
+"\n"
+"are you sure you want to continue?"
+msgstr ""
+"Tyto panely mohou obsahovat obsah pro dospělé\n"
+"\n"
+"jsi si jistý, že chceš pokračovat?"
 
-#: plugin.py:871
-msgid "Remove"
-msgstr "Odstranit"
-
-#: plugin.py:872
-msgid "Restart enigma"
-msgstr "Restartujte enigmu"
-
-#: plugin.py:889
-msgid "Load Category..."
-msgstr "Načíst kategorii..."
-
-#: plugin.py:913
-msgid "Category: "
-msgstr "Kategorie: "
-
-#: plugin.py:946 plugin.py:956
-msgid "Unknow Image!"
-msgstr "Neznámý obrázek!"
-
-#: plugin.py:968
+#: plugin.py:1607 plugin.py:1772
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Chcete nainstalovat %s?"
 
-#: plugin.py:988 plugin.py:1142
+#: plugin.py:1612
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+"Probíhá %s\n"
+"Čekejte prosím..."
+
+#: plugin.py:1629
+msgid "Install"
+msgstr "Instalovat"
+
+#: plugin.py:1630
+msgid "Remove"
+msgstr "Odstranit"
+
+#: plugin.py:1631
+msgid "Restart enigma"
+msgstr "Restartujte enigmu"
+
+#: plugin.py:1637 plugin.py:1679 plugin.py:1719
+msgid "0 Halign Left"
+msgstr "0 Zarovnat vlevo"
+
+#: plugin.py:1639 plugin.py:1682 plugin.py:1721
+msgid "0 Halign Right"
+msgstr "0 Zarovnat vpravo"
+
+#: plugin.py:1653
+msgid "Load Category..."
+msgstr "Načíst kategorii..."
+
+#: plugin.py:1691
+msgid "Category: "
+msgstr "Kategorie: "
+
+#: plugin.py:1750 plugin.py:1760
+msgid "Unknow Image!"
+msgstr "Neznámý obrázek!"
+
+#: plugin.py:1810 plugin.py:1992
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -60,51 +92,90 @@ msgstr ""
 "Instalace aplikace %s\n"
 "Prosím, čekejte..."
 
-#: plugin.py:1083
+#: plugin.py:1937
 msgid "Download page get failed ..."
 msgstr "Stahování stránky se nezdařilo..."
 
-#: plugin.py:1093
+#: plugin.py:1948
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Třídění pozemních kanálů s pravidly Lcn Dokončeno"
 
-#: plugin.py:1100
+#: plugin.py:1955
 msgid "Do you want to install?"
 msgstr "Chcete nainstalovat?"
 
-#: plugin.py:1148
+#: plugin.py:2003
 msgid "Settings Not Installed ..."
 msgstr "Nastavení není nainstalováno..."
 
-#: plugin.py:1159
+#: plugin.py:2020
 msgid "Do you want to remove?"
 msgstr "Chcete odstranit?"
 
-#: plugin.py:1173
+#: plugin.py:2034
 #, python-format
 msgid "Removing %s"
 msgstr "Odebírání %s"
 
-#: plugin.py:1179
+#: plugin.py:2040
 msgid "Do you want to restart Gui Interface?"
 msgstr "Chcete restartovat rozhraní Gui?"
 
-#: plugin.py:1231
+#: plugin.py:2070
+msgid "Update"
+msgstr "Aktualizovat"
+
+#: plugin.py:2140
+#, python-format
+msgid ""
+"New version %s is available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Press green button to start updating"
+msgstr ""
+"K dispozici je nová verze %s\n"
+"\n"
+"Seznam změn: %s\n"
+"\n"
+"Stisknutím zeleného tlačítka zahájíte aktualizaci"
+
+#: plugin.py:2146
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"K dispozici je nová verze %s.\n"
+"\n"
+"Seznam změn: %s \n"
+"\n"
+"Chcete jej nainstalovat nyní?"
+
+#: plugin.py:2149
+msgid "Congrats! You already have the latest version..."
+msgstr "Gratuluji! Už máte nejnovější verzi..."
+
+#: plugin.py:2159
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Chcete nyní nainstalovat aktualizaci ( %s )?"
+
+#: plugin.py:2166
+msgid "Update Aborted!"
+msgstr "Aktualizace zrušena!"
+
+#: plugin.py:2185
 msgid "Unable to download updates!"
 msgstr "Aktualizace nelze stáhnout!"
 
-#: plugin.py:1351 plugin.py:1355
-msgid "Free Space:"
-msgstr "Volné místo:"
-
-#: plugin.py:1351 plugin.py:1355
-msgid "of"
-msgstr "ze"
-
-#: plugin.py:1366
+#: plugin.py:2433
 msgid "Check Connection!"
 msgstr "Zkontrolujte připojení!"
 
-#: plugin.py:1390
+#: plugin.py:2454
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"

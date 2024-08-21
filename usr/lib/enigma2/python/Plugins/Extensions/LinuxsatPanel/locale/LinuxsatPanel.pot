@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-20 22:48+0200\n"
+"POT-Creation-Date: 2024-08-21 12:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -13,6 +13,30 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
+"X-Poedit-SearchPath-1: lsConsole.py\n"
+
+#: lsConsole.py:56
+msgid "Cancel"
+msgstr ""
+
+#: lsConsole.py:57
+msgid "Hide/Show"
+msgstr ""
+
+#: lsConsole.py:58
+msgid "Restart"
+msgstr ""
+
+#: lsConsole.py:90
+msgid ""
+"Execution progress\n"
+"\n"
+msgstr ""
+
+#: lsConsole.py:122 plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378
+#: plugin.py:1628
+msgid "Exit"
+msgstr ""
 
 #: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
 #: plugin.py:2067
@@ -21,10 +45,6 @@ msgstr ""
 
 #: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
 msgid "0 Sort"
-msgstr ""
-
-#: plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378 plugin.py:1628
-msgid "Exit"
 msgstr ""
 
 #: plugin.py:614
