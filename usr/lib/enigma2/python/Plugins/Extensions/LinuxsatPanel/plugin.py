@@ -33,7 +33,7 @@ from .Lcn import (
 )
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
-from Components.Button import Button
+# from Components.Button import Button
 from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -1740,9 +1740,6 @@ class addInstall(Screen):
         self['key_green'] = Label(_('Install'))
         self['key_yellow'] = Label(_('Remove'))
         self['key_blue'] = Label(_('Restart enigma'))
-        # self['key_yellow'].hide()
-        # self['key_blue'].hide()
-        # self['key_green'].hide()
         self['sort'] = Label()
         if HALIGN == RT_HALIGN_RIGHT:
             self['sort'].setText(_('0 Halign Left'))
@@ -1750,9 +1747,7 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Right'))
         self.LcnOn = False
         if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            # self['key_yellow'].hide()
             self['key_yellow'].setText('Lcn')
-            # self['key_yellow'].show()
             self.LcnOn = True
             print('LcnOn = True')
 
@@ -1830,19 +1825,15 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
+        
+        if self.LcnOn:
         # self.LcnOn = False
         # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            # self['key_yellow'].hide()
-            # self['key_yellow'] = Button('Lcn')
-            # # self['key_yellow'].show()
-            # self.LcnOn = True
-            # print('LcnOn = True')
-        # else:
-            # self['key_yellow'].hide()
-            # self['key_yellow'] = Button(_('Remove'))
-        # self['key_green'].show()
-        # self['key_yellow'].show()
-        # self['key_blue'].show()
+            self['key_yellow'].setText('Lcn')
+            self.LcnOn = True
+            print('LcnOn 2 = True')
+        else:
+            self['key_yellow'].setText(_('Remove'))
         return
 
     def message(self):
@@ -2039,8 +2030,6 @@ class addInstall(Screen):
                     continue
                 self.names.append(name.strip())
                 self.urls.append(url.strip())
-            # self['key_yellow'].hide()
-            # self['key_green'].show()
             LPshowlist(self.names, self["list"])
             # self.buttons()
         except Exception as e:
@@ -2122,7 +2111,8 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        if self.dest is not None and lngx == 'it':
+        if self.LcnOn:
+        # if self.dest is not None and lngx == 'it':
             self.Lcn()
         else:
             self.session.openWithCallback(self.removenow,
@@ -2180,7 +2170,6 @@ class LSinfo(Screen):
         self.labeltext = ('')
         self['list'] = ScrollLabel(info)
         self['key_green'] = Label()
-        # self['key_green'].hide()
         self["pixmap"] = Pixmap()
         self["pixmap"].hide()
         self['actions'] = ActionMap(['OkCancelActions',
@@ -2251,7 +2240,6 @@ class LSinfo(Screen):
             print('new version online')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].setText(_('Update'))
-            # self['key_green'].show()
             self["pixmap"].show()
 
     def update_me(self):
