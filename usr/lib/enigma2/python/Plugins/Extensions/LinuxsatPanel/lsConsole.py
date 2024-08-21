@@ -7,6 +7,7 @@ from __future__ import print_function
 from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
+from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ScrollLabel import ScrollLabel
@@ -53,9 +54,9 @@ class lsConsole(Screen):
         self.errorOcurred = False
         # lastpage = ''
         self['text'] = ScrollLabel('')
-        self['key_red'] = Button(_('Cancel'))
-        self['key_green'] = Button(_('Hide/Show'))
-        self['key_blue'] = Button(_('Restart'))
+        self['key_red'] = StaticText(_('Cancel'))
+        self['key_green'] = StaticText(_('Hide/Show'))
+        self['key_blue'] = StaticText(_('Restart'))
 
         self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
                                     {
@@ -103,11 +104,12 @@ class lsConsole(Screen):
         else:
             self.show()
             self.finished = True
-
-            try:
-                lastpage = self['text'].isAtLastPage()
-            except:
-                lastpage = self['text']
+            '''
+            # try:
+                # lastpage = self['text'].isAtLastPage()
+            # except:
+                # lastpage = self['text']
+            '''
 
             if self.cancel_msg:
                 self.cancel_msg.close()

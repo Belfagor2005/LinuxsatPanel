@@ -2,7 +2,8 @@
 <screen position="center,center" size="1920,1080" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
 	<ePixmap position="0,0" zPosition="-1" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel2.png" backgroundColor="#25062748" alphatest="on"/>
 	<!-- <eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black"/> -->
-	<widget name="text" position="20,172" size="1070,790" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;28" zPosition="5" transparent="1"/>
+	<widget name="text" position="80,258" size="1000,650" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;28" zPosition="5" transparent="1"/>
+	
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1219,474" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->

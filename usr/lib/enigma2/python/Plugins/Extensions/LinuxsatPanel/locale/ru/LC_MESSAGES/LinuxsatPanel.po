@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-20 22:48+0200\n"
+"POT-Creation-Date: 2024-08-22 00:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -10,24 +10,44 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
-"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
+"X-Poedit-SearchPath-1: lsConsole.py\n"
 
-#: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
-#: plugin.py:2067
-msgid "Please Wait..."
-msgstr "Пожалуйста, подождите..."
+#: lsConsole.py:56
+msgid "Cancel"
+msgstr ""
 
-#: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
-msgid "0 Sort"
-msgstr "0 Сортировать"
+#: lsConsole.py:57
+msgid "Hide/Show"
+msgstr ""
 
-#: plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378 plugin.py:1628
+#: lsConsole.py:58
+msgid "Restart"
+msgstr "Перезапуск энигмы"
+
+#: lsConsole.py:90
+msgid ""
+"Execution progress\n"
+"\n"
+msgstr ""
+
+#: lsConsole.py:123 plugin.py:451 plugin.py:766 plugin.py:1029 plugin.py:1380
+#: plugin.py:1732
 msgid "Exit"
 msgstr "Выход"
 
-#: plugin.py:614
+#: plugin.py:449 plugin.py:764 plugin.py:1027 plugin.py:1378 plugin.py:1755
+#: plugin.py:2172
+msgid "Please Wait..."
+msgstr "Пожалуйста, подождите..."
+
+#: plugin.py:450 plugin.py:765 plugin.py:1028 plugin.py:1379
+msgid "0 Sort"
+msgstr "0 Сортировать"
+
+#: plugin.py:608
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -37,12 +57,12 @@ msgstr ""
 "\n"
 "Вы уверены, что хотите продолжить?"
 
-#: plugin.py:1607 plugin.py:1772
+#: plugin.py:1618 plugin.py:1876
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Вы хотите установить %s?"
 
-#: plugin.py:1612
+#: plugin.py:1623
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -51,39 +71,56 @@ msgstr ""
 "Выполнение %s\n"
 "Пожалуйста, подождите..."
 
-#: plugin.py:1629
+#: plugin.py:1631
+msgid ""
+"File not found /etc/CCcam.cfg!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1667 plugin.py:1715
+#, python-format
+msgid "Server added in %s"
+msgstr ""
+
+#: plugin.py:1680
+msgid ""
+"File not found /etc/tuxbox/config/oscam.server!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1733
 msgid "Install"
 msgstr "Установить"
 
-#: plugin.py:1630
+#: plugin.py:1734
 msgid "Remove"
 msgstr "Удалить"
 
-#: plugin.py:1631
+#: plugin.py:1735
 msgid "Restart enigma"
 msgstr "Перезапуск энигмы"
 
-#: plugin.py:1637 plugin.py:1679 plugin.py:1719
+#: plugin.py:1741 plugin.py:1783 plugin.py:1823
 msgid "0 Halign Left"
 msgstr "0 Выровнять по левому краю"
 
-#: plugin.py:1639 plugin.py:1682 plugin.py:1721
+#: plugin.py:1743 plugin.py:1786 plugin.py:1825
 msgid "0 Halign Right"
 msgstr "0 Выровнять по правому краю"
 
-#: plugin.py:1653
+#: plugin.py:1757
 msgid "Load Category..."
 msgstr "Категория загрузки..."
 
-#: plugin.py:1691
+#: plugin.py:1795
 msgid "Category: "
 msgstr "Категория: "
 
-#: plugin.py:1750 plugin.py:1760
+#: plugin.py:1854 plugin.py:1864
 msgid "Unknow Image!"
 msgstr "Неизвестный Имидж!"
 
-#: plugin.py:1810 plugin.py:1992
+#: plugin.py:1914 plugin.py:2095
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -92,40 +129,40 @@ msgstr ""
 "Установка %s\n"
 "Пожалуйста, подождите..."
 
-#: plugin.py:1937
+#: plugin.py:2041
 msgid "Download page get failed ..."
 msgstr "Страница загрузки не удалась..."
 
-#: plugin.py:1948
+#: plugin.py:2051
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr "Сортировка наземных каналов по правилам Lcn завершена"
 
-#: plugin.py:1955
+#: plugin.py:2058
 msgid "Do you want to install?"
 msgstr "Вы хотите установить?"
 
-#: plugin.py:2003
+#: plugin.py:2106
 msgid "Settings Not Installed ..."
 msgstr "Настройки не установлены..."
 
-#: plugin.py:2020
+#: plugin.py:2123
 msgid "Do you want to remove?"
 msgstr "Вы хотите удалить?"
 
-#: plugin.py:2034
+#: plugin.py:2137
 #, python-format
 msgid "Removing %s"
 msgstr "Удаление %s"
 
-#: plugin.py:2040
+#: plugin.py:2143
 msgid "Do you want to restart Gui Interface?"
 msgstr "Вы хотите перезапустить интерфейс Gui?"
 
-#: plugin.py:2070
+#: plugin.py:2175
 msgid "Update"
 msgstr "Обновить"
 
-#: plugin.py:2140
+#: plugin.py:2245
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -140,7 +177,7 @@ msgstr ""
 "\n"
 "Нажмите зеленую кнопку, чтобы начать обновление"
 
-#: plugin.py:2146
+#: plugin.py:2251
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -155,27 +192,27 @@ msgstr ""
 "\n"
 "Хотите установить его сейчас?"
 
-#: plugin.py:2149
+#: plugin.py:2254
 msgid "Congrats! You already have the latest version..."
 msgstr "Поздравляю! У вас уже установлена последняя версия..."
 
-#: plugin.py:2159
+#: plugin.py:2264
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Хотите установить обновление ( %s ) сейчас?"
 
-#: plugin.py:2166
+#: plugin.py:2271
 msgid "Update Aborted!"
 msgstr "Обновление прервано!"
 
-#: plugin.py:2185
+#: plugin.py:2290
 msgid "Unable to download updates!"
 msgstr "Невозможно загрузить обновления!"
 
-#: plugin.py:2433
+#: plugin.py:2538
 msgid "Check Connection!"
 msgstr "Проверьте подключение!"
 
-#: plugin.py:2454
+#: plugin.py:2559
 msgid "Linuxsat Panel"
 msgstr "Панель Linuxsat"

@@ -1,7 +1,7 @@
 <!-- by lululla 01072024 -->
 <screen position="center,center" size="1280,720" title="Command execution..." backgroundColor="#16000000" flags="wfNoBorder">
 	<ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" backgroundColor="#25062748" alphatest="on" />
-	<widget name="text" position="15,125" size="715,510" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;22" zPosition="6"/>
+	<widget name="text" position="55,170" size="680,425" halign="left" foregroundColor="#0049bbff" backgroundColor="#40000000" font="Console;22" zPosition="6"/>
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="802,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->

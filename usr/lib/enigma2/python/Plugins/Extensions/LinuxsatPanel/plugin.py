@@ -19,7 +19,7 @@ from . import (
     isHD,
     RequestUrl,
     lngx,
-    refreshPlugins,
+    # refreshPlugins,
     xmlurl,
     HALIGN,
 )
@@ -1633,7 +1633,10 @@ class ScriptInstaller(Screen):
         os.chmod(dest, 0o755)
         try:
             dat = RequestUrl()
-            data = checkGZIP(dat)
+            if dat:
+                data = checkGZIP(dat)
+            else:
+                return
             import re
             if PY3:
                 import six
@@ -1673,15 +1676,19 @@ class ScriptInstaller(Screen):
         if not os.path.exists(dest1):
             os.system('mkdir /etc/tuxbox/config')
         # os.chmod(dest, 0o755)
-        dest = '/etc/tuxbox/config/oscam.server'        
+        dest = '/etc/tuxbox/config/oscam.server'
         if not fileExists(dest):
             import shutil
             shutil.copy2(plugin_path + '/sh/oscam.server', dest)
             self.session.open(MessageBox, _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...'), type=MessageBox.TYPE_INFO, timeout=8)
             return
         try:
+            data = ''
             dat = RequestUrl()
-            data = checkGZIP(dat)
+            if dat:
+                data = checkGZIP(dat)
+            else:
+                return
             import re
             if PY3:
                 import six
@@ -1715,8 +1722,6 @@ class ScriptInstaller(Screen):
             self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
         except Exception as e:
             print('error on host', str(e))
-            
-
 
 
 class addInstall(Screen):
@@ -1731,13 +1736,13 @@ class addInstall(Screen):
         self.fxml = str(data)
         self.name = name
         self.dest = dest
-        self['key_red'] = Button(_('Exit'))
-        self['key_green'] = Button(_('Install'))
-        self['key_yellow'] = Button(_('Remove'))
-        self['key_blue'] = Button(_('Restart enigma'))
-        self['key_yellow'].hide()
-        self['key_blue'].hide()
-        self['key_green'].hide()
+        self['key_red'] = Label(_('Exit'))
+        self['key_green'] = Label(_('Install'))
+        self['key_yellow'] = Label(_('Remove'))
+        self['key_blue'] = Label(_('Restart enigma'))
+        # self['key_yellow'].hide()
+        # self['key_blue'].hide()
+        # self['key_green'].hide()
         self['sort'] = Label()
         if HALIGN == RT_HALIGN_RIGHT:
             self['sort'].setText(_('0 Halign Left'))
@@ -1745,9 +1750,9 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Right'))
         self.LcnOn = False
         if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].hide()
-            self['key_yellow'] = Button('Lcn')
-            self['key_yellow'].show()
+            # self['key_yellow'].hide()
+            self['key_yellow'].setText('Lcn')
+            # self['key_yellow'].show()
             self.LcnOn = True
             print('LcnOn = True')
 
@@ -1825,19 +1830,19 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
-        self.LcnOn = False
-        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].hide()
-            self['key_yellow'] = Button('Lcn')
-            # self['key_yellow'].show()
-            self.LcnOn = True
-            print('LcnOn = True')
+        # self.LcnOn = False
+        # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+            # self['key_yellow'].hide()
+            # self['key_yellow'] = Button('Lcn')
+            # # self['key_yellow'].show()
+            # self.LcnOn = True
+            # print('LcnOn = True')
         # else:
             # self['key_yellow'].hide()
             # self['key_yellow'] = Button(_('Remove'))
-        self['key_green'].show()
-        self['key_yellow'].show()
-        self['key_blue'].show()
+        # self['key_green'].show()
+        # self['key_yellow'].show()
+        # self['key_blue'].show()
         return
 
     def message(self):
@@ -2034,8 +2039,8 @@ class addInstall(Screen):
                     continue
                 self.names.append(name.strip())
                 self.urls.append(url.strip())
-            self['key_yellow'].hide()
-            self['key_green'].show()
+            # self['key_yellow'].hide()
+            # self['key_green'].show()
             LPshowlist(self.names, self["list"])
             # self.buttons()
         except Exception as e:
@@ -2150,11 +2155,13 @@ class addInstall(Screen):
             self.session.open(TryQuitMainloop, 3)
 
     def exitnow(self):
+        '''
         try:
             if not os.path.exists('/var/lib/dpkg/info'):
                 refreshPlugins()
         except Exception as e:
             print('error on exit!', e)
+        '''
         self.close()
 
 
@@ -2172,8 +2179,8 @@ class LSinfo(Screen):
         info = _('Please Wait...')
         self.labeltext = ('')
         self['list'] = ScrollLabel(info)
-        self['key_green'] = Button(_('Update'))
-        self['key_green'].hide()
+        self['key_green'] = Label()
+        # self['key_green'].hide()
         self["pixmap"] = Pixmap()
         self["pixmap"].hide()
         self['actions'] = ActionMap(['OkCancelActions',
@@ -2243,7 +2250,8 @@ class LSinfo(Screen):
             self.Update = True
             print('new version online')
             self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
-            self['key_green'].show()
+            self['key_green'].setText(_('Update'))
+            # self['key_green'].show()
             self["pixmap"].show()
 
     def update_me(self):
