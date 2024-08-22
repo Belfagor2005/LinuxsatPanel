@@ -1914,6 +1914,7 @@ class addInstall(Screen):
             folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
                 print('folddest:', folddest)
+                print('self.plug:', self.plug) 
                 cmd2 = ''
                 if ".deb" in self.plug:
                     cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
@@ -1925,10 +1926,11 @@ class addInstall(Screen):
                     cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
                 elif ".bz2" in self.plug and "gz" in self.plug:
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-                else:
-                    return
+                # else:
+                    # return
                 # cmd3 = "rm /tmp/" + self.plug  # + "'"
                 cmd = cmd2  # + " && "  # + cmd3
+                print('cmd:', cmd)
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
                 self.session.open(lsConsole, _(title), [cmd], closeOnSuccess=False)
 
