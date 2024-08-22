@@ -18,7 +18,7 @@ from . import (
     isFHD,
     isHD,
     RequestUrl,
-    lngx,
+    # lngx,
     # refreshPlugins,
     xmlurl,
     HALIGN,
@@ -54,9 +54,9 @@ import re
 import ssl
 import sys
 from enigma import (
+    RT_VALIGN_CENTER,
     RT_HALIGN_LEFT,
     RT_HALIGN_RIGHT,
-    RT_VALIGN_CENTER,
     eListboxPythonMultiContent,
     ePicLoad,
     eTimer,
@@ -271,162 +271,181 @@ class LinuxsatPanel(Screen):
         self.pics = []
         self.titles = []
 
-        list.append("Backup ")
-        self.titles.append("Backup-Tools")
-        self.pics.append(picfold + "Backup.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Backup ")
+            self.titles.append("Backup-Tools")
+            self.pics.append(picfold + "Backup.png")
 
-        list.append("Bouquets ")
-        self.titles.append("Bouquets ")
-        self.pics.append(picfold + "Bouquets.png")
-
-        list.append("DvbUsb Tuners Drivers")
-        self.titles.append("Dvb-Usb ")
-        self.pics.append(picfold + "usb-tuner-drivers.png")
-
-        list.append("Epg ")
-        self.titles.append("Epg-Tools ")
-        self.pics.append(picfold + "plugin-epg.png")
-
-        list.append("Feeds Image Oe2.0 ")
-        self.titles.append("Feeds Oe2.0 ")
-        self.pics.append(picfold + "Feeds2.0.png")
-
-        list.append("Feeds Image DreamOs ")
-        self.titles.append("Feeds DreamOs ")
-        self.pics.append(picfold + "Feeds2.2.png")
-
-        list.append("Games ")
-        self.titles.append("Games ")
-        self.pics.append(picfold + "Game.png")
-
-        list.append("Iptv ")
-        self.titles.append("Iptv ")
-        self.pics.append(picfold + "iptv-streaming.png")
+            list.append("Bouquets ")
+            self.titles.append("Bouquets ")
+            self.pics.append(picfold + "Bouquets.png")
 
         list.append("Channel List ")
         self.titles.append("Channel List")
         self.pics.append(picfold + "Channel-list.png")
 
-        list.append("Kiddac Oe2.0 ")
-        self.titles.append("Kiddac Zone Oe2.0 ")
-        self.pics.append(picfold + "KiddaC1.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("DvbUsb Tuners Drivers")
+            self.titles.append("Dvb-Usb ")
+            self.pics.append(picfold + "usb-tuner-drivers.png")
 
-        list.append("Kiddac DreamOs ")
-        self.titles.append("Kiddac Zone DreamOs ")
-        self.pics.append(picfold + "KiddaC2.png")
+            list.append("Epg ")
+            self.titles.append("Epg-Tools ")
+            self.pics.append(picfold + "plugin-epg.png")
 
-        list.append("Lululla Zone Oe2.0 ")
-        self.titles.append("Lululla Zone Oe2.0 ")
-        self.pics.append(picfold + "oe2.0.png")
+            list.append("Feeds Image Oe2.0 ")
+            self.titles.append("Feeds Oe2.0 ")
+            self.pics.append(picfold + "Feeds2.0.png")
 
-        list.append("Lululla Zone DreamOs ")
-        self.titles.append("Lululla Zone DreamOs ")
-        self.pics.append(picfold + "oe2.5-2.6.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Feeds Image DreamOs ")
+            self.titles.append("Feeds DreamOs ")
+            self.pics.append(picfold + "Feeds2.2.png")
 
-        list.append("DreamOs Plugins ")
-        self.titles.append("DreamOs Plugins ")
-        self.pics.append(picfold + "OE2.2-Plugins.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Games ")
+            self.titles.append("Games ")
+            self.pics.append(picfold + "Game.png")
 
-        list.append("Mediaplayer-Youtube ")
-        self.titles.append("MP-YT ")
-        self.pics.append(picfold + "mediayou.png")
+            list.append("Iptv ")
+            self.titles.append("Iptv ")
+            self.pics.append(picfold + "iptv-streaming.png")
 
-        list.append("MultiBoot ")
-        self.titles.append("MultiBoot ")
-        self.pics.append(picfold + "multiboot.png")
+            list.append("Kiddac Oe2.0 ")
+            self.titles.append("Kiddac Zone Oe2.0 ")
+            self.pics.append(picfold + "KiddaC1.png")
 
-        list.append("Multimedia ")
-        self.titles.append("Multimedia ")
-        self.pics.append(picfold + "Multimedia.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Kiddac DreamOs ")
+            self.titles.append("Kiddac Zone DreamOs ")
+            self.pics.append(picfold + "KiddaC2.png")
 
-        list.append("Panels Addons ")
-        self.titles.append("Panels Addons ")
-        self.pics.append(picfold + "Panels.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Lululla Zone Oe2.0 ")
+            self.titles.append("Lululla Zone Oe2.0 ")
+            self.pics.append(picfold + "oe2.0.png")
 
-        list.append("Picons ")
-        self.titles.append("Picons-Tools ")
-        self.pics.append(picfold + "picons.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Lululla Zone DreamOs ")
+            self.titles.append("Lululla Zone DreamOs ")
+            self.pics.append(picfold + "oe2.5-2.6.png")
 
-        list.append("Python Library ")
-        self.titles.append("Python Library ")
-        self.pics.append(picfold + "Library.png")
+            list.append("DreamOs Plugins ")
+            self.titles.append("DreamOs Plugins ")
+            self.pics.append(picfold + "OE2.2-Plugins.png")
 
-        list.append("Radio ")
-        self.titles.append("Radio-Tools ")
-        self.pics.append(picfold + "Radio.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Mediaplayer-Youtube ")
+            self.titles.append("MP-YT ")
+            self.pics.append(picfold + "mediayou.png")
+
+            list.append("MultiBoot ")
+            self.titles.append("MultiBoot ")
+            self.pics.append(picfold + "multiboot.png")
+
+            list.append("Multimedia ")
+            self.titles.append("Multimedia ")
+            self.pics.append(picfold + "Multimedia.png")
+
+            list.append("Panels Addons ")
+            self.titles.append("Panels Addons ")
+            self.pics.append(picfold + "Panels.png")
+
+            list.append("Picons ")
+            self.titles.append("Picons-Tools ")
+            self.pics.append(picfold + "picons.png")
+
+            list.append("Python Library ")
+            self.titles.append("Python Library ")
+            self.pics.append(picfold + "Library.png")
+
+            list.append("Radio ")
+            self.titles.append("Radio-Tools ")
+            self.pics.append(picfold + "Radio.png")
 
         list.append("Script Installer ")
         self.titles.append("Script Installer ")
         self.pics.append(picfold + "script.png")
 
-        list.append("Skins | TEAM ")
-        self.titles.append("Skins | TEAM ")
-        self.pics.append(picfold + "skinsteam.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Skins | TEAM ")
+            self.titles.append("Skins | TEAM ")
+            self.pics.append(picfold + "skinsteam.png")
 
-        list.append("Skins Fhd-Hd DreamOs ")
-        self.titles.append("Skins DreamOs ")
-        self.pics.append(picfold + "OE2.2-Skins.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Skins Fhd-Hd DreamOs ")
+            self.titles.append("Skins DreamOs ")
+            self.pics.append(picfold + "OE2.2-Skins.png")
 
-        list.append("Keys Tools Oe2.0 ")
-        self.titles.append("SoftCam-Tools2.0 ")
-        self.pics.append(picfold + "key-updater.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Keys Tools Oe2.0 ")
+            self.titles.append("SoftCam-Tools2.0 ")
+            self.pics.append(picfold + "key-updater.png")
 
-        list.append("Keys Tools DreamOs ")
-        self.titles.append("SoftCam-Tools DreamOs ")
-        self.pics.append(picfold + "key-updater1.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Keys Tools DreamOs ")
+            self.titles.append("SoftCam-Tools DreamOs ")
+            self.pics.append(picfold + "key-updater1.png")
 
-        list.append("Softcams ")
-        self.titles.append("SoftcamsOE2.0 ")
-        self.pics.append(picfold + "SOE20.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Softcams ")
+            self.titles.append("SoftcamsOE2.0 ")
+            self.pics.append(picfold + "SOE20.png")
 
-        list.append("Softcams ")
-        self.titles.append("Softcams DreamOs ")
-        self.pics.append(picfold + "SOE22.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Softcams ")
+            self.titles.append("Softcams DreamOs ")
+            self.pics.append(picfold + "SOE22.png")
 
-        list.append("Sport ")
-        self.titles.append("Sport ")
-        self.pics.append(picfold + "sport.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Sport ")
+            self.titles.append("Sport ")
+            self.pics.append(picfold + "sport.png")
 
-        list.append("Streamlink ")
-        self.titles.append("Streamlink ")
-        self.pics.append(picfold + "streamlink.png")
+            list.append("Streamlink ")
+            self.titles.append("Streamlink ")
+            self.pics.append(picfold + "streamlink.png")
 
-        list.append("Utility ")
-        self.titles.append("Utiliy ")
-        self.pics.append(picfold + "utility.png")
+            list.append("Utility ")
+            self.titles.append("Utiliy ")
+            self.pics.append(picfold + "utility.png")
 
-        list.append("Vpn Oe2.0 ")
-        self.titles.append("Vpn-Oe2.0 ")
-        self.pics.append(picfold + "vpn.png")
+            list.append("Vpn Oe2.0 ")
+            self.titles.append("Vpn-Oe2.0 ")
+            self.pics.append(picfold + "vpn.png")
 
-        list.append("Weather ")
-        self.titles.append("Weather-Tools ")
-        self.pics.append(picfold + "weather.png")
+            list.append("Weather ")
+            self.titles.append("Weather-Tools ")
+            self.pics.append(picfold + "weather.png")
 
-        list.append("Weather Forecast ")
-        self.titles.append("Weather-Foreca")
-        self.pics.append(picfold + "weather-forecast.png")
+            list.append("Weather Forecast ")
+            self.titles.append("Weather-Foreca")
+            self.pics.append(picfold + "weather-forecast.png")
 
-        list.append("Webcam ")
-        self.titles.append("Webcam ")
-        self.pics.append(picfold + "webcam.png")
+            list.append("Webcam ")
+            self.titles.append("Webcam ")
+            self.pics.append(picfold + "webcam.png")
 
         if not config.ParentalControl.configured.value:
-            list.append("Adult Oe2.0 ")
-            self.titles.append("Adult Oe2.0 ")
-            self.pics.append(picfold + "18+deb.png")
+            if not os.path.exists('/var/lib/dpkg/info'):
+                list.append("Adult Oe2.0 ")
+                self.titles.append("Adult Oe2.0 ")
+                self.pics.append(picfold + "18+deb.png")
 
-            list.append("Adult DreamOs ")
-            self.titles.append("Adult DreamOs ")
-            self.pics.append(picfold + "18+.png")
+            if os.path.exists('/var/lib/dpkg/info'):
+                list.append("Adult DreamOs ")
+                self.titles.append("Adult DreamOs ")
+                self.pics.append(picfold + "18+.png")
 
-        list.append("Other Oe2.0 ")
-        self.titles.append("Other Oe2.0 ")
-        self.pics.append(picfold + "Other.png")
+        if not os.path.exists('/var/lib/dpkg/info'):
+            list.append("Other Oe2.0 ")
+            self.titles.append("Other Oe2.0 ")
+            self.pics.append(picfold + "Other.png")
 
-        list.append("Other DreamOs ")
-        self.titles.append("Other DreamOs ")
-        self.pics.append(picfold + "Other1.png")
+        if os.path.exists('/var/lib/dpkg/info'):
+            list.append("Other DreamOs ")
+            self.titles.append("Other DreamOs ")
+            self.pics.append(picfold + "Other1.png")
 
         list.append(" Information ")
         self.titles.append("Information ")
@@ -2117,15 +2136,17 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        # if self.LcnOn is True:
-            # print('go lcn: ', self.LcnOn)
-        # # if self.dest is not None and lngx == 'it':
-            # self.Lcn()
-        # else:
-            self.session.openWithCallback(self.removenow,
-                                          MessageBox,
-                                          _("Do you want to remove?"),
-                                          MessageBox.TYPE_YESNO)
+        '''
+        if self.LcnOn is True:
+            print('go lcn: ', self.LcnOn)
+        # if self.dest is not None and lngx == 'it':
+            self.Lcn()
+        else:
+        '''
+        self.session.openWithCallback(self.removenow,
+                                      MessageBox,
+                                      _("Do you want to remove?"),
+                                      MessageBox.TYPE_YESNO)
 
     def removenow(self, answer=False):
         if answer:
@@ -2180,7 +2201,6 @@ class LSinfo(Screen):
         self["pixmap"] = Pixmap()
         self["pixmap"].hide()
         self['actions'] = ActionMap(['OkCancelActions',
-                                     'ColorActions',
                                      'DirectionActions',
                                      'HotkeyActions',
                                      'InfobarEPGActions',

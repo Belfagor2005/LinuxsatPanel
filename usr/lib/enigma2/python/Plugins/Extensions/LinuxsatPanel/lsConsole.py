@@ -8,7 +8,7 @@ from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.Label import Label
-from Components.Sources.StaticText import StaticText
+# from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
 # from Components.Button import Button
 from Components.ScrollLabel import ScrollLabel
