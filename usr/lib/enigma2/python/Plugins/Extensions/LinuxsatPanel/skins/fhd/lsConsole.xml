@@ -14,7 +14,7 @@
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 	<!-- buttons -->
-	<widget name="key_red" position="80,990" size="300,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
-	<widget name="key_green" position="405,990" size="300,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
-	<widget name="key_blue" position="1065,990" size="320,45" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2"/>
+	<widget name="key_red" position="8,990" size="300,40" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_green" position="280,990" size="300,40" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="795,990" size="320,40" valign="center" halign="center" zPosition="6" foregroundColor="#b0b0b0" font="lsat;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 </screen>
