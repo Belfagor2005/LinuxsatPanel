@@ -1745,11 +1745,11 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
-        self.LcnOn = False
-        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].setText('Lcn')
-            self.LcnOn = True
-            print('LcnOn = True')
+        # self.LcnOn = False
+        # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+            # self['key_yellow'].setText('Lcn')
+            # self.LcnOn = True
+            # print('LcnOn = True')
 
         self.list = []
         self["list"] = LPSlist([])
@@ -1761,6 +1761,7 @@ class addInstall(Screen):
         self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'NumberActions'],
                                     {'ok': self.message,
                                      '0': self.arabicx,
+                                     '5': self.Lcn,
                                      'green': self.message,
                                      'cancel': self.exitnow,
                                      'red': self.exitnow,
@@ -1825,15 +1826,15 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
-        
-        if self.LcnOn:
-        # self.LcnOn = False
-        # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].setText('Lcn')
-            self.LcnOn = True
-            print('LcnOn 2 = True')
-        else:
-            self['key_yellow'].setText(_('Remove'))
+
+        # if self.LcnOn is True:
+        # # self.LcnOn = False
+        # # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+            # self['key_yellow'].setText('Lcn')
+            # # self.LcnOn = True
+            # print('LcnOn 2 = True')
+        # else:
+            # self['key_yellow'].setText(_('Remove'))
         return
 
     def message(self):
@@ -2038,15 +2039,20 @@ class addInstall(Screen):
 
     def Lcn(self):
         setx = 0
-        if self.LcnOn:
-            lcn = LCN()
-            lcn.read()
-            if len(lcn.lcnlist) >= 1:
-                lcn.writeBouquet()
-                ReloadBouquets(setx)
-                self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
-                                  MessageBox.TYPE_INFO,
-                                  timeout=5)
+        # if self.LcnOn is True:
+        lcn = LCN()
+        lcn.read()
+        print('lcn.lcnlist:', len(lcn.lcnlist))
+        if len(lcn.lcnlist) >= 1:
+            lcn.writeBouquet()
+            ReloadBouquets(setx)
+            self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
+                              MessageBox.TYPE_INFO,
+                              timeout=5)
+        else:
+            self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
+                              MessageBox.TYPE_INFO,
+                              timeout=5)
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
@@ -2111,10 +2117,11 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        if self.LcnOn:
-        # if self.dest is not None and lngx == 'it':
-            self.Lcn()
-        else:
+        # if self.LcnOn is True:
+            # print('go lcn: ', self.LcnOn)
+        # # if self.dest is not None and lngx == 'it':
+            # self.Lcn()
+        # else:
             self.session.openWithCallback(self.removenow,
                                           MessageBox,
                                           _("Do you want to remove?"),
