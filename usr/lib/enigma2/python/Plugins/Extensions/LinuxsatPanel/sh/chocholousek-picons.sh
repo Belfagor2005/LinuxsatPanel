@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Configuration
-#########################################
+## Configuration
+########################################
 plugin="chocholousek-picons"
 git_url="https://gitlab.com/eliesat/extensions/-/raw/main/chocholousek-picons"
 version=$(wget $git_url/version -qO- | awk 'NR==1')
@@ -10,8 +10,7 @@ package="enigma2-plugin-extensions-$plugin"
 targz_file="$plugin.tar.gz"
 url="$git_url/$targz_file"
 temp_dir="/tmp"
-
-# Determine package manager
+## Determine package manager
 #########################################
 if command -v dpkg &> /dev/null; then
 package_manager="apt"
@@ -22,15 +21,13 @@ package_manager="opkg"
 status_file="/var/lib/opkg/status"
 uninstall_command="opkg remove --force-depends"
 fi
-
-#check and_remove package old version
+##check and_remove package old version
 #########################################
 check_and_remove_package() {
 if [ -d $plugin_path ]; then
 echo "> removing package old version please wait..."
 sleep 3 
 rm -rf $plugin_path > /dev/null 2>&1
-
 if grep -q "$package" "$status_file"; then
 echo "> Removing existing $package package, please wait..."
 $uninstall_command $package > /dev/null 2>&1
@@ -46,7 +43,7 @@ echo " "
 fi  }
 check_and_remove_package
 
-#download & install package
+##download & install package
 #########################################
 download_and_install_package() {
 echo "> Downloading $plugin-$version package  please wait ..."
@@ -66,7 +63,7 @@ else
 fi  }
 download_and_install_package
 
-# Remove unnecessary files and folders
+## Remove unnecessary files and folders
 #########################################
 print_message() {
 echo "> [$(date +'%Y-%m-%d')] $1"

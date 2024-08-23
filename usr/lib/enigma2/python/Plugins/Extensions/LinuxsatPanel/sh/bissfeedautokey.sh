@@ -1,13 +1,12 @@
 #!/bin/sh
+
 if [ -d /usr/lib/enigma2/python/Plugins/Extensions/BissFeedAutoKey ]; then
 echo "> removing package please wait..."
 sleep 3s 
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/BissFeedAutoKey > /dev/null 2>&1
-
 rm -rf /usr/lib/enigma2/python/Components/Renderer/ProgressPixmap.py  > /dev/null 2>&1
 rm -rf /usr/lib/enigma2/python/Components/Converter/ServiceName2.py  > /dev/null 2>&1
 rm -rf /usr/lib/enigma2/python/Components/Converter/ServiceInfo2.py  > /dev/null 2>&1
-
 
 status='/var/lib/opkg/status'
 package='enigma2-plugin-extensions-bissfeed-autokey'
@@ -28,7 +27,7 @@ sleep 3s
 
 else
 
-#remove unnecessary files and folders
+##remove unnecessary files and folders
 if [  -d "/CONTROL" ]; then
 rm -r  /CONTROL >/dev/null 2>&1
 fi
@@ -40,11 +39,11 @@ rm -rf /postrm >/dev/null 2>&1
 rm -rf /tmp/*.ipk >/dev/null 2>&1
 rm -rf /tmp/*.tar.gz >/dev/null 2>&1
 
-#check install deps
-# Check python
+##check install deps
+## Check python
 pyVersion=$(python -c"from sys import version_info; print(version_info[0])")
 
-#config
+##config
 plugin=bissfeedautokey
 version=2.8
 
@@ -56,7 +55,7 @@ url=https://gitlab.com/eliesat/extensions/-/raw/main/bissfeedautokey/bissfeedaut
 package=/var/volatile/tmp/$plugin-py2-$version.tar.gz
 fi
 
-#download & install
+##download & install
 echo "> Downloading $plugin-$version package  please wait ..."
 sleep 3s
 

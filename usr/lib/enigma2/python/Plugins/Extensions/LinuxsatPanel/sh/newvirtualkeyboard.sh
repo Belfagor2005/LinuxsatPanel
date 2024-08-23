@@ -3,7 +3,7 @@
 # Configuration
 #########################################
 plugin="newvirtualkeyboard"
-git_url="https://gitlab.com/eliesat/extensions/-/raw/main/newvirtualkeyboard"
+git_url="https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh"
 version=$(wget $git_url/version -qO- | awk 'NR==1')
 plugin_path="/usr/lib/enigma2/python/Plugins/SystemPlugins/NewVirtualKeyBoard"
 package="enigma2-plugin-extensions-$plugin"
@@ -37,7 +37,6 @@ $uninstall_command $package > /dev/null 2>&1
 fi
 echo "*******************************************"
 echo "*             Removed Finished            *"
-echo "*            Uploaded By Eliesat          *"
 echo "*******************************************"
 sleep 3
 exit 1
@@ -87,7 +86,7 @@ echo "> [$(date +'%Y-%m-%d')] $1"
 cleanup() {
 [ -d "/CONTROL" ] && rm -rf /CONTROL >/dev/null 2>&1
 rm -rf /control /postinst /preinst /prerm /postrm /tmp/*.ipk /tmp/*.tar.gz >/dev/null 2>&1
-print_message "> Uploaded By ElieSat"
+print_message "> Uploaded done"
 }
 cleanup
     

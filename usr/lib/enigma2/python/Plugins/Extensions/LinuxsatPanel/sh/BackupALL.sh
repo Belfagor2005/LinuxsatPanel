@@ -1,5 +1,5 @@
 #!/bin/bash
-# BACKUPALL
+## BACKUPALL
 rm -rf /media/hdd/#Backups#
 mkdir -p /media/hdd/#Backups#/BackupALL/etc/enigma2
 cp -r /etc/epgimport /media/hdd//#Backups#/BackupALL/etc/
@@ -16,37 +16,34 @@ mkdir -p /media/hdd/#Backups#/BackupALL/usr/lib/enigma2/python/Screens
 cp -r /etc/tuxbox/config /media/hdd/#Backups#/BackupALL/etc/tuxbox
 ([ -f /etc/CCcam.cfg ] && cp -r /etc/CCcam.cfg /media/hdd/#Backups#/BackupALL/etc/CCcam.cfg);
 ([ -f /usr/lib/enigma2/python/Screens/EpgSelection.py ] && cp -r /usr/lib/enigma2/python/Screens/EpgSelection.py /media/hdd/#Backups#/BackupALL/usr/lib/enigma2/python/Screens/EpgSelection.py);
-# LINEBACKUP
+## LINEBACKUP
 mkdir -p /media/hdd/#Backups#/LineBackup/usr
 cp -r /usr/keys /media/hdd/#Backups#/LineBackup/usr
 mkdir -p /media/hdd/#Backups#/LineBackup/etc/tuxbox/config
 cp -r /etc/tuxbox/config /media/hdd/#Backups#/LineBackup/etc/tuxbox
 ([ -f /etc/CCcam.cfg ] && cp -r /etc/CCcam.cfg /media/hdd/#Backups#/LineBackup/etc/CCcam.cfg);
-# BOUQUETSBACKUP
+## BOUQUETSBACKUP
 mkdir -p /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 cp -r /etc/enigma2/*.tv /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 cp -r /etc/enigma2/*.radio /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 cp -r /etc/enigma2/lamedb /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 cp -r /etc/enigma2/lamedb5 /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 ([ -f /usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/favourites.xml ] && cp -r /usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/favourites.xml /media/hdd/#Backups#/BackupALL/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/favourites.xml);
-# EPGIMPORTBACKUP
+## EPGIMPORTBACKUP
 mkdir -p /media/hdd/#Backups#/EPGimportBackup/etc
 mkdir -p /media/hdd/#Backups#/EPGimportBackup/etc/enigma2
 cp -r /etc/epgimport /media/hdd/#Backups#/EPGimportBackup/etc/
 ([ -f /etc/enigma2/epgimport.conf ] && cp -r /etc/enigma2/epgimport.conf /media/hdd/#Backups#/EPGimportBackup/etc/enigma2/epgimport.conf);
-# TIMERSBACKUP
+## TIMERSBACKUP
 mkdir -p /media/hdd/#Backups#/TimerBackup/etc/enigma2
 cp -r /etc/enigma2/autotimer.xml /media/hdd/#Backups#/TimerBackup/etc/enigma2/autotimer.xml
 cp -r /etc/enigma2/timers.xml /media/hdd/#Backups#/TimerBackup/etc/enigma2/timers.xml
 echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+
 echo " "
 echo " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
 echo " *                                                             * "
-echo " *                WILLOBUILD BACKUP UTILITY                    * "
+echo " *                	 BACKUP UTILITY                   		 * "
 echo " *                                                             * "
 echo " *                                                             * "
 echo " *                                                             * "
@@ -56,10 +53,5 @@ echo " *                 /media/hdd/#Backups#/                       * "
 echo " *                                                             * "
 echo " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
 echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+
 exit 0

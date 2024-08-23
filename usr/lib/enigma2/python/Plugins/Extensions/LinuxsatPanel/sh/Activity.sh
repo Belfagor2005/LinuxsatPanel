@@ -1,3 +1,3 @@
 #!/bin/sh
-## DESCRIPTION=This script created by Levi45\nActivity
+## DESCRIPTION=Activity
 top -n1
