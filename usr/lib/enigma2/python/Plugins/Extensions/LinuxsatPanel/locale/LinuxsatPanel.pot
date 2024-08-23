@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-21 12:58+0200\n"
+"POT-Creation-Date: 2024-08-23 14:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -15,130 +15,147 @@ msgstr ""
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
 
-#: lsConsole.py:56
+#: lsConsole.py:58
 msgid "Cancel"
 msgstr ""
 
-#: lsConsole.py:57
+#: lsConsole.py:59
 msgid "Hide/Show"
 msgstr ""
 
-#: lsConsole.py:58
+#: lsConsole.py:60
 msgid "Restart"
 msgstr ""
 
-#: lsConsole.py:90
+#: lsConsole.py:92
 msgid ""
 "Execution progress\n"
 "\n"
 msgstr ""
 
-#: lsConsole.py:122 plugin.py:457 plugin.py:772 plugin.py:1035 plugin.py:1378
-#: plugin.py:1628
+#: lsConsole.py:125 plugin.py:470 plugin.py:785 plugin.py:1048 plugin.py:1399
+#: plugin.py:1758
 msgid "Exit"
 msgstr ""
 
-#: plugin.py:455 plugin.py:770 plugin.py:1033 plugin.py:1376 plugin.py:1651
-#: plugin.py:2067
+#: plugin.py:468 plugin.py:783 plugin.py:1046 plugin.py:1397 plugin.py:1776
+#: plugin.py:2202
 msgid "Please Wait..."
 msgstr ""
 
-#: plugin.py:456 plugin.py:771 plugin.py:1034 plugin.py:1377
+#: plugin.py:469 plugin.py:784 plugin.py:1047 plugin.py:1398
 msgid "0 Sort"
 msgstr ""
 
-#: plugin.py:614
+#: plugin.py:627
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
 "are you sure you want to continue?"
 msgstr ""
 
-#: plugin.py:1607 plugin.py:1772
+#: plugin.py:1637 plugin.py:1894
 #, python-format
 msgid "Do you want to install %s?"
 msgstr ""
 
-#: plugin.py:1612
+#: plugin.py:1642
 #, python-format
 msgid ""
 "Executing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1629
+#: plugin.py:1650
+msgid ""
+"File not found /etc/CCcam.cfg!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1689 plugin.py:1741
+#, python-format
+msgid "Server added in %s"
+msgstr ""
+
+#: plugin.py:1702
+msgid ""
+"File not found /etc/tuxbox/config/oscam.server!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1759
 msgid "Install"
 msgstr ""
 
-#: plugin.py:1630
+#: plugin.py:1760
 msgid "Remove"
 msgstr ""
 
-#: plugin.py:1631
+#: plugin.py:1761
 msgid "Restart enigma"
 msgstr ""
 
-#: plugin.py:1637 plugin.py:1679 plugin.py:1719
+#: plugin.py:1764 plugin.py:1805 plugin.py:1845
 msgid "0 Halign Left"
 msgstr ""
 
-#: plugin.py:1639 plugin.py:1682 plugin.py:1721
+#: plugin.py:1766 plugin.py:1808 plugin.py:1847
 msgid "0 Halign Right"
 msgstr ""
 
-#: plugin.py:1653
+#: plugin.py:1778
 msgid "Load Category..."
 msgstr ""
 
-#: plugin.py:1691
+#: plugin.py:1817
 msgid "Category: "
 msgstr ""
 
-#: plugin.py:1750 plugin.py:1760
+#: plugin.py:1872 plugin.py:1882
 msgid "Unknow Image!"
 msgstr ""
 
-#: plugin.py:1810 plugin.py:1992
+#: plugin.py:1935 plugin.py:2121
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1937
+#: plugin.py:2062
 msgid "Download page get failed ..."
 msgstr ""
 
-#: plugin.py:1948
+#: plugin.py:2073
 msgid "Sorting Terrestrial channels with Lcn rules Completed"
 msgstr ""
 
-#: plugin.py:1955
+#: plugin.py:2077
+msgid "Sorting Terrestrial not Executed!"
+msgstr ""
+
+#: plugin.py:2084
 msgid "Do you want to install?"
 msgstr ""
 
-#: plugin.py:2003
+#: plugin.py:2132
 msgid "Settings Not Installed ..."
 msgstr ""
 
-#: plugin.py:2020
+#: plugin.py:2153
 msgid "Do you want to remove?"
 msgstr ""
 
-#: plugin.py:2034
+#: plugin.py:2167
 #, python-format
 msgid "Removing %s"
 msgstr ""
 
-#: plugin.py:2040
+#: plugin.py:2173
 msgid "Do you want to restart Gui Interface?"
 msgstr ""
 
-#: plugin.py:2070
-msgid "Update"
-msgstr ""
-
-#: plugin.py:2140
+#: plugin.py:2273
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -148,7 +165,11 @@ msgid ""
 "Press green button to start updating"
 msgstr ""
 
-#: plugin.py:2146
+#: plugin.py:2274
+msgid "Update"
+msgstr ""
+
+#: plugin.py:2279
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -158,27 +179,27 @@ msgid ""
 "Do you want to install it now?"
 msgstr ""
 
-#: plugin.py:2149
+#: plugin.py:2282
 msgid "Congrats! You already have the latest version..."
 msgstr ""
 
-#: plugin.py:2159
+#: plugin.py:2292
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr ""
 
-#: plugin.py:2166
+#: plugin.py:2299
 msgid "Update Aborted!"
 msgstr ""
 
-#: plugin.py:2185
+#: plugin.py:2318
 msgid "Unable to download updates!"
 msgstr ""
 
-#: plugin.py:2433
+#: plugin.py:2566
 msgid "Check Connection!"
 msgstr ""
 
-#: plugin.py:2454
+#: plugin.py:2587
 msgid "Linuxsat Panel"
 msgstr ""

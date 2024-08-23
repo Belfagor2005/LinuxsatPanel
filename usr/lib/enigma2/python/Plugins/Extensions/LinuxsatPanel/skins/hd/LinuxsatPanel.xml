@@ -56,6 +56,6 @@
 	<widget source="label20" render="Label" position="606,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
 	<widget name="pixmap20" position="620,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
 	<!-- buttons -->
-	<widget name="key_red" position="301,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/redk.png" position="320,682" size="175,25" zPosition="4" alphatest="on" />
+	<widget name="key_red" position="281,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/redk.png" position="320,682" size="140,20" zPosition="4" alphatest="on" />
 </screen>
