@@ -19,7 +19,7 @@ from . import (
     isHD,
     RequestUrl,
     # lngx,
-    # refreshPlugins,
+    refreshPlugins,
     xmlurl,
     HALIGN,
 )
@@ -1900,10 +1900,10 @@ class addInstall(Screen):
         if response.status_code == 200:
             with open(dest, 'wb') as f:
                 f.write(response.content)
-            print("File scaricato correttamente")
+            print("File scaricato correttamente.")
             return True
         else:
-            print("Errore durante il download del file")
+            print("Errore durante il download del file.")
         return False
 
     def okClicked(self, answer=False):
@@ -1914,7 +1914,7 @@ class addInstall(Screen):
             folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
                 print('folddest:', folddest)
-                print('self.plug:', self.plug) 
+                print('self.plug:', self.plug)
                 cmd2 = ''
                 if ".deb" in self.plug:
                     cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
@@ -1926,6 +1926,7 @@ class addInstall(Screen):
                     cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
                 elif ".bz2" in self.plug and "gz" in self.plug:
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
+                #  # else no work, endswith allowed on self.plug extensions?
                 # else:
                     # return
                 # cmd3 = "rm /tmp/" + self.plug  # + "'"
@@ -2050,6 +2051,8 @@ class addInstall(Screen):
                 url = item.split('###')[1]
                 if name in self.names:
                     continue
+                name = str(name)
+                url = str(url)
                 self.names.append(name.strip())
                 self.urls.append(url.strip())
             LPshowlist(self.names, self["list"])
@@ -2175,13 +2178,13 @@ class addInstall(Screen):
             self.session.open(TryQuitMainloop, 3)
 
     def exitnow(self):
-        '''
+
         try:
             if not os.path.exists('/var/lib/dpkg/info'):
                 refreshPlugins()
         except Exception as e:
             print('error on exit!', e)
-        '''
+
         self.close()
 
 
