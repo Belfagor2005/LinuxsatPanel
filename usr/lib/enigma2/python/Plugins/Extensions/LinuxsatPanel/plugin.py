@@ -53,6 +53,8 @@ import os
 import re
 import ssl
 import sys
+import shutil
+import six
 from enigma import (
     RT_VALIGN_CENTER,
     RT_HALIGN_LEFT,
@@ -1568,6 +1570,9 @@ class ScriptInstaller(Screen):
         if 'xxx' in self.namev.lower():
             self.url = 'wget -qO- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -qO - | bash'
 
+        if 'levi45' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -qO - | bash'
+
         if 'multistalker' in self.namev.lower():
             self.url = 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh'
 
@@ -1601,9 +1606,6 @@ class ScriptInstaller(Screen):
         if 'quad9' in self.namev.lower():
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -qO - | bash'
 
-        if 'levi45' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -qO - | bash'
-
         if 'mountpoint' in self.namev.lower():
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -qO - | bash'
 
@@ -1620,17 +1622,14 @@ class ScriptInstaller(Screen):
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
 
         if 'serviceapp' in self.namev.lower():
-            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
             self.url = 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp'
 
         if 'cccam.cfg' in self.namev.lower():
-            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
-            self.getcl()
+            self.getcl('CCcam')
             return
 
         if 'oscam.serv' in self.namev.lower():
-            # self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
-            self.getclsc()
+            self.getcl('Oscam')
             return
 
         self.session.openWithCallback(self.okClicked,
@@ -1642,101 +1641,59 @@ class ScriptInstaller(Screen):
             title = (_("Executing %s\nPlease Wait...") % self.namev)
             self.session.open(lsConsole, _(title), [self.url], closeOnSuccess=False)
 
-    def getcl(self):
-        dest = '/etc/CCcam.cfg'
-        if not fileExists(dest):
-            import shutil
-            shutil.copy2(plugin_path + '/sh/CCcam.cfg', '/etc')
-            self.session.open(MessageBox, _('File not found /etc/CCcam.cfg!\nRestart please...'), type=MessageBox.TYPE_INFO, timeout=8)
+    def getcl(self, config_type):
+        if config_type == 'CCcam':
+            dest = '/etc/CCcam.cfg'
+            src = plugin_path + '/sh/CCcam.cfg'
+            not_found_msg = _('File not found /etc/CCcam.cfg!\nRestart please...')
+            write_format = '\nC: {} {} {} {}\n'
+
+        elif config_type == 'Oscam':
+            dest_dir = '/etc/tuxbox/config'
+            if not os.path.exists(dest_dir):
+                os.makedirs(dest_dir)
+            dest = os.path.join(dest_dir, 'oscam.server')
+            src = plugin_path + '/sh/oscam.server'
+            not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
+            write_format = ('\n[reader]\nlabel = Server_{}\nenable= 1\nprotocol = cccam\n'
+                            'device = {},{}\nuser = {}\npassword = {}\ninactivitytimeout = 30\n'
+                            'group = 3\ncccversion = 2.2.1\ncccmaxhops = 0\nccckeepalive = 1\n'
+                            'audisabled = 1\n\n')
+        else:
             return
-        os.chmod(dest, 0o755)
+
+        if not os.path.exists(dest):
+            shutil.copy2(src, dest)
+            self.session.open(MessageBox, not_found_msg, type=MessageBox.TYPE_INFO, timeout=8)
+            return
+
         try:
             dat = RequestUrl()
-            if dat:
-                data = checkGZIP(dat)
-            else:
+            if not dat:
                 return
-            import re
+            data = checkGZIP(dat)
             if PY3:
-                import six
                 data = six.ensure_str(data)
 
-            if 'bosscccam' in data.lower():
-                url1 = re.findall(r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>', data)
+            regex_patterns = [
+                r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>',
+                r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
+                r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
+                r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
+            ]
 
-            elif '15days' in data.lower():
-                url1 = re.findall(r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', data)
-
-            elif 'cccamia' in data:
-                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
-
-            elif 'freecccam' in data:
-                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
-
-            else:
-                url1 = re.findall(r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
+            for pattern in regex_patterns:
+                url1 = re.findall(pattern, data)
+                if url1:
+                    break
 
             for h, p, u, pw in url1:
-                print(h, p, u, pw)
-                host = 'C: ' + str(h)
+                host = str(h)
                 port = str(p)
                 user = str(u)
                 pasw = str(pw).replace('</h1>', '').replace('</div>', '')
-
                 with open(dest, 'a') as cfgdok:
-                    cfgdok.write('\n' + host + ' ' + port + ' ' + user + ' ' + pasw + '\n')
-
-            self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
-        except Exception as e:
-            print('error on host', str(e))
-
-    def getclsc(self):
-        dest1 = '/etc/tuxbox/config'
-        if not os.path.exists(dest1):
-            os.system('mkdir /etc/tuxbox/config')
-        # os.chmod(dest, 0o755)
-        dest = '/etc/tuxbox/config/oscam.server'
-        if not fileExists(dest):
-            import shutil
-            shutil.copy2(plugin_path + '/sh/oscam.server', dest)
-            self.session.open(MessageBox, _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...'), type=MessageBox.TYPE_INFO, timeout=8)
-            return
-        try:
-            data = ''
-            dat = RequestUrl()
-            if dat:
-                data = checkGZIP(dat)
-            else:
-                return
-            import re
-            if PY3:
-                import six
-                data = six.ensure_str(data)
-
-            if 'bosscccam' in data.lower():
-                url1 = re.findall(r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>', data)
-
-            elif '15days' in data.lower():
-                url1 = re.findall(r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', data)
-
-            elif 'cccamia' in data:
-                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
-
-            elif 'freecccam' in data:
-                url1 = re.findall(r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
-
-            else:
-                url1 = re.findall(r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*', data)
-
-            for h, p, u, pw in url1:
-                print(h, p, u, pw)
-                host = 'C: ' + str(h)
-                port = str(p)
-                user = str(u)
-                pasw = str(pw).replace('</h1>', '').replace('</div>', '')
-
-                with open(dest, 'a') as cfgdok:
-                    cfgdok.write('\n[reader]\nlabel = Server_' + host + '\nenable= 1\nprotocol = cccam\ndevice = ' + host + ',' + port + '\nuser = ' + user + '\npassword = ' + pasw + '\ninactivitytimeout = 30\ngroup = 3\ncccversion = 2.2.1\ncccmaxhops = 0\nccckeepalive = 1\naudisabled = 1\n\n')
+                    cfgdok.write(write_format.format(host, port, user, pasw))
 
             self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
         except Exception as e:

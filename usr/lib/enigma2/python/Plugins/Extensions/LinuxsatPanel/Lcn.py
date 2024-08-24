@@ -139,9 +139,10 @@ class LCN:
         max = int(tmp[1])
         for x in self.lcnlist:
             if x[0] >= min and x[0] <= max:
-                # value = x[0]
+                value = x[0]
                 cmd = "x[0] = " + rule
                 try:
+                    print('value:', value)
                     exec(cmd)
                 except Exception as e:
                     print(e)
