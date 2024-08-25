@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-24 15:54+0200\n"
+"POT-Creation-Date: 2024-08-25 18:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -54,9 +54,9 @@ msgid ""
 "are you sure you want to continue?"
 msgstr ""
 
-#: plugin.py:1636 plugin.py:1851
+#: plugin.py:1636
 #, python-format
-msgid "Do you want to install %s?"
+msgid "Do you want to execute %s?"
 msgstr ""
 
 #: plugin.py:1641
@@ -113,6 +113,11 @@ msgstr ""
 
 #: plugin.py:1829 plugin.py:1839
 msgid "Unknow Image!"
+msgstr ""
+
+#: plugin.py:1851
+#, python-format
+msgid "Do you want to install %s?"
 msgstr ""
 
 #: plugin.py:1892 plugin.py:2078

@@ -1633,7 +1633,7 @@ class ScriptInstaller(Screen):
             return
 
         self.session.openWithCallback(self.okClicked,
-                                      MessageBox, _("Do you want to install %s?") % self.namev,
+                                      MessageBox, _("Do you want to execute %s?") % self.namev,
                                       MessageBox.TYPE_YESNO)
 
     def okClicked(self, answer=False):
