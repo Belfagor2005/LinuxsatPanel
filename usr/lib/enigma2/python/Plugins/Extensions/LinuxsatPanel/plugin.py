@@ -1676,7 +1676,7 @@ class ScriptInstaller(Screen):
                 data = six.ensure_str(data)
 
             regex_patterns = [
-                r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong>',
+                r'<strong>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
                 r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
                 r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
                 r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
@@ -1691,7 +1691,8 @@ class ScriptInstaller(Screen):
                 host = str(h)
                 port = str(p)
                 user = str(u)
-                pasw = str(pw).replace('</h1>', '').replace('</div>', '')
+                pas = pw.replace('</h1>', '').replace('</b>', '')
+                pasw = pas.replace('</div>', '').replace('</span>', '')
                 with open(dest, 'a') as cfgdok:
                     cfgdok.write(write_format.format(host, port, user, pasw))
 
