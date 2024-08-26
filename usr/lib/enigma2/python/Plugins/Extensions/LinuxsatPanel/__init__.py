@@ -40,7 +40,7 @@ abouturl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/abou
 xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_2024.xml'
 installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
 developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
-ListUrl = ['https://bosscccam.co/Test.php', 'https://iptv-15days.blogspot.com', 'https://cccamia.com/free-cccam', 'https://cccam.net/freecccam']
+ListUrl = ['https://bosscccam.co/Test.php', 'https://iptv-15days.blogspot.com', 'https://cccamia.com/free-cccam', 'https://cccam.net/freecccam', 'https://cccamiptv.pro/cccam-free/#page-content']
 isDreamOS = False
 if os.path.exists("/var/lib/dpkg/status"):
     isDreamOS = True
