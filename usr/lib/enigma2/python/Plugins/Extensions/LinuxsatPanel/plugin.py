@@ -26,6 +26,7 @@ from . import (
 from .lsConsole import lsConsole
 from .Lcn import (
     LCN,
+    LCNBuildHelper,
     ReloadBouquets,
     copy_files_to_enigma2,
     keepiptv,
@@ -1807,7 +1808,6 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
-
         # if self.LcnOn is True:
         # # self.LcnOn = False
         # # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
@@ -1862,10 +1862,10 @@ class addInstall(Screen):
         if response.status_code == 200:
             with open(dest, 'wb') as f:
                 f.write(response.content)
-            print("File scaricato correttamente.")
+            print("File downloaded successfully.")
             return True
         else:
-            print("Errore durante il download del file.")
+            print("Error downloading the file.")
         return False
 
     def okClicked(self, answer=False):
@@ -1875,8 +1875,6 @@ class addInstall(Screen):
                 os.system('ln -sf  /var/volatile/tmp /tmp')
             folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
-                print('folddest:', folddest)
-                print('self.plug:', self.plug)
                 cmd2 = ''
                 if ".deb" in self.plug:
                     cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
@@ -1888,14 +1886,10 @@ class addInstall(Screen):
                     cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
                 elif ".bz2" in self.plug and "gz" in self.plug:
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-                #  # else no work, endswith allowed on self.plug extensions?
-                # else:
-                    # return
-                # cmd3 = "rm /tmp/" + self.plug  # + "'"
-                cmd = cmd2  # + " && "  # + cmd3
-                print('cmd:', cmd)
+
+                # print('cmd:', cmd)
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
-                self.session.open(lsConsole, _(title), [cmd], closeOnSuccess=False)
+                self.session.open(lsConsole, _(title), [cmd2], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
@@ -1916,7 +1910,7 @@ class addInstall(Screen):
                 r = r[n1:n2]
                 regex = 'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
                 match = re.compile(regex).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         url = url.replace('blob', 'raw')
@@ -1933,7 +1927,7 @@ class addInstall(Screen):
                 r = r[n1:n2]
                 regex = 'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
                 match = re.compile(regex).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for name, url, date in match:
                     if url.find('.zip') != -1:
                         if 'ddt' in name.lower():
@@ -1949,7 +1943,7 @@ class addInstall(Screen):
             if 'manutek' in self.name.lower():
                 regex = 'href="/isetting/.*?file=(.+?).zip">'
                 match = re.compile(regex).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for url in match:
                     name = url
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
@@ -1965,7 +1959,7 @@ class addInstall(Screen):
                 # n2 = r.find('href="#readme">', n1)
                 # r = r[n1:n2]
                 match = re.compile(regex).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         name = 'Morph883 ' + name
@@ -1979,12 +1973,12 @@ class addInstall(Screen):
             if 'vhannibal 1' in self.name.lower():
                 # <td><a href="autosetting/download.php?id=1&action=download">Vhannibal Hot Bird 13°E</a></td>
                 match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for url, name, date in match:
                     # name = str(name) + ' ' + date
                     name = str(name).replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "https://www.vhannibal.net/" + url
-                    print('url vhan1:', url)
+                    # print('url vhan1:', url)
                     self.downloading = True
                     item = name + "###" + url
                     items.append(item)
@@ -1993,17 +1987,16 @@ class addInstall(Screen):
             if 'vhannibal 2' in self.name.lower():
                 regex = '<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
                 match = re.compile(regex).findall(r)
-                print('match:', match)
+                # print('match:', match)
                 for url, date in match:
                     if '.php' in url.lower():
                         continue
                     name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
-                    print('url vhan2:', url)
+                    # print('url vhan2:', url)
                     self.downloading = True
                     # self.names.append(name.strip())
                     # self.urls.append(url.strip())
-
                     item = name + "###" + url
                     items.append(item)
                     items.sort()
@@ -2025,20 +2018,33 @@ class addInstall(Screen):
 
     def Lcn(self):
         setx = 0
-        # if self.LcnOn is True:
-        lcn = LCN()
-        lcn.read()
-        print('lcn.lcnlist:', len(lcn.lcnlist))
-        if len(lcn.lcnlist) >= 1:
-            lcn.writeBouquet()
-            ReloadBouquets(setx)
-            self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
+        try:
+            # from .Lcn import LCNBuildHelper
+            lcn = LCNBuildHelper()
+            lcn.buildAfterScan()
+            self.session.open(MessageBox, _('Sorting Terrestrial Executed!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
-        else:
+        except Exception as e:
+            print(e)
             self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
+
+        # # if self.LcnOn is True:
+        # lcn = LCN()
+        # lcn.read()
+        # print('lcn.lcnlist:', len(lcn.lcnlist))
+        # if len(lcn.lcnlist) >= 0:
+            # lcn.writeBouquet()
+            # ReloadBouquets(setx)
+            # self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
+                              # MessageBox.TYPE_INFO,
+                              # timeout=5)
+        # else:
+            # self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
+                              # MessageBox.TYPE_INFO,
+                              # timeout=5)
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
@@ -2452,9 +2458,6 @@ class startLP(Screen):
 def menustart():
     try:
         if CheckConn():
-            # xml = xmlurl
-            # data = checkGZIP(xml)
-            # _session.open(LinuxsatPanel, data)
             _session.open(startLP)
         else:
             _session.open(MessageBox,
@@ -2483,13 +2486,19 @@ def menu(menuid, **kwargs):
 
 
 def Plugins(**kwargs):
-    add_skin_font()
-    return [PluginDescriptor(name="Linuxsat Panel",
-                             description=descplug,
-                             icon="LinuxsatPanel.png",
-                             where=PluginDescriptor.WHERE_PLUGINMENU,
-                             fnc=main),
-            PluginDescriptor(name="Linuxsat Panel",
-                             description=descplug,
-                             where=PluginDescriptor.WHERE_MENU,
-                             fnc=menu)]
+    add_skin_font()  # Initialize the necessary fonts
+    return [
+        PluginDescriptor(
+            name="Linuxsat Panel",
+            description=descplug,
+            icon="LinuxsatPanel.png",
+            where=PluginDescriptor.WHERE_PLUGINMENU,
+            fnc=main
+        ),
+        PluginDescriptor(
+            name="Linuxsat Panel",
+            description=descplug,
+            where=PluginDescriptor.WHERE_MENU,
+            fnc=menu
+        )
+    ]
