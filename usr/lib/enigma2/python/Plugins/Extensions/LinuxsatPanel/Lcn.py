@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
+from . import _
 from enigma import (eServiceReference, eServiceCenter)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
