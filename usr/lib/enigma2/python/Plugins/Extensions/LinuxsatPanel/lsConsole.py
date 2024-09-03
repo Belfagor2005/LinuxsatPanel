@@ -1,16 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # RAED & mfaraj57 &  (c) 2018
-# mod ululla 20240720
+# mod Lululla 20240720
 
 from __future__ import print_function
 from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.Label import Label
-# from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap
-# from Components.Button import Button
 from Components.ScrollLabel import ScrollLabel
 from Screens.MessageBox import MessageBox
 from Tools.Directories import (SCOPE_PLUGINS, resolveFilename)

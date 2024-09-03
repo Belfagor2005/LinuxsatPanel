@@ -94,10 +94,12 @@ setx = 0
 
 if PY3:
     from urllib.request import (urlopen, Request)
+    from urllib.error import URLError
     unicode = str
     PY3 = True
 else:
     from urllib2 import (urlopen, Request)
+    from urllib2 import URLError
 
 
 if sys.version_info >= (2, 7, 9):
@@ -107,7 +109,15 @@ if sys.version_info >= (2, 7, 9):
         sslContext = None
 
 
+def create_ssl_context():
+    try:
+        return ssl.create_default_context()
+    except Exception:
+        return None
+
 def ssl_urlopen(url):
+    sslContext = create_ssl_context()
+
     if sslContext:
         return urlopen(url, context=sslContext)
     else:
@@ -118,7 +128,7 @@ try:
     from twisted.internet import ssl
     from twisted.internet._sslverify import ClientTLSOptions
     sslverify = True
-except:
+except ImportError:
     sslverify = False
 
 
@@ -154,13 +164,7 @@ def make_request(url):
 global skin_path
 skin_path = ''
 
-if isWQHD():
-    skin_path = plugin_path + '/skins/fhd'
-    picfold = plugin_path + "/LSicons2/"
-    pngx = plugin_path + "/icons2/link.png"
-    blpic = picfold + "Blank.png"
-
-elif isFHD():
+if isWQHD() or isFHD():
     skin_path = plugin_path + '/skins/fhd'
     picfold = plugin_path + "/LSicons2/"
     pngx = plugin_path + "/icons2/link.png"
@@ -170,7 +174,7 @@ else:
     picfold = plugin_path + "/LSicons/"
     pngx = plugin_path + "/icons/link.png"
     blpic = picfold + "Blank.png"
-print('skin path=', skin_path)
+# print('skin path=', skin_path)
 
 
 # menulist
@@ -188,7 +192,6 @@ class LPSlist(MenuList):
 
 
 def LPListEntry(name, item):
-    # #fec51b
     res = [(name, item)]
     if fileExists(pngx):
         if isFHD():
@@ -492,33 +495,21 @@ class LinuxsatPanel(Screen):
                                      "info": self.key_info,
                                      "menu": self.closeRecursive})
 
-        ln = len(self.names)
-        self.npage = int(float(ln / 20)) + 1
+        self.PIXMAPS_PER_PAGE = 20
+        # ln = len(self.names)
+        self.npics = len(self.names)  # Assumi che questo sia il numero totale di immagini
+        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
-
-    def list_sort(self):
-        self.combined_data = zip(self.names, self.titles, self.pics)
-        # test up
-        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        # print("Lista ordinata:", sorted_list)
-        # print("Titoli ordinati:", sorted_titles)
-        # print("Immagini ordinate:", sorted_pics)
-
-        self.names = sorted_list
-        self.titles = sorted_titles
-        self.pics = sorted_pics
-        self.openTest()
 
     def paintFrame(self):
         try:
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            ifr = self.index - (20 * (self.ipage - 1))
+            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
             self["frame"].startMoving()
@@ -527,14 +518,14 @@ class LinuxsatPanel(Screen):
 
     def openTest(self):
         if self.ipage < self.npage:
-            self.maxentry = (20 * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
         elif self.ipage == self.npage:
             self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
             i1 = 0
-            while i1 < 20:
+            while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
                 i1 += 1
@@ -606,6 +597,15 @@ class LinuxsatPanel(Screen):
         if len(self["menu"].list) > number:
             self["menu"].setIndex(number)
             self.okbuttonClick()
+
+    def list_sort(self):
+        self.combined_data = zip(self.names, self.titles, self.pics)
+        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        self.names = sorted_list
+        self.titles = sorted_titles
+        self.pics = sorted_pics
+        self.openTest()
 
     def closeNonRecursive(self):
         self.close(False)
@@ -2030,7 +2030,7 @@ class addInstall(Screen):
             self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
-
+        '''
         # # if self.LcnOn is True:
         # lcn = LCN()
         # lcn.read()
@@ -2045,6 +2045,7 @@ class addInstall(Screen):
             # self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
                               # MessageBox.TYPE_INFO,
                               # timeout=5)
+        '''
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
