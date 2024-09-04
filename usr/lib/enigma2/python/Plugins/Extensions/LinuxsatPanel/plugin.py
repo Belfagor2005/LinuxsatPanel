@@ -25,7 +25,7 @@ from . import (
 )
 from .lsConsole import lsConsole
 from .Lcn import (
-    LCN,
+    # LCN,
     LCNBuildHelper,
     ReloadBouquets,
     copy_files_to_enigma2,
@@ -34,7 +34,6 @@ from .Lcn import (
 )
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
-# from Components.Button import Button
 from Components.config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -85,21 +84,24 @@ from enigma import (
 # ======================================================================
 global HALIGN
 global setx
+global skin_path
+
 currversion = '2.2'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
+skin_path = ''
 _session = None
 setx = 0
 
 
 if PY3:
     from urllib.request import (urlopen, Request)
-    from urllib.error import URLError
+    # from urllib.error import URLError
     unicode = str
     PY3 = True
 else:
     from urllib2 import (urlopen, Request)
-    from urllib2 import URLError
+    # from urllib2 import URLError
 
 
 if sys.version_info >= (2, 7, 9):
@@ -114,6 +116,7 @@ def create_ssl_context():
         return ssl.create_default_context()
     except Exception:
         return None
+
 
 def ssl_urlopen(url):
     sslContext = create_ssl_context()
@@ -161,9 +164,7 @@ def make_request(url):
     return
 
 
-global skin_path
-skin_path = ''
-
+# init path
 if isWQHD() or isFHD():
     skin_path = plugin_path + '/skins/fhd'
     picfold = plugin_path + "/LSicons2/"
@@ -213,6 +214,36 @@ def LPshowlist(data, list):
         list.setList(plist)
 
 
+# sortlist
+class ListSortUtility:
+    @staticmethod
+    def list_sort(names, titles, pics):
+        combined_data = zip(names, titles, pics)
+        sorted_data = sorted(combined_data, key=lambda x: x[0])
+        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
+        return sorted_list, sorted_titles, sorted_pics
+
+
+# pixmaplist
+def get_positions(resolution):
+    positions = []
+    if resolution == "FHD":
+        positions = [
+            [100, 210], [310, 210], [525, 210], [735, 210], [940, 210],
+            [100, 420], [310, 420], [525, 420], [735, 420], [940, 420],
+            [100, 635], [310, 635], [525, 635], [735, 635], [940, 635],
+            [100, 835], [310, 835], [525, 835], [735, 835], [940, 835]
+        ]
+    elif resolution == "HD":
+        positions = [
+            [65, 135], [200, 135], [345, 135], [485, 135], [620, 135],
+            [65, 270], [200, 270], [345, 270], [485, 270], [620, 270],
+            [65, 405], [200, 405], [345, 405], [485, 405], [620, 405],
+            [65, 540], [200, 540], [345, 540], [485, 540], [620, 540]
+        ]
+    return positions
+
+
 class LinuxsatPanel(Screen):
 
     def __init__(self, session):
@@ -221,57 +252,11 @@ class LinuxsatPanel(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
-        if isFHD():
-            self.pos = []
-            self.pos.append([100, 210])
-            self.pos.append([310, 210])
-            self.pos.append([525, 210])
-            self.pos.append([735, 210])
-            self.pos.append([940, 210])
 
-            self.pos.append([100, 420])
-            self.pos.append([310, 420])
-            self.pos.append([525, 420])
-            self.pos.append([735, 420])
-            self.pos.append([940, 420])
-
-            self.pos.append([100, 635])
-            self.pos.append([310, 635])
-            self.pos.append([525, 635])
-            self.pos.append([735, 635])
-            self.pos.append([940, 635])
-
-            self.pos.append([100, 835])
-            self.pos.append([310, 835])
-            self.pos.append([525, 835])
-            self.pos.append([735, 835])
-            self.pos.append([940, 835])
-
-        if isHD():
-            self.pos = []
-            self.pos.append([65, 135])
-            self.pos.append([200, 135])
-            self.pos.append([345, 135])
-            self.pos.append([485, 135])
-            self.pos.append([620, 135])
-
-            self.pos.append([65, 270])
-            self.pos.append([200, 270])
-            self.pos.append([345, 270])
-            self.pos.append([485, 270])
-            self.pos.append([620, 270])
-
-            self.pos.append([65, 405])
-            self.pos.append([200, 405])
-            self.pos.append([345, 405])
-            self.pos.append([485, 405])
-            self.pos.append([620, 405])
-
-            self.pos.append([65, 540])
-            self.pos.append([200, 540])
-            self.pos.append([345, 540])
-            self.pos.append([485, 540])
-            self.pos.append([620, 540])
+        if isWQHD() or isFHD():
+            self.pos = get_positions("FHD")
+        elif isHD():
+            self.pos = get_positions("HD")
 
         list = []
         self.pics = []
@@ -465,11 +450,6 @@ class LinuxsatPanel(Screen):
         self.combined_data = zip(self.names, self.titles, self.pics)
 
         self["frame"] = MovingPixmap()
-        i = 0
-        while i < 20:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -496,8 +476,13 @@ class LinuxsatPanel(Screen):
                                      "menu": self.closeRecursive})
 
         self.PIXMAPS_PER_PAGE = 20
-        # ln = len(self.names)
-        self.npics = len(self.names)  # Assumi che questo sia il numero totale di immagini
+        i = 0
+        while i < self.PIXMAPS_PER_PAGE:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+
+        self.npics = len(self.names)
         self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(list) - 1
@@ -506,6 +491,8 @@ class LinuxsatPanel(Screen):
 
     def paintFrame(self):
         try:
+            if self.index > self.maxentry:
+                self.index = self.minentry
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
@@ -514,7 +501,7 @@ class LinuxsatPanel(Screen):
             self["frame"].moveTo(ipos[0], ipos[1], 1)
             self["frame"].startMoving()
         except Exception as e:
-            print('error  in paintframe: ', e)
+            print('Error in paintFrame: ', e)
 
     def openTest(self):
         if self.ipage < self.npage:
@@ -546,7 +533,7 @@ class LinuxsatPanel(Screen):
         self.paintFrame()
 
     def key_left(self):
-        if not self.index <= 0:
+        if self.index >= 0:
             self.index -= 1
             # self.paintFrame()
         self.paintFrame()
@@ -559,7 +546,11 @@ class LinuxsatPanel(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            self.key_down()
+            self.ipage += 1
+            if self.ipage > self.npage:  # If we exceed the number of pages
+                self.index = 0
+                self.ipage = 1  # Back to first page
+            self.openTest()
         else:
             self.paintFrame()
 
@@ -567,30 +558,28 @@ class LinuxsatPanel(Screen):
         self.index = self.index - 5
         if self.index < (self.minentry):
             if self.ipage > 1:
-                self.ipage = self.ipage - 1
+                self.ipage -= 1
                 self.openTest()
             elif self.ipage == 1:
                 return
             else:
                 self.index = 0
-            self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def key_down(self):
         self.index = self.index + 5
         if self.index > self.maxentry:
             if self.ipage < self.npage:
-                self.ipage = self.ipage + 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
-            elif self.ipage == self.npage:
+            else:
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
-            else:
-                self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def keyNumberGlobal(self, number):
         number -= 1
@@ -599,12 +588,7 @@ class LinuxsatPanel(Screen):
             self.okbuttonClick()
 
     def list_sort(self):
-        self.combined_data = zip(self.names, self.titles, self.pics)
-        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        self.names = sorted_list
-        self.titles = sorted_titles
-        self.pics = sorted_pics
+        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
         self.openTest()
 
     def closeNonRecursive(self):
@@ -676,57 +660,11 @@ class LSskin(Screen):
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
         self.name = name
-        if isFHD():
-            self.pos = []
-            self.pos.append([100, 210])
-            self.pos.append([310, 210])
-            self.pos.append([525, 210])
-            self.pos.append([735, 210])
-            self.pos.append([940, 210])
 
-            self.pos.append([100, 420])
-            self.pos.append([310, 420])
-            self.pos.append([525, 420])
-            self.pos.append([735, 420])
-            self.pos.append([940, 420])
-
-            self.pos.append([100, 635])
-            self.pos.append([310, 635])
-            self.pos.append([525, 635])
-            self.pos.append([735, 635])
-            self.pos.append([940, 635])
-
-            self.pos.append([100, 835])
-            self.pos.append([310, 835])
-            self.pos.append([525, 835])
-            self.pos.append([735, 835])
-            self.pos.append([940, 835])
-
-        if isHD():
-            self.pos = []
-            self.pos.append([65, 135])
-            self.pos.append([200, 135])
-            self.pos.append([345, 135])
-            self.pos.append([485, 135])
-            self.pos.append([620, 135])
-
-            self.pos.append([65, 270])
-            self.pos.append([200, 270])
-            self.pos.append([345, 270])
-            self.pos.append([485, 270])
-            self.pos.append([620, 270])
-
-            self.pos.append([65, 405])
-            self.pos.append([200, 405])
-            self.pos.append([345, 405])
-            self.pos.append([485, 405])
-            self.pos.append([620, 405])
-
-            self.pos.append([65, 540])
-            self.pos.append([200, 540])
-            self.pos.append([345, 540])
-            self.pos.append([485, 540])
-            self.pos.append([620, 540])
+        if isWQHD() or isFHD():
+            self.pos = get_positions("FHD")
+        elif isHD():
+            self.pos = get_positions("HD")
 
         list = []
         self.pics = []
@@ -777,11 +715,7 @@ class LSskin(Screen):
         self.combined_data = zip(self.names, self.titles, self.pics)
 
         self["frame"] = MovingPixmap()
-        i = 0
-        while i < 20:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -807,50 +741,44 @@ class LSskin(Screen):
                                      "info": self.key_info,
                                      "menu": self.closeRecursive})
 
-        ln = len(self.names)
-        self.npage = int(float(ln / 20)) + 1
+        self.PIXMAPS_PER_PAGE = 20
+        i = 0
+        while i < self.PIXMAPS_PER_PAGE:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+
+        self.npics = len(self.names)
+        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):
-        self.combined_data = zip(self.names, self.titles, self.pics)
-        # test up
-        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        # print("Lista ordinata:", sorted_list)
-        # print("Titoli ordinati:", sorted_titles)
-        # print("Immagini ordinate:", sorted_pics)
-        # self.combined_data = sorted_data
-        self.names = sorted_list
-        self.titles = sorted_titles
-        self.pics = sorted_pics
-
-        self.openTest()
-
     def paintFrame(self):
         try:
+            if self.index > self.maxentry:
+                self.index = self.minentry
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            ifr = self.index - (20 * (self.ipage - 1))
+            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
             self["frame"].startMoving()
         except Exception as e:
-            print('error  in paintframe: ', e)
+            print('Error in paintFrame: ', e)
 
     def openTest(self):
         if self.ipage < self.npage:
-            self.maxentry = (20 * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
         elif self.ipage == self.npage:
             self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
             i1 = 0
-            while i1 < 20:
+            while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
                 i1 += 1
@@ -871,8 +799,9 @@ class LSskin(Screen):
         self.paintFrame()
 
     def key_left(self):
-        if not self.index <= 0:
+        if self.index >= 0:
             self.index -= 1
+            # self.paintFrame()
         self.paintFrame()
 
     def key_right(self):
@@ -883,7 +812,11 @@ class LSskin(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            self.key_down()
+            self.ipage += 1
+            if self.ipage > self.npage:  # If we exceed the number of pages
+                self.index = 0
+                self.ipage = 1  # Back to first page
+            self.openTest()
         else:
             self.paintFrame()
 
@@ -891,36 +824,38 @@ class LSskin(Screen):
         self.index = self.index - 5
         if self.index < (self.minentry):
             if self.ipage > 1:
-                self.ipage = self.ipage - 1
+                self.ipage -= 1
                 self.openTest()
             elif self.ipage == 1:
                 return
             else:
                 self.index = 0
-            self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def key_down(self):
         self.index = self.index + 5
-        if self.index > (self.maxentry):
+        if self.index > self.maxentry:
             if self.ipage < self.npage:
-                self.ipage = self.ipage + 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
-            elif self.ipage == self.npage:
+            else:
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
-            else:
-                self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def keyNumberGlobal(self, number):
         number -= 1
         if len(self["menu"].list) > number:
             self["menu"].setIndex(number)
             self.okbuttonClick()
+
+    def list_sort(self):
+        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.openTest()
 
     def closeNonRecursive(self):
         self.close(False)
@@ -955,57 +890,11 @@ class LSChannel(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.name = name
-        if isFHD():
-            self.pos = []
-            self.pos.append([100, 210])
-            self.pos.append([310, 210])
-            self.pos.append([525, 210])
-            self.pos.append([735, 210])
-            self.pos.append([940, 210])
 
-            self.pos.append([100, 420])
-            self.pos.append([310, 420])
-            self.pos.append([525, 420])
-            self.pos.append([735, 420])
-            self.pos.append([940, 420])
-
-            self.pos.append([100, 635])
-            self.pos.append([310, 635])
-            self.pos.append([525, 635])
-            self.pos.append([735, 635])
-            self.pos.append([940, 635])
-
-            self.pos.append([100, 835])
-            self.pos.append([310, 835])
-            self.pos.append([525, 835])
-            self.pos.append([735, 835])
-            self.pos.append([940, 835])
-
-        if isHD():
-            self.pos = []
-            self.pos.append([65, 135])
-            self.pos.append([200, 135])
-            self.pos.append([345, 135])
-            self.pos.append([485, 135])
-            self.pos.append([620, 135])
-
-            self.pos.append([65, 270])
-            self.pos.append([200, 270])
-            self.pos.append([345, 270])
-            self.pos.append([485, 270])
-            self.pos.append([620, 270])
-
-            self.pos.append([65, 405])
-            self.pos.append([200, 405])
-            self.pos.append([345, 405])
-            self.pos.append([485, 405])
-            self.pos.append([620, 405])
-
-            self.pos.append([65, 540])
-            self.pos.append([200, 540])
-            self.pos.append([345, 540])
-            self.pos.append([485, 540])
-            self.pos.append([620, 540])
+        if isWQHD() or isFHD():
+            self.pos = get_positions("FHD")
+        elif isHD():
+            self.pos = get_positions("HD")
 
         list = []
         self.pics = []
@@ -1040,11 +929,7 @@ class LSChannel(Screen):
         self.combined_data = zip(self.names, self.titles, self.pics)
 
         self["frame"] = MovingPixmap()
-        i = 0
-        while i < 20:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -1070,50 +955,44 @@ class LSChannel(Screen):
                                      "info": self.key_info,
                                      "menu": self.closeRecursive})
 
-        ln = len(self.names)
-        self.npage = int(float(ln / 20)) + 1
+        self.PIXMAPS_PER_PAGE = 20
+        i = 0
+        while i < self.PIXMAPS_PER_PAGE:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+
+        self.npics = len(self.names)
+        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):
-        self.combined_data = zip(self.names, self.titles, self.pics)
-        # test up
-        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        # print("Lista ordinata:", sorted_list)
-        # print("Titoli ordinati:", sorted_titles)
-        # print("Immagini ordinate:", sorted_pics)
-        # self.combined_data = sorted_data
-        self.names = sorted_list
-        self.titles = sorted_titles
-        self.pics = sorted_pics
-
-        self.openTest()
-
     def paintFrame(self):
         try:
+            if self.index > self.maxentry:
+                self.index = self.minentry
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            ifr = self.index - (20 * (self.ipage - 1))
+            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
             self["frame"].startMoving()
         except Exception as e:
-            print('error  in paintframe: ', e)
+            print('Error in paintFrame: ', e)
 
     def openTest(self):
         if self.ipage < self.npage:
-            self.maxentry = (20 * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
         elif self.ipage == self.npage:
             self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
             i1 = 0
-            while i1 < 20:
+            while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
                 i1 += 1
@@ -1134,8 +1013,9 @@ class LSChannel(Screen):
         self.paintFrame()
 
     def key_left(self):
-        if not self.index <= 0:
+        if self.index >= 0:
             self.index -= 1
+            # self.paintFrame()
         self.paintFrame()
 
     def key_right(self):
@@ -1146,7 +1026,11 @@ class LSChannel(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            self.key_down()
+            self.ipage += 1
+            if self.ipage > self.npage:  # If we exceed the number of pages
+                self.index = 0
+                self.ipage = 1  # Back to first page
+            self.openTest()
         else:
             self.paintFrame()
 
@@ -1154,36 +1038,38 @@ class LSChannel(Screen):
         self.index = self.index - 5
         if self.index < (self.minentry):
             if self.ipage > 1:
-                self.ipage = self.ipage - 1
+                self.ipage -= 1
                 self.openTest()
             elif self.ipage == 1:
                 return
             else:
                 self.index = 0
-            self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def key_down(self):
         self.index = self.index + 5
-        if self.index > (self.maxentry):
+        if self.index > self.maxentry:
             if self.ipage < self.npage:
-                self.ipage = self.ipage + 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
-            elif self.ipage == self.npage:
+            else:
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
-            else:
-                self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def keyNumberGlobal(self, number):
         number -= 1
         if len(self["menu"].list) > number:
             self["menu"].setIndex(number)
             self.okbuttonClick()
+
+    def list_sort(self):
+        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.openTest()
 
     def closeNonRecursive(self):
         self.close(False)
@@ -1233,57 +1119,11 @@ class ScriptInstaller(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.name = name
-        if isFHD():
-            self.pos = []
-            self.pos.append([100, 210])
-            self.pos.append([310, 210])
-            self.pos.append([525, 210])
-            self.pos.append([735, 210])
-            self.pos.append([940, 210])
 
-            self.pos.append([100, 420])
-            self.pos.append([310, 420])
-            self.pos.append([525, 420])
-            self.pos.append([735, 420])
-            self.pos.append([940, 420])
-
-            self.pos.append([100, 635])
-            self.pos.append([310, 635])
-            self.pos.append([525, 635])
-            self.pos.append([735, 635])
-            self.pos.append([940, 635])
-
-            self.pos.append([100, 835])
-            self.pos.append([310, 835])
-            self.pos.append([525, 835])
-            self.pos.append([735, 835])
-            self.pos.append([940, 835])
-
-        if isHD():
-            self.pos = []
-            self.pos.append([65, 135])
-            self.pos.append([200, 135])
-            self.pos.append([345, 135])
-            self.pos.append([485, 135])
-            self.pos.append([620, 135])
-
-            self.pos.append([65, 270])
-            self.pos.append([200, 270])
-            self.pos.append([345, 270])
-            self.pos.append([485, 270])
-            self.pos.append([620, 270])
-
-            self.pos.append([65, 405])
-            self.pos.append([200, 405])
-            self.pos.append([345, 405])
-            self.pos.append([485, 405])
-            self.pos.append([620, 405])
-
-            self.pos.append([65, 540])
-            self.pos.append([200, 540])
-            self.pos.append([345, 540])
-            self.pos.append([485, 540])
-            self.pos.append([620, 540])
+        if isWQHD() or isFHD():
+            self.pos = get_positions("FHD")
+        elif isHD():
+            self.pos = get_positions("HD")
 
         list = []
         self.pics = []
@@ -1391,11 +1231,7 @@ class ScriptInstaller(Screen):
         self.combined_data = zip(self.names, self.titles, self.pics)
 
         self["frame"] = MovingPixmap()
-        i = 0
-        while i < 20:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -1421,51 +1257,44 @@ class ScriptInstaller(Screen):
                                      "info": self.key_info,
                                      "menu": self.closeRecursive})
 
-        ln = len(self.names)
-        self.npage = int(float(ln / 20)) + 1
+        self.PIXMAPS_PER_PAGE = 20
+        i = 0
+        while i < self.PIXMAPS_PER_PAGE:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+
+        self.npics = len(self.names)
+        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def list_sort(self):
-        self.combined_data = zip(self.names, self.titles, self.pics)
-        # test up
-        sorted_data = sorted(self.combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        # print("Lista ordinata:", sorted_list)
-        # print("Titoli ordinati:", sorted_titles)
-        # print("Immagini ordinate:", sorted_pics)
-        # self.combined_data = sorted_data
-        self.names = sorted_list
-        self.titles = sorted_titles
-        self.pics = sorted_pics
-
-        self.openTest()
-
     def paintFrame(self):
         try:
+            if self.index > self.maxentry:
+                self.index = self.minentry
             self.idx = self.index
             name = self.names[self.idx]
             self['info'].setText(str(name))
-            # information
-            ifr = self.index - (20 * (self.ipage - 1))
+            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
             ipos = self.pos[ifr]
             self["frame"].moveTo(ipos[0], ipos[1], 1)
             self["frame"].startMoving()
         except Exception as e:
-            print('error  in paintframe: ', e)
+            print('Error in paintFrame: ', e)
 
     def openTest(self):
         if self.ipage < self.npage:
-            self.maxentry = (20 * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
         elif self.ipage == self.npage:
             self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * 20
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
             i1 = 0
-            while i1 < 20:
+            while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
                 self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
                 i1 += 1
@@ -1486,8 +1315,9 @@ class ScriptInstaller(Screen):
         self.paintFrame()
 
     def key_left(self):
-        if not self.index <= 0:
+        if self.index >= 0:
             self.index -= 1
+            # self.paintFrame()
         self.paintFrame()
 
     def key_right(self):
@@ -1498,7 +1328,11 @@ class ScriptInstaller(Screen):
             self.openTest()
         self.index += 1
         if self.index > self.maxentry:
-            self.key_down()
+            self.ipage += 1
+            if self.ipage > self.npage:  # If we exceed the number of pages
+                self.index = 0
+                self.ipage = 1  # Back to first page
+            self.openTest()
         else:
             self.paintFrame()
 
@@ -1506,36 +1340,38 @@ class ScriptInstaller(Screen):
         self.index = self.index - 5
         if self.index < (self.minentry):
             if self.ipage > 1:
-                self.ipage = self.ipage - 1
+                self.ipage -= 1
                 self.openTest()
             elif self.ipage == 1:
                 return
             else:
                 self.index = 0
-            self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def key_down(self):
         self.index = self.index + 5
-        if self.index > (self.maxentry):
+        if self.index > self.maxentry:
             if self.ipage < self.npage:
-                self.ipage = self.ipage + 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
-            elif self.ipage == self.npage:
+            else:
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
-            else:
-                self.paintFrame()
-        else:
-            self.paintFrame()
+
+        self.paintFrame()
 
     def keyNumberGlobal(self, number):
         number -= 1
         if len(self["menu"].list) > number:
             self["menu"].setIndex(number)
             self.okbuttonClick()
+
+    def list_sort(self):
+        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.openTest()
 
     def closeNonRecursive(self):
         self.close(False)
@@ -1661,6 +1497,7 @@ class ScriptInstaller(Screen):
                             'group = 3\ncccversion = 2.2.1\ncccmaxhops = 0\nccckeepalive = 1\n'
                             'audisabled = 1\n\n')
         else:
+            print('unknow actions')
             return
 
         if not os.path.exists(dest):
@@ -1687,6 +1524,8 @@ class ScriptInstaller(Screen):
                 r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>'
             ]
 
+            host = None
+            pas = None                      
             for pattern in regex_patterns:
                 url1 = re.findall(pattern, data)
                 if url1:
@@ -1698,9 +1537,16 @@ class ScriptInstaller(Screen):
                 user = str(u)
                 pas = pw.replace('</h1>', '').replace('</b>', '')
                 pasw = pas.replace('</div>', '').replace('</span>', '')
-                with open(dest, 'a') as cfgdok:
-                    cfgdok.write(write_format.format(host, port, user, pasw))
+            if host and host is not None:
+                if config_type == 'CCcam':
+                    print('write cccam file')
+                    with open(dest, 'a') as cfgdok:
+                        cfgdok.write(write_format.format(host, port, user, pasw))
 
+                if config_type == 'Oscam':
+                    print('write Oscam file')
+                    with open(dest, 'a') as cfgdok:
+                        cfgdok.write(write_format.format(host, host, port, user, pasw))
             self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
         except Exception as e:
             print('error on host', str(e))
@@ -1727,12 +1573,13 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Left'))
         else:
             self['sort'].setText(_('0 Halign Right'))
-        # self.LcnOn = False
-        # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
-            # self['key_yellow'].setText('Lcn')
-            # self.LcnOn = True
-            # print('LcnOn = True')
-
+        '''
+        self.LcnOn = False
+        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+            self['key_yellow'].setText('Lcn')
+            self.LcnOn = True
+            print('LcnOn = True')
+        '''
         self.list = []
         self["list"] = LPSlist([])
         self['fspace'] = Label()
@@ -1769,7 +1616,7 @@ class addInstall(Screen):
         elif HALIGN == RT_HALIGN_RIGHT:
             HALIGN = RT_HALIGN_LEFT
             self['sort'].setText(_('0 Halign Right'))
-        # self.openTest()
+
         if self.dest is not None:
             self.downxmlpage()
         else:
@@ -2017,7 +1864,7 @@ class addInstall(Screen):
             self['info'].setText(_('Download page get failed ...'))
 
     def Lcn(self):
-        setx = 0
+        # setx = 0
         try:
             # from .Lcn import LCNBuildHelper
             lcn = LCNBuildHelper()
@@ -2091,12 +1938,6 @@ class addInstall(Screen):
                     self.session.openWithCallback(self.yes, lsConsole, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
                                                   closeOnSuccess=False)
-                    '''
-                    # self.session.openWithCallback(self.yes, lsConsole, title=_(title),
-                                                  # cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
-                                                  # finishedCallback=self.yes,
-                                                  # closeOnSuccess=False)
-                    '''
             else:
                 self['info'].setText(_('Settings Not Installed ...'))
 
@@ -2298,15 +2139,6 @@ class LSinfo(Screen):
     def Up(self):
         self['list'].pageUp()
 
-    '''
-    # def myIp(self):
-        # currentip = '127.0.0.1'
-        # if not os.path.exists('/tmp/currentip'):
-            # os.system('wget -qO- http://ipecho.net/plain > /tmp/currentip')
-        # currentip1 = open('/tmp/currentip', 'r')
-        # return currentip1.read()
-    '''
-
     def arckget(self):
         zarcffll = ''
         try:
@@ -2342,8 +2174,8 @@ class LSinfo(Screen):
             info += checkGZIP(infourl)
         except Exception as e:
             print("Error ", e)
-            info = checkGZIP(infourl)
-            print('info =: ', info)
+            # info = checkGZIP(infourl)
+            # print('info =: ', info)
         self['list'].setText(info)
 
 
