@@ -85,14 +85,12 @@ from enigma import (
 # code open to everyone. by Lululla
 # ======================================================================
 # changelog 2.3
-# -fix get_positions
+# -fix get_positions and paintFrame (80%)
 # -fix list_sort_utility
 # -fix make_request
-# -fix paintFrame (80%)
-# -fix regex_patterns
+# -fix regex_patterns cline on cccam and oscam
 # -reduced source code
 # -lcn fix (on test button 5) (only Italy)
-# -fix cline on cccam and oscam
 # ======================================================================
 global HALIGN
 global setx
@@ -108,12 +106,10 @@ setx = 0
 
 if PY3:
     from urllib.request import (urlopen, Request)
-    # from urllib.error import URLError
     unicode = str
     PY3 = True
 else:
     from urllib2 import (urlopen, Request)
-    # from urllib2 import URLError
 
 
 if sys.version_info >= (2, 7, 9):
@@ -170,7 +166,6 @@ else:
     picfold = plugin_path + "/LSicons/"
     pngx = plugin_path + "/icons/link.png"
     blpic = picfold + "Blank.png"
-# print('skin path=', skin_path)
 
 
 # menulist
@@ -246,205 +241,208 @@ class LinuxsatPanel(Screen):
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-        self.data = checkGZIP(xmlurl)
-        # self.data = fetch_url(xmlurl)
 
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
         elif isHD():
             self.pos = get_positions("HD")
 
-        list = []
+        self.data = checkGZIP(xmlurl)
+
+        menu_list = []
         self.pics = []
         self.titles = []
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Backup ")
+        has_dpkg = os.path.exists('/var/lib/dpkg/info')
+
+        if not has_dpkg:
+            menu_list.append("Backup ")
             self.titles.append("Backup-Tools")
             self.pics.append(picfold + "Backup.png")
 
-            list.append("Bouquets ")
+            menu_list.append("Bouquets ")
             self.titles.append("Bouquets ")
             self.pics.append(picfold + "Bouquets.png")
 
-        list.append("Channel List ")
+        menu_list.append("Channel List ")
         self.titles.append("Channel List")
         self.pics.append(picfold + "Channel-list.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("DvbUsb Tuners Drivers")
+        if not has_dpkg:
+            menu_list.append("DvbUsb Tuners Drivers")
             self.titles.append("Dvb-Usb ")
             self.pics.append(picfold + "usb-tuner-drivers.png")
 
-            list.append("Epg ")
+            menu_list.append("Epg ")
             self.titles.append("Epg-Tools ")
             self.pics.append(picfold + "plugin-epg.png")
 
-            list.append("Feeds Image Oe2.0 ")
+            menu_list.append("Feeds Image Oe2.0 ")
             self.titles.append("Feeds Oe2.0 ")
             self.pics.append(picfold + "Feeds2.0.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Feeds Image DreamOs ")
+        if has_dpkg:
+            menu_list.append("Feeds Image DreamOs ")
             self.titles.append("Feeds DreamOs ")
             self.pics.append(picfold + "Feeds2.2.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Games ")
+        if not has_dpkg:
+            menu_list.append("Games ")
             self.titles.append("Games ")
             self.pics.append(picfold + "Game.png")
 
-            list.append("Iptv ")
+            menu_list.append("Iptv ")
             self.titles.append("Iptv ")
             self.pics.append(picfold + "iptv-streaming.png")
 
-            list.append("Kiddac Oe2.0 ")
+            menu_list.append("Kiddac Oe2.0 ")
             self.titles.append("Kiddac Zone Oe2.0 ")
             self.pics.append(picfold + "KiddaC1.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Kiddac DreamOs ")
+        if has_dpkg:
+            menu_list.append("Kiddac DreamOs ")
             self.titles.append("Kiddac Zone DreamOs ")
             self.pics.append(picfold + "KiddaC2.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Lululla Zone Oe2.0 ")
+        if not has_dpkg:
+            menu_list.append("Lululla Zone Oe2.0 ")
             self.titles.append("Lululla Zone Oe2.0 ")
             self.pics.append(picfold + "oe2.0.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Lululla Zone DreamOs ")
+        if has_dpkg:
+            menu_list.append("Lululla Zone DreamOs ")
             self.titles.append("Lululla Zone DreamOs ")
             self.pics.append(picfold + "oe2.5-2.6.png")
 
-            list.append("DreamOs Plugins ")
+            menu_list.append("DreamOs Plugins ")
             self.titles.append("DreamOs Plugins ")
             self.pics.append(picfold + "OE2.2-Plugins.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Mediaplayer-Youtube ")
+        if not has_dpkg:
+            menu_list.append("Mediaplayer-Youtube ")
             self.titles.append("MP-YT ")
             self.pics.append(picfold + "mediayou.png")
 
-            list.append("MultiBoot ")
+            menu_list.append("MultiBoot ")
             self.titles.append("MultiBoot ")
             self.pics.append(picfold + "multiboot.png")
 
-            list.append("Multimedia ")
+            menu_list.append("Multimedia ")
             self.titles.append("Multimedia ")
             self.pics.append(picfold + "Multimedia.png")
 
-            list.append("Panels Addons ")
+            menu_list.append("Panels Addons ")
             self.titles.append("Panels Addons ")
             self.pics.append(picfold + "Panels.png")
 
-            list.append("Picons ")
+            menu_list.append("Picons ")
             self.titles.append("Picons-Tools ")
             self.pics.append(picfold + "picons.png")
 
-            list.append("Python Library ")
+            menu_list.append("Python Library ")
             self.titles.append("Python Library ")
             self.pics.append(picfold + "Library.png")
 
-            list.append("Radio ")
+            menu_list.append("Radio ")
             self.titles.append("Radio-Tools ")
             self.pics.append(picfold + "Radio.png")
 
-        list.append("Script Installer ")
+        menu_list.append("Script Installer ")
         self.titles.append("Script Installer ")
         self.pics.append(picfold + "script.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Skins | TEAM ")
+        if not has_dpkg:
+            menu_list.append("Skins | TEAM ")
             self.titles.append("Skins | TEAM ")
             self.pics.append(picfold + "skinsteam.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Skins Fhd-Hd DreamOs ")
+        if has_dpkg:
+            menu_list.append("Skins Fhd-Hd DreamOs ")
             self.titles.append("Skins DreamOs ")
             self.pics.append(picfold + "OE2.2-Skins.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Keys Tools Oe2.0 ")
+        if not has_dpkg:
+            menu_list.append("Keys Tools Oe2.0 ")
             self.titles.append("SoftCam-Tools2.0 ")
             self.pics.append(picfold + "key-updater.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Keys Tools DreamOs ")
+        if has_dpkg:
+            menu_list.append("Keys Tools DreamOs ")
             self.titles.append("SoftCam-Tools DreamOs ")
             self.pics.append(picfold + "key-updater1.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Softcams ")
+        if not has_dpkg:
+            menu_list.append("Softcams ")
             self.titles.append("SoftcamsOE2.0 ")
             self.pics.append(picfold + "SOE20.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Softcams ")
+        if has_dpkg:
+            menu_list.append("Softcams ")
             self.titles.append("Softcams DreamOs ")
             self.pics.append(picfold + "SOE22.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Sport ")
+        if not has_dpkg:
+            menu_list.append("Sport ")
             self.titles.append("Sport ")
             self.pics.append(picfold + "sport.png")
 
-            list.append("Streamlink ")
+            menu_list.append("Streamlink ")
             self.titles.append("Streamlink ")
             self.pics.append(picfold + "streamlink.png")
 
-            list.append("Utility ")
+            menu_list.append("Utility ")
             self.titles.append("Utiliy ")
             self.pics.append(picfold + "utility.png")
 
-            list.append("Vpn Oe2.0 ")
+            menu_list.append("Vpn Oe2.0 ")
             self.titles.append("Vpn-Oe2.0 ")
             self.pics.append(picfold + "vpn.png")
 
-            list.append("Weather ")
+            menu_list.append("Weather ")
             self.titles.append("Weather-Tools ")
             self.pics.append(picfold + "weather.png")
 
-            list.append("Weather Forecast ")
+            menu_list.append("Weather Forecast ")
             self.titles.append("Weather-Foreca")
             self.pics.append(picfold + "weather-forecast.png")
 
-            list.append("Webcam ")
+            menu_list.append("Webcam ")
             self.titles.append("Webcam ")
             self.pics.append(picfold + "webcam.png")
 
         if not config.ParentalControl.configured.value:
-            if not os.path.exists('/var/lib/dpkg/info'):
-                list.append("Adult Oe2.0 ")
+
+            if not has_dpkg:
+                menu_list.append("Adult Oe2.0 ")
                 self.titles.append("Adult Oe2.0 ")
                 self.pics.append(picfold + "18+deb.png")
 
-            if os.path.exists('/var/lib/dpkg/info'):
-                list.append("Adult DreamOs ")
+            if has_dpkg:
+                menu_list.append("Adult DreamOs ")
                 self.titles.append("Adult DreamOs ")
                 self.pics.append(picfold + "18+.png")
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("Other Oe2.0 ")
+        if not has_dpkg:
+            menu_list.append("Other Oe2.0 ")
             self.titles.append("Other Oe2.0 ")
             self.pics.append(picfold + "Other.png")
 
-        if os.path.exists('/var/lib/dpkg/info'):
-            list.append("Other DreamOs ")
+        if has_dpkg:
+            menu_list.append("Other DreamOs ")
             self.titles.append("Other DreamOs ")
             self.pics.append(picfold + "Other1.png")
 
-        list.append(" Information ")
+        menu_list.append(" Information ")
         self.titles.append("Information ")
         self.pics.append(picfold + "Information.png")
 
-        list.append(" About ")
+        menu_list.append(" About ")
         self.titles.append("About ")
         self.pics.append(picfold + "about.png")
 
-        self.names = list
-        self.combined_data = zip(self.names, self.titles, self.pics)
-
+        self.names = menu_list
+        # self.combined_data = zip(self.names, self.titles, self.pics)
+        self.combined_data = list(zip(self.names, self.titles, self.pics))  # Garantisci che `zip` restituisca una lista
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
@@ -457,7 +455,7 @@ class LinuxsatPanel(Screen):
                                      "NumberActions",
                                      'ColorActions',
                                      "EPGSelectActions",
-                                     "InfoActions",],
+                                     "InfoActions"],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
                                      "exit": self.closeRecursive,
@@ -481,7 +479,7 @@ class LinuxsatPanel(Screen):
         self.npics = len(self.names)
         self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
-        self.maxentry = len(list) - 1
+        self.maxentry = len(menu_list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
@@ -683,51 +681,51 @@ class LSskin(Screen):
         elif isHD():
             self.pos = get_positions("HD")
 
-        list = []
+        menu_list = []
         self.pics = []
         self.titles = []
 
-        list.append("Skins All ")
+        menu_list.append("Skins All ")
         self.titles.append("Skins_All ")
         self.pics.append(picfold + "otherskins.png")
 
-        list.append("Skins | HD ")
+        menu_list.append("Skins | HD ")
         self.titles.append("Skins | HD ")
         self.pics.append(picfold + "SkinHD.png")
 
-        list.append("Skins Egami ")
+        menu_list.append("Skins Egami ")
         self.titles.append("Skins_Egami ")
         self.pics.append(picfold + "egami.png")
 
-        list.append("Skins HDF ")
+        menu_list.append("Skins HDF ")
         self.titles.append("Skins_HDF ")
         self.pics.append(picfold + "hdf.png")
 
-        list.append("Skins OpenBh ")
+        menu_list.append("Skins OpenBh ")
         self.titles.append("Skins_OBH ")
         self.pics.append(picfold + "openbh.png")
 
-        list.append("Skins OPEN ATV ")
+        menu_list.append("Skins OPEN ATV ")
         self.titles.append("Skins_OpenAtv ")
         self.pics.append(picfold + "openatv.png")
 
-        list.append("Skins OpenPLi ")
+        menu_list.append("Skins OpenPLi ")
         self.titles.append("Skins_OpenPli ")
         self.pics.append(picfold + "openpli.png")
 
-        list.append("Skins OpenSpa ")
+        menu_list.append("Skins OpenSpa ")
         self.titles.append("Skins_OpenSpa ")
         self.pics.append(picfold + "openspa.png")
 
-        list.append("Skins VTi ")
+        menu_list.append("Skins VTi ")
         self.titles.append("Skins_Vti ")
         self.pics.append(picfold + "vti.png")
 
-        list.append("Skins Oe Based ")
+        menu_list.append("Skins Oe Based ")
         self.titles.append("Skins_Oebased ")
         self.pics.append(picfold + "oebased.png")
 
-        self.names = list
+        self.names = menu_list
 
         self.combined_data = zip(self.names, self.titles, self.pics)
 
@@ -744,7 +742,7 @@ class LSskin(Screen):
                                      "NumberActions",
                                      'ColorActions',
                                      "EPGSelectActions",
-                                     "InfoActions",],
+                                     "InfoActions"],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
                                      "exit": self.closeRecursive,
@@ -768,7 +766,7 @@ class LSskin(Screen):
         self.npics = len(self.names)
         self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
-        self.maxentry = len(list) - 1
+        self.maxentry = len(menu_list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
@@ -933,35 +931,35 @@ class LSChannel(Screen):
         elif isHD():
             self.pos = get_positions("HD")
 
-        list = []
+        menu_list = []
         self.pics = []
         self.titles = []
 
-        list.append("CIEFP ")
+        menu_list.append("CIEFP ")
         self.titles.append("CIEFP")
         self.pics.append(picfold + "ciefp.png")
 
-        list.append("CYRUS ")
+        menu_list.append("CYRUS ")
         self.titles.append("CYRUS ")
         self.pics.append(picfold + "cyrus.png")
 
-        list.append("MANUTEK ")
+        menu_list.append("MANUTEK ")
         self.titles.append("MANUTEK ")
         self.pics.append(picfold + "manutek.png")
 
-        list.append("MORPHEUS ")
+        menu_list.append("MORPHEUS ")
         self.titles.append("MORPHEUS ")
         self.pics.append(picfold + "morpheus883.png")
 
-        list.append("VHANNIBAL 1 ")
+        menu_list.append("VHANNIBAL 1 ")
         self.titles.append("VHANNIBAL 1 ")
         self.pics.append(picfold + "vhannibal1.png")
 
-        list.append("VHANNIBAL 2 ")
+        menu_list.append("VHANNIBAL 2 ")
         self.titles.append("VHANNIBAL 2 ")
         self.pics.append(picfold + "vhannibal2.png")
 
-        self.names = list
+        self.names = menu_list
 
         self.combined_data = zip(self.names, self.titles, self.pics)
 
@@ -978,7 +976,7 @@ class LSChannel(Screen):
                                      "NumberActions",
                                      'ColorActions',
                                      "EPGSelectActions",
-                                     "InfoActions",],
+                                     "InfoActions"],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
                                      "exit": self.closeRecursive,
@@ -1002,7 +1000,7 @@ class LSChannel(Screen):
         self.npics = len(self.names)
         self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
-        self.maxentry = len(list) - 1
+        self.maxentry = len(menu_list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
@@ -1182,108 +1180,108 @@ class ScriptInstaller(Screen):
         elif isHD():
             self.pos = get_positions("HD")
 
-        list = []
+        menu_list = []
         self.pics = []
         self.titles = []
 
-        list.append("Add Libssl Libcrypto ")
+        menu_list.append("Add Libssl Libcrypto ")
         self.titles.append("Add Libssl Libcrypto ")
         self.pics.append(picfold + "AddLibssl.png")
 
-        list.append("Add Symlink Libssl Libcrypto ")
+        menu_list.append("Add Symlink Libssl Libcrypto ")
         self.titles.append("Add Symlink Libssl ")
         self.pics.append(picfold + "AddSymlink.png")
 
-        list.append("Ajpanel by AMAJamry ")
+        menu_list.append("Ajpanel by AMAJamry ")
         self.titles.append("Ajpanel AMAJamry ")
         self.pics.append(picfold + "Ajpanel.png")
 
-        list.append("Biss Feed Autokey ")
+        menu_list.append("Biss Feed Autokey ")
         self.titles.append("Biss Feed Autokey ")
         self.pics.append(picfold + "BissFeedAutokey.png")
 
-        list.append("Chocholousek Picons ")
+        menu_list.append("Chocholousek Picons ")
         self.titles.append("Chocholousek Picons ")
         self.pics.append(picfold + "ChocholousekPicons.png")
 
-        list.append("Add Dns Cloudfaire ")
+        menu_list.append("Add Dns Cloudfaire ")
         self.titles.append("Dns Cloudfaire ")
         self.pics.append(picfold + "DnsCloudfaire.png")
 
-        list.append("Add Dns Google ")
+        menu_list.append("Add Dns Google ")
         self.titles.append("Dns Google ")
         self.pics.append(picfold + "DnsGoogle.png")
 
-        list.append("Add Dns Quad9 ")
+        menu_list.append("Add Dns Quad9 ")
         self.titles.append("Dns Quad9 ")
         self.pics.append(picfold + "DnsQuad9.png")
 
-        list.append("E2player by MOHAMED OS ")
+        menu_list.append("E2player by MOHAMED OS ")
         self.titles.append("E2player MOHAMED ")
         self.pics.append(picfold + "E2playerMOHAMED.png")
 
-        list.append("E2player by MAXBAMBY ")
+        menu_list.append("E2player by MAXBAMBY ")
         self.titles.append("E2player MAXBAMBY ")
         self.pics.append(picfold + "E2playerMAXBAMBY.png")
 
-        list.append("E2player by ZADMARIO ")
+        menu_list.append("E2player by ZADMARIO ")
         self.titles.append("E2player ZADMARIO ")
         self.pics.append(picfold + "E2playerZADMARIO.png")
 
-        list.append("E2player by XXX ")
+        menu_list.append("E2player by XXX ")
         self.titles.append("E2player XXX ")
         self.pics.append(picfold + "E2playerXXX.png")
 
-        list.append("History Zap Selector ")
+        menu_list.append("History Zap Selector ")
         self.titles.append("History Zap Selector ")
         self.pics.append(picfold + "HistoryZapSelector.png")
 
-        list.append("iSetting E2 ")
+        menu_list.append("iSetting E2 ")
         self.titles.append("iSetting E2 ")
         self.pics.append(picfold + "iSettingE2.png")
 
-        list.append("Levi45 Cam Manager ")
+        menu_list.append("Levi45 Cam Manager ")
         self.titles.append("Levi45 Manager ")
         self.pics.append(picfold + "Levi45Manager.png")
 
-        list.append("Show Mountpoints ")
+        menu_list.append("Show Mountpoints ")
         self.titles.append("Mountpoints ")
         self.pics.append(picfold + "Mountpoints.png")
 
-        list.append("Multistalker By ZIKO ")
+        menu_list.append("Multistalker By ZIKO ")
         self.titles.append("Multistalker Ziko ")
         self.pics.append(picfold + "Multistalker.png")
 
-        list.append("New VirtualKeyboard ")
+        menu_list.append("New VirtualKeyboard ")
         self.titles.append("New VirtualKeyboard ")
         self.pics.append(picfold + "NewVirtualKeyboard.png")
 
-        list.append("Quicksignal By Raed ")
+        menu_list.append("Quicksignal By Raed ")
         self.titles.append("Quicksignal Raed ")
         self.pics.append(picfold + "Quicksignal.png")
 
-        list.append("Send Emm TVS ")
+        menu_list.append("Send Emm TVS ")
         self.titles.append("Send Emm ")
         self.pics.append(picfold + "SendEmm.png")
 
-        list.append("Send Cline -> CCcam.cfg ")
+        menu_list.append("Send Cline -> CCcam.cfg ")
         self.titles.append("Send CCcline CCcam ")
         self.pics.append(picfold + "cccamfreee.png")
 
-        list.append("Send Cline -> oscam.server ")
+        menu_list.append("Send Cline -> oscam.server ")
         self.titles.append("Send CCcline Oscam ")
         self.pics.append(picfold + "oscamfree.png")
 
         if not os.path.exists('/var/lib/dpkg/info'):
-            list.append("ServiceApp Exteplayer ")
+            menu_list.append("ServiceApp Exteplayer ")
             self.titles.append("ServiceApp Exteplayer ")
             self.pics.append(picfold + "serviceapp.png")
 
-        list.append("SubSupport Addon ")
+        menu_list.append("SubSupport Addon ")
         self.titles.append("Subsupport addon ")
         self.pics.append(picfold + "SubSupportAddon.png")
 
-        self.names = list
+        self.names = menu_list
         # test down
         self.combined_data = zip(self.names, self.titles, self.pics)
 
@@ -1300,7 +1298,7 @@ class ScriptInstaller(Screen):
                                      "NumberActions",
                                      'ColorActions',
                                      "EPGSelectActions",
-                                     "InfoActions",],
+                                     "InfoActions"],
                                     {"ok": self.okbuttonClick,
                                      "cancel": self.closeNonRecursive,
                                      "exit": self.closeRecursive,
@@ -1324,7 +1322,7 @@ class ScriptInstaller(Screen):
         self.npics = len(self.names)
         self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
-        self.maxentry = len(list) - 1
+        self.maxentry = len(menu_list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
