@@ -11,6 +11,7 @@ from . import (
     checkGZIP,
     descplug,
     developer_url,
+    fetch_url,
     freespace,
     infourl,
     installer_url,
@@ -18,6 +19,7 @@ from . import (
     isFHD,
     isHD,
     RequestUrl,
+    make_request,
     # lngx,
     refreshPlugins,
     xmlurl,
@@ -82,11 +84,21 @@ from enigma import (
 # all and you must make the modified
 # code open to everyone. by Lululla
 # ======================================================================
+# changelog 2.3
+# -fix get_positions
+# -fix list_sort_utility
+# -fix make_request
+# -fix paintFrame (80%)
+# -fix regex_patterns
+# -reduced source code
+# -lcn fix (on test button 5) (only Italy)
+# -fix cline on cccam and oscam
+# ======================================================================
 global HALIGN
 global setx
 global skin_path
 
-currversion = '2.2'
+currversion = '2.3'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
 skin_path = ''
@@ -145,23 +157,6 @@ if sslverify:
             if self.hostname:
                 ClientTLSOptions(self.hostname, ctx)
             return ctx
-
-
-def make_request(url):
-    try:
-        import requests
-        response = requests.get(url, verify=False, timeout=5)
-        if response.status_code == 200:
-            link = requests.get(url, headers={'User-Agent': AgentRequest}, timeout=10, verify=False, stream=True).text
-            return link
-    except ImportError:
-        req = Request(url)
-        req.add_header('User-Agent', 'E2 Plugin Lululla')
-        response = urlopen(req, None, 10)
-        link = response.read().decode('utf-8')
-        response.close()
-        return link
-    return
 
 
 # init path
@@ -252,6 +247,7 @@ class LinuxsatPanel(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
+        # self.data = fetch_url(xmlurl)
 
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
@@ -491,6 +487,7 @@ class LinuxsatPanel(Screen):
 
     def paintFrame(self):
         try:
+            # If the index exceeds the maximum number of items, it returns to the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -533,18 +530,33 @@ class LinuxsatPanel(Screen):
         self.paintFrame()
 
     def key_left(self):
+        # Decrement the index only if we are not at the first pixmap
         if self.index >= 0:
             self.index -= 1
-            # self.paintFrame()
-        self.paintFrame()
+        else:
+            # If we are at the first pixmap, go back to the last pixmap of the last page
+            self.ipage = self.npage
+            self.index = self.npics - 1
+        # Check if we need to change pages
+        if self.index < self.minentry:
+            self.ipage -= 1
+            if self.ipage < 1:  # If we go beyond the first page
+                self.ipage = self.npage
+                self.index = self.npics - 1  # Back to the last pixmap of the last page
+            self.openTest()
+        else:
+            self.paintFrame()
 
     def key_right(self):
-        i = self.npics - 1
-        if self.index == i:
+        # Increment the index only if we are not at the last pixmap
+        if self.index < self.npics - 1:
+            self.index += 1
+        else:
+            # If we are at the last pixmap, go back to the first pixmap of the first page
             self.index = 0
             self.ipage = 1
             self.openTest()
-        self.index += 1
+        # Check if we need to change pages
         if self.index > self.maxentry:
             self.ipage += 1
             if self.ipage > self.npage:  # If we exceed the number of pages
@@ -555,26 +567,30 @@ class LinuxsatPanel(Screen):
             self.paintFrame()
 
     def key_up(self):
-        self.index = self.index - 5
-        if self.index < (self.minentry):
+        if self.index >= 5:
+            self.index -= 5
+        else:
             if self.ipage > 1:
                 self.ipage -= 1
+                self.index = self.maxentry  # Back to the last line of the previous page
                 self.openTest()
-            elif self.ipage == 1:
-                return
             else:
-                self.index = 0
-
+                # If we are on the first page, go back to the last pixmap of the last page
+                self.ipage = self.npage
+                self.index = self.npics - 1
+                self.openTest()
         self.paintFrame()
 
     def key_down(self):
-        self.index = self.index + 5
-        if self.index > self.maxentry:
+        if self.index <= self.maxentry - 5:
+            self.index += 5
+        else:
             if self.ipage < self.npage:
                 self.ipage += 1
-                self.index = self.minentry
+                self.index = self.minentry  # Back to the top of the next page
                 self.openTest()
             else:
+                # If we are on the last page, go back to the first pixmap of the first page
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
@@ -659,6 +675,7 @@ class LSskin(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
+        # self.data = fetch_url(xmlurl)
         self.name = name
 
         if isWQHD() or isFHD():
@@ -757,6 +774,7 @@ class LSskin(Screen):
 
     def paintFrame(self):
         try:
+            # If the index exceeds the maximum number of items, it returns to the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -799,18 +817,33 @@ class LSskin(Screen):
         self.paintFrame()
 
     def key_left(self):
+        # Decrement the index only if we are not at the first pixmap
         if self.index >= 0:
             self.index -= 1
-            # self.paintFrame()
-        self.paintFrame()
+        else:
+            # If we are at the first pixmap, go back to the last pixmap of the last page
+            self.ipage = self.npage
+            self.index = self.npics - 1
+        # Check if we need to change pages
+        if self.index < self.minentry:
+            self.ipage -= 1
+            if self.ipage < 1:  # If we go beyond the first page
+                self.ipage = self.npage
+                self.index = self.npics - 1  # Back to the last pixmap of the last page
+            self.openTest()
+        else:
+            self.paintFrame()
 
     def key_right(self):
-        i = self.npics - 1
-        if self.index == i:
+        # Increment the index only if we are not at the last pixmap
+        if self.index < self.npics - 1:
+            self.index += 1
+        else:
+            # If we are at the last pixmap, go back to the first pixmap of the first page
             self.index = 0
             self.ipage = 1
             self.openTest()
-        self.index += 1
+        # Check if we need to change pages
         if self.index > self.maxentry:
             self.ipage += 1
             if self.ipage > self.npage:  # If we exceed the number of pages
@@ -821,26 +854,30 @@ class LSskin(Screen):
             self.paintFrame()
 
     def key_up(self):
-        self.index = self.index - 5
-        if self.index < (self.minentry):
+        if self.index >= 5:
+            self.index -= 5
+        else:
             if self.ipage > 1:
                 self.ipage -= 1
+                self.index = self.maxentry  # Back to the last line of the previous page
                 self.openTest()
-            elif self.ipage == 1:
-                return
             else:
-                self.index = 0
-
+                # If we are on the first page, go back to the last pixmap of the last page
+                self.ipage = self.npage
+                self.index = self.npics - 1
+                self.openTest()
         self.paintFrame()
 
     def key_down(self):
-        self.index = self.index + 5
-        if self.index > self.maxentry:
+        if self.index <= self.maxentry - 5:
+            self.index += 5
+        else:
             if self.ipage < self.npage:
                 self.ipage += 1
-                self.index = self.minentry
+                self.index = self.minentry  # Back to the top of the next page
                 self.openTest()
             else:
+                # If we are on the last page, go back to the first pixmap of the first page
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
@@ -971,6 +1008,7 @@ class LSChannel(Screen):
 
     def paintFrame(self):
         try:
+            # If the index exceeds the maximum number of items, it returns to the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -1013,18 +1051,33 @@ class LSChannel(Screen):
         self.paintFrame()
 
     def key_left(self):
+        # Decrement the index only if we are not at the first pixmap
         if self.index >= 0:
             self.index -= 1
-            # self.paintFrame()
-        self.paintFrame()
+        else:
+            # If we are at the first pixmap, go back to the last pixmap of the last page
+            self.ipage = self.npage
+            self.index = self.npics - 1
+        # Check if we need to change pages
+        if self.index < self.minentry:
+            self.ipage -= 1
+            if self.ipage < 1:  # If we go beyond the first page
+                self.ipage = self.npage
+                self.index = self.npics - 1  # Back to the last pixmap of the last page
+            self.openTest()
+        else:
+            self.paintFrame()
 
     def key_right(self):
-        i = self.npics - 1
-        if self.index == i:
+        # Increment the index only if we are not at the last pixmap
+        if self.index < self.npics - 1:
+            self.index += 1
+        else:
+            # If we are at the last pixmap, go back to the first pixmap of the first page
             self.index = 0
             self.ipage = 1
             self.openTest()
-        self.index += 1
+        # Check if we need to change pages
         if self.index > self.maxentry:
             self.ipage += 1
             if self.ipage > self.npage:  # If we exceed the number of pages
@@ -1035,26 +1088,30 @@ class LSChannel(Screen):
             self.paintFrame()
 
     def key_up(self):
-        self.index = self.index - 5
-        if self.index < (self.minentry):
+        if self.index >= 5:
+            self.index -= 5
+        else:
             if self.ipage > 1:
                 self.ipage -= 1
+                self.index = self.maxentry  # Back to the last line of the previous page
                 self.openTest()
-            elif self.ipage == 1:
-                return
             else:
-                self.index = 0
-
+                # If we are on the first page, go back to the last pixmap of the last page
+                self.ipage = self.npage
+                self.index = self.npics - 1
+                self.openTest()
         self.paintFrame()
 
     def key_down(self):
-        self.index = self.index + 5
-        if self.index > self.maxentry:
+        if self.index <= self.maxentry - 5:
+            self.index += 5
+        else:
             if self.ipage < self.npage:
                 self.ipage += 1
-                self.index = self.minentry
+                self.index = self.minentry  # Back to the top of the next page
                 self.openTest()
             else:
+                # If we are on the last page, go back to the first pixmap of the first page
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
@@ -1273,6 +1330,7 @@ class ScriptInstaller(Screen):
 
     def paintFrame(self):
         try:
+            # If the index exceeds the maximum number of items, it returns to the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -1315,18 +1373,33 @@ class ScriptInstaller(Screen):
         self.paintFrame()
 
     def key_left(self):
+        # Decrement the index only if we are not at the first pixmap
         if self.index >= 0:
             self.index -= 1
-            # self.paintFrame()
-        self.paintFrame()
+        else:
+            # If we are at the first pixmap, go back to the last pixmap of the last page
+            self.ipage = self.npage
+            self.index = self.npics - 1
+        # Check if we need to change pages
+        if self.index < self.minentry:
+            self.ipage -= 1
+            if self.ipage < 1:  # If we go beyond the first page
+                self.ipage = self.npage
+                self.index = self.npics - 1  # Back to the last pixmap of the last page
+            self.openTest()
+        else:
+            self.paintFrame()
 
     def key_right(self):
-        i = self.npics - 1
-        if self.index == i:
+        # Increment the index only if we are not at the last pixmap
+        if self.index < self.npics - 1:
+            self.index += 1
+        else:
+            # If we are at the last pixmap, go back to the first pixmap of the first page
             self.index = 0
             self.ipage = 1
             self.openTest()
-        self.index += 1
+        # Check if we need to change pages
         if self.index > self.maxentry:
             self.ipage += 1
             if self.ipage > self.npage:  # If we exceed the number of pages
@@ -1337,26 +1410,30 @@ class ScriptInstaller(Screen):
             self.paintFrame()
 
     def key_up(self):
-        self.index = self.index - 5
-        if self.index < (self.minentry):
+        if self.index >= 5:
+            self.index -= 5
+        else:
             if self.ipage > 1:
                 self.ipage -= 1
+                self.index = self.maxentry  # Back to the last line of the previous page
                 self.openTest()
-            elif self.ipage == 1:
-                return
             else:
-                self.index = 0
-
+                # If we are on the first page, go back to the last pixmap of the last page
+                self.ipage = self.npage
+                self.index = self.npics - 1
+                self.openTest()
         self.paintFrame()
 
     def key_down(self):
-        self.index = self.index + 5
-        if self.index > self.maxentry:
+        if self.index <= self.maxentry - 5:
+            self.index += 5
+        else:
             if self.ipage < self.npage:
                 self.ipage += 1
-                self.index = self.minentry
+                self.index = self.minentry  # Back to the top of the next page
                 self.openTest()
             else:
+                # If we are on the last page, go back to the first pixmap of the first page
                 self.index = 0
                 self.ipage = 1
                 self.openTest()
@@ -1492,9 +1569,18 @@ class ScriptInstaller(Screen):
             dest = os.path.join(dest_dir, 'oscam.server')
             src = plugin_path + '/sh/oscam.server'
             not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
-            write_format = ('\n[reader]\nlabel = Server_{}\nenable= 1\nprotocol = cccam\n'
-                            'device = {},{}\nuser = {}\npassword = {}\ninactivitytimeout = 30\n'
-                            'group = 3\ncccversion = 2.2.1\ncccmaxhops = 0\nccckeepalive = 1\n'
+            write_format = ('\n[reader]\n'
+                            'label = Server_{}\n'  # host
+                            'enable= 1\n'
+                            'protocol = cccam\n'
+                            'device = {}, {}\n'  # host, port,
+                            'user = {}\n'  # user
+                            'password = {}\n'  # pasw
+                            'inactivitytimeout = 30\n'
+                            'group = 1\n'
+                            'cccversion = 2.1.2\n'
+                            'cccmaxhops = 1\n'
+                            'ccckeepalive = 1\n'
                             'audisabled = 1\n\n')
         else:
             print('unknow actions')
@@ -1507,37 +1593,68 @@ class ScriptInstaller(Screen):
 
         try:
             dat = RequestUrl()
-            if not dat:
-                return
-            data = checkGZIP(dat)
+            print('Request Server url is:', dat)
+            # data = checkGZIP(dat)
+            data = make_request(dat)
+            # data = fetch_url(dat)
+
             if PY3:
                 data = six.ensure_str(data)
 
-            regex_patterns = [
-                r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>',
-                r'<strong>c:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
-                r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
-                r'cline">\s*C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
-                r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
-                r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
-                r'b>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)',
-                r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>'
-            ]
-
+            if 'bosscccam' in data:  # ok
+                print('bosscccam pattern')
+                regex_patterns = [
+                    r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>",
+                ]
+            elif 'cccambird' in data:  # ok
+                print('cccambird pattern')
+                regex_patterns = [
+                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
+                ]
+            elif 'cccamia' in data:  # ok
+                print('cccamia pattern')
+                regex_patterns = [
+                    r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
+                ]
+            elif 'cccam.net' in data:  # ok
+                print('cccam.net pattern')
+                regex_patterns = [
+                    r'b>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)',
+                ]
+            elif 'iptv-15days' in data:  # ok cccamia
+                print('15days pattern')
+                regex_patterns = [
+                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
+                ]
+            else:
+                print('generic pattern')
+                regex_patterns = [
+                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>',
+                    r'<strong>c:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
+                    r'cline">\s*C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
+                    r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
+                    r'"C: (.*?) (.*?) (.*?) (.*?)"',
+                    r'"c: (.*?) (.*?) (.*?) (.*?)"',
+                ]
             host = None
-            pas = None                      
+            pas = None
             for pattern in regex_patterns:
-                url1 = re.findall(pattern, data)
+                url1 = re.search(pattern, data)
                 if url1:
-                    break
-
-            for h, p, u, pw in url1:
-                host = str(h)
-                port = str(p)
-                user = str(u)
-                pas = pw.replace('</h1>', '').replace('</b>', '')
-                pasw = pas.replace('</div>', '').replace('</span>', '')
+                    host = url1.group(1)
+                    port = url1.group(2)
+                    user = url1.group(3)
+                    pas = url1.group(4)
+                    '''
+                    print("Server:", host)
+                    print("Port:", port)
+                    print("User:", user)
+                    print("Password:", pas)
+                    '''
             if host and host is not None:
+                pas = pas.replace('</h1>', '').replace('</b>', '')
+                pasw = pas.replace('</div>', '').replace('</span>', '')
+
                 if config_type == 'CCcam':
                     print('write cccam file')
                     with open(dest, 'a') as cfgdok:
@@ -1547,7 +1664,11 @@ class ScriptInstaller(Screen):
                     print('write Oscam file')
                     with open(dest, 'a') as cfgdok:
                         cfgdok.write(write_format.format(host, host, port, user, pasw))
-            self.session.open(MessageBox, _('Server added in %s') % dest, type=MessageBox.TYPE_INFO, timeout=8)
+
+                self.session.open(MessageBox, _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw), type=MessageBox.TYPE_INFO, timeout=6)
+            else:
+                self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!"), type=MessageBox.TYPE_INFO, timeout=8)
+
         except Exception as e:
             print('error on host', str(e))
 
@@ -1740,6 +1861,7 @@ class addInstall(Screen):
 
     def downxmlpage(self):
         self.downloading = False
+        # r = fetch_url(self.fxml)
         r = make_request(self.fxml)
         if PY3:
             import six
@@ -2119,7 +2241,8 @@ class LSinfo(Screen):
                 self.infoBox()
             elif self.name == " About ":
                 url = abouturl
-                ab = checkGZIP(url)
+                # ab = checkGZIP(url)
+                ab = fetch_url(url)
                 self['list'].setText(ab)
             else:
                 return
@@ -2171,7 +2294,8 @@ class LSinfo(Screen):
             info += 'Designs and Graphics by @oktus\n'
             info += 'Support on: Linuxsat-support.com\n\n'
             info += 'Current IP Wan: %s\nImage: %sCpu: %s\nPython Version: %s\nArch. Info: %s\nLibssl(oscam):\n%s\n' % (ifg, img, arc, python, arkFull, libsssl)
-            info += checkGZIP(infourl)
+            # info += checkGZIP(infourl)
+            info += fetch_url(infourl)
         except Exception as e:
             print("Error ", e)
             # info = checkGZIP(infourl)

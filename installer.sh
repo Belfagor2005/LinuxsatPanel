@@ -3,7 +3,7 @@
 
 ## Only This 2 lines to edit with new version ######
 version='2.2'
-changelog='\nAdd Script Panel\Skins hd/fhd fix\nMinor fix'
+changelog='\nfix get_positions\nfix list_sort_utility\nfix make_request\nfix paintFrame (80%)\nfix regex_patterns\nreduced source code\nlcn fix (button 5 only Italy)\nfix cline on cccam and oscam'
 
 ##############################################################
 

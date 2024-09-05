@@ -2,52 +2,54 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-22 00:18+0200\n"
+"POT-Creation-Date: 2024-09-04 17:02+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
 
 #: lsConsole.py:56
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
 #: lsConsole.py:57
 msgid "Hide/Show"
-msgstr ""
+msgstr "Skryť/zobraziť"
 
 #: lsConsole.py:58
 msgid "Restart"
-msgstr "Reštartujte enigmu"
+msgstr "Reštart"
 
 #: lsConsole.py:90
 msgid ""
 "Execution progress\n"
 "\n"
 msgstr ""
+"Priebeh vykonávania\n"
+"\n"
 
-#: lsConsole.py:123 plugin.py:451 plugin.py:766 plugin.py:1029 plugin.py:1380
-#: plugin.py:1732
+#: lsConsole.py:123 plugin.py:452 plugin.py:739 plugin.py:973 plugin.py:1295
+#: plugin.py:1688
 msgid "Exit"
 msgstr "Ukončiť"
 
-#: plugin.py:449 plugin.py:764 plugin.py:1027 plugin.py:1378 plugin.py:1755
-#: plugin.py:2172
+#: plugin.py:450 plugin.py:737 plugin.py:971 plugin.py:1293 plugin.py:1707
+#: plugin.py:2134
 msgid "Please Wait..."
 msgstr "Prosím čakajte..."
 
-#: plugin.py:450 plugin.py:765 plugin.py:1028 plugin.py:1379
+#: plugin.py:451 plugin.py:738 plugin.py:972 plugin.py:1294
 msgid "0 Sort"
 msgstr "0 Zoradiť"
 
-#: plugin.py:608
+#: plugin.py:630
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -57,12 +59,12 @@ msgstr ""
 "\n"
 "si si istý, že chceš pokračovať?"
 
-#: plugin.py:1618 plugin.py:1876
+#: plugin.py:1550
 #, python-format
-msgid "Do you want to install %s?"
-msgstr "Chcete nainštalovať %s?"
+msgid "Do you want to execute %s?"
+msgstr "Chcete spustiť %s?"
 
-#: plugin.py:1623
+#: plugin.py:1555
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -71,56 +73,87 @@ msgstr ""
 "Prebieha spustenie %s\n"
 "Čakajte prosím..."
 
-#: plugin.py:1631
+#: plugin.py:1562
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
 msgstr ""
+"Súbor sa nenašiel /etc/CCcam.cfg!\n"
+"Reštartujte prosím..."
 
-#: plugin.py:1667 plugin.py:1715
-#, python-format
-msgid "Server added in %s"
-msgstr ""
-
-#: plugin.py:1680
+#: plugin.py:1571
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
 msgstr ""
+"Súbor sa nenašiel /etc/tuxbox/config/oscam.server!\n"
+"Reštartujte prosím..."
 
-#: plugin.py:1733
+#: plugin.py:1668
+#, python-format
+msgid ""
+"Server %s added in %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"User:%s\n"
+"Password:%s\n"
+msgstr ""
+"Server %s pridaný do %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"Používateľ:%s\n"
+"Heslo:%s\n"
+
+#: plugin.py:1670
+msgid ""
+"Server Error.\n"
+"\n"
+"Try again, you'll be luckier!"
+msgstr ""
+"Chyba servera.\n"
+"\n"
+"Skúste to znova, budete mať viac šťastia!"
+
+#: plugin.py:1689
 msgid "Install"
 msgstr "Inštalovať"
 
-#: plugin.py:1734
+#: plugin.py:1690
 msgid "Remove"
 msgstr "Odstrániť"
 
-#: plugin.py:1735
+#: plugin.py:1691
 msgid "Restart enigma"
 msgstr "Reštartujte enigmu"
 
-#: plugin.py:1741 plugin.py:1783 plugin.py:1823
+#: plugin.py:1694 plugin.py:1736 plugin.py:1776
 msgid "0 Halign Left"
-msgstr "0 Zarovnať doľava"
+msgstr "0 Zarovnať vľavo"
 
-#: plugin.py:1743 plugin.py:1786 plugin.py:1825
+#: plugin.py:1696 plugin.py:1739 plugin.py:1778
 msgid "0 Halign Right"
 msgstr "0 Zarovnať vpravo"
 
-#: plugin.py:1757
+#: plugin.py:1709
 msgid "Load Category..."
 msgstr "Načítať kategóriu..."
 
-#: plugin.py:1795
+#: plugin.py:1748
 msgid "Category: "
 msgstr "Kategória: "
 
-#: plugin.py:1854 plugin.py:1864
+#: plugin.py:1802 plugin.py:1812
 msgid "Unknow Image!"
 msgstr "Nepoznaný obrázok!"
 
-#: plugin.py:1914 plugin.py:2095
+#: plugin.py:1824
+#, python-format
+msgid "Do you want to install %s?"
+msgstr "Chcete nainštalovať %s?"
+
+#: plugin.py:1859 plugin.py:2059
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -129,40 +162,40 @@ msgstr ""
 "Inštaluje sa %s\n"
 "Prosím čakajte..."
 
-#: plugin.py:2041
+#: plugin.py:1986
 msgid "Download page get failed ..."
 msgstr "Sťahovanie stránky zlyhalo..."
 
-#: plugin.py:2051
-msgid "Sorting Terrestrial channels with Lcn rules Completed"
-msgstr "Triedenie pozemných kanálov s pravidlami Lcn Dokončené"
+#: plugin.py:1994
+msgid "Sorting Terrestrial Executed!"
+msgstr "Triedenie terestriálneho spustenia!"
 
-#: plugin.py:2058
+#: plugin.py:1999
+msgid "Sorting Terrestrial not Executed!"
+msgstr "Pozemné triedenie nebolo spustené!"
+
+#: plugin.py:2022
 msgid "Do you want to install?"
 msgstr "Chcete nainštalovať?"
 
-#: plugin.py:2106
+#: plugin.py:2064
 msgid "Settings Not Installed ..."
 msgstr "Nastavenia nie sú nainštalované..."
 
-#: plugin.py:2123
+#: plugin.py:2085
 msgid "Do you want to remove?"
 msgstr "Chcete odstrániť?"
 
-#: plugin.py:2137
+#: plugin.py:2099
 #, python-format
 msgid "Removing %s"
 msgstr "Odstraňuje sa %s"
 
-#: plugin.py:2143
+#: plugin.py:2105
 msgid "Do you want to restart Gui Interface?"
 msgstr "Chcete reštartovať rozhranie Gui?"
 
-#: plugin.py:2175
-msgid "Update"
-msgstr "Aktualizovať"
-
-#: plugin.py:2245
+#: plugin.py:2205
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -177,7 +210,11 @@ msgstr ""
 "\n"
 "Stlačením zeleného tlačidla spustíte aktualizáciu"
 
-#: plugin.py:2251
+#: plugin.py:2206
+msgid "Update"
+msgstr "Aktualizovať"
+
+#: plugin.py:2211
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -192,27 +229,27 @@ msgstr ""
 "\n"
 "Chcete ho nainštalovať teraz?"
 
-#: plugin.py:2254
+#: plugin.py:2214
 msgid "Congrats! You already have the latest version..."
 msgstr "Gratulujem! Už máte najnovšiu verziu..."
 
-#: plugin.py:2264
+#: plugin.py:2224
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Chcete teraz nainštalovať aktualizáciu ( %s )?"
 
-#: plugin.py:2271
+#: plugin.py:2231
 msgid "Update Aborted!"
 msgstr "Aktualizácia prerušená!"
 
-#: plugin.py:2290
+#: plugin.py:2251
 msgid "Unable to download updates!"
 msgstr "Nie je možné stiahnuť aktualizácie!"
 
-#: plugin.py:2538
+#: plugin.py:2421
 msgid "Check Connection!"
 msgstr "Skontrolujte pripojenie!"
 
-#: plugin.py:2559
+#: plugin.py:2442
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"

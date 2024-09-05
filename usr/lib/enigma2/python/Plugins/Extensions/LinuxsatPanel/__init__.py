@@ -40,7 +40,13 @@ abouturl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/abou
 xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_2024.xml'
 installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
 developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
-ListUrl = ['https://bosscccam.co/Test.php', 'https://iptv-15days.blogspot.com', 'https://cccamia.com/free-cccam', 'https://cccam.net/freecccam', 'https://cccamiptv.pro/cccam-free/#page-content']
+
+ListUrl = ['https://bosscccam.co/Test.php',
+           'https://iptv-15days.blogspot.com',
+           'https://cccamia.com/free-cccam',
+           'https://cccam.net/freecccam']
+
+
 isDreamOS = False
 if os.path.exists("/var/lib/dpkg/status"):
     isDreamOS = True
@@ -193,6 +199,42 @@ def freespace():
         return _("Free Space:") + " -?- " + _("of") + " -?-"
 
 
+# Use the feature to get the text and update the interface
+def fetch_url(url, retries=3, initial_timeout=5):
+    import sys
+    import socket
+    if sys.version_info[0] == 3:
+        from urllib.request import (urlopen)
+        from urllib.error import URLError
+        # unicode = str
+        PY3 = True
+    else:
+        from urllib2 import (urlopen)
+        from urllib2 import URLError
+    timeout = initial_timeout
+    for i in range(retries):
+        try:
+            fp = urlopen(url, timeout=timeout)
+            lines = fp.readlines()
+            fp.close()
+            labeltext = ""
+            for line in lines:
+                if PY3:
+                    line = line.decode()  # Decode bytes to str in Python 3
+                labeltext += str(line)
+            return labeltext
+        except socket.timeout:
+            print("Attempt failed: The connection timed out after %s seconds." % timeout)
+            timeout *= 2  # Double the timeout for the next attempt
+        except URLError as e:
+            print("URL Error:", e)
+            break
+        except Exception as e:
+            print("Error:", e)
+            break
+    return None
+
+
 def checkGZIP(url):
     url = url
     from io import StringIO
@@ -201,10 +243,9 @@ def checkGZIP(url):
     import sys
     if sys.version_info[0] == 3:
         from urllib.request import (urlopen, Request)
-        # unicode = str
-        # PY3 = True
     else:
         from urllib2 import (urlopen, Request)
+
     hdr = {"User-Agent": AgentRequest}
     response = None
     request = Request(url, headers=hdr)
@@ -258,6 +299,45 @@ def b64decoder(s):
             output = output.decode('utf-8')
         return output
 
+
+def make_request(url, max_retries=3, base_delay=1):
+    import time
+    import socket
+    import sys
+
+    if sys.version_info[0] == 3:
+        from urllib.request import (urlopen, Request)
+        from urllib.error import URLError
+    else:
+        from urllib2 import (urlopen, Request)
+        from urllib2 import URLError
+
+    for attempt in range(max_retries):
+        try:
+            req = Request(url)
+            req.add_header('User-Agent', AgentRequest)
+            start_time = time.time()
+            response = urlopen(req, None, 10)
+
+            elapsed_time = time.time() - start_time
+            print('elapsed_time:', elapsed_time)
+
+            if response.getcode() == 200:
+                content = response.read().decode('utf-8')
+                return content
+            else:
+                print("URL returned status code:", response.getcode)
+                return None
+        except URLError as e:
+            if isinstance(e.reason, socket.timeout):
+                delay = base_delay * (2 ** attempt)
+                print("Timeout occurred. Retrying in seconds...", str(delay))
+                time.sleep(delay)
+            else:
+                print("URLError occurred:", str(e))
+                return None
+    print("Max retries reached.")
+    return None
 
 # self.token = "ZUp6enk4cko4ZzBKTlBMTFNxN3djd25MOHEzeU5Zak1Bdkd6S3lPTmdqSjhxeUxMSTBNOFRhUGNBMjBCVmxBTzlBPT0K"
 # def check(self, token):

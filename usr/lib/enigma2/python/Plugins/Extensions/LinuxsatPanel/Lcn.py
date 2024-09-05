@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
-from . import _
 from enigma import (eServiceReference, eServiceCenter)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -38,6 +37,7 @@ TerChArch = plugin_path + '/temp/TerrestrialChannelListArchive'
 IptvChArch = plugin_path + '/temp'
 e2etc = '/etc/enigma2'
 ee2ldb = '/etc/enigma2/lamedb'
+dbfile = '/var/etc/enigma2/lcndb'
 
 
 def ReloadBouquets(x):
@@ -48,10 +48,7 @@ def ReloadBouquets(x):
         eDVBDB = None
     print("\n----Reloading bouquets----")
 
-    # print("\n----Reloading Iptv----")
-    # copy_files_to_enigma2
-
-    global setx
+    global setx  # for linuxsat panel
     if x == 1:
         setx = 0
         print("\n----Reloading Terrestrial----")
@@ -85,16 +82,11 @@ class LCN():
     service_types_radio = '1:7:2:0:0:0:0:0:0:0:(type == 2)'
 
     def __init__(self):
-        # def __init__(self, dbfile, rulefile, rulename, bouquetfile):
-        # self.dbfile = dbfile
-        # self.bouquetfile = bouquetfile
-        self.dbfile = '/var/etc/enigma2/lcndb'
         self.bouquetfile = Bouquet()
         self.lcnlist = []
         self.markers = []
         self.e2services = []
         mdom = parse(rules)
-        # mdom = xml.etree.cElementTree.parse(rulefile)
         self.root = None
         for x in mdom.getroot():
             # if x.tag == "ruleset" and x.get("name") == rulename:
@@ -151,10 +143,8 @@ class LCN():
 
     def read(self, serviceType):
         self.readE2Services(serviceType)
-        # def read(self):
-        # self.readE2Services()
         try:
-            f = open(self.dbfile)
+            f = open(dbfile)
         except Exception as e:
             print(e)
             return
@@ -369,7 +359,6 @@ class LCN():
             i += 1
 
     def reloadBouquets(self):
-        # eDVBDB.getInstance().reloadBouquets()
         ReloadBouquets(0)
 
 
@@ -386,10 +375,9 @@ class LCNBuildHelper():
                 self.rulelist.append((x.get("name"), x.get("name")))
             # if x.tag == "ruleset" and x.get("name") == 'Italy':
                 # self.rulelist.append((x.get("name"), x.get("name")))
-
         config.lcn = ConfigSubsection()
         config.lcn.enabled = ConfigYesNo(True)
-        config.lcn.bouquet = ConfigSelection(default="userbouquet.LastScanned.tv", choices=self.bouquetlist)
+        config.lcn.bouquet = ConfigSelection(default="userbouquet.LastScanned.tv", choices=self.bouquetlist)  # not used instead self.bouquetfile
         config.lcn.rules = ConfigSelection(self.rulelist)
 
     def readBouquetsTvList(self, pwd):
@@ -453,12 +441,12 @@ class LCNBuildHelper():
                 break
 
         bouquet = self.rulelist[0][0]
+        self.bouquetfile = Bouquet()  #find terrestrial bouqet top of source
         for x in self.bouquetlist:
-            if x[0] == config.lcn.bouquet.value:
+            if x[0] == self.bouquetfile:  # config.lcn.bouquet.value:
                 bouquet = x[0]
                 break
 
-        # lcn = LCN(resolveFilename(SCOPE_CONFIG, "lcndb"), os.path.dirname(sys.modules[__name__].__file__) + "/rules.xml", rule, resolveFilename(SCOPE_CONFIG, bouquet))
         lcn = LCN()
         lcn.read("TV")
         if len(lcn.lcnlist) > 0:
@@ -521,9 +509,6 @@ class LCNScannerPlugin(Screen, ConfigListScreen, LCNBuildHelper):
             self.keySave()
             configfile.save()
 
-    # def reloadBouquets(self):
-        # ReloadBouquets(0)
-
 
 def terrestrial():
     SavingProcessTerrestrialChannels = StartSavingTerrestrialChannels()
@@ -585,11 +570,12 @@ def terrestrial_rest():
                 new_bouquet.close()
                 os.system('cp -rf /etc/enigma2/bouquets.tv /etc/enigma2/backup_bouquets.tv')
                 os.system('mv -f /etc/enigma2/new_bouquets.tv /etc/enigma2/bouquets.tv')
-        if os.path.exists('/etc/enigma2/lcndb'):
+        if os.path.exists(dbfile):
             lcnstart()
 
 
 def copy_files_to_enigma2():
+
     IptvChArch = plugin_path + '/temp'
     enigma2_folder = "/etc/enigma2"
     bouquet_file = os.path.join(enigma2_folder, "bouquets.tv")
@@ -611,7 +597,7 @@ def copy_files_to_enigma2():
 
 def lcnstart():
     print(' lcnstart ')
-    if os.path.exists('/etc/enigma2/lcndb'):
+    if os.path.exists(dbfile):
         '''
         # lcn = LCN()
         # lcn.read()
@@ -805,21 +791,3 @@ def TransferBouquetTerrestrialFinal():
     return
 
 # ===== by lululla
-
-
-'''
-# def LCNScannerMain(session, **kwargs):
-    # session.open(LCNScannerPlugin)
-
-
-# def LCNScannerSetup(menuid, **kwargs):
-    # if menuid == "scan":
-        # return [("LCN Scanner", LCNScannerMain, "lcnscanner", None)]
-    # else:
-        # return []
-
-
-# def Plugins(**kwargs):
-    # return PluginDescriptor(name="LCN", description=_("LCN plugin for DVB-T/T2 services"), where=PluginDescriptor.WHERE_MENU, fnc=LCNScannerSetup)
-    # # return PluginDescriptor(name="LCN", description=_("LCN plugin for DVB-T/T2 services"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc=LCNScannerMain)
-'''
