@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
+from . import _
 from enigma import (eServiceReference, eServiceCenter)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -438,13 +439,15 @@ class LCNBuildHelper():
         for x in self.rulelist:
             if x[0] == config.lcn.rules.value:
                 rule = x[0]
+                print('rule:', rule)
                 break
 
         bouquet = self.rulelist[0][0]
-        self.bouquetfile = Bouquet()  #find terrestrial bouqet top of source
+        self.bouquetfile = Bouquet()  # find terrestrial bouqet top of source
         for x in self.bouquetlist:
             if x[0] == self.bouquetfile:  # config.lcn.bouquet.value:
                 bouquet = x[0]
+                print('bouquet:', bouquet)
                 break
 
         lcn = LCN()
