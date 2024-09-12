@@ -36,6 +36,20 @@ else
 	Packagerequests=python-requests
 fi
 
+
+if [ -f /usr/bin/wget ]; then
+    echo "wget exist"
+else
+	if [ $OSTYPE = "DreamOs" ]; then
+		echo "dreamos"
+		apt-get update && apt-get install wget
+	else
+		opkg update && opkg install wget
+	fi
+fi
+
+
+
 if [ $PYTHON = "PY3" ]; then
 	if grep -qs "Package: $Packagesix" cat $STATUS ; then
 		echo ""
