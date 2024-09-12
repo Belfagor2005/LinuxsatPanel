@@ -90,7 +90,7 @@ echo ""
 mkdir -p $TMPPATH
 cd $TMPPATH
 set -e
-if [ -f /var/lib/dpkg/status ]; then
+if [ $OSTYPE = "DreamOs" ]; then
    echo "# Your image is OE2.5/2.6 #"
    echo ""
 else
