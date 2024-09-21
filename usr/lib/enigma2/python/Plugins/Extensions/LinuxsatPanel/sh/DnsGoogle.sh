@@ -15,4 +15,3 @@ echo "> done
 
 sleep 3s; killall -9 enigma2
 exit 0
-

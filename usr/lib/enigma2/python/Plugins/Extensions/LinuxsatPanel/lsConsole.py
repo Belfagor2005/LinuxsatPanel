@@ -67,8 +67,8 @@ class lsConsole(Screen):
                                     "blue": self.restartenigma,
                                     "exit": self.cancel,
                                     }, -1)
+        self.newtitle = title == 'Linuxsat-support Console' and ('Console') or title
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
-        self.newtitle = title == 'Console' and ('Console') or title
         self.cancel_msg = None
         self.onShown.append(self.updateTitle)
         self.container = eConsoleAppContainer()
@@ -90,6 +90,7 @@ class lsConsole(Screen):
             self['text'].setText(_('Execution progress\n\n'))
         print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
         if self.container.execute(self.cmdlist[self.run]):
+            self['text'].setText(self.cmdlist[self.run])  # add
             self.runFinished(-1)
 
     def runFinished(self, retval):
@@ -109,7 +110,6 @@ class lsConsole(Screen):
             # except:
                 # lastpage = self['text']
             '''
-
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:

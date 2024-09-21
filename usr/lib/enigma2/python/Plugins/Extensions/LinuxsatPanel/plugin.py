@@ -84,14 +84,6 @@ from enigma import (
 # all and you must make the modified
 # code open to everyone. by Lululla
 # ======================================================================
-# changelog 2.3
-# -fix get_positions and paintFrame (80%)
-# -fix list_sort_utility
-# -fix make_request
-# -fix regex_patterns cline on cccam and oscam
-# -reduced source code
-# -lcn fix (on test button 5) (only Italy)
-# ======================================================================
 global HALIGN
 global setx
 global skin_path
@@ -477,7 +469,8 @@ class LinuxsatPanel(Screen):
             i += 1
 
         self.npics = len(self.names)
-        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(menu_list) - 1
         self.ipage = 1
@@ -764,7 +757,8 @@ class LSskin(Screen):
             i += 1
 
         self.npics = len(self.names)
-        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(menu_list) - 1
         self.ipage = 1
@@ -998,7 +992,8 @@ class LSChannel(Screen):
             i += 1
 
         self.npics = len(self.names)
-        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(menu_list) - 1
         self.ipage = 1
@@ -1281,6 +1276,10 @@ class ScriptInstaller(Screen):
         self.titles.append("Subsupport addon ")
         self.pics.append(picfold + "SubSupportAddon.png")
 
+        menu_list.append("Xtraevent Addon ")
+        self.titles.append("Xtraevent addon ")
+        self.pics.append(picfold + "xtraevent.png")
+
         self.names = menu_list
         # test down
         self.combined_data = zip(self.names, self.titles, self.pics)
@@ -1320,7 +1319,8 @@ class ScriptInstaller(Screen):
             i += 1
 
         self.npics = len(self.names)
-        self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
         self.index = 0
         self.maxentry = len(menu_list) - 1
         self.ipage = 1
@@ -1464,7 +1464,7 @@ class ScriptInstaller(Screen):
         self.idx = self.index
         if self.idx is None:
             return
-
+        self.url = ''
         self.namev = self.names[self.idx]
 
         if 'ajpanel' in self.namev.lower():
@@ -1512,7 +1512,7 @@ class ScriptInstaller(Screen):
         if 'dns google' in self.namev.lower():
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -qO - | bash'
 
-        if 'couldfire' in self.namev.lower():
+        if 'cloudfaire' in self.namev.lower():
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -qO - | bash'
 
         if 'quad9' in self.namev.lower():
@@ -1528,13 +1528,16 @@ class ScriptInstaller(Screen):
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -qO - | bash'
 
         if 'virtualkeyb' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/newvirtualkeyboard.sh?inline=false" -qO - | bash'
+            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -qO - | bash'
 
         if 'subsupport' in self.namev.lower():
             self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -qO - | bash'
 
         if 'serviceapp' in self.namev.lower():
             self.url = 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp'
+
+        if 'xtraevent' in self.namev.lower():
+            self.url = 'wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -qO - | bash'
 
         if 'cccam.cfg' in self.namev.lower():
             self.getcl('CCcam')
@@ -1546,12 +1549,22 @@ class ScriptInstaller(Screen):
 
         self.session.openWithCallback(self.okClicked,
                                       MessageBox, _("Do you want to execute %s?") % self.namev,
-                                      MessageBox.TYPE_YESNO)
+                                      MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            self.session.open(lsConsole, _(title), [self.url], closeOnSuccess=False)
+            keywords = ['dns google', 'cloudfaire', 'quad9']
+            lower_namev = self.namev.lower()
+            keyword_found = any(keyword in lower_namev for keyword in keywords)
+            if keyword_found:
+                cmd = str(self.url)
+                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
+            else:
+                cmd = str(self.url) + ' > /tmp/my_debug.log'
+                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)                 
+        else:
+            return
 
     def getcl(self, config_type):
         if config_type == 'CCcam':
@@ -1669,6 +1682,12 @@ class ScriptInstaller(Screen):
 
         except Exception as e:
             print('error on host', str(e))
+
+    def openVi(self, callback=''):
+        from .File_Commander import File_Commander
+        user_log = '/tmp/my_debug.log'
+        if fileExists(user_log):
+            self.session.open(File_Commander, user_log)
 
 
 class addInstall(Screen):
@@ -1855,7 +1874,7 @@ class addInstall(Screen):
 
                 # print('cmd:', cmd)
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
-                self.session.open(lsConsole, _(title), [cmd2], closeOnSuccess=False)
+                self.session.open(lsConsole, _(title), cmdlist=[cmd2], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
@@ -2095,7 +2114,7 @@ class addInstall(Screen):
             self.iname = ipk[:n2]
             cmd = "opkg remove '" + self.iname + "'"
             title = (_("Removing %s") % self.iname)
-            self.session.open(lsConsole, _(title), [cmd])
+            self.session.open(lsConsole, _(title), cmdlist=[cmd])
 
     def restart(self):
         self.session.openWithCallback(self.restartnow,
@@ -2223,7 +2242,7 @@ class LSinfo(Screen):
 
     def install_update(self, answer=False):
         if answer:
-            self.session.open(lsConsole, 'Upgrading...', cmdlist=('wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'), finishedCallback=self.myCallback, closeOnSuccess=False)
+            self.session.open(lsConsole, 'Upgrading...', cmdlist=['wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'], finishedCallback=self.myCallback, closeOnSuccess=False)
         else:
             self.session.open(MessageBox,
                               _("Update Aborted!"),

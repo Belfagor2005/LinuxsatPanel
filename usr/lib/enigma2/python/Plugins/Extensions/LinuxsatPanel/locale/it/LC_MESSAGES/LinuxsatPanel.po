@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-09-03 20:27+0200\n"
+"POT-Creation-Date: 2024-09-21 16:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,6 +13,25 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
+"X-Poedit-SearchPath-2: File-Commander.py\n"
+
+#: File-Commander.py:16
+msgid "File Commander - Addon"
+msgstr "File Commander - Addon"
+
+#: File-Commander.py:17
+msgid "play/show Files"
+msgstr "play/show Files"
+
+#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
+#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
+#: plugin.py:965 plugin.py:1292 plugin.py:1705
+msgid "Exit"
+msgstr "Esci"
+
+#: File-Commander.py:82
+msgid "Linuxsat-support - File Commander"
+msgstr "Linuxsat-support - File Commander"
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -34,21 +53,16 @@ msgstr ""
 "Esecuzione in corso\n"
 "\n"
 
-#: lsConsole.py:123 plugin.py:452 plugin.py:739 plugin.py:973 plugin.py:1295
-#: plugin.py:1682
-msgid "Exit"
-msgstr "Esci"
-
-#: plugin.py:450 plugin.py:737 plugin.py:971 plugin.py:1293 plugin.py:1701
-#: plugin.py:2128
+#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
+#: plugin.py:2151
 msgid "Please Wait..."
 msgstr "Attendi Prego..."
 
-#: plugin.py:451 plugin.py:738 plugin.py:972 plugin.py:1294
+#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
 msgid "0 Sort"
 msgstr "0 Ordinamento"
 
-#: plugin.py:630
+#: plugin.py:621
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -58,12 +72,12 @@ msgstr ""
 "\n"
 "Sei sicuro di voler continuare?"
 
-#: plugin.py:1550
+#: plugin.py:1551
 #, python-format
 msgid "Do you want to execute %s?"
 msgstr "Vuoi eseguire %s ?"
 
-#: plugin.py:1555
+#: plugin.py:1556
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -72,7 +86,7 @@ msgstr ""
 "Eseguo %s\n"
 "Attendere Prego..."
 
-#: plugin.py:1562
+#: plugin.py:1573
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -80,7 +94,7 @@ msgstr ""
 "File non trovato /etc/CCcam.cfg!\n"
 "Riavvia prego..."
 
-#: plugin.py:1571
+#: plugin.py:1582
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -88,12 +102,24 @@ msgstr ""
 "File non trovato /etc/tuxbox/config/oscam.server!\n"
 "Riavvia prego..."
 
-#: plugin.py:1661
+#: plugin.py:1679
 #, python-format
-msgid "Server %s added in %s"
-msgstr "Server %s aggiunto in %s"
+msgid ""
+"Server %s added in %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"User:%s\n"
+"Password:%s\n"
+msgstr ""
+"Server %s added in %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"User:%s\n"
+"Password:%s\n"
 
-#: plugin.py:1665
+#: plugin.py:1681
 msgid ""
 "Server Error.\n"
 "\n"
@@ -103,44 +129,44 @@ msgstr ""
 "\n"
 "Riprova, sarai più fortunato!"
 
-#: plugin.py:1683
+#: plugin.py:1706
 msgid "Install"
 msgstr "Installa/Aggiorna"
 
-#: plugin.py:1684
+#: plugin.py:1707
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: plugin.py:1685
+#: plugin.py:1708
 msgid "Restart enigma"
 msgstr "Riavvia Enigma"
 
-#: plugin.py:1688 plugin.py:1730 plugin.py:1770
+#: plugin.py:1711 plugin.py:1753 plugin.py:1793
 msgid "0 Halign Left"
 msgstr "0 Allinea Sx"
 
-#: plugin.py:1690 plugin.py:1733 plugin.py:1772
+#: plugin.py:1713 plugin.py:1756 plugin.py:1795
 msgid "0 Halign Right"
 msgstr "0 Allinea Dx"
 
-#: plugin.py:1703
+#: plugin.py:1726
 msgid "Load Category..."
 msgstr "Carico Categoria..."
 
-#: plugin.py:1742
+#: plugin.py:1765
 msgid "Category: "
 msgstr "Categoria: "
 
-#: plugin.py:1796 plugin.py:1806
+#: plugin.py:1819 plugin.py:1829
 msgid "Unknow Image!"
 msgstr "Immagine non corretta!"
 
-#: plugin.py:1818
+#: plugin.py:1841
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Vuoi installare %s ?"
 
-#: plugin.py:1853 plugin.py:2053
+#: plugin.py:1876 plugin.py:2076
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -149,40 +175,40 @@ msgstr ""
 "Installa %s\n"
 "Attendere Prego..."
 
-#: plugin.py:1980
+#: plugin.py:2003
 msgid "Download page get failed ..."
 msgstr "La pagina di download non è riuscita ..."
 
-#: plugin.py:1988
+#: plugin.py:2011
 msgid "Sorting Terrestrial Executed!"
 msgstr "Ordinamento dei canali terrestri completato!"
 
-#: plugin.py:1993
+#: plugin.py:2016
 msgid "Sorting Terrestrial not Executed!"
 msgstr "Ordinamento dei canali terrestri con regole Lcn non completato!"
 
-#: plugin.py:2016
+#: plugin.py:2039
 msgid "Do you want to install?"
 msgstr "Vuoi installare ?"
 
-#: plugin.py:2058
+#: plugin.py:2081
 msgid "Settings Not Installed ..."
 msgstr "Liste canali non installate..."
 
-#: plugin.py:2079
+#: plugin.py:2102
 msgid "Do you want to remove?"
 msgstr "Vuoi rimuovere ?"
 
-#: plugin.py:2093
+#: plugin.py:2116
 #, python-format
 msgid "Removing %s"
 msgstr "Rimuovo %s"
 
-#: plugin.py:2099
+#: plugin.py:2122
 msgid "Do you want to restart Gui Interface?"
 msgstr "Vuoi riavviare l'Interfaccia Grafica?"
 
-#: plugin.py:2199
+#: plugin.py:2222
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -197,11 +223,11 @@ msgstr ""
 "\n"
 "Premere il pulsante verde per avviare l'aggiornamento"
 
-#: plugin.py:2200
+#: plugin.py:2223
 msgid "Update"
 msgstr "Aggiornare"
 
-#: plugin.py:2205
+#: plugin.py:2228
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -216,30 +242,34 @@ msgstr ""
 "\n"
 "Vuoi installarla ora?"
 
-#: plugin.py:2208
+#: plugin.py:2231
 msgid "Congrats! You already have the latest version..."
 msgstr "Congratulazioni! Hai già l'ultima versione..."
 
-#: plugin.py:2218
+#: plugin.py:2241
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Vuoi installare l'aggiornamento (%s)ora ?"
 
-#: plugin.py:2225
+#: plugin.py:2248
 msgid "Update Aborted!"
 msgstr "Aggionamento Annullato!"
 
-#: plugin.py:2245
+#: plugin.py:2268
 msgid "Unable to download updates!"
 msgstr "Impossibile scaricare aggiornamento!"
 
-#: plugin.py:2415
+#: plugin.py:2438
 msgid "Check Connection!"
 msgstr "Controlla Connessione!"
 
-#: plugin.py:2436
+#: plugin.py:2459
 msgid "Linuxsat Panel"
 msgstr "Linuxsat Panel"
+
+#, python-format
+#~ msgid "Server %s added in %s"
+#~ msgstr "Server %s aggiunto in %s"
 
 #~ msgid "Sorting Terrestrial channels with Lcn rules Completed"
 #~ msgstr "Ordinamento dei canali terrestri con regole Lcn completate"
