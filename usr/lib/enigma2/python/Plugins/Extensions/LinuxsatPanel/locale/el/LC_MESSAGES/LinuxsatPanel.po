@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-09-04 11:58+0200\n"
+"POT-Creation-Date: 2024-09-21 16:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: giorbak\n"
@@ -15,6 +15,25 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
+"X-Poedit-SearchPath-2: File-Commander.py\n"
+
+#: File-Commander.py:16
+msgid "File Commander - Addon"
+msgstr ""
+
+#: File-Commander.py:17
+msgid "play/show Files"
+msgstr "αναπαραγωγή/εμφάνιση αρχείων"
+
+#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
+#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
+#: plugin.py:965 plugin.py:1292 plugin.py:1705
+msgid "Exit"
+msgstr "Έξοδος"
+
+#: File-Commander.py:82
+msgid "Linuxsat-support - File Commander"
+msgstr ""
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -36,21 +55,16 @@ msgstr ""
 "Πρόοδος εκτέλεσης\n"
 "\n"
 
-#: lsConsole.py:123 plugin.py:452 plugin.py:739 plugin.py:973 plugin.py:1294
-#: plugin.py:1679
-msgid "Exit"
-msgstr "Έξοδος"
-
-#: plugin.py:450 plugin.py:737 plugin.py:971 plugin.py:1292 plugin.py:1698
-#: plugin.py:2125
+#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
+#: plugin.py:2151
 msgid "Please Wait..."
 msgstr "Παρακαλώ περιμένετε..."
 
-#: plugin.py:451 plugin.py:738 plugin.py:972 plugin.py:1293
+#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
 msgid "0 Sort"
 msgstr "0 Ταξινόμηση"
 
-#: plugin.py:630
+#: plugin.py:621
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -60,12 +74,12 @@ msgstr ""
 "\n"
 "Είστε σίγουροι ότι θέλετε να συνεχίσετε;"
 
-#: plugin.py:1549
+#: plugin.py:1551
 #, python-format
 msgid "Do you want to execute %s?"
 msgstr "Θέλετε να εκτελέσετε το %s;"
 
-#: plugin.py:1554
+#: plugin.py:1556
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -74,7 +88,7 @@ msgstr ""
 "Εκτέλεση του %s\n"
 "Παρακαλώ περιμένετε..."
 
-#: plugin.py:1561
+#: plugin.py:1573
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -82,7 +96,7 @@ msgstr ""
 "Το αρχείο /etc/CCcam.cfg δεν βρέθηκε!\n"
 "Κάντε επανεκκίνηση παρακαλώ..."
 
-#: plugin.py:1570
+#: plugin.py:1582
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -90,7 +104,7 @@ msgstr ""
 "Το αρχείο /etc/tuxbox/config/oscam.server δεν βρέθηκε!\n"
 "Κάντε επανεκκίνηση παρακαλώ..."
 
-#: plugin.py:1659
+#: plugin.py:1679
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -107,7 +121,7 @@ msgstr ""
 "Χρήστης:%s\n"
 "Κωδικός:%s\n"
 
-#: plugin.py:1661
+#: plugin.py:1681
 msgid ""
 "Server Error.\n"
 "\n"
@@ -117,44 +131,44 @@ msgstr ""
 "\n"
 "Δοκιμάστε ξανά, θα είστε πιο τυχεροί!"
 
-#: plugin.py:1680
+#: plugin.py:1706
 msgid "Install"
 msgstr "Εγκατάσταση"
 
-#: plugin.py:1681
+#: plugin.py:1707
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: plugin.py:1682
+#: plugin.py:1708
 msgid "Restart enigma"
 msgstr "Επανεκκίνηση enigma"
 
-#: plugin.py:1685 plugin.py:1727 plugin.py:1767
+#: plugin.py:1711 plugin.py:1753 plugin.py:1793
 msgid "0 Halign Left"
 msgstr "0 Στοίχιση αριστερά"
 
-#: plugin.py:1687 plugin.py:1730 plugin.py:1769
+#: plugin.py:1713 plugin.py:1756 plugin.py:1795
 msgid "0 Halign Right"
 msgstr "0 Στοίχιση δεξιά"
 
-#: plugin.py:1700
+#: plugin.py:1726
 msgid "Load Category..."
 msgstr "Φόρτωση κατηγορίας..."
 
-#: plugin.py:1739
+#: plugin.py:1765
 msgid "Category: "
 msgstr "Κατηγορία: "
 
-#: plugin.py:1793 plugin.py:1803
+#: plugin.py:1819 plugin.py:1829
 msgid "Unknow Image!"
 msgstr "Άγνωστο image!"
 
-#: plugin.py:1815
+#: plugin.py:1841
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Θέλετε να εγκαταστήσετε το %s;"
 
-#: plugin.py:1850 plugin.py:2050
+#: plugin.py:1876 plugin.py:2076
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -163,40 +177,40 @@ msgstr ""
 "Εγκατάσταση του %s\n"
 "Παρακαλώ περιμένετε..."
 
-#: plugin.py:1977
+#: plugin.py:2003
 msgid "Download page get failed ..."
 msgstr "Η λήψη της σελίδας απέτυχε ..."
 
-#: plugin.py:1985
+#: plugin.py:2011
 msgid "Sorting Terrestrial Executed!"
 msgstr "Η ταξινόμηση των επίγειων εκτελέστηκε!"
 
-#: plugin.py:1990
+#: plugin.py:2016
 msgid "Sorting Terrestrial not Executed!"
 msgstr "Η ταξινόμηση των επίγειων δεν εκτελέστηκε!"
 
-#: plugin.py:2013
+#: plugin.py:2039
 msgid "Do you want to install?"
 msgstr "Θέλετε να το εγκαταστήσετε;"
 
-#: plugin.py:2055
+#: plugin.py:2081
 msgid "Settings Not Installed ..."
 msgstr "Οι ρυθμίσεις δεν εγκαταστάθηκαν ..."
 
-#: plugin.py:2076
+#: plugin.py:2102
 msgid "Do you want to remove?"
 msgstr "Θέλετε να το αφαιρέσετε;"
 
-#: plugin.py:2090
+#: plugin.py:2116
 #, python-format
 msgid "Removing %s"
 msgstr "Αφαίρεση του %s"
 
-#: plugin.py:2096
+#: plugin.py:2122
 msgid "Do you want to restart Gui Interface?"
 msgstr "Θέλετε να κάνετε επανεκκίνηση της διεπαφής χρήστη;"
 
-#: plugin.py:2196
+#: plugin.py:2222
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -211,11 +225,11 @@ msgstr ""
 "\n"
 "Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση"
 
-#: plugin.py:2197
+#: plugin.py:2223
 msgid "Update"
 msgstr "Ενημέρωση"
 
-#: plugin.py:2202
+#: plugin.py:2228
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -230,27 +244,27 @@ msgstr ""
 "\n"
 "Θέλετε να την εγκαταστήσετε τώρα;"
 
-#: plugin.py:2205
+#: plugin.py:2231
 msgid "Congrats! You already have the latest version..."
 msgstr "Συγχαρητήρια! Έχετε ήδη την πιο πρόσφατη έκδοση..."
 
-#: plugin.py:2215
+#: plugin.py:2241
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Θέλετε να εγκαταστήσετε την ενημέρωση ( %s ) τώρα;"
 
-#: plugin.py:2222
+#: plugin.py:2248
 msgid "Update Aborted!"
 msgstr "Η ενημέρωση ακυρώθηκε!"
 
-#: plugin.py:2242
+#: plugin.py:2268
 msgid "Unable to download updates!"
 msgstr "Δεν είναι δυνατή η λήψη ενημερώσεων!"
 
-#: plugin.py:2412
+#: plugin.py:2438
 msgid "Check Connection!"
 msgstr "Έλεγχος σύνδεσης!"
 
-#: plugin.py:2433
+#: plugin.py:2459
 msgid "Linuxsat Panel"
 msgstr ""
