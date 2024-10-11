@@ -2,8 +2,8 @@
 ## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/sh
 
 ## Only This 2 lines to edit with new version ######
-version='2.3'
-changelog='\nfix get_positions\nfix list_sort_utility\nfix make_request\nfix paintFrame (80%)\nfix regex_patterns\nreduced source code\nlcn fix (button 5 only Italy)\nfix cline on cccam and oscam'
+version='2.4'
+changelog='\nRemove code unecessary\nfix Scipt Url\nfix make_request\n\nfix regex_patterns\nreduced source code\n'
 
 ##############################################################
 
