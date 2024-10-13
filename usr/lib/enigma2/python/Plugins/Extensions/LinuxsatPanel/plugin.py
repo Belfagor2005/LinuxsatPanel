@@ -88,7 +88,7 @@ global HALIGN
 global setx
 global skin_path
 
-currversion = '2.3'
+currversion = '2.4'
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 PY3 = sys.version_info.major >= 3
 skin_path = ''
@@ -109,6 +109,19 @@ if sys.version_info >= (2, 7, 9):
         sslContext = ssl._create_unverified_context()
     except:
         sslContext = None
+
+
+if sys.version_info[0] >= 3:
+    import html
+
+    def decode_html(text):
+        return html.unescape(text)
+else:
+    from HTMLParser import HTMLParser
+    html_parser = HTMLParser()
+
+    def decode_html(text):
+        return html_parser.unescape(text)
 
 
 def create_ssl_context():
@@ -199,11 +212,11 @@ def LPshowlist(data, list):
 # sortlist
 class ListSortUtility:
     @staticmethod
-    def list_sort(names, titles, pics):
-        combined_data = zip(names, titles, pics)
+    def list_sort(names, titles, pics, urls):
+        combined_data = zip(names, titles, pics, urls)
         sorted_data = sorted(combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics = zip(*sorted_data)
-        return sorted_list, sorted_titles, sorted_pics
+        sorted_list, sorted_titles, sorted_pics, sorted_urls = zip(*sorted_data)
+        return sorted_list, sorted_titles, sorted_pics, sorted_urls
 
 
 # pixmaplist
@@ -240,10 +253,10 @@ class LinuxsatPanel(Screen):
             self.pos = get_positions("HD")
 
         self.data = checkGZIP(xmlurl)
-
         menu_list = []
-        self.pics = []
         self.titles = []
+        self.pics = []
+        self.urls = []
 
         has_dpkg = os.path.exists('/var/lib/dpkg/info')
 
@@ -434,7 +447,7 @@ class LinuxsatPanel(Screen):
 
         self.names = menu_list
         # self.combined_data = zip(self.names, self.titles, self.pics)
-        self.combined_data = list(zip(self.names, self.titles, self.pics))  # Garantisci che `zip` restituisca una lista
+        self.combined_data = list(zip(self.names, self.titles, self.pics, self.urls))
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
@@ -595,7 +608,7 @@ class LinuxsatPanel(Screen):
             self.okbuttonClick()
 
     def list_sort(self):
-        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
         self.openTest()
 
     def closeNonRecursive(self):
@@ -653,8 +666,8 @@ class LinuxsatPanel(Screen):
             title = self.titles[self.idx]
             n1 = self.data.find(title, 0)
             n2 = self.data.find("</plugins>", n1)
-            fxml = self.data[n1:n2]
-            self.session.open(addInstall, fxml, name, None)
+            url = self.data[n1:n2]
+            self.session.open(addInstall, url, name, None)
 
 
 class LSskin(Screen):
@@ -666,16 +679,17 @@ class LSskin(Screen):
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
         # self.data = fetch_url(xmlurl)
-        self.name = name
 
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
         elif isHD():
             self.pos = get_positions("HD")
 
+        self.name = name
         menu_list = []
-        self.pics = []
         self.titles = []
+        self.pics = []
+        self.urls = []
 
         menu_list.append("Skins All ")
         self.titles.append("Skins_All ")
@@ -718,11 +732,8 @@ class LSskin(Screen):
         self.pics.append(picfold + "oebased.png")
 
         self.names = menu_list
-
-        self.combined_data = zip(self.names, self.titles, self.pics)
-
+        self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
         self["frame"] = MovingPixmap()
-
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -882,7 +893,7 @@ class LSskin(Screen):
             self.okbuttonClick()
 
     def list_sort(self):
-        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
         self.openTest()
 
     def closeNonRecursive(self):
@@ -905,8 +916,8 @@ class LSskin(Screen):
         title = self.titles[self.idx]
         n1 = self.data.find(title, 0)
         n2 = self.data.find("</plugins>", n1)
-        fxml = self.data[n1:n2]
-        self.session.open(addInstall, fxml, name, None)
+        url = self.data[n1:n2]
+        self.session.open(addInstall, url, name, None)
 
 
 class LSChannel(Screen):
@@ -916,47 +927,51 @@ class LSChannel(Screen):
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-        self.name = name
 
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
         elif isHD():
             self.pos = get_positions("HD")
 
+        self.name = name
         menu_list = []
-        self.pics = []
         self.titles = []
+        self.pics = []
+        self.urls = []
 
         menu_list.append("CIEFP ")
         self.titles.append("CIEFP")
         self.pics.append(picfold + "ciefp.png")
+        self.urls.append('https://github.com/ciefp/ciefpsettings-enigma2-zipped')
 
         menu_list.append("CYRUS ")
         self.titles.append("CYRUS ")
         self.pics.append(picfold + "cyrus.png")
+        self.urls.append('http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
 
         menu_list.append("MANUTEK ")
         self.titles.append("MANUTEK ")
         self.pics.append(picfold + "manutek.png")
+        self.urls.append('http://www.manutek.it/isetting/index.php')
 
         menu_list.append("MORPHEUS ")
         self.titles.append("MORPHEUS ")
         self.pics.append(picfold + "morpheus883.png")
+        self.urls.append('http://github.com/morpheus883/enigma2-zipped')
 
-        menu_list.append("VHANNIBAL 1 ")
-        self.titles.append("VHANNIBAL 1 ")
+        menu_list.append("VHANNIBAL NET ")
+        self.titles.append("VHANNIBAL NET ")
         self.pics.append(picfold + "vhannibal1.png")
+        self.urls.append('http://www.vhannibal.net/asd.php')
 
-        menu_list.append("VHANNIBAL 2 ")
-        self.titles.append("VHANNIBAL 2 ")
+        menu_list.append("VHANNIBAL TEK ")
+        self.titles.append("VHANNIBAL TEK ")
         self.pics.append(picfold + "vhannibal2.png")
+        self.urls.append('http://sat.alfa-tech.net/upload/settings/vhannibal/')
 
         self.names = menu_list
-
-        self.combined_data = zip(self.names, self.titles, self.pics)
-
+        self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
         self["frame"] = MovingPixmap()
-
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
         self['sort'] = Label(_('0 Sort'))
@@ -1116,7 +1131,7 @@ class LSChannel(Screen):
             self.okbuttonClick()
 
     def list_sort(self):
-        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
         self.openTest()
 
     def closeNonRecursive(self):
@@ -1135,27 +1150,8 @@ class LSChannel(Screen):
         self.idx = self.index
         if self.idx is None:
             return
-
         name = self.names[self.idx]
-
-        if 'ciefp' in name.lower():
-            url = 'https://github.com/ciefp/ciefpsettings-enigma2-zipped'
-
-        if 'cyrus' in name.lower():
-            url = 'http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml'
-
-        if 'manutek' in name.lower():
-            url = 'http://www.manutek.it/isetting/index.php'
-
-        if 'morpheus' in name.lower():
-            url = 'http://github.com/morpheus883/enigma2-zipped'
-
-        if 'vhannibal 1' in name.lower():
-            url = 'https://www.vhannibal.net/asd.php'
-
-        if 'vhannibal 2' in name.lower():
-            url = 'http://sat.alfa-tech.net/upload/settings/vhannibal/'
-
+        url = self.urls[self.idx]
         self.session.open(addInstall, url, name, '')
 
 
@@ -1166,96 +1162,117 @@ class ScriptInstaller(Screen):
         skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-        self.name = name
 
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
         elif isHD():
             self.pos = get_positions("HD")
 
+        self.name = name
         menu_list = []
-        self.pics = []
         self.titles = []
+        self.pics = []
+        self.urls = []
 
         menu_list.append("Add Libssl Libcrypto ")
         self.titles.append("Add Libssl Libcrypto ")
         self.pics.append(picfold + "AddLibssl.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash')
 
-        menu_list.append("Add Symlink Libssl Libcrypto ")
+        menu_list.append("Add Symlink Libssl ")
         self.titles.append("Add Symlink Libssl ")
         self.pics.append(picfold + "AddSymlink.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash')
 
         menu_list.append("Ajpanel by AMAJamry ")
         self.titles.append("Ajpanel AMAJamry ")
         self.pics.append(picfold + "Ajpanel.png")
+        self.urls.append('wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
 
         menu_list.append("Biss Feed Autokey ")
         self.titles.append("Biss Feed Autokey ")
         self.pics.append(picfold + "BissFeedAutokey.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -O - | bash')
 
         menu_list.append("Chocholousek Picons ")
         self.titles.append("Chocholousek Picons ")
         self.pics.append(picfold + "ChocholousekPicons.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -O - | bash')
 
         menu_list.append("Add Dns Cloudfaire ")
         self.titles.append("Dns Cloudfaire ")
         self.pics.append(picfold + "DnsCloudfaire.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | bash')
 
         menu_list.append("Add Dns Google ")
         self.titles.append("Dns Google ")
         self.pics.append(picfold + "DnsGoogle.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | bash')
 
         menu_list.append("Add Dns Quad9 ")
         self.titles.append("Dns Quad9 ")
         self.pics.append(picfold + "DnsQuad9.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | bash')
 
         menu_list.append("E2player by MOHAMED OS ")
         self.titles.append("E2player MOHAMED ")
         self.pics.append(picfold + "E2playerMOHAMED.png")
+        self.urls.append('wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
 
         menu_list.append("E2player by MAXBAMBY ")
         self.titles.append("E2player MAXBAMBY ")
         self.pics.append(picfold + "E2playerMAXBAMBY.png")
+        self.urls.append('wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
 
         menu_list.append("E2player by ZADMARIO ")
         self.titles.append("E2player ZADMARIO ")
         self.pics.append(picfold + "E2playerZADMARIO.png")
+        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
 
         menu_list.append("E2player by XXX ")
         self.titles.append("E2player XXX ")
         self.pics.append(picfold + "E2playerXXX.png")
+        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash')
 
         menu_list.append("History Zap Selector ")
         self.titles.append("History Zap Selector ")
         self.pics.append(picfold + "HistoryZapSelector.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash')
 
         menu_list.append("iSetting E2 ")
         self.titles.append("iSetting E2 ")
         self.pics.append(picfold + "iSettingE2.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -O - | bash')
 
         menu_list.append("Levi45 Cam Manager ")
         self.titles.append("Levi45 Manager ")
         self.pics.append(picfold + "Levi45Manager.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
 
         menu_list.append("Show Mountpoints ")
         self.titles.append("Mountpoints ")
         self.pics.append(picfold + "Mountpoints.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
 
         menu_list.append("Multistalker By ZIKO ")
         self.titles.append("Multistalker Ziko ")
         self.pics.append(picfold + "Multistalker.png")
+        self.urls.append('wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
 
         menu_list.append("New VirtualKeyboard ")
         self.titles.append("New VirtualKeyboard ")
         self.pics.append(picfold + "NewVirtualKeyboard.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
 
         menu_list.append("Quicksignal By Raed ")
         self.titles.append("Quicksignal Raed ")
         self.pics.append(picfold + "Quicksignal.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
 
         menu_list.append("Send Emm TVS ")
         self.titles.append("Send Emm ")
         self.pics.append(picfold + "SendEmm.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
 
         menu_list.append("Send Cline -> CCcam.cfg ")
         self.titles.append("Send CCcline CCcam ")
@@ -1265,27 +1282,35 @@ class ScriptInstaller(Screen):
         self.titles.append("Send CCcline Oscam ")
         self.pics.append(picfold + "oscamfree.png")
 
+        menu_list.append("Keys Update ")
+        self.titles.append("Keys Update ")
+        self.pics.append(picfold + "keys.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
+
         if not os.path.exists('/var/lib/dpkg/info'):
             menu_list.append("ServiceApp Exteplayer ")
             self.titles.append("ServiceApp Exteplayer ")
             self.pics.append(picfold + "serviceapp.png")
+            self.urls.append('opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
 
         menu_list.append("SubSupport Addon ")
         self.titles.append("Subsupport addon ")
         self.pics.append(picfold + "SubSupportAddon.png")
+        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
 
         menu_list.append("Transmission Addon ")
         self.titles.append("Transmission addon ")
         self.pics.append(picfold + "transmission.png")
-
+        self.urls.append('wget -q --no-check-certificate http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh -O - | bash')
 
         menu_list.append("Xtraevent Addon ")
         self.titles.append("Xtraevent addon ")
         self.pics.append(picfold + "xtraevent.png")
+        self.urls.append('wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
 
         self.names = menu_list
         # test down
-        self.combined_data = zip(self.names, self.titles, self.pics)
+        self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
 
         self["frame"] = MovingPixmap()
 
@@ -1448,7 +1473,7 @@ class ScriptInstaller(Screen):
             self.okbuttonClick()
 
     def list_sort(self):
-        self.names, self.titles, self.pics = ListSortUtility.list_sort(self.names, self.titles, self.pics)
+        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
         self.openTest()
 
     def closeNonRecursive(self):
@@ -1467,84 +1492,8 @@ class ScriptInstaller(Screen):
         self.idx = self.index
         if self.idx is None:
             return
-        self.url = ''
         self.namev = self.names[self.idx]
-
-        if 'ajpanel' in self.namev.lower():
-            self.url = 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh'
-
-        if 'mohamed' in self.namev.lower():
-            self.url = 'wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -O - | /bin/sh'
-
-        if 'maxbambi' in self.namev.lower():
-            self.url = 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash'
-
-        if 'zadmario' in self.namev.lower():
-            self.url = 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash'
-
-        if 'xxx' in self.namev.lower():
-            self.url = 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash'
-
-        if 'levi45' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash'
-
-        if 'multistalker' in self.namev.lower():
-            self.url = 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh'
-
-        if 'quicksignal' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash'
-
-        if 'emm' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash'
-
-        if 'libcrypto' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash'
-
-        if 'libcrypto' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash'
-
-        if 'keys upd' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash'
-
-        if 'bissfeed' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -O - | bash'
-
-        if 'bissfeed' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -O - | bash'
-
-        if 'dns google' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | bash'
-
-        if 'cloudfaire' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | bash'
-
-        if 'quad9' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | bash'
-
-        if 'mountpoint' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash'
-
-        if 'history zap' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash'
-
-        if 'isetting' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -O - | bash'
-
-        if 'transmission' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh -O - | bash'
-
-        if 'virtualkeyb' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash'
-
-        if 'subsupport' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash'
-
-        if 'serviceapp' in self.namev.lower():
-            self.url = 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp'
-
-        if 'xtraevent' in self.namev.lower():
-            self.url = 'wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash'
-
+        self.url = self.urls[self.idx]
         if 'cccam.cfg' in self.namev.lower():
             self.getcl('CCcam')
             return
@@ -1568,7 +1517,7 @@ class ScriptInstaller(Screen):
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:
                 cmd = str(self.url) + ' > /tmp/my_debug.log'
-                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)                 
+                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
         else:
             return
 
@@ -1877,18 +1826,16 @@ class addInstall(Screen):
                     cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
                 elif ".bz2" in self.plug and "gz" in self.plug:
                     cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-
                 # print('cmd:', cmd)
                 title = (_("Installing %s\nPlease Wait...") % self.iname)
                 self.session.open(lsConsole, _(title), cmdlist=[cmd2], closeOnSuccess=False)
 
     def downxmlpage(self):
         self.downloading = False
-        # r = fetch_url(self.fxml)
         r = make_request(self.fxml)
-        if PY3:
-            import six
-            r = six.ensure_str(r)
+        if r is None:
+            print("Errore: Nessun dato ricevuto da make_request")
+            return
         self.names = []
         self.urls = []
         items = []
@@ -1900,14 +1847,14 @@ class addInstall(Screen):
                 n1 = r.find('title="README.txt', 0)
                 n2 = r.find('href="#readme">', n1)
                 r = r[n1:n2]
-                regex = 'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
+                regex = r'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
                 match = re.compile(regex).findall(r)
                 # print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
-                        name = name
+                        name = decode_html(name)
                         self.downloading = True
                     item = name + "###" + url
                     items.append(item)
@@ -1917,7 +1864,7 @@ class addInstall(Screen):
                 n1 = r.find('name="Sat">', 0)
                 n2 = r.find("/ruleset>", n1)
                 r = r[n1:n2]
-                regex = 'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
+                regex = r'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
                 match = re.compile(regex).findall(r)
                 # print('match:', match)
                 for name, url, date in match:
@@ -1926,14 +1873,14 @@ class addInstall(Screen):
                             continue
                         if 'Sat' in name.lower():
                             continue
-                        name = name + ' ' + date
+                        name = decode_html(name) + ' ' + date
                         self.downloading = True
                     item = name + "###" + url
                     items.append(item)
                     items.sort()
 
             if 'manutek' in self.name.lower():
-                regex = 'href="/isetting/.*?file=(.+?).zip">'
+                regex = r'href="/isetting/.*?file=(.+?).zip">'
                 match = re.compile(regex).findall(r)
                 # print('match:', match)
                 for url in match:
@@ -1941,12 +1888,12 @@ class addInstall(Screen):
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
                     url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
                     self.downloading = True
-                    item = name + "###" + url
+                    item = decode_html(name) + "###" + url
                     items.append(item)
                     items.sort()
 
             if 'morpheus' in self.name.lower():
-                regex = 'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
+                regex = r'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
                 # n1 = r.find('title="README.txt', 0)
                 # n2 = r.find('href="#readme">', n1)
                 # r = r[n1:n2]
@@ -1954,7 +1901,7 @@ class addInstall(Screen):
                 # print('match:', match)
                 for name, url in match:
                     if url.find('.zip') != -1:
-                        name = 'Morph883 ' + name
+                        name = 'Morph883 ' + decode_html(name)
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
                         self.downloading = True
@@ -1962,33 +1909,48 @@ class addInstall(Screen):
                     items.append(item)
                     items.sort()
 
-            if 'vhannibal 1' in self.name.lower():
-                # <td><a href="autosetting/download.php?id=1&action=download">Vhannibal Hot Bird 13°E</a></td>
-                match = re.compile('<td><a href="(.+?)">(.+?)</a></td>.*?<td>(.+?)</td>', re.DOTALL).findall(r)
-                # print('match:', match)
-                for url, name, date in match:
-                    # name = str(name) + ' ' + date
-                    name = str(name).replace('&#127381;', '').replace("%20", " ") + ' ' + date
+            if 'vhannibal net' in self.name.lower():
+                '''
+                <tr class="site_content_row">
+                <td width="30"><img src="images/green_icon.png" alt="Aggiornato il 07/10/24 alle 10:24:57" width="30" height="30" title="Aggiornato il 07/10/24 alle 10:24:57"/></td>
+                <td><a href="download_setting.php?id=1&action=download" target="_blank">Vhannibal Hot Bird 13°E</a></td>
+                <td> 7 ott</td>
+                <td>858435</td>
+                <td width="30"><a href="download_setting.php?id=1&action=download" target="_blank"><img src="images/download_icon.png" width="30" height="30" alt="Scarica" /></a></td>
+                </tr>
+                '''
+
+                # r = six.ensure_str(r, errors='replace')
+
+                pattern = re.compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', re.DOTALL)
+                matches = pattern.findall(r)
+                for match in matches:
+                    url = match[0]
+                    name = match[1]
+                    if isinstance(name, bytes):
+                        name = name.decode('utf-8', errors='replace')
+                    name = decode_html(match[1])
+                    date = match[2]
+                # match = re.compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', re.DOTALL).findall(r)
+                # for url, name, date in match:
+                    name = str(name).replace('&#127381;', '').replace("%20", " ").replace("..", "").strip() + ' ' + date
                     url = "https://www.vhannibal.net/" + url
-                    # print('url vhan1:', url)
                     self.downloading = True
                     item = name + "###" + url
                     items.append(item)
                     items.sort()
+                    print("url =", url)
+                    print("name =", name)
 
-            if 'vhannibal 2' in self.name.lower():
-                regex = '<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
+            if 'vhannibal tek' in self.name.lower():
+                regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
                 match = re.compile(regex).findall(r)
-                # print('match:', match)
                 for url, date in match:
                     if '.php' in url.lower():
                         continue
-                    name = url.replace('&#127381;', '').replace("%20", " ") + ' ' + date
+                    name = decode_html(url).replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
-                    # print('url vhan2:', url)
                     self.downloading = True
-                    # self.names.append(name.strip())
-                    # self.urls.append(url.strip())
                     item = name + "###" + url
                     items.append(item)
                     items.sort()
@@ -1998,7 +1960,7 @@ class addInstall(Screen):
                 url = item.split('###')[1]
                 if name in self.names:
                     continue
-                name = str(name)
+                name = str(decode_html(name))
                 url = str(url)
                 self.names.append(name.strip())
                 self.urls.append(url.strip())

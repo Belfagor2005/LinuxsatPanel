@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-09-04 17:02+0200\n"
+"POT-Creation-Date: 2024-09-21 16:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
@@ -11,9 +11,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
-"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
+"X-Poedit-SearchPath-2: File-Commander.py\n"
+
+#: File-Commander.py:16
+msgid "File Commander - Addon"
+msgstr "File Commander - dodatek"
+
+#: File-Commander.py:17
+msgid "play/show Files"
+msgstr "odtwórz/pokaż pliki"
+
+#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
+#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
+#: plugin.py:965 plugin.py:1292 plugin.py:1705
+msgid "Exit"
+msgstr "Wyjście"
+
+#: File-Commander.py:82
+msgid "Linuxsat-support - File Commander"
+msgstr "Linuxsat-support - File Commander"
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -35,21 +54,16 @@ msgstr ""
 "Postęp wykonania\n"
 "\n"
 
-#: lsConsole.py:123 plugin.py:452 plugin.py:739 plugin.py:973 plugin.py:1295
-#: plugin.py:1688
-msgid "Exit"
-msgstr "Wyjście"
-
-#: plugin.py:450 plugin.py:737 plugin.py:971 plugin.py:1293 plugin.py:1707
-#: plugin.py:2134
+#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
+#: plugin.py:2151
 msgid "Please Wait..."
 msgstr "Proszę czekać..."
 
-#: plugin.py:451 plugin.py:738 plugin.py:972 plugin.py:1294
+#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
 msgid "0 Sort"
 msgstr "0 Sort"
 
-#: plugin.py:630
+#: plugin.py:621
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -59,12 +73,12 @@ msgstr ""
 "\n"
 "czy na pewno chcesz kontynuować?"
 
-#: plugin.py:1550
+#: plugin.py:1551
 #, python-format
 msgid "Do you want to execute %s?"
 msgstr "Czy chcesz wykonać %s?"
 
-#: plugin.py:1555
+#: plugin.py:1556
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -73,7 +87,7 @@ msgstr ""
 "Wykonywanie %s\n"
 "Proszę czekać..."
 
-#: plugin.py:1562
+#: plugin.py:1573
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -81,7 +95,7 @@ msgstr ""
 "Nie znaleziono pliku /etc/CCcam.cfg!\n"
 "Proszę uruchomić ponownie..."
 
-#: plugin.py:1571
+#: plugin.py:1582
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -89,7 +103,7 @@ msgstr ""
 "Nie znaleziono pliku /etc/tuxbox/config/oscam.server!\n"
 "Proszę uruchomić ponownie..."
 
-#: plugin.py:1668
+#: plugin.py:1679
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -106,7 +120,7 @@ msgstr ""
 "Użytkownik:%s\n"
 "Hasło:%s\n"
 
-#: plugin.py:1670
+#: plugin.py:1681
 msgid ""
 "Server Error.\n"
 "\n"
@@ -116,44 +130,44 @@ msgstr ""
 "\n"
 "Spróbuj ponownie, będziesz miał więcej szczęścia!"
 
-#: plugin.py:1689
+#: plugin.py:1706
 msgid "Install"
 msgstr "Instaluj"
 
-#: plugin.py:1690
+#: plugin.py:1707
 msgid "Remove"
 msgstr "Usuń"
 
-#: plugin.py:1691
+#: plugin.py:1708
 msgid "Restart enigma"
 msgstr "Ponowne uruchomienie enigmy"
 
-#: plugin.py:1694 plugin.py:1736 plugin.py:1776
+#: plugin.py:1711 plugin.py:1753 plugin.py:1793
 msgid "0 Halign Left"
 msgstr "0 Wyrównywać po lewej"
 
-#: plugin.py:1696 plugin.py:1739 plugin.py:1778
+#: plugin.py:1713 plugin.py:1756 plugin.py:1795
 msgid "0 Halign Right"
 msgstr "0 Wyrównaj w prawo"
 
-#: plugin.py:1709
+#: plugin.py:1726
 msgid "Load Category..."
 msgstr "Załaduj kategorię..."
 
-#: plugin.py:1748
+#: plugin.py:1765
 msgid "Category: "
 msgstr "Kategoria: "
 
-#: plugin.py:1802 plugin.py:1812
+#: plugin.py:1819 plugin.py:1829
 msgid "Unknow Image!"
 msgstr "Nieznany obraz!"
 
-#: plugin.py:1824
+#: plugin.py:1841
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Czy chcesz zainstalować %s?"
 
-#: plugin.py:1859 plugin.py:2059
+#: plugin.py:1876 plugin.py:2076
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -162,40 +176,40 @@ msgstr ""
 "Instalowanie %s\n"
 "Proszę czekać..."
 
-#: plugin.py:1986
+#: plugin.py:2003
 msgid "Download page get failed ..."
 msgstr "Strona pobierania nie powiodła się..."
 
-#: plugin.py:1994
+#: plugin.py:2011
 msgid "Sorting Terrestrial Executed!"
 msgstr "Sortowanie Ziemi wykonane!"
 
-#: plugin.py:1999
+#: plugin.py:2016
 msgid "Sorting Terrestrial not Executed!"
 msgstr "Sortowanie naziemne nie zostało wykonane!"
 
-#: plugin.py:2022
+#: plugin.py:2039
 msgid "Do you want to install?"
 msgstr "Czy chcesz zainstalować?"
 
-#: plugin.py:2064
+#: plugin.py:2081
 msgid "Settings Not Installed ..."
 msgstr "Ustawienia nie zostały zainstalowane..."
 
-#: plugin.py:2085
+#: plugin.py:2102
 msgid "Do you want to remove?"
 msgstr "Czy chcesz usunąć?"
 
-#: plugin.py:2099
+#: plugin.py:2116
 #, python-format
 msgid "Removing %s"
 msgstr "Usuwanie %s"
 
-#: plugin.py:2105
+#: plugin.py:2122
 msgid "Do you want to restart Gui Interface?"
 msgstr "Czy chcesz ponownie uruchomić interfejs Gui?"
 
-#: plugin.py:2205
+#: plugin.py:2222
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -210,11 +224,11 @@ msgstr ""
 "\n"
 "Naciśnij zielony przycisk, aby rozpocząć aktualizację"
 
-#: plugin.py:2206
+#: plugin.py:2223
 msgid "Update"
 msgstr "Aktualizuj"
 
-#: plugin.py:2211
+#: plugin.py:2228
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -229,27 +243,27 @@ msgstr ""
 "\n"
 "Czy chcesz go teraz zainstalować?"
 
-#: plugin.py:2214
+#: plugin.py:2231
 msgid "Congrats! You already have the latest version..."
 msgstr "Gratulacje! Masz już najnowszą wersję..."
 
-#: plugin.py:2224
+#: plugin.py:2241
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Czy chcesz teraz zainstalować aktualizację (%s)?"
 
-#: plugin.py:2231
+#: plugin.py:2248
 msgid "Update Aborted!"
 msgstr "Aktualizacja przerwana!"
 
-#: plugin.py:2251
+#: plugin.py:2268
 msgid "Unable to download updates!"
 msgstr "Nie można pobrać aktualizacji!"
 
-#: plugin.py:2421
+#: plugin.py:2438
 msgid "Check Connection!"
 msgstr "Sprawdź połączenie!"
 
-#: plugin.py:2442
+#: plugin.py:2459
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"
