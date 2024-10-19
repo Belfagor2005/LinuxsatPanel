@@ -1909,6 +1909,7 @@ class LSinfo(Screen):
                                      'DirectionActions',
                                      'HotkeyActions',
                                      'InfobarEPGActions',
+                                     'ColorActions',
                                      'ChannelSelectBaseActions'], {'ok': self.close,
                                                                    'back': self.close,
                                                                    'cancel': self.close,
