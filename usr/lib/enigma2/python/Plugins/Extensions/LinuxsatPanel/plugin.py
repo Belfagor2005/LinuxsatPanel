@@ -87,13 +87,25 @@ from enigma import (
 global HALIGN
 global setx
 global skin_path
+global has_dpkg
 
-currversion = '2.4'
+currversion = '2.5'
+
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+
 PY3 = sys.version_info.major >= 3
+
 skin_path = ''
+
 _session = None
+
+has_dpkg = False
+
 setx = 0
+
+
+if os.path.exists("/usr/bin/apt-get"):
+    has_dpkg = True
 
 
 if PY3:
@@ -239,6 +251,19 @@ def get_positions(resolution):
     return positions
 
 
+def add_menu_item(menu_list, titles, pics, title, pic_name):
+    menu_list.append(title)
+    titles.append(title.strip())
+    pics.append(picfold + pic_name)
+
+
+def add_menu_item_with_url(menu_list, titles, pics, urls, title, pic_name, url):
+    menu_list.append(title)
+    titles.append(title.strip())
+    pics.append(picfold + pic_name)
+    urls.append(url)
+
+
 class LinuxsatPanel(Screen):
 
     def __init__(self, session):
@@ -258,192 +283,80 @@ class LinuxsatPanel(Screen):
         self.pics = []
         self.urls = []
 
-        has_dpkg = os.path.exists('/var/lib/dpkg/info')
+        if not has_dpkg:
+            add_menu_item(menu_list, self.titles, self.pics, "Backup ", "Backup.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Bouquets ", "Bouquets.png")
+
+        add_menu_item(menu_list, self.titles, self.pics, "Channel List ", "Channel-list.png")
 
         if not has_dpkg:
-            menu_list.append("Backup ")
-            self.titles.append("Backup-Tools")
-            self.pics.append(picfold + "Backup.png")
-
-            menu_list.append("Bouquets ")
-            self.titles.append("Bouquets ")
-            self.pics.append(picfold + "Bouquets.png")
-
-        menu_list.append("Channel List ")
-        self.titles.append("Channel List")
-        self.pics.append(picfold + "Channel-list.png")
+            add_menu_item(menu_list, self.titles, self.pics, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Epg ", "plugin-epg.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Feeds Image Oe2.0 ", "Feeds2.0.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Feeds Image DreamOs ", "Feeds2.2.png")
 
         if not has_dpkg:
-            menu_list.append("DvbUsb Tuners Drivers")
-            self.titles.append("Dvb-Usb ")
-            self.pics.append(picfold + "usb-tuner-drivers.png")
-
-            menu_list.append("Epg ")
-            self.titles.append("Epg-Tools ")
-            self.pics.append(picfold + "plugin-epg.png")
-
-            menu_list.append("Feeds Image Oe2.0 ")
-            self.titles.append("Feeds Oe2.0 ")
-            self.pics.append(picfold + "Feeds2.0.png")
-
-        if has_dpkg:
-            menu_list.append("Feeds Image DreamOs ")
-            self.titles.append("Feeds DreamOs ")
-            self.pics.append(picfold + "Feeds2.2.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Games ", "Game.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Iptv ", "iptv-streaming.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Kiddac Oe2.0 ", "KiddaC1.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Kiddac DreamOs ", "KiddaC2.png")
 
         if not has_dpkg:
-            menu_list.append("Games ")
-            self.titles.append("Games ")
-            self.pics.append(picfold + "Game.png")
-
-            menu_list.append("Iptv ")
-            self.titles.append("Iptv ")
-            self.pics.append(picfold + "iptv-streaming.png")
-
-            menu_list.append("Kiddac Oe2.0 ")
-            self.titles.append("Kiddac Zone Oe2.0 ")
-            self.pics.append(picfold + "KiddaC1.png")
-
-        if has_dpkg:
-            menu_list.append("Kiddac DreamOs ")
-            self.titles.append("Kiddac Zone DreamOs ")
-            self.pics.append(picfold + "KiddaC2.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Lululla Zone Oe2.0 ", "oe2.0.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Lululla Zone DreamOs ", "oe2.5-2.6.png")
+            add_menu_item(menu_list, self.titles, self.pics, "DreamOs Plugins ", "OE2.2-Plugins.png")
 
         if not has_dpkg:
-            menu_list.append("Lululla Zone Oe2.0 ")
-            self.titles.append("Lululla Zone Oe2.0 ")
-            self.pics.append(picfold + "oe2.0.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Mediaplayer-Youtube ", "mediayou.png")
+            add_menu_item(menu_list, self.titles, self.pics, "MultiBoot ", "multiboot.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Multimedia ", "Multimedia.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Panels Addons ", "Panels.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Picons Tools ", "picons.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Python Library ", "Library.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Radio Tools", "Radio.png")
 
-        if has_dpkg:
-            menu_list.append("Lululla Zone DreamOs ")
-            self.titles.append("Lululla Zone DreamOs ")
-            self.pics.append(picfold + "oe2.5-2.6.png")
-
-            menu_list.append("DreamOs Plugins ")
-            self.titles.append("DreamOs Plugins ")
-            self.pics.append(picfold + "OE2.2-Plugins.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Script Installer ", "script.png")
 
         if not has_dpkg:
-            menu_list.append("Mediaplayer-Youtube ")
-            self.titles.append("MP-YT ")
-            self.pics.append(picfold + "mediayou.png")
-
-            menu_list.append("MultiBoot ")
-            self.titles.append("MultiBoot ")
-            self.pics.append(picfold + "multiboot.png")
-
-            menu_list.append("Multimedia ")
-            self.titles.append("Multimedia ")
-            self.pics.append(picfold + "Multimedia.png")
-
-            menu_list.append("Panels Addons ")
-            self.titles.append("Panels Addons ")
-            self.pics.append(picfold + "Panels.png")
-
-            menu_list.append("Picons ")
-            self.titles.append("Picons-Tools ")
-            self.pics.append(picfold + "picons.png")
-
-            menu_list.append("Python Library ")
-            self.titles.append("Python Library ")
-            self.pics.append(picfold + "Library.png")
-
-            menu_list.append("Radio ")
-            self.titles.append("Radio-Tools ")
-            self.pics.append(picfold + "Radio.png")
-
-        menu_list.append("Script Installer ")
-        self.titles.append("Script Installer ")
-        self.pics.append(picfold + "script.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Skins | TEAM ", "skinsteam.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Skins Fhd-Hd DreamOs ", "OE2.2-Skins.png")
 
         if not has_dpkg:
-            menu_list.append("Skins | TEAM ")
-            self.titles.append("Skins | TEAM ")
-            self.pics.append(picfold + "skinsteam.png")
-
-        if has_dpkg:
-            menu_list.append("Skins Fhd-Hd DreamOs ")
-            self.titles.append("Skins DreamOs ")
-            self.pics.append(picfold + "OE2.2-Skins.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Keys Tools2.0 ", "key-updater.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Keys Tools DreamOs ", "key-updater1.png")
 
         if not has_dpkg:
-            menu_list.append("Keys Tools Oe2.0 ")
-            self.titles.append("SoftCam-Tools2.0 ")
-            self.pics.append(picfold + "key-updater.png")
-
-        if has_dpkg:
-            menu_list.append("Keys Tools DreamOs ")
-            self.titles.append("SoftCam-Tools DreamOs ")
-            self.pics.append(picfold + "key-updater1.png")
+            add_menu_item(menu_list, self.titles, self.pics, "SoftcamsOE2.0 ", "SOE20.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Softcams DreamOs ", "SOE22.png")
 
         if not has_dpkg:
-            menu_list.append("Softcams ")
-            self.titles.append("SoftcamsOE2.0 ")
-            self.pics.append(picfold + "SOE20.png")
-
-        if has_dpkg:
-            menu_list.append("Softcams ")
-            self.titles.append("Softcams DreamOs ")
-            self.pics.append(picfold + "SOE22.png")
-
-        if not has_dpkg:
-            menu_list.append("Sport ")
-            self.titles.append("Sport ")
-            self.pics.append(picfold + "sport.png")
-
-            menu_list.append("Streamlink ")
-            self.titles.append("Streamlink ")
-            self.pics.append(picfold + "streamlink.png")
-
-            menu_list.append("Utility ")
-            self.titles.append("Utiliy ")
-            self.pics.append(picfold + "utility.png")
-
-            menu_list.append("Vpn Oe2.0 ")
-            self.titles.append("Vpn-Oe2.0 ")
-            self.pics.append(picfold + "vpn.png")
-
-            menu_list.append("Weather ")
-            self.titles.append("Weather-Tools ")
-            self.pics.append(picfold + "weather.png")
-
-            menu_list.append("Weather Forecast ")
-            self.titles.append("Weather-Foreca")
-            self.pics.append(picfold + "weather-forecast.png")
-
-            menu_list.append("Webcam ")
-            self.titles.append("Webcam ")
-            self.pics.append(picfold + "webcam.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Sport Tools ", "sport.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Streamlink Tools ", "streamlink.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Utility ", "utility.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Vpn Oe2.0 ", "vpn.png")
+            add_menu_item(menu_list, self.titles, self.pics, "WeatherTools ", "weather.png")
+            add_menu_item(menu_list, self.titles, self.pics, "WeatherForecast ", "weather-forecast.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Webcam ", "webcam.png")
 
         if not config.ParentalControl.configured.value:
-
             if not has_dpkg:
-                menu_list.append("Adult Oe2.0 ")
-                self.titles.append("Adult Oe2.0 ")
-                self.pics.append(picfold + "18+deb.png")
-
-            if has_dpkg:
-                menu_list.append("Adult DreamOs ")
-                self.titles.append("Adult DreamOs ")
-                self.pics.append(picfold + "18+.png")
+                add_menu_item(menu_list, self.titles, self.pics, "Adult Oe2.0 ", "18+deb.png")
+            else:
+                add_menu_item(menu_list, self.titles, self.pics, "Adult DreamOs ", "18+.png")
 
         if not has_dpkg:
-            menu_list.append("Other Oe2.0 ")
-            self.titles.append("Other Oe2.0 ")
-            self.pics.append(picfold + "Other.png")
+            add_menu_item(menu_list, self.titles, self.pics, "Other Oe2.0 ", "Other.png")
+        else:
+            add_menu_item(menu_list, self.titles, self.pics, "Other DreamOs ", "Other1.png")
 
-        if has_dpkg:
-            menu_list.append("Other DreamOs ")
-            self.titles.append("Other DreamOs ")
-            self.pics.append(picfold + "Other1.png")
-
-        menu_list.append(" Information ")
-        self.titles.append("Information ")
-        self.pics.append(picfold + "Information.png")
-
-        menu_list.append(" About ")
-        self.titles.append("About ")
-        self.pics.append(picfold + "about.png")
+        add_menu_item(menu_list, self.titles, self.pics, " Information ", "Information.png")
+        add_menu_item(menu_list, self.titles, self.pics, " About ", "about.png")
 
         self.names = menu_list
         # self.combined_data = zip(self.names, self.titles, self.pics)
@@ -691,45 +604,17 @@ class LSskin(Screen):
         self.pics = []
         self.urls = []
 
-        menu_list.append("Skins All ")
-        self.titles.append("Skins_All ")
-        self.pics.append(picfold + "otherskins.png")
-
-        menu_list.append("Skins | HD ")
-        self.titles.append("Skins | HD ")
-        self.pics.append(picfold + "SkinHD.png")
-
-        menu_list.append("Skins Egami ")
-        self.titles.append("Skins_Egami ")
-        self.pics.append(picfold + "egami.png")
-
-        menu_list.append("Skins HDF ")
-        self.titles.append("Skins_HDF ")
-        self.pics.append(picfold + "hdf.png")
-
-        menu_list.append("Skins OpenBh ")
-        self.titles.append("Skins_OBH ")
-        self.pics.append(picfold + "openbh.png")
-
-        menu_list.append("Skins OPEN ATV ")
-        self.titles.append("Skins_OpenAtv ")
-        self.pics.append(picfold + "openatv.png")
-
-        menu_list.append("Skins OpenPLi ")
-        self.titles.append("Skins_OpenPli ")
-        self.pics.append(picfold + "openpli.png")
-
-        menu_list.append("Skins OpenSpa ")
-        self.titles.append("Skins_OpenSpa ")
-        self.pics.append(picfold + "openspa.png")
-
-        menu_list.append("Skins VTi ")
-        self.titles.append("Skins_Vti ")
-        self.pics.append(picfold + "vti.png")
-
-        menu_list.append("Skins Oe Based ")
-        self.titles.append("Skins_Oebased ")
-        self.pics.append(picfold + "oebased.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins All ", "otherskins.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins | HD ", "SkinHD.png")
+        # add_menu_item(menu_list, self.titles, self.pics, "Skins | FHD ", "SkinFHD.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins Egami ", "egami.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins HDF ", "hdf.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenBh ", "openbh.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins OPEN ATV ", "openatv.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenPLi ", "openpli.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenSpa ", "openspa.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins VTi ", "vti.png")
+        add_menu_item(menu_list, self.titles, self.pics, "Skins Oe Based ", "oebased.png")
 
         self.names = menu_list
         self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
@@ -939,35 +824,12 @@ class LSChannel(Screen):
         self.pics = []
         self.urls = []
 
-        menu_list.append("CIEFP ")
-        self.titles.append("CIEFP")
-        self.pics.append(picfold + "ciefp.png")
-        self.urls.append('https://github.com/ciefp/ciefpsettings-enigma2-zipped')
-
-        menu_list.append("CYRUS ")
-        self.titles.append("CYRUS ")
-        self.pics.append(picfold + "cyrus.png")
-        self.urls.append('http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
-
-        menu_list.append("MANUTEK ")
-        self.titles.append("MANUTEK ")
-        self.pics.append(picfold + "manutek.png")
-        self.urls.append('http://www.manutek.it/isetting/index.php')
-
-        menu_list.append("MORPHEUS ")
-        self.titles.append("MORPHEUS ")
-        self.pics.append(picfold + "morpheus883.png")
-        self.urls.append('http://github.com/morpheus883/enigma2-zipped')
-
-        menu_list.append("VHANNIBAL NET ")
-        self.titles.append("VHANNIBAL NET ")
-        self.pics.append(picfold + "vhannibal1.png")
-        self.urls.append('http://www.vhannibal.net/asd.php')
-
-        menu_list.append("VHANNIBAL TEK ")
-        self.titles.append("VHANNIBAL TEK ")
-        self.pics.append(picfold + "vhannibal2.png")
-        self.urls.append('http://sat.alfa-tech.net/upload/settings/vhannibal/')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", 'https://github.com/ciefp/ciefpsettings-enigma2-zipped')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", 'http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", 'http://www.manutek.it/isetting/index.php')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", 'http://github.com/morpheus883/enigma2-zipped')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", 'http://www.vhannibal.net/asd.php')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", 'http://sat.alfa-tech.net/upload/settings/vhannibal/')
 
         self.names = menu_list
         self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
@@ -1174,139 +1036,65 @@ class ScriptInstaller(Screen):
         self.pics = []
         self.urls = []
 
-        menu_list.append("Add Libssl Libcrypto ")
-        self.titles.append("Add Libssl Libcrypto ")
-        self.pics.append(picfold + "AddLibssl.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Add Libssl Libcrypto", "AddLibssl.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash')
 
-        menu_list.append("Add Symlink Libssl ")
-        self.titles.append("Add Symlink Libssl ")
-        self.pics.append(picfold + "AddSymlink.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Add Symlink Libssl", "AddSymlink.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash')
 
-        menu_list.append("Ajpanel by AMAJamry ")
-        self.titles.append("Ajpanel AMAJamry ")
-        self.pics.append(picfold + "Ajpanel.png")
-        self.urls.append('wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ajpanel AMAJamry", "Ajpanel.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
 
-        menu_list.append("Biss Feed Autokey ")
-        self.titles.append("Biss Feed Autokey ")
-        self.pics.append(picfold + "BissFeedAutokey.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Biss Feed Autokey", "BissFeedAutokey.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -O - | bash')
 
-        menu_list.append("Chocholousek Picons ")
-        self.titles.append("Chocholousek Picons ")
-        self.pics.append(picfold + "ChocholousekPicons.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Chocholousek Picons", "ChocholousekPicons.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -O - | bash')
 
-        menu_list.append("Add Dns Cloudfaire ")
-        self.titles.append("Dns Cloudfaire ")
-        self.pics.append(picfold + "DnsCloudfaire.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | bash')
 
-        menu_list.append("Add Dns Google ")
-        self.titles.append("Dns Google ")
-        self.pics.append(picfold + "DnsGoogle.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | bash')
 
-        menu_list.append("Add Dns Quad9 ")
-        self.titles.append("Dns Quad9 ")
-        self.pics.append(picfold + "DnsQuad9.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | bash')
 
-        menu_list.append("E2player by MOHAMED OS ")
-        self.titles.append("E2player MOHAMED ")
-        self.pics.append(picfold + "E2playerMOHAMED.png")
-        self.urls.append('wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player MOHAMED", "E2playerMOHAMED.png", 'wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
 
-        menu_list.append("E2player by MAXBAMBY ")
-        self.titles.append("E2player MAXBAMBY ")
-        self.pics.append(picfold + "E2playerMAXBAMBY.png")
-        self.urls.append('wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
 
-        menu_list.append("E2player by ZADMARIO ")
-        self.titles.append("E2player ZADMARIO ")
-        self.pics.append(picfold + "E2playerZADMARIO.png")
-        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
 
-        menu_list.append("E2player by XXX ")
-        self.titles.append("E2player XXX ")
-        self.pics.append(picfold + "E2playerXXX.png")
-        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash')
 
-        menu_list.append("History Zap Selector ")
-        self.titles.append("History Zap Selector ")
-        self.pics.append(picfold + "HistoryZapSelector.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash')
 
-        menu_list.append("iSetting E2 ")
-        self.titles.append("iSetting E2 ")
-        self.pics.append(picfold + "iSettingE2.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "iSetting E2", "iSettingE2.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -O - | bash')
 
-        menu_list.append("Levi45 Cam Manager ")
-        self.titles.append("Levi45 Manager ")
-        self.pics.append(picfold + "Levi45Manager.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
 
-        menu_list.append("Show Mountpoints ")
-        self.titles.append("Mountpoints ")
-        self.pics.append(picfold + "Mountpoints.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
 
-        menu_list.append("Multistalker By ZIKO ")
-        self.titles.append("Multistalker Ziko ")
-        self.pics.append(picfold + "Multistalker.png")
-        self.urls.append('wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
 
-        menu_list.append("New VirtualKeyboard ")
-        self.titles.append("New VirtualKeyboard ")
-        self.pics.append(picfold + "NewVirtualKeyboard.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
 
-        menu_list.append("Quicksignal By Raed ")
-        self.titles.append("Quicksignal Raed ")
-        self.pics.append(picfold + "Quicksignal.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
 
-        menu_list.append("Send Emm TVS ")
-        self.titles.append("Send Emm ")
-        self.pics.append(picfold + "SendEmm.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
 
-        menu_list.append("Send Cline -> CCcam.cfg ")
+        # Adding more options without URLs
+        menu_list.append("Send Cline -> CCcam.cfg")
         self.titles.append("Send CCcline CCcam ")
         self.pics.append(picfold + "cccamfreee.png")
 
-        menu_list.append("Send Cline -> oscam.server ")
+        menu_list.append("Send Cline -> oscam.server")
         self.titles.append("Send CCcline Oscam ")
         self.pics.append(picfold + "oscamfree.png")
 
-        menu_list.append("Keys Update ")
-        self.titles.append("Keys Update ")
-        self.pics.append(picfold + "keys.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
 
-        if not os.path.exists('/var/lib/dpkg/info'):
-            menu_list.append("ServiceApp Exteplayer ")
-            self.titles.append("ServiceApp Exteplayer ")
-            self.pics.append(picfold + "serviceapp.png")
-            self.urls.append('opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
+        if not has_dpkg:
+            add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
 
-        menu_list.append("SubSupport Addon ")
-        self.titles.append("Subsupport addon ")
-        self.pics.append(picfold + "SubSupportAddon.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
 
-        menu_list.append("Transmission Addon ")
-        self.titles.append("Transmission addon ")
-        self.pics.append(picfold + "transmission.png")
-        self.urls.append('wget -q --no-check-certificate http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh -O - | bash')
 
-        menu_list.append("Xtraevent Addon ")
-        self.titles.append("Xtraevent addon ")
-        self.pics.append(picfold + "xtraevent.png")
-        self.urls.append('wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xtraevent addon", "xtraevent.png", 'wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
 
         self.names = menu_list
         # test down
@@ -1650,7 +1438,7 @@ class addInstall(Screen):
     def __init__(self, session, data, name, dest):
         Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'addInstall.xml')
-        if os.path.exists('/var/lib/dpkg/info'):
+        if has_dpkg:
             skin = os.path.join(skin_path, 'addInstall-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
@@ -1690,7 +1478,7 @@ class addInstall(Screen):
                                      'blue': self.restart,
                                      'yellow': self.remove}, -2)
         self.timer = eTimer()
-        if os.path.exists('/var/lib/dpkg/info'):
+        if has_dpkg:
             self.timer_conn = self.timer.timeout.connect(self.getfreespace)
         else:
             self.timer.callback.append(self.getfreespace)
@@ -1769,7 +1557,7 @@ class addInstall(Screen):
             self.plug = self.url[(n1 + 1):]
             self.iname = ''
             if ".deb" in self.plug:
-                if not os.path.exists('/var/lib/dpkg/info'):
+                if not has_dpkg:
                     self.session.open(MessageBox,
                                       _('Unknow Image!'),
                                       MessageBox.TYPE_INFO,
@@ -1779,7 +1567,7 @@ class addInstall(Screen):
                 self.iname = self.plug[:n2]
 
             if ".ipk" in self.plug:
-                if os.path.exists('/var/lib/dpkg/info'):
+                if has_dpkg:
                     self.session.open(MessageBox,
                                       _('Unknow Image!'),
                                       MessageBox.TYPE_INFO,
@@ -1856,7 +1644,7 @@ class addInstall(Screen):
                         url = 'https://github.com' + url
                         name = decode_html(name)
                         self.downloading = True
-                    item = name + "###" + url
+                    item = name + "###" + str(url)
                     items.append(item)
                     items.sort()
 
@@ -1875,7 +1663,7 @@ class addInstall(Screen):
                             continue
                         name = decode_html(name) + ' ' + date
                         self.downloading = True
-                    item = name + "###" + url
+                    item = name + "###" + str(url)
                     items.append(item)
                     items.sort()
 
@@ -1888,7 +1676,7 @@ class addInstall(Screen):
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
                     url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
                     self.downloading = True
-                    item = decode_html(name) + "###" + url
+                    item = decode_html(name) + "###" + str(url)
                     items.append(item)
                     items.sort()
 
@@ -1905,7 +1693,7 @@ class addInstall(Screen):
                         url = url.replace('blob', 'raw')
                         url = 'https://github.com' + url
                         self.downloading = True
-                    item = name + "###" + url
+                    item = name + "###" + str(url)
                     items.append(item)
                     items.sort()
 
@@ -1931,16 +1719,12 @@ class addInstall(Screen):
                         name = name.decode('utf-8', errors='replace')
                     name = decode_html(match[1])
                     date = match[2]
-                # match = re.compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', re.DOTALL).findall(r)
-                # for url, name, date in match:
                     name = str(name).replace('&#127381;', '').replace("%20", " ").replace("..", "").strip() + ' ' + date
                     url = "https://www.vhannibal.net/" + url
                     self.downloading = True
-                    item = name + "###" + url
+                    item = name + "###" + str(url)
                     items.append(item)
                     items.sort()
-                    print("url =", url)
-                    print("name =", name)
 
             if 'vhannibal tek' in self.name.lower():
                 regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
@@ -1951,7 +1735,7 @@ class addInstall(Screen):
                     name = decode_html(url).replace('&#127381;', '').replace("%20", " ") + ' ' + date
                     url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
                     self.downloading = True
-                    item = name + "###" + url
+                    item = name + "###" + str(url)
                     items.append(item)
                     items.sort()
 
@@ -1965,7 +1749,6 @@ class addInstall(Screen):
                 self.names.append(name.strip())
                 self.urls.append(url.strip())
             LPshowlist(self.names, self["list"])
-            # self.buttons()
         except Exception as e:
             print('downxmlpage get failed: ', str(e))
             self['info'].setText(_('Download page get failed ...'))
@@ -2097,7 +1880,7 @@ class addInstall(Screen):
     def exitnow(self):
 
         try:
-            if not os.path.exists('/var/lib/dpkg/info'):
+            if not has_dpkg:
                 refreshPlugins()
         except Exception as e:
             print('error on exit!', e)
@@ -2110,7 +1893,7 @@ class LSinfo(Screen):
     def __init__(self, session, name):
         Screen.__init__(self, session)
         skin = os.path.join(skin_path, 'LSinfo.xml')
-        if os.path.exists('/var/lib/dpkg/info'):
+        if has_dpkg:
             skin = os.path.join(skin_path, 'LSinfo-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
@@ -2151,7 +1934,7 @@ class LSinfo(Screen):
         self.timerz.start(200, 1)
 
         self.timer = eTimer()
-        if os.path.exists('/var/lib/dpkg/info'):
+        if has_dpkg:
             self.timer_conn = self.timer.timeout.connect(self.startRun)
         else:
             self.timer.callback.append(self.startRun)
@@ -2250,7 +2033,7 @@ class LSinfo(Screen):
     def arckget(self):
         zarcffll = ''
         try:
-            if os.path.exists('/var/lib/dpkg/info'):
+            if has_dpkg:
                 zarcffll = os.popen('dpkg --print-architecture | grep -iE "arm|aarch64|mips|cortex|sh4|sh_4"').read().strip('\n\r')
             else:
                 zarcffll = os.popen('opkg print-architecture | grep -iE "arm|aarch64|mips|cortex|h4|sh_4"').read().strip('\n\r')
