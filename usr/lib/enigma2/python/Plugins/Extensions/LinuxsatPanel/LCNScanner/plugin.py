@@ -7,10 +7,6 @@ from Tools.Directories import SCOPE_CONFIG, SCOPE_PLUGIN_ABSOLUTE, fileReadLines
 from enigma import eDVBDB, eServiceCenter, eServiceReference
 from os.path import join
 from sys import maxsize
-import glob
-import os
-import re
-import sys
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -132,7 +128,6 @@ class LCNScanner:
 
             return services
 
-
         def matchLCNsAndServices(mode, lcndb, services, duplicate, renumbers):
             print("[LCNScanner] Matching LCN entries with services mod:", mode)
             lcns = []
@@ -191,10 +186,10 @@ class LCNScanner:
                         medium = "S"
 
                     service = "{}:{}:{}:{}".format(
-                        item[DB_SID],
-                        item[DB_TSID],
-                        item[DB_ONID],
-                        item[DB_NAMESPACE]
+                        item[self.DB_SID],
+                        item[self.DB_TSID],
+                        item[self.DB_ONID],
+                        item[self.DB_NAMESPACE]
                     )
                     lcns.append([
                         medium,
@@ -254,7 +249,7 @@ class LCNScanner:
                         data[self.LCNS_LCN_SCANNED] = data[self.LCNS_LCN_BROADCAST]
                         lcnCache[lcn] = data
                 elif (len(serviceReference) > 2 and
-                      serviceReference[2] in MODES[mode]):
+                      serviceReference[2] in self.MODES[mode]):
                     print("[LCNScanner] Service with LCN not a valid mode service!")
                     continue
                 else:
@@ -275,7 +270,6 @@ class LCNScanner:
                 serviceLCNs[lcn] = tuple(data)
 
             return (cableLCNs, satelliteLCNs, terrestrialLCNs)
-
 
         def writeBouquet(mode, medium, serviceLCNs, markers):
             def insertMarker(mode, lcn):
@@ -428,5 +422,3 @@ class LCNScanner:
             eDVBDB.getInstance().reloadServicelist()
         eDVBDB.getInstance().reloadBouquets()
         print("[LCNScanner] LCN scan finished.")
-
-
