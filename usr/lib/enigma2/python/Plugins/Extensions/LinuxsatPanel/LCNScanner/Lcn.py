@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+from __future__ import absolute_import
 from __future__ import print_function
-from . import _
+from .. import _
 from enigma import (eServiceReference, eServiceCenter)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.ConfigList import ConfigListScreen
+from Tools.Directories import (resolveFilename, SCOPE_PLUGINS)
 from Components.config import (
     getConfigListEntry,
     config,
@@ -28,8 +30,9 @@ except ImportError:
     from xml.etree.ElementTree import parse
 
 # NAME Digitale Terrestre
-plugin_path = os.path.dirname(sys.modules[__name__].__file__)
-rules = os.path.join(plugin_path, 'rules.xml')
+# plugin_path = os.path.dirname(sys.modules[__name__].__file__)
+plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+rules = os.path.join(plugin_path, 'LCNScanner/rules.xml')
 ServiceListNewLamedb = plugin_path + '/temp/ServiceListNewLamedb'
 TrasponderListNewLamedb = plugin_path + '/temp/TrasponderListNewLamedb'
 ServOldLamedb = plugin_path + '/temp/ServiceListOldLamedb'
@@ -75,6 +78,8 @@ def Bouquet():
             x = f.read()
             if re.search("#NAME Digitale Terrestre", x, flags=re.IGNORECASE):
                 return "/etc/enigma2/" + file
+            elif re.search("#NAME Terrestrial TV LCN", x, flags=re.IGNORECASE):
+                return "/etc/enigma2/" + file
     return
 
 
@@ -90,8 +95,8 @@ class LCN():
         mdom = parse(rules)
         self.root = None
         for x in mdom.getroot():
-            # if x.tag == "ruleset" and x.get("name") == rulename:
-            if x.tag == "ruleset" and x.get("name") == 'Italy':
+            # if x.tag == "rules" and x.get("name") == rulename:
+            if x.tag == "rules" and x.get("name") == 'Italy':
                 self.root = x
                 return
 
@@ -145,21 +150,23 @@ class LCN():
     def read(self, serviceType):
         self.readE2Services(serviceType)
         try:
-            f = open(dbfile)
+            with open(dbfile) as f:
+                while True:
+                    line = f.readline()
+                    if not line:
+                        break
+                    line = line.strip()
+                    if len(line) != 38:
+                        continue
+                    tmp = line.split(":")
+                    if len(tmp) != 6:
+                        continue
+                    self.addLcnToList(int(tmp[0], 16), int(tmp[1], 16), int(tmp[2], 16), int(tmp[3], 16), int(tmp[4]), int(tmp[5]))
+
         except Exception as e:
-            print(e)
+            print("Errore durante la lettura del file:", e)
             return
-        while True:
-            line = f.readline()
-            if line == "":
-                break
-            line = line.strip()
-            if len(line) != 38:
-                continue
-            tmp = line.split(":")
-            if len(tmp) != 6:
-                continue
-            self.addLcnToList(int(tmp[0], 16), int(tmp[1], 16), int(tmp[2], 16), int(tmp[3], 16), int(tmp[4]), int(tmp[5]))
+
         if self.root is not None:
             for x in self.root:
                 if x.tag == "rule":
@@ -189,175 +196,162 @@ class LCN():
                     self.e2services.append(service.toString())
 
     def ClearDoubleMarker(self, UserBouquet):
-        if os.path.exists(UserBouquet):
-            ReadFile = open(UserBouquet, "r")
-            uBQ = ReadFile.readlines()
-            ReadFile.close()
-            WriteFile = open(UserBouquet, "w")
+        if not os.path.exists(UserBouquet):
+            print("File UserBouquet non trovato.", UserBouquet)
+            return
+
+        try:
+            with open(UserBouquet, "r") as read_file:
+                uBQ = read_file.readlines()
+
             LineMaker = []
             PosDelMaker = []
             x = 1
             for line in uBQ:
-                if line.find("#SERVICE 1:64:"):
+                if "#SERVICE 1:64:" in line:
                     x += 1
                     continue
-                elif line.find("#DESCRIPTION"):
+                elif "#DESCRIPTION" in line:
                     LineMaker.append(x)
                 x += 1
-            START = 0
-            STOP = 0
-            i = 0
-            for xx in LineMaker:
-                if i + 1 < len(LineMaker):
-                    START = LineMaker[i]
-                    STOP = LineMaker[i + 1]
-                    if STOP - START < 3:
-                        PosDelMaker.append(START)
-                        PosDelMaker.append(START + 1)
-                    if uBQ[START] == uBQ[STOP]:
-                        PosDelMaker.append(STOP)
-                        PosDelMaker.append(STOP + 1)
-                i += 1
-            PosDelMaker.reverse()
+
+            for i in range(len(LineMaker) - 1):
+                START = LineMaker[i]
+                STOP = LineMaker[i + 1]
+                if STOP - START < 3:
+                    PosDelMaker.extend([START, START + 1])
+                if uBQ[START] == uBQ[STOP]:
+                    PosDelMaker.extend([STOP, STOP + 1])
+
+            PosDelMaker = sorted(set(PosDelMaker), reverse=True)
+
             for delmark in PosDelMaker:
                 del uBQ[delmark - 1]
-            for x in uBQ:
-                WriteFile.write(x)
-            WriteFile.close()
+
+            with open(UserBouquet, "w") as write_file:
+                write_file.writelines(uBQ)
+
+        except Exception as e:
+            print("Errore durante la gestione del file UserBouquet:", e)
 
     def writeBouquet(self):
+        dttbouquet = Bouquet()
         try:
-            f = open('/etc/enigma2/userbouquet.terrestrial_lcn.tv', "w")
-            # f = open(self.bouquetfile, "w")
+            with open(dttbouquet, "w") as f:
+                self.newlist = []
+                count = 0
+
+                for x in self.lcnlist:
+                    count += 1
+                    while x[0] != count:
+                        self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
+                        count += 1
+                    if x[0] == count:
+                        self.newlist.append(x)
+
+                f.write("#NAME Terrestrial TV LCN\n")
+                f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0::Terrestrial TV LCN\n")
+                f.write("##DESCRIPTION Terrestrial TV LCN\n")
+
+                for x in self.newlist:
+                    if int(x[1]) == 11111111:
+                        f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+                        continue
+
+                    if len(self.markers) > 0 and x[0] > self.markers[0][0]:
+                        f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+                        f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
+                        self.markers.pop(0)  # Rimuove il primo marker
+
+                    refstr = "1:0:1:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])
+                    refsplit = eServiceReference(refstr).toString().split(":")
+                    added = False
+                    for tref in self.e2services:
+                        tmp = tref.split(":")
+                        if (tmp[3] == refsplit[3] and tmp[4] == refsplit[4] and
+                                tmp[5] == refsplit[5] and tmp[6] == refsplit[6]):
+                            f.write("#SERVICE " + tref + "\n")
+                            added = True
+                            break
+                    if not added:
+                        f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+            self.addInTVBouquets()
         except Exception as e:
-            print(e)
-            return
-
-        self.newlist = []
-        count = 0
-        for x in self.lcnlist:
-            count += 1
-            while x[0] != count:
-                self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
-                count += 1
-            if x[0] == count:
-                self.newlist.append(x)
-
-        f.write("#NAME Terrestrial TV LCN\n")
-        f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0::Terrestrial TV LCN\n")
-        f.write("##DESCRIPTION Terrestrial TV LCN\n")
-        for x in self.newlist:
-            if int(x[1]) == 11111111:
-                # print x[0], " Detected 111111111111 service"
-                f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-                continue
-
-            if len(self.markers) > 0:
-                if x[0] > self.markers[0][0]:
-                    f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-                    f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
-                    self.markers.remove(self.markers[0])
-            refstr = "1:0:1:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])  # temporary ref
-            refsplit = eServiceReference(refstr).toString().split(":")
-            added = False
-            for tref in self.e2services:
-                tmp = tref.split(":")
-                if tmp[3] == refsplit[3] and tmp[4] == refsplit[4] and tmp[5] == refsplit[5] and tmp[6] == refsplit[6]:
-                    f.write("#SERVICE " + tref + "\n")
-                    added = True
-                    break
-
-            if not added:  # no service found? something wrong? a log should be a good idea. Anyway we add an empty line so we keep the numeration
-                f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-
-        f.close()
-        self.addInTVBouquets()
-        # self.ClearDoubleMarker(self.bouquetfile)
+            print("Errore nella scrittura del bouquet: ", str(e))
 
     def addInTVBouquets(self):
-        f = open('/etc/enigma2/bouquets.tv', 'r')
-        ret = f.read().split("\n")
-        f.close()
-
-        i = 0
-        while i < len(ret):
-            if ret[i].find("userbouquet.terrestrial_lcn.tv") >= 0:
-                return
-            i += 1
-
-        f = open('/etc/enigma2/bouquets.tv', 'w')
-        f.write(ret[0] + "\n")
-        f.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.tv" ORDER BY bouquet\n')
-        i = 1
-        while i < len(ret):
-            f.write(ret[i] + "\n")
-            i += 1
+        try:
+            with open('/etc/enigma2/bouquets.tv', 'r') as f:
+                ret = f.read().splitlines()
+            dttbouquet_str = Bouquet()  # "FROM BOUQUET \"userbouquet.terrestrial_lcn.tv\""
+            for line in ret:
+                if dttbouquet_str in line:
+                    return
+            with open('/etc/enigma2/bouquets.tv', 'w') as f:
+                f.write(ret[0] + "\n")
+                f.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.tv" ORDER BY bouquet\n')
+                for line in ret[1:]:
+                    f.write(line + "\n")
+        except Exception as e:
+            print("Errore nell'aggiunta del bouquet TV: ", str(e))
 
     def writeRadioBouquet(self):
         try:
-            f = open('/etc/enigma2/userbouquet.terrestrial_lcn.radio', "w")
+            with open('/etc/enigma2/userbouquet.terrestrial_lcn.radio', "w") as f:
+                self.newlist = []
+                count = 0
+                for x in self.lcnlist:
+                    count += 1
+                    while x[0] != count:
+                        self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
+                        count += 1
+                    if x[0] == count:
+                        self.newlist.append(x)
+
+                f.write("#NAME Terrestrial Radio LCN\n")
+                f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0::Terrestrial RADIO LCN\n")
+                f.write("##DESCRIPTION Terrestrial RADIO LCN\n")
+
+                for x in self.newlist:
+                    if int(x[1]) == 11111111:
+                        f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+                        continue
+
+                    if len(self.markers) > 0 and x[0] > self.markers[0][0]:
+                        f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
+                        f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
+                        self.markers.pop(0)
+
+                    refstr = "1:0:2:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])
+                    refsplit = eServiceReference(refstr).toString().split(":")
+                    added = False
+
+                    for tref in self.e2services:
+                        tmp = tref.split(":")
+                        if tmp[3] == refsplit[3] and tmp[4] == refsplit[4] and tmp[5] == refsplit[5] and tmp[6] == refsplit[6]:
+                            f.write("#SERVICE " + tref + "\n")
+                            added = True
+                            break
+
+                    if not added:
+                        f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
+                        print("Servizio non trovato per riferimento: ", refsplit)
+
+            self.addInRadioBouquets()
+
         except Exception as e:
-            print(e)
-            return
-
-        self.newlist = []
-        count = 0
-        for x in self.lcnlist:
-            count += 1
-            while x[0] != count:
-                self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
-                count += 1
-            if x[0] == count:
-                self.newlist.append(x)
-
-        f.write("#NAME Terrestrial Radio LCN\n")
-        f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0::Terrestrial RADIO LCN\n")
-        f.write("##DESCRIPTION Terrestrial RADIO LCN\n")
-        for x in self.newlist:
-            if int(x[1]) == 11111111:
-                # print x[0], " Detected 111111111111 service"
-                f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-                continue
-
-            if len(self.markers) > 0:
-                if x[0] > self.markers[0][0]:
-                    f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-                    f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
-                    self.markers.remove(self.markers[0])
-            refstr = "1:0:2:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])  # temporary ref
-            refsplit = eServiceReference(refstr).toString().split(":")
-            added = False
-            for tref in self.e2services:
-                tmp = tref.split(":")
-                if tmp[3] == refsplit[3] and tmp[4] == refsplit[4] and tmp[5] == refsplit[5] and tmp[6] == refsplit[6]:
-                    f.write("#SERVICE " + tref + "\n")
-                    added = True
-                    break
-
-            if not added:  # no service found? something wrong? a log should be a good idea. Anyway we add an empty line so we keep the numeration
-                f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-
-        f.close()
-        self.addInRadioBouquets()
+            print("Errore nella scrittura del bouquet radio: ", str(e))
 
     def addInRadioBouquets(self):
-        f = open('/etc/enigma2/bouquets.radio', 'r')
-        ret = f.read().split("\n")
-        f.close()
-
-        i = 0
-        while i < len(ret):
-            if ret[i].find("userbouquet.terrestrial_lcn.radio") >= 0:
-                return
-            i += 1
-
-        f = open('/etc/enigma2/bouquets.radio', 'w')
-        f.write(ret[0] + "\n")
-        f.write('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.radio" ORDER BY bouquet\n')
-        i = 1
-        while i < len(ret):
-            f.write(ret[i] + "\n")
-            i += 1
+        radio_file = '/etc/enigma2/bouquets.radio'
+        with open(radio_file, 'r') as f:
+            ret = f.readlines()
+        if any("userbouquet.terrestrial_lcn.radio" in line for line in ret):
+            return
+        with open(radio_file, 'w') as f:
+            f.write(ret[0].strip() + "\n")
+            f.write('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.radio" ORDER BY bouquet\n')
+            f.writelines(ret[1:])
 
     def reloadBouquets(self):
         ReloadBouquets(0)
@@ -372,9 +366,9 @@ class LCNBuildHelper():
         self.rulelist = []
         mdom = parse(os.path.dirname(sys.modules[__name__].__file__) + "/rules.xml")
         for x in mdom.getroot():
-            if x.tag == "ruleset":
+            if x.tag == "rules":
                 self.rulelist.append((x.get("name"), x.get("name")))
-            # if x.tag == "ruleset" and x.get("name") == 'Italy':
+            # if x.tag == "rules" and x.get("name") == 'Italy':
                 # self.rulelist.append((x.get("name"), x.get("name")))
         config.lcn = ConfigSubsection()
         config.lcn.enabled = ConfigYesNo(True)
@@ -464,7 +458,7 @@ class LCNBuildHelper():
         else:
             if not suppressmessages:
                 self.session.open(MessageBox, _("No entry in lcn db. Please do a service scan."), MessageBox.TYPE_INFO)
-
+        print('reload blouquet=======')
         lcn.reloadBouquets()
 
 
@@ -528,15 +522,11 @@ def terrestrial():
 def SearchIPTV():
     iptv_list = []
     for iptv_file in sorted(glob.glob("/etc/enigma2/userbouquet.*.tv")):
-        usbq = open(iptv_file, "r").read()
-        usbq_lines = usbq.strip().lower()
-        if "http" in usbq_lines:
-            iptv_list.append(os.path.basename(iptv_file))
-
-    if not iptv_list:
-        return False
-    else:
-        return iptv_list
+        with open(iptv_file, "r") as file:
+            usbq_lines = file.read().strip().lower()
+            if "http" in usbq_lines:
+                iptv_list.append(os.path.basename(iptv_file))
+    return iptv_list if iptv_list else False
 
 
 def keepiptv():
@@ -582,15 +572,11 @@ def copy_files_to_enigma2():
     IptvChArch = plugin_path + '/temp'
     enigma2_folder = "/etc/enigma2"
     bouquet_file = os.path.join(enigma2_folder, "bouquets.tv")
-
-    # Copia i file dalla cartella temporanea a /etc/enigma2
     for filename in os.listdir(IptvChArch):
         if filename.endswith(".tv"):
             src_path = os.path.join(IptvChArch, filename)
             dst_path = os.path.join(enigma2_folder, filename)
             shutil.copy(src_path, dst_path)
-
-            # Aggiungi il nome del file al file bouquet.tv
             with open(bouquet_file, "r+") as f:
                 line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(filename)
                 if line not in f:
@@ -621,68 +607,66 @@ def StartSavingTerrestrialChannels():
 
     def ForceSearchBouquetTerrestrial():
         for file in sorted(glob.glob("/etc/enigma2/*.tv")):
-            f = open(file, "r").read()
-            x = f.strip().lower()
-            if x.find('eeee') != -1:
-                return file
-                break
+            with open(file, "r") as f:
+                content = f.read().strip().lower()
+                if 'eeee' in content:
+                    return file
         return
 
     def ResearchBouquetTerrestrial(search):
+        search_lower = search.lower()
         for file in sorted(glob.glob("/etc/enigma2/*.tv")):
-            f = open(file, "r").read()
-            x = f.strip().lower()
-            x1 = f.strip()
-            if x1.find("#NAME") != -1:
-                if x.lower().find(search.lower()) != -1:
-                    if x.find('eeee') != -1:
-                        return file
-                        break
+            with open(file, "r") as f:
+                content = f.read().strip()
+                content_lower = content.lower()
+                if "#NAME" in content:
+                    if search_lower in content_lower:
+                        if 'eeee' in content_lower:
+                            return file
         return
 
     def SaveTrasponderService():
-        TrasponderListOldLamedb = open(TransOldLamedb, 'w')
-        ServiceListOldLamedb = open(ServOldLamedb, 'w')
         Trasponder = False
         inTransponder = False
         inService = False
         try:
-            LamedbFile = open(ee2ldb, 'r')
-            while 1:
-                line = LamedbFile.readline()
-                if not line:
-                    break
-                if not (inTransponder or inService):
-                    if line.find('transponders') == 0:
-                        inTransponder = True
-                    if line.find('services') == 0:
-                        inService = True
-                if line.find('end') == 0:
-                    inTransponder = False
-                    inService = False
-                line = line.lower()
-                if line.find('eeee') != -1:
-                    Trasponder = True
-                    if inTransponder:
-                        TrasponderListOldLamedb.write(line)
-                        line = LamedbFile.readline()
-                        TrasponderListOldLamedb.write(line)
-                        line = LamedbFile.readline()
-                        TrasponderListOldLamedb.write(line)
-                    if inService:
-                        tmp = line.split(':')
-                        ServiceListOldLamedb.write(tmp[0] + ":" + tmp[1] + ":" + tmp[2] + ":" + tmp[3] + ":" + tmp[4] + ":0\n")
-                        line = LamedbFile.readline()
-                        ServiceListOldLamedb.write(line)
-                        line = LamedbFile.readline()
-                        ServiceListOldLamedb.write(line)
-            TrasponderListOldLamedb.close()
-            ServiceListOldLamedb.close()
+            with open(TransOldLamedb, 'w') as TrasponderListOldLamedb, open(ServOldLamedb, 'w') as ServiceListOldLamedb:
+                with open(ee2ldb, 'r') as LamedbFile:
+                    for line in LamedbFile:
+                        line = line.strip()  # Rimuove spazi bianchi attorno alla riga
+
+                        if not (inTransponder or inService):
+                            if line.startswith('transponders'):
+                                inTransponder = True
+                            elif line.startswith('services'):
+                                inService = True
+
+                        if line.startswith('end'):
+                            inTransponder = False
+                            inService = False
+
+                        line_lower = line.lower()
+                        if 'eeee' in line_lower:
+                            Trasponder = True
+                            if inTransponder:
+                                TrasponderListOldLamedb.write(line_lower + "\n")
+                                for i in range(2):
+                                    line = next(LamedbFile).strip()
+                                    TrasponderListOldLamedb.write(line + "\n")
+                            elif inService:
+                                tmp = line.split(':')
+                                ServiceListOldLamedb.write(':'.join(tmp[:5]) + ":0\n")
+                                for i in range(2):
+                                    line = next(LamedbFile).strip()
+                                    ServiceListOldLamedb.write(line + "\n")
+
             if not Trasponder:
-                os.system('rm -fr ' + TransOldLamedb)
-                os.system('rm -fr ' + ServOldLamedb)
-        except:
-            pass
+                os.remove(TransOldLamedb)
+                os.remove(ServOldLamedb)
+
+        except Exception as e:
+            print("Errore durante il processo:", e)
+
         return Trasponder
 
     def CreateBouquetForce():
@@ -705,6 +689,7 @@ def StartSavingTerrestrialChannels():
         except:
             pass
         return
+
     Service = SaveTrasponderService()
     if Service:
         if not SaveBouquetTerrestrial():
@@ -715,82 +700,89 @@ def StartSavingTerrestrialChannels():
 
 def LamedbRestore():
     try:
-        TrasponderListNewLamedb = open(plugin_path + '/temp/TrasponderListNewLamedb', 'w')
-        ServiceListNewLamedb = open(plugin_path + '/temp/ServiceListNewLamedb', 'w')
-        inTransponder = False
-        inService = False
-        infile = open(ee2ldb, 'r')
-        while 1:
-            line = infile.readline()
-            if not line:
-                break
-            if not (inTransponder or inService):
-                if line.find('transponders') == 0:
-                    inTransponder = True
-                if line.find('services') == 0:
-                    inService = True
-            if line.find('end') == 0:
-                inTransponder = False
-                inService = False
-            if inTransponder:
-                TrasponderListNewLamedb.write(line)
-            if inService:
-                ServiceListNewLamedb.write(line)
-        TrasponderListNewLamedb.close()
-        ServiceListNewLamedb.close()
-        WritingLamedbFinal = open(ee2ldb, "w")
-        WritingLamedbFinal.write("eDVB services /4/\n")
-        TrasponderListNewLamedb = open(plugin_path + '/temp/TrasponderListNewLamedb', 'r').readlines()
-        for x in TrasponderListNewLamedb:
-            WritingLamedbFinal.write(x)
-        try:
-            TrasponderListOldLamedb = open(TransOldLamedb, 'r').readlines()
-            for x in TrasponderListOldLamedb:
-                WritingLamedbFinal.write(x)
-        except:
-            pass
-        WritingLamedbFinal.write("end\n")
-        ServiceListNewLamedb = open(plugin_path + '/temp/ServiceListNewLamedb', 'r').readlines()
-        for x in ServiceListNewLamedb:
-            WritingLamedbFinal.write(x)
-        try:
-            ServiceListOldLamedb = open(ServOldLamedb, 'r').readlines()
-            for x in ServiceListOldLamedb:
-                WritingLamedbFinal.write(x)
-        except:
-            pass
-        WritingLamedbFinal.write("end\n")
-        WritingLamedbFinal.close()
+        with open(plugin_path + '/temp/TrasponderListNewLamedb', 'w') as TransNew, \
+             open(plugin_path + '/temp/ServiceListNewLamedb', 'w') as ServNew:
+            inTransponder = False
+            inService = False
+
+            with open(ee2ldb, 'r') as infile:
+                for line in infile:
+                    line = line.strip()
+                    if not (inTransponder or inService):
+                        if line.startswith('transponders'):
+                            inTransponder = True
+                        elif line.startswith('services'):
+                            inService = True
+                    if line.startswith('end'):
+                        inTransponder = False
+                        inService = False
+                    if inTransponder:
+                        TransNew.write(line + "\n")
+                    if inService:
+                        ServNew.write(line + "\n")
+
+        with open(ee2ldb, "w") as WritingLamedbFinal:
+            WritingLamedbFinal.write("eDVB services /4/\n")
+
+            with open(plugin_path + '/temp/TrasponderListNewLamedb', 'r') as TransNew:
+                WritingLamedbFinal.writelines(TransNew)
+
+            try:
+                with open(TransOldLamedb, 'r') as TransOld:
+                    WritingLamedbFinal.writelines(TransOld)
+            except FileNotFoundError:
+                pass
+
+            WritingLamedbFinal.write("end\n")
+
+            with open(plugin_path + '/temp/ServiceListNewLamedb', 'r') as ServNew:
+                WritingLamedbFinal.writelines(ServNew)
+
+            try:
+                with open(ServOldLamedb, 'r') as ServOld:
+                    WritingLamedbFinal.writelines(ServOld)
+            except FileNotFoundError:
+                pass
+
+            WritingLamedbFinal.write("end\n")
+
         return True
-    except:
+
+    except Exception as e:
+        print("Errore durante il ripristino del lamedb:", e)
         return False
 
 
 def TransferBouquetTerrestrialFinal():
 
-    def RestoreTerrestrial():
-        for file in os.listdir("/etc/enigma2/"):
-            if re.search('^userbouquet.*.tv', file):
-                f = open("/etc/enigma2/" + file, "r")
-                x = f.read()
-                if re.search('#NAME Digitale Terrestre', x, flags=re.IGNORECASE) or re.search('#NAME DTT', x, flags=re.IGNORECASE):  # for disa51
-                    return "/etc/enigma2/" + file
-        return
+    def RestoreTerrestrial(TerChArch):
+        def find_terrestrial_bouquet():
+            for file in os.listdir("/etc/enigma2/"):
+                if re.search(r'^userbouquet.*\.tv$', file):
+                    with open("/etc/enigma2/" + file, "r") as f:
+                        content = f.read()
+                        if re.search(r'#NAME Digitale Terrestre', content, flags=re.IGNORECASE) or \
+                           re.search(r'#NAME DTT', content, flags=re.IGNORECASE) or \
+                           re.search(r'#NAME Terrestrial TV LCN', content, flags=re.IGNORECASE):
+                            return "/etc/enigma2/" + file
+            return None
 
-    try:
-        TerrestrialChannelListArchive = open(TerChArch, 'r').readlines()
-        DirectoryUserBouquetTerrestrial = RestoreTerrestrial()
-        if DirectoryUserBouquetTerrestrial:
-            TrasfBouq = open(DirectoryUserBouquetTerrestrial, 'w')
-            for Line in TerrestrialChannelListArchive:
-                if Line.lower().find('#name') != -1:
-                    TrasfBouq.write('#NAME Digitale Terrestre\n')
-                else:
-                    TrasfBouq.write(Line)
-            TrasfBouq.close()
-            return True
-    except:
-        return False
-    return
+        try:
+            with open(TerChArch, 'r') as archive_file:
+                terrestrial_channel_list = archive_file.readlines()
+
+            terrestrial_bouquet_path = find_terrestrial_bouquet()
+            if terrestrial_bouquet_path:
+                with open(terrestrial_bouquet_path, 'w') as bouquet_file:
+                    for line in terrestrial_channel_list:
+                        if '#NAME' in line.lower():
+                            bouquet_file.write('#NAME Digitale Terrestre\n')
+                        else:
+                            bouquet_file.write(line)
+                return True
+        except Exception as e:
+            print("Errore durante il ripristino del bouquet:", e)
+            return False
+
 
 # ===== by lululla

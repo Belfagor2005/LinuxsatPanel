@@ -1,11 +1,21 @@
-<!-- Rules created on 24/03/2022 by Lululla -->
-<rules>
-	<!--
- 	<ruleset name="Default">
-		<rule type="marker" position="1000">Duplicati</rule>				
-	</ruleset>
-	-->
-	<ruleset name="Italy">		
+<rulesxml>
+	<rules name="Default">
+		<rule type="duplicate" mode="All" range="10001">Duplicates</rule>
+	</rules>
+	<rules name="Australia">
+		<rule type="duplicate" mode="All" range="350-399">Duplicated Services</rule>
+	</rules>
+	<rules name="Germany">
+		<rule type="duplicate" mode="All" range="900-999">Duplicated Services</rule>
+		<rule type="marker" mode="TV" position="220">Sky</rule>
+		<rule type="marker" mode="TV" position="240">Sport</rule>
+		<rule type="marker" mode="TV" position="301">SD</rule>
+		<rule type="marker" mode="TV" position="329">Regional</rule>
+		<rule type="marker" mode="TV" position="570">International</rule>
+		<rule type="marker" mode="TV" position="700">Sky Movie</rule>
+		<rule type="marker" mode="TV" position="750">Sky Sport</rule>
+	</rules>
+	<rules name="Italy">		
 		<rule type="marker" position="0">Intrattenimento</rule>
 		<rule type="marker" position="10">Emittenti Locali</rule>
 		<rule type="marker" position="20">Semi-Generalisti</rule>
@@ -27,5 +37,5 @@
 		<rule type="marker" position="801">Servizi Regionali</rule>			
 		<rule type="marker" position="824">Duplicati</rule>		
 		<rule type="marker" position="1000">Duplicati</rule>				
-	</ruleset>		
-</rules>
+	</rules>		
+</rulesxml>

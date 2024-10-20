@@ -26,14 +26,16 @@ from . import (
     HALIGN,
 )
 from .lsConsole import lsConsole
-from .Lcn import (
+from .LCNScanner.plugin import LCNScanner
+from .LCNScanner.Lcn import (
     # LCN,
-    LCNBuildHelper,
+    # LCNBuildHelper,
     ReloadBouquets,
     copy_files_to_enigma2,
     keepiptv,
     terrestrial,
 )
+
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.config import config
@@ -1036,6 +1038,10 @@ class ScriptInstaller(Screen):
         self.pics = []
         self.urls = []
 
+        menu_list.append("Lcn Find")
+        self.titles.append("Search Scan Lcn channels ")
+        self.pics.append(picfold + "LcnSearch.png")
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Add Libssl Libcrypto", "AddLibssl.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash')
 
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Add Symlink Libssl", "AddSymlink.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash')
@@ -1077,6 +1083,11 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
 
         # Adding more options without URLs
+
+        # menu_list.append("Lcn Find")
+        # self.titles.append("Search Lcn channels ")
+        # self.pics.append(picfold + "lcn.png")
+
         menu_list.append("Send Cline -> CCcam.cfg")
         self.titles.append("Send CCcline CCcam ")
         self.pics.append(picfold + "cccamfreee.png")
@@ -1097,6 +1108,7 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xtraevent addon", "xtraevent.png", 'wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
 
         self.names = menu_list
+
         # test down
         self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
 
@@ -1141,6 +1153,25 @@ class ScriptInstaller(Screen):
         self.maxentry = len(menu_list) - 1
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
+
+    def Lcn(self, answer=None):
+        if answer is None:
+            self.session.openWithCallback(self.Lcn,
+                                          MessageBox, _("Do you want to Order LCN Bouquet"),
+                                          MessageBox.TYPE_YESNO)
+        else:
+            print('scan init')
+            lcn_scanner_instance = LCNScanner()
+            LCN = lcn_scanner_instance.lcnScan()
+            # print("LCNScannerSetup instance:", LCN)
+            try:
+                self.session.open(LCN)
+            except Exception as e:
+                print('except..:', e)
+            self.session.open(MessageBox,
+                              _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+                              MessageBox.TYPE_INFO,
+                              timeout=5)
 
     def paintFrame(self):
         try:
@@ -1290,6 +1321,10 @@ class ScriptInstaller(Screen):
             self.getcl('Oscam')
             return
 
+        if 'lcn find' in self.namev.lower():
+            self.Lcn()
+            return
+
         self.session.openWithCallback(self.okClicked,
                                       MessageBox, _("Do you want to execute %s?") % self.namev,
                                       MessageBox.TYPE_YESNO, default=True)
@@ -1301,7 +1336,7 @@ class ScriptInstaller(Screen):
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
             if keyword_found:
-                cmd = str(self.url)
+                cmd = str(self.url) + ' > /tmp/my_debug.log'
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:
                 cmd = str(self.url) + ' > /tmp/my_debug.log'
@@ -1753,36 +1788,24 @@ class addInstall(Screen):
             print('downxmlpage get failed: ', str(e))
             self['info'].setText(_('Download page get failed ...'))
 
-    def Lcn(self):
-        # setx = 0
-        try:
-            # from .Lcn import LCNBuildHelper
-            lcn = LCNBuildHelper()
-            lcn.buildAfterScan()
-            self.session.open(MessageBox, _('Sorting Terrestrial Executed!'),
+    def Lcn(self, answer=None):
+        if answer is None:
+            self.session.openWithCallback(self.Lcn,
+                                          MessageBox, _("[LCNScanner] Do you want to Scan Order LCN Bouquet"),
+                                          MessageBox.TYPE_YESNO)
+        else:
+            print('scan init')
+            lcn_scanner_instance = LCNScanner()
+            LCN = lcn_scanner_instance.lcnScan()
+            print("LCNScannerSetup instance:", LCN)
+            try:
+                self.session.open(LCN)
+            except Exception as e:
+                print('except..:', e)
+            self.session.open(MessageBox,
+                              _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
-        except Exception as e:
-            print(e)
-            self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
-                              MessageBox.TYPE_INFO,
-                              timeout=5)
-        '''
-        # # if self.LcnOn is True:
-        # lcn = LCN()
-        # lcn.read()
-        # print('lcn.lcnlist:', len(lcn.lcnlist))
-        # if len(lcn.lcnlist) >= 0:
-            # lcn.writeBouquet()
-            # ReloadBouquets(setx)
-            # self.session.open(MessageBox, _('Sorting Terrestrial channels with Lcn rules Completed'),
-                              # MessageBox.TYPE_INFO,
-                              # timeout=5)
-        # else:
-            # self.session.open(MessageBox, _('Sorting Terrestrial not Executed!'),
-                              # MessageBox.TYPE_INFO,
-                              # timeout=5)
-        '''
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
@@ -1841,13 +1864,6 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        '''
-        if self.LcnOn is True:
-            print('go lcn: ', self.LcnOn)
-        # if self.dest is not None and lngx == 'it':
-            self.Lcn()
-        else:
-        '''
         self.session.openWithCallback(self.removenow,
                                       MessageBox,
                                       _("Do you want to remove?"),
@@ -2136,14 +2152,14 @@ class startLP(Screen):
     def loadDefaultImage(self):
         self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
         self.timer = eTimer()
-        if fileExists('/var/lib/dpkg/status'):
+        if os.path.exists("/usr/bin/apt-get"):
             self.timer_conn = self.timer.timeout.connect(self.decodeImage)
         else:
             self.timer.callback.append(self.decodeImage)
         self.timer.start(100, True)
 
         self.timerx = eTimer()
-        if fileExists('/var/lib/dpkg/status'):
+        if os.path.exists("/usr/bin/apt-get"):
             self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
         else:
             self.timerx.callback.append(self.clsgo)
