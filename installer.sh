@@ -22,7 +22,7 @@ if [ -f /var/lib/dpkg/status ]; then
    OSTYPE=DreamOs
 else
    STATUS=/var/lib/opkg/status
-   OSTYPE=Dream
+   OSTYPE=OE20
 fi
 echo ""
 if python --version 2>&1 | grep -q '^Python 3\.'; then
@@ -47,7 +47,6 @@ else
 		opkg update && opkg install wget
 	fi
 fi
-
 
 
 if [ $PYTHON = "PY3" ]; then
@@ -116,6 +115,20 @@ if [ ! -d $PLUGINPATH ]; then
 	rm -rf $TMPPATH > /dev/null 2>&1
 	exit 1
 fi
+
+# Identify the box type from the hostname file
+FILE="/etc/image-version"
+box_type=$(head -n 1 /etc/hostname)
+distro_value=$(grep '^distro=' "$FILE" | awk -F '=' '{print $2}')
+distro_version=$(grep '^version=' "$FILE" | awk -F '=' '{print $2}')
+echo "^^^^^^^^^^Debug information:" > /tmp/LinuxsatPanel_debug.txt
+echo "BOX MODEL: $box_type" >> /tmp/LinuxsatPanel_debug.txt
+echo "OO SYSTEM: $OSTYPE" >> /tmp/LinuxsatPanel_debug.txt
+echo "PYTHON: $PYTHON" >> /tmp/LinuxsatPanel_debug.txt
+echo "PLUGINPATH: $PLUGINPATH" >> /tmp/LinuxsatPanel_debug.txt
+echo "IMAGE NAME: $distro_value" >> /tmp/LinuxsatPanel_debug.txt
+echo "IMAGE VERSION: $distro_version" >> /tmp/LinuxsatPanel_debug.txt
+echo "   "
 
 rm -rf $TMPPATH > /dev/null 2>&1
 sync
