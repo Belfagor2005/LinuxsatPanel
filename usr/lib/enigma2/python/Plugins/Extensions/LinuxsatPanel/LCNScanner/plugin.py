@@ -87,16 +87,15 @@ class LCNScanner:
     def lcnScan(self, callback=None):
         def getModes(element):
             mode = element.get("mode", "All")
-            match mode:
-                case "All" | "Both":
-                    modes = ("TV", "Radio")
-                case "TV":
-                    modes = ("TV",)
-                case "Radio":
-                    modes = ("Radio",)
-                case _:
-                    print("[LCNScanner] Error: Invalid mode specified, 'All' assumed!  (Only 'All', 'Both', 'Radio' or 'TV' permitted.)", mode)
-                    modes = ("TV", "Radio")
+            if mode in ("All", "Both"):
+                modes = ("TV", "Radio")
+            elif mode == "TV":
+                modes = ("TV",)
+            elif mode == "Radio":
+                modes = ("Radio",)
+            else:
+                print("[LCNScanner] Error: Invalid mode specified, 'All' assumed!  (Only 'All', 'Both', 'Radio' or 'TV' permitted.)", mode)
+                modes = ("TV", "Radio")
             return modes
 
         def loadLCNs():
@@ -109,24 +108,30 @@ class LCNScanner:
                     print(f"[LCNScanner] Error: Duplicated line detected in lcndb!  ({lcn}).")
             return lcndb
 
-        def loadServices(mode):
-            print("[LCNScanner] Loading mode services.", mode)
-            services = {}
-            serviceHandler = eServiceCenter.getInstance()
-            match mode:
-                case "TV":
-                    # providerQuery = f"{self.MODE_TV} FROM PROVIDERS ORDER BY name"
-                    providerQuery = self.MODE_TV + " FROM PROVIDERS ORDER BY name"
-                case "Radio":
-                    # providerQuery = f"{self.MODE_RADIO} FROM PROVIDERS ORDER BY name"
-                    providerQuery = self.MODE_RADIO + " FROM PROVIDERS ORDER BY name"
-            providers = serviceHandler.list(eServiceReference(providerQuery))
-            if providers:
-                for serviceQuery, providerName in providers.getContent("SN", True):
-                    serviceList = serviceHandler.list(eServiceReference(serviceQuery))
-                    for serviceReference, serviceName in serviceList.getContent("SN", True):
-                        services[":".join(serviceReference.split(":")[3:7])] = (providerName, serviceReference, serviceName)
-            return services
+    def loadServices(mode):
+        print("[LCNScanner] Loading mode services.", mode)
+        services = {}
+        serviceHandler = eServiceCenter.getInstance()
+
+        if mode == "TV":
+            # providerQuery = f"{self.MODE_TV} FROM PROVIDERS ORDER BY name"
+            providerQuery = self.MODE_TV + " FROM PROVIDERS ORDER BY name"
+        elif mode == "Radio":
+            # providerQuery = f"{self.MODE_RADIO} FROM PROVIDERS ORDER BY name"
+            providerQuery = self.MODE_RADIO + " FROM PROVIDERS ORDER BY name"
+        else:
+            print("[LCNScanner] Error: Invalid mode specified. Please use 'TV' or 'Radio'.")
+            return services  # Restituisci un dizionario vuoto se il mode non è valido
+
+        providers = serviceHandler.list(eServiceReference(providerQuery))
+        if providers:
+            for serviceQuery, providerName in providers.getContent("SN", True):
+                serviceList = serviceHandler.list(eServiceReference(serviceQuery))
+                for serviceReference, serviceName in serviceList.getContent("SN", True):
+                    services[":".join(serviceReference.split(":")[3:7])] = (providerName, serviceReference, serviceName)
+
+        return services
+
 
         def matchLCNsAndServices(mode, lcndb, services, duplicate, renumbers):
             print("[LCNScanner] Matching LCN entries with services mod:", mode)
@@ -135,112 +140,111 @@ class LCNScanner:
                 version = int(lcndb[0][9:]) if lcndb[0].startswith("#VERSION ") else 1
             except Exception:
                 version = 1
-            match version:
-                case 1:
-                    for line in lcndb:
-                        line = line.strip()
-                        if len(line) != 38:
-                            continue
-                        item = line.split(":")
-                        if len(item) != 6:
-                            continue
-                        match item[self.OLDDB_NAMESPACE][:4].upper():
-                            case "DDDD":
-                                medium = "A"
-                            case "EEEE":
-                                medium = "T"
-                            case "FFFF":
-                                medium = "C"
-                            case _:
-                                medium = "S"
-                        # service = f"{item[self.OLDDB_SID].lstrip("0")}:{item[self.OLDDB_TSID].lstrip("0")}:{item[self.OLDDB_ONID].lstrip("0")}:{item[self.OLDDB_NAMESPACE].lstrip("0")}".upper()
-                        service = "{}:{}:{}:{}".format(
-                            item[self.OLDDB_SID].lstrip("0"),
-                            item[self.OLDDB_TSID].lstrip("0"),
-                            item[self.OLDDB_ONID].lstrip("0"),
-                            item[self.OLDDB_NAMESPACE].lstrip("0")
-                        ).upper()
-                        lcns.append([
-                            medium,
-                            service,
-                            services[service][self.SERVICE_SERVICEREFERENCE] if service in services else "",
-                            int(item[self.OLDDB_SIGNAL]),
-                            int(item[self.OLDDB_LCN]),
-                            0,
-                            0,
-                            services[service][self.SERVICE_PROVIDER] if service in services else "",
-                            "",
-                            services[service][self.SERVICE_NAME] if service in services else "",
-                            ""
-                        ])
-                case 2:
-                    for line in lcndb:
-                        if line.startswith("#"):
-                            continue
-                        item = line.split(":")
-                        match item[self.DB_NAMESPACE][:4]:
-                            case "DDDD":
-                                medium = "A"
-                            case "EEEE":
-                                medium = "T"
-                            case "FFFF":
-                                medium = "C"
-                            case _:
-                                medium = "S"
-                        # service = f"{item[self.DB_SID]}:{item[self.DB_TSID]}:{item[self.DB_ONID]}:{item[self.DB_NAMESPACE]}"
-                        service = "{}:{}:{}:{}".format(
-                            item[self.DB_SID],
-                            item[self.DB_TSID],
-                            item[self.DB_ONID],
-                            item[self.DB_NAMESPACE]
-                        )
-                        lcns.append([
-                            medium,
-                            service,
-                            services[service][self.SERVICE_SERVICEREFERENCE] if service in services else "",
-                            int(item[self.DB_SIGNAL]),
-                            int(item[self.DB_LCN_BROADCAST]),
-                            int(item[self.DB_LCN_SCANNED]),
-                            int(item[self.DB_LCN_GUI]),
-                            services[service][self.SERVICE_PROVIDER] if service in services else "",
-                            item[self.DB_PROVIDER_GUI],
-                            services[service][self.SERVICE_NAME] if service in services else "",
-                            item[self.DB_SERVICENAME_GUI]
-                        ])
-                case _:
-                    print("[LCNScanner] Error: LCN db file format unrecognized!")
+            if version == 1:
+                for line in lcndb:
+                    line = line.strip()
+                    if len(line) != 38:
+                        continue
+                    item = line.split(":")
+                    if len(item) != 6:
+                        continue
+                    if item[self.OLDDB_NAMESPACE][:4].upper() == "DDDD":
+                        medium = "A"
+                    elif item[self.OLDDB_NAMESPACE][:4].upper() == "EEEE":
+                        medium = "T"
+                    elif item[self.OLDDB_NAMESPACE][:4].upper() == "FFFF":
+                        medium = "C"
+                    else:
+                        medium = "S"
+
+                    service = "{}:{}:{}:{}".format(
+                        item[self.OLDDB_SID].lstrip("0"),
+                        item[self.OLDDB_TSID].lstrip("0"),
+                        item[self.OLDDB_ONID].lstrip("0"),
+                        item[self.OLDDB_NAMESPACE].lstrip("0")
+                    ).upper()
+                    lcns.append([
+                        medium,
+                        service,
+                        services[service][self.SERVICE_SERVICEREFERENCE] if service in services else "",
+                        int(item[self.OLDDB_SIGNAL]),
+                        int(item[self.OLDDB_LCN]),
+                        0,
+                        0,
+                        services[service][self.SERVICE_PROVIDER] if service in services else "",
+                        "",
+                        services[service][self.SERVICE_NAME] if service in services else "",
+                        ""
+                    ])
+            elif version == 2:
+                for line in lcndb:
+                    if line.startswith("#"):
+                        continue
+                    item = line.split(":")
+                    if item[self.DB_NAMESPACE][:4] == "DDDD":
+                        medium = "A"
+                    elif item[self.DB_NAMESPACE][:4] == "EEEE":
+                        medium = "T"
+                    elif item[self.DB_NAMESPACE][:4] == "FFFF":
+                        medium = "C"
+                    else:
+                        medium = "S"
+
+                    service = "{}:{}:{}:{}".format(
+                        item[self.DB_SID],
+                        item[self.DB_TSID],
+                        item[self.DB_ONID],
+                        item[self.DB_NAMESPACE]
+                    )
+                    lcns.append([
+                        medium,
+                        service,
+                        services[service][self.SERVICE_SERVICEREFERENCE] if service in services else "",
+                        int(item[self.DB_SIGNAL]),
+                        int(item[self.DB_LCN_BROADCAST]),
+                        int(item[self.DB_LCN_SCANNED]),
+                        int(item[self.DB_LCN_GUI]),
+                        services[service][self.SERVICE_PROVIDER] if service in services else "",
+                        item[self.DB_PROVIDER_GUI],
+                        services[service][self.SERVICE_NAME] if service in services else "",
+                        item[self.DB_SERVICENAME_GUI]
+                    ])
+            else:
+                print("[LCNScanner] Error: LCN db file format unrecognized!")
+
             scannerLCN = duplicate[mode][0]
             scannerLast = duplicate[mode][1]
-            cableCache = {}  # Cache to check for unique cable LCNs.
-            satelliteCache = {}  # Cache to check for unique satellite LCNs.
-            terrestrialCache = {}  # Cache to check for unique terrestrial LCNs.
-            cableLCNs = {}  # Dictionary for available and unique cable LCNs.
-            satelliteLCNs = {}  # Dictionary for available and unique satellite LCNs.
-            terrestrialLCNs = {}  # Dictionary for available and unique terrestrial LCNs.
+            cableCache = {}
+            satelliteCache = {}
+            terrestrialCache = {}
+            cableLCNs = {}
+            satelliteLCNs = {}
+            terrestrialLCNs = {}
+
             for data in lcns:
                 service = data[self.LCNS_TRIPLET]
                 serviceReference = data[self.LCNS_SERVICEREFERENCE].split(":")
                 lcn = data[self.LCNS_LCN_BROADCAST]
-                match data[self.LCNS_MEDIUM]:
-                    case "C":
-                        lcnCache = cableCache
-                        serviceLCNs = cableLCNs
-                    case "S":
-                        lcnCache = satelliteCache
-                        serviceLCNs = satelliteLCNs
-                    case "A" | "T":
-                        lcnCache = terrestrialCache
-                        serviceLCNs = terrestrialLCNs
-                if service in services:  # Check if the service represented by this LCN entry is still a valid service.
-                    if lcn in lcnCache:  # Check if the LCN already exists.
-                        if data[self.LCNS_TRIPLET] == lcnCache[lcn][self.LCNS_TRIPLET] and data[self.LCNS_SIGNAL] > lcnCache[lcn][self.LCNS_SIGNAL]:
+
+                if data[self.LCNS_MEDIUM] == "C":
+                    lcnCache = cableCache
+                    serviceLCNs = cableLCNs
+                elif data[self.LCNS_MEDIUM] == "S":
+                    lcnCache = satelliteCache
+                    serviceLCNs = satelliteLCNs
+                elif data[self.LCNS_MEDIUM] in ("A", "T"):
+                    lcnCache = terrestrialCache
+                    serviceLCNs = terrestrialLCNs
+
+                if service in services:
+                    if lcn in lcnCache:
+                        if (data[self.LCNS_TRIPLET] == lcnCache[lcn][self.LCNS_TRIPLET] and
+                                data[self.LCNS_SIGNAL] > lcnCache[lcn][self.LCNS_SIGNAL]):
                             data[self.LCNS_LCN_SCANNED] = data[self.LCNS_LCN_BROADCAST]
-                            lcnCache[lcn] = data  # Replace the existing weaker signal with the stronger one.
-                        elif scannerLCN > scannerLast:  # Check if there is no more space for duplicates.
-                            # print(f"[LCNScanner] Warning: Duplicate LCN {lcn} found for servine '{data[self.LCNS_SERVICEREFERENCE]}' but duplicate LCN range exhausted!")
-                            print("[LCNScanner] Warning: Duplicate LCN  found for servine data[self.LCNS_SERVICEREFERENCE] but duplicate LCN range exhausted!")
-                        else:  # Allocate a new LCN from the duplicate pool.
-                            # print(f"[LCNScanner] Duplicate LCN found, renumbering {lcn} to {scannerLCN}.")
+                            lcnCache[lcn] = data
+                        elif scannerLCN > scannerLast:
+                            print("[LCNScanner] Warning: Duplicate LCN found for service data[self.LCNS_SERVICEREFERENCE] but duplicate LCN range exhausted!")
+                        else:
                             print("[LCNScanner] Duplicate LCN found, renumbering lcn to scannerLCN.")
                             lcn = scannerLCN
                             data[self.LCNS_LCN_SCANNED] = lcn
@@ -249,30 +253,29 @@ class LCNScanner:
                     else:
                         data[self.LCNS_LCN_SCANNED] = data[self.LCNS_LCN_BROADCAST]
                         lcnCache[lcn] = data
-                elif len(serviceReference) > 2 and serviceReference[2] in self.MODES[mode]:  # Skip all LCN entries of the same type that are not a valid service.
-                    # print(f"[LCNScanner] Service '{service}' with LCN {lcn} not a valid {mode} service!")
+                elif (len(serviceReference) > 2 and
+                      serviceReference[2] in self.MODES[mode]):
                     print("[LCNScanner] Service with LCN not a valid mode service!")
                     continue
                 else:
                     continue
-                for renumber in renumbers[mode]:  # Process the LCN renumbering rules.
+
+                for renumber in renumbers[mode]:
                     if renumber[0][0] <= lcn <= renumber[0][1]:
                         try:
-                            # startingLCN = lcn
                             lcn = int(eval(renumber[1].replace("LCN", str(lcn))))
-                            # print(f"[LCNScanner] LCN {startingLCN} is renumbered to {lcn} via rule range {renumber[0][0]}-{renumber[0][1]} and formula='{renumber[1]}'.")
                             if lcn in lcnCache:
-                                # print(f"[LCNScanner] Renumbered LCN {startingLCN} is now a duplicated LCN {lcn}, renumbering {startingLCN} to {scannerLCN}.")
                                 data[self.LCNS_LCN_SCANNED] = scannerLCN
                                 scannerLCN += 1
                             else:
                                 data[self.LCNS_LCN_SCANNED] = lcn
                         except ValueError as err:
-                            # print(f"[LCNScanner] Error: LCN renumber formula '{renumber[1]}' is invalid!  ({err})")
-                            print("[LCNScanner] Error: LCN renumber formula is invalid!",  err)
+                            print("[LCNScanner] Error: LCN renumber formula is invalid!", err)
+
                 serviceLCNs[lcn] = tuple(data)
 
             return (cableLCNs, satelliteLCNs, terrestrialLCNs)
+
 
         def writeBouquet(mode, medium, serviceLCNs, markers):
             def insertMarker(mode, lcn):
