@@ -1,7 +1,9 @@
 <rulesxml>
-	<rules name="Default">
+	<!--
+ 	<rules name="Default">
 		<rule type="duplicate" mode="All" range="10001">Duplicates</rule>
 	</rules>
+	-->
 	<rules name="Australia">
 		<rule type="duplicate" mode="All" range="350-399">Duplicated Services</rule>
 	</rules>
@@ -15,7 +17,7 @@
 		<rule type="marker" mode="TV" position="700">Sky Movie</rule>
 		<rule type="marker" mode="TV" position="750">Sky Sport</rule>
 	</rules>
-	<rules name="Italy">		
+	<rules name="Default">		<!-- Italy -->
 		<rule type="marker" position="0">Intrattenimento</rule>
 		<rule type="marker" position="10">Emittenti Locali</rule>
 		<rule type="marker" position="20">Semi-Generalisti</rule>

@@ -1060,6 +1060,11 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
 
         # Adding more options without URLs
+        menu_list.append("Lcn Scanner")
+        self.titles.append("Search Scanner Lcn channels ")
+        self.pics.append(picfold + "LcnSearch.png")
+        self.urls.append('')
+
         menu_list.append("Send Cline -> CCcam.cfg")
         self.titles.append("Send CCcline CCcam ")
         self.pics.append(picfold + "cccamfreee.png")
@@ -1434,7 +1439,7 @@ class ScriptInstaller(Screen):
             self.getcl('Oscam')
             return
 
-        if 'lcn find' in self.namev.lower():
+        if 'lcn scanner' in self.namev.lower():
             self.Lcn()
             return
 

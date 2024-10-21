@@ -75,7 +75,7 @@ class LCNScanner:
                     self.ruleList[name] = name
                     rulesIndex += 1
 
-        config.plugins.LCNScanner.rules = ConfigSelection(default="Italy", choices=self.ruleList)
+        config.plugins.LCNScanner.rules = ConfigSelection(default="Default", choices=self.ruleList)
         config.plugins.LCNScanner.useSpacerLines = ConfigYesNo(default=False)
         config.plugins.LCNScanner.addServiceNames = ConfigYesNo(default=False)
         config.plugins.LCNScanner.useDescriptionLines = ConfigYesNo(default=False)
