@@ -67,7 +67,7 @@ class LCNScanner:
     def __init__(self):
         self.configPath = resolveFilename(SCOPE_CONFIG)
         self.ruleList = {}
-        self.rulesDom = fileReadXML(resolveFilename(plugin_path, "/LCNScanner/rules.xml"), default="<rulesxml />", source=MODULE_NAME)
+        self.rulesDom = fileReadXML(resolveFilename(SCOPE_PLUGINS, "Extensions/LinuxsatPanel/LCNScanner/rules.xml"), default="<rulesxml />", source=MODULE_NAME)
         if self.rulesDom is not None:
             rulesIndex = 1
             for rules in self.rulesDom.findall("rules"):
