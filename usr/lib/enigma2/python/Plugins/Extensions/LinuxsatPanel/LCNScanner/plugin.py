@@ -101,7 +101,7 @@ class LCNScanner:
                 if lcn not in lcndb:
                     lcndb.append(lcn)
                 else:
-                    print(f"[LCNScanner] Error: Duplicated line detected in lcndb!  ({lcn}).")
+                    print("[LCNScanner] Error: Duplicated line detected in lcndb!", lcn)
             return lcndb
 
         def loadServices(mode):
@@ -307,7 +307,6 @@ class LCNScanner:
             if fileWriteLines(bouquetsPath, bouquet, source=MODULE_NAME):
                 print("[LCNScanner] Bouquet saved.")
             else:
-                # print(f"[LCNScanner] Error: Bouquet '{bouquetsPath}' could not be saved!")
                 print("[LCNScanner] Error: Bouquet could not be saved!")
             bouquetsPath = join(self.configPath, f"bouquets.{extension}")
             bouquets = fileReadLines(bouquetsPath, default=[], source=MODULE_NAME)
