@@ -6,16 +6,18 @@
 
 from Components.PluginComponent import plugins
 from Components.config import ConfigSelection, ConfigSubsection, ConfigYesNo, config
-from Tools.Directories import SCOPE_CONFIG, SCOPE_PLUGIN_ABSOLUTE, fileReadLines, fileReadXML, fileWriteLines, resolveFilename
+from Tools.Directories import SCOPE_CONFIG, SCOPE_PLUGINS, resolveFilename
 from enigma import eDVBDB, eServiceCenter, eServiceReference
 from os.path import join
 from sys import maxsize
+from xml.etree.ElementTree import Element, ParseError, fromstring, parse
+from errno import ENOENT
 
-MODULE_NAME = __name__.split(".")[-1]
-
+DEFAULT_MODULE_NAME = MODULE_NAME = __name__.split(".")[-1]
+plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 config.plugins.LCNScanner = ConfigSubsection()
 config.plugins.LCNScanner.showInPluginsList = ConfigYesNo(default=False)
-config.plugins.LCNScanner.showInPluginsList.addNotifier(plugins.reloadPlugins, initial_call=False, immediate_feedback=False)
+# config.plugins.LCNScanner.showInPluginsList.addNotifier(plugins.reloadPlugins, initial_call=False, immediate_feedback=False)
 
 
 class LCNScanner:
@@ -65,7 +67,7 @@ class LCNScanner:
     def __init__(self):
         self.configPath = resolveFilename(SCOPE_CONFIG)
         self.ruleList = {}
-        self.rulesDom = fileReadXML(resolveFilename(SCOPE_PLUGIN_ABSOLUTE, "rules.xml"), default="<rulesxml />", source=MODULE_NAME)
+        self.rulesDom = fileReadXML(resolveFilename(plugin_path, "/LCNScanner/rules.xml"), default="<rulesxml />", source=MODULE_NAME)
         if self.rulesDom is not None:
             rulesIndex = 1
             for rules in self.rulesDom.findall("rules"):
@@ -422,3 +424,77 @@ class LCNScanner:
             eDVBDB.getInstance().reloadServicelist()
         eDVBDB.getInstance().reloadBouquets()
         print("[LCNScanner] LCN scan finished.")
+
+
+def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
+    lines = None
+    try:
+        with open(filename) as fd:
+            lines = fd.read().splitlines()
+        # msg = "Read"
+    except OSError as err:
+        if err.errno != ENOENT:  # ENOENT - No such file or directory.
+            print("[" + source + "] Error " + str(err.errno) + ": Unable to read lines from file '" + filename + "'!  (" + err.strerror + ")")
+        lines = default
+        # msg = "Default"
+    # if debug or forceDebug:
+        # length = len(lines) if lines else 0
+        # print("[" + source + "] Line " + str(getframe(1).f_lineno) + ": " + msg + " " + str(length) + " lines from file '" + filename + "'.")
+    return lines
+
+
+def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
+    try:
+        with open(filename, "w") as fd:
+            if isinstance(lines, list):
+                lines.append("")
+                lines = "\n".join(lines)
+            fd.write(lines)
+        # msg = "Wrote"
+        result = 1
+    except OSError as err:
+        print("[" + source + "] Error " + str(err.errno) + ": Unable to write " + str(len(lines)) + " lines to file '" + filename + "'! " + err.strerror)
+        # msg = "Failed to write"
+        result = 0
+    # if debug or forceDebug:
+        # print("[" + source + "] Line " + str(getframe(1).f_lineno) + ": " + msg + " " + str(len(lines)) + " lines to file '" + filename)
+    return result
+
+
+def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
+    dom = None
+    try:
+        with open(filename) as fd:  # This open gets around a possible file handle leak in Python's XML parser.
+            try:
+                dom = parse(fd).getroot()
+                print("Read")
+            except ParseError as err:
+                fd.seek(0)
+                content = fd.readlines()
+                line, column = err.position
+                print("[" + source + "] XML Parse Error: '" + str(err) + "' in '" + filename + "'!")
+                data = content[line - 1].replace("\t", " ").rstrip()
+                print("[" + source + "] XML Parse Error: '" + str(data) + "'")
+                print("[" + source + "] XML Parse Error: '" + '-' * column + "^" + ' ' * (len(data) - column - 1) + "'")
+            except Exception as err:
+                print("[" + source + "] Error: Unable to parse data in '" + filename + "' - '" + str(err) + "'!")
+    except OSError as err:
+        if err.errno == ENOENT:  # ENOENT - No such file or directory.
+            print("[" + source + "] Warning: File '" + filename + "' does not exist!")
+        else:
+            print("[%s] Error %d: Opening file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
+    except Exception as err:
+        print("[" + source + "] Error: Unexpected error opening/parsing file '" + filename + "'!  (" + str(err) + ")")
+        # print_exc()
+    if dom is None:
+        if default and isinstance(default, str):
+            dom = fromstring(default)
+            print("Default (XML)")
+        elif default and isinstance(default, Element):
+            dom = default
+            print("Default (DOM)")
+        else:
+            print("Failed to read")
+    # if debug or forceDebug:
+        # print(f"[{source}] Line {getframe(1).f_lineno}: {msg} from XML file '{filename}'.")
+    return dom
