@@ -29,7 +29,6 @@ try:
 except ImportError:
     from xml.etree.ElementTree import parse
 
-# NAME Digitale Terrestre
 # plugin_path = os.path.dirname(sys.modules[__name__].__file__)
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 rules = os.path.join(plugin_path, 'LCNScanner/rules.xml')
@@ -52,7 +51,7 @@ def ReloadBouquets(x):
         eDVBDB = None
     print("\n----Reloading bouquets----")
 
-    global setx  # for linuxsat panel
+    global setx
     if x == 1:
         setx = 0
         print("\n----Reloading Terrestrial----")
@@ -95,8 +94,7 @@ class LCN():
         mdom = parse(rules)
         self.root = None
         for x in mdom.getroot():
-            # if x.tag == "rules" and x.get("name") == rulename:
-            if x.tag == "rules" and x.get("name") == 'Italy':
+            if x.tag == "rules" and x.get("name") == 'Default':
                 self.root = x
                 return
 
@@ -368,8 +366,6 @@ class LCNBuildHelper():
         for x in mdom.getroot():
             if x.tag == "rules":
                 self.rulelist.append((x.get("name"), x.get("name")))
-            # if x.tag == "rules" and x.get("name") == 'Italy':
-                # self.rulelist.append((x.get("name"), x.get("name")))
         config.lcn = ConfigSubsection()
         config.lcn.enabled = ConfigYesNo(True)
         config.lcn.bouquet = ConfigSelection(default="userbouquet.LastScanned.tv", choices=self.bouquetlist)  # not used instead self.bouquetfile
@@ -437,9 +433,9 @@ class LCNBuildHelper():
                 break
 
         bouquet = self.rulelist[0][0]
-        self.bouquetfile = Bouquet()  # find terrestrial bouqet top of source
+        self.bouquetfile = Bouquet()
         for x in self.bouquetlist:
-            if x[0] == self.bouquetfile:  # config.lcn.bouquet.value:
+            if x[0] == self.bouquetfile:
                 bouquet = x[0]
                 print('bouquet:', bouquet)
                 break
@@ -466,10 +462,8 @@ class LCNScannerPlugin(Screen, ConfigListScreen, LCNBuildHelper):
     skin = """
         <screen position="center,center" size="560,400" title="LCN Scanner">
             <widget name="config" position="5,5" size="550,350" scrollbarMode="showOnDemand" zPosition="1"/>
-
             <widget name="key_red" position="0,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
             <widget name="key_green" position="140,360" size="140,40" valign="center" halign="center" zPosition="5" transparent="1" foregroundColor="white" font="Regular;18"/>
-
             <ePixmap name="red" pixmap="skin_default/buttons/red.png" position="0,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
             <ePixmap name="green" pixmap="skin_default/buttons/green.png" position="140,360" size="140,40" zPosition="4" transparent="1" alphatest="on"/>
         </screen>"""
@@ -633,7 +627,7 @@ def StartSavingTerrestrialChannels():
             with open(TransOldLamedb, 'w') as TrasponderListOldLamedb, open(ServOldLamedb, 'w') as ServiceListOldLamedb:
                 with open(ee2ldb, 'r') as LamedbFile:
                     for line in LamedbFile:
-                        line = line.strip()  # Rimuove spazi bianchi attorno alla riga
+                        line = line.strip()
 
                         if not (inTransponder or inService):
                             if line.startswith('transponders'):
