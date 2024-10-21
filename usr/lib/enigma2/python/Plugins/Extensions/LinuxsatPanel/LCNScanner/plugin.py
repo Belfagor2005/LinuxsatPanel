@@ -113,14 +113,12 @@ class LCNScanner:
             serviceHandler = eServiceCenter.getInstance()
 
             if mode == "TV":
-                # providerQuery = f"{self.MODE_TV} FROM PROVIDERS ORDER BY name"
                 providerQuery = self.MODE_TV + " FROM PROVIDERS ORDER BY name"
             elif mode == "Radio":
-                # providerQuery = f"{self.MODE_RADIO} FROM PROVIDERS ORDER BY name"
                 providerQuery = self.MODE_RADIO + " FROM PROVIDERS ORDER BY name"
             else:
                 print("[LCNScanner] Error: Invalid mode specified. Please use 'TV' or 'Radio'.")
-                return services  # Restituisci un dizionario vuoto se il mode non è valido
+                return services
 
             providers = serviceHandler.list(eServiceReference(providerQuery))
             if providers:
@@ -299,7 +297,6 @@ class LCNScanner:
                     index += 1
                 bouquet = insertMarker(mode, index)
                 name = serviceLCNs[lcn][self.LCNS_SERVICENAME]
-                # serviceName = f":{name}" if config.plugins.LCNScanner.addServiceNames.value else ""
                 serviceName = ":{}".format(name) if config.plugins.LCNScanner.addServiceNames.value else ""
                 bouquet.append("#SERVICE {}{}".format(serviceLCNs[lcn][self.LCNS_SERVICEREFERENCE], serviceName))
                 if useDescriptionLines:
@@ -311,14 +308,14 @@ class LCNScanner:
                 print("[LCNScanner] Bouquet saved.")
             else:
                 print("[LCNScanner] Error: Bouquet could not be saved!")
-            bouquetsPath = join(self.configPath, f"bouquets.{extension}")
+            bouquetsPath = join(self.configPath, "bouquets." + extension)
             bouquets = fileReadLines(bouquetsPath, default=[], source=MODULE_NAME)
             for bouquet in bouquets:
                 if bouquet.find(bouquetName) != -1:
                     print("[LCNScanner] Bouquet is already in bouquetsPath.")
                     break
             else:
-                bouquets.append(f"#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET \"{bouquetName}\" ORDER BY bouquet")
+                bouquets.append("#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET \"" + bouquetName + "\" ORDER BY bouquet")
                 if fileWriteLines(bouquetsPath, bouquets, source=MODULE_NAME):
                     print("[LCNScanner] Bouquet added to bouquetsPath.")
                 else:
@@ -370,7 +367,8 @@ class LCNScanner:
                     except ValueError as err:
                         print("[LCNScanner] Error: Duplicate range '{}' is invalid! ({})".format(lcnRange, err))
                     print("[LCNScanner] Duplicated LCNs for {} will be allocated new numbers {}{}.".format(mode, rangeMsg, markerMsg))
-        dom = self.rulesDom.findall(f".//rules[@name='{rules}']/rule[@type='renumber']")
+        dom = self.rulesDom.findall(".//rules[@name='" + rules + "']/rule[@type='renumber']")
+
         if dom is not None:
             for element in dom:
                 modes = getModes(element)
@@ -384,7 +382,7 @@ class LCNScanner:
                         print("[LCNScanner] LCNs for {} in the range {} to {} will be renumbered with the formula '{}'.".format(mode, lcnRange[0], lcnRange[1], element.text))
                     except ValueError as err:
                         print("[LCNScanner] Error: Renumber range '{}' is invalid! ({})".format(lcnRange, err))
-        dom = self.rulesDom.findall(f".//rules[@name='{rules}']/rule[@type='marker']")
+        dom = self.rulesDom.findall(".//rules[@name='" + rules + "']/rule[@type='marker']")
         if dom is not None:
             for element in dom:
                 modes = getModes(element)
