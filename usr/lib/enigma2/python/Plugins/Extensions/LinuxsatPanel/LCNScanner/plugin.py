@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Based on a plugin from Sif Team.
 # This version created by IanSav and the OpenATV team.
 
