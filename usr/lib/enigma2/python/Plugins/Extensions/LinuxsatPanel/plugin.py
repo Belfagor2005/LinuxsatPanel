@@ -1060,10 +1060,11 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
 
         # Adding more options without URLs
-        menu_list.append("Lcn Scanner")
-        self.titles.append("Search Scanner Lcn channels ")
-        self.pics.append(picfold + "LcnSearch.png")
-        self.urls.append('')
+        if not has_dpkg:
+            menu_list.append("Lcn Scanner")
+            self.titles.append("Search Scanner Lcn channels ")
+            self.pics.append(picfold + "LcnSearch.png")
+            self.urls.append('')
 
         menu_list.append("Send Cline -> CCcam.cfg")
         self.titles.append("Send CCcline CCcam ")
@@ -1081,149 +1082,6 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xtraevent addon", "xtraevent.png", 'wget -q --no-check-certificate "https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
-
-        '''
-        menu_list.append("Add Libssl Libcrypto ")
-        self.titles.append("Add Libssl Libcrypto ")
-        self.pics.append(picfold + "AddLibssl.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | bash')
-
-        menu_list.append("Add Symlink Libssl ")
-        self.titles.append("Add Symlink Libssl ")
-        self.pics.append(picfold + "AddSymlink.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | bash')
-
-        menu_list.append("Ajpanel by AMAJamry ")
-        self.titles.append("Ajpanel AMAJamry ")
-        self.pics.append(picfold + "Ajpanel.png")
-        self.urls.append('wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
-
-        menu_list.append("Biss Feed Autokey ")
-        self.titles.append("Biss Feed Autokey ")
-        self.pics.append(picfold + "BissFeedAutokey.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/bissfeedautokey.sh?inline=false" -O - | bash')
-
-        menu_list.append("Chocholousek Picons ")
-        self.titles.append("Chocholousek Picons ")
-        self.pics.append(picfold + "ChocholousekPicons.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/chocholousek-picons.sh?inline=false" -O - | bash')
-
-        menu_list.append("Add Dns Cloudfaire ")
-        self.titles.append("Dns Cloudfaire ")
-        self.pics.append(picfold + "DnsCloudfaire.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | bash')
-
-        menu_list.append("Add Dns Google ")
-        self.titles.append("Dns Google ")
-        self.pics.append(picfold + "DnsGoogle.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | bash')
-
-        menu_list.append("Add Dns Quad9 ")
-        self.titles.append("Dns Quad9 ")
-        self.pics.append(picfold + "DnsQuad9.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | bash')
-
-        menu_list.append("E2player by MOHAMED OS ")
-        self.titles.append("E2player MOHAMED ")
-        self.pics.append(picfold + "E2playerMOHAMED.png")
-        self.urls.append('wget --no-check-certificate "https://gitlab.com/MOHAMED_OS/e2iplayer/-/raw/main/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-
-        menu_list.append("E2player by MAXBAMBY ")
-        self.titles.append("E2player MAXBAMBY ")
-        self.pics.append(picfold + "E2playerMAXBAMBY.png")
-        self.urls.append('wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
-
-        menu_list.append("E2player by ZADMARIO ")
-        self.titles.append("E2player ZADMARIO ")
-        self.pics.append(picfold + "E2playerZADMARIO.png")
-        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
-
-        menu_list.append("E2player by XXX ")
-        self.titles.append("E2player XXX ")
-        self.pics.append(picfold + "E2playerXXX.png")
-        self.urls.append('wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash')
-
-        menu_list.append("History Zap Selector ")
-        self.titles.append("History Zap Selector ")
-        self.pics.append(picfold + "HistoryZapSelector.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash')
-
-        menu_list.append("iSetting E2 ")
-        self.titles.append("iSetting E2 ")
-        self.pics.append(picfold + "iSettingE2.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/isetting-e2.sh?inline=false" -O - | bash')
-
-        menu_list.append("Lcn Find")
-        self.titles.append("Search Scan Lcn channels ")
-        self.pics.append(picfold + "LcnSearch.png")
-        self.urls.append('')
-
-        menu_list.append("Levi45 Cam Manager ")
-        self.titles.append("Levi45 Manager ")
-        self.pics.append(picfold + "Levi45Manager.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
-
-        menu_list.append("Show Mountpoints ")
-        self.titles.append("Mountpoints ")
-        self.pics.append(picfold + "Mountpoints.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
-
-        menu_list.append("Multistalker By ZIKO ")
-        self.titles.append("Multistalker Ziko ")
-        self.pics.append(picfold + "Multistalker.png")
-        self.urls.append('wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
-
-        menu_list.append("New VirtualKeyboard ")
-        self.titles.append("New VirtualKeyboard ")
-        self.pics.append(picfold + "NewVirtualKeyboard.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
-
-        menu_list.append("Quicksignal By Raed ")
-        self.titles.append("Quicksignal Raed ")
-        self.pics.append(picfold + "Quicksignal.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
-
-        menu_list.append("Send Emm TVS ")
-        self.titles.append("Send Emm ")
-        self.pics.append(picfold + "SendEmm.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
-
-        menu_list.append("Send Cline -> CCcam.cfg ")
-        self.titles.append("Send CCcline CCcam ")
-        self.pics.append(picfold + "cccamfreee.png")
-        self.urls.append('')
-
-        menu_list.append("Send Cline -> oscam.server ")
-        self.titles.append("Send CCcline Oscam ")
-        self.pics.append(picfold + "oscamfree.png")
-        self.urls.append('')
-
-        menu_list.append("Keys Update ")
-        self.titles.append("Keys Update ")
-        self.pics.append(picfold + "keys.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
-
-        if not has_dpkg:
-            menu_list.append("ServiceApp Exteplayer ")
-            self.titles.append("ServiceApp Exteplayer ")
-            self.pics.append(picfold + "serviceapp.png")
-            self.urls.append('opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
-
-        menu_list.append("SubSupport Addon ")
-        self.titles.append("Subsupport addon ")
-        self.pics.append(picfold + "SubSupportAddon.png")
-        self.urls.append('wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
-
-        menu_list.append("Transmission Addon ")
-        self.titles.append("Transmission addon ")
-        self.pics.append(picfold + "transmission.png")
-        self.urls.append('wget -q --no-check-certificate http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh -O - | bash')
-
-        menu_list.append("Xtraevent Addon ")
-        self.titles.append("Xtraevent addon ")
-        self.pics.append(picfold + "xtraevent.png")
-        self.urls.append('wget -q --no-check-certificate https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
-        '''
 
         self.names = menu_list
         # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
