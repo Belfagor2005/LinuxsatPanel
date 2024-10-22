@@ -43,6 +43,7 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import (MultiContentEntryText, MultiContentEntryPixmapAlphaTest)
 from Components.Pixmap import (Pixmap, MovingPixmap)
+from Components.PluginComponent import plugins
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
@@ -528,7 +529,13 @@ class LinuxsatPanel(Screen):
     def closeNonRecursive(self):
         self.close(False)
 
+    def refreshPlugins(self):
+        plugins.clearPluginList()
+        plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
     def closeRecursive(self):
+        if not has_dpkg:
+            self.refreshPlugins()
         self.close(True)
 
     def createSummary(self):
@@ -2162,7 +2169,7 @@ class startLP(Screen):
             self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
             # _l = self.picload.PictureData.get()
             # del self.picload
-            if fileExists("/var/lib/dpkg/status"):
+            if os.path.exists("/usr/bin/apt-get"):
                 self.picload.startDecode(pixmapx, False)
             else:
                 self.picload.startDecode(pixmapx, 0, 0, False)
