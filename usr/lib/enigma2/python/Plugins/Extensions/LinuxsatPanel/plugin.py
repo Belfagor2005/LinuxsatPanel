@@ -5,7 +5,7 @@ from . import (
     _,
     AgentRequest,
     CheckConn,
-    abouturl,
+    # abouturl,
     add_skin_font,
     b64decoder,
     checkGZIP,
@@ -92,7 +92,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.5.2'
+currversion = '2.5.3'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 
@@ -1297,7 +1297,8 @@ class ScriptInstaller(Screen):
         print('[okbuttonClick] self.url', self.url)
 
         if 'cccam.cfg' in self.namev.lower():
-            self.getcl('CCcam')
+            # self.getcl('CCcam')
+            self.askForFcl()
             return
 
         if 'oscam.serv' in self.namev.lower():
@@ -1326,6 +1327,26 @@ class ScriptInstaller(Screen):
                 self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
         else:
             return
+
+    def askForFcl(self):
+        self.session.openWithCallback(self.runScriptWithConsole, MessageBox, _("Do you want add Cline?"), MessageBox.TYPE_YESNO)
+
+    def runScriptWithConsole(self, confirmed):
+        if confirmed:
+            script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+            url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+            try:
+                import requests
+                from os import chmod
+                response = requests.get(url)
+                response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
+                with open(script_path, 'w') as file:
+                    file.write(response.text)
+                chmod(script_path, 0o777)
+            except Exception as e:
+                print("Failed to update script: {e}. Using existing script.", e)
+
+            self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
 
     def getcl(self, config_type):
         if config_type == 'CCcam':
@@ -2006,12 +2027,14 @@ class LSinfo(Screen):
     def startRun(self):
         try:
             if self.name == " Information ":
-                self.infoBox()
+                # self.infoBox()
+                self.openinfo()
+
             elif self.name == " About ":
-                url = abouturl
-                # ab = checkGZIP(url)
-                ab = fetch_url(url)
-                self['list'].setText(ab)
+                # ab = fetch_url(abouturl)
+                with open(os.path.join(plugin_path, 'LICENSE'), 'r') as filer:
+                    info = filer.read()
+                    self['list'].setText(info)
             else:
                 return
         except Exception as e:
@@ -2041,6 +2064,24 @@ class LSinfo(Screen):
             print("Error ", e)
         return str(zarcffll)
 
+    def openinfo(self, callback=''):
+        # from .File_Commander import File_Commander
+        from .stbinfo import stbinfo
+        print('STB info:\n%s' % stbinfo.to_string())
+        with open('/tmp/output.txt', 'w') as file:
+            info = 'Suggested by: @masterG - @oktus - @pcd\nAll code was rewritten by @Lululla - 2024.07.20\n'
+            info2 = 'Designs and Graphics by @oktus\nSupport on: Linuxsat-support.com\n\n'
+            file.write('%s V.%s\n%s%s\nSTB info:\n%s' % (descplug, currversion, info, info2, stbinfo.to_string()))
+        # user_log = '/tmp/output.txt'
+        # if fileExists(user_log):
+            # self.session.open(File_Commander, user_log)
+        try:
+            with open('/tmp/output.txt', 'r') as filer:
+                info = filer.read()
+                self['list'].setText(info)
+        except Exception as e:
+            print(e)
+
     def infoBox(self):
         info = '%s V.%s\n\n' % (descplug, currversion)
         try:
@@ -2056,18 +2097,19 @@ class LSinfo(Screen):
             libs = os.popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
             if libs:
                 libsssl = libs
-            info = '%s V.%s\n\n' % (descplug, currversion)
             info += 'Suggested by: @masterG - @oktus - @pcd\n'
-            info += 'All code was rewritten by @Lululla - Date 2024.07.20\n'
+            info += 'All code was rewritten by @Lululla - 2024.07.20\n'
             info += 'Designs and Graphics by @oktus\n'
             info += 'Support on: Linuxsat-support.com\n\n'
-            info += 'Current IP Wan: %s\nImage: %sCpu: %s\nPython Version: %s\nArch. Info: %s\nLibssl(oscam):\n%s\n' % (ifg, img, arc, python, arkFull, libsssl)
-            # info += checkGZIP(infourl)
+            info += 'Current IP Wan: %s\n' % ifg
+            info += 'Image: %s' % img
+            info += 'Cpu: %s\n' % arc
+            info += 'Python Version: %s\n' % python
+            info += 'Arch. Info: %s\n' % arkFull
+            info += 'Libssl(oscam): %s\n' % libsssl
             info += fetch_url(infourl)
         except Exception as e:
             print("Error ", e)
-            # info = checkGZIP(infourl)
-            # print('info =: ', info)
         self['list'].setText(info)
 
 

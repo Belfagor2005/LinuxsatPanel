@@ -1,10 +1,14 @@
 (c) 2024 (contact through www.linuxsat-support.com)
+LinuxsatPanel Plugin
+Suggested by:
 @masterG
 @oktus
 @pcd
 
-All code was rewritten by Lululla
-maintener 20240720
+All code was rewritten 
+by Lululla
+maintener
+20240720 init version 2.0
 
 ----------------------------ENGLISH-------------------------------
 
@@ -15,22 +19,20 @@ To view a copy of this license, visit
 https://creativecommons.org/licenses/by-nc-sa/3.0  and
 https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
 
+ATTENTION PLEASE...    
+This is free software; you can redistribute it and/or modify it 
+underthe terms of the GNU General Public License as published 
+by the Free Software Foundation; or any later version.
+You are not allowed to remove credits and 
+the code must be open to everyone. 
+Thank you Lululla 
+
+Support on:
+linuxsat-support.com
+
 This plugin is NOT free software. It is open source, but it may not be commercially 
 distributed.
 
 PLEASE DO NOT POST THE PLUGIN CODE ON GITHUB
 
-----------------------------DEUTSCH/GERMAN-------------------------------
-
-Dieses Softwarepaket (außer Bildern) ist lizenziert 
-unter Creative Commons CC BY-NC-SA 3.0 Unported (Namensnennung - 
-Nicht-kommerziell - Weitergabe unter gleichen Bedingungen), sofern im Kopf 
-einer Quelltextdatei kein anderer Hinweis steht.
-Lizenztyp:  https://creativecommons.org/licenses/by-nc-sa/3.0/
-Lizenzdetails:   https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
-
-Dies ist keine freie Software. Sie ist Open Source, darf aber nicht kommerziell 
-vertrieben werden. Die Privatnutzung ist erlaubt.
-
-BITTE KEINE CODEVERÖFFENTLICHUNG AUF GITHUB
 
