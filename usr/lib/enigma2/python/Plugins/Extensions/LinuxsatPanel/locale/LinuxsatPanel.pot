@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-10-20 17:26+0200\n"
+"POT-Creation-Date: 2024-10-27 14:11+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -14,46 +14,54 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: LCNScanner/Lcn.py\n"
 "X-Poedit-SearchPath-1: LCNScanner/plugin.py\n"
-"X-Poedit-SearchPath-2: File_Commander.py\n"
-"X-Poedit-SearchPath-3: lsConsole.py\n"
-"X-Poedit-SearchPath-4: plugin.py\n"
+"X-Poedit-SearchPath-2: lsConsole.py\n"
+"X-Poedit-SearchPath-3: plugin.py\n"
+"X-Poedit-SearchPath-4: addons/checkskin.py\n"
+"X-Poedit-SearchPath-5: addons/File_Commander.py\n"
+"X-Poedit-SearchPath-6: addons/type_utils.py\n"
 
-#: File_Commander.py:16
-msgid "File Commander - Addon"
-msgstr ""
-
-#: File_Commander.py:17
-msgid "play/show Files"
-msgstr ""
-
-#: File_Commander.py:74 File_Commander.py:75 File_Commander.py:76
-#: File_Commander.py:77 LCNScanner/Lcn.py:487 lsConsole.py:123 plugin.py:370
-#: plugin.py:627 plugin.py:842 plugin.py:1120 plugin.py:1483
-msgid "Exit"
-msgstr ""
-
-#: LCNScanner/Lcn.py:451 LCNScanner/Lcn.py:458
+#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
 msgid "No entry in lcn db. Please do a service scan."
 msgstr ""
 
-#: LCNScanner/Lcn.py:480
+#: LCNScanner/Lcn.py:476
 msgid "Enable terrestrial LCN:"
 msgstr ""
 
-#: LCNScanner/Lcn.py:481
+#: LCNScanner/Lcn.py:477
 msgid "Terrestrial bouquet:"
 msgstr ""
 
-#: LCNScanner/Lcn.py:482
+#: LCNScanner/Lcn.py:478
 msgid "LCN rules:"
 msgstr ""
 
-#: LCNScanner/Lcn.py:486
+#: LCNScanner/Lcn.py:482
 msgid "Rebuild"
 msgstr ""
 
-#: LCNScanner/Lcn.py:502
+#: LCNScanner/Lcn.py:483 addons/File_Commander.py:73
+#: addons/File_Commander.py:74 addons/File_Commander.py:75
+#: addons/File_Commander.py:76 addons/type_utils.py:108
+#: addons/type_utils.py:109 addons/type_utils.py:111 lsConsole.py:123
+#: plugin.py:370 plugin.py:633 plugin.py:849 plugin.py:1105 plugin.py:1519
+msgid "Exit"
+msgstr ""
+
+#: LCNScanner/Lcn.py:498
 msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+#: addons/File_Commander.py:17 addons/type_utils.py:22
+msgid "File Commander - Addon"
+msgstr ""
+
+#: addons/File_Commander.py:18 addons/type_utils.py:23
+msgid "play/show Files"
+msgstr ""
+
+#: addons/type_utils.py:110
+msgid "Save"
 msgstr ""
 
 #: lsConsole.py:56
@@ -74,57 +82,67 @@ msgid ""
 "\n"
 msgstr ""
 
-#: plugin.py:368 plugin.py:625 plugin.py:840 plugin.py:1118 plugin.py:1502
-#: plugin.py:1918
+#: plugin.py:368 plugin.py:631 plugin.py:847 plugin.py:1103 plugin.py:1538
+#: plugin.py:1948
 msgid "Please Wait..."
 msgstr ""
 
-#: plugin.py:369 plugin.py:626 plugin.py:841 plugin.py:1119
+#: plugin.py:369 plugin.py:632 plugin.py:848 plugin.py:1104
 msgid "0 Sort"
 msgstr ""
 
-#: plugin.py:549
+#: plugin.py:555
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
 "are you sure you want to continue?"
 msgstr ""
 
-#: plugin.py:1160
+#: plugin.py:1145
 msgid "Do you want to Order LCN Bouquet"
 msgstr ""
 
-#: plugin.py:1172 plugin.py:1806
+#: plugin.py:1156 plugin.py:1839
 msgid ""
 "[LCNScanner] LCN scan finished\n"
 "Channels Ordered!"
 msgstr ""
 
-#: plugin.py:1329
+#: plugin.py:1163
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+
+#: plugin.py:1344
 #, python-format
 msgid "Do you want to execute %s?"
 msgstr ""
 
-#: plugin.py:1334
+#: plugin.py:1349
 #, python-format
 msgid ""
 "Executing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1351
+#: plugin.py:1364
+msgid "Do you want add Cline?"
+msgstr ""
+
+#: plugin.py:1388
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
 msgstr ""
 
-#: plugin.py:1360
+#: plugin.py:1397
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
 msgstr ""
 
-#: plugin.py:1457
+#: plugin.py:1496
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -135,87 +153,87 @@ msgid ""
 "Password:%s\n"
 msgstr ""
 
-#: plugin.py:1459
+#: plugin.py:1499
 msgid ""
 "Server Error.\n"
 "\n"
 "Try again, you'll be luckier!"
 msgstr ""
 
-#: plugin.py:1484
+#: plugin.py:1520
 msgid "Install"
 msgstr ""
 
-#: plugin.py:1485
+#: plugin.py:1521
 msgid "Remove"
 msgstr ""
 
-#: plugin.py:1486
+#: plugin.py:1522
 msgid "Restart enigma"
 msgstr ""
 
-#: plugin.py:1489 plugin.py:1531 plugin.py:1571
+#: plugin.py:1525 plugin.py:1567 plugin.py:1607
 msgid "0 Halign Left"
 msgstr ""
 
-#: plugin.py:1491 plugin.py:1534 plugin.py:1573
+#: plugin.py:1527 plugin.py:1570 plugin.py:1609
 msgid "0 Halign Right"
 msgstr ""
 
-#: plugin.py:1504
+#: plugin.py:1540
 msgid "Load Category..."
 msgstr ""
 
-#: plugin.py:1543
+#: plugin.py:1579
 msgid "Category: "
 msgstr ""
 
-#: plugin.py:1597 plugin.py:1607
+#: plugin.py:1632 plugin.py:1641
 msgid "Unknow Image!"
 msgstr ""
 
-#: plugin.py:1619
+#: plugin.py:1653
 #, python-format
 msgid "Do you want to install %s?"
 msgstr ""
 
-#: plugin.py:1653 plugin.py:1850
+#: plugin.py:1687 plugin.py:1882
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1789
+#: plugin.py:1823
 msgid "Download page get failed ..."
 msgstr ""
 
-#: plugin.py:1794
+#: plugin.py:1828
 msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
 msgstr ""
 
-#: plugin.py:1813
+#: plugin.py:1845
 msgid "Do you want to install?"
 msgstr ""
 
-#: plugin.py:1855
+#: plugin.py:1887
 msgid "Settings Not Installed ..."
 msgstr ""
 
-#: plugin.py:1869
+#: plugin.py:1900
 msgid "Do you want to remove?"
 msgstr ""
 
-#: plugin.py:1883
+#: plugin.py:1914
 #, python-format
 msgid "Removing %s"
 msgstr ""
 
-#: plugin.py:1889
+#: plugin.py:1919
 msgid "Do you want to restart Gui Interface?"
 msgstr ""
 
-#: plugin.py:1990
+#: plugin.py:2020
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -225,11 +243,11 @@ msgid ""
 "Press green button to start updating"
 msgstr ""
 
-#: plugin.py:1991
+#: plugin.py:2022
 msgid "Update"
 msgstr ""
 
-#: plugin.py:1996
+#: plugin.py:2028
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -239,27 +257,27 @@ msgid ""
 "Do you want to install it now?"
 msgstr ""
 
-#: plugin.py:1999
+#: plugin.py:2032
 msgid "Congrats! You already have the latest version..."
 msgstr ""
 
-#: plugin.py:2009
+#: plugin.py:2043
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr ""
 
-#: plugin.py:2016
+#: plugin.py:2050
 msgid "Update Aborted!"
 msgstr ""
 
-#: plugin.py:2036
+#: plugin.py:2072
 msgid "Unable to download updates!"
 msgstr ""
 
-#: plugin.py:2206
+#: plugin.py:2260
 msgid "Check Connection!"
 msgstr ""
 
-#: plugin.py:2227
+#: plugin.py:2281
 msgid "Linuxsat Panel"
 msgstr ""

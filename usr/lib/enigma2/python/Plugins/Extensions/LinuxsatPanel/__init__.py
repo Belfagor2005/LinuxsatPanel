@@ -16,6 +16,12 @@
 # all and you must make the modified
 # code open to everyone. by Lululla
 # ======================================================================
+from __future__ import absolute_import
+__author__ = "Lululla"
+__email__ = "ekekaz@gmail.com"
+__copyright__ = 'Copyright (c) 2024 Lululla'
+__license__ = "GPL-v2"
+__version__ = "1.0.0"
 
 from Components.Language import language
 from Tools.Directories import (resolveFilename, SCOPE_PLUGINS)
@@ -80,9 +86,9 @@ def wgetsts():
 
 
 def localeInit():
-    if isDreamOS:  # check if opendreambox image
-        lang = language.getLanguage()[:2]  # getLanguage returns e.g. "fi_FI" for "language_country"
-        os.environ["LANGUAGE"] = lang  # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
+    if isDreamOS:
+        lang = language.getLanguage()[:2]
+        os.environ["LANGUAGE"] = lang
     gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 

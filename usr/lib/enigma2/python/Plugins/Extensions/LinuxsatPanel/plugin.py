@@ -92,7 +92,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.5.3'
+currversion = '2.5.4'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 
@@ -1073,6 +1073,11 @@ class ScriptInstaller(Screen):
             self.pics.append(picfold + "LcnSearch.png")
             self.urls.append('')
 
+        menu_list.append("Check Skin Conponent")
+        self.titles.append("Search Skin Conponent Image Necessary ")
+        self.pics.append(picfold + "CheckSkin.png")
+        self.urls.append('')
+
         menu_list.append("Send Cline -> CCcam.cfg")
         self.titles.append("Send CCcline CCcam ")
         self.pics.append(picfold + "cccamfreee.png")
@@ -1086,6 +1091,7 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
         if not has_dpkg:
             add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xtraevent addon", "xtraevent.png", 'wget -q --no-check-certificate "https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
@@ -1147,10 +1153,31 @@ class ScriptInstaller(Screen):
                 self.session.open(LCN)
             except Exception as e:
                 print('except..:', e)
-            self.session.open(MessageBox,
-                              _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+            self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
+
+    def Checkskin(self, answer=None):
+        if answer is None:
+            self.session.openWithCallback(self.Checkskin,
+                                          MessageBox, _("[Checkskin] This operation checks if the skin has its components (is not sure)..\nDo you really want to continue?"),
+                                          MessageBox.TYPE_YESNO)
+        else:
+            from .addons import checkskin
+            self.check_module = eTimer()
+            check = checkskin.check_module_skin()
+            try:
+                self.check_module_conn = self.check_module.timeout.connect(check)
+            except:
+                self.check_module.callback.append(check)
+            self.check_module.start(100, True)
+            self.openVi()
+
+    def openVi(self, callback=''):
+        from .addons.File_Commander import File_Commander
+        user_log = '/tmp/my_debug.log'
+        if fileExists(user_log):
+            self.session.open(File_Commander, user_log)
 
     def paintFrame(self):
         try:
@@ -1309,6 +1336,10 @@ class ScriptInstaller(Screen):
             self.Lcn()
             return
 
+        if 'check skin conponent' in self.namev.lower():
+            self.Checkskin()
+            return
+
         self.session.openWithCallback(self.okClicked,
                                       MessageBox, _("Do you want to execute %s?") % self.namev,
                                       MessageBox.TYPE_YESNO, default=True)
@@ -1329,7 +1360,9 @@ class ScriptInstaller(Screen):
             return
 
     def askForFcl(self):
-        self.session.openWithCallback(self.runScriptWithConsole, MessageBox, _("Do you want add Cline?"), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(self.runScriptWithConsole,
+                                      MessageBox, _("Do you want add Cline?"),
+                                      MessageBox.TYPE_YESNO)
 
     def runScriptWithConsole(self, confirmed):
         if confirmed:
@@ -1381,7 +1414,9 @@ class ScriptInstaller(Screen):
 
         if not os.path.exists(dest):
             shutil.copy2(src, dest)
-            self.session.open(MessageBox, not_found_msg, type=MessageBox.TYPE_INFO, timeout=8)
+            self.session.open(MessageBox, not_found_msg,
+                              type=MessageBox.TYPE_INFO,
+                              timeout=8)
             return
 
         try:
@@ -1458,18 +1493,15 @@ class ScriptInstaller(Screen):
                     with open(dest, 'a') as cfgdok:
                         cfgdok.write(write_format.format(host, host, port, user, pasw))
 
-                self.session.open(MessageBox, _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw), type=MessageBox.TYPE_INFO, timeout=6)
+                self.session.open(MessageBox, _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw),
+                                  type=MessageBox.TYPE_INFO, timeout=6)
             else:
-                self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!"), type=MessageBox.TYPE_INFO, timeout=8)
+                self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!"),
+                                  type=MessageBox.TYPE_INFO,
+                                  timeout=8)
 
         except Exception as e:
             print('error on host', str(e))
-
-    def openVi(self, callback=''):
-        from .File_Commander import File_Commander
-        user_log = '/tmp/my_debug.log'
-        if fileExists(user_log):
-            self.session.open(File_Commander, user_log)
 
 
 class addInstall(Screen):
@@ -1597,8 +1629,7 @@ class addInstall(Screen):
             self.iname = ''
             if ".deb" in self.plug:
                 if not has_dpkg:
-                    self.session.open(MessageBox,
-                                      _('Unknow Image!'),
+                    self.session.open(MessageBox, _('Unknow Image!'),
                                       MessageBox.TYPE_INFO,
                                       timeout=5)
                     return
@@ -1607,8 +1638,7 @@ class addInstall(Screen):
 
             if ".ipk" in self.plug:
                 if has_dpkg:
-                    self.session.open(MessageBox,
-                                      _('Unknow Image!'),
+                    self.session.open(MessageBox, _('Unknow Image!'),
                                       MessageBox.TYPE_INFO,
                                       timeout=5)
                     return
@@ -1801,20 +1831,18 @@ class addInstall(Screen):
             print('scan init')
             lcn_scanner_instance = LCNScanner()
             LCN = lcn_scanner_instance.lcnScan()
-            print("LCNScannerSetup instance:", LCN)
+            # print("LCNScannerSetup instance:", LCN)
             try:
                 self.session.open(LCN)
             except Exception as e:
                 print('except..:', e)
-            self.session.open(MessageBox,
-                              _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+            self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
                               MessageBox.TYPE_INFO,
                               timeout=5)
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
-                                      MessageBox,
-                                      _("Do you want to install?"),
+                                      MessageBox, _("Do you want to install?"),
                                       MessageBox.TYPE_YESNO)
 
     def okRun1(self, answer=False):
@@ -1869,8 +1897,7 @@ class addInstall(Screen):
 
     def remove(self):
         self.session.openWithCallback(self.removenow,
-                                      MessageBox,
-                                      _("Do you want to remove?"),
+                                      MessageBox, _("Do you want to remove?"),
                                       MessageBox.TYPE_YESNO)
 
     def removenow(self, answer=False):
@@ -1889,8 +1916,7 @@ class addInstall(Screen):
 
     def restart(self):
         self.session.openWithCallback(self.restartnow,
-                                      MessageBox,
-                                      _("Do you want to restart Gui Interface?"),
+                                      MessageBox, _("Do you want to restart Gui Interface?"),
                                       MessageBox.TYPE_YESNO)
 
     def restartnow(self, answer=False):
@@ -1991,13 +2017,16 @@ class LSinfo(Screen):
         if currversion < remote_version:
             self.Update = True
             print('new version online')
-            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog), MessageBox.TYPE_INFO, timeout=5)
+            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog),
+                                          MessageBox.TYPE_INFO, timeout=5)
             self['key_green'].setText(_('Update'))
             self["pixmap"].show()
 
     def update_me(self):
         if self.Update is True:
-            self.session.openWithCallback(self.install_update, MessageBox, _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (self.new_version, self.new_changelog), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(self.install_update,
+                                          MessageBox, _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (self.new_version, self.new_changelog),
+                                          MessageBox.TYPE_YESNO)
         else:
             self.session.open(MessageBox,
                               _("Congrats! You already have the latest version..."),
@@ -2010,14 +2039,15 @@ class LSinfo(Screen):
         remote_date = data['pushed_at']
         strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
         remote_date = strp_remote_date.strftime('%Y-%m-%d')
-        self.session.openWithCallback(self.install_update, MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(self.install_update,
+                                      MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date),
+                                      MessageBox.TYPE_YESNO)
 
     def install_update(self, answer=False):
         if answer:
             self.session.open(lsConsole, 'Upgrading...', cmdlist=['wget -q "--no-check-certificate" ' + b64decoder(installer_url) + ' -O - | /bin/sh'], finishedCallback=self.myCallback, closeOnSuccess=False)
         else:
-            self.session.open(MessageBox,
-                              _("Update Aborted!"),
+            self.session.open(MessageBox, _("Update Aborted!"),
                               MessageBox.TYPE_INFO, timeout=3)
 
     def myCallback(self, result=None):
@@ -2065,7 +2095,6 @@ class LSinfo(Screen):
         return str(zarcffll)
 
     def openinfo(self, callback=''):
-        # from .File_Commander import File_Commander
         from .stbinfo import stbinfo
         print('STB info:\n%s' % stbinfo.to_string())
         with open('/tmp/output.txt', 'w') as file:
@@ -2074,6 +2103,7 @@ class LSinfo(Screen):
             file.write('%s V.%s\n%s%s\nSTB info:\n%s' % (descplug, currversion, info, info2, stbinfo.to_string()))
         # user_log = '/tmp/output.txt'
         # if fileExists(user_log):
+            # from .File_Commander import File_Commander
             # self.session.open(File_Commander, user_log)
         try:
             with open('/tmp/output.txt', 'r') as filer:
@@ -2227,8 +2257,7 @@ def menustart():
         if CheckConn():
             _session.open(startLP)
         else:
-            _session.open(MessageBox,
-                          _('Check Connection!'),
+            _session.open(MessageBox, _('Check Connection!'),
                           MessageBox.TYPE_INFO,
                           timeout=5)
     except:
