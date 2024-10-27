@@ -6,7 +6,7 @@
 #  distributed other than under the conditions noted above.
 #  Lululla coder 2022.07.20
 # NOT REMOVE DISCLAIMER!!!
-
+from . import _
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
