@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# from . import _
+from . import _
 # Components
 from Components.ActionMap import ActionMap
 from Components.Label import Label
