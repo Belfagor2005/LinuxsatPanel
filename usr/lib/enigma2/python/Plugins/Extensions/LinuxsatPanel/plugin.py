@@ -92,7 +92,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.5.4'
+currversion = '2.5.5'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 
@@ -254,10 +254,20 @@ def get_positions(resolution):
     return positions
 
 
-def add_menu_item(menu_list, titles, pics, title, pic_name):
+# def add_menu_item(menu_list, titles, pics, name, pic):
+    # menu_list.append((name, titles, pic, ""))
+
+def add_menu_item(menu_list, titles, pics, urls, title, pic_name):
     menu_list.append(title)
     titles.append(title.strip())
     pics.append(picfold + pic_name)
+    urls.append("")  # Aggiungi una stringa vuota per l'URL
+
+
+# def add_menu_item(menu_list, titles, pics, title, pic_name):
+    # menu_list.append(title)
+    # titles.append(title.strip())
+    # pics.append(picfold + pic_name)
 
 
 def add_menu_item_with_url(menu_list, titles, pics, urls, title, pic_name, url):
@@ -287,86 +297,87 @@ class LinuxsatPanel(Screen):
         self.urls = []
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Backup ", "Backup.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Bouquets ", "Bouquets.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup ", "Backup.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets ", "Bouquets.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, "Channel List ", "Channel-list.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Epg ", "plugin-epg.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Feeds Image Oe2.0 ", "Feeds2.0.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg ", "plugin-epg.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image Oe2.0 ", "Feeds2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Feeds Image DreamOs ", "Feeds2.2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image DreamOs ", "Feeds2.2.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Games ", "Game.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Iptv ", "iptv-streaming.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Kiddac Oe2.0 ", "KiddaC1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games ", "Game.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv ", "iptv-streaming.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac Oe2.0 ", "KiddaC1.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Kiddac DreamOs ", "KiddaC2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac DreamOs ", "KiddaC2.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Lululla Zone Oe2.0 ", "oe2.0.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone Oe2.0 ", "oe2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Lululla Zone DreamOs ", "oe2.5-2.6.png")
-            add_menu_item(menu_list, self.titles, self.pics, "DreamOs Plugins ", "OE2.2-Plugins.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone DreamOs ", "oe2.5-2.6.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "DreamOs Plugins ", "OE2.2-Plugins.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Mediaplayer-Youtube ", "mediayou.png")
-            add_menu_item(menu_list, self.titles, self.pics, "MultiBoot ", "multiboot.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Multimedia ", "Multimedia.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Panels Addons ", "Panels.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Picons Tools ", "picons.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Python Library ", "Library.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Radio Tools", "Radio.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot ", "multiboot.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia ", "Multimedia.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Panels Addons ", "Panels.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Picons Tools ", "picons.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Python Library ", "Library.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Tools", "Radio.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, "Script Installer ", "script.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Script Installer ", "script.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Skins | TEAM ", "skinsteam.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | TEAM ", "skinsteam.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Skins Fhd-Hd DreamOs ", "OE2.2-Skins.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd DreamOs ", "OE2.2-Skins.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Keys Tools2.0 ", "key-updater.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools2.0 ", "key-updater.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Keys Tools DreamOs ", "key-updater1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools DreamOs ", "key-updater1.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "SoftcamsOE2.0 ", "SOE20.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "SoftcamsOE2.0 ", "SOE20.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Softcams DreamOs ", "SOE22.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams DreamOs ", "SOE22.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Sport Tools ", "sport.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Streamlink Tools ", "streamlink.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Utility ", "utility.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Vpn Oe2.0 ", "vpn.png")
-            add_menu_item(menu_list, self.titles, self.pics, "WeatherTools ", "weather.png")
-            add_menu_item(menu_list, self.titles, self.pics, "WeatherForecast ", "weather-forecast.png")
-            add_menu_item(menu_list, self.titles, self.pics, "Webcam ", "webcam.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility ", "utility.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Oe2.0 ", "vpn.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam ", "webcam.png")
 
         if not config.ParentalControl.configured.value:
             if not has_dpkg:
-                add_menu_item(menu_list, self.titles, self.pics, "Adult Oe2.0 ", "18+deb.png")
+                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult Oe2.0 ", "18+deb.png")
             else:
-                add_menu_item(menu_list, self.titles, self.pics, "Adult DreamOs ", "18+.png")
+                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult DreamOs ", "18+.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, "Other Oe2.0 ", "Other.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other Oe2.0 ", "Other.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, "Other DreamOs ", "Other1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other DreamOs ", "Other1.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, " Information ", "Information.png")
-        add_menu_item(menu_list, self.titles, self.pics, " About ", "about.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
 
         self.names = menu_list
+        self.sorted = False
         # self.combined_data = list(zip(self.names, self.titles, self.pics, self.urls))
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort'))
+        self['sort'] = Label(_('0 Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -522,8 +533,28 @@ class LinuxsatPanel(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
+    # def list_sort(self):
+        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # self.openTest()
+
     def list_sort(self):
-        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # Salva le liste originali la prima volta che questa funzione viene chiamata
+        if not hasattr(self, 'original_data'):
+            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+
+        # Controlla se è ordinato
+        if self.sorted:
+            # Se è ordinato, ripristina l'ordine originale
+            self.names, self.titles, self.pics, self.urls = self.original_data
+            self.sorted = False
+            self['sort'].setText(_('0 Sort A-Z'))
+        else:
+            # Se non è ordinato, applica l'ordinamento
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.sorted = True
+            self['sort'].setText(_('0 Sort Default'))
+
         self.openTest()
 
     def closeNonRecursive(self):
@@ -612,24 +643,25 @@ class LSskin(Screen):
         self.pics = []
         self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, "Skins All ", "otherskins.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins | HD ", "SkinHD.png")
-        # add_menu_item(menu_list, self.titles, self.pics, "Skins | FHD ", "SkinFHD.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins Egami ", "egami.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins HDF ", "hdf.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenBh ", "openbh.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins OPEN ATV ", "openatv.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenPLi ", "openpli.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins OpenSpa ", "openspa.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins VTi ", "vti.png")
-        add_menu_item(menu_list, self.titles, self.pics, "Skins Oe Based ", "oebased.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins All ", "otherskins.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | HD ", "SkinHD.png")
+        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | FHD ", "SkinFHD.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Egami ", "egami.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins HDF ", "hdf.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenBh ", "openbh.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OPEN ATV ", "openatv.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenPLi ", "openpli.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenSpa ", "openspa.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins VTi ", "vti.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Oe Based ", "oebased.png")
 
         self.names = menu_list
+        self.sorted = False
         # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort'))
+        self['sort'] = Label(_('0 Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -785,8 +817,28 @@ class LSskin(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
+    # def list_sort(self):
+        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # self.openTest()
+
     def list_sort(self):
-        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # Salva le liste originali la prima volta che questa funzione viene chiamata
+        if not hasattr(self, 'original_data'):
+            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+
+        # Controlla se è ordinato
+        if self.sorted:
+            # Se è ordinato, ripristina l'ordine originale
+            self.names, self.titles, self.pics, self.urls = self.original_data
+            self.sorted = False
+            self['sort'].setText(_('0 Sort A-Z'))
+        else:
+            # Se non è ordinato, applica l'ordinamento
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.sorted = True
+            self['sort'].setText(_('0 Sort Default'))
+
         self.openTest()
 
     def closeNonRecursive(self):
@@ -845,7 +897,7 @@ class LSChannel(Screen):
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort'))
+        self['sort'] = Label(_('0 Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -1001,8 +1053,28 @@ class LSChannel(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
+    # def list_sort(self):
+        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # self.openTest()
+
     def list_sort(self):
-        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # Salva le liste originali la prima volta che questa funzione viene chiamata
+        if not hasattr(self, 'original_data'):
+            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+
+        # Controlla se è ordinato
+        if self.sorted:
+            # Se è ordinato, ripristina l'ordine originale
+            self.names, self.titles, self.pics, self.urls = self.original_data
+            self.sorted = False
+            self['sort'].setText(_('0 Sort A-Z'))
+        else:
+            # Se non è ordinato, applica l'ordinamento
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.sorted = True
+            self['sort'].setText(_('0 Sort Default'))
+
         self.openTest()
 
     def closeNonRecursive(self):
@@ -1065,6 +1137,8 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh -O - | bash')
+        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "X-Klass", "xklass.png", 'wget -qO- --no-check-certificate "https://gitlab.com/MOHAMED_OS/dz_store/-/raw/main/XKlass/online-setup" | -O - | bash')
 
         # Adding more options without URLs
         if not has_dpkg:
@@ -1087,21 +1161,20 @@ class ScriptInstaller(Screen):
         self.titles.append("Send CCcline Oscam ")
         self.pics.append(picfold + "oscamfree.png")
         self.urls.append('')
-        #
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | bash')
         if not has_dpkg:
             add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
 
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/subsupport-addon.sh?inline=false" -O - | bash')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | bash')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xtraevent addon", "xtraevent.png", 'wget -q --no-check-certificate "https://github.com/popking159/xtraeventplugin/raw/main/xtraevent-install.sh?inline=false" -O - | bash')
-
         self.names = menu_list
+        self.sorted = False
         # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort'))
+        self['sort'] = Label(_('0 Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -1297,8 +1370,28 @@ class ScriptInstaller(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
+    # def list_sort(self):
+        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # self.openTest()
+
     def list_sort(self):
-        self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+        # Salva le liste originali la prima volta che questa funzione viene chiamata
+        if not hasattr(self, 'original_data'):
+            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+
+        # Controlla se è ordinato
+        if self.sorted:
+            # Se è ordinato, ripristina l'ordine originale
+            self.names, self.titles, self.pics, self.urls = self.original_data
+            self.sorted = False
+            self['sort'].setText(_('0 Sort A-Z'))
+        else:
+            # Se non è ordinato, applica l'ordinamento
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.sorted = True
+            self['sort'].setText(_('0 Sort Default'))
+
         self.openTest()
 
     def closeNonRecursive(self):
