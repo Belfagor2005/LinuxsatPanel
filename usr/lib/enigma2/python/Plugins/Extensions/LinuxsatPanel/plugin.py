@@ -616,10 +616,14 @@ class LinuxsatPanel(Screen):
 
         else:
             title = self.titles[self.idx]
-            n1 = self.data.find(title, 0)
-            n2 = self.data.find("</plugins>", n1)
-            url = self.data[n1:n2]
-            self.session.open(addInstall, url, name, None)
+            self.data = checkGZIP(xmlurl)
+            if self.data is not None:
+                n1 = self.data.find(title, 0)
+                n2 = self.data.find("</plugins>", n1)
+                url = self.data[n1:n2]
+                self.session.open(addInstall, url, name, None)
+            else:
+                self.session.open(MessageBox, _("Error: No Data Find."), MessageBox.TYPE_ERROR)
 
 
 class LSskin(Screen):
@@ -859,10 +863,14 @@ class LSskin(Screen):
             return
         name = self.names[self.idx]
         title = self.titles[self.idx]
-        n1 = self.data.find(title, 0)
-        n2 = self.data.find("</plugins>", n1)
-        url = self.data[n1:n2]
-        self.session.open(addInstall, url, name, None)
+        self.data = checkGZIP(xmlurl)
+        if self.data is not None:
+            n1 = self.data.find(title, 0)
+            n2 = self.data.find("</plugins>", n1)
+            url = self.data[n1:n2]
+            self.session.open(addInstall, url, name, None)
+        else:
+            self.session.open(MessageBox, _("Error: No Data Find."), MessageBox.TYPE_ERROR)
 
 
 class LSChannel(Screen):
@@ -1134,10 +1142,11 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh" -O - | /bin/sh')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Xstreamity", "xstreamity.png", 'wget -q "--no-check-certificate" wget https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false -O - | bash')
         # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "X-Klass", "xklass.png", 'wget -qO- --no-check-certificate "https://gitlab.com/MOHAMED_OS/dz_store/-/raw/main/XKlass/online-setup" | -O - | bash')
 
         # Adding more options without URLs
