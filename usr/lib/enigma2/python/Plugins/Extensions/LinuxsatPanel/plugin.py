@@ -92,7 +92,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.5.5'
+currversion = '2.5.6'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 
@@ -497,15 +497,19 @@ class LinuxsatPanel(Screen):
             self.paintFrame()
 
     def key_up(self):
-        if self.index >= 5:
+        if self.index == 0 and self.ipage == 1:
+            self.ipage = self.npage
+            self.index = self.minentry
+            self.openTest()
+
+        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
             self.index -= 5
         else:
-            if self.ipage > 1:
-                self.ipage -= 1
-                self.index = self.maxentry  # Back to the last line of the previous page
+            if self.ipage == self.npage and self.index == self.minentry:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the first page, go back to the last pixmap of the last page
                 self.ipage = self.npage
                 self.index = self.npics - 1
                 self.openTest()
@@ -515,14 +519,13 @@ class LinuxsatPanel(Screen):
         if self.index <= self.maxentry - 5:
             self.index += 5
         else:
-            if self.ipage < self.npage:
-                self.ipage += 1
-                self.index = self.minentry  # Back to the top of the next page
+            if self.ipage == self.npage:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the last page, go back to the first pixmap of the first page
-                self.index = 0
-                self.ipage = 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
 
         self.paintFrame()
@@ -533,24 +536,16 @@ class LinuxsatPanel(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
-    # def list_sort(self):
-        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-        # self.openTest()
-
     def list_sort(self):
-        # Salva le liste originali la prima volta che questa funzione viene chiamata
         if not hasattr(self, 'original_data'):
             self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+            self.sorted = False
 
-        # Controlla se è ordinato
         if self.sorted:
-            # Se è ordinato, ripristina l'ordine originale
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
             self['sort'].setText(_('0 Sort A-Z'))
         else:
-            # Se non è ordinato, applica l'ordinamento
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self['sort'].setText(_('0 Sort Default'))
@@ -785,15 +780,19 @@ class LSskin(Screen):
             self.paintFrame()
 
     def key_up(self):
-        if self.index >= 5:
+        if self.index == 0 and self.ipage == 1:
+            self.ipage = self.npage
+            self.index = self.minentry
+            self.openTest()
+
+        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
             self.index -= 5
         else:
-            if self.ipage > 1:
-                self.ipage -= 1
-                self.index = self.maxentry  # Back to the last line of the previous page
+            if self.ipage == self.npage and self.index == self.minentry:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the first page, go back to the last pixmap of the last page
                 self.ipage = self.npage
                 self.index = self.npics - 1
                 self.openTest()
@@ -803,14 +802,13 @@ class LSskin(Screen):
         if self.index <= self.maxentry - 5:
             self.index += 5
         else:
-            if self.ipage < self.npage:
-                self.ipage += 1
-                self.index = self.minentry  # Back to the top of the next page
+            if self.ipage == self.npage:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the last page, go back to the first pixmap of the first page
-                self.index = 0
-                self.ipage = 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
 
         self.paintFrame()
@@ -821,24 +819,16 @@ class LSskin(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
-    # def list_sort(self):
-        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-        # self.openTest()
-
     def list_sort(self):
-        # Salva le liste originali la prima volta che questa funzione viene chiamata
         if not hasattr(self, 'original_data'):
             self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+            self.sorted = False
 
-        # Controlla se è ordinato
         if self.sorted:
-            # Se è ordinato, ripristina l'ordine originale
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
             self['sort'].setText(_('0 Sort A-Z'))
         else:
-            # Se non è ordinato, applica l'ordinamento
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self['sort'].setText(_('0 Sort Default'))
@@ -1025,15 +1015,19 @@ class LSChannel(Screen):
             self.paintFrame()
 
     def key_up(self):
-        if self.index >= 5:
+        if self.index == 0 and self.ipage == 1:
+            self.ipage = self.npage
+            self.index = self.minentry
+            self.openTest()
+
+        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
             self.index -= 5
         else:
-            if self.ipage > 1:
-                self.ipage -= 1
-                self.index = self.maxentry  # Back to the last line of the previous page
+            if self.ipage == self.npage and self.index == self.minentry:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the first page, go back to the last pixmap of the last page
                 self.ipage = self.npage
                 self.index = self.npics - 1
                 self.openTest()
@@ -1043,14 +1037,13 @@ class LSChannel(Screen):
         if self.index <= self.maxentry - 5:
             self.index += 5
         else:
-            if self.ipage < self.npage:
-                self.ipage += 1
-                self.index = self.minentry  # Back to the top of the next page
+            if self.ipage == self.npage:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the last page, go back to the first pixmap of the first page
-                self.index = 0
-                self.ipage = 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
 
         self.paintFrame()
@@ -1061,24 +1054,16 @@ class LSChannel(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
-    # def list_sort(self):
-        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-        # self.openTest()
-
     def list_sort(self):
-        # Salva le liste originali la prima volta che questa funzione viene chiamata
         if not hasattr(self, 'original_data'):
             self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+            self.sorted = False
 
-        # Controlla se è ordinato
         if self.sorted:
-            # Se è ordinato, ripristina l'ordine originale
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
             self['sort'].setText(_('0 Sort A-Z'))
         else:
-            # Se non è ordinato, applica l'ordinamento
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self['sort'].setText(_('0 Sort Default'))
@@ -1343,15 +1328,19 @@ class ScriptInstaller(Screen):
             self.paintFrame()
 
     def key_up(self):
-        if self.index >= 5:
+        if self.index == 0 and self.ipage == 1:
+            self.ipage = self.npage
+            self.index = self.minentry
+            self.openTest()
+
+        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
             self.index -= 5
         else:
-            if self.ipage > 1:
-                self.ipage -= 1
-                self.index = self.maxentry  # Back to the last line of the previous page
+            if self.ipage == self.npage and self.index == self.minentry:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the first page, go back to the last pixmap of the last page
                 self.ipage = self.npage
                 self.index = self.npics - 1
                 self.openTest()
@@ -1361,14 +1350,13 @@ class ScriptInstaller(Screen):
         if self.index <= self.maxentry - 5:
             self.index += 5
         else:
-            if self.ipage < self.npage:
-                self.ipage += 1
-                self.index = self.minentry  # Back to the top of the next page
+            if self.ipage == self.npage:
+                self.ipage = 1
+                self.index = 0
                 self.openTest()
             else:
-                # If we are on the last page, go back to the first pixmap of the first page
-                self.index = 0
-                self.ipage = 1
+                self.ipage += 1
+                self.index = self.minentry
                 self.openTest()
 
         self.paintFrame()
@@ -1379,24 +1367,16 @@ class ScriptInstaller(Screen):
             self["menu"].setIndex(number)
             self.okbuttonClick()
 
-    # def list_sort(self):
-        # self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-        # self.openTest()
-
     def list_sort(self):
-        # Salva le liste originali la prima volta che questa funzione viene chiamata
         if not hasattr(self, 'original_data'):
             self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False  # Flag per monitorare lo stato di ordinamento
+            self.sorted = False
 
-        # Controlla se è ordinato
         if self.sorted:
-            # Se è ordinato, ripristina l'ordine originale
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
             self['sort'].setText(_('0 Sort A-Z'))
         else:
-            # Se non è ordinato, applica l'ordinamento
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self['sort'].setText(_('0 Sort Default'))
