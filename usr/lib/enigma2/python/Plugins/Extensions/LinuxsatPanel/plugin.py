@@ -46,15 +46,16 @@ from Components.Pixmap import (Pixmap, MovingPixmap)
 from Components.PluginComponent import plugins
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
+from os import chmod, makedirs, popen, system, walk
+from os.path import exists, join
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
-from Tools.Directories import (SCOPE_PLUGINS, resolveFilename, fileExists)
+from Tools.Directories import (fileExists, resolveFilename, SCOPE_PLUGINS)
 from datetime import datetime
 import codecs
 import json
-import os
 import re
 import ssl
 import sys
@@ -94,7 +95,9 @@ global has_dpkg
 
 currversion = '2.5.6'
 
-plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+plugin_path = resolveFilename(SCOPE_PLUGINS,
+                              "Extensions/{}".format('LinuxsatPanel')
+                              )
 
 PY3 = sys.version_info.major >= 3
 
@@ -107,7 +110,7 @@ has_dpkg = False
 setx = 0
 
 
-if os.path.exists("/usr/bin/apt-get"):
+if exists("/usr/bin/apt-get"):
     has_dpkg = True
 
 
@@ -175,17 +178,28 @@ if sslverify:
             return ctx
 
 
-# init path
+# if isWQHD() or isFHD():
+    # skin_path = os.path.join(plugin_path, 'skins', 'fhd')
+    # picfold = os.path.join(plugin_path, "LSicons2")
+    # pngx = os.path.join(plugin_path, "icons2", "link.png")
+    # nss_pic = os.path.join(picfold, "LSS.png")
+# else:
+    # skin_path = os.path.join(plugin_path, 'skins', 'hd')
+    # picfold = os.path.join(plugin_path, "LSicons")
+    # pngx = os.path.join(plugin_path, "icons", "link.png")
+    # nss_pic = os.path.join(picfold, "LSS.png")
+
+
 if isWQHD() or isFHD():
     skin_path = plugin_path + '/skins/fhd'
     picfold = plugin_path + "/LSicons2/"
     pngx = plugin_path + "/icons2/link.png"
-    blpic = picfold + "Blank.png"
+    nss_pic = picfold + "LSS.png"
 else:
     skin_path = plugin_path + '/skins/hd'
     picfold = plugin_path + "/LSicons/"
     pngx = plugin_path + "/icons/link.png"
-    blpic = picfold + "Blank.png"
+    nss_pic = picfold + "LSS.png"
 
 
 # menulist
@@ -281,7 +295,7 @@ class LinuxsatPanel(Screen):
 
     def __init__(self, session):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
 
@@ -441,7 +455,7 @@ class LinuxsatPanel(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -452,8 +466,8 @@ class LinuxsatPanel(Screen):
             idx = self.minentry + i
             # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
-            if not os.path.exists(self.pics[idx]):
-                pic = blpic
+            if not exists(self.pics[idx]):
+                pic = nss_pic
             self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
             i += 1
         self.index = self.minentry
@@ -625,7 +639,7 @@ class LSskin(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.data = checkGZIP(xmlurl)
@@ -724,7 +738,7 @@ class LSskin(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -735,8 +749,8 @@ class LSskin(Screen):
             idx = self.minentry + i
             # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
-            if not os.path.exists(self.pics[idx]):
-                pic = blpic
+            if not exists(self.pics[idx]):
+                pic = nss_pic
             self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
             i += 1
         self.index = self.minentry
@@ -867,7 +881,7 @@ class LSChannel(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
 
@@ -959,7 +973,7 @@ class LSChannel(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -970,8 +984,8 @@ class LSChannel(Screen):
             idx = self.minentry + i
             # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
-            if not os.path.exists(self.pics[idx]):
-                pic = blpic
+            if not exists(self.pics[idx]):
+                pic = nss_pic
             self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
             i += 1
         self.index = self.minentry
@@ -1095,7 +1109,7 @@ class ScriptInstaller(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'LinuxsatPanel.xml')
+        skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
 
@@ -1123,12 +1137,14 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/historyzapselector-dorik.sh?inline=false" -O - | bash')
-        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | bash')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/ipaudiopro_1.4.sh?inline=false" -O - | bash')
+        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Adder", "keysadd.png", 'wget -q "--no-check-certificate" https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+        add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "Multistalker.png", 'wget -q install --force-depends "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/multistalker_pro?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | bash')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false -O - | bash')
@@ -1273,7 +1289,7 @@ class ScriptInstaller(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(blpic)
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -1284,8 +1300,8 @@ class ScriptInstaller(Screen):
             idx = self.minentry + i
             # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
             pic = self.pics[idx]
-            if not os.path.exists(self.pics[idx]):
-                pic = blpic
+            if not exists(self.pics[idx]):
+                pic = nss_pic
             self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
             i += 1
         self.index = self.minentry
@@ -1453,7 +1469,6 @@ class ScriptInstaller(Screen):
             url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
             try:
                 import requests
-                from os import chmod
                 response = requests.get(url)
                 response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
                 with open(script_path, 'w') as file:
@@ -1473,9 +1488,9 @@ class ScriptInstaller(Screen):
 
         elif config_type == 'Oscam':
             dest_dir = '/etc/tuxbox/config'
-            if not os.path.exists(dest_dir):
-                os.makedirs(dest_dir)
-            dest = os.path.join(dest_dir, 'oscam.server')
+            if not exists(dest_dir):
+                makedirs(dest_dir)
+            dest = join(dest_dir, 'oscam.server')
             src = plugin_path + '/sh/oscam.server'
             not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
             write_format = ('\n[reader]\n'
@@ -1495,7 +1510,7 @@ class ScriptInstaller(Screen):
             print('unknow actions')
             return
 
-        if not os.path.exists(dest):
+        if not exists(dest):
             shutil.copy2(src, dest)
             self.session.open(MessageBox, not_found_msg,
                               type=MessageBox.TYPE_INFO,
@@ -1591,9 +1606,9 @@ class addInstall(Screen):
 
     def __init__(self, session, data, name, dest):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'addInstall.xml')
+        skin = join(skin_path, 'addInstall.xml')
         if has_dpkg:
-            skin = os.path.join(skin_path, 'addInstall-os.xml')
+            skin = join(skin_path, 'addInstall-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self.fxml = str(data)
@@ -1610,7 +1625,7 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Right'))
         '''
         self.LcnOn = False
-        if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+        if exists('/etc/enigma2/lcndb') and lngx == 'it':
             self['key_yellow'].setText('Lcn')
             self.LcnOn = True
             print('LcnOn = True')
@@ -1692,7 +1707,7 @@ class addInstall(Screen):
             self['sort'].setText(_('0 Halign Right'))
         # if self.LcnOn is True:
         # # self.LcnOn = False
-        # # if os.path.exists('/etc/enigma2/lcndb') and lngx == 'it':
+        # # if exists('/etc/enigma2/lcndb') and lngx == 'it':
             # self['key_yellow'].setText('Lcn')
             # # self.LcnOn = True
             # print('LcnOn 2 = True')
@@ -1751,8 +1766,8 @@ class addInstall(Screen):
     def okClicked(self, answer=False):
         if answer:
             dest = "/tmp"
-            if not os.path.exists(dest):
-                os.system('ln -sf  /var/volatile/tmp /tmp')
+            if not exists(dest):
+                system('ln -sf  /var/volatile/tmp /tmp')
             folddest = '/tmp/' + self.plug
             if self.retfile(folddest):
                 cmd2 = ''
@@ -1944,24 +1959,24 @@ class addInstall(Screen):
 
                 from six.moves.urllib.request import urlretrieve
                 urlretrieve(url, dest)
-                if os.path.exists(dest) and '.zip' in dest:
+                if exists(dest) and '.zip' in dest:
                     fdest1 = "/tmp/unzipped"
                     fdest2 = "/etc/enigma2"
-                    if os.path.exists("/tmp/unzipped"):
-                        os.system('rm -rf /tmp/unzipped')
-                    os.makedirs('/tmp/unzipped')
+                    if exists("/tmp/unzipped"):
+                        system('rm -rf /tmp/unzipped')
+                    makedirs('/tmp/unzipped')
                     cmd2 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
-                    os.system(cmd2)
-                    for root, dirs, files in os.walk(fdest1):
+                    system(cmd2)
+                    for root, dirs, files in walk(fdest1):
                         for name in dirs:
                             self.namel = name
-                    os.system('rm -rf /etc/enigma2/lamedb')
-                    os.system('rm -rf /etc/enigma2/*.radio')
-                    os.system('rm -rf /etc/enigma2/*.tv')
-                    os.system('rm -rf /etc/enigma2/*.del')
-                    os.system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
-                    os.system("rm -rf /tmp/unzipped")
-                    os.system("rm -rf /tmp/settings.zip")
+                    system('rm -rf /etc/enigma2/lamedb')
+                    system('rm -rf /etc/enigma2/*.radio')
+                    system('rm -rf /etc/enigma2/*.tv')
+                    system('rm -rf /etc/enigma2/*.del')
+                    system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
+                    system("rm -rf /tmp/unzipped")
+                    system("rm -rf /tmp/settings.zip")
                     title = (_("Installing %s\nPlease Wait...") % self.name)
                     self.session.openWithCallback(self.yes, lsConsole, title=_(title),
                                                   cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
@@ -2021,9 +2036,9 @@ class LSinfo(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'LSinfo.xml')
+        skin = join(skin_path, 'LSinfo.xml')
         if has_dpkg:
-            skin = os.path.join(skin_path, 'LSinfo-os.xml')
+            skin = join(skin_path, 'LSinfo-os.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         titlex = descplug + ' V.' + currversion
@@ -2057,7 +2072,7 @@ class LSinfo(Screen):
         self.setTitle(titlex)
         self.Update = False
         self.timerz = eTimer()
-        if os.path.exists('/var/lib/dpkg/status'):
+        if exists('/var/lib/dpkg/status'):
             self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
         else:
             self.timerz.callback.append(self.check_vers)
@@ -2145,7 +2160,7 @@ class LSinfo(Screen):
 
             elif self.name == " About ":
                 # ab = fetch_url(abouturl)
-                with open(os.path.join(plugin_path, 'LICENSE'), 'r') as filer:
+                with open(join(plugin_path, 'LICENSE'), 'r') as filer:
                     info = filer.read()
                     self['list'].setText(info)
             else:
@@ -2170,9 +2185,9 @@ class LSinfo(Screen):
         zarcffll = ''
         try:
             if has_dpkg:
-                zarcffll = os.popen('dpkg --print-architecture | grep -iE "arm|aarch64|mips|cortex|sh4|sh_4"').read().strip('\n\r')
+                zarcffll = popen('dpkg --print-architecture | grep -iE "arm|aarch64|mips|cortex|sh4|sh_4"').read().strip('\n\r')
             else:
-                zarcffll = os.popen('opkg print-architecture | grep -iE "arm|aarch64|mips|cortex|h4|sh_4"').read().strip('\n\r')
+                zarcffll = popen('opkg print-architecture | grep -iE "arm|aarch64|mips|cortex|h4|sh_4"').read().strip('\n\r')
         except Exception as e:
             print("Error ", e)
         return str(zarcffll)
@@ -2202,12 +2217,12 @@ class LSinfo(Screen):
             if self.arckget():
                 arkFull = self.arckget()
                 print('arkget= ', arkFull)
-            img = os.popen('cat /etc/issue').read().strip('\n\r')
+            img = popen('cat /etc/issue').read().strip('\n\r')
             img = img.replace('\\l', '')
-            python = os.popen('python -V').read().strip('\n\r')
-            arc = os.popen('uname -m').read().strip('\n\r')
-            ifg = os.popen('wget -qO - ifconfig.me').read().strip('\n\r')
-            libs = os.popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
+            python = popen('python -V').read().strip('\n\r')
+            arc = popen('uname -m').read().strip('\n\r')
+            ifg = popen('wget -qO - ifconfig.me').read().strip('\n\r')
+            libs = popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
             if libs:
                 libsssl = libs
             info += 'Suggested by: @masterG - @oktus - @pcd\n'
@@ -2233,7 +2248,7 @@ class startLP(Screen):
         _session = session
         first = True
         Screen.__init__(self, session)
-        skin = os.path.join(skin_path, 'startLP.xml')
+        skin = join(skin_path, 'startLP.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
         self["poster"] = Pixmap()
@@ -2290,14 +2305,14 @@ class startLP(Screen):
     def loadDefaultImage(self):
         self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
         self.timer = eTimer()
-        if os.path.exists("/usr/bin/apt-get"):
+        if exists("/usr/bin/apt-get"):
             self.timer_conn = self.timer.timeout.connect(self.decodeImage)
         else:
             self.timer.callback.append(self.decodeImage)
         self.timer.start(100, True)
 
         self.timerx = eTimer()
-        if os.path.exists("/usr/bin/apt-get"):
+        if exists("/usr/bin/apt-get"):
             self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
         else:
             self.timerx.callback.append(self.clsgo)
@@ -2324,7 +2339,7 @@ class startLP(Screen):
             self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
             # _l = self.picload.PictureData.get()
             # del self.picload
-            if os.path.exists("/usr/bin/apt-get"):
+            if exists("/usr/bin/apt-get"):
                 self.picload.startDecode(pixmapx, False)
             else:
                 self.picload.startDecode(pixmapx, 0, 0, False)
