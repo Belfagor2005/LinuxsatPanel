@@ -314,7 +314,7 @@ class LinuxsatPanel(Screen):
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup Tools ", "Backup.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets Tools ", "Bouquets.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List Tools ", "Channel-list.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
