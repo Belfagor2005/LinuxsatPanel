@@ -311,35 +311,35 @@ class LinuxsatPanel(Screen):
         self.urls = []
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup ", "Backup.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets ", "Bouquets.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup Tools ", "Backup.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets Tools ", "Bouquets.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List Tools ", "Channel-list.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg ", "plugin-epg.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image Oe2.0 ", "Feeds2.0.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg Tools ", "plugin-epg.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.0 ", "Feeds2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image DreamOs ", "Feeds2.2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.5 ", "Feeds2.2.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games ", "Game.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv ", "iptv-streaming.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac Oe2.0 ", "KiddaC1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games Tools ", "Game.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv Tools ", "iptv-streaming.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac OE2.0 ", "KiddaC1.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac DreamOs ", "KiddaC2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac OE2.5 ", "KiddaC2.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone Oe2.0 ", "oe2.0.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone DreamOs ", "oe2.5-2.6.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.5 ", "oe2.5-2.6.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "DreamOs Plugins ", "OE2.2-Plugins.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot ", "multiboot.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia ", "Multimedia.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot Tools ", "multiboot.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia Tools ", "Multimedia.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Panels Addons ", "Panels.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Picons Tools ", "picons.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Python Library ", "Library.png")
@@ -355,32 +355,32 @@ class LinuxsatPanel(Screen):
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools2.0 ", "key-updater.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools DreamOs ", "key-updater1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools2.5 ", "key-updater1.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "SoftcamsOE2.0 ", "SOE20.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams DreamOs ", "SOE22.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "SoftcamsOE2.5 ", "SOE22.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility ", "utility.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Oe2.0 ", "vpn.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility Tools ", "utility.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn OE2.0 ", "vpn.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam ", "webcam.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam Tools ", "webcam.png")
 
         if not config.ParentalControl.configured.value:
             if not has_dpkg:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult Oe2.0 ", "18+deb.png")
+                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.0 ", "18+deb.png")
             else:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult DreamOs ", "18+.png")
+                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.5 ", "18+.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other Oe2.0 ", "Other.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.0 ", "Other.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other DreamOs ", "Other1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.5 ", "Other1.png")
 
         add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
