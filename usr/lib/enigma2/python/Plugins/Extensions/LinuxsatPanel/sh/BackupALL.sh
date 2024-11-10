@@ -1,5 +1,5 @@
 #!/bin/bash
-## BACKUPALL
+#DESCRIPTION=BACKUPALL
 rm -rf /media/hdd/#Backups#
 mkdir -p /media/hdd/#Backups#/BackupALL/etc/enigma2
 cp -r /etc/epgimport /media/hdd//#Backups#/BackupALL/etc/

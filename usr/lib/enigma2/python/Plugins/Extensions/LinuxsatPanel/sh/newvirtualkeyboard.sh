@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#DESCRIPTION=newvirtualkeyboard
 # Configuration
 #########################################
 plugin="newvirtualkeyboard"

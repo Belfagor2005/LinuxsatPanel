@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#DESCRIPTION=iSettingE2
 if [ -d /usr/lib/enigma2/python/Plugins/Extensions/iSettingE2 ]; then
 echo "> removing package please wait..."
 sleep 3s 

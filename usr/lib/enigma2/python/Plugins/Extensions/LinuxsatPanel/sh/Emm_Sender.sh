@@ -1,4 +1,5 @@
 #!/bin/bash
+#DESCRIPTION=send emm
 # mod by lululla 24/08/2023
 # Aggiornato il $(date +"%d/%m/%Y")
 

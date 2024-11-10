@@ -1,4 +1,5 @@
 #!/bin/sh
+#DESCRIPTION=GOOGLE DNS
 if [ ! -f /etc/resolv-backup.conf ] 
 then
 grep "nameserver.*" /etc/resolv.conf >> //etc/resolv-backup.conf

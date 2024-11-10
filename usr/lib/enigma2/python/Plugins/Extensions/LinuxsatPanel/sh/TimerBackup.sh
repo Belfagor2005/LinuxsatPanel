@@ -1,4 +1,5 @@
 #!/bin/bash
+#DESCRIPTION=TimerBackup
 echo " "
 echo " "
 mkdir -p /media/hdd/#Backups#/TimerBackup/etc/enigma2

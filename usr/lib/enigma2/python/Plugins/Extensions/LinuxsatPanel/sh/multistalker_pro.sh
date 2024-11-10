@@ -1,4 +1,5 @@
 #! /bin/sh
+#DESCRIPTION=multi-stalkerpro pro
 wget https://raw.githubusercontent.com/emil237/updates-enigma/main/update-all-python.sh  -O - | /bin/sh
 echo " DOWNLOAD AND INSTALL multi-stalkerpro "
 versions="1.2"

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## Configuration
+#DESCRIPTION=chocholousek-picons
 ########################################
 plugin="chocholousek-picons"
 git_url="https://gitlab.com/eliesat/extensions/-/raw/main/chocholousek-picons"

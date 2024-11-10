@@ -1,4 +1,5 @@
 #!/bin/sh
+#DESCRIPTION=checking: libssl & libcrypto
 LINE="======================================================================="
 ######### checking Package: libssl & libcrypto ###########
 if [ -f /etc/apt/apt.conf ] ; then

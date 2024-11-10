@@ -1,4 +1,5 @@
 #!/bin/bash
+#DESCRIPTION=BouquetsBackup
 mkdir -p /media/hdd/#Backups#/BouquetsBackup/etc/enigma2
 mkdir -p /media/hdd/#Backups#/BackupALL/etc/enigma2
 cp -r /etc/enigma2/*.tv /media/hdd/#Backups#/BouquetsBackup/etc/enigma2

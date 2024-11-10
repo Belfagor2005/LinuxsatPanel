@@ -1,3 +1,5 @@
+#!/bin/sh
+#DESCRIPTION=multi-stalkerpro
 echo " DOWNLOAD AND INSTALL multi-stalkerpro "
 versions="1.2"
 TMPDIR='/tmp'

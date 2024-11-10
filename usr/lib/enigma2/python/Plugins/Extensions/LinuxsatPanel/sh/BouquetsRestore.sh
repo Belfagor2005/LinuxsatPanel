@@ -1,4 +1,5 @@
 #!/bin/bash
+#DESCRIPTION=BouquetsRestore
 rm -rf /etc/enigma2/lamedb
 rm -rf /etc/enigma2/lamedb5
 rm -rf /etc/enigma2/*.tv

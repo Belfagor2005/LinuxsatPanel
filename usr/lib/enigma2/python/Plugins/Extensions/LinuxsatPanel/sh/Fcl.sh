@@ -1,4 +1,5 @@
 #!/bin/sh
+#DESCRIPTION=free cline
 [ -d /tmp/xtest ] || mkdir -p /tmp/xtest
 cd /tmp/xtest
 curl --max-time 5.5  --limit-rate 100K -k -A -k -s  https://cccam-premium.co/free-cccam/ > /tmp/xtest/CCcam
