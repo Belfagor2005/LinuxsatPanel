@@ -1,5 +1,5 @@
 #!/bin/sh
-#DESCRIPTION=checking: libssl & libcrypto
+##DESCRIPTION=checking: libssl & libcrypto
 LINE="======================================================================="
 ######### checking Package: libssl & libcrypto ###########
 if [ -f /etc/apt/apt.conf ] ; then
@@ -376,18 +376,11 @@ else ## Try to Download libcrypto from feed
         exit 1
     fi
 fi
+
 ######### checking Package: libssl & libcrypto ###########
 search() { grep -w "Package: glibc-gconv" -A 8 | awk -F "Version: " '{print $2}' | awk '/-/ {print}' | awk -F '-' '{print $1}' | awk '{print $1; exit}'; }
 search2() { grep -w "Package: glibc-gconv" -A 8 | awk -F "Version: " '{print $2}' | awk '/-/ {print}' | awk -F '-' '{print $1}' | awk '{print $1; exit}' | sed -e 's/\.//g'; }
-
 Glibc_Version="`cat $lib_files | search`"
 #Glibc_Version2="`cat $lib_files | search2`"
-
 echo "$images glibc $Glibc_Version"
-
-#if [ $Glibc_Version2 -ge "232" ]; then
-#	echo "glibc is greater than or equal to 2.32"
-#else
-#	echo "glibc is less than to 2.32"
-#fi
 exit 0

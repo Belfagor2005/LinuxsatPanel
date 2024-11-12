@@ -1,3 +1,0 @@
-#!/bin/sh
-#DESCRIPTION= SPAZIO LIBERO
-df -h

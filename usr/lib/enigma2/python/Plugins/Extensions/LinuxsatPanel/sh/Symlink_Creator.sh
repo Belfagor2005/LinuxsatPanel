@@ -1,6 +1,5 @@
 #!/bin/sh
 ## DESCRIPTION=This script created by Levi45\nThis script will create symlink
-###############################################################################
 if [ -f /lib/ld-2.32.so ]; then
 	ln -s /lib/ld-2.32.so /lib/ld-linux.so.3
 	echo "ld-2.32.so symlink created"
@@ -47,13 +46,9 @@ if [ -f /usr/lib/libssl.so.1.0.2 ]; then
 else
 	echo "libssl.so.1.0.2 not found"
 fi
-################################################################
 sync
-echo "#########################################################"
-echo "#                             Levi45                    #"
 echo "#########################################################"
 echo "#                SYMLINKS CREATED SUCCESSFULLY          #"
 echo "#########################################################"
-echo "#                    SATELLITE-FORUM.COM                #"
-echo "#########################################################"
+
 exit 0
