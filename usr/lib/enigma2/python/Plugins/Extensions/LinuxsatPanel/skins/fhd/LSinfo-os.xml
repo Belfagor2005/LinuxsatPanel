@@ -1,6 +1,7 @@
 <!-- by lululla 01072024 -->
 <screen name="LSinfo" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
 	<ePixmap position="0,0" zPosition="-1" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel3.png" alphatest="blend" />
+	<widget source="session.CurrentService" render="lsPicsmap" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d0.png,/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d1.png" pixdelay="590" control="1" position="1216,425" size="600,56" zPosition="5" transparent="1" alphatest="on" />
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black" />
 	<!-- list -->
 	<widget name="list" position="80,200" size="1000,765" zPosition="99" font="lmsat;32" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" />
