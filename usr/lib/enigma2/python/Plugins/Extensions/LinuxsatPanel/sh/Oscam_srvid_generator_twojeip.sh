@@ -7,8 +7,8 @@ HEADER="
 ### Script written by s3n0, 2021-02-17: https://github.com/s3n0
 #################################################################################
 "
-exec > >(tee -a /tmp/SRVID_TWOJEIP_debug.txt) 2>&1
-set -x
+# exec > >(tee -a /tmp/SRVID_TWOJEIP_debug.txt) 2>&1
+# set -x
 
 #################################################################################
 

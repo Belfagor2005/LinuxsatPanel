@@ -1,14 +1,14 @@
 #!/bin/bash
-# DESCRIPTION=SRVID-LYNGSAT
+## DESCRIPTION=SRVID-LYNGSAT
 HEADER="
 ######################################################################################
 ### - the script serves as a generator of the 'oscam.srvid' file for Enigma2
 ### - based on data parsing from website: https://www.lyngsat.com/packages/XXXXXX.html
-### - adapted by <YourName>, $(date '+%Y-%m-%d')
+### - adapted, $(date '+%Y-%m-%d')
 ######################################################################################
 "
-exec > >(tee -a /tmp/SRVID_LYNGSAT_debug.txt) 2>&1
-set -x
+# exec > >(tee -a /tmp/SRVID_LYNGSAT_debug.txt) 2>&1
+# set -x
 
 find_oscam_cfg_dir() {
     local RET_VAL=""

@@ -7,8 +7,8 @@ HEADER="
 ### - script adapted by <YourName>, $(date '+%Y-%m-%d')
 #################################################################################
 "
-exec > >(tee -a /tmp/SRVID_KINGOFSAT_debug.txt) 2>&1
-set -x
+# exec > >(tee -a /tmp/SRVID_KINGOFSAT_debug.txt) 2>&1
+# set -x
 
 find_oscam_cfg_dir() {
     local RET_VAL=""

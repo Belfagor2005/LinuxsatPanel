@@ -12,8 +12,8 @@ HEADER="
 #################################################################################
 "
 
-exec > >(tee -a /tmp/SRVID_SATELINATV_debug.txt) 2>&1
-set -x
+# exec > >(tee -a /tmp/SRVID_SATELINATV_debug.txt) 2>&1
+# set -x
 
 check_command() {
     command -v "$1" >/dev/null 2>&1 || { echo "ERROR: Command '$1' not found. Please install it and re-run the script."; exit 1; }
