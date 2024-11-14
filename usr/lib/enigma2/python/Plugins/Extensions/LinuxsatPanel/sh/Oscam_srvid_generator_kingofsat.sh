@@ -32,14 +32,13 @@ find_oscam_cfg_dir() {
     [ -z "$RET_VAL" ] && echo "WARNING ! Oscam configuration directory not found !"
     echo "$RET_VAL"
 }
-
 create_srvid_file() {
     local URL="http://en.kingofsat.net/pack-${1,,}.php"
     local TEMP_FILE="/tmp/kos.html"
 
-    if wget -q -O "$TEMP_FILE" "$URL"; then
+    if wget -q --user-agent="Mozilla/5.0" -O "$TEMP_FILE" "$URL"; then
         echo "URL download successful:   ${URL}"
-
+        cat "$TEMP_FILE"
         awk -F '>' -v CAIDS="${2}" -v PROVIDER="${1^^}" '
             BEGIN { CHNAME = "invalid" }
             /<i>|class="A3"/ { CHNAME = substr($2, 1, length($2) - 3) }
@@ -56,6 +55,30 @@ create_srvid_file() {
         echo "URL download failed !!! URL:  ${URL}"
     fi
 }
+
+# create_srvid_file() {
+    # local URL="http://en.kingofsat.net/pack-${1,,}.php"
+    # local TEMP_FILE="/tmp/kos.html"
+
+    # if wget -q -O "$TEMP_FILE" "$URL"; then
+        # echo "URL download successful:   ${URL}"
+
+        # awk -F '>' -v CAIDS="${2}" -v PROVIDER="${1^^}" '
+            # BEGIN { CHNAME = "invalid" }
+            # /<i>|class="A3"/ { CHNAME = substr($2, 1, length($2) - 3) }
+            # /class="s">[0-9]+/ {
+                # SID = substr($2, 1, length($2) - 4)
+                # if (CHNAME == "invalid") next
+                # printf "%s:%04X|%s|%s\n", CAIDS, SID, PROVIDER, CHNAME
+                # CHNAME = "invalid"
+            # }' "$TEMP_FILE" > "/tmp/oscam__${1,,}.srvid"
+
+        # echo -e "The new file was created:  /tmp/oscam__${1,,}.srvid\n"
+        # rm -f "$TEMP_FILE"
+    # else
+        # echo "URL download failed !!! URL:  ${URL}"
+    # fi
+# }
 
 #################################################################################
 
