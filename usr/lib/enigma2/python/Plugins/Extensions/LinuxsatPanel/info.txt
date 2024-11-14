@@ -1,0 +1,69 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+WELCOME TO 
+
+LINUXSAT-SUPPORT PANEL ADDONS
+
+2024.07.20 INIT RECODE PANEL PLUGIN
+
+Thank you Lululla 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Support on: linuxsat-support.com
+
+Init version 2.0 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20240809 2.1 version is online
+For Plugin Upgrade:
+yellow_long: FORCE UPDATE
+info_long: FORCE UPDATE
+green: UPDATE REQUEST
+Changelog:
+--add Skins Team
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20240820 2.2 version is online
+
+Changelog:
+--add Script Panel
+--button fix
+--skin hd/fhd fix
+--minor fix
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20240905 2.3 version is online
+
+Changelog:
+--fix get_positions and paintFrame (80%)
+--fix list_sort_utility
+--fix make_request
+--fix regex_patterns cline on cccam and oscam
+--reduced source code
+--lcn fix (on test button 5) (only Italy)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241011 2.4 version is online
+
+Changelog:
+--Remove code unecessary
+--fix Script Url
+--fix make_request
+--fix regex_patterns
+--reduced source code
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241091 2.5 version is online
+
+Changelog:
+--fix MenuList
+--reduced source code
+
+

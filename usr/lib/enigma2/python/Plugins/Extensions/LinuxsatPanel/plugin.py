@@ -2160,6 +2160,9 @@ class LSinfo(Screen):
                 # self.infoBox()
                 self.openinfo()
 
+            # elif self.name == " Info ":
+                # self.infoBox()
+
             elif self.name == " About ":
                 # ab = fetch_url(abouturl)
                 with open(join(plugin_path, 'LICENSE'), 'r') as filer:
@@ -2197,20 +2200,49 @@ class LSinfo(Screen):
     def openinfo(self, callback=''):
         from .stbinfo import stbinfo
         print('STB info:\n%s' % stbinfo.to_string())
+
         with open('/tmp/output.txt', 'w') as file:
             info = 'Suggested by: @masterG - @oktus - @pcd\nAll code was rewritten by @Lululla - 2024.07.20\n'
             info2 = 'Designs and Graphics by @oktus\nSupport on: Linuxsat-support.com\n\n'
             file.write('%s V.%s\n%s%s\nSTB info:\n%s' % (descplug, currversion, info, info2, stbinfo.to_string()))
-        # user_log = '/tmp/output.txt'
-        # if fileExists(user_log):
-            # from .File_Commander import File_Commander
-            # self.session.open(File_Commander, user_log)
+
+        try:
+
+            with open(join(plugin_path, 'info.txt'), 'r') as info_file:
+                additional_info = info_file.read()
+
+            with open('/tmp/output.txt', 'a') as file:
+                file.write('\n' + additional_info)
+
+        except Exception as e:
+            print(f"Errore durante la lettura o scrittura del file info.txt: {e}")
+
         try:
             with open('/tmp/output.txt', 'r') as filer:
                 info = filer.read()
                 self['list'].setText(info)
+
         except Exception as e:
             print(e)
+
+    # def openinfo(self, callback=''):
+        # from .stbinfo import stbinfo
+        # print('STB info:\n%s' % stbinfo.to_string())
+        # with open('/tmp/output.txt', 'w') as file:
+            # info = 'Suggested by: @masterG - @oktus - @pcd\nAll code was rewritten by @Lululla - 2024.07.20\n'
+            # info2 = 'Designs and Graphics by @oktus\nSupport on: Linuxsat-support.com\n\n'
+            # file.write('%s V.%s\n%s%s\nSTB info:\n%s' % (descplug, currversion, info, info2, stbinfo.to_string()))
+
+        # # user_log = '/tmp/output.txt'
+        # # if fileExists(user_log):
+            # # from .File_Commander import File_Commander
+            # # self.session.open(File_Commander, user_log)
+        # try:
+            # with open('/tmp/output.txt', 'r') as filer:
+                # info = filer.read()
+                # self['list'].setText(info)
+        # except Exception as e:
+            # print(e)
 
     def infoBox(self):
         info = '%s V.%s\n\n' % (descplug, currversion)
