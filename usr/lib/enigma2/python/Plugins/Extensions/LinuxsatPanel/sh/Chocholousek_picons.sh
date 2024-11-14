@@ -32,10 +32,10 @@ if grep -q "$package" "$status_file"; then
 echo "> Removing existing $package package, please wait..."
 $uninstall_command $package > /dev/null 2>&1
 fi
-echo "*******************************************"
-echo "*             Removed Finished            *"
-echo "*            Uploaded By Eliesat          *"
-echo "*******************************************"
+echo "*******************************************
+*             Removed Finished            *
+*            Uploaded By Eliesat          *
+*******************************************"
 sleep 3
 exit 1
 else

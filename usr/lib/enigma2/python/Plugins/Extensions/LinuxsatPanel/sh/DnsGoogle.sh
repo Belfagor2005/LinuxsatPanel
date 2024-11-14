@@ -8,10 +8,10 @@ fi
 rm -f /etc/resolv.conf
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf; 
-echo ""
-echo "* NETWORK RESTARTED*"
-echo "* GOOGLE DNS APPEND TO NAMESERVER *"
-echo "> done
+echo "
+* NETWORK RESTARTED*
+* GOOGLE DNS APPEND TO NAMESERVER *
+> done
 > your device will restart now please wait..."; 
 
 sleep 3s; killall -9 enigma2
