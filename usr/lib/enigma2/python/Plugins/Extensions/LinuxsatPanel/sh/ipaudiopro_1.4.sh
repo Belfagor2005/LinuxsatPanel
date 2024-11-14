@@ -1,6 +1,6 @@
 #! /bin/sh
 #DESCRIPTION=IPAUDIO
-wget https://raw.githubusercontent.com/emil237/updates-enigma/main/update-all-python.sh  -O - | /bin/sh
+wget https://raw.githubusercontent.com/emil237/updates-enigma/main/update-all-python.sh  -O - | /bin/bash
 
 plugin="ipaudiopro"
 

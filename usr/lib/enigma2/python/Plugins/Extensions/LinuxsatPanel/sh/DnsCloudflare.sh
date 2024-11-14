@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #DESCRIPTION=CLOUDFARE DNS
 if [ ! -f /etc/resolv-backup.conf ] 
 then

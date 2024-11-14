@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #DESCRIPTION=DNS QUAD9
 if [ ! -f /etc/resolv-backup.conf ] 
 then

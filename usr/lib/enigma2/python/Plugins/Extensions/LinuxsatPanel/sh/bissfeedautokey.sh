@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #DESCRIPTION=BissFeedAutoKey
 if [ -d /usr/lib/enigma2/python/Plugins/Extensions/BissFeedAutoKey ]; then
 echo "> removing package please wait..."

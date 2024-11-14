@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #DESCRIPTION=HistoryZapSelector
 if [ -d /usr/lib/enigma2/python/Plugins/Extensions/HistoryZapSelector ]; then
 echo "> removing package please wait..."

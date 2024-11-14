@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ##DESCRIPTION=This script downloads latest CCcam keys & provider info.
 softcam="https://raw.githubusercontent.com/MOHAMED19OS/SoftCam_Emu/main/SoftCam.Key"

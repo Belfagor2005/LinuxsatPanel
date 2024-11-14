@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #DESCRIPTION=GOOGLE DNS
 if [ ! -f /etc/resolv-backup.conf ] 
 then

@@ -1,6 +1,6 @@
 #!/bin/bash
 #DESCRIPTION=subsinstaller
-wget https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/subsinstaller.sh -O - | /bin/sh
+wget https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/subsinstaller.sh -O - | /bin/bash
 
 exit 0
 

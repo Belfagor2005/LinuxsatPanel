@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##DESCRIPTION=checking: libssl & libcrypto
 LINE="======================================================================="
 ######### checking Package: libssl & libcrypto ###########
