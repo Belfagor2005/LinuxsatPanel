@@ -312,7 +312,7 @@ def make_request(url, max_retries=3, base_delay=1):
     import time
     import socket
     import sys
-    import six
+    # import six
 
     if sys.version_info[0] == 3:
         from urllib.request import (urlopen, Request)
@@ -325,9 +325,9 @@ def make_request(url, max_retries=3, base_delay=1):
         try:
             req = Request(url)
             req.add_header('User-Agent', AgentRequest)
-            start_time = time.time()
+            # start_time = time.time()
             response = urlopen(req, None, 30)
-            elapsed_time = time.time() - start_time
+            # elapsed_time = time.time() - start_time
             # print('elapsed_time:', elapsed_time)
             if response.getcode() == 200:
                 content = response.read()

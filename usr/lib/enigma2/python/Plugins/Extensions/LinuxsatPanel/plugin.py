@@ -2221,7 +2221,7 @@ class LSinfo(Screen):
                 file.write('\n' + additional_info)
 
         except Exception as e:
-            print(f"Errore durante la lettura o scrittura del file info.txt: {e}")
+            print("Errore durante la lettura o scrittura del file info.txt:", e)
 
         try:
             with open('/tmp/output.txt', 'r') as filer:
