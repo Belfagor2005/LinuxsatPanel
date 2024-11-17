@@ -85,7 +85,7 @@ sleep 1;
 if grep -qs -i 'mips' cat $CHECK ; then
 echo "[ Your device is MIPS ]"
 if [ "$PYTHON" = "PY2" ]; then
-wget -q  "--no-check-certificate" https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py2.7_mips32el.tar.gz -O /tmp/multi-stalkerpro-py2.7_mips32el.tar.gz
+wget -q  "--no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py2.7_mips32el.tar.gz" -O /tmp/multi-stalkerpro-py2.7_mips32el.tar.gz
 tar -xzf /tmp/multi-stalkerpro-py2.7_mips32el.tar.gz -C /
 sleep 2;
 rm -f /tmp/multi-stalkerpro-py2.7_mips32el.tar.gz
@@ -194,7 +194,7 @@ fi
 elif grep -qs -i 'armv7l' cat $CHECK ; then
 echo "[ Your device is armv7l ]"
 if [ "$PYTHONLASTV" = "PY3" ]; then
-wget -q  "--no-check-certificate" https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py3.11_arm.tar.gz -O /tmp/multi-stalkerpro-py3.11_arm.tar.gz
+wget -q  --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py3.11_arm.tar.gz" -O /tmp/multi-stalkerpro-py3.11_arm.tar.gz
 tar -xzf /tmp/multi-stalkerpro-py3.11_arm.tar.gz -C /
 sleep 2;
 rm -f /tmp/multi-stalkerpro-py3.11_arm.tar.gz
@@ -299,7 +299,7 @@ echo ""
 fi
 fi
 if [ "$PYTHON" = "PY2" ]; then
-wget -q  "--no-check-certificate" https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py2.7_arm.tar.gz -O /tmp/multi-stalkerpro-py2.7_arm.tar.gz
+wget -q  --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/main/multi-stalkerpro-py2.7_arm.tar.gz" -O /tmp/multi-stalkerpro-py2.7_arm.tar.gz
 sleep 1;
 tar -xzf /tmp/multi-stalkerpro-py2.7_arm.tar.gz -C /
 sleep 2;
@@ -374,10 +374,10 @@ echo ""
 sleep 2;
 fi
 echo ""
-wget -q  "--no-check-certificate" https://github.com/emilnabil/multi-stalkerpro/raw/refs/heads/main/icon.png -O /$PLUGINPATH/icon.png
+wget -q  --no-check-certificate "https://github.com/emilnabil/multi-stalkerpro/raw/refs/heads/main/icon.png" -O /$PLUGINPATH/icon.png
 echo "#########################################################"
 echo "**                                                                    *"
-echo "**                       multi-stalkerpro                     *"
+echo "**                       multi-stalkerpro                             *"
 echo "**                                                                    *"
 echo "***********************************************************************"
 echo "   UPLOADED BY  >>>>   EMIL_NABIL "
