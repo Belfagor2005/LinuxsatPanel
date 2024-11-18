@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-11-18 17:07+0100\n"
+"POT-Creation-Date: 2024-11-18 17:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: giorbak\n"
@@ -10,26 +10,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
-"X-Poedit-Basepath: ../../..\n"
+"X-Generator: Poedit 3.2\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: lsConsole.py\n"
-"X-Poedit-SearchPath-1: plugin.py\n"
-"X-Poedit-SearchPath-2: addons/File_Commander.py\n"
+"X-Poedit-SearchPath-0: LCNScanner/Lcn.py\n"
+"X-Poedit-SearchPath-1: LCNScanner/plugin.py\n"
+"X-Poedit-SearchPath-2: lsConsole.py\n"
+"X-Poedit-SearchPath-3: plugin.py\n"
+"X-Poedit-SearchPath-4: addons/checkskin.py\n"
+"X-Poedit-SearchPath-5: addons/File_Commander.py\n"
+"X-Poedit-SearchPath-6: addons/type_utils.py\n"
 
-#: addons/File_Commander.py:17
-msgid "File Commander - Addon"
-msgstr ""
+#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
+msgid "No entry in lcn db. Please do a service scan."
+msgstr "Δεν υπάρχουν καταχωρήσεις στη βάση δεδομένων LCN. Παρακαλώ κάντε σάρωση υπηρεσιών."
 
-#: addons/File_Commander.py:18
-msgid "play/show Files"
-msgstr "αναπαραγωγή/εμφάνιση αρχείων"
+#: LCNScanner/Lcn.py:476
+msgid "Enable terrestrial LCN:"
+msgstr "Ενεργοποίηση επίγειου LCN:"
 
-#: addons/File_Commander.py:73 addons/File_Commander.py:74
-#: addons/File_Commander.py:75 addons/File_Commander.py:76 lsConsole.py:123
+#: LCNScanner/Lcn.py:477
+msgid "Terrestrial bouquet:"
+msgstr "Επίγειο μπουκέτο:"
+
+#: LCNScanner/Lcn.py:478
+msgid "LCN rules:"
+msgstr "Κανόνες LCN:"
+
+#: LCNScanner/Lcn.py:482
+msgid "Rebuild"
+msgstr "Αναδημιουργία"
+
+#: LCNScanner/Lcn.py:483 addons/File_Commander.py:73 addons/File_Commander.py:74 addons/File_Commander.py:75 addons/File_Commander.py:76 addons/type_utils.py:108 addons/type_utils.py:109 addons/type_utils.py:111 lsConsole.py:123
 #: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
 msgid "Exit"
 msgstr "Έξοδος"
+
+#: LCNScanner/Lcn.py:498
+msgid "Rebuild LCN bouquet now?"
+msgstr "Να γίνει αναδημιουργία του μπουκέτου LCN τώρα;"
+
+#: addons/File_Commander.py:17 addons/type_utils.py:22
+msgid "File Commander - Addon"
+msgstr ""
+
+#: addons/File_Commander.py:18 addons/type_utils.py:23
+msgid "play/show Files"
+msgstr "αναπαραγωγή/εμφάνιση αρχείων"
+
+#: addons/type_utils.py:110
+msgid "Save"
+msgstr "Αποθήκευση"
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -51,23 +82,17 @@ msgstr ""
 "Πρόοδος εκτέλεσης\n"
 "\n"
 
-#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646
-#: plugin.py:2057
+#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646 plugin.py:2057
 msgid "Please Wait..."
 msgstr "Παρακαλώ περιμένετε..."
 
-#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
-#: plugin.py:1079 plugin.py:1197 plugin.py:1404
-#, fuzzy
-#| msgid "0 Sort"
+#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912 plugin.py:1079 plugin.py:1197 plugin.py:1404
 msgid "0 Sort A-Z"
-msgstr "0 Ταξινόμηση"
+msgstr "0 Ταξινόμηση A-Z"
 
 #: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
-#, fuzzy
-#| msgid "0 Sort"
 msgid "0 Sort Default"
-msgstr "0 Ταξινόμηση"
+msgstr "0 Ταξιν. Προεπιλογή"
 
 #: plugin.py:595
 msgid ""
@@ -81,13 +106,11 @@ msgstr ""
 
 #: plugin.py:635 plugin.py:877
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Σφάλμα: Δεν βρέθηκαν δεδομένα."
 
 #: plugin.py:1238
-#, fuzzy
-#| msgid "Do you want to Order LCN Bouquet"
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN"
+msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN;"
 
 #: plugin.py:1249 plugin.py:1947
 msgid ""
@@ -99,12 +122,10 @@ msgstr ""
 
 #: plugin.py:1256
 msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not "
-"sure)..\n"
+"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
 "Do you really want to continue?"
 msgstr ""
-"[Checkskin] Αυτή η λειτουργία ελέγχει εάν το θέμα έχει τα συστατικά του (δεν "
-"είναι σίγουρο)..\n"
+"[Checkskin] Αυτή η λειτουργία ελέγχει εάν το θέμα έχει τα συστατικά του (δεν είναι σίγουρο)..\n"
 "Θέλετε πραγματικά να συνεχίσετε;"
 
 #: plugin.py:1452
@@ -112,12 +133,17 @@ msgstr ""
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
+"                                                     However, if required, you can get help to resolve the issue.\n"
 "\n"
 "\n"
 "Do you want to execute %s?"
 msgstr ""
+"ΔΕΝ είμαι υπεύθυνος για τυχόν προβλήματα που μπορεί να αντιμετωπίσετε\n"
+"εάν εγκαταστήσετε τα πρόσθετα και τα θέματα.\n"
+"Ωστόσο, εάν χρειαστεί, μπορείτε να λάβετε βοήθεια για να επιλύσετε το πρόβλημα.\n"
+"\n"
+"\n"
+"Θέλετε να εκτελέσετε το %s;"
 
 #: plugin.py:1458
 #, python-format
@@ -233,12 +259,17 @@ msgstr "[LCNScanner] Θέλετε να σαρώσετε την ταξινόμη�
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
+"                                                     However, if required, you can get help to resolve the issue.\n"
 "\n"
 "\n"
 "Do you want to install?"
 msgstr ""
+"ΔΕΝ είμαι υπεύθυνος για τυχόν προβλήματα που μπορεί να αντιμετωπίσετε\n"
+"εάν εγκαταστήσετε τα πρόσθετα και τα θέματα.\n"
+"Ωστόσο, εάν χρειαστεί, μπορείτε να λάβετε βοήθεια για να επιλύσετε το πρόβλημα.\n"
+"\n"
+"\n"
+"Θέλετε να το εγκαταστήσετε;"
 
 #: plugin.py:1996
 msgid "Settings Not Installed ..."
@@ -315,33 +346,3 @@ msgstr "Έλεγχος σύνδεσης!"
 #: plugin.py:2403
 msgid "Linuxsat Panel"
 msgstr ""
-
-#, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Θέλετε να εκτελέσετε το %s;"
-
-#~ msgid "Do you want to install?"
-#~ msgstr "Θέλετε να το εγκαταστήσετε;"
-
-#~ msgid "No entry in lcn db. Please do a service scan."
-#~ msgstr ""
-#~ "Δεν υπάρχουν καταχωρήσεις στη βάση δεδομένων LCN. Παρακαλώ κάντε σάρωση "
-#~ "υπηρεσιών."
-
-#~ msgid "Enable terrestrial LCN:"
-#~ msgstr "Ενεργοποίηση επίγειου LCN:"
-
-#~ msgid "Terrestrial bouquet:"
-#~ msgstr "Επίγειο μπουκέτο:"
-
-#~ msgid "LCN rules:"
-#~ msgstr "Κανόνες LCN:"
-
-#~ msgid "Rebuild"
-#~ msgstr "Αναδημιουργία"
-
-#~ msgid "Rebuild LCN bouquet now?"
-#~ msgstr "Να γίνει αναδημιουργία του μπουκέτου LCN τώρα;"
-
-#~ msgid "Save"
-#~ msgstr "Αποθήκευση"
