@@ -60,10 +60,17 @@ Changelog:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20241091 2.5 version is online
+20241019 2.5 version is online
 
 Changelog:
 --fix MenuList
 --reduced source code
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241118 2.6 version is online
+
+Changelog:
+--Order List Category
 
 
