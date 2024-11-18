@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-08-02 13:53+0200\n"
+"POT-Creation-Date: 2024-11-18 17:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jakarta\n"
 "Language-Team: Jakarta\n"
@@ -9,95 +9,238 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:438 plugin.py:718 plugin.py:934 plugin.py:1295
+#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646
+#: plugin.py:2057
 msgid "Please Wait..."
 msgstr ""
 
-#: plugin.py:439 plugin.py:719
-msgid "0 Sort"
+#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
+#: plugin.py:1079 plugin.py:1197 plugin.py:1404
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort A-Z"
 msgstr "0 Ordre"
 
-#: plugin.py:916
+#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
 msgid "Exit"
 msgstr "Sortir"
 
-#: plugin.py:917
+#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort Default"
+msgstr "0 Ordre"
+
+#: plugin.py:595
+msgid ""
+"These Panel may contain Adult content\n"
+"\n"
+"are you sure you want to continue?"
+msgstr ""
+
+#: plugin.py:635 plugin.py:877
+msgid "Error: No Data Find."
+msgstr ""
+
+#: plugin.py:1238
+msgid "Do you want to Order LCN Bouquet?"
+msgstr ""
+
+#: plugin.py:1249 plugin.py:1947
+msgid ""
+"[LCNScanner] LCN scan finished\n"
+"Channels Ordered!"
+msgstr ""
+
+#: plugin.py:1256
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not "
+"sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+
+#: plugin.py:1452
+#, python-format
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, "
+"you can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to execute %s?"
+msgstr ""
+
+#: plugin.py:1458
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+
+#: plugin.py:1473
+msgid "Do you want add Cline?"
+msgstr ""
+
+#: plugin.py:1496
+msgid ""
+"File not found /etc/CCcam.cfg!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1505
+msgid ""
+"File not found /etc/tuxbox/config/oscam.server!\n"
+"Restart please..."
+msgstr ""
+
+#: plugin.py:1604
+#, python-format
+msgid ""
+"Server %s added in %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"User:%s\n"
+"Password:%s\n"
+msgstr ""
+
+#: plugin.py:1607
+msgid ""
+"Server Error.\n"
+"\n"
+"Try again, you'll be luckier!"
+msgstr ""
+
+#: plugin.py:1628
 msgid "Install"
 msgstr ""
 
-#: plugin.py:918
+#: plugin.py:1629
 msgid "Remove"
 msgstr "Retirer"
 
-#: plugin.py:919
+#: plugin.py:1630
 msgid "Restart enigma"
 msgstr ""
 
-#: plugin.py:936
+#: plugin.py:1633 plugin.py:1675 plugin.py:1715
+msgid "0 Halign Left"
+msgstr ""
+
+#: plugin.py:1635 plugin.py:1678 plugin.py:1717
+msgid "0 Halign Right"
+msgstr ""
+
+#: plugin.py:1648
 msgid "Load Category..."
 msgstr ""
 
-#: plugin.py:960
+#: plugin.py:1687
 msgid "Category: "
 msgstr ""
 
-#: plugin.py:993 plugin.py:1003
+#: plugin.py:1740 plugin.py:1749
 msgid "Unknow Image!"
 msgstr ""
 
-#: plugin.py:1015
+#: plugin.py:1761
 #, python-format
 msgid "Do you want to install %s?"
 msgstr ""
 
-#: plugin.py:1039 plugin.py:1228
+#: plugin.py:1795 plugin.py:1991
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1155
+#: plugin.py:1931
 msgid "Download page get failed ..."
 msgstr ""
 
-#: plugin.py:1165
-msgid "Sorting Terrestrial channels with Lcn rules Completed"
+#: plugin.py:1936
+msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
 msgstr ""
 
-#: plugin.py:1172
-msgid "Do you want to install?"
+#: plugin.py:1953
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, "
+"you can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to install?"
 msgstr ""
 
-#: plugin.py:1239
+#: plugin.py:1996
 msgid "Settings Not Installed ..."
 msgstr ""
 
-#: plugin.py:1256
+#: plugin.py:2009
 msgid "Do you want to remove?"
 msgstr ""
 
-#: plugin.py:1270
+#: plugin.py:2023
 #, python-format
 msgid "Removing %s"
 msgstr ""
 
-#: plugin.py:1276
+#: plugin.py:2028
 msgid "Do you want to restart Gui Interface?"
 msgstr ""
 
-#: plugin.py:1328
+#: plugin.py:2129
+#, python-format
+msgid ""
+"New version %s is available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Press green button to start updating"
+msgstr ""
+
+#: plugin.py:2131
+msgid "Update"
+msgstr ""
+
+#: plugin.py:2137
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+
+#: plugin.py:2141
+msgid "Congrats! You already have the latest version..."
+msgstr ""
+
+#: plugin.py:2152
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr ""
+
+#: plugin.py:2159
+msgid "Update Aborted!"
+msgstr ""
+
+#: plugin.py:2184
 msgid "Unable to download updates!"
 msgstr ""
 
-#: plugin.py:1544
+#: plugin.py:2382
 msgid "Check Connection!"
 msgstr ""
 
-#: plugin.py:1565
+#: plugin.py:2403
 msgid "Linuxsat Panel"
 msgstr ""

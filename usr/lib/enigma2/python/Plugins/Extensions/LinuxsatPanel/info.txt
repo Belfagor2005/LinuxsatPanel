@@ -13,6 +13,12 @@ Thank you Lululla
 
 Support on: linuxsat-support.com
 
+I am NOT responsible for any issues you may
+encounter once you install the plugins and skins.
+However, if required, you can get help to resolve the issue.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Init version 2.0 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

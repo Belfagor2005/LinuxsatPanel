@@ -1235,7 +1235,7 @@ class ScriptInstaller(Screen):
     def Lcn(self, answer=None):
         if answer is None:
             self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("Do you want to Order LCN Bouquet"),
+                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
                                           MessageBox.TYPE_YESNO)
         else:
             print('scan init')
@@ -1449,7 +1449,8 @@ class ScriptInstaller(Screen):
             return
 
         self.session.openWithCallback(self.okClicked,
-                                      MessageBox, _("Do you want to execute %s?") % self.namev,
+                                      MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
+                                                    However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev,
                                       MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
@@ -1949,7 +1950,8 @@ class addInstall(Screen):
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
-                                      MessageBox, _("Do you want to install?"),
+                                      MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
+                                                    However, if required, you can get help to resolve the issue.\n\n\nDo you want to install?"),
                                       MessageBox.TYPE_YESNO)
 
     def okRun1(self, answer=False):
@@ -2222,7 +2224,7 @@ class LSinfo(Screen):
                 file.write('\n' + additional_info)
 
         except Exception as e:
-            print("Errore durante la lettura o scrittura del file info.txt:", e)
+            print("Error file info.txt:", e)
 
         try:
             with open('/tmp/output.txt', 'r') as filer:

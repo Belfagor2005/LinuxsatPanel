@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-09-21 16:43+0200\n"
+"POT-Creation-Date: 2024-11-18 17:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
@@ -11,28 +11,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: plugin.py\n"
-"X-Poedit-SearchPath-1: lsConsole.py\n"
-"X-Poedit-SearchPath-2: File-Commander.py\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: lsConsole.py\n"
+"X-Poedit-SearchPath-1: plugin.py\n"
+"X-Poedit-SearchPath-2: addons/File_Commander.py\n"
 
-#: File-Commander.py:16
+#: addons/File_Commander.py:17
 msgid "File Commander - Addon"
 msgstr "File Commander - Dodatak"
 
-#: File-Commander.py:17
+#: addons/File_Commander.py:18
 msgid "play/show Files"
 msgstr "reprodukcija/prikaz datoteka"
 
-#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
-#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
-#: plugin.py:965 plugin.py:1292 plugin.py:1705
+#: addons/File_Commander.py:73 addons/File_Commander.py:74
+#: addons/File_Commander.py:75 addons/File_Commander.py:76 lsConsole.py:123
+#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
 msgid "Exit"
 msgstr "Izlaz"
-
-#: File-Commander.py:82
-msgid "Linuxsat-support - File Commander"
-msgstr "Linuxsat-support - File Commander"
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -54,16 +50,25 @@ msgstr ""
 "Napredak izvršenja\n"
 "\n"
 
-#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
-#: plugin.py:2151
+#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646
+#: plugin.py:2057
 msgid "Please Wait..."
 msgstr "Molimo pričekajte..."
 
-#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
-msgid "0 Sort"
+#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
+#: plugin.py:1079 plugin.py:1197 plugin.py:1404
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort A-Z"
 msgstr "0 Sortiraj"
 
-#: plugin.py:621
+#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort Default"
+msgstr "0 Sortiraj"
+
+#: plugin.py:595
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -73,12 +78,42 @@ msgstr ""
 "\n"
 "Jeste li sigurni da želite nastaviti?"
 
-#: plugin.py:1551
-#, python-format
-msgid "Do you want to execute %s?"
-msgstr "Želite li izvršiti %s?"
+#: plugin.py:635 plugin.py:877
+msgid "Error: No Data Find."
+msgstr ""
 
-#: plugin.py:1556
+#: plugin.py:1238
+#, fuzzy
+#| msgid "Do you want to remove?"
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Želite li ukloniti?"
+
+#: plugin.py:1249 plugin.py:1947
+msgid ""
+"[LCNScanner] LCN scan finished\n"
+"Channels Ordered!"
+msgstr ""
+
+#: plugin.py:1256
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not "
+"sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+
+#: plugin.py:1452
+#, python-format
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, "
+"you can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to execute %s?"
+msgstr ""
+
+#: plugin.py:1458
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -87,7 +122,13 @@ msgstr ""
 "Izvršavanje %s\n"
 "Molim te čekaj..."
 
-#: plugin.py:1573
+#: plugin.py:1473
+#, fuzzy
+#| msgid "Do you want to install?"
+msgid "Do you want add Cline?"
+msgstr "Želite li instalirati?"
+
+#: plugin.py:1496
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -95,7 +136,7 @@ msgstr ""
 "Datoteka nije pronađena /etc/CCcam.cfg!\n"
 "Ponovno pokreni, molim..."
 
-#: plugin.py:1582
+#: plugin.py:1505
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -103,7 +144,7 @@ msgstr ""
 "Datoteka nije pronađena /etc/tuxbox/config/oscam.server!\n"
 "Ponovno pokreni, molim..."
 
-#: plugin.py:1679
+#: plugin.py:1604
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -120,7 +161,7 @@ msgstr ""
 "Korisnik:%s\n"
 "Lozinka:%s\n"
 
-#: plugin.py:1681
+#: plugin.py:1607
 msgid ""
 "Server Error.\n"
 "\n"
@@ -130,44 +171,44 @@ msgstr ""
 "\n"
 "Pokušajte ponovno, imat ćete više sreće!"
 
-#: plugin.py:1706
+#: plugin.py:1628
 msgid "Install"
 msgstr "Instaliraj"
 
-#: plugin.py:1707
+#: plugin.py:1629
 msgid "Remove"
 msgstr "Ukloni"
 
-#: plugin.py:1708
+#: plugin.py:1630
 msgid "Restart enigma"
 msgstr "Ponovno pokretanje enigme"
 
-#: plugin.py:1711 plugin.py:1753 plugin.py:1793
+#: plugin.py:1633 plugin.py:1675 plugin.py:1715
 msgid "0 Halign Left"
 msgstr "0 Halign Lijevo"
 
-#: plugin.py:1713 plugin.py:1756 plugin.py:1795
+#: plugin.py:1635 plugin.py:1678 plugin.py:1717
 msgid "0 Halign Right"
 msgstr "0 Halign Desno"
 
-#: plugin.py:1726
+#: plugin.py:1648
 msgid "Load Category..."
 msgstr "Kategorija opterećenja..."
 
-#: plugin.py:1765
+#: plugin.py:1687
 msgid "Category: "
 msgstr "Kategorija: "
 
-#: plugin.py:1819 plugin.py:1829
+#: plugin.py:1740 plugin.py:1749
 msgid "Unknow Image!"
 msgstr "Nepoznata slika!"
 
-#: plugin.py:1841
+#: plugin.py:1761
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Želite li instalirati %s?"
 
-#: plugin.py:1876 plugin.py:2076
+#: plugin.py:1795 plugin.py:1991
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -176,40 +217,43 @@ msgstr ""
 "Instaliranje %s\n"
 "Molim te čekaj..."
 
-#: plugin.py:2003
+#: plugin.py:1931
 msgid "Download page get failed ..."
 msgstr "Stranica za preuzimanje nije uspjela ..."
 
-#: plugin.py:2011
-msgid "Sorting Terrestrial Executed!"
-msgstr "Razvrstavanje zemaljskih pogubljenih!"
+#: plugin.py:1936
+msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
+msgstr ""
 
-#: plugin.py:2016
-msgid "Sorting Terrestrial not Executed!"
-msgstr "Razvrstavanje zemaljskih nije izvršeno!"
+#: plugin.py:1953
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, "
+"you can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to install?"
+msgstr ""
 
-#: plugin.py:2039
-msgid "Do you want to install?"
-msgstr "Želite li instalirati?"
-
-#: plugin.py:2081
+#: plugin.py:1996
 msgid "Settings Not Installed ..."
 msgstr "Postavke nisu instalirane ..."
 
-#: plugin.py:2102
+#: plugin.py:2009
 msgid "Do you want to remove?"
 msgstr "Želite li ukloniti?"
 
-#: plugin.py:2116
+#: plugin.py:2023
 #, python-format
 msgid "Removing %s"
 msgstr "Uklanjanje %s"
 
-#: plugin.py:2122
+#: plugin.py:2028
 msgid "Do you want to restart Gui Interface?"
 msgstr "Želite li ponovno pokrenuti Gui sučelje?"
 
-#: plugin.py:2222
+#: plugin.py:2129
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -224,11 +268,11 @@ msgstr ""
 "\n"
 "Pritisnite zeleni gumb za početak ažuriranja"
 
-#: plugin.py:2223
+#: plugin.py:2131
 msgid "Update"
 msgstr "Ažuriraj"
 
-#: plugin.py:2228
+#: plugin.py:2137
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -243,27 +287,40 @@ msgstr ""
 "\n"
 "Želite li ga instalirati sada?"
 
-#: plugin.py:2231
+#: plugin.py:2141
 msgid "Congrats! You already have the latest version..."
 msgstr "Congrats! Već imate najnoviju verziju..."
 
-#: plugin.py:2241
+#: plugin.py:2152
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Želite li sada instalirati ažuriranje ( %s ) ?"
 
-#: plugin.py:2248
+#: plugin.py:2159
 msgid "Update Aborted!"
 msgstr "Ažuriranje prekinuto!"
 
-#: plugin.py:2268
+#: plugin.py:2184
 msgid "Unable to download updates!"
 msgstr "Nije moguće preuzeti ažuriranja!"
 
-#: plugin.py:2438
+#: plugin.py:2382
 msgid "Check Connection!"
 msgstr "Provjerite vezu!"
 
-#: plugin.py:2459
+#: plugin.py:2403
 msgid "Linuxsat Panel"
 msgstr "Linuxsat ploča"
+
+#~ msgid "Linuxsat-support - File Commander"
+#~ msgstr "Linuxsat-support - File Commander"
+
+#, python-format
+#~ msgid "Do you want to execute %s?"
+#~ msgstr "Želite li izvršiti %s?"
+
+#~ msgid "Sorting Terrestrial Executed!"
+#~ msgstr "Razvrstavanje zemaljskih pogubljenih!"
+
+#~ msgid "Sorting Terrestrial not Executed!"
+#~ msgstr "Razvrstavanje zemaljskih nije izvršeno!"
