@@ -3,7 +3,7 @@
 
 # Based on a plugin from Sif Team.
 # This version created by IanSav and the OpenATV team.
-
+# mod from Lululla 20230512
 from Components.PluginComponent import plugins
 from Components.config import ConfigSelection, ConfigSubsection, ConfigYesNo, config
 from Tools.Directories import SCOPE_CONFIG, SCOPE_PLUGINS, resolveFilename
@@ -17,7 +17,6 @@ DEFAULT_MODULE_NAME = MODULE_NAME = __name__.split(".")[-1]
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
 config.plugins.LCNScanner = ConfigSubsection()
 config.plugins.LCNScanner.showInPluginsList = ConfigYesNo(default=False)
-# config.plugins.LCNScanner.showInPluginsList.addNotifier(plugins.reloadPlugins, initial_call=False, immediate_feedback=False)
 
 
 class LCNScanner:
@@ -431,15 +430,10 @@ def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=Fals
     try:
         with open(filename) as fd:
             lines = fd.read().splitlines()
-        # msg = "Read"
     except OSError as err:
         if err.errno != ENOENT:  # ENOENT - No such file or directory.
             print("[" + source + "] Error " + str(err.errno) + ": Unable to read lines from file '" + filename + "'!  (" + err.strerror + ")")
         lines = default
-        # msg = "Default"
-    # if debug or forceDebug:
-        # length = len(lines) if lines else 0
-        # print("[" + source + "] Line " + str(getframe(1).f_lineno) + ": " + msg + " " + str(length) + " lines from file '" + filename + "'.")
     return lines
 
 
@@ -450,14 +444,10 @@ def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
                 lines.append("")
                 lines = "\n".join(lines)
             fd.write(lines)
-        # msg = "Wrote"
         result = 1
     except OSError as err:
         print("[" + source + "] Error " + str(err.errno) + ": Unable to write " + str(len(lines)) + " lines to file '" + filename + "'! " + err.strerror)
-        # msg = "Failed to write"
         result = 0
-    # if debug or forceDebug:
-        # print("[" + source + "] Line " + str(getframe(1).f_lineno) + ": " + msg + " " + str(len(lines)) + " lines to file '" + filename)
     return result
 
 
@@ -485,7 +475,6 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
             print("[%s] Error %d: Opening file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
     except Exception as err:
         print("[" + source + "] Error: Unexpected error opening/parsing file '" + filename + "'!  (" + str(err) + ")")
-        # print_exc()
     if dom is None:
         if default and isinstance(default, str):
             dom = fromstring(default)
@@ -495,6 +484,4 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
             print("Default (DOM)")
         else:
             print("Failed to read")
-    # if debug or forceDebug:
-        # print(f"[{source}] Line {getframe(1).f_lineno}: {msg} from XML file '{filename}'.")
     return dom

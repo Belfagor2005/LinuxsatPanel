@@ -9,16 +9,20 @@
 
 from __future__ import absolute_import
 from Components.config import config
-from Tools.Directories import SCOPE_PLUGINS
+from Tools.Directories import (
+    fileExists,
+    resolveFilename,
+    SCOPE_PLUGINS,
+)
 try:
     from Tools.Directories import SCOPE_SKIN as SCOPE_GUISKIN
 except ImportError:
     from Tools.Directories import SCOPE_GUISKIN
-from Tools.Directories import fileExists, resolveFilename
+from os import remove
 import os
 import re
 import sys
-from os import remove
+
 colorend = '\033[m'
 colorstart = '\033[31m'
 PY3 = sys.version_info.major >= 3

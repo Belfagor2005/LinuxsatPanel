@@ -42,8 +42,8 @@ plugin_path = os.path.dirname(sys.modules[__name__].__file__)
 AgentRequest = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3'
 infourl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/info.txt'
 abouturl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/about.txt'
-# xmlurl = 'https://github.com/Belfagor2005/upload/raw/main/fill/addons_2024.xml'
 xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_2024.xml'
+# xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_20242.xml'
 installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
 developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
 

@@ -121,8 +121,6 @@ class File_Commander(Screen):
         self.setTitle(self.newtitle)
 
     def exitEditor(self):
-        # if fileExists(self.file_name):
-            # remove(self.file_name)
         self.close()
 
     def GetFileData(self, fx):

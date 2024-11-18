@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-09-21 16:43+0200\n"
+"POT-Creation-Date: 2024-11-18 12:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
@@ -11,28 +11,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: plugin.py\n"
-"X-Poedit-SearchPath-1: lsConsole.py\n"
-"X-Poedit-SearchPath-2: File-Commander.py\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: lsConsole.py\n"
+"X-Poedit-SearchPath-1: plugin.py\n"
+"X-Poedit-SearchPath-2: addons/File_Commander.py\n"
 
-#: File-Commander.py:16
+#: addons/File_Commander.py:17
 msgid "File Commander - Addon"
 msgstr "File Commander - Дополнение"
 
-#: File-Commander.py:17
+#: addons/File_Commander.py:18
 msgid "play/show Files"
 msgstr "воспроизведение/показ файлов"
 
-#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
-#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
-#: plugin.py:965 plugin.py:1292 plugin.py:1705
+#: addons/File_Commander.py:73 addons/File_Commander.py:74
+#: addons/File_Commander.py:75 addons/File_Commander.py:76 lsConsole.py:123
+#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1626
 msgid "Exit"
 msgstr "Выход"
-
-#: File-Commander.py:82
-msgid "Linuxsat-support - File Commander"
-msgstr "Linuxsat-support - Файловый коммандер"
 
 #: lsConsole.py:56
 msgid "Cancel"
@@ -54,16 +50,25 @@ msgstr ""
 "Ход выполнения\n"
 "\n"
 
-#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
-#: plugin.py:2151
+#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1645
+#: plugin.py:2055
 msgid "Please Wait..."
 msgstr "Пожалуйста, подождите..."
 
-#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
-msgid "0 Sort"
+#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
+#: plugin.py:1079 plugin.py:1197 plugin.py:1404
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort A-Z"
 msgstr "0 Сортировать"
 
-#: plugin.py:621
+#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
+#, fuzzy
+#| msgid "0 Sort"
+msgid "0 Sort Default"
+msgstr "0 Сортировать"
+
+#: plugin.py:595
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -73,12 +78,35 @@ msgstr ""
 "\n"
 "Вы уверены, что хотите продолжить?"
 
-#: plugin.py:1551
+#: plugin.py:635 plugin.py:877
+msgid "Error: No Data Find."
+msgstr ""
+
+#: plugin.py:1238
+#, fuzzy
+#| msgid "Do you want to remove?"
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Вы хотите удалить?"
+
+#: plugin.py:1249 plugin.py:1946
+msgid ""
+"[LCNScanner] LCN scan finished\n"
+"Channels Ordered!"
+msgstr ""
+
+#: plugin.py:1256
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not "
+"sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+
+#: plugin.py:1452
 #, python-format
 msgid "Do you want to execute %s?"
 msgstr "Вы хотите выполнить %s?"
 
-#: plugin.py:1556
+#: plugin.py:1457
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -87,7 +115,13 @@ msgstr ""
 "Выполнение %s\n"
 "Пожалуйста, подождите..."
 
-#: plugin.py:1573
+#: plugin.py:1472
+#, fuzzy
+#| msgid "Do you want to install?"
+msgid "Do you want add Cline?"
+msgstr "Вы хотите установить?"
+
+#: plugin.py:1495
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -95,7 +129,7 @@ msgstr ""
 "Файл не найден /etc/CCcam.cfg!\n"
 "Перезагрузите, пожалуйста..."
 
-#: plugin.py:1582
+#: plugin.py:1504
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -103,7 +137,7 @@ msgstr ""
 "Файл не найден /etc/tuxbox/config/oscam.server!\n"
 "Перезагрузите, пожалуйста..."
 
-#: plugin.py:1679
+#: plugin.py:1603
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -120,7 +154,7 @@ msgstr ""
 "Пользователь:%s\n"
 "Пароль:%s\n"
 
-#: plugin.py:1681
+#: plugin.py:1606
 msgid ""
 "Server Error.\n"
 "\n"
@@ -130,44 +164,44 @@ msgstr ""
 "\n"
 "Попробуйте еще раз, вам повезет больше!"
 
-#: plugin.py:1706
+#: plugin.py:1627
 msgid "Install"
 msgstr "Установить"
 
-#: plugin.py:1707
+#: plugin.py:1628
 msgid "Remove"
 msgstr "Удалить"
 
-#: plugin.py:1708
+#: plugin.py:1629
 msgid "Restart enigma"
 msgstr "Перезапуск энигмы"
 
-#: plugin.py:1711 plugin.py:1753 plugin.py:1793
+#: plugin.py:1632 plugin.py:1674 plugin.py:1714
 msgid "0 Halign Left"
 msgstr "0 Выровнять по левому краю"
 
-#: plugin.py:1713 plugin.py:1756 plugin.py:1795
+#: plugin.py:1634 plugin.py:1677 plugin.py:1716
 msgid "0 Halign Right"
 msgstr "0 Выровнять по правому краю"
 
-#: plugin.py:1726
+#: plugin.py:1647
 msgid "Load Category..."
 msgstr "Категория загрузки..."
 
-#: plugin.py:1765
+#: plugin.py:1686
 msgid "Category: "
 msgstr "Категория: "
 
-#: plugin.py:1819 plugin.py:1829
+#: plugin.py:1739 plugin.py:1748
 msgid "Unknow Image!"
 msgstr "Неизвестный Имидж!"
 
-#: plugin.py:1841
+#: plugin.py:1760
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Вы хотите установить %s?"
 
-#: plugin.py:1876 plugin.py:2076
+#: plugin.py:1794 plugin.py:1989
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -176,40 +210,36 @@ msgstr ""
 "Установка %s\n"
 "Пожалуйста, подождите..."
 
-#: plugin.py:2003
+#: plugin.py:1930
 msgid "Download page get failed ..."
 msgstr "Страница загрузки не удалась..."
 
-#: plugin.py:2011
-msgid "Sorting Terrestrial Executed!"
-msgstr "Сортировка наземных объектов выполнена!"
+#: plugin.py:1935
+msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
+msgstr ""
 
-#: plugin.py:2016
-msgid "Sorting Terrestrial not Executed!"
-msgstr "Сортировка наземных не выполнена!"
-
-#: plugin.py:2039
+#: plugin.py:1952
 msgid "Do you want to install?"
 msgstr "Вы хотите установить?"
 
-#: plugin.py:2081
+#: plugin.py:1994
 msgid "Settings Not Installed ..."
 msgstr "Настройки не установлены..."
 
-#: plugin.py:2102
+#: plugin.py:2007
 msgid "Do you want to remove?"
 msgstr "Вы хотите удалить?"
 
-#: plugin.py:2116
+#: plugin.py:2021
 #, python-format
 msgid "Removing %s"
 msgstr "Удаление %s"
 
-#: plugin.py:2122
+#: plugin.py:2026
 msgid "Do you want to restart Gui Interface?"
 msgstr "Вы хотите перезапустить интерфейс Gui?"
 
-#: plugin.py:2222
+#: plugin.py:2127
 #, python-format
 msgid ""
 "New version %s is available\n"
@@ -224,11 +254,11 @@ msgstr ""
 "\n"
 "Нажмите зеленую кнопку, чтобы начать обновление"
 
-#: plugin.py:2223
+#: plugin.py:2129
 msgid "Update"
 msgstr "Обновить"
 
-#: plugin.py:2228
+#: plugin.py:2135
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -243,27 +273,36 @@ msgstr ""
 "\n"
 "Хотите установить его сейчас?"
 
-#: plugin.py:2231
+#: plugin.py:2139
 msgid "Congrats! You already have the latest version..."
 msgstr "Поздравляю! У вас уже установлена последняя версия..."
 
-#: plugin.py:2241
+#: plugin.py:2150
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr "Хотите установить обновление ( %s ) сейчас?"
 
-#: plugin.py:2248
+#: plugin.py:2157
 msgid "Update Aborted!"
 msgstr "Обновление прервано!"
 
-#: plugin.py:2268
+#: plugin.py:2182
 msgid "Unable to download updates!"
 msgstr "Невозможно загрузить обновления!"
 
-#: plugin.py:2438
+#: plugin.py:2380
 msgid "Check Connection!"
 msgstr "Проверьте подключение!"
 
-#: plugin.py:2459
+#: plugin.py:2401
 msgid "Linuxsat Panel"
 msgstr "Панель Linuxsat"
+
+#~ msgid "Linuxsat-support - File Commander"
+#~ msgstr "Linuxsat-support - Файловый коммандер"
+
+#~ msgid "Sorting Terrestrial Executed!"
+#~ msgstr "Сортировка наземных объектов выполнена!"
+
+#~ msgid "Sorting Terrestrial not Executed!"
+#~ msgstr "Сортировка наземных не выполнена!"

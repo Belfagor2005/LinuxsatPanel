@@ -93,7 +93,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.5.9'
+currversion = '2.6'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -321,20 +321,20 @@ class LinuxsatPanel(Screen):
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg Tools ", "plugin-epg.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.0 ", "Feeds2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.5 ", "Feeds2.2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.2/2.5/2.6 ", "Feeds2.2.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games Tools ", "Game.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv Tools ", "iptv-streaming.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac OE2.0 ", "KiddaC1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.0 ", "KiddaC1.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Kiddac OE2.5 ", "KiddaC2.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.2/2.5/2.6 ", "KiddaC2.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.5 ", "oe2.5-2.6.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "DreamOs Plugins ", "OE2.2-Plugins.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.2/2.5/2.6 ", "oe2.5-2.6.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Plugins OE2.2/2.5/2.6 ", "OE2.2-Plugins.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
@@ -350,23 +350,23 @@ class LinuxsatPanel(Screen):
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | TEAM ", "skinsteam.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd DreamOs ", "OE2.2-Skins.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd OE2.2/2.5/2.6 ", "OE2.2-Skins.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools2.0 ", "key-updater.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.0 ", "key-updater.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools2.5 ", "key-updater1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.2/2.5/2.6 ", "key-updater1.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "SoftcamsOE2.0 ", "SOE20.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.0 ", "SOE20.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "SoftcamsOE2.5 ", "SOE22.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.2/2.5/2.6 ", "SOE22.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility Tools ", "utility.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn OE2.0 ", "vpn.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Tools ", "vpn.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam Tools ", "webcam.png")
@@ -375,12 +375,12 @@ class LinuxsatPanel(Screen):
             if not has_dpkg:
                 add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.0 ", "18+deb.png")
             else:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.5 ", "18+.png")
+                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.2/2.5/2.6 ", "18+.png")
 
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.0 ", "Other.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.5 ", "Other1.png")
+            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.2/2.5/2.6 ", "Other1.png")
 
         add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
@@ -1143,8 +1143,8 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | /bin/sh')
-        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Ziko", "Multistalker.png", 'wget -q install --force-depends "https://dreambox4u.com/emilnabil237/plugins/MultiStalkerPro/installer.sh?inline=false" -O - | /bin/sh ;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
-        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Multistalker_pro.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" | /bin/sh')
+        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko Biko", "Multistalker.png", 'wget -q --no-check-certificate  "https://raw.githubusercontent.com/biko-73/Multi-Stalker/main/pro/installer.sh -O - | /bin/sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+        # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/refs/heads/main/installer.sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Multistalker_pro.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | /bin/sh')
 

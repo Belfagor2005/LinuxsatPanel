@@ -128,9 +128,7 @@ class File_Commander(Screen):
         self["filedata"].setList(self.list)
 
     def SaveFile(self, answer=None):
-        # if answer is None:
-            # self.session.openWithCallback(self.SaveFile, MessageBox, _("Do you really save file?"))
-        # else:
+
         try:
             if fileExists(self.file_name):
                 system("cp " + self.file_name + " " + self.file_name + ".bak")
@@ -142,5 +140,3 @@ class File_Commander(Screen):
         except OSError:
             pass
         self.close()
-        # else:
-            # self.close()
