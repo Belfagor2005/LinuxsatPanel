@@ -1,6 +1,5 @@
 <!-- by lululla 01072024 -->
 <screen name="Plgnstrt" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
-	<ePixmap zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/hat.png" position="933,481" size="90,70" alphatest="blend" />
 	<widget name="poster" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/Logo.png" position="704,412" size="512,256" zPosition="0" alphatest="off" scale="stretch" />	
 	<widget name="version" position="706,623" size="509,40" zPosition="2" backgroundColor="#30000000" transparent="1" font="Regular; 32" halign="center" foregroundColor="#ffffff" />
 </screen>
