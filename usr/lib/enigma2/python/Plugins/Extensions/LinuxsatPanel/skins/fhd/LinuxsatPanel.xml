@@ -1,7 +1,7 @@
 <!-- by lululla 01072024 -->
 <screen name="LinuxsatPanel" position="0,0" size="1920,1080" title="Linuxsat Addons Setup">
     <ePixmap position="0,0" zPosition="0" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons2/panel.png" backgroundColor="#25062748" alphatest="on" />
-	<widget source="session.CurrentService" render="lsPicsmap" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d0.png,/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d1.png" pixdelay="590" control="1" position="1216,425" size="600,56" zPosition="5" transparent="1" alphatest="on" />
+	<!-- <widget source="session.CurrentService" render="lsPicsmap" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d0.png,/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/d1.png" pixdelay="590" control="1" position="1216,425" size="600,56" zPosition="5" transparent="1" alphatest="on" /> -->
 	<!-- <ePixmap zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/xmas/hat.png" position="1782,441" size="90,70" alphatest="blend" /> -->
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black" />
     <widget name="info" position="1110,180" zPosition="4" size="550,84" font="Regular; 38" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
