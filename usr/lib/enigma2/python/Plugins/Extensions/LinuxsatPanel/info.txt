@@ -24,6 +24,8 @@ Init version 2.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 20240809 2.1 version is online
+
+Changelog:
 For Plugin Upgrade:
 yellow_long: FORCE UPDATE
 info_long: FORCE UPDATE
