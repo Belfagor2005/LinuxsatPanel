@@ -4,7 +4,7 @@
 # Based on a plugin from Sif Team.
 # This version created by IanSav and the OpenATV team.
 # mod from Lululla 20230512
-from Components.PluginComponent import plugins
+# from Components.PluginComponent import plugins
 from Components.config import ConfigSelection, ConfigSubsection, ConfigYesNo, config
 from Tools.Directories import SCOPE_CONFIG, SCOPE_PLUGINS, resolveFilename
 from enigma import eDVBDB, eServiceCenter, eServiceReference
@@ -94,7 +94,7 @@ class LCNScanner:
             elif mode == "Radio":
                 modes = ("Radio",)
             else:
-                print("[LCNScanner] Error: Invalid mode specified, 'All' assumed!  (Only 'All', 'Both', 'Radio' or 'TV' permitted.)", mode)
+                print("[LCNScanner] Error: Invalid mode '{}' specified, 'All' assumed!  (Only 'All', 'Both', 'Radio' or 'TV' permitted.)".format(mode))
                 modes = ("TV", "Radio")
             return modes
 
@@ -105,20 +105,20 @@ class LCNScanner:
                 if lcn not in lcndb:
                     lcndb.append(lcn)
                 else:
-                    print("[LCNScanner] Error: Duplicated line detected in lcndb!", lcn)
+                    print("[LCNScanner] Error: Duplicated line detected in lcndb!  ({}).".format(lcn))
             return lcndb
 
         def loadServices(mode):
-            print("[LCNScanner] Loading mode services.", mode)
+            print("[LCNScanner] Loading {} services.".format(mode))
             services = {}
             serviceHandler = eServiceCenter.getInstance()
-
+            # Sostituzione del match-case con if-elif
             if mode == "TV":
-                providerQuery = self.MODE_TV + " FROM PROVIDERS ORDER BY name"
+                providerQuery = "{} FROM PROVIDERS ORDER BY name".format(self.MODE_TV)
             elif mode == "Radio":
-                providerQuery = self.MODE_RADIO + " FROM PROVIDERS ORDER BY name"
+                providerQuery = "{} FROM PROVIDERS ORDER BY name".format(self.MODE_RADIO)
             else:
-                print("[LCNScanner] Error: Invalid mode specified. Please use 'TV' or 'Radio'.")
+                print("[LCNScanner] Error: Unsupported mode '{}'!".format(mode))
                 return services
 
             providers = serviceHandler.list(eServiceReference(providerQuery))
@@ -126,17 +126,20 @@ class LCNScanner:
                 for serviceQuery, providerName in providers.getContent("SN", True):
                     serviceList = serviceHandler.list(eServiceReference(serviceQuery))
                     for serviceReference, serviceName in serviceList.getContent("SN", True):
-                        services[":".join(serviceReference.split(":")[3:7])] = (providerName, serviceReference, serviceName)
-
+                        services[":".join(serviceReference.split(":")[3:7])] = (
+                            providerName, serviceReference, serviceName
+                        )
             return services
 
         def matchLCNsAndServices(mode, lcndb, services, duplicate, renumbers):
-            print("[LCNScanner] Matching LCN entries with services mod:", mode)
+            print("[LCNScanner] Matching LCN entries with {} services.".format(mode))
             lcns = []
             try:
                 version = int(lcndb[0][9:]) if lcndb[0].startswith("#VERSION ") else 1
             except Exception:
                 version = 1
+
+            # Sostituzione di match-case per la versione
             if version == 1:
                 for line in lcndb:
                     line = line.strip()
@@ -208,6 +211,7 @@ class LCNScanner:
                     ])
             else:
                 print("[LCNScanner] Error: LCN db file format unrecognized!")
+                return None
 
             scannerLCN = duplicate[mode][0]
             scannerLast = duplicate[mode][1]
@@ -235,14 +239,13 @@ class LCNScanner:
 
                 if service in services:
                     if lcn in lcnCache:
-                        if (data[self.LCNS_TRIPLET] == lcnCache[lcn][self.LCNS_TRIPLET] and
-                                data[self.LCNS_SIGNAL] > lcnCache[lcn][self.LCNS_SIGNAL]):
+                        if data[self.LCNS_TRIPLET] == lcnCache[lcn][self.LCNS_TRIPLET] and data[self.LCNS_SIGNAL] > lcnCache[lcn][self.LCNS_SIGNAL]:
                             data[self.LCNS_LCN_SCANNED] = data[self.LCNS_LCN_BROADCAST]
                             lcnCache[lcn] = data
                         elif scannerLCN > scannerLast:
-                            print("[LCNScanner] Warning: Duplicate LCN found for service data[LCNS_SERVICEREFERENCE] but duplicate LCN range exhausted!")
+                            print("[LCNScanner] Warning: Duplicate LCN {} found for service '{}' but duplicate LCN range exhausted!".format(lcn, data[self.LCNS_SERVICEREFERENCE]))
                         else:
-                            print("[LCNScanner] Duplicate LCN found, renumbering lcn to scannerLCN.")
+                            print("[LCNScanner] Duplicate LCN found, renumbering {} to {}.".format(lcn, scannerLCN))
                             lcn = scannerLCN
                             data[self.LCNS_LCN_SCANNED] = lcn
                             lcnCache[lcn] = data
@@ -250,9 +253,8 @@ class LCNScanner:
                     else:
                         data[self.LCNS_LCN_SCANNED] = data[self.LCNS_LCN_BROADCAST]
                         lcnCache[lcn] = data
-                elif (len(serviceReference) > 2 and
-                      serviceReference[2] in self.MODES[mode]):
-                    print("[LCNScanner] Service with LCN not a valid mode service!")
+                elif len(serviceReference) > 2 and serviceReference[2] in self.MODES[mode]:
+                    print("[LCNScanner] Service '{}' with LCN {} not a valid {} service!".format(service, lcn, mode))
                     continue
                 else:
                     continue
@@ -260,14 +262,17 @@ class LCNScanner:
                 for renumber in renumbers[mode]:
                     if renumber[0][0] <= lcn <= renumber[0][1]:
                         try:
+                            startingLCN = lcn
                             lcn = int(eval(renumber[1].replace("LCN", str(lcn))))
+                            print("[LCNScanner] LCN {} is renumbered to {} via rule range {} and formula='{}'.".format(startingLCN, lcn, renumber[0][0] - renumber[0][1], renumber[1]))
                             if lcn in lcnCache:
+                                print("[LCNScanner] Renumbered LCN {} is now a duplicated LCN {}, renumbering {} to {}.".format(startingLCN, lcn, startingLCN, scannerLCN))
                                 data[self.LCNS_LCN_SCANNED] = scannerLCN
                                 scannerLCN += 1
                             else:
                                 data[self.LCNS_LCN_SCANNED] = lcn
                         except ValueError as err:
-                            print("[LCNScanner] Error: LCN renumber formula is invalid!", err)
+                            print("[LCNScanner] Error: LCN renumber formula '{}' is invalid!  ({})".format(renumber[1], err))
 
                 serviceLCNs[lcn] = tuple(data)
 
@@ -302,25 +307,28 @@ class LCNScanner:
                 bouquet.append("#SERVICE {}{}".format(serviceLCNs[lcn][self.LCNS_SERVICEREFERENCE], serviceName))
                 if useDescriptionLines:
                     bouquet.append("#DESCRIPTION {}".format(name))
+            # Save bouquet and, if required, add this bouquet to the list of bouquets.
             extension = mode.lower()
+            # This code is not currently needed but is being kept in case needs change.
+            # bouquetName = getattr(config.plugins.LCNScanner, f"{medium.lower()}Bouquet{mode}", f"userbouquet.{medium.lower()}_lcn.{mode}").value
             bouquetName = "userbouquet.{}_lcn.{}".format(medium.lower(), extension)
             bouquetsPath = join(self.configPath, bouquetName)
             if fileWriteLines(bouquetsPath, bouquet, source=MODULE_NAME):
-                print("[LCNScanner] Bouquet saved.")
+                print("[LCNScanner] Bouquet '{}' saved.".format(bouquetsPath))
             else:
-                print("[LCNScanner] Error: Bouquet could not be saved!")
-            bouquetsPath = join(self.configPath, "bouquets." + extension)
+                print("[LCNScanner] Error: Bouquet {} could not be saved!".format(bouquetsPath))
+            bouquetsPath = join(self.configPath, "bouquets.{}".format(extension))
             bouquets = fileReadLines(bouquetsPath, default=[], source=MODULE_NAME)
             for bouquet in bouquets:
                 if bouquet.find(bouquetName) != -1:
-                    print("[LCNScanner] Bouquet is already in bouquetsPath.")
+                    print("[LCNScanner] Bouquet '{}' is already in '{}'.".format(bouquetName, bouquetsPath))
                     break
             else:
-                bouquets.append("#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET \"" + bouquetName + "\" ORDER BY bouquet")
+                bouquets.append("#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET \"{}\" ORDER BY bouquet".format(bouquetName))
                 if fileWriteLines(bouquetsPath, bouquets, source=MODULE_NAME):
-                    print("[LCNScanner] Bouquet added to bouquetsPath.")
+                    print("[LCNScanner] Bouquet '{}' added to '{}'.".format(bouquetName, bouquetsPath))
                 else:
-                    print("[LCNScanner] Error: Bouquet bouquetName could not be added to bouquetsPath!")
+                    print("[LCNScanner] Error: Bouquet '{}' could not be added to '{}'!".format(bouquetName, bouquetsPath))
 
         def buildLCNs(serviceLCNs):
             lcndb = []
@@ -366,9 +374,9 @@ class LCNScanner:
                             markers[mode][duplicate[mode][0]] = marker
                             markerMsg = " with a preceding marker of '{}'".format(marker)
                     except ValueError as err:
-                        print("[LCNScanner] Error: Duplicate range '{}' is invalid! ({})".format(lcnRange, err))
+                        print("[LCNScanner] Error: Duplicate range '{}' is invalid!  ({})".format(lcnRange, err))
                     print("[LCNScanner] Duplicated LCNs for {} will be allocated new numbers {}{}.".format(mode, rangeMsg, markerMsg))
-        dom = self.rulesDom.findall(".//rules[@name='" + rules + "']/rule[@type='renumber']")
+        dom = self.rulesDom.findall(".//rules[@name='{}']/rule[@type='renumber']".format(rules))
 
         if dom is not None:
             for element in dom:
@@ -382,8 +390,8 @@ class LCNScanner:
                         renumbers[mode].append((lcnRange, element.text))
                         print("[LCNScanner] LCNs for {} in the range {} to {} will be renumbered with the formula '{}'.".format(mode, lcnRange[0], lcnRange[1], element.text))
                     except ValueError as err:
-                        print("[LCNScanner] Error: Renumber range '{}' is invalid! ({})".format(lcnRange, err))
-        dom = self.rulesDom.findall(".//rules[@name='" + rules + "']/rule[@type='marker']")
+                        print("[LCNScanner] Error: Renumber range '{}' is invalid!  ({})".format(lcnRange, err))
+        dom = self.rulesDom.findall(".//rules[@name='{}']/rule[@type='marker']".format(rules))
         if dom is not None:
             for element in dom:
                 modes = getModes(element)

@@ -93,7 +93,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.1'
+currversion = '2.6.2'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -1252,8 +1252,9 @@ class ScriptInstaller(Screen):
                 print("Exception during LCN scan:", e)
 
             try:
-                self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                                  MessageBox.TYPE_INFO, timeout=5)
+                self.session.openWithCallback(self._onLCNScanFinished,
+                                              MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+                                              MessageBox.TYPE_INFO, timeout=5)
             except RuntimeError as re:
                 print("RuntimeError during MessageBox display:", re)
 
