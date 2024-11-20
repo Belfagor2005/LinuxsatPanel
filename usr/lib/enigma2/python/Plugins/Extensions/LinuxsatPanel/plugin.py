@@ -1238,17 +1238,27 @@ class ScriptInstaller(Screen):
                                           MessageBox, _("Do you want to Order LCN Bouquet?"),
                                           MessageBox.TYPE_YESNO)
         else:
-            print('scan init')
-            lcn_scanner_instance = LCNScanner()
-            LCN = lcn_scanner_instance.lcnScan()
-            # print("LCNScannerSetup instance:", LCN)
+            print('Starting LCN scan...')
             try:
-                self.session.open(LCN)
+                lcn_scanner_instance = LCNScanner()
+                LCN = lcn_scanner_instance.lcnScan()
+                print("LCN Scanner returned:", LCN)
+
+                if LCN:
+                    self.session.open(LCN)
+                else:
+                    print("Error: LCN scan did not return a valid screen.")
             except Exception as e:
-                print('except..:', e)
-            self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                              MessageBox.TYPE_INFO,
-                              timeout=5)
+                print("Exception during LCN scan:", e)
+
+            try:
+                self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+                                  MessageBox.TYPE_INFO, timeout=5)
+            except RuntimeError as re:
+                print("RuntimeError during MessageBox display:", re)
+
+    def _onLCNScanFinished(self, result=None):
+        pass
 
     def Checkskin(self, answer=None):
         if answer is None:
@@ -1933,20 +1943,49 @@ class addInstall(Screen):
     def Lcn(self, answer=None):
         if answer is None:
             self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("[LCNScanner] Do you want to Scan Order LCN Bouquet"),
+                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
                                           MessageBox.TYPE_YESNO)
         else:
-            print('scan init')
-            lcn_scanner_instance = LCNScanner()
-            LCN = lcn_scanner_instance.lcnScan()
-            # print("LCNScannerSetup instance:", LCN)
+            print('Starting LCN scan...')
             try:
-                self.session.open(LCN)
+                lcn_scanner_instance = LCNScanner()
+                LCN = lcn_scanner_instance.lcnScan()
+                print("LCN Scanner returned:", LCN)
+
+                if LCN:
+                    self.session.open(LCN)
+                else:
+                    print("Error: LCN scan did not return a valid screen.")
             except Exception as e:
-                print('except..:', e)
-            self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                              MessageBox.TYPE_INFO,
-                              timeout=5)
+                print("Exception during LCN scan:", e)
+
+            try:
+                self.session.openWithCallback(self._onLCNScanFinished,
+                                              MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+                                              MessageBox.TYPE_INFO, timeout=5)
+            except RuntimeError as re:
+                print("RuntimeError during MessageBox display:", re)
+
+    def _onLCNScanFinished(self, result=None):
+        pass
+
+    # def Lcn(self, answer=None):
+        # if answer is None:
+            # self.session.openWithCallback(self.Lcn,
+                                          # MessageBox, _("[LCNScanner] Do you want to Scan Order LCN Bouquet"),
+                                          # MessageBox.TYPE_YESNO)
+        # else:
+            # print('scan init')
+            # lcn_scanner_instance = LCNScanner()
+            # LCN = lcn_scanner_instance.lcnScan()
+            # # print("LCNScannerSetup instance:", LCN)
+            # try:
+                # self.session.open(LCN)
+            # except Exception as e:
+                # print('except..:', e)
+            # self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
+                              # MessageBox.TYPE_INFO,
+                              # timeout=5)
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,

@@ -220,12 +220,9 @@ class LCN():
                     PosDelMaker.extend([START, START + 1])
                 if uBQ[START] == uBQ[STOP]:
                     PosDelMaker.extend([STOP, STOP + 1])
-
             PosDelMaker = sorted(set(PosDelMaker), reverse=True)
-
             for delmark in PosDelMaker:
                 del uBQ[delmark - 1]
-
             with open(UserBouquet, "w") as write_file:
                 write_file.writelines(uBQ)
 
@@ -238,7 +235,6 @@ class LCN():
             with open(dttbouquet, "w") as f:
                 self.newlist = []
                 count = 0
-
                 for x in self.lcnlist:
                     count += 1
                     while x[0] != count:
@@ -255,7 +251,6 @@ class LCN():
                     if int(x[1]) == 11111111:
                         f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
                         continue
-
                     if len(self.markers) > 0 and x[0] > self.markers[0][0]:
                         f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
                         f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
@@ -593,7 +588,6 @@ def lcnstart():
             lcn.buildAfterScan()
         except Exception as e:
             print(e)
-
     return
 
 
@@ -739,9 +733,7 @@ def LamedbRestore():
                 pass
 
             WritingLamedbFinal.write("end\n")
-
         return True
-
     except Exception as e:
         print("Errore durante il ripristino del lamedb:", e)
         return False
