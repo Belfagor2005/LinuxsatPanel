@@ -1,6 +1,9 @@
-# for localized messages
-# from . import _
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
+from __future__ import absolute_import
+from __future__ import print_function
+from .. import _
 from enigma import eDVBDB
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Plugins.Plugin import PluginDescriptor
