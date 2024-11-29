@@ -76,9 +76,17 @@ Changelog:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20241118 2.6 version is online
+20241118 2.6 - 2.6.1 - 2.6.2 version is online
 
 Changelog:
 --Order List Category
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241129 2.6.3 version is online
+
+Changelog:
+--Fix Terrestrial Order
+
 
 

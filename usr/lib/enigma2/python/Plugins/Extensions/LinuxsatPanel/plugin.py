@@ -93,7 +93,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.2'
+currversion = '2.6.3'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -178,18 +178,6 @@ if sslverify:
             return ctx
 
 
-# if isWQHD() or isFHD():
-    # skin_path = os.path.join(plugin_path, 'skins', 'fhd')
-    # picfold = os.path.join(plugin_path, "LSicons2")
-    # pngx = os.path.join(plugin_path, "icons2", "link.png")
-    # nss_pic = os.path.join(picfold, "LSS.png")
-# else:
-    # skin_path = os.path.join(plugin_path, 'skins', 'hd')
-    # picfold = os.path.join(plugin_path, "LSicons")
-    # pngx = os.path.join(plugin_path, "icons", "link.png")
-    # nss_pic = os.path.join(picfold, "LSS.png")
-
-
 if isWQHD() or isFHD():
     skin_path = plugin_path + '/skins/fhd'
     picfold = plugin_path + "/LSicons2/"
@@ -271,17 +259,18 @@ def get_positions(resolution):
 # def add_menu_item(menu_list, titles, pics, name, pic):
     # menu_list.append((name, titles, pic, ""))
 
-def add_menu_item(menu_list, titles, pics, urls, title, pic_name):
-    menu_list.append(title)
-    titles.append(title.strip())
-    pics.append(picfold + pic_name)
-    urls.append("")  # Aggiungi una stringa vuota per l'URL
-
 
 # def add_menu_item(menu_list, titles, pics, title, pic_name):
     # menu_list.append(title)
     # titles.append(title.strip())
     # pics.append(picfold + pic_name)
+
+
+def add_menu_item(menu_list, titles, pics, urls, title, pic_name):
+    menu_list.append(title)
+    titles.append(title.strip())
+    pics.append(picfold + pic_name)
+    urls.append("")  # Aggiungi una stringa vuota per l'URL
 
 
 def add_menu_item_with_url(menu_list, titles, pics, urls, title, pic_name, url):
@@ -632,7 +621,8 @@ class LinuxsatPanel(Screen):
                 url = self.data[n1:n2]
                 self.session.open(addInstall, url, name, None)
             else:
-                self.session.open(MessageBox, _("Error: No Data Find."), MessageBox.TYPE_ERROR)
+                self.session.open(MessageBox, _("Error: No Data Find."),
+                                  MessageBox.TYPE_ERROR)
 
 
 class LSskin(Screen):
@@ -874,7 +864,8 @@ class LSskin(Screen):
             url = self.data[n1:n2]
             self.session.open(addInstall, url, name, None)
         else:
-            self.session.open(MessageBox, _("Error: No Data Find."), MessageBox.TYPE_ERROR)
+            self.session.open(MessageBox, _("Error: No Data Find."),
+                              MessageBox.TYPE_ERROR)
 
 
 class LSChannel(Screen):
@@ -1233,6 +1224,19 @@ class ScriptInstaller(Screen):
         self.onLayoutFinish.append(self.openTest)
 
     def Lcn(self, answer=None):
+        if answer is None:
+            self.session.openWithCallback(self.Lcn,
+                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
+                                          MessageBox.TYPE_YESNO)
+        else:
+            print('Starting LCN scan...')
+            try:
+                from .LCNScanner.Terrestrial import PluginSetup
+                self.session.open(PluginSetup)
+            except Exception as e:
+                print("Exception during LCN scan:", e)
+
+    def LcnXX(self, answer=None):
         if answer is None:
             self.session.openWithCallback(self.Lcn,
                                           MessageBox, _("Do you want to Order LCN Bouquet?"),
@@ -1662,6 +1666,7 @@ class addInstall(Screen):
                                     {'ok': self.message,
                                      '0': self.arabicx,
                                      '5': self.Lcn,
+                                     '6': self.LcnXX,
                                      'green': self.message,
                                      'cancel': self.exitnow,
                                      'red': self.exitnow,
@@ -1949,6 +1954,19 @@ class addInstall(Screen):
         else:
             print('Starting LCN scan...')
             try:
+                from .LCNScanner.Terrestrial import PluginSetup
+                self.session.open(PluginSetup)
+            except Exception as e:
+                print("Exception during LCN scan:", e)
+
+    def LcnXX(self, answer=None):
+        if answer is None:
+            self.session.openWithCallback(self.Lcn,
+                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
+                                          MessageBox.TYPE_YESNO)
+        else:
+            print('Starting LCN scan...')
+            try:
                 lcn_scanner_instance = LCNScanner()
                 LCN = lcn_scanner_instance.lcnScan()
                 print("LCN Scanner returned:", LCN)
@@ -1969,24 +1987,6 @@ class addInstall(Screen):
 
     def _onLCNScanFinished(self, result=None):
         pass
-
-    # def Lcn(self, answer=None):
-        # if answer is None:
-            # self.session.openWithCallback(self.Lcn,
-                                          # MessageBox, _("[LCNScanner] Do you want to Scan Order LCN Bouquet"),
-                                          # MessageBox.TYPE_YESNO)
-        # else:
-            # print('scan init')
-            # lcn_scanner_instance = LCNScanner()
-            # LCN = lcn_scanner_instance.lcnScan()
-            # # print("LCNScannerSetup instance:", LCN)
-            # try:
-                # self.session.open(LCN)
-            # except Exception as e:
-                # print('except..:', e)
-            # self.session.open(MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                              # MessageBox.TYPE_INFO,
-                              # timeout=5)
 
     def okRun(self):
         self.session.openWithCallback(self.okRun1,
@@ -2247,7 +2247,7 @@ class LSinfo(Screen):
         return str(zarcffll)
 
     def openinfo(self, callback=''):
-        from .stbinfo import stbinfo
+        from .addons.stbinfo import stbinfo
         print('STB info:\n%s' % stbinfo.to_string())
 
         with open('/tmp/output.txt', 'w') as file:
