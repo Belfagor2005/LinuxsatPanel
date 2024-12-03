@@ -93,7 +93,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.3'
+currversion = '2.6.4'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -256,21 +256,11 @@ def get_positions(resolution):
     return positions
 
 
-# def add_menu_item(menu_list, titles, pics, name, pic):
-    # menu_list.append((name, titles, pic, ""))
-
-
-# def add_menu_item(menu_list, titles, pics, title, pic_name):
-    # menu_list.append(title)
-    # titles.append(title.strip())
-    # pics.append(picfold + pic_name)
-
-
 def add_menu_item(menu_list, titles, pics, urls, title, pic_name):
     menu_list.append(title)
     titles.append(title.strip())
     pics.append(picfold + pic_name)
-    urls.append("")  # Aggiungi una stringa vuota per l'URL
+    urls.append("")  # add missing string for URL
 
 
 def add_menu_item_with_url(menu_list, titles, pics, urls, title, pic_name, url):
@@ -556,6 +546,9 @@ class LinuxsatPanel(Screen):
         self.openTest()
 
     def closeNonRecursive(self):
+        message = '\n   - - -   L I N U X S A T   P A N E L   - - -\n\nIf you like this plugin and you want to support it,\nor if you just want to say thanks\n\n\nplease donate via FORUM-SUPPORT \n\nhttps://www.linuxsat-support.com\n\nThanks a lot !\n\n\n\n(c) 2024 by Lululla'
+        self.session.open(MessageBox, _(message),
+                          MessageBox.TYPE_INFO, timeout=6)
         self.close(False)
 
     def refreshPlugins(self):
@@ -565,6 +558,9 @@ class LinuxsatPanel(Screen):
     def closeRecursive(self):
         if not has_dpkg:
             self.refreshPlugins()
+        message = '\n   - - -   L I N U X S A T   P A N E L   - - -\n\nIf you like this plugin and you want to support it,\nor if you just want to say thanks\n\n\nplease donate via FORUM-SUPPORT \n\nhttps://www.linuxsat-support.com\n\nThanks a lot !\n\n\n\n(c) 2024 by Lululla'
+        self.session.open(MessageBox, _(message),
+                          MessageBox.TYPE_INFO, timeout=6)
         self.close(True)
 
     def createSummary(self):
