@@ -1598,9 +1598,13 @@ class ScriptInstaller(Screen):
                     print("User:", user)
                     print("Password:", pas)
                     '''
-            if host and host is not None:
                 pas = pas.replace('</h1>', '').replace('</b>', '')
                 pasw = pas.replace('</div>', '').replace('</span>', '')
+
+                host = str(host) if host is not None else ""
+                port = str(port) if port is not None else ""
+                user = str(user) if user is not None else ""
+                pasw = str(pasw) if pasw is not None else ""
 
                 if config_type == 'CCcam':
                     print('write cccam file')
@@ -1612,15 +1616,17 @@ class ScriptInstaller(Screen):
                     with open(dest, 'a') as cfgdok:
                         cfgdok.write(write_format.format(host, host, port, user, pasw))
 
-                self.session.open(MessageBox, _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw),
-                                  type=MessageBox.TYPE_INFO, timeout=6)
-            else:
-                self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!"),
-                                  type=MessageBox.TYPE_INFO,
-                                  timeout=8)
+                text = _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw)
+                if not PY3:
+                    text = text.encode('utf-8')
+                self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
+                                                            
+                                            
 
         except Exception as e:
-            print('error on host', str(e))
+            self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!\n%s") % str(e),
+                              type=MessageBox.TYPE_INFO,
+                              timeout=8)
 
 
 class addInstall(Screen):
@@ -2318,39 +2324,6 @@ class startLP(Screen):
         # self.current_text_index = 0
         self.onLayoutFinish.append(self.loadDefaultImage)
 
-    '''
-    # def change_text(self):
-        # import threading
-        # def update_text():
-            # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
-            # self['version'].setText(self.texts[self.current_text_index])
-            # print('current_text_index:', self.current_text_index)
-
-        # threading.Timer(2.0, update_text).start()
-        # currversion = '1'
-        # self.texts = ["Load plugin...", "Linuxsat Panel V." + currversion, "WELCOME!!!"]
-        # self.current_text_index = 0
-
-        # from time import sleep
-
-        # def starters():
-            # for text in self.texts:
-                # print('text=', text)
-                # # print('texts:', self.texts)
-                # self['version'].setText(self.texts[self.current_text_index])
-                # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
-                # # self.current_text_index += 1
-                # sleep(3.0)
-
-                # if self.current_text_index == len(self.texts) - 1:
-                    # print("timer threading work!")
-                    # # data = checkGZIP(xmlurl)
-                    # self.session.open(LinuxsatPanel)
-                    # # self.session.openWithCallback(self.passe, LinuxsatPanel)
-                # self.close()
-        # starters()
-        '''
-
     def clsgo(self):
         if first is True:
             self.session.openWithCallback(self.passe, LinuxsatPanel)
@@ -2376,25 +2349,14 @@ class startLP(Screen):
             self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
         else:
             self.timerx.callback.append(self.clsgo)
-        self.timerx.start(3000, True)
-        '''
-        # import threading
-        # def update_text():
-            # self.current_text_index = (self.current_text_index + 1) % len(self.texts)
-            # self['version'].setText(self.texts[self.current_text_index])
-            # print('current_text_index:', self.current_text_index)
-            # if self.current_text_index == len(self.texts) - 1:
-                # print("timer threading work!")
-                # self.clsgo()
-        # threading.Timer(2.0, update_text).start()
-        # self.change_text()
-        '''
+        self.timerx.start(2500, True)
 
     def decodeImage(self):
         pixmapx = self.fldpng
         if fileExists(pixmapx):
             size = self['poster'].instance.size()
-            self.picload = ePicLoad()
+            if not self.picload:
+                self.picload = ePicLoad()
             self.scale = AVSwitch().getFramebufferScale()
             self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
             # _l = self.picload.PictureData.get()
