@@ -5,7 +5,6 @@ from . import (
     _,
     AgentRequest,
     CheckConn,
-    # abouturl,
     add_skin_font,
     b64decoder,
     checkGZIP,
@@ -20,8 +19,6 @@ from . import (
     isHD,
     RequestUrl,
     make_request,
-    # newOE,
-    # lngx,
     refreshPlugins,
     xmlurl,
     HALIGN,
@@ -2432,7 +2429,6 @@ class AboutLSS(Screen):
         _session = session
         first = False
         Screen.__init__(self, session)
-
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -2440,12 +2436,10 @@ class AboutLSS(Screen):
                 self.setTitle(_('%s') % descplug + ' V.' + currversion)
             except:
                 pass
-
         skin = join(skin_path, 'AboutLSS.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             skin = f.read()
         self.skin = ctrlSkin('AboutLSS', skin)
-        # self.session = session
         credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
         credit += _('Suggested by: @masterG - @oktus - @pcd\n')
         credit += _('Designs and Graphics by @oktus\n')
