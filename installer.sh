@@ -2,8 +2,8 @@
 ## setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/bash
 
 ## Only This 2 lines to edit with new version ######
-version='2.6.4'
-changelog='\nAdd missing info'
+version='2.6.5'
+changelog='\n--Removed skin check on NewEnigma and DreamOs\n--Fix Execution Script\n--Add Info on Exit'
 
 ##############################################################
 

@@ -88,5 +88,13 @@ Changelog:
 Changelog:
 --Fix Terrestrial Order
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241212 2.6.5 version is online
+
+Changelog:
+--Removed skin check on NewEnigma and DreamOs
+--Fix Execution Script
+--Add Info on Exit
 
 

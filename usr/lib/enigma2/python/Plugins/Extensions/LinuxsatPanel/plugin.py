@@ -20,11 +20,13 @@ from . import (
     isHD,
     RequestUrl,
     make_request,
+    # newOE,
     # lngx,
     refreshPlugins,
     xmlurl,
     HALIGN,
 )
+from .addons.NewOeSk import ctrlSkin
 from .lsConsole import lsConsole
 from .LCNScanner.plugin import LCNScanner
 from .LCNScanner.Lcn import (
@@ -93,7 +95,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.4'
+currversion = '2.6.5'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -274,6 +276,13 @@ class LinuxsatPanel(Screen):
 
     def __init__(self, session):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
@@ -545,12 +554,6 @@ class LinuxsatPanel(Screen):
 
         self.openTest()
 
-    def closeNonRecursive(self):
-        message = '\n   - - -   L I N U X S A T   P A N E L   - - -\n\nIf you like this plugin and you want to support it,\nor if you just want to say thanks\n\n\nplease donate via FORUM-SUPPORT \n\nhttps://www.linuxsat-support.com\n\nThanks a lot !\n\n\n\n(c) 2024 by Lululla'
-        self.session.open(MessageBox, _(message),
-                          MessageBox.TYPE_INFO, timeout=6)
-        self.close(False)
-
     def refreshPlugins(self):
         plugins.clearPluginList()
         plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
@@ -558,10 +561,10 @@ class LinuxsatPanel(Screen):
     def closeRecursive(self):
         if not has_dpkg:
             self.refreshPlugins()
-        message = '\n   - - -   L I N U X S A T   P A N E L   - - -\n\nIf you like this plugin and you want to support it,\nor if you just want to say thanks\n\n\nplease donate via FORUM-SUPPORT \n\nhttps://www.linuxsat-support.com\n\nThanks a lot !\n\n\n\n(c) 2024 by Lululla'
-        self.session.open(MessageBox, _(message),
-                          MessageBox.TYPE_INFO, timeout=6)
-        self.close(True)
+        self.session.openWithCallback(self.close, AboutLSS)
+
+    def closeNonRecursive(self):
+        self.session.openWithCallback(self.close, AboutLSS)
 
     def createSummary(self):
         return
@@ -625,12 +628,19 @@ class LSskin(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
+
         self.data = checkGZIP(xmlurl)
         # self.data = fetch_url(xmlurl)
-
         if isWQHD() or isFHD():
             self.pos = get_positions("FHD")
         elif isHD():
@@ -868,6 +878,13 @@ class LSChannel(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
@@ -1096,6 +1113,13 @@ class ScriptInstaller(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'LinuxsatPanel.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
@@ -1585,6 +1609,7 @@ class ScriptInstaller(Screen):
                 ]
             host = None
             pas = None
+            user = None
             for pattern in regex_patterns:
                 url1 = re.search(pattern, data)
                 if url1:
@@ -1620,9 +1645,6 @@ class ScriptInstaller(Screen):
                 if not PY3:
                     text = text.encode('utf-8')
                 self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
-                                                            
-                                            
-
         except Exception as e:
             self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!\n%s") % str(e),
                               type=MessageBox.TYPE_INFO,
@@ -1633,11 +1655,25 @@ class addInstall(Screen):
 
     def __init__(self, session, data, name, dest):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'addInstall.xml')
+
+        '''
         if has_dpkg:
-            skin = join(skin_path, 'addInstall-os.xml')
+            skin = join(skin_path, 'addInstall-os.xml')  # now i have ctrlSkin for check
+        '''
+
         with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
+            skin = f.read()
+
+        self.skin = ctrlSkin('addInstall', skin)
+
         self.fxml = str(data)
         self.name = name
         self.dest = dest
@@ -2089,12 +2125,25 @@ class LSinfo(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
         skin = join(skin_path, 'LSinfo.xml')
+
+        '''
         if has_dpkg:
-            skin = join(skin_path, 'LSinfo-os.xml')
+            skin = join(skin_path, 'LSinfo-os.xml')  # now i have ctrlSkin for check
+        '''
+
         with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
-        titlex = descplug + ' V.' + currversion
+            skin = f.read()
+
+        self.skin = ctrlSkin('LSinfo', skin)
+
         self.name = name
         info = _('Please Wait...')
         self.labeltext = ('')
@@ -2122,7 +2171,6 @@ class LSinfo(Screen):
                                                                    'showEventInfoPlugin': self.update_dev,
                                                                    'red': self.close}, -1)
 
-        self.setTitle(titlex)
         self.Update = False
         self.timerz = eTimer()
         if exists('/var/lib/dpkg/status'):
@@ -2258,13 +2306,11 @@ class LSinfo(Screen):
             file.write('%s V.%s\n%s%s\nSTB info:\n%s' % (descplug, currversion, info, info2, stbinfo.to_string()))
 
         try:
-
             with open(join(plugin_path, 'info.txt'), 'r') as info_file:
                 additional_info = info_file.read()
 
             with open('/tmp/output.txt', 'a') as file:
                 file.write('\n' + additional_info)
-
         except Exception as e:
             print("Error file info.txt:", e)
 
@@ -2314,14 +2360,22 @@ class startLP(Screen):
         _session = session
         first = True
         Screen.__init__(self, session)
+
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
+
         skin = join(skin_path, 'startLP.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
+
         self["poster"] = Pixmap()
         self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
-        # self.texts = ["Load plugin...", "Linuxsat Panel V." + currversion, "WELCOME!!!"]
-        # self.current_text_index = 0
         self.onLayoutFinish.append(self.loadDefaultImage)
 
     def clsgo(self):
@@ -2370,6 +2424,48 @@ class startLP(Screen):
                 self['poster'].instance.setPixmap(ptr)
                 self['poster'].show()
         return
+
+
+class AboutLSS(Screen):
+    def __init__(self, session):
+        global _session, first
+        _session = session
+        first = False
+        Screen.__init__(self, session)
+
+        try:
+            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+        except:
+            try:
+                self.setTitle(_('%s') % descplug + ' V.' + currversion)
+            except:
+                pass
+
+        skin = join(skin_path, 'AboutLSS.xml')
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+
+        # self.session = session
+        credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
+        credit += _('Suggested by: @masterG - @oktus - @pcd\n')
+        credit += _('Designs and Graphics by @oktus\n')
+        credit += _('Support on: Linuxsat-support.com\n\n')
+        credit += _('The Plugin lives thanks to the donations of each of you.\n')
+        credit += _('A coffee costs nothing.\n\n')
+        credit += _('If you think it is a useful tool for your box\n')
+        credit += _('please make a donation:\n')
+        credit += 'http://paypal.com/paypalme/belfagor2005\n'
+        credit += _('make donation on Linuxsat-support.com\n\n\n\n\n')
+        credit += _('All code was rewritten by @Lululla - 2024.07.20\n')
+        self['Info'] = Label(_(credit))
+        self['key_red'] = Label(_('Exit'))
+        self["pixmap"] = Pixmap()
+        self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+                                    {"ok": self.close,
+                                     "cancel": self.close,
+                                     "exit": self.close,
+                                     "back": self.close,
+                                     "red": self.close}, -1)
 
 
 def menustart():
