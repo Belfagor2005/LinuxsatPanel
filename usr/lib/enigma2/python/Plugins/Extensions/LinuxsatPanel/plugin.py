@@ -2372,7 +2372,7 @@ class startLP(Screen):
         skin = join(skin_path, 'startLP.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
             self.skin = f.read()
-
+        # self.skin = ctrlSkin('startLP', skin)
         self["poster"] = Pixmap()
         self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
         self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
@@ -2443,8 +2443,8 @@ class AboutLSS(Screen):
 
         skin = join(skin_path, 'AboutLSS.xml')
         with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
-
+            skin = f.read()
+        self.skin = ctrlSkin('AboutLSS', skin)
         # self.session = session
         credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
         credit += _('Suggested by: @masterG - @oktus - @pcd\n')
