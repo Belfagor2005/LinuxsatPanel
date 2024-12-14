@@ -58,23 +58,21 @@ def newOE():
 
 
 def ctrlSkin(pank, skin):
-    # coded by @Lululla 20240720
     from re import sub
     print('ctrlSkin panel=%s' % pank)
-    # Keywords to identify when to remove "font" and "scrollbarWidth"
-    scrollbar_keywords = ['list', 'menu', 'config']
-    # 'tasklist', 'menulist', 'menu_list', 'filelist', 'file_list', 'entries', 'Listbox', 'list_left', 'list_right', 'streamlist', 'tablist', 'HelpScrollLabel']
-    if newOE() or isfile('/etc/opkg/nn2-feed.conf'):  # Condition for Enigma2 version
+    scrollbar_keywords = ['list', 'text', 'menu', 'config', 'tasklist', 'menulist']  # , 'menu_list', 'filelist', 'file_list', 'entries', 'Listbox', 'list_left', 'list_right', 'streamlist', 'tablist', 'HelpScrollLabel']
+    # Modifica solo se `newOE()` è True o `/etc/opkg/nn2-feed.conf` esiste
+    if newOE() or os.path.isfile('/etc/opkg/nn2-feed.conf') or os.path.isfile("/usr/bin/apt-get"):
+        # Rimuovi l'attributo "scrollbarWidth" se esiste
         if 'scrollbarWidth' in skin:
             skin = sub(r'scrollbarWidth="[^"]*"', '', skin)
+
+        # Rimuovi "font" solo se un widget ha `scrollbarMode` con uno dei valori specifici
         for keyword in scrollbar_keywords:
-            # Search for "scrollbarMode" with one of the associated values ​​(list, menu, config)
-            if 'scrollbarMode="%s"' % keyword in skin:
-                # print('Found keyword scrollbarMode:', keyword)
-                # Remove "font=" from the line
+            if 'scrollbarMode="' in skin:  # Cerca scrollbarMode nel widget
                 skin = sub(r'font="[^"]*"', '', skin)
-        # print('Skin modded:', skin)
+
+        print('Skin modificato:\n', skin)
     else:
-        # No changes to the content of `skin`
-        skin = skin
+        print('Nessuna modifica al contenuto di `skin`.')
     return skin
