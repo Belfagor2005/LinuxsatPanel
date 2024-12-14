@@ -63,22 +63,33 @@ def ctrlSkin(pank, skin):
     print('ctrlSkin panel=%s' % pank)
     # Keywords to identify when to remove "font" and "scrollbarWidth"
     scrollbar_keywords = ['list', 'text', 'menu', 'config', 'tasklist', 'menulist']  # , 'menu_list', 'filelist', 'file_list', 'entries', 'Listbox', 'list_left', 'list_right', 'streamlist', 'tablist', 'HelpScrollLabel']
-    # Check whether to change based on Enigma2 version or specific files
+    # Check if it is a Dreambox system with NewOE
     if newOE() or isfile('/etc/opkg/nn2-feed.conf') or isfile("/usr/bin/apt-get"):
-        # Search for "scrollbarWidth"
+        # Remove "scrollbarWidth" if present
         if 'scrollbarWidth' in skin:
             skin = sub(r'scrollbarWidth="[^"]*"', '', skin)
-        # Search for "scrollbarMode" with one of the associated values ​​(list, menu, config)
-        widgets = findall(r'<widget[^>]*>', skin)  # Trova tutti i widget
+
+        # Find all widgets defined in the skin file
+        widgets = findall(r'<widget[^>]*>', skin)
         for widget in widgets:
-            # Check if `scrollbarMode` is associated with one of the keywords
-            for key in scrollbar_keywords:
-                if 'scrollbarMode="%s"' % key in widget:
-                    # Remove "font" from this widget
-                    mod_widget = sub(r'font="[^"]*"', '', widget)
-                    skin = skin.replace(widget, mod_widget)
-                    break  # No need to continue checking other keywords for this widget
-        # print('Skin modded:\n', skin)
+            # Search for the widget name
+            widget_name_match = findall(r'name="([^"]+)"', widget)
+            widget_name = widget_name_match[0] if widget_name_match else None
+
+            # Removes font only for scrollbar_keywords key on NewOE systems
+            # if widget_name == 'config':
+            if widget_name and widget_name in scrollbar_keywords:
+                # Remove font if present
+                mod_widget = sub(r'font="[^"]*"', '', widget)
+                skin = skin.replace(widget, mod_widget)
+            # Change for other widgets with scrollbarMode
+            else:
+                for key in scrollbar_keywords:
+                    if 'scrollbarMode="%s"' % key in widget:
+                        mod_widget = sub(r'font="[^"]*"', '', widget)
+                        skin = skin.replace(widget, mod_widget)
+                        break
+        # print('Skin mod:\n%s' % skin)
     else:
         print('No changes to the content of `skin.')
     return skin
