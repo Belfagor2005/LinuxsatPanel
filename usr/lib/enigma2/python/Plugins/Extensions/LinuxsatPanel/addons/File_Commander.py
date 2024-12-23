@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from . import _
+from .. import _
 # Components
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -16,7 +16,7 @@ import skin
 DEFAULT_MODULE_NAME = __name__.split(".")[-1]
 pname = _("File Commander - Addon")
 pdesc = _("play/show Files")
-pversion = "1.0-r1"
+pversion = "1.0-r2"
 
 
 def getTextBoundarySize(instance, font, targetSize, text):
@@ -56,23 +56,23 @@ class File_Commander(Screen):
         Screen.__init__(self, session)
         # HelpableScreen.__init__(self)
         self.file_name = file
-        title = "Linuxsat-support - File Commander"
+        title = "Checkskin Commander"
         self.list = []
         self["filedata"] = MenuList(self.list)
         self["actions"] = ActionMap(["WizardActions", "ColorActions", "DirectionActions"], {
             "ok": self.exitEditor,
-            "green": self.exitEditor,
+            "green": self.SaveFile,
             "back": self.exitEditor,
             "red": self.exitEditor,
             "yellow": self.SaveFile,
             "blue": self.exitEditor,
-            # "chplus": self.posStart,
-            # "chminus": self.posEnd,
+            "chplus": self.posStart,
+            "chminus": self.posEnd,
         }, -1)
         self["list_head"] = Label(self.file_name)
         self["key_red"] = Label(_("Exit"))
         self["key_green"] = Label(_("Exit"))
-        self["key_yellow"] = Label(_("Exit"))
+        self["key_yellow"] = Label(_("Save"))
         self["key_blue"] = Label(_("Exit"))
         self.selLine = None
         self.oldLine = None
@@ -86,8 +86,8 @@ class File_Commander(Screen):
         self.setTitle(self.newtitle)
 
     def exitEditor(self):
-        if fileExists(self.file_name):
-            remove(self.file_name)
+        # if fileExists(self.file_name):
+            # remove(self.file_name)
         self.close()
 
     def GetFileData(self, fx):
@@ -127,16 +127,18 @@ class File_Commander(Screen):
             lineno += 1
         self["filedata"].setList(self.list)
 
-    def SaveFile(self, answer=None):
-
-        try:
-            if fileExists(self.file_name):
-                system("cp " + self.file_name + " " + self.file_name + ".bak")
-            eFile = open(self.file_name, "w")
-            for x in self.list:
-                my_x = x.partition(": ")[2]
-                eFile.writelines(my_x)
-            eFile.close()
-        except OSError:
-            pass
-        self.close()
+    def SaveFile(self, answer):
+        if answer is True:
+            try:
+                if fileExists(self.file_name):
+                    system("cp " + self.file_name + " " + self.file_name + ".bak")
+                eFile = open(self.file_name, "w")
+                for x in self.list:
+                    my_x = x.partition(": ")[2]
+                    eFile.writelines(my_x)
+                eFile.close()
+            except OSError:
+                pass
+            self.close()
+        else:
+            self.close()
