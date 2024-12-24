@@ -71,7 +71,7 @@ def ctrlSkin(pank, skin):
     print('ctrlSkin panel=%s' % pank)
     scrollbar_keywords = ['list', 'text', 'menu', 'config', 'tasklist', 'menulist']  # , 'menu_list', 'filelist', 'file_list', 'entries', 'Listbox', 'list_left', 'list_right', 'streamlist', 'tablist', 'HelpScrollLabel']
     # Edit only if `newOE()` is True or `/etc/opkg/nn2-feed.conf` exists
-    if newOE() or os.path.isfile('/etc/opkg/nn2-feed.conf') or os.path.isfile("/usr/bin/apt-get"):
+    if newOE() or isfile('/etc/opkg/nn2-feed.conf') or isfile("/usr/bin/apt-get"):
         for pattern in patterns_to_remove:
             skin = re.sub(pattern, '', skin)
         # Remove "font" only if a widget has `scrollbarMode` with one of the specific values
