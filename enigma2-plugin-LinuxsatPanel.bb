@@ -4,9 +4,9 @@ SECTION = "extra"
 PRIORITY = "required"
 LICENSE = "proprietary"
 
-inherit gitpkgv allarch
-
 require conf/license/license-gplv2.inc
+
+inherit gitpkgv
 
 SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
@@ -23,3 +23,4 @@ FILES_${PN} = "/usr/*"
 do_install() {
     cp -rp ${S}/usr* ${D}/ 
 }
+
