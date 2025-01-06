@@ -92,7 +92,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.6'
+currversion = '2.6.7'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
