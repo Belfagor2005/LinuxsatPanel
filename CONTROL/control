@@ -1,5 +1,5 @@
 Package: enigma2-plugin-extensions-linuxsat-panel
-Version: 2.6
+Version: 2.7
 Description: addons panel
 Section: extra
 Priority: optional
@@ -7,5 +7,5 @@ Maintainer: master G - Lululla - graph: oktus
 Architecture: all
 OE: 2.0/2.5-2.6
 Homepage: https://www.linuxsat-support.com
-Source: https://www.linuxsat-support.com
+Source: enigma2-plugin-extensions-linuxsat-panel
 

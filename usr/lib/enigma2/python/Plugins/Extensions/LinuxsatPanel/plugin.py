@@ -45,7 +45,7 @@ from Components.Pixmap import (Pixmap, MovingPixmap)
 from Components.PluginComponent import plugins
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
-from os import chmod, makedirs, popen, system, walk
+from os import chmod, makedirs, system, walk
 from os.path import exists, join
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
@@ -53,13 +53,15 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import (fileExists, resolveFilename, SCOPE_PLUGINS)
 from datetime import datetime
+from re import compile, search, DOTALL
 import codecs
 import json
-import re
 import ssl
 import sys
 import shutil
 import six
+import subprocess
+import base64
 from enigma import (
     RT_VALIGN_CENTER,
     RT_HALIGN_LEFT,
@@ -92,7 +94,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.6.7'
+currversion = '2.7'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -157,6 +159,13 @@ def ssl_urlopen(url):
         return urlopen(url)
 
 
+def run_command(cmd):
+    try:
+        return subprocess.check_output(cmd, shell=True).decode('utf-8').strip()
+    except subprocess.CalledProcessError:
+        return None
+
+
 try:
     from twisted.internet import ssl
     from twisted.internet._sslverify import ClientTLSOptions
@@ -207,11 +216,19 @@ def LPListEntry(name, item):
     res = [(name, item)]
     if fileExists(pngx):
         if isFHD():
-            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 5), size=(40, 40), png=loadPNG(pngx)))
-            res.append(MultiContentEntryText(pos=(55, 0), size=(920, 50), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+            if HALIGN == RT_HALIGN_RIGHT:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(940, 5), size=(40, 40), png=loadPNG(pngx)))
+                res.append(MultiContentEntryText(pos=(5, 0), size=(930, 50), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+            else:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 5), size=(40, 40), png=loadPNG(pngx)))
+                res.append(MultiContentEntryText(pos=(55, 0), size=(930, 50), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
         else:
-            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 7), size=(30, 30), png=loadPNG(pngx)))
-            res.append(MultiContentEntryText(pos=(45, 0), size=(615, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+            if HALIGN == RT_HALIGN_RIGHT:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(640, 7), size=(30, 30), png=loadPNG(pngx)))
+                res.append(MultiContentEntryText(pos=(5, 0), size=(590, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+            else:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 7), size=(30, 30), png=loadPNG(pngx)))
+                res.append(MultiContentEntryText(pos=(45, 0), size=(590, 35), font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
     return res
 
 
@@ -376,7 +393,7 @@ class LinuxsatPanel(Screen):
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort A-Z'))
+        self['sort'] = Label(_('Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -543,11 +560,11 @@ class LinuxsatPanel(Screen):
         if self.sorted:
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
-            self['sort'].setText(_('0 Sort A-Z'))
+            self['sort'].setText(_('Sort A-Z'))
         else:
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
-            self['sort'].setText(_('0 Sort Default'))
+            self['sort'].setText(_('Sort Default'))
 
         self.openTest()
 
@@ -667,7 +684,7 @@ class LSskin(Screen):
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort A-Z'))
+        self['sort'] = Label(_('Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -834,11 +851,11 @@ class LSskin(Screen):
         if self.sorted:
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
-            self['sort'].setText(_('0 Sort A-Z'))
+            self['sort'].setText(_('Sort A-Z'))
         else:
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
-            self['sort'].setText(_('0 Sort Default'))
+            self['sort'].setText(_('Sort Default'))
 
         self.openTest()
 
@@ -910,7 +927,7 @@ class LSChannel(Screen):
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort A-Z'))
+        self['sort'] = Label(_('Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -1077,11 +1094,11 @@ class LSChannel(Screen):
         if self.sorted:
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
-            self['sort'].setText(_('0 Sort A-Z'))
+            self['sort'].setText(_('Sort A-Z'))
         else:
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
-            self['sort'].setText(_('0 Sort Default'))
+            self['sort'].setText(_('Sort Default'))
 
         self.openTest()
 
@@ -1140,13 +1157,16 @@ class ScriptInstaller(Screen):
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player MOHAMED", "E2playerMOHAMED.png", 'wget -qO- --no-check-certificate https://mohamed_os.gitlab.io/e2iplayer/online-setup -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Historyzapselector_dorik.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Ipaudiopro_1.4.sh?inline=false" -O - | /bin/sh')
         # add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | /bin/sh')
+
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Adder", "keysadd.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
         add_menu_item_with_url(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
@@ -1202,7 +1222,7 @@ class ScriptInstaller(Screen):
         self["frame"] = MovingPixmap()
         self['info'] = Label()
         self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('0 Sort A-Z'))
+        self['sort'] = Label(_('Sort A-Z'))
         self['key_red'] = Label(_('Exit'))
         self["pixmap"] = Pixmap()
         self["actions"] = ActionMap(["OkCancelActions",
@@ -1433,11 +1453,11 @@ class ScriptInstaller(Screen):
         if self.sorted:
             self.names, self.titles, self.pics, self.urls = self.original_data
             self.sorted = False
-            self['sort'].setText(_('0 Sort A-Z'))
+            self['sort'].setText(_('Sort A-Z'))
         else:
             self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
             self.sorted = True
-            self['sort'].setText(_('0 Sort Default'))
+            self['sort'].setText(_('Sort Default'))
 
         self.openTest()
 
@@ -1464,7 +1484,6 @@ class ScriptInstaller(Screen):
         print('[okbuttonClick] self.url', self.url)
 
         if 'cccam.cfg' in self.namev.lower():
-            # self.getcl('CCcam')
             self.askForFcl()
             return
 
@@ -1562,9 +1581,7 @@ class ScriptInstaller(Screen):
         try:
             dat = RequestUrl()
             print('Request Server url is:', dat)
-            # data = checkGZIP(dat)
             data = make_request(dat)
-            # data = fetch_url(dat)
 
             if PY3:
                 data = six.ensure_str(data)
@@ -1608,18 +1625,13 @@ class ScriptInstaller(Screen):
             pas = None
             user = None
             for pattern in regex_patterns:
-                url1 = re.search(pattern, data)
+                url1 = search(pattern, data)
                 if url1:
                     host = url1.group(1)
                     port = url1.group(2)
                     user = url1.group(3)
                     pas = url1.group(4)
-                    '''
-                    print("Server:", host)
-                    print("Port:", port)
-                    print("User:", user)
-                    print("Password:", pas)
-                    '''
+
                 pas = pas.replace('</h1>', '').replace('</b>', '')
                 pasw = pas.replace('</div>', '').replace('</span>', '')
 
@@ -1660,12 +1672,10 @@ class addInstall(Screen):
             except:
                 pass
         skin = join(skin_path, 'addInstall.xml')
-
         '''
         if has_dpkg:
             skin = join(skin_path, 'addInstall-os.xml')  # now i have ctrlSkin for check
         '''
-
         with codecs.open(skin, "r", encoding="utf-8") as f:
             skin = f.read()
 
@@ -1680,9 +1690,9 @@ class addInstall(Screen):
         self['key_blue'] = Label(_('Restart enigma'))
         self['sort'] = Label()
         if HALIGN == RT_HALIGN_RIGHT:
-            self['sort'].setText(_('0 Halign Left'))
+            self['sort'].setText(_('Halign Left'))
         else:
-            self['sort'].setText(_('0 Halign Right'))
+            self['sort'].setText(_('Halign Right'))
         '''
         self.LcnOn = False
         if exists('/etc/enigma2/lcndb') and lngx == 'it':
@@ -1723,10 +1733,10 @@ class addInstall(Screen):
         global HALIGN
         if HALIGN == RT_HALIGN_LEFT:
             HALIGN = RT_HALIGN_RIGHT
-            self['sort'].setText(_('0 Halign Left'))
+            self['sort'].setText(_('Halign Left'))
         elif HALIGN == RT_HALIGN_RIGHT:
             HALIGN = RT_HALIGN_LEFT
-            self['sort'].setText(_('0 Halign Right'))
+            self['sort'].setText(_('Halign Right'))
 
         if self.dest is not None:
             self.downxmlpage()
@@ -1744,7 +1754,7 @@ class addInstall(Screen):
     def openTest(self):
         print('self.xml: ', self.fxml)
         regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
-        match = re.compile(regex, re.DOTALL).findall(self.fxml)
+        match = compile(regex, DOTALL).findall(self.fxml)
         self.names = []
         self.urls = []
         items = []
@@ -1763,9 +1773,9 @@ class addInstall(Screen):
 
     def buttons(self):
         if HALIGN == RT_HALIGN_RIGHT:
-            self['sort'].setText(_('0 Halign Left'))
+            self['sort'].setText(_('Halign Left'))
         else:
-            self['sort'].setText(_('0 Halign Right'))
+            self['sort'].setText(_('Halign Right'))
         # if self.LcnOn is True:
         # # self.LcnOn = False
         # # if exists('/etc/enigma2/lcndb') and lngx == 'it':
@@ -1850,22 +1860,19 @@ class addInstall(Screen):
         self.downloading = False
         r = make_request(self.fxml)
         if r is None:
-            print("Errore: Nessun dato ricevuto da make_request")
+            print("Error: No data received from make_request")
             return
         self.names = []
         self.urls = []
         items = []
-        # a = 0
         name = url = date = ''
         try:
-            # if a == 0:
             if 'ciefp' in self.name.lower():
                 n1 = r.find('title="README.txt', 0)
                 n2 = r.find('href="#readme">', n1)
                 r = r[n1:n2]
                 regex = r'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
-                match = re.compile(regex).findall(r)
-                # print('match:', match)
+                match = compile(regex).findall(r)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         url = url.replace('blob', 'raw')
@@ -1881,8 +1888,7 @@ class addInstall(Screen):
                 n2 = r.find("/ruleset>", n1)
                 r = r[n1:n2]
                 regex = r'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
-                match = re.compile(regex).findall(r)
-                # print('match:', match)
+                match = compile(regex).findall(r)
                 for name, url, date in match:
                     if url.find('.zip') != -1:
                         if 'ddt' in name.lower():
@@ -1897,8 +1903,7 @@ class addInstall(Screen):
 
             if 'manutek' in self.name.lower():
                 regex = r'href="/isetting/.*?file=(.+?).zip">'
-                match = re.compile(regex).findall(r)
-                # print('match:', match)
+                match = compile(regex).findall(r)
                 for url in match:
                     name = url
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
@@ -1913,8 +1918,7 @@ class addInstall(Screen):
                 # n1 = r.find('title="README.txt', 0)
                 # n2 = r.find('href="#readme">', n1)
                 # r = r[n1:n2]
-                match = re.compile(regex).findall(r)
-                # print('match:', match)
+                match = compile(regex).findall(r)
                 for name, url in match:
                     if url.find('.zip') != -1:
                         name = 'Morph883 ' + decode_html(name)
@@ -1926,19 +1930,7 @@ class addInstall(Screen):
                     items.sort()
 
             if 'vhannibal net' in self.name.lower():
-                '''
-                <tr class="site_content_row">
-                <td width="30"><img src="images/green_icon.png" alt="Aggiornato il 07/10/24 alle 10:24:57" width="30" height="30" title="Aggiornato il 07/10/24 alle 10:24:57"/></td>
-                <td><a href="download_setting.php?id=1&action=download" target="_blank">Vhannibal Hot Bird 13°E</a></td>
-                <td> 7 ott</td>
-                <td>858435</td>
-                <td width="30"><a href="download_setting.php?id=1&action=download" target="_blank"><img src="images/download_icon.png" width="30" height="30" alt="Scarica" /></a></td>
-                </tr>
-                '''
-
-                # r = six.ensure_str(r, errors='replace')
-
-                pattern = re.compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', re.DOTALL)
+                pattern = compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
                 matches = pattern.findall(r)
                 for match in matches:
                     url = match[0]
@@ -1956,7 +1948,7 @@ class addInstall(Screen):
 
             if 'vhannibal tek' in self.name.lower():
                 regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
-                match = re.compile(regex).findall(r)
+                match = compile(regex).findall(r)
                 for url, date in match:
                     if '.php' in url.lower():
                         continue
@@ -2188,35 +2180,44 @@ class LSinfo(Screen):
         pass
 
     def check_vers(self):
-        print('check version online')
+        print('Online version control...')
         remote_version = '0.0'
         remote_changelog = ''
-        req = Request(b64decoder(installer_url), headers={'User-Agent': AgentRequest})
-        page = urlopen(req).read()
-        if PY3:
-            data = page.decode("utf-8")
-        else:
-            data = page.encode("utf-8")
-        if data:
-            lines = data.split("\n")
-            for line in lines:
-                if line.startswith("version"):
-                    remote_version = line.split("=")
-                    remote_version = line.split("'")[1]
-                if line.startswith("changelog"):
-                    remote_changelog = line.split("=")
-                    remote_changelog = line.split("'")[1]
-                    break
-        self.new_version = remote_version
-        self.new_changelog = remote_changelog
-        # if float(currversion) < float(remote_version):
-        if currversion < remote_version:
-            self.Update = True
-            print('new version online')
-            self.mbox = self.session.open(MessageBox, _('New version %s is available\n\nChangelog: %s\n\nPress green button to start updating') % (self.new_version, self.new_changelog),
-                                          MessageBox.TYPE_INFO, timeout=5)
-            self['key_green'].setText(_('Update'))
-            self["pixmap"].show()
+        try:
+            decoded_url = base64.b64decode(installer_url).decode("utf-8")
+            req = Request(decoded_url, headers={'User-Agent': AgentRequest})
+            page = urlopen(req).read()
+
+            if PY3:
+                data = page.decode("utf-8")
+            else:
+                data = page.encode("utf-8")
+
+            if data:
+                lines = data.split("\n")
+                for line in lines:
+                    if line.startswith("version"):
+                        remote_version = line.split("=")[1].strip().strip("'")
+                    if line.startswith("changelog"):
+                        remote_changelog = line.split("=")[1].strip().strip("'")
+                        break
+
+            self.new_version = remote_version
+            self.new_changelog = remote_changelog
+
+            if currversion < remote_version:
+                self.Update = True
+                print('New version online:', self.new_version)
+                self.mbox = self.session.open(
+                    MessageBox,
+                    _('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
+                    MessageBox.TYPE_INFO,
+                    timeout=5
+                )
+                self['key_green'].setText(_('Update'))
+                self["pixmap"].show()
+        except Exception as e:
+            print("Error while checking version:", e)
 
     def update_me(self):
         if self.Update is True:
@@ -2255,10 +2256,8 @@ class LSinfo(Screen):
             if self.name == " Information ":
                 # self.infoBox()
                 self.openinfo()
-
             # elif self.name == " Info ":
                 # self.infoBox()
-
             elif self.name == " About ":
                 # ab = fetch_url(abouturl)
                 with open(join(plugin_path, 'LICENSE'), 'r') as filer:
@@ -2286,12 +2285,15 @@ class LSinfo(Screen):
         zarcffll = ''
         try:
             if has_dpkg:
-                zarcffll = popen('dpkg --print-architecture | grep -iE "arm|aarch64|mips|cortex|sh4|sh_4"').read().strip('\n\r')
+                cmd = 'dpkg --print-architecture'
             else:
-                zarcffll = popen('opkg print-architecture | grep -iE "arm|aarch64|mips|cortex|h4|sh_4"').read().strip('\n\r')
+                cmd = 'opkg print-architecture'
+            result = run_command(cmd)
+            if result and any(arch in result.lower() for arch in ["arm", "aarch64", "mips", "cortex", "sh4", "sh_4"]):
+                zarcffll = result
         except Exception as e:
-            print("Error ", e)
-        return str(zarcffll)
+            print("Error while retrieving architecture:", e)
+        return zarcffll
 
     def openinfo(self, callback=''):
         from .addons.stbinfo import stbinfo
@@ -2322,18 +2324,27 @@ class LSinfo(Screen):
     def infoBox(self):
         info = '%s V.%s\n\n' % (descplug, currversion)
         try:
-            arkFull = ''
+            """
             if self.arckget():
                 arkFull = self.arckget()
                 print('arkget= ', arkFull)
-            img = popen('cat /etc/issue').read().strip('\n\r')
-            img = img.replace('\\l', '')
-            python = popen('python -V').read().strip('\n\r')
-            arc = popen('uname -m').read().strip('\n\r')
-            ifg = popen('wget -qO - ifconfig.me').read().strip('\n\r')
-            libs = popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
-            if libs:
-                libsssl = libs
+            # img = popen('cat /etc/issue').read().strip('\n\r')
+            # img = img.replace('\\l', '')
+            # python = popen('python -V').read().strip('\n\r')
+            # arc = popen('uname -m').read().strip('\n\r')
+            # ifg = popen('wget -qO - ifconfig.me').read().strip('\n\r')
+            # libs = popen('ls -l /usr/lib/libss*.*').read().strip('\n\r')
+            # if libs:
+                # libsssl = libs
+            """
+            arkFull = self.arckget if self.arckget() else 'N/A'
+            img = run_command('cat /etc/issue').replace('\\l', '')
+            python = run_command('python -V')
+            arc = run_command('uname -m')
+            ifg = run_command('wget -qO - ifconfig.me')
+            libs = run_command('ls -l /usr/lib/libss*.*')
+            libsssl = libs if libs else None
+
             info += 'Suggested by: @masterG - @oktus - @pcd\n'
             info += 'All code was rewritten by @Lululla - 2024.07.20\n'
             info += 'Designs and Graphics by @oktus\n'

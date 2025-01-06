@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from .. import _
+
 from enigma import (eServiceReference, eServiceCenter)
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -19,15 +20,19 @@ from Components.config import (
     ConfigSelection,
     configfile,
 )
+
 import os
 import sys
 import re
 import glob
 import shutil
+
+
 try:
     from xml.etree.cElementTree import parse
 except ImportError:
     from xml.etree.ElementTree import parse
+
 
 # plugin_path = os.path.dirname(sys.modules[__name__].__file__)
 plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
@@ -67,7 +72,7 @@ def ReloadBouquets(x):
         os.system("wget -qO - http://127.0.0.1/web/servicelistreload?mode=2 > /dev/null 2>&1 &")
         os.system("wget -qO - http://127.0.0.1/web/servicelistreload?mode=4 > /dev/null 2>&1 &")
         print("wGET: bouquets reloaded...")
-    return  # x
+    return
 
 
 def Bouquet():

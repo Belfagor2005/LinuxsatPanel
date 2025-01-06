@@ -18,9 +18,7 @@ encounter once you install the plugins and skins.
 However, if required, you can get help to resolve the issue.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Init version 2.0 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 20240809 2.1 version is online
@@ -97,4 +95,29 @@ Changelog:
 --Fix Execution Script
 --Add Info on Exit
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20241224 2.6.6 version is online
+
+Changelog:
+--Fix Other Execution Script
+--Add Info PopUP
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250106 2.6.7 version is online
+
+Changelog:
+--Removed Christmas Bot
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250106 2.7 version is online
+
+Changelog:
+--Fix Arabic menulist
+--Fix Command utility_Get
+--Fix Screen
+--Fix Sort & Halign
+--Minor fix
 

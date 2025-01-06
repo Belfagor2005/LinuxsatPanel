@@ -4,22 +4,24 @@
 	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
 	<!-- list -->
 	<widget name="list" position="55,170" size="680,425" zPosition="4" scrollbarMode="showOnDemand" itemCornerRadius="19" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="5" />
-	<widget name="info" position="775,115" zPosition="4" size="455,60" font="Regular; 24" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+	<widget name="info" position="57,115" zPosition="4" size="678,52" font="lsat; 24" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
 	<widget name="fspace" position="57,604" size="678,44" zPosition="4" font="lbsat;22" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
-	<widget name="sort" position="805,560" zPosition="4" size="455,60" font="lmsat; 28" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="left" valign="center" />
+	<widget name="sort" position="836,651" zPosition="4" size="429,44" font="lsat; 24" foregroundColor="#0049bbff" backgroundColor="dark" transparent="1" halign="left" valign="center" />
+	<eLabel name="" position="798,647" size="52,52" backgroundColor="dark" halign="center" valign="center" transparent="1" cornerRadius="26" font="lsat; 26" zPosition="1" text="0" foregroundColor="#0049bbff" />
+
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="802,294" size="415,235" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->
-	<widget source="global.CurrentTime" render="Label" position="1059,600" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1059,550" size="200,60" font="lsat; 50" noWrap="1" halign="center" valign="bottom" foregroundColor="#0049bbff" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Default</convert>
 	</widget>
-	<widget source="global.CurrentTime" render="Label" position="1049,640" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
+	<widget source="global.CurrentTime" render="Label" position="1049,590" size="223,36" font="lsat; 16" halign="center" valign="bottom" foregroundColor="#707070" backgroundColor="#20000000" transparent="1" zPosition="2">
 		<convert type="ClockToText">Format %A %d %B</convert>
 	</widget>
 
 	<!-- buttons -->
-	<widget name="key_red" position="57,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_green" position="301,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_yellow" position="543,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-	<widget name="key_blue" position="779,660" size="250,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_red" position="37,660" size="170,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_green" position="221,660" size="170,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_yellow" position="403,660" size="170,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	<widget name="key_blue" position="584,660" size="200,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 </screen>

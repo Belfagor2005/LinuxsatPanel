@@ -284,12 +284,10 @@ def b64decoder(s):
     import base64
     import sys
     try:
-
         output = base64.b64decode(s)
         if sys.version_info[0] == 3:
             output = output.decode('utf-8')
         return output
-
     except Exception:
         padding = len(s) % 4
         if padding == 1:
@@ -301,7 +299,6 @@ def b64decoder(s):
             s += b'='
         else:
             return ""
-
         output = base64.b64decode(s)
         if sys.version_info[0] == 3:
             output = output.decode('utf-8')
@@ -312,7 +309,7 @@ def make_request(url, max_retries=3, base_delay=1):
     import time
     import socket
     import sys
-    # import six
+    import six
 
     if sys.version_info[0] == 3:
         from urllib.request import (urlopen, Request)
@@ -334,15 +331,10 @@ def make_request(url, max_retries=3, base_delay=1):
                 if not content:
                     return None
                 try:
-                    content = content.decode('utf-8')
+                    content = six.ensure_str(content, errors='replace')
                 except UnicodeDecodeError:
                     print("Decoding error with 'utf-8', trying 'latin-1'...")
                     content = content.decode('latin-1', errors='replace')
-                # try:
-                    # content = six.ensure_str(content, errors='replace')
-                # except UnicodeDecodeError:
-                    # print("Decoding error with 'utf-8', trying 'latin-1'...")
-                    # content = content.decode('latin-1', errors='replace')
                 print("Contenuto decodificato con latin-1:\n", content)
                 return content
         except URLError as e:
