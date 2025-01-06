@@ -10,8 +10,7 @@ from Screens.Screen import Screen
 from Tools.Directories import fileExists
 from enigma import eLabel
 from errno import ENOENT
-from os import system, remove
-import skin
+from os import system
 
 DEFAULT_MODULE_NAME = __name__.split(".")[-1]
 pname = _("File Commander - Addon")
@@ -86,8 +85,6 @@ class File_Commander(Screen):
         self.setTitle(self.newtitle)
 
     def exitEditor(self):
-        # if fileExists(self.file_name):
-            # remove(self.file_name)
         self.close()
 
     def GetFileData(self, fx):

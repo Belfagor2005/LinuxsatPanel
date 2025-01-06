@@ -17,7 +17,6 @@ except ImportError:
     from Tools.Directories import SCOPE_GUISKIN
 from Tools.Directories import fileExists, resolveFilename
 import os
-import re
 import sys
 from os import remove
 
@@ -31,7 +30,6 @@ cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 skin_base_fold = "%senigma2/%s/" % (mvi, cur_skin)
 user_skin_file = tmplog + 'merged_' + cur_skin + '.xml'
 user_log = tmplog + 'my_debug.log'
-
 
 
 # Funzione di logging
@@ -80,7 +78,8 @@ def checkComponent(myContent, look4Component, myPath, found_files):
         checklogskin("Missing component found: %s" % name)
 
     try:
-        r = re.findall(r' %s="([a-zA-Z0-9_/\.]+)"' % look4Component, myContent)
+        from re import findall
+        r = findall(r' %s="([a-zA-Z0-9_/\.]+)"' % look4Component, myContent)
         r = list(set(r))
         checklogskin("I found components: %s" % r)
 

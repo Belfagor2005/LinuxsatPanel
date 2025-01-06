@@ -57,11 +57,10 @@ def newOE():
     return boo
 
 
-
 patterns_to_remove = [
-    r'scrollbarWidth="[^"]*"', 
-    r'scrollbarSliderBorderWidth="[^"]*"', 
-    r'textoffsets\s*="[^"]*"', 
+    r'scrollbarWidth="[^"]*"',
+    r'scrollbarSliderBorderWidth="[^"]*"',
+    r'textoffsets\s*="[^"]*"',
     r'secondfont\s*="[^"]*"'
 ]
 
@@ -73,7 +72,7 @@ def ctrlSkin(pank, skin):
     # Edit only if `newOE()` is True or `/etc/opkg/nn2-feed.conf` exists
     if newOE() or isfile('/etc/opkg/nn2-feed.conf') or isfile("/usr/bin/apt-get"):
         for pattern in patterns_to_remove:
-            skin = re.sub(pattern, '', skin)
+            skin = sub(pattern, '', skin)
         # Remove "font" only if a widget has `scrollbarMode` with one of the specific values
         for keyword in scrollbar_keywords:
             if 'scrollbarMode="' in skin:  # Cerca scrollbarMode nel widget

@@ -4,14 +4,6 @@ import uuid
 import socket
 import platform
 
-'''
-try:
-    from .stbinfo import stbinfo
-    print('STB info:\n%s' % stbinfo.to_string())
-except:
-    pass
-'''
-
 
 class StbInfo:
     def __init__(self):
