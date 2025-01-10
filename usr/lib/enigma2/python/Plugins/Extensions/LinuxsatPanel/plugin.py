@@ -2197,10 +2197,14 @@ class LSinfo(Screen):
                 lines = data.split("\n")
                 for line in lines:
                     if line.startswith("version"):
-                        remote_version = line.split("=")[1].strip().strip("'")
+                        parts = line.split("=")
+                        if len(parts) > 1:
+                            remote_version = parts[1].strip().strip("'")
                     if line.startswith("changelog"):
-                        remote_changelog = line.split("=")[1].strip().strip("'")
-                        break
+                        parts = line.split("=")
+                        if len(parts) > 1:
+                            remote_changelog = parts[1].strip().strip("'")
+                            break
 
             self.new_version = remote_version
             self.new_changelog = remote_changelog
@@ -2218,6 +2222,7 @@ class LSinfo(Screen):
                 self["pixmap"].show()
         except Exception as e:
             print("Error while checking version:", e)
+
 
     def update_me(self):
         if self.Update is True:
