@@ -4,14 +4,7 @@
 
 ## Only This 2 lines to edit with new version ######
 version='2.6.7'
-changelog=(
-    "\n"
-    "-- Fix Arabic menulist\n"
-    "-- Fix Command utility_Get\n"
-    "-- Fix Screen\n"
-    "-- Fix Sort & Halign\n"
-    "-- Minor fix"
-)
+changelog=("\n-- Fix Arabic menulist\n-- Fix Command utility_Get\n-- Fix Screen\n-- Fix Sort & Halign\n-- Minor fix")
 
 ##############################################################
 
