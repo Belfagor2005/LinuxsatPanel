@@ -6,7 +6,6 @@
 version='2.7.0'
 changelog="\n-- Removed Arabic menulist\n-- Removed Halign\n-- Minor fix\n"
 
-
 ##############################################################
 
 TMPPATH=/tmp/LinuxsatPanel-main
