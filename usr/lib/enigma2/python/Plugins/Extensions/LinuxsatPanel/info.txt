@@ -116,7 +116,7 @@ Changelog:
 --Minor fix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20250106 2.7.0 version is online
+20250106 2.7.2 version is online
 
 Changelog:
 --Removed Arabic menulist
