@@ -43,7 +43,6 @@ AgentRequest = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KH
 infourl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/info.txt'
 abouturl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/about.txt'
 xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_2024.xml'
-# xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons_20242.xml'
 installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
 developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
 
@@ -171,9 +170,9 @@ def add_skin_font():
     # addFont(filename, name, scale, isReplacement, render)
     if any(s in lngx for s in locl):
         HALIGN = RT_HALIGN_RIGHT
-        addFont((FNTPath + '/DejaVuSans.ttf'), 'lsat', 100, 1)
-        addFont((FNTPath + '/DejaVuSans.ttf'), 'lmsat', 100, 1)
-        addFont((FNTPath + '/DejaVuSans.ttf'), 'lbsat', 100, 1)
+        addFont((FNTPath + '/DejaVuSans.otf'), 'lsat', 100, 1)
+        addFont((FNTPath + '/DejaVuSans.otf'), 'lmsat', 100, 1)
+        addFont((FNTPath + '/DejaVuSans.otf'), 'lbsat', 100, 1)
     else:
         addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
         addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)

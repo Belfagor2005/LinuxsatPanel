@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-01-06 18:47+0100\n"
+"POT-Creation-Date: 2025-02-01 23:03+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,37 +13,35 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: LCNScanner/Lcn.py:444 LCNScanner/Lcn.py:451
+#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
 msgid "No entry in lcn db. Please do a service scan."
 msgstr "Nessuna voce nel database LCN. Eseguire una scansione del servizio."
 
-#: LCNScanner/Lcn.py:471
+#: LCNScanner/Lcn.py:476
 msgid "Enable terrestrial LCN:"
 msgstr "Abilita LCN terrestre:"
 
-#: LCNScanner/Lcn.py:472
+#: LCNScanner/Lcn.py:477
 msgid "Terrestrial bouquet:"
 msgstr "Bouquet Terrestre:"
 
-#: LCNScanner/Lcn.py:473
+#: LCNScanner/Lcn.py:478
 msgid "LCN rules:"
 msgstr "Regole LCN:"
 
-#: LCNScanner/Lcn.py:477
+#: LCNScanner/Lcn.py:482
 msgid "Rebuild"
 msgstr "Ricostruzione"
 
-#: LCNScanner/Lcn.py:478 addons/File_Commander.py:73 addons/File_Commander.py:74
-#: addons/File_Commander.py:76 lsConsole.py:123 ⁨plugin - ~~.py⁩:381 ⁨plugin - ~~.py⁩:669
-#: ⁨plugin - ~~.py⁩:909 ⁨plugin - ~~.py⁩:1187 ⁨plugin - ~~.py⁩:1621 plugin-.py:370
-#: plugin-.py:633 plugin-.py:849 plugin-.py:1105 plugin-.py:1519 plugin.py:397
-#: plugin.py:688 plugin.py:931 plugin.py:1226 plugin.py:1687 plugin.py:2466
-#: plugin~.py:467 plugin~.py:752 plugin~.py:990 plugin~.py:1332 plugin~.py:1672
-#: plugin~~.py:395 plugin~~.py:678 plugin~~.py:913 plugin~~.py:1198 plugin~~.py:1626
+#: LCNScanner/Lcn.py:483 addons/File_Commander.py:72 addons/File_Commander.py:73
+#: addons/File_Commander.py:75 lsConsole.py:123 ⁨plugin - Copia.py⁩:397
+#: ⁨plugin - Copia.py⁩:688 ⁨plugin - Copia.py⁩:931 ⁨plugin - Copia.py⁩:1229
+#: ⁨plugin - Copia.py⁩:1690 ⁨plugin - Copia.py⁩:2474 plugin.py:417 plugin.py:708
+#: plugin.py:951 plugin.py:1249 plugin.py:1710 plugin.py:2525
 msgid "Exit"
 msgstr "Esci"
 
-#: LCNScanner/Lcn.py:493
+#: LCNScanner/Lcn.py:498
 msgid "Rebuild LCN bouquet now?"
 msgstr "Vuoi ricostruire il bouquet LCN adesso?"
 
@@ -162,11 +160,12 @@ msgstr "Il plugin Terrestrial Bouquet non è abilitato."
 
 #: LCNScanner/Terrestrial.py:116
 msgid ""
-"Try running a manual scan of terrestrial frequencies with network scan enabled. If "
-"this fails maybe there is no lcn data available in your area."
+"Try running a manual scan of terrestrial frequencies with network scan enabled. "
+"If this fails maybe there is no lcn data available in your area."
 msgstr ""
-"Prova a eseguire una scansione manuale delle frequenze terrestri con la scansione di "
-"rete abilitata. Se fallisce, forse non ci sono dati lcn disponibili nella tua zona."
+"Prova a eseguire una scansione manuale delle frequenze terrestri con la "
+"scansione di rete abilitata. Se fallisce, forse non ci sono dati lcn "
+"disponibili nella tua zona."
 
 #: LCNScanner/Terrestrial.py:119
 msgid "There is currently no LCN data stored."
@@ -178,7 +177,8 @@ msgstr "Non sono stati trovati servizi terrestri corrispondenti."
 
 #: LCNScanner/Terrestrial.py:207
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr "Costruisci/ricostruisci ora il bouquet terrestre in base all'ultima scansione."
+msgstr ""
+"Costruisci/ricostruisci ora il bouquet terrestre in base all'ultima scansione."
 
 #: LCNScanner/Terrestrial.py:208
 msgid "Terrestrial Bouquet setup"
@@ -190,10 +190,11 @@ msgstr "Abilita Bouquet Terrestre"
 
 #: LCNScanner/Terrestrial.py:214
 msgid ""
-"Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
+"data."
 msgstr ""
-"Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero di canale "
-"logo)."
+"Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero di "
+"canale logo)."
 
 #: LCNScanner/Terrestrial.py:214
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
@@ -201,10 +202,11 @@ msgstr "Questo plugin dipende dai dati LCN trasmessi dal trasmettitore locale."
 
 #: LCNScanner/Terrestrial.py:214
 msgid ""
-"Once configured the bouquet will be updated automatically when doing a manual scan."
+"Once configured the bouquet will be updated automatically when doing a manual "
+"scan."
 msgstr ""
-"Una volta configurato, il bouquet verrà aggiornato automaticamente quando si esegue "
-"una scansione manuale."
+"Una volta configurato, il bouquet verrà aggiornato automaticamente quando si "
+"esegue una scansione manuale."
 
 #: LCNScanner/Terrestrial.py:214
 msgid "Please make certain network search is enabled when scanning."
@@ -224,11 +226,12 @@ msgstr "Crea un bouquet radio separato"
 
 #: LCNScanner/Terrestrial.py:217
 msgid ""
-"Put radio services in a separate bouquet, not the main tv bouquet. This is required "
-"when the provider duplicates channel numbers for tv and radio."
+"Put radio services in a separate bouquet, not the main tv bouquet. This is "
+"required when the provider duplicates channel numbers for tv and radio."
 msgstr ""
-"Metti i servizi radio in un bouquet separato, non nel bouquet tv principale. Questo "
-"è necessario quando il provider duplica i numeri dei canali per tv e radio."
+"Metti i servizi radio in un bouquet separato, non nel bouquet tv principale. "
+"Questo è necessario quando il provider duplica i numeri dei canali per tv e "
+"radio."
 
 #: LCNScanner/Terrestrial.py:218
 msgid "Skip duplicates"
@@ -257,29 +260,29 @@ msgstr "Bouquet Terrestre"
 
 #: LCNScanner/Terrestrial.py:265
 msgid ""
-"Create an ordered bouquet of terrestrial services based on LCN data from your local "
-"transmitter."
+"Create an ordered bouquet of terrestrial services based on LCN data from your "
+"local transmitter."
 msgstr ""
 "Crea un bouquet ordinato di servizi terrestri basato sui dati LCN del tuo "
 "trasmettitore locale."
 
-#: __init__.py:203 __init__.py:207
+#: __init__.py:202 __init__.py:206
 msgid "Free Space:"
 msgstr "Spazio Libero:"
 
-#: __init__.py:203 __init__.py:207
+#: __init__.py:202 __init__.py:206
 msgid "of"
 msgstr ""
 
-#: addons/File_Commander.py:17
+#: addons/File_Commander.py:16
 msgid "File Commander - Addon"
 msgstr "File Commander - Addon"
 
-#: addons/File_Commander.py:18
+#: addons/File_Commander.py:17
 msgid "play/show Files"
 msgstr "play/show Files"
 
-#: addons/File_Commander.py:75
+#: addons/File_Commander.py:74
 msgid "Save"
 msgstr "Salva"
 
@@ -303,29 +306,41 @@ msgstr ""
 "Esecuzione in corso\n"
 "\n"
 
-#: ⁨plugin - ~~.py⁩:379 ⁨plugin - ~~.py⁩:667 ⁨plugin - ~~.py⁩:907 ⁨plugin - ~~.py⁩:1185
-#: ⁨plugin - ~~.py⁩:1640 ⁨plugin - ~~.py⁩:2050 plugin-.py:368 plugin-.py:631 plugin-.py:847
-#: plugin-.py:1103 plugin-.py:1538 plugin-.py:1948 plugin.py:395 plugin.py:686
-#: plugin.py:929 plugin.py:1224 plugin.py:1706 plugin.py:2137 plugin~.py:465
-#: plugin~.py:750 plugin~.py:988 plugin~.py:1330 plugin~.py:1691 plugin~.py:2126
-#: plugin~~.py:393 plugin~~.py:676 plugin~~.py:911 plugin~~.py:1196 plugin~~.py:1645
-#: plugin~~.py:2055
+#: ⁨plugin - Copia.py⁩:294 ⁨plugin - Copia.py⁩:297 ⁨plugin - Copia.py⁩:646
+#: ⁨plugin - Copia.py⁩:649 ⁨plugin - Copia.py⁩:896 ⁨plugin - Copia.py⁩:899
+#: ⁨plugin - Copia.py⁩:1131 ⁨plugin - Copia.py⁩:1134 ⁨plugin - Copia.py⁩:1671
+#: ⁨plugin - Copia.py⁩:1674 ⁨plugin - Copia.py⁩:2121 ⁨plugin - Copia.py⁩:2124
+#: ⁨plugin - Copia.py⁩:2381 ⁨plugin - Copia.py⁩:2384 ⁨plugin - Copia.py⁩:2452
+#: ⁨plugin - Copia.py⁩:2455 plugin.py:314 plugin.py:317 plugin.py:666 plugin.py:669
+#: plugin.py:916 plugin.py:919 plugin.py:1151 plugin.py:1154 plugin.py:1691
+#: plugin.py:1694 plugin.py:2148 plugin.py:2151 plugin.py:2432 plugin.py:2435
+#: plugin.py:2503 plugin.py:2506
+#, python-format
+msgid "%s"
+msgstr ""
+
+#: ⁨plugin - Copia.py⁩:395 ⁨plugin - Copia.py⁩:686 ⁨plugin - Copia.py⁩:929
+#: ⁨plugin - Copia.py⁩:1227 ⁨plugin - Copia.py⁩:1709 ⁨plugin - Copia.py⁩:2140
+#: plugin.py:415 plugin.py:706 plugin.py:949 plugin.py:1247 plugin.py:1732
+#: plugin.py:2167
 msgid "Please Wait..."
 msgstr "Attendi Prego..."
 
-#: ⁨plugin - ~~.py⁩:380 ⁨plugin - ~~.py⁩:551 ⁨plugin - ~~.py⁩:668 ⁨plugin - ~~.py⁩:839
-#: ⁨plugin - ~~.py⁩:908 ⁨plugin - ~~.py⁩:1079 ⁨plugin - ~~.py⁩:1186 ⁨plugin - ~~.py⁩:1397
-#: plugin~~.py:394 plugin~~.py:561 plugin~~.py:677 plugin~~.py:844 plugin~~.py:912
-#: plugin~~.py:1079 plugin~~.py:1197 plugin~~.py:1404
-msgid "0 Sort A-Z"
-msgstr "0 Ordinamento A-Z"
+#: ⁨plugin - Copia.py⁩:396 ⁨plugin - Copia.py⁩:563 ⁨plugin - Copia.py⁩:687
+#: ⁨plugin - Copia.py⁩:854 ⁨plugin - Copia.py⁩:930 ⁨plugin - Copia.py⁩:1097
+#: ⁨plugin - Copia.py⁩:1228 ⁨plugin - Copia.py⁩:1459 plugin.py:416 plugin.py:583
+#: plugin.py:707 plugin.py:874 plugin.py:950 plugin.py:1117 plugin.py:1248
+#: plugin.py:1479
+msgid "Sort A-Z"
+msgstr "Ordinamento A-Z"
 
-#: ⁨plugin - ~~.py⁩:556 ⁨plugin - ~~.py⁩:844 ⁨plugin - ~~.py⁩:1084 ⁨plugin - ~~.py⁩:1402
-#: plugin~~.py:565 plugin~~.py:848 plugin~~.py:1083 plugin~~.py:1408
-msgid "0 Sort Default"
-msgstr "0 Ordinamento Predefinito"
+#: ⁨plugin - Copia.py⁩:567 ⁨plugin - Copia.py⁩:858 ⁨plugin - Copia.py⁩:1101
+#: ⁨plugin - Copia.py⁩:1463 plugin.py:587 plugin.py:878 plugin.py:1121
+#: plugin.py:1483
+msgid "Sort Default"
+msgstr "Ordinamento Predefinito"
 
-#: ⁨plugin - ~~.py⁩:586 plugin-.py:555 plugin.py:597 plugin~.py:646 plugin~~.py:595
+#: ⁨plugin - Copia.py⁩:597 plugin.py:617
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -335,17 +350,17 @@ msgstr ""
 "\n"
 "Sei sicuro di voler continuare?"
 
-#: ⁨plugin - ~~.py⁩:626 ⁨plugin - ~~.py⁩:873 plugin.py:637 plugin.py:887 plugin~~.py:635
-#: plugin~~.py:877
+#: ⁨plugin - Copia.py⁩:637 ⁨plugin - Copia.py⁩:887 plugin.py:657 plugin.py:907
 msgid "Error: No Data Find."
 msgstr ""
 
-#: ⁨plugin - ~~.py⁩:1227 plugin-.py:1145 plugin~~.py:1238
-msgid "Do you want to Order LCN Bouquet"
-msgstr "Vuoi ordinare il bouquet LCN"
+#: ⁨plugin - Copia.py⁩:1269 ⁨plugin - Copia.py⁩:1282 ⁨plugin - Copia.py⁩:1982
+#: ⁨plugin - Copia.py⁩:1995 plugin.py:1289 plugin.py:1302 plugin.py:2009
+#: plugin.py:2022
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Vuoi ordinare il bouquet LCN?"
 
-#: ⁨plugin - ~~.py⁩:1238 ⁨plugin - ~~.py⁩:1941 plugin-.py:1156 plugin-.py:1839
-#: plugin.py:1297 plugin.py:2010 plugin~~.py:1249 plugin~~.py:1946
+#: ⁨plugin - Copia.py⁩:1300 ⁨plugin - Copia.py⁩:2013 plugin.py:1320 plugin.py:2040
 msgid ""
 "[LCNScanner] LCN scan finished\n"
 "Channels Ordered!"
@@ -353,21 +368,36 @@ msgstr ""
 "[LCNScanner] Scansione LCN completata\n"
 "Canali ordinati!"
 
-#: ⁨plugin - ~~.py⁩:1245 plugin-.py:1163 plugin.py:1308 plugin~~.py:1256
+#: ⁨plugin - Copia.py⁩:1311 plugin.py:1331
 msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
+"[Checkskin] This operation checks if the skin has its components (is not "
+"sure)..\n"
 "Do you really want to continue?"
 msgstr ""
 "[Checkskin] Questa operazione controlla se la skin ha i suoi componenti (non è "
 "sicuro).\n"
 "Vuoi davvero continuare?"
 
-#: ⁨plugin - ~~.py⁩:1446 plugin-.py:1344 plugin~.py:1518 plugin~~.py:1452
+#: ⁨plugin - Copia.py⁩:1506 plugin.py:1526
 #, python-format
-msgid "Do you want to execute %s?"
-msgstr "Vuoi eseguire %s ?"
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, you "
+"can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to execute %s?"
+msgstr ""
+"NON sono responsabile per eventuali problemi che potresti\n"
+"riscontrare una volta installati i plugin e le skin.\n"
+"                                                     Tuttavia, se necessario, "
+"puoi ottenere assistenza per risolvere il problema.\n"
+"\n"
+"\n"
+"Vuoi eseguire %s?"
 
-#: ⁨plugin - ~~.py⁩:1451 plugin-.py:1349 plugin.py:1509 plugin~.py:1523 plugin~~.py:1457
+#: ⁨plugin - Copia.py⁩:1512 plugin.py:1532
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -376,11 +406,11 @@ msgstr ""
 "Eseguo %s\n"
 "Attendere Prego..."
 
-#: ⁨plugin - ~~.py⁩:1466 plugin-.py:1364 plugin.py:1524 plugin~~.py:1472
+#: ⁨plugin - Copia.py⁩:1527 plugin.py:1547
 msgid "Do you want add Cline?"
 msgstr "Vuoi aggiungere Cine?"
 
-#: ⁨plugin - ~~.py⁩:1490 plugin-.py:1388 plugin.py:1547 plugin~.py:1540 plugin~~.py:1495
+#: ⁨plugin - Copia.py⁩:1550 plugin.py:1570
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -388,7 +418,7 @@ msgstr ""
 "File non trovato /etc/CCcam.cfg!\n"
 "Riavvia prego..."
 
-#: ⁨plugin - ~~.py⁩:1499 plugin-.py:1397 plugin.py:1556 plugin~.py:1549 plugin~~.py:1504
+#: ⁨plugin - Copia.py⁩:1559 plugin.py:1579
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -396,7 +426,7 @@ msgstr ""
 "File non trovato /etc/tuxbox/config/oscam.server!\n"
 "Riavvia prego..."
 
-#: ⁨plugin - ~~.py⁩:1598 plugin-.py:1496 plugin.py:1653 plugin~.py:1646 plugin~~.py:1603
+#: ⁨plugin - Copia.py⁩:1656 plugin.py:1676
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -413,203 +443,7 @@ msgstr ""
 "User:%s\n"
 "Password:%s\n"
 
-#: ⁨plugin - ~~.py⁩:1601 plugin-.py:1499 plugin~.py:1648 plugin~~.py:1606
-msgid ""
-"Server Error.\n"
-"\n"
-"Try again, you'll be luckier!"
-msgstr ""
-"Server Error.\n"
-"\n"
-"Riprova, sarai più fortunato!"
-
-#: ⁨plugin - ~~.py⁩:1622 plugin-.py:1520 plugin.py:1688 plugin~.py:1673 plugin~~.py:1627
-msgid "Install"
-msgstr "Installa/Aggiorna"
-
-#: ⁨plugin - ~~.py⁩:1623 plugin-.py:1521 plugin.py:1689 plugin~.py:1674 plugin~~.py:1628
-msgid "Remove"
-msgstr "Rimuovi"
-
-#: ⁨plugin - ~~.py⁩:1624 plugin-.py:1522 plugin.py:1690 plugin~.py:1675 plugin~~.py:1629
-msgid "Restart enigma"
-msgstr "Riavvia Enigma"
-
-#: ⁨plugin - ~~.py⁩:1627 ⁨plugin - ~~.py⁩:1669 ⁨plugin - ~~.py⁩:1709 plugin-.py:1525
-#: plugin-.py:1567 plugin-.py:1607 plugin~.py:1678 plugin~.py:1720 plugin~.py:1760
-#: plugin~~.py:1632 plugin~~.py:1674 plugin~~.py:1714
-msgid "0 Halign Left"
-msgstr "0 Allinea Sx"
-
-#: ⁨plugin - ~~.py⁩:1629 ⁨plugin - ~~.py⁩:1672 ⁨plugin - ~~.py⁩:1711 plugin-.py:1527
-#: plugin-.py:1570 plugin-.py:1609 plugin~.py:1680 plugin~.py:1723 plugin~.py:1762
-#: plugin~~.py:1634 plugin~~.py:1677 plugin~~.py:1716
-msgid "0 Halign Right"
-msgstr "0 Allinea Dx"
-
-#: ⁨plugin - ~~.py⁩:1642 plugin-.py:1540 plugin.py:1708 plugin~.py:1693 plugin~~.py:1647
-msgid "Load Category..."
-msgstr "Carico Categoria..."
-
-#: ⁨plugin - ~~.py⁩:1681 plugin-.py:1579 plugin.py:1748 plugin~.py:1732 plugin~~.py:1686
-msgid "Category: "
-msgstr "Categoria: "
-
-#: ⁨plugin - ~~.py⁩:1734 ⁨plugin - ~~.py⁩:1743 plugin-.py:1632 plugin-.py:1641
-#: plugin.py:1801 plugin.py:1810 plugin~.py:1786 plugin~.py:1796 plugin~~.py:1739
-#: plugin~~.py:1748
-msgid "Unknow Image!"
-msgstr "Immagine non corretta!"
-
-#: ⁨plugin - ~~.py⁩:1755 plugin-.py:1653 plugin.py:1822 plugin~.py:1808 plugin~~.py:1760
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "Vuoi installare %s ?"
-
-#: ⁨plugin - ~~.py⁩:1789 ⁨plugin - ~~.py⁩:1984 plugin-.py:1687 plugin-.py:1882
-#: plugin.py:1856 plugin.py:2058 plugin~.py:1842 plugin~.py:2051 plugin~~.py:1794
-#: plugin~~.py:1989
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"Installa %s\n"
-"Attendere Prego..."
-
-#: ⁨plugin - ~~.py⁩:1925 plugin-.py:1823 plugin.py:1974 plugin~.py:1978 plugin~~.py:1930
-msgid "Download page get failed ..."
-msgstr "La pagina di download non è riuscita ..."
-
-#: ⁨plugin - ~~.py⁩:1930 plugin-.py:1828 plugin~~.py:1935
-msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
-msgstr "[LCNScanner] Vuoi scansionare l'ordine LCN Bouquet"
-
-#: ⁨plugin - ~~.py⁩:1947 plugin-.py:1845 plugin~.py:2014 plugin~~.py:1952
-msgid "Do you want to install?"
-msgstr "Vuoi installare ?"
-
-#: ⁨plugin - ~~.py⁩:1989 plugin-.py:1887 plugin.py:2063 plugin~.py:2056 plugin~~.py:1994
-msgid "Settings Not Installed ..."
-msgstr "Liste canali non installate..."
-
-#: ⁨plugin - ~~.py⁩:2002 plugin-.py:1900 plugin.py:2076 plugin~.py:2077 plugin~~.py:2007
-msgid "Do you want to remove?"
-msgstr "Vuoi rimuovere ?"
-
-#: ⁨plugin - ~~.py⁩:2016 plugin-.py:1914 plugin.py:2090 plugin~.py:2091 plugin~~.py:2021
-#, python-format
-msgid "Removing %s"
-msgstr "Rimuovo %s"
-
-#: ⁨plugin - ~~.py⁩:2021 plugin-.py:1919 plugin.py:2095 plugin~.py:2097 plugin~~.py:2026
-msgid "Do you want to restart Gui Interface?"
-msgstr "Vuoi riavviare l'Interfaccia Grafica?"
-
-#: ⁨plugin - ~~.py⁩:2122 plugin-.py:2020 plugin~.py:2197 plugin~~.py:2127
-#, python-format
-msgid ""
-"New version %s is available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press green button to start updating"
-msgstr ""
-"È disponibile la nuova versione %s\n"
-"\n"
-"Registro delle modifiche: %s\n"
-"\n"
-"Premere il pulsante verde per avviare l'aggiornamento"
-
-#: ⁨plugin - ~~.py⁩:2124 plugin-.py:2022 plugin.py:2217 plugin~.py:2198 plugin~~.py:2129
-msgid "Update"
-msgstr "Aggiornare"
-
-#: ⁨plugin - ~~.py⁩:2130 plugin-.py:2028 plugin.py:2225 plugin~.py:2203 plugin~~.py:2135
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-"È disponibile la nuova versione %s.\n"
-"\n"
-"Registro delle modifiche: %s\n"
-"\n"
-"Vuoi installarla ora?"
-
-#: ⁨plugin - ~~.py⁩:2134 plugin-.py:2032 plugin.py:2229 plugin~.py:2206 plugin~~.py:2139
-msgid "Congrats! You already have the latest version..."
-msgstr "Congratulazioni! Hai già l'ultima versione..."
-
-#: ⁨plugin - ~~.py⁩:2145 plugin-.py:2043 plugin.py:2240 plugin~.py:2216 plugin~~.py:2150
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Vuoi installare l'aggiornamento (%s)ora ?"
-
-#: ⁨plugin - ~~.py⁩:2152 plugin-.py:2050 plugin.py:2247 plugin~.py:2223 plugin~~.py:2157
-msgid "Update Aborted!"
-msgstr "Aggionamento Annullato!"
-
-#: ⁨plugin - ~~.py⁩:2174 plugin-.py:2072 plugin.py:2270 plugin~.py:2243 plugin~~.py:2182
-msgid "Unable to download updates!"
-msgstr "Impossibile scaricare aggiornamento!"
-
-#: ⁨plugin - ~~.py⁩:2362 plugin-.py:2260 plugin.py:2481 plugin~.py:2413 plugin~~.py:2380
-msgid "Check Connection!"
-msgstr "Controlla Connessione!"
-
-#: ⁨plugin - ~~.py⁩:2383 plugin-.py:2281 plugin.py:2502 plugin~.py:2434 plugin~~.py:2401
-msgid "Linuxsat Panel"
-msgstr "Linuxsat Panel"
-
-#: plugin-.py:369 plugin-.py:632 plugin-.py:848 plugin-.py:1104 plugin~.py:466
-#: plugin~.py:751 plugin~.py:989 plugin~.py:1331
-msgid "0 Sort"
-msgstr "Ordinamento"
-
-#: plugin.py:294 plugin.py:297 plugin.py:646 plugin.py:649 plugin.py:896 plugin.py:899
-#: plugin.py:1131 plugin.py:1134 plugin.py:1668 plugin.py:1671 plugin.py:2118
-#: plugin.py:2121 plugin.py:2373 plugin.py:2376 plugin.py:2444 plugin.py:2447
-#, python-format
-msgid "%s"
-msgstr ""
-
-#: plugin.py:396 plugin.py:563 plugin.py:687 plugin.py:854 plugin.py:930 plugin.py:1097
-#: plugin.py:1225 plugin.py:1456
-msgid "Sort A-Z"
-msgstr "Ordinamento A-Z"
-
-#: plugin.py:567 plugin.py:858 plugin.py:1101 plugin.py:1460
-msgid "Sort Default"
-msgstr "Ordinamento Predefinito"
-
-#: plugin.py:1266 plugin.py:1279 plugin.py:1979 plugin.py:1992
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Vuoi ordinare il bouquet LCN?"
-
-#: plugin.py:1503
-#, python-format
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, you can "
-"get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to execute %s?"
-msgstr ""
-"NON sono responsabile per eventuali problemi che potresti\n"
-"riscontrare una volta installati i plugin e le skin.\n"
-"                                                     Tuttavia, se necessario, puoi "
-"ottenere assistenza per risolvere il problema.\n"
-"\n"
-"\n"
-"Vuoi eseguire %s?"
-
-#: plugin.py:1658
+#: ⁨plugin - Copia.py⁩:1661 plugin.py:1681
 #, python-format
 msgid ""
 "Server Error.\n"
@@ -622,33 +456,92 @@ msgstr ""
 "Riprova, sarai più fortunato!\n"
 "%s"
 
-#: plugin.py:1693 plugin.py:1736 plugin.py:1776
+#: ⁨plugin - Copia.py⁩:1691 plugin.py:1711
+msgid "Install"
+msgstr "Installa/Aggiorna"
+
+#: ⁨plugin - Copia.py⁩:1692 plugin.py:1712
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: ⁨plugin - Copia.py⁩:1693 plugin.py:1713
+msgid "Restart enigma"
+msgstr "Riavvia Enigma"
+
+#: ⁨plugin - Copia.py⁩:1696 ⁨plugin - Copia.py⁩:1739 ⁨plugin - Copia.py⁩:1779
 msgid "Halign Left"
 msgstr "Allinea Sx"
 
-#: plugin.py:1695 plugin.py:1739 plugin.py:1778
+#: ⁨plugin - Copia.py⁩:1698 ⁨plugin - Copia.py⁩:1742 ⁨plugin - Copia.py⁩:1781
 msgid "Halign Right"
 msgstr "Allinea Dx"
 
-#: plugin.py:2020
+#: ⁨plugin - Copia.py⁩:1711 plugin.py:1734
+msgid "Load Category..."
+msgstr "Carico Categoria..."
+
+#: ⁨plugin - Copia.py⁩:1751 plugin.py:1775
+msgid "Category: "
+msgstr "Categoria: "
+
+#: ⁨plugin - Copia.py⁩:1804 ⁨plugin - Copia.py⁩:1813 plugin.py:1831 plugin.py:1840
+msgid "Unknow Image!"
+msgstr "Immagine non corretta!"
+
+#: ⁨plugin - Copia.py⁩:1825 plugin.py:1852
+#, python-format
+msgid "Do you want to install %s?"
+msgstr "Vuoi installare %s ?"
+
+#: ⁨plugin - Copia.py⁩:1859 ⁨plugin - Copia.py⁩:2061 plugin.py:1886 plugin.py:2088
+#, python-format
+msgid ""
+"Installing %s\n"
+"Please Wait..."
+msgstr ""
+"Installa %s\n"
+"Attendere Prego..."
+
+#: ⁨plugin - Copia.py⁩:1977 plugin.py:2004
+msgid "Download page get failed ..."
+msgstr "La pagina di download non è riuscita ..."
+
+#: ⁨plugin - Copia.py⁩:2023 plugin.py:2050
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
-"                                                     However, if required, you can "
-"get help to resolve the issue.\n"
+"                                                     However, if required, you "
+"can get help to resolve the issue.\n"
 "\n"
 "\n"
 "Do you want to install?"
 msgstr ""
 "NON sono responsabile per eventuali problemi che potresti\n"
 "riscontrare una volta installati i plugin e le skin.\n"
-"                                                     Tuttavia, se necessario, puoi "
-"ottenere assistenza per risolvere il problema.\n"
+"                                                     Tuttavia, se necessario, "
+"puoi ottenere assistenza per risolvere il problema.\n"
 "\n"
 "\n"
 "Vuoi installare?"
 
-#: plugin.py:2213
+#: ⁨plugin - Copia.py⁩:2066 plugin.py:2093
+msgid "Settings Not Installed ..."
+msgstr "Liste canali non installate..."
+
+#: ⁨plugin - Copia.py⁩:2079 plugin.py:2106
+msgid "Do you want to remove?"
+msgstr "Vuoi rimuovere ?"
+
+#: ⁨plugin - Copia.py⁩:2093 plugin.py:2120
+#, python-format
+msgid "Removing %s"
+msgstr "Rimuovo %s"
+
+#: ⁨plugin - Copia.py⁩:2098 plugin.py:2125
+msgid "Do you want to restart Gui Interface?"
+msgstr "Vuoi riavviare l'Interfaccia Grafica?"
+
+#: ⁨plugin - Copia.py⁩:2220
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -663,7 +556,43 @@ msgstr ""
 "\n"
 "Premere il pulsante verde per avviare l'aggiornamento."
 
-#: plugin.py:2454
+#: ⁨plugin - Copia.py⁩:2224 plugin.py:2252
+msgid "Update"
+msgstr "Aggiornare"
+
+#: ⁨plugin - Copia.py⁩:2233 plugin.py:2318
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"È disponibile la nuova versione %s.\n"
+"\n"
+"Registro delle modifiche: %s\n"
+"\n"
+"Vuoi installarla ora?"
+
+#: ⁨plugin - Copia.py⁩:2237 plugin.py:2331
+msgid "Congrats! You already have the latest version..."
+msgstr "Congratulazioni! Hai già l'ultima versione..."
+
+#: ⁨plugin - Copia.py⁩:2248 plugin.py:2344
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Vuoi installare l'aggiornamento (%s)ora ?"
+
+#: ⁨plugin - Copia.py⁩:2255 plugin.py:2351
+msgid "Update Aborted!"
+msgstr "Aggionamento Annullato!"
+
+#: ⁨plugin - Copia.py⁩:2278 plugin.py:2371
+msgid "Unable to download updates!"
+msgstr "Impossibile scaricare aggiornamento!"
+
+#: ⁨plugin - Copia.py⁩:2462 plugin.py:2513
 msgid ""
 "Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
@@ -671,15 +600,15 @@ msgstr ""
 "Grazie per aver scelto il plugin per la gestione del tuo Enigma Box.\n"
 "\n"
 
-#: plugin.py:2455
+#: ⁨plugin - Copia.py⁩:2463 plugin.py:2514
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr "Suggerito da: @masterG - @oktus - @pcd\n"
 
-#: plugin.py:2456
+#: ⁨plugin - Copia.py⁩:2464 plugin.py:2515
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Design e grafica di @oktus\n"
 
-#: plugin.py:2457
+#: ⁨plugin - Copia.py⁩:2465 plugin.py:2516
 msgid ""
 "Support on: Linuxsat-support.com\n"
 "\n"
@@ -687,11 +616,11 @@ msgstr ""
 "Supporto su: Linuxsat-support.com\n"
 "\n"
 
-#: plugin.py:2458
+#: ⁨plugin - Copia.py⁩:2466 plugin.py:2517
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr "Il Plugin vive grazie alle donazioni di ognuno di voi.\n"
 
-#: plugin.py:2459
+#: ⁨plugin - Copia.py⁩:2467 plugin.py:2518
 msgid ""
 "A coffee costs nothing.\n"
 "\n"
@@ -700,15 +629,15 @@ msgstr ""
 "\n"
 "\n"
 
-#: plugin.py:2460
+#: ⁨plugin - Copia.py⁩:2468 plugin.py:2519
 msgid "If you think it is a useful tool for your box\n"
 msgstr "Se pensi che sia uno strumento utile per il tuo box\n"
 
-#: plugin.py:2461
+#: ⁨plugin - Copia.py⁩:2469 plugin.py:2520
 msgid "please make a donation:\n"
 msgstr "per favore fai una donazione:\n"
 
-#: plugin.py:2463
+#: ⁨plugin - Copia.py⁩:2471 plugin.py:2522
 msgid ""
 "make donation on Linuxsat-support.com\n"
 "\n"
@@ -722,14 +651,95 @@ msgstr ""
 "\n"
 "\n"
 
-#: plugin.py:2464
+#: ⁨plugin - Copia.py⁩:2472 plugin.py:2523
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr "Tutto il codice è stato riscritto da @Lululla - 2024.07.20\n"
 
-#: plugin~.py:1986
-msgid "Sorting Terrestrial Executed!"
-msgstr "Ordinamento Terrestre eseguito!"
+#: ⁨plugin - Copia.py⁩:2489 plugin.py:2540
+msgid "Check Connection!"
+msgstr "Controlla Connessione!"
 
-#: plugin~.py:1991
-msgid "Sorting Terrestrial not Executed!"
-msgstr "Ordinamento Terrestre non eseguito!"
+#: ⁨plugin - Copia.py⁩:2510 plugin.py:2561
+msgid "Linuxsat Panel"
+msgstr "Linuxsat Panel"
+
+#: plugin.py:1714
+msgid "Reload"
+msgstr "Ricarica"
+
+#: plugin.py:2246
+msgid ""
+"New version: {} available\n"
+"\n"
+"Changelog:\n"
+"{}\n"
+"\n"
+"Press the green button to start the update."
+msgstr ""
+"Nuova versione: {} disponibile\n"
+"\n"
+"Changelog:\n"
+"{}\n"
+"\n"
+"Premi il pulsante verde per avviare l'aggiornamento."
+
+#: plugin.py:2261
+msgid "Error during version control: {}"
+msgstr ""
+
+#~ msgid "0 Sort A-Z"
+#~ msgstr "0 Ordinamento A-Z"
+
+#~ msgid "0 Sort Default"
+#~ msgstr "0 Ordinamento Predefinito"
+
+#~ msgid "Do you want to Order LCN Bouquet"
+#~ msgstr "Vuoi ordinare il bouquet LCN"
+
+#, python-format
+#~ msgid "Do you want to execute %s?"
+#~ msgstr "Vuoi eseguire %s ?"
+
+#~ msgid ""
+#~ "Server Error.\n"
+#~ "\n"
+#~ "Try again, you'll be luckier!"
+#~ msgstr ""
+#~ "Server Error.\n"
+#~ "\n"
+#~ "Riprova, sarai più fortunato!"
+
+#~ msgid "0 Halign Left"
+#~ msgstr "0 Allinea Sx"
+
+#~ msgid "0 Halign Right"
+#~ msgstr "0 Allinea Dx"
+
+#~ msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
+#~ msgstr "[LCNScanner] Vuoi scansionare l'ordine LCN Bouquet"
+
+#~ msgid "Do you want to install?"
+#~ msgstr "Vuoi installare ?"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Press green button to start updating"
+#~ msgstr ""
+#~ "È disponibile la nuova versione %s\n"
+#~ "\n"
+#~ "Registro delle modifiche: %s\n"
+#~ "\n"
+#~ "Premere il pulsante verde per avviare l'aggiornamento"
+
+#~ msgid "0 Sort"
+#~ msgstr "Ordinamento"
+
+#~ msgid "Sorting Terrestrial Executed!"
+#~ msgstr "Ordinamento Terrestre eseguito!"
+
+#~ msgid "Sorting Terrestrial not Executed!"
+#~ msgstr "Ordinamento Terrestre non eseguito!"

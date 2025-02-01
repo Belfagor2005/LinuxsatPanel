@@ -109,15 +109,16 @@ Changelog:
 
 Changelog:
 --Removed Christmas Bot
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250106 2.7 version is online
-
-Changelog:
 --Fix Arabic menulist
 --Fix Command utility_Get
 --Fix Screen
 --Fix Sort & Halign
 --Minor fix
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+20250106 2.7.0 version is online
+
+Changelog:
+--Removed Arabic menulist
+--Removed Halign
+--Minor fix

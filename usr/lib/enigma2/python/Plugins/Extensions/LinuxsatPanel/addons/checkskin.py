@@ -10,6 +10,7 @@
 
 from __future__ import absolute_import
 from Components.config import config
+from os import remove
 from Tools.Directories import SCOPE_PLUGINS
 try:
     from Tools.Directories import SCOPE_SKIN as SCOPE_GUISKIN
@@ -18,7 +19,7 @@ except ImportError:
 from Tools.Directories import fileExists, resolveFilename
 import os
 import sys
-from os import remove
+
 
 colorend = '\033[m'
 colorstart = '\033[31m'

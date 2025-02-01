@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2024-11-18 17:04+0100\n"
+"POT-Creation-Date: 2025-01-06 18:46+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: giorbak\n"
@@ -13,52 +13,251 @@ msgstr ""
 "X-Generator: Poedit 3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: LCNScanner/Lcn.py\n"
-"X-Poedit-SearchPath-1: LCNScanner/plugin.py\n"
-"X-Poedit-SearchPath-2: lsConsole.py\n"
-"X-Poedit-SearchPath-3: plugin.py\n"
-"X-Poedit-SearchPath-4: addons/checkskin.py\n"
-"X-Poedit-SearchPath-5: addons/File_Commander.py\n"
-"X-Poedit-SearchPath-6: addons/type_utils.py\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
+#: LCNScanner/Lcn.py:444 LCNScanner/Lcn.py:451
 msgid "No entry in lcn db. Please do a service scan."
 msgstr "Δεν υπάρχουν καταχωρήσεις στη βάση δεδομένων LCN. Παρακαλώ κάντε σάρωση υπηρεσιών."
 
-#: LCNScanner/Lcn.py:476
+#: LCNScanner/Lcn.py:471
 msgid "Enable terrestrial LCN:"
 msgstr "Ενεργοποίηση επίγειου LCN:"
 
-#: LCNScanner/Lcn.py:477
+#: LCNScanner/Lcn.py:472
 msgid "Terrestrial bouquet:"
 msgstr "Επίγειο μπουκέτο:"
 
-#: LCNScanner/Lcn.py:478
+#: LCNScanner/Lcn.py:473
 msgid "LCN rules:"
 msgstr "Κανόνες LCN:"
 
-#: LCNScanner/Lcn.py:482
+#: LCNScanner/Lcn.py:477
 msgid "Rebuild"
 msgstr "Αναδημιουργία"
 
-#: LCNScanner/Lcn.py:483 addons/File_Commander.py:73 addons/File_Commander.py:74 addons/File_Commander.py:75 addons/File_Commander.py:76 addons/type_utils.py:108 addons/type_utils.py:109 addons/type_utils.py:111 lsConsole.py:123
-#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
+#: LCNScanner/Lcn.py:478 addons/File_Commander.py:73 addons/File_Commander.py:74 addons/File_Commander.py:76 lsConsole.py:123 ⁨plugin - ~~.py⁩:381 ~~.py⁩:669 ~~.py⁩:909 ~~.py⁩:1187 ~~.py⁩:1621 plugin-.py:370 plugin-.py:633
+#: plugin-.py:849 plugin-.py:1105 plugin-.py:1519 plugin.py:397 plugin.py:688 plugin.py:931 plugin.py:1226 plugin.py:1687 plugin.py:2466 plugin~.py:467 plugin~.py:752 plugin~.py:990 plugin~.py:1332 plugin~.py:1672 plugin~~.py:395
+#: plugin~~.py:678 plugin~~.py:913 plugin~~.py:1198 plugin~~.py:1626
 msgid "Exit"
 msgstr "Έξοδος"
 
-#: LCNScanner/Lcn.py:498
+#: LCNScanner/Lcn.py:493
 msgid "Rebuild LCN bouquet now?"
 msgstr "Να γίνει αναδημιουργία του μπουκέτου LCN τώρα;"
 
-#: addons/File_Commander.py:17 addons/type_utils.py:22
+#: LCNScanner/Terrestrial.py:31 LCNScanner/Terrestrial.py:72
+msgid "Italy"
+msgstr "Ιταλία"
+
+#: LCNScanner/Terrestrial.py:33 LCNScanner/Terrestrial.py:59
+msgid "Entertainment"
+msgstr "Ψυχαγωγία"
+
+#: LCNScanner/Terrestrial.py:34 LCNScanner/Terrestrial.py:36
+msgid "Local Broadcasters"
+msgstr "Τοπικοί ραδιοτηλεοπτικοί φορείς"
+
+#: LCNScanner/Terrestrial.py:35
+msgid "Semi-Generalists"
+msgstr "Ημι-γενικοί"
+
+#: LCNScanner/Terrestrial.py:37
+msgid "Information and Culture"
+msgstr "Πληροφόρηση και πολιτισμός"
+
+#: LCNScanner/Terrestrial.py:38
+msgid "Sports"
+msgstr "Αθλητισμός"
+
+#: LCNScanner/Terrestrial.py:39
+msgid "Music"
+msgstr "Μουσική"
+
+#: LCNScanner/Terrestrial.py:40 LCNScanner/Terrestrial.py:43 LCNScanner/Terrestrial.py:49
+msgid "Regional Broadcasters"
+msgstr "Περιφερειακοί ραδιοτηλεοπτικοί φορείς"
+
+#: LCNScanner/Terrestrial.py:41
+msgid "Test Channels"
+msgstr "Δοκιμαστικά κανάλια"
+
+#: LCNScanner/Terrestrial.py:42
+msgid "Promo H264"
+msgstr "Προώθηση H264"
+
+#: LCNScanner/Terrestrial.py:44
+msgid "Premium"
+msgstr ""
+
+#: LCNScanner/Terrestrial.py:45
+msgid "Europe7"
+msgstr ""
+
+#: LCNScanner/Terrestrial.py:46
+msgid "Sky Channels"
+msgstr "Κανάλια Sky"
+
+#: LCNScanner/Terrestrial.py:47
+msgid "SD Provisionals"
+msgstr "Προσωρινά SD"
+
+#: LCNScanner/Terrestrial.py:48
+msgid "HD Channels"
+msgstr "Κανάλια HD"
+
+#: LCNScanner/Terrestrial.py:50
+msgid "Regional Radio"
+msgstr "Περιφερειακό ραδιόφωνο"
+
+#: LCNScanner/Terrestrial.py:51 LCNScanner/Terrestrial.py:158
+msgid "Duplicates"
+msgstr "Διπλότυπα"
+
+#: LCNScanner/Terrestrial.py:52
+msgid "LCN Duplicates"
+msgstr "Διπλότυπα LCN"
+
+#: LCNScanner/Terrestrial.py:56
+msgid "UK"
+msgstr "Ηνωμένο Βασίλειο"
+
+#: LCNScanner/Terrestrial.py:60
+msgid "High Definition"
+msgstr "Υψηλής ευκρίνειας"
+
+#: LCNScanner/Terrestrial.py:61
+msgid "Children"
+msgstr "Παιδικά"
+
+#: LCNScanner/Terrestrial.py:62
+msgid "News"
+msgstr "Ειδησιογραφικά"
+
+#: LCNScanner/Terrestrial.py:63
+msgid "BBC Interactive"
+msgstr "Διαδραστικό BBC"
+
+#: LCNScanner/Terrestrial.py:64
+msgid "Adult"
+msgstr "Ενηλίκων"
+
+#: LCNScanner/Terrestrial.py:65
+msgid "Radio"
+msgstr "Ραδιόφωνο"
+
+#: LCNScanner/Terrestrial.py:68
+msgid "Australia"
+msgstr "Αυστραλία"
+
+#: LCNScanner/Terrestrial.py:84
+msgid "Terrestrial"
+msgstr "Επίγεια"
+
+#: LCNScanner/Terrestrial.py:115
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr "Το πρόσθετο Terrestrial Bouquet δεν είναι ενεργοποιημένο."
+
+#: LCNScanner/Terrestrial.py:116
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr "Δοκιμάστε να εκτελέσετε μια χειροκίνητη σάρωση επίγειων συχνοτήτων με ενεργοποιημένη τη σάρωση δικτύου. Εάν αυτό αποτύχει, ίσως δεν υπάρχουν διαθέσιμα δεδομένα lcn στην περιοχή σας."
+
+#: LCNScanner/Terrestrial.py:119
+msgid "There is currently no LCN data stored."
+msgstr "Προς το παρόν δεν υπάρχουν αποθηκευμένα δεδομένα LCN."
+
+#: LCNScanner/Terrestrial.py:137
+msgid "No corresponding terrestrial services found."
+msgstr "Δεν βρέθηκαν αντίστοιχες επίγειες υπηρεσίες."
+
+#: LCNScanner/Terrestrial.py:207
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr "Δημιουργήστε/αναδημιουργήστε το επίγειο μπουκέτο τώρα με βάση την τελευταία σάρωση."
+
+#: LCNScanner/Terrestrial.py:208
+msgid "Terrestrial Bouquet setup"
+msgstr "Ρύθμιση επίγειου μπουκέτου"
+
+#: LCNScanner/Terrestrial.py:214
+msgid "Enable terrestrial bouquet"
+msgstr "Ενεργοποίηση επίγειου μπουκέτου"
+
+#: LCNScanner/Terrestrial.py:214
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr "Ενεργοποιήστε τη δημιουργία ενός επίγειου μπουκέτου με βάση τα δεδομένα LCN (λογικός αριθμός καναλιού)."
+
+#: LCNScanner/Terrestrial.py:214
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr "Αυτό το πρόσθετο εξαρτάται από τα δεδομένα LCN που μεταδίδονται από τον τοπικό σας πομπό."
+
+#: LCNScanner/Terrestrial.py:214
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr "Μόλις ρυθμιστεί, το μπουκέτο θα ενημερώνεται αυτόματα όταν πραγματοποιείται χειροκίνητη σάρωση."
+
+#: LCNScanner/Terrestrial.py:214
+msgid "Please make certain network search is enabled when scanning."
+msgstr "Παρακαλώ βεβαιωθείτε ότι η αναζήτηση δικτύου είναι ενεργοποιημένη κατά τη σάρωση."
+
+#: LCNScanner/Terrestrial.py:216
+msgid "Region"
+msgstr "Περιοχή"
+
+#: LCNScanner/Terrestrial.py:216
+msgid "Select your region."
+msgstr "Επιλέξτε την περιοχή σας."
+
+#: LCNScanner/Terrestrial.py:217
+msgid "Create separate radio bouquet"
+msgstr "Δημιουργήστε ξεχωριστό ραδιοφωνικό μπουκέτο"
+
+#: LCNScanner/Terrestrial.py:217
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr "Βάλτε τις ραδιοφωνικές υπηρεσίες σε ξεχωριστό μπουκέτο, όχι στο κύριο τηλεοπτικό μπουκέτο. Αυτό απαιτείται όταν ο πάροχος διπλασιάζει τους αριθμούς καναλιών για την τηλεόραση και το ραδιόφωνο."
+
+#: LCNScanner/Terrestrial.py:218
+msgid "Skip duplicates"
+msgstr "Παράλειψη διπλότυπων"
+
+#: LCNScanner/Terrestrial.py:218
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr "Μην προσθέτετε διπλότυπα ή μη ευρετηριασμένα κανάλια στο μπουκέτο."
+
+#: LCNScanner/Terrestrial.py:226
+msgid "Rebuild bouquet"
+msgstr "Αναδημιουργία μπουκέτου"
+
+#: LCNScanner/Terrestrial.py:233
+msgid "Terrestrial Bouquet Error"
+msgstr "Σφάλμα επίγειου μπουκέτου"
+
+#: LCNScanner/Terrestrial.py:235
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr "Το επίγειο μπουκέτο ανακατασκευάστηκε με επιτυχία."
+
+#: LCNScanner/Terrestrial.py:236 LCNScanner/Terrestrial.py:250 LCNScanner/Terrestrial.py:265
+msgid "Terrestrial Bouquet"
+msgstr "Επίγειο μπουκέτο"
+
+#: LCNScanner/Terrestrial.py:265
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr "Δημιουργήστε ένα οργανωμένο μπουκέτο επίγειων υπηρεσιών με βάση τα δεδομένα LCN από τον τοπικό σας πομπό."
+
+#: __init__.py:203 __init__.py:207
+msgid "Free Space:"
+msgstr "Ελεύθερος χώρος:"
+
+#: __init__.py:203 __init__.py:207
+msgid "of"
+msgstr "από"
+
+#: addons/File_Commander.py:17
 msgid "File Commander - Addon"
 msgstr ""
 
-#: addons/File_Commander.py:18 addons/type_utils.py:23
+#: addons/File_Commander.py:18
 msgid "play/show Files"
 msgstr "αναπαραγωγή/εμφάνιση αρχείων"
 
-#: addons/type_utils.py:110
+#: addons/File_Commander.py:75
 msgid "Save"
 msgstr "Αποθήκευση"
 
@@ -82,19 +281,22 @@ msgstr ""
 "Πρόοδος εκτέλεσης\n"
 "\n"
 
-#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646 plugin.py:2057
+#: ⁨plugin - ~~.py⁩:379 ~~.py⁩:667 ~~.py⁩:907 ~~.py⁩:1185 ~~.py⁩:1640 ~~.py⁩:2050 plugin-.py:368 plugin-.py:631 plugin-.py:847 plugin-.py:1103 plugin-.py:1538 plugin-.py:1948 plugin.py:395 plugin.py:686 plugin.py:929
+#: plugin.py:1224 plugin.py:1706 plugin.py:2137 plugin~.py:465 plugin~.py:750 plugin~.py:988 plugin~.py:1330 plugin~.py:1691 plugin~.py:2126 plugin~~.py:393 plugin~~.py:676 plugin~~.py:911 plugin~~.py:1196 plugin~~.py:1645
+#: plugin~~.py:2055
 msgid "Please Wait..."
 msgstr "Παρακαλώ περιμένετε..."
 
-#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912 plugin.py:1079 plugin.py:1197 plugin.py:1404
+#: ⁨plugin - ~~.py⁩:380 ~~.py⁩:551 ~~.py⁩:668 ~~.py⁩:839 ~~.py⁩:908 ~~.py⁩:1079 ~~.py⁩:1186 ~~.py⁩:1397 plugin~~.py:394 plugin~~.py:561 plugin~~.py:677 plugin~~.py:844 plugin~~.py:912 plugin~~.py:1079 plugin~~.py:1197
+#: plugin~~.py:1404
 msgid "0 Sort A-Z"
 msgstr "0 Ταξινόμηση A-Z"
 
-#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
+#: ⁨plugin - ~~.py⁩:556 ~~.py⁩:844 ~~.py⁩:1084 ~~.py⁩:1402 plugin~~.py:565 plugin~~.py:848 plugin~~.py:1083 plugin~~.py:1408
 msgid "0 Sort Default"
 msgstr "0 Ταξιν. Προεπιλογή"
 
-#: plugin.py:595
+#: ⁨plugin - ~~.py⁩:586 plugin-.py:555 plugin.py:597 plugin~.py:646 plugin~~.py:595
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -104,15 +306,15 @@ msgstr ""
 "\n"
 "Είστε σίγουροι ότι θέλετε να συνεχίσετε;"
 
-#: plugin.py:635 plugin.py:877
+#: ⁨plugin - ~~.py⁩:626 ~~.py⁩:873 plugin.py:637 plugin.py:887 plugin~~.py:635 plugin~~.py:877
 msgid "Error: No Data Find."
 msgstr "Σφάλμα: Δεν βρέθηκαν δεδομένα."
 
-#: plugin.py:1238
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN;"
+#: ⁨plugin - ~~.py⁩:1227 plugin-.py:1145 plugin~~.py:1238
+msgid "Do you want to Order LCN Bouquet"
+msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN"
 
-#: plugin.py:1249 plugin.py:1947
+#: ⁨plugin - ~~.py⁩:1238 ~~.py⁩:1941 plugin-.py:1156 plugin-.py:1839 plugin.py:1297 plugin.py:2010 plugin~~.py:1249 plugin~~.py:1946
 msgid ""
 "[LCNScanner] LCN scan finished\n"
 "Channels Ordered!"
@@ -120,7 +322,7 @@ msgstr ""
 "[LCNScanner] Η σάρωση LCN ολοκληρώθηκε\n"
 "Τα κανάλια ταξινομήθηκαν!"
 
-#: plugin.py:1256
+#: ⁨plugin - ~~.py⁩:1245 plugin-.py:1163 plugin.py:1308 plugin~~.py:1256
 msgid ""
 "[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
 "Do you really want to continue?"
@@ -128,24 +330,12 @@ msgstr ""
 "[Checkskin] Αυτή η λειτουργία ελέγχει εάν το θέμα έχει τα συστατικά του (δεν είναι σίγουρο)..\n"
 "Θέλετε πραγματικά να συνεχίσετε;"
 
-#: plugin.py:1452
+#: ⁨plugin - ~~.py⁩:1446 plugin-.py:1344 plugin~.py:1518 plugin~~.py:1452
 #, python-format
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to execute %s?"
-msgstr ""
-"ΔΕΝ είμαι υπεύθυνος για τυχόν προβλήματα που μπορεί να αντιμετωπίσετε\n"
-"εάν εγκαταστήσετε τα πρόσθετα και τα θέματα.\n"
-"Ωστόσο, εάν χρειαστεί, μπορείτε να λάβετε βοήθεια για να επιλύσετε το πρόβλημα.\n"
-"\n"
-"\n"
-"Θέλετε να εκτελέσετε το %s;"
+msgid "Do you want to execute %s?"
+msgstr "Θέλετε να εκτελέσετε το %s;"
 
-#: plugin.py:1458
+#: ⁨plugin - ~~.py⁩:1451 plugin-.py:1349 plugin.py:1509 plugin~.py:1523 plugin~~.py:1457
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -154,11 +344,11 @@ msgstr ""
 "Εκτέλεση του %s\n"
 "Παρακαλώ περιμένετε..."
 
-#: plugin.py:1473
+#: ⁨plugin - ~~.py⁩:1466 plugin-.py:1364 plugin.py:1524 plugin~~.py:1472
 msgid "Do you want add Cline?"
 msgstr "Θέλετε να προσθέσετε Cline;"
 
-#: plugin.py:1496
+#: ⁨plugin - ~~.py⁩:1490 plugin-.py:1388 plugin.py:1547 plugin~.py:1540 plugin~~.py:1495
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -166,7 +356,7 @@ msgstr ""
 "Το αρχείο /etc/CCcam.cfg δεν βρέθηκε!\n"
 "Κάντε επανεκκίνηση παρακαλώ..."
 
-#: plugin.py:1505
+#: ⁨plugin - ~~.py⁩:1499 plugin-.py:1397 plugin.py:1556 plugin~.py:1549 plugin~~.py:1504
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -174,7 +364,7 @@ msgstr ""
 "Το αρχείο /etc/tuxbox/config/oscam.server δεν βρέθηκε!\n"
 "Κάντε επανεκκίνηση παρακαλώ..."
 
-#: plugin.py:1604
+#: ⁨plugin - ~~.py⁩:1598 plugin-.py:1496 plugin.py:1653 plugin~.py:1646 plugin~~.py:1603
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -191,7 +381,7 @@ msgstr ""
 "Χρήστης:%s\n"
 "Κωδικός:%s\n"
 
-#: plugin.py:1607
+#: ⁨plugin - ~~.py⁩:1601 plugin-.py:1499 plugin~.py:1648 plugin~~.py:1606
 msgid ""
 "Server Error.\n"
 "\n"
@@ -199,46 +389,46 @@ msgid ""
 msgstr ""
 "Σφάλμα διακομιστή.\n"
 "\n"
-"Δοκιμάστε ξανά, θα είστε πιο τυχεροί!"
+"Δοκιμάστε ξανά, ίσως είστε πιο τυχεροί!"
 
-#: plugin.py:1628
+#: ⁨plugin - ~~.py⁩:1622 plugin-.py:1520 plugin.py:1688 plugin~.py:1673 plugin~~.py:1627
 msgid "Install"
 msgstr "Εγκατάσταση"
 
-#: plugin.py:1629
+#: ⁨plugin - ~~.py⁩:1623 plugin-.py:1521 plugin.py:1689 plugin~.py:1674 plugin~~.py:1628
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: plugin.py:1630
+#: ⁨plugin - ~~.py⁩:1624 plugin-.py:1522 plugin.py:1690 plugin~.py:1675 plugin~~.py:1629
 msgid "Restart enigma"
 msgstr "Επανεκκίνηση enigma"
 
-#: plugin.py:1633 plugin.py:1675 plugin.py:1715
+#: ⁨plugin - ~~.py⁩:1627 ~~.py⁩:1669 ~~.py⁩:1709 plugin-.py:1525 plugin-.py:1567 plugin-.py:1607 plugin~.py:1678 plugin~.py:1720 plugin~.py:1760 plugin~~.py:1632 plugin~~.py:1674 plugin~~.py:1714
 msgid "0 Halign Left"
 msgstr "0 Στοίχιση αριστερά"
 
-#: plugin.py:1635 plugin.py:1678 plugin.py:1717
+#: ⁨plugin - ~~.py⁩:1629 ~~.py⁩:1672 ~~.py⁩:1711 plugin-.py:1527 plugin-.py:1570 plugin-.py:1609 plugin~.py:1680 plugin~.py:1723 plugin~.py:1762 plugin~~.py:1634 plugin~~.py:1677 plugin~~.py:1716
 msgid "0 Halign Right"
 msgstr "0 Στοίχιση δεξιά"
 
-#: plugin.py:1648
+#: ⁨plugin - ~~.py⁩:1642 plugin-.py:1540 plugin.py:1708 plugin~.py:1693 plugin~~.py:1647
 msgid "Load Category..."
 msgstr "Φόρτωση κατηγορίας..."
 
-#: plugin.py:1687
+#: ⁨plugin - ~~.py⁩:1681 plugin-.py:1579 plugin.py:1748 plugin~.py:1732 plugin~~.py:1686
 msgid "Category: "
 msgstr "Κατηγορία: "
 
-#: plugin.py:1740 plugin.py:1749
+#: ⁨plugin - ~~.py⁩:1734 ~~.py⁩:1743 plugin-.py:1632 plugin-.py:1641 plugin.py:1801 plugin.py:1810 plugin~.py:1786 plugin~.py:1796 plugin~~.py:1739 plugin~~.py:1748
 msgid "Unknow Image!"
 msgstr "Άγνωστο image!"
 
-#: plugin.py:1761
+#: ⁨plugin - ~~.py⁩:1755 plugin-.py:1653 plugin.py:1822 plugin~.py:1808 plugin~~.py:1760
 #, python-format
 msgid "Do you want to install %s?"
 msgstr "Θέλετε να εγκαταστήσετε το %s;"
 
-#: plugin.py:1795 plugin.py:1991
+#: ⁨plugin - ~~.py⁩:1789 ~~.py⁩:1984 plugin-.py:1687 plugin-.py:1882 plugin.py:1856 plugin.py:2058 plugin~.py:1842 plugin~.py:2051 plugin~~.py:1794 plugin~~.py:1989
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -247,15 +437,154 @@ msgstr ""
 "Εγκατάσταση του %s\n"
 "Παρακαλώ περιμένετε..."
 
-#: plugin.py:1931
+#: ⁨plugin - ~~.py⁩:1925 plugin-.py:1823 plugin.py:1974 plugin~.py:1978 plugin~~.py:1930
 msgid "Download page get failed ..."
 msgstr "Η λήψη της σελίδας απέτυχε ..."
 
-#: plugin.py:1936
+#: ⁨plugin - ~~.py⁩:1930 plugin-.py:1828 plugin~~.py:1935
 msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
 msgstr "[LCNScanner] Θέλετε να σαρώσετε την ταξινόμηση μπουκέτου LCN"
 
-#: plugin.py:1953
+#: ⁨plugin - ~~.py⁩:1947 plugin-.py:1845 plugin~.py:2014 plugin~~.py:1952
+msgid "Do you want to install?"
+msgstr "Θέλετε να εγκαταστήσετε;"
+
+#: ⁨plugin - ~~.py⁩:1989 plugin-.py:1887 plugin.py:2063 plugin~.py:2056 plugin~~.py:1994
+msgid "Settings Not Installed ..."
+msgstr "Οι ρυθμίσεις δεν εγκαταστάθηκαν ..."
+
+#: ⁨plugin - ~~.py⁩:2002 plugin-.py:1900 plugin.py:2076 plugin~.py:2077 plugin~~.py:2007
+msgid "Do you want to remove?"
+msgstr "Θέλετε να το αφαιρέσετε;"
+
+#: ⁨plugin - ~~.py⁩:2016 plugin-.py:1914 plugin.py:2090 plugin~.py:2091 plugin~~.py:2021
+#, python-format
+msgid "Removing %s"
+msgstr "Αφαίρεση του %s"
+
+#: ⁨plugin - ~~.py⁩:2021 plugin-.py:1919 plugin.py:2095 plugin~.py:2097 plugin~~.py:2026
+msgid "Do you want to restart Gui Interface?"
+msgstr "Θέλετε να κάνετε επανεκκίνηση της διεπαφής χρήστη;"
+
+#: ⁨plugin - ~~.py⁩:2122 plugin-.py:2020 plugin~.py:2197 plugin~~.py:2127
+#, python-format
+msgid ""
+"New version %s is available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Press green button to start updating"
+msgstr ""
+"Νέα έκδοση %s είναι διαθέσιμη\n"
+"\n"
+"Καταγραφή αλλαγών: %s\n"
+"\n"
+"Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση"
+
+#: ⁨plugin - ~~.py⁩:2124 plugin-.py:2022 plugin.py:2217 plugin~.py:2198 plugin~~.py:2129
+msgid "Update"
+msgstr "Ενημέρωση"
+
+#: ⁨plugin - ~~.py⁩:2130 plugin-.py:2028 plugin.py:2225 plugin~.py:2203 plugin~~.py:2135
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"Νέα έκδοση %s είναι διαθέσιμη.\n"
+"\n"
+"Καταγραφή αλλαγών: %s \n"
+"\n"
+"Θέλετε να την εγκαταστήσετε τώρα;"
+
+#: ⁨plugin - ~~.py⁩:2134 plugin-.py:2032 plugin.py:2229 plugin~.py:2206 plugin~~.py:2139
+msgid "Congrats! You already have the latest version..."
+msgstr "Συγχαρητήρια! Έχετε ήδη την πιο πρόσφατη έκδοση..."
+
+#: ⁨plugin - ~~.py⁩:2145 plugin-.py:2043 plugin.py:2240 plugin~.py:2216 plugin~~.py:2150
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Θέλετε να εγκαταστήσετε την ενημέρωση ( %s ) τώρα;"
+
+#: ⁨plugin - ~~.py⁩:2152 plugin-.py:2050 plugin.py:2247 plugin~.py:2223 plugin~~.py:2157
+msgid "Update Aborted!"
+msgstr "Η ενημέρωση ακυρώθηκε!"
+
+#: ⁨plugin - ~~.py⁩:2174 plugin-.py:2072 plugin.py:2270 plugin~.py:2243 plugin~~.py:2182
+msgid "Unable to download updates!"
+msgstr "Δεν είναι δυνατή η λήψη ενημερώσεων!"
+
+#: ⁨plugin - ~~.py⁩:2362 plugin-.py:2260 plugin.py:2481 plugin~.py:2413 plugin~~.py:2380
+msgid "Check Connection!"
+msgstr "Έλεγχος σύνδεσης!"
+
+#: ⁨plugin - ~~.py⁩:2383 plugin-.py:2281 plugin.py:2502 plugin~.py:2434 plugin~~.py:2401
+msgid "Linuxsat Panel"
+msgstr ""
+
+#: plugin-.py:369 plugin-.py:632 plugin-.py:848 plugin-.py:1104 plugin~.py:466 plugin~.py:751 plugin~.py:989 plugin~.py:1331
+msgid "0 Sort"
+msgstr "0 Ταξινόμηση"
+
+#: plugin.py:294 plugin.py:297 plugin.py:646 plugin.py:649 plugin.py:896 plugin.py:899 plugin.py:1131 plugin.py:1134 plugin.py:1668 plugin.py:1671 plugin.py:2118 plugin.py:2121 plugin.py:2373 plugin.py:2376 plugin.py:2444 plugin.py:2447
+#, python-format
+msgid "%s"
+msgstr ""
+
+#: plugin.py:396 plugin.py:563 plugin.py:687 plugin.py:854 plugin.py:930 plugin.py:1097 plugin.py:1225 plugin.py:1456
+msgid "Sort A-Z"
+msgstr "Ταξινόμηση A-Z"
+
+#: plugin.py:567 plugin.py:858 plugin.py:1101 plugin.py:1460
+msgid "Sort Default"
+msgstr "Προεπιλεγμένη ταξινόμηση"
+
+#: plugin.py:1266 plugin.py:1279 plugin.py:1979 plugin.py:1992
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN;"
+
+#: plugin.py:1503
+#, python-format
+msgid ""
+"I am NOT responsible for any issues you may\n"
+"encounter once you install the plugins and skins.\n"
+"                                                     However, if required, you can get help to resolve the issue.\n"
+"\n"
+"\n"
+"Do you want to execute %s?"
+msgstr ""
+"ΔΕΝ είμαι υπεύθυνος για τυχόν προβλήματα που μπορεί να αντιμετωπίσετε\n"
+"εάν εγκαταστήσετε τα πρόσθετα και τα θέματα.\n"
+"Ωστόσο, εάν χρειαστεί, μπορείτε να λάβετε βοήθεια για να επιλύσετε το πρόβλημα.\n"
+"\n"
+"\n"
+"Θέλετε να εκτελέσετε το %s;"
+
+#: plugin.py:1658
+#, python-format
+msgid ""
+"Server Error.\n"
+"\n"
+"Try again, you'll be luckier!\n"
+"%s"
+msgstr ""
+"Σφάλμα διακομιστή.\n"
+"\n"
+"Δοκιμάστε ξανά, ίσως είστε πιο τυχεροί!\n"
+"%s"
+
+#: plugin.py:1693 plugin.py:1736 plugin.py:1776
+msgid "Halign Left"
+msgstr "Στοίχιση αριστερά"
+
+#: plugin.py:1695 plugin.py:1739 plugin.py:1778
+msgid "Halign Right"
+msgstr "Στοίχιση δεξιά"
+
+#: plugin.py:2020
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
@@ -271,78 +600,87 @@ msgstr ""
 "\n"
 "Θέλετε να το εγκαταστήσετε;"
 
-#: plugin.py:1996
-msgid "Settings Not Installed ..."
-msgstr "Οι ρυθμίσεις δεν εγκαταστάθηκαν ..."
-
-#: plugin.py:2009
-msgid "Do you want to remove?"
-msgstr "Θέλετε να το αφαιρέσετε;"
-
-#: plugin.py:2023
-#, python-format
-msgid "Removing %s"
-msgstr "Αφαίρεση του %s"
-
-#: plugin.py:2028
-msgid "Do you want to restart Gui Interface?"
-msgstr "Θέλετε να κάνετε επανεκκίνηση της διεπαφής χρήστη;"
-
-#: plugin.py:2129
+#: plugin.py:2213
 #, python-format
 msgid ""
-"New version %s is available\n"
+"New version %s available\n"
 "\n"
 "Changelog: %s\n"
 "\n"
-"Press green button to start updating"
+"Press the green button to start the update."
 msgstr ""
 "Νέα έκδοση %s είναι διαθέσιμη\n"
 "\n"
 "Καταγραφή αλλαγών: %s\n"
 "\n"
-"Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση"
+"Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση."
 
-#: plugin.py:2131
-msgid "Update"
-msgstr "Ενημέρωση"
-
-#: plugin.py:2137
-#, python-format
+#: plugin.py:2454
 msgid ""
-"New version %s is available.\n"
+"Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
 msgstr ""
-"Νέα έκδοση %s είναι διαθέσιμη.\n"
+"Σας ευχαριστούμε που επιλέξατε το πρόσθετο για τη διαχείριση του Enigma δέκτη σας.\n"
 "\n"
-"Καταγραφή αλλαγών: %s \n"
+
+#: plugin.py:2455
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr "Προτείνεται από: @masterG - @oktus - @pcd\n"
+
+#: plugin.py:2456
+msgid "Designs and Graphics by @oktus\n"
+msgstr "Σχεδιασμοί και γραφικά από τον @oktus\n"
+
+#: plugin.py:2457
+msgid ""
+"Support on: Linuxsat-support.com\n"
 "\n"
-"Θέλετε να την εγκαταστήσετε τώρα;"
-
-#: plugin.py:2141
-msgid "Congrats! You already have the latest version..."
-msgstr "Συγχαρητήρια! Έχετε ήδη την πιο πρόσφατη έκδοση..."
-
-#: plugin.py:2152
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Θέλετε να εγκαταστήσετε την ενημέρωση ( %s ) τώρα;"
-
-#: plugin.py:2159
-msgid "Update Aborted!"
-msgstr "Η ενημέρωση ακυρώθηκε!"
-
-#: plugin.py:2184
-msgid "Unable to download updates!"
-msgstr "Δεν είναι δυνατή η λήψη ενημερώσεων!"
-
-#: plugin.py:2382
-msgid "Check Connection!"
-msgstr "Έλεγχος σύνδεσης!"
-
-#: plugin.py:2403
-msgid "Linuxsat Panel"
 msgstr ""
+"Υποστήριξη στο: Linuxsat-support.com\n"
+"\n"
+
+#: plugin.py:2458
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr "Το πρόσθετο ζει χάρη στις δωρεές του καθενός από εσάς.\n"
+
+#: plugin.py:2459
+msgid ""
+"A coffee costs nothing.\n"
+"\n"
+msgstr ""
+"Ένας καφές δεν κοστίζει τίποτα.\n"
+"\n"
+
+#: plugin.py:2460
+msgid "If you think it is a useful tool for your box\n"
+msgstr "Αν νομίζετε ότι είναι ένα χρήσιμο εργαλείο για τον δέκτη σας\n"
+
+#: plugin.py:2461
+msgid "please make a donation:\n"
+msgstr "παρακαλώ κάντε μια δωρεά:\n"
+
+#: plugin.py:2463
+msgid ""
+"make donation on Linuxsat-support.com\n"
+"\n"
+"\n"
+"\n"
+"\n"
+msgstr ""
+"κάντε δωρεά στο Linuxsat-support.com\n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#: plugin.py:2464
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr "Όλος ο κώδικας ξαναγράφτηκε από τον @Lululla - 2024.07.20\n"
+
+#: plugin~.py:1986
+msgid "Sorting Terrestrial Executed!"
+msgstr "Η ταξινόμηση επίγειων εκτελέστηκε!"
+
+#: plugin~.py:1991
+msgid "Sorting Terrestrial not Executed!"
+msgstr "Η ταξινόμηση επίγειων δεν εκτελέστηκε!"
