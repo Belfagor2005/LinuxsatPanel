@@ -139,44 +139,10 @@ def refreshPlugins():
     plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
 
-# language
-locl = "ar", "ae", "bh", "dz", "eg", "in", "iq", "jo", "kw", "lb", "ly", "ma", "om", "qa", "sa", "sd", "ss", "sy", "tn", "ye"
-global lngx
-lngx = 'en'
-try:
-    from Components.config import config
-    lngx = config.osd.language.value
-    lngx = lngx[:-3]
-except:
-    lngx = 'en'
-    pass
-
-
 try:
     wgetsts()
 except:
     pass
-
-
-global HALIGN
-
-HALIGN = RT_HALIGN_LEFT
-
-
-def add_skin_font():
-    global HALIGN
-    from enigma import addFont
-    FNTPath = os_path.join(plugin_path + "/fonts")
-    # addFont(filename, name, scale, isReplacement, render)
-    if any(s in lngx for s in locl):
-        HALIGN = RT_HALIGN_RIGHT
-        addFont((FNTPath + '/DejaVuSans.otf'), 'lsat', 100, 1)
-        addFont((FNTPath + '/DejaVuSans.otf'), 'lmsat', 100, 1)
-        addFont((FNTPath + '/DejaVuSans.otf'), 'lbsat', 100, 1)
-    else:
-        addFont((FNTPath + '/ls-regular.ttf'), 'lsat', 100, 1)
-        addFont((FNTPath + '/ls-medium.ttf'), 'lmsat', 100, 1)
-        addFont((FNTPath + '/ls-medium.ttf'), 'lbsat', 100, 1)
 
 
 # KiddaC code
@@ -348,9 +314,72 @@ def make_request(url, max_retries=3, base_delay=1):
     return None
 
 
-# self.token = "ZUp6enk4cko4ZzBKTlBMTFNxN3djd25MOHEzeU5Zak1Bdkd6S3lPTmdqSjhxeUxMSTBNOFRhUGNBMjBCVmxBTzlBPT0K"
-# def check(self, token):
-    # result = base64.b64decode(token)
-    # result = zlib.decompress(base64.b64decode(result))
-    # result = base64.b64decode(result).decode()
-    # return result
+# language set arabic
+global lngx
+global HALIGN
+HALIGN = RT_HALIGN_LEFT
+locl = ("ar", "ae", "bh", "dz", "eg", "in", "iq", "jo",
+                    "kw", "lb", "ly", "ma", "om", "qa", "sa", "sd",
+                    "ss", "sy", "tn", "ye")
+
+FNTPath = os.path.join(plugin_path, "fonts")
+lngx = 'en'
+
+
+def detect_system_language():
+    """Rileva la lingua di sistema con fallback a lngx"""
+    try:
+        from Components.config import config
+        lang = config.osd.language.value
+        return lang.split('_')[0] if '_' in lang else lang
+    except (ImportError, AttributeError, KeyError):
+        return lngx
+
+
+def configure_text_alignment(language_code):
+    return RT_HALIGN_RIGHT if language_code in locl else RT_HALIGN_LEFT
+
+
+def load_custom_fonts(alignment):
+    from enigma import addFont
+    font_config = {
+        RT_HALIGN_RIGHT: {
+            'regular': 'DejaVuSans.otf',
+            'medium': 'DejaVuSans.otf',
+            'bold': 'DejaVuSans.otf'
+        },
+        RT_HALIGN_LEFT: {
+            'regular': 'ls-regular.ttf',
+            'medium': 'ls-medium.ttf',
+            'bold': 'ls-medium.ttf'
+        }
+    }
+    fonts = font_config[alignment]
+    addFont(os.path.join(FNTPath, fonts['regular']), 'lsat', 100, 1)
+    addFont(os.path.join(FNTPath, fonts['medium']), 'lmsat', 100, 1)
+    addFont(os.path.join(FNTPath, fonts['bold']), 'lbsat', 100, 1)
+
+
+def initialize_global_settings():
+    global HALIGN
+    current_language = detect_system_language()
+    HALIGN = configure_text_alignment(current_language)
+    load_custom_fonts(HALIGN)
+
+# initialize_global_settings()
+
+
+def add_skin_fonts():
+    from enigma import addFont
+    FNTPath = os.path.join(plugin_path, "fonts")
+    font_config = {
+        RT_HALIGN_LEFT: {
+            'regular': 'ls-regular.ttf',
+            'medium': 'ls-medium.ttf',
+            'bold': 'ls-medium.ttf'
+        }
+    }
+    fonts = font_config[HALIGN]
+    addFont(os.path.join(FNTPath, fonts['regular']), 'lsat', 100, 1)
+    addFont(os.path.join(FNTPath, fonts['medium']), 'lmsat', 100, 1)
+    addFont(os.path.join(FNTPath, fonts['bold']), 'lbsat', 100, 1)

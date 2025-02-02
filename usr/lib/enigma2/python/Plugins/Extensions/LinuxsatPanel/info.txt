@@ -116,9 +116,15 @@ Changelog:
 --Minor fix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20250106 2.7.2 version is online
+20250201 2.7.2 version is online
 
 Changelog:
 --Removed Arabic menulist
 --Removed Halign
 --Minor fix
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250202 2.7.3 version is online
+
+Changelog:
+-- add WireGuard Vpn

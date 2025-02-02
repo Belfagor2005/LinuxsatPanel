@@ -5,7 +5,8 @@ from . import (
     _,
     AgentRequest,
     CheckConn,
-    add_skin_font,
+    # initialize_global_settings,
+    add_skin_fonts,
     b64decoder,
     checkGZIP,
     descplug,
@@ -95,7 +96,7 @@ global setx
 global skin_path
 global has_dpkg
 
-currversion = '2.7.2'
+currversion = '2.7.3'
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -1213,7 +1214,7 @@ class ScriptInstaller(Screen):
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator TWOJEIP", "twojeip.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_twojeip.sh?inline=false" -O - | /bin/sh')
 
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | /bin/sh')
-
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WireGuard Vpn", "WireGuard.png", 'wget -q --no-check-certificate "wget -qO /tmp/WireGuard.sh "https://raw.githubusercontent.com/m4dhouse/Wireguard-Vpn/python-3.12/WireGuard.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xstreamity", "xstreamity.png", 'wget -q --no-check-certificate https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xtraevent", "xtraevent.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Xtraevent.sh?inline=false" -O - | /bin/sh')
@@ -2522,7 +2523,8 @@ def menu(menuid, **kwargs):
 
 
 def Plugins(**kwargs):
-    add_skin_font()  # Initialize the necessary fonts
+    # initialize_global_settings()  # Initialize the necessary fonts
+    add_skin_fonts()
     return [
         PluginDescriptor(
             name="Linuxsat Panel",

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-01-06 18:46+0100\n"
+"POT-Creation-Date: 2025-02-01 22:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: giorbak\n"
@@ -15,33 +15,32 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: LCNScanner/Lcn.py:444 LCNScanner/Lcn.py:451
+#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
 msgid "No entry in lcn db. Please do a service scan."
 msgstr "Δεν υπάρχουν καταχωρήσεις στη βάση δεδομένων LCN. Παρακαλώ κάντε σάρωση υπηρεσιών."
 
-#: LCNScanner/Lcn.py:471
+#: LCNScanner/Lcn.py:476
 msgid "Enable terrestrial LCN:"
 msgstr "Ενεργοποίηση επίγειου LCN:"
 
-#: LCNScanner/Lcn.py:472
+#: LCNScanner/Lcn.py:477
 msgid "Terrestrial bouquet:"
 msgstr "Επίγειο μπουκέτο:"
 
-#: LCNScanner/Lcn.py:473
+#: LCNScanner/Lcn.py:478
 msgid "LCN rules:"
 msgstr "Κανόνες LCN:"
 
-#: LCNScanner/Lcn.py:477
+#: LCNScanner/Lcn.py:482
 msgid "Rebuild"
 msgstr "Αναδημιουργία"
 
-#: LCNScanner/Lcn.py:478 addons/File_Commander.py:73 addons/File_Commander.py:74 addons/File_Commander.py:76 lsConsole.py:123 ⁨plugin - ~~.py⁩:381 ~~.py⁩:669 ~~.py⁩:909 ~~.py⁩:1187 ~~.py⁩:1621 plugin-.py:370 plugin-.py:633
-#: plugin-.py:849 plugin-.py:1105 plugin-.py:1519 plugin.py:397 plugin.py:688 plugin.py:931 plugin.py:1226 plugin.py:1687 plugin.py:2466 plugin~.py:467 plugin~.py:752 plugin~.py:990 plugin~.py:1332 plugin~.py:1672 plugin~~.py:395
-#: plugin~~.py:678 plugin~~.py:913 plugin~~.py:1198 plugin~~.py:1626
+#: LCNScanner/Lcn.py:483 addons/File_Commander.py:72 addons/File_Commander.py:73 addons/File_Commander.py:75 lsConsole.py:123 ⁨plugin - Copia.py⁩:397 Copia.py⁩:688 Copia.py⁩:931 Copia.py⁩:1229 Copia.py⁩:1690 Copia.py⁩:2474
+#: plugin.py:417 plugin.py:708 plugin.py:951 plugin.py:1249 plugin.py:1710 plugin.py:2515
 msgid "Exit"
 msgstr "Έξοδος"
 
-#: LCNScanner/Lcn.py:493
+#: LCNScanner/Lcn.py:498
 msgid "Rebuild LCN bouquet now?"
 msgstr "Να γίνει αναδημιουργία του μπουκέτου LCN τώρα;"
 
@@ -241,23 +240,23 @@ msgstr "Επίγειο μπουκέτο"
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
 msgstr "Δημιουργήστε ένα οργανωμένο μπουκέτο επίγειων υπηρεσιών με βάση τα δεδομένα LCN από τον τοπικό σας πομπό."
 
-#: __init__.py:203 __init__.py:207
+#: __init__.py:202 __init__.py:206
 msgid "Free Space:"
 msgstr "Ελεύθερος χώρος:"
 
-#: __init__.py:203 __init__.py:207
+#: __init__.py:202 __init__.py:206
 msgid "of"
 msgstr "από"
 
-#: addons/File_Commander.py:17
+#: addons/File_Commander.py:16
 msgid "File Commander - Addon"
 msgstr ""
 
-#: addons/File_Commander.py:18
+#: addons/File_Commander.py:17
 msgid "play/show Files"
 msgstr "αναπαραγωγή/εμφάνιση αρχείων"
 
-#: addons/File_Commander.py:75
+#: addons/File_Commander.py:74
 msgid "Save"
 msgstr "Αποθήκευση"
 
@@ -281,22 +280,27 @@ msgstr ""
 "Πρόοδος εκτέλεσης\n"
 "\n"
 
-#: ⁨plugin - ~~.py⁩:379 ~~.py⁩:667 ~~.py⁩:907 ~~.py⁩:1185 ~~.py⁩:1640 ~~.py⁩:2050 plugin-.py:368 plugin-.py:631 plugin-.py:847 plugin-.py:1103 plugin-.py:1538 plugin-.py:1948 plugin.py:395 plugin.py:686 plugin.py:929
-#: plugin.py:1224 plugin.py:1706 plugin.py:2137 plugin~.py:465 plugin~.py:750 plugin~.py:988 plugin~.py:1330 plugin~.py:1691 plugin~.py:2126 plugin~~.py:393 plugin~~.py:676 plugin~~.py:911 plugin~~.py:1196 plugin~~.py:1645
-#: plugin~~.py:2055
+#: ⁨plugin - Copia.py⁩:294 Copia.py⁩:297 Copia.py⁩:646 Copia.py⁩:649 Copia.py⁩:896 Copia.py⁩:899 Copia.py⁩:1131 Copia.py⁩:1134 Copia.py⁩:1671 Copia.py⁩:1674 Copia.py⁩:2121 Copia.py⁩:2124 Copia.py⁩:2381
+#: Copia.py⁩:2384 Copia.py⁩:2452 Copia.py⁩:2455 plugin.py:314 plugin.py:317 plugin.py:666 plugin.py:669 plugin.py:916 plugin.py:919 plugin.py:1151 plugin.py:1154 plugin.py:1691 plugin.py:1694 plugin.py:2148 plugin.py:2151
+#: plugin.py:2422 plugin.py:2425 plugin.py:2493 plugin.py:2496
+#, python-format
+msgid "%s"
+msgstr ""
+
+#: ⁨plugin - Copia.py⁩:395 Copia.py⁩:686 Copia.py⁩:929 Copia.py⁩:1227 Copia.py⁩:1709 Copia.py⁩:2140 plugin.py:415 plugin.py:706 plugin.py:949 plugin.py:1247 plugin.py:1732 plugin.py:2167
 msgid "Please Wait..."
 msgstr "Παρακαλώ περιμένετε..."
 
-#: ⁨plugin - ~~.py⁩:380 ~~.py⁩:551 ~~.py⁩:668 ~~.py⁩:839 ~~.py⁩:908 ~~.py⁩:1079 ~~.py⁩:1186 ~~.py⁩:1397 plugin~~.py:394 plugin~~.py:561 plugin~~.py:677 plugin~~.py:844 plugin~~.py:912 plugin~~.py:1079 plugin~~.py:1197
-#: plugin~~.py:1404
-msgid "0 Sort A-Z"
-msgstr "0 Ταξινόμηση A-Z"
+#: ⁨plugin - Copia.py⁩:396 Copia.py⁩:563 Copia.py⁩:687 Copia.py⁩:854 Copia.py⁩:930 Copia.py⁩:1097 Copia.py⁩:1228 Copia.py⁩:1459 plugin.py:416 plugin.py:583 plugin.py:707 plugin.py:874 plugin.py:950 plugin.py:1117
+#: plugin.py:1248 plugin.py:1479
+msgid "Sort A-Z"
+msgstr "Ταξινόμηση A-Z"
 
-#: ⁨plugin - ~~.py⁩:556 ~~.py⁩:844 ~~.py⁩:1084 ~~.py⁩:1402 plugin~~.py:565 plugin~~.py:848 plugin~~.py:1083 plugin~~.py:1408
-msgid "0 Sort Default"
-msgstr "0 Ταξιν. Προεπιλογή"
+#: ⁨plugin - Copia.py⁩:567 Copia.py⁩:858 Copia.py⁩:1101 Copia.py⁩:1463 plugin.py:587 plugin.py:878 plugin.py:1121 plugin.py:1483
+msgid "Sort Default"
+msgstr "Προεπιλεγμένη ταξινόμηση"
 
-#: ⁨plugin - ~~.py⁩:586 plugin-.py:555 plugin.py:597 plugin~.py:646 plugin~~.py:595
+#: ⁨plugin - Copia.py⁩:597 plugin.py:617
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -306,15 +310,15 @@ msgstr ""
 "\n"
 "Είστε σίγουροι ότι θέλετε να συνεχίσετε;"
 
-#: ⁨plugin - ~~.py⁩:626 ~~.py⁩:873 plugin.py:637 plugin.py:887 plugin~~.py:635 plugin~~.py:877
+#: ⁨plugin - Copia.py⁩:637 Copia.py⁩:887 plugin.py:657 plugin.py:907
 msgid "Error: No Data Find."
 msgstr "Σφάλμα: Δεν βρέθηκαν δεδομένα."
 
-#: ⁨plugin - ~~.py⁩:1227 plugin-.py:1145 plugin~~.py:1238
-msgid "Do you want to Order LCN Bouquet"
-msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN"
+#: ⁨plugin - Copia.py⁩:1269 Copia.py⁩:1282 Copia.py⁩:1982 Copia.py⁩:1995 plugin.py:1289 plugin.py:1302 plugin.py:2009 plugin.py:2022
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN;"
 
-#: ⁨plugin - ~~.py⁩:1238 ~~.py⁩:1941 plugin-.py:1156 plugin-.py:1839 plugin.py:1297 plugin.py:2010 plugin~~.py:1249 plugin~~.py:1946
+#: ⁨plugin - Copia.py⁩:1300 Copia.py⁩:2013 plugin.py:1320 plugin.py:2040
 msgid ""
 "[LCNScanner] LCN scan finished\n"
 "Channels Ordered!"
@@ -322,7 +326,7 @@ msgstr ""
 "[LCNScanner] Η σάρωση LCN ολοκληρώθηκε\n"
 "Τα κανάλια ταξινομήθηκαν!"
 
-#: ⁨plugin - ~~.py⁩:1245 plugin-.py:1163 plugin.py:1308 plugin~~.py:1256
+#: ⁨plugin - Copia.py⁩:1311 plugin.py:1331
 msgid ""
 "[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
 "Do you really want to continue?"
@@ -330,223 +334,7 @@ msgstr ""
 "[Checkskin] Αυτή η λειτουργία ελέγχει εάν το θέμα έχει τα συστατικά του (δεν είναι σίγουρο)..\n"
 "Θέλετε πραγματικά να συνεχίσετε;"
 
-#: ⁨plugin - ~~.py⁩:1446 plugin-.py:1344 plugin~.py:1518 plugin~~.py:1452
-#, python-format
-msgid "Do you want to execute %s?"
-msgstr "Θέλετε να εκτελέσετε το %s;"
-
-#: ⁨plugin - ~~.py⁩:1451 plugin-.py:1349 plugin.py:1509 plugin~.py:1523 plugin~~.py:1457
-#, python-format
-msgid ""
-"Executing %s\n"
-"Please Wait..."
-msgstr ""
-"Εκτέλεση του %s\n"
-"Παρακαλώ περιμένετε..."
-
-#: ⁨plugin - ~~.py⁩:1466 plugin-.py:1364 plugin.py:1524 plugin~~.py:1472
-msgid "Do you want add Cline?"
-msgstr "Θέλετε να προσθέσετε Cline;"
-
-#: ⁨plugin - ~~.py⁩:1490 plugin-.py:1388 plugin.py:1547 plugin~.py:1540 plugin~~.py:1495
-msgid ""
-"File not found /etc/CCcam.cfg!\n"
-"Restart please..."
-msgstr ""
-"Το αρχείο /etc/CCcam.cfg δεν βρέθηκε!\n"
-"Κάντε επανεκκίνηση παρακαλώ..."
-
-#: ⁨plugin - ~~.py⁩:1499 plugin-.py:1397 plugin.py:1556 plugin~.py:1549 plugin~~.py:1504
-msgid ""
-"File not found /etc/tuxbox/config/oscam.server!\n"
-"Restart please..."
-msgstr ""
-"Το αρχείο /etc/tuxbox/config/oscam.server δεν βρέθηκε!\n"
-"Κάντε επανεκκίνηση παρακαλώ..."
-
-#: ⁨plugin - ~~.py⁩:1598 plugin-.py:1496 plugin.py:1653 plugin~.py:1646 plugin~~.py:1603
-#, python-format
-msgid ""
-"Server %s added in %s\n"
-"\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
-msgstr ""
-"Ο διακομιστής %s προστέθηκε στο %s\n"
-"\n"
-"Διακομιστής:%s\n"
-"Θύρα:%s\n"
-"Χρήστης:%s\n"
-"Κωδικός:%s\n"
-
-#: ⁨plugin - ~~.py⁩:1601 plugin-.py:1499 plugin~.py:1648 plugin~~.py:1606
-msgid ""
-"Server Error.\n"
-"\n"
-"Try again, you'll be luckier!"
-msgstr ""
-"Σφάλμα διακομιστή.\n"
-"\n"
-"Δοκιμάστε ξανά, ίσως είστε πιο τυχεροί!"
-
-#: ⁨plugin - ~~.py⁩:1622 plugin-.py:1520 plugin.py:1688 plugin~.py:1673 plugin~~.py:1627
-msgid "Install"
-msgstr "Εγκατάσταση"
-
-#: ⁨plugin - ~~.py⁩:1623 plugin-.py:1521 plugin.py:1689 plugin~.py:1674 plugin~~.py:1628
-msgid "Remove"
-msgstr "Αφαίρεση"
-
-#: ⁨plugin - ~~.py⁩:1624 plugin-.py:1522 plugin.py:1690 plugin~.py:1675 plugin~~.py:1629
-msgid "Restart enigma"
-msgstr "Επανεκκίνηση enigma"
-
-#: ⁨plugin - ~~.py⁩:1627 ~~.py⁩:1669 ~~.py⁩:1709 plugin-.py:1525 plugin-.py:1567 plugin-.py:1607 plugin~.py:1678 plugin~.py:1720 plugin~.py:1760 plugin~~.py:1632 plugin~~.py:1674 plugin~~.py:1714
-msgid "0 Halign Left"
-msgstr "0 Στοίχιση αριστερά"
-
-#: ⁨plugin - ~~.py⁩:1629 ~~.py⁩:1672 ~~.py⁩:1711 plugin-.py:1527 plugin-.py:1570 plugin-.py:1609 plugin~.py:1680 plugin~.py:1723 plugin~.py:1762 plugin~~.py:1634 plugin~~.py:1677 plugin~~.py:1716
-msgid "0 Halign Right"
-msgstr "0 Στοίχιση δεξιά"
-
-#: ⁨plugin - ~~.py⁩:1642 plugin-.py:1540 plugin.py:1708 plugin~.py:1693 plugin~~.py:1647
-msgid "Load Category..."
-msgstr "Φόρτωση κατηγορίας..."
-
-#: ⁨plugin - ~~.py⁩:1681 plugin-.py:1579 plugin.py:1748 plugin~.py:1732 plugin~~.py:1686
-msgid "Category: "
-msgstr "Κατηγορία: "
-
-#: ⁨plugin - ~~.py⁩:1734 ~~.py⁩:1743 plugin-.py:1632 plugin-.py:1641 plugin.py:1801 plugin.py:1810 plugin~.py:1786 plugin~.py:1796 plugin~~.py:1739 plugin~~.py:1748
-msgid "Unknow Image!"
-msgstr "Άγνωστο image!"
-
-#: ⁨plugin - ~~.py⁩:1755 plugin-.py:1653 plugin.py:1822 plugin~.py:1808 plugin~~.py:1760
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "Θέλετε να εγκαταστήσετε το %s;"
-
-#: ⁨plugin - ~~.py⁩:1789 ~~.py⁩:1984 plugin-.py:1687 plugin-.py:1882 plugin.py:1856 plugin.py:2058 plugin~.py:1842 plugin~.py:2051 plugin~~.py:1794 plugin~~.py:1989
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"Εγκατάσταση του %s\n"
-"Παρακαλώ περιμένετε..."
-
-#: ⁨plugin - ~~.py⁩:1925 plugin-.py:1823 plugin.py:1974 plugin~.py:1978 plugin~~.py:1930
-msgid "Download page get failed ..."
-msgstr "Η λήψη της σελίδας απέτυχε ..."
-
-#: ⁨plugin - ~~.py⁩:1930 plugin-.py:1828 plugin~~.py:1935
-msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
-msgstr "[LCNScanner] Θέλετε να σαρώσετε την ταξινόμηση μπουκέτου LCN"
-
-#: ⁨plugin - ~~.py⁩:1947 plugin-.py:1845 plugin~.py:2014 plugin~~.py:1952
-msgid "Do you want to install?"
-msgstr "Θέλετε να εγκαταστήσετε;"
-
-#: ⁨plugin - ~~.py⁩:1989 plugin-.py:1887 plugin.py:2063 plugin~.py:2056 plugin~~.py:1994
-msgid "Settings Not Installed ..."
-msgstr "Οι ρυθμίσεις δεν εγκαταστάθηκαν ..."
-
-#: ⁨plugin - ~~.py⁩:2002 plugin-.py:1900 plugin.py:2076 plugin~.py:2077 plugin~~.py:2007
-msgid "Do you want to remove?"
-msgstr "Θέλετε να το αφαιρέσετε;"
-
-#: ⁨plugin - ~~.py⁩:2016 plugin-.py:1914 plugin.py:2090 plugin~.py:2091 plugin~~.py:2021
-#, python-format
-msgid "Removing %s"
-msgstr "Αφαίρεση του %s"
-
-#: ⁨plugin - ~~.py⁩:2021 plugin-.py:1919 plugin.py:2095 plugin~.py:2097 plugin~~.py:2026
-msgid "Do you want to restart Gui Interface?"
-msgstr "Θέλετε να κάνετε επανεκκίνηση της διεπαφής χρήστη;"
-
-#: ⁨plugin - ~~.py⁩:2122 plugin-.py:2020 plugin~.py:2197 plugin~~.py:2127
-#, python-format
-msgid ""
-"New version %s is available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press green button to start updating"
-msgstr ""
-"Νέα έκδοση %s είναι διαθέσιμη\n"
-"\n"
-"Καταγραφή αλλαγών: %s\n"
-"\n"
-"Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση"
-
-#: ⁨plugin - ~~.py⁩:2124 plugin-.py:2022 plugin.py:2217 plugin~.py:2198 plugin~~.py:2129
-msgid "Update"
-msgstr "Ενημέρωση"
-
-#: ⁨plugin - ~~.py⁩:2130 plugin-.py:2028 plugin.py:2225 plugin~.py:2203 plugin~~.py:2135
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-"Νέα έκδοση %s είναι διαθέσιμη.\n"
-"\n"
-"Καταγραφή αλλαγών: %s \n"
-"\n"
-"Θέλετε να την εγκαταστήσετε τώρα;"
-
-#: ⁨plugin - ~~.py⁩:2134 plugin-.py:2032 plugin.py:2229 plugin~.py:2206 plugin~~.py:2139
-msgid "Congrats! You already have the latest version..."
-msgstr "Συγχαρητήρια! Έχετε ήδη την πιο πρόσφατη έκδοση..."
-
-#: ⁨plugin - ~~.py⁩:2145 plugin-.py:2043 plugin.py:2240 plugin~.py:2216 plugin~~.py:2150
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Θέλετε να εγκαταστήσετε την ενημέρωση ( %s ) τώρα;"
-
-#: ⁨plugin - ~~.py⁩:2152 plugin-.py:2050 plugin.py:2247 plugin~.py:2223 plugin~~.py:2157
-msgid "Update Aborted!"
-msgstr "Η ενημέρωση ακυρώθηκε!"
-
-#: ⁨plugin - ~~.py⁩:2174 plugin-.py:2072 plugin.py:2270 plugin~.py:2243 plugin~~.py:2182
-msgid "Unable to download updates!"
-msgstr "Δεν είναι δυνατή η λήψη ενημερώσεων!"
-
-#: ⁨plugin - ~~.py⁩:2362 plugin-.py:2260 plugin.py:2481 plugin~.py:2413 plugin~~.py:2380
-msgid "Check Connection!"
-msgstr "Έλεγχος σύνδεσης!"
-
-#: ⁨plugin - ~~.py⁩:2383 plugin-.py:2281 plugin.py:2502 plugin~.py:2434 plugin~~.py:2401
-msgid "Linuxsat Panel"
-msgstr ""
-
-#: plugin-.py:369 plugin-.py:632 plugin-.py:848 plugin-.py:1104 plugin~.py:466 plugin~.py:751 plugin~.py:989 plugin~.py:1331
-msgid "0 Sort"
-msgstr "0 Ταξινόμηση"
-
-#: plugin.py:294 plugin.py:297 plugin.py:646 plugin.py:649 plugin.py:896 plugin.py:899 plugin.py:1131 plugin.py:1134 plugin.py:1668 plugin.py:1671 plugin.py:2118 plugin.py:2121 plugin.py:2373 plugin.py:2376 plugin.py:2444 plugin.py:2447
-#, python-format
-msgid "%s"
-msgstr ""
-
-#: plugin.py:396 plugin.py:563 plugin.py:687 plugin.py:854 plugin.py:930 plugin.py:1097 plugin.py:1225 plugin.py:1456
-msgid "Sort A-Z"
-msgstr "Ταξινόμηση A-Z"
-
-#: plugin.py:567 plugin.py:858 plugin.py:1101 plugin.py:1460
-msgid "Sort Default"
-msgstr "Προεπιλεγμένη ταξινόμηση"
-
-#: plugin.py:1266 plugin.py:1279 plugin.py:1979 plugin.py:1992
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Θέλετε να ταξινομήσετε το μπουκέτο LCN;"
-
-#: plugin.py:1503
+#: ⁨plugin - Copia.py⁩:1506 plugin.py:1526
 #, python-format
 msgid ""
 "I am NOT responsible for any issues you may\n"
@@ -563,7 +351,53 @@ msgstr ""
 "\n"
 "Θέλετε να εκτελέσετε το %s;"
 
-#: plugin.py:1658
+#: ⁨plugin - Copia.py⁩:1512 plugin.py:1532
+#, python-format
+msgid ""
+"Executing %s\n"
+"Please Wait..."
+msgstr ""
+"Εκτέλεση του %s\n"
+"Παρακαλώ περιμένετε..."
+
+#: ⁨plugin - Copia.py⁩:1527 plugin.py:1547
+msgid "Do you want add Cline?"
+msgstr "Θέλετε να προσθέσετε Cline;"
+
+#: ⁨plugin - Copia.py⁩:1550 plugin.py:1570
+msgid ""
+"File not found /etc/CCcam.cfg!\n"
+"Restart please..."
+msgstr ""
+"Το αρχείο /etc/CCcam.cfg δεν βρέθηκε!\n"
+"Κάντε επανεκκίνηση παρακαλώ..."
+
+#: ⁨plugin - Copia.py⁩:1559 plugin.py:1579
+msgid ""
+"File not found /etc/tuxbox/config/oscam.server!\n"
+"Restart please..."
+msgstr ""
+"Το αρχείο /etc/tuxbox/config/oscam.server δεν βρέθηκε!\n"
+"Κάντε επανεκκίνηση παρακαλώ..."
+
+#: ⁨plugin - Copia.py⁩:1656 plugin.py:1676
+#, python-format
+msgid ""
+"Server %s added in %s\n"
+"\n"
+"Server:%s\n"
+"Port:%s\n"
+"User:%s\n"
+"Password:%s\n"
+msgstr ""
+"Ο διακομιστής %s προστέθηκε στο %s\n"
+"\n"
+"Διακομιστής:%s\n"
+"Θύρα:%s\n"
+"Χρήστης:%s\n"
+"Κωδικός:%s\n"
+
+#: ⁨plugin - Copia.py⁩:1661 plugin.py:1681
 #, python-format
 msgid ""
 "Server Error.\n"
@@ -576,15 +410,57 @@ msgstr ""
 "Δοκιμάστε ξανά, ίσως είστε πιο τυχεροί!\n"
 "%s"
 
-#: plugin.py:1693 plugin.py:1736 plugin.py:1776
+#: ⁨plugin - Copia.py⁩:1691 plugin.py:1711
+msgid "Install"
+msgstr "Εγκατάσταση"
+
+#: ⁨plugin - Copia.py⁩:1692 plugin.py:1712
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: ⁨plugin - Copia.py⁩:1693 plugin.py:1713
+msgid "Restart enigma"
+msgstr "Επανεκκίνηση enigma"
+
+#: ⁨plugin - Copia.py⁩:1696 Copia.py⁩:1739 Copia.py⁩:1779
 msgid "Halign Left"
 msgstr "Στοίχιση αριστερά"
 
-#: plugin.py:1695 plugin.py:1739 plugin.py:1778
+#: ⁨plugin - Copia.py⁩:1698 Copia.py⁩:1742 Copia.py⁩:1781
 msgid "Halign Right"
 msgstr "Στοίχιση δεξιά"
 
-#: plugin.py:2020
+#: ⁨plugin - Copia.py⁩:1711 plugin.py:1734
+msgid "Load Category..."
+msgstr "Φόρτωση κατηγορίας..."
+
+#: ⁨plugin - Copia.py⁩:1751 plugin.py:1775
+msgid "Category: "
+msgstr "Κατηγορία: "
+
+#: ⁨plugin - Copia.py⁩:1804 Copia.py⁩:1813 plugin.py:1831 plugin.py:1840
+msgid "Unknow Image!"
+msgstr "Άγνωστο image!"
+
+#: ⁨plugin - Copia.py⁩:1825 plugin.py:1852
+#, python-format
+msgid "Do you want to install %s?"
+msgstr "Θέλετε να εγκαταστήσετε το %s;"
+
+#: ⁨plugin - Copia.py⁩:1859 Copia.py⁩:2061 plugin.py:1886 plugin.py:2088
+#, python-format
+msgid ""
+"Installing %s\n"
+"Please Wait..."
+msgstr ""
+"Εγκατάσταση του %s\n"
+"Παρακαλώ περιμένετε..."
+
+#: ⁨plugin - Copia.py⁩:1977 plugin.py:2004
+msgid "Download page get failed ..."
+msgstr "Η λήψη της σελίδας απέτυχε ..."
+
+#: ⁨plugin - Copia.py⁩:2023 plugin.py:2050
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
@@ -600,7 +476,24 @@ msgstr ""
 "\n"
 "Θέλετε να το εγκαταστήσετε;"
 
-#: plugin.py:2213
+#: ⁨plugin - Copia.py⁩:2066 plugin.py:2093
+msgid "Settings Not Installed ..."
+msgstr "Οι ρυθμίσεις δεν εγκαταστάθηκαν ..."
+
+#: ⁨plugin - Copia.py⁩:2079 plugin.py:2106
+msgid "Do you want to remove?"
+msgstr "Θέλετε να το αφαιρέσετε;"
+
+#: ⁨plugin - Copia.py⁩:2093 plugin.py:2120
+#, python-format
+msgid "Removing %s"
+msgstr "Αφαίρεση του %s"
+
+#: ⁨plugin - Copia.py⁩:2098 plugin.py:2125
+msgid "Do you want to restart Gui Interface?"
+msgstr "Θέλετε να κάνετε επανεκκίνηση της διεπαφής χρήστη;"
+
+#: ⁨plugin - Copia.py⁩:2220
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -615,7 +508,43 @@ msgstr ""
 "\n"
 "Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση."
 
-#: plugin.py:2454
+#: ⁨plugin - Copia.py⁩:2224 plugin.py:2252
+msgid "Update"
+msgstr "Ενημέρωση"
+
+#: ⁨plugin - Copia.py⁩:2233 plugin.py:2319
+#, python-format
+msgid ""
+"New version %s is available.\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Do you want to install it now?"
+msgstr ""
+"Νέα έκδοση %s είναι διαθέσιμη.\n"
+"\n"
+"Καταγραφή αλλαγών: %s \n"
+"\n"
+"Θέλετε να την εγκαταστήσετε τώρα;"
+
+#: ⁨plugin - Copia.py⁩:2237 plugin.py:2323
+msgid "Congrats! You already have the latest version..."
+msgstr "Συγχαρητήρια! Έχετε ήδη την πιο πρόσφατη έκδοση..."
+
+#: ⁨plugin - Copia.py⁩:2248 plugin.py:2334
+#, python-format
+msgid "Do you want to install update ( %s ) now?"
+msgstr "Θέλετε να εγκαταστήσετε την ενημέρωση ( %s ) τώρα;"
+
+#: ⁨plugin - Copia.py⁩:2255 plugin.py:2341
+msgid "Update Aborted!"
+msgstr "Η ενημέρωση ακυρώθηκε!"
+
+#: ⁨plugin - Copia.py⁩:2278 plugin.py:2361
+msgid "Unable to download updates!"
+msgstr "Δεν είναι δυνατή η λήψη ενημερώσεων!"
+
+#: ⁨plugin - Copia.py⁩:2462 plugin.py:2503
 msgid ""
 "Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
@@ -623,15 +552,15 @@ msgstr ""
 "Σας ευχαριστούμε που επιλέξατε το πρόσθετο για τη διαχείριση του Enigma δέκτη σας.\n"
 "\n"
 
-#: plugin.py:2455
+#: ⁨plugin - Copia.py⁩:2463 plugin.py:2504
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr "Προτείνεται από: @masterG - @oktus - @pcd\n"
 
-#: plugin.py:2456
+#: ⁨plugin - Copia.py⁩:2464 plugin.py:2505
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Σχεδιασμοί και γραφικά από τον @oktus\n"
 
-#: plugin.py:2457
+#: ⁨plugin - Copia.py⁩:2465 plugin.py:2506
 msgid ""
 "Support on: Linuxsat-support.com\n"
 "\n"
@@ -639,11 +568,11 @@ msgstr ""
 "Υποστήριξη στο: Linuxsat-support.com\n"
 "\n"
 
-#: plugin.py:2458
+#: ⁨plugin - Copia.py⁩:2466 plugin.py:2507
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr "Το πρόσθετο ζει χάρη στις δωρεές του καθενός από εσάς.\n"
 
-#: plugin.py:2459
+#: ⁨plugin - Copia.py⁩:2467 plugin.py:2508
 msgid ""
 "A coffee costs nothing.\n"
 "\n"
@@ -651,15 +580,15 @@ msgstr ""
 "Ένας καφές δεν κοστίζει τίποτα.\n"
 "\n"
 
-#: plugin.py:2460
+#: ⁨plugin - Copia.py⁩:2468 plugin.py:2509
 msgid "If you think it is a useful tool for your box\n"
 msgstr "Αν νομίζετε ότι είναι ένα χρήσιμο εργαλείο για τον δέκτη σας\n"
 
-#: plugin.py:2461
+#: ⁨plugin - Copia.py⁩:2469 plugin.py:2510
 msgid "please make a donation:\n"
 msgstr "παρακαλώ κάντε μια δωρεά:\n"
 
-#: plugin.py:2463
+#: ⁨plugin - Copia.py⁩:2471 plugin.py:2512
 msgid ""
 "make donation on Linuxsat-support.com\n"
 "\n"
@@ -673,14 +602,38 @@ msgstr ""
 "\n"
 "\n"
 
-#: plugin.py:2464
+#: ⁨plugin - Copia.py⁩:2472 plugin.py:2513
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr "Όλος ο κώδικας ξαναγράφτηκε από τον @Lululla - 2024.07.20\n"
 
-#: plugin~.py:1986
-msgid "Sorting Terrestrial Executed!"
-msgstr "Η ταξινόμηση επίγειων εκτελέστηκε!"
+#: ⁨plugin - Copia.py⁩:2489 plugin.py:2530
+msgid "Check Connection!"
+msgstr "Έλεγχος σύνδεσης!"
 
-#: plugin~.py:1991
-msgid "Sorting Terrestrial not Executed!"
-msgstr "Η ταξινόμηση επίγειων δεν εκτελέστηκε!"
+#: ⁨plugin - Copia.py⁩:2510 plugin.py:2551
+msgid "Linuxsat Panel"
+msgstr ""
+
+#: plugin.py:1714
+msgid "Reload"
+msgstr "Επαναφόρτωση"
+
+#: plugin.py:2246
+msgid ""
+"New version: {} available\n"
+"\n"
+"Changelog:\n"
+"{}\n"
+"\n"
+"Press the green button to start the update."
+msgstr ""
+"Νέα έκδοση: {} διαθέσιμη\n"
+"\n"
+"Καταγραφή αλλαγών:\n"
+"{}\n"
+"\n"
+"Πατήστε το πράσινο κουμπί για να ξεκινήσει η ενημέρωση."
+
+#: plugin.py:2261
+msgid "Error during version control: {}"
+msgstr "Σφάλμα κατά τον έλεγχο έκδοσης: {}"
