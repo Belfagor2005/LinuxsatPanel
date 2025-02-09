@@ -5,7 +5,7 @@
 	<ePixmap position="1219,256" zPosition="2" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/LSicons2/oe2.0.png" alphatest="blend" />
 	<eLabel position="0,0" zPosition="-10" size="1920,1080" backgroundColor="black" />
 	<!-- list -->
-	<widget name="Info" position="80,200" size="1000,765" zPosition="99" font="lmsat;32" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" itemCornerRadius="12" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="8" />
+	<widget name="Info" position="80,200" size="1000,765" zPosition="99" font="lmsat;32" halign="center" foregroundColor="#0049bbff" backgroundColor="#54111112" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="8" />
 	<!-- minitv -->
 	<widget source="session.VideoPicture" render="Pig" position="1219,474" size="610,345" zPosition="1" backgroundColor="#ff000000" />
 	<!-- clock -->

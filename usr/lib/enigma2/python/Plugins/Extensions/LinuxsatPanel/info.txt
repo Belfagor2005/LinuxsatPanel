@@ -129,3 +129,11 @@ Changelog:
 Changelog:
 -- add WireGuard Vpn
 -- add EPGImport Source
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250209 2.7.4 version is online
+
+Changelog:
+-- fix pick screen
+-- fix info-about (New ATV Image)
+

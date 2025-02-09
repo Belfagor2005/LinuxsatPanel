@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-02-01 22:55+0100\n"
+"POT-Creation-Date: 2025-02-09 21:53+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -36,10 +36,8 @@ msgstr ""
 
 #: LCNScanner/Lcn.py:483 addons/File_Commander.py:72
 #: addons/File_Commander.py:73 addons/File_Commander.py:75 lsConsole.py:123
-#: ⁨plugin - Copia.py⁩:397 ⁨plugin - Copia.py⁩:688 ⁨plugin - Copia.py⁩:931
-#: ⁨plugin - Copia.py⁩:1229 ⁨plugin - Copia.py⁩:1690 ⁨plugin - Copia.py⁩:2474
-#: plugin.py:417 plugin.py:708 plugin.py:951 plugin.py:1249 plugin.py:1710
-#: plugin.py:2515
+#: plugin.py:430 plugin.py:722 plugin.py:966 plugin.py:1267 plugin.py:1729
+#: plugin.py:2526
 msgid "Exit"
 msgstr ""
 
@@ -245,11 +243,11 @@ msgstr ""
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
 msgstr ""
 
-#: __init__.py:202 __init__.py:206
+#: __init__.py:168 __init__.py:172
 msgid "Free Space:"
 msgstr ""
 
-#: __init__.py:202 __init__.py:206
+#: __init__.py:168 __init__.py:172
 msgid "of"
 msgstr ""
 
@@ -283,70 +281,56 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:294 ⁨plugin - Copia.py⁩:297 ⁨plugin - Copia.py⁩:646
-#: ⁨plugin - Copia.py⁩:649 ⁨plugin - Copia.py⁩:896 ⁨plugin - Copia.py⁩:899
-#: ⁨plugin - Copia.py⁩:1131 ⁨plugin - Copia.py⁩:1134 ⁨plugin - Copia.py⁩:1671
-#: ⁨plugin - Copia.py⁩:1674 ⁨plugin - Copia.py⁩:2121 ⁨plugin - Copia.py⁩:2124
-#: ⁨plugin - Copia.py⁩:2381 ⁨plugin - Copia.py⁩:2384 ⁨plugin - Copia.py⁩:2452
-#: ⁨plugin - Copia.py⁩:2455 plugin.py:314 plugin.py:317 plugin.py:666
-#: plugin.py:669 plugin.py:916 plugin.py:919 plugin.py:1151 plugin.py:1154
-#: plugin.py:1691 plugin.py:1694 plugin.py:2148 plugin.py:2151 plugin.py:2422
-#: plugin.py:2425 plugin.py:2493 plugin.py:2496
+#: plugin.py:327 plugin.py:330 plugin.py:680 plugin.py:683 plugin.py:931
+#: plugin.py:934 plugin.py:1167 plugin.py:1170 plugin.py:1710 plugin.py:1713
+#: plugin.py:2169 plugin.py:2172 plugin.py:2431 plugin.py:2434 plugin.py:2504
+#: plugin.py:2507
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:395 ⁨plugin - Copia.py⁩:686 ⁨plugin - Copia.py⁩:929
-#: ⁨plugin - Copia.py⁩:1227 ⁨plugin - Copia.py⁩:1709 ⁨plugin - Copia.py⁩:2140
-#: plugin.py:415 plugin.py:706 plugin.py:949 plugin.py:1247 plugin.py:1732
-#: plugin.py:2167
+#: plugin.py:428 plugin.py:720 plugin.py:964 plugin.py:1265 plugin.py:1751
+#: plugin.py:2188
 msgid "Please Wait..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:396 ⁨plugin - Copia.py⁩:563 ⁨plugin - Copia.py⁩:687
-#: ⁨plugin - Copia.py⁩:854 ⁨plugin - Copia.py⁩:930 ⁨plugin - Copia.py⁩:1097
-#: ⁨plugin - Copia.py⁩:1228 ⁨plugin - Copia.py⁩:1459 plugin.py:416 plugin.py:583
-#: plugin.py:707 plugin.py:874 plugin.py:950 plugin.py:1117 plugin.py:1248
-#: plugin.py:1479
+#: plugin.py:429 plugin.py:596 plugin.py:721 plugin.py:888 plugin.py:965
+#: plugin.py:1132 plugin.py:1266 plugin.py:1497
 msgid "Sort A-Z"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:567 ⁨plugin - Copia.py⁩:858 ⁨plugin - Copia.py⁩:1101
-#: ⁨plugin - Copia.py⁩:1463 plugin.py:587 plugin.py:878 plugin.py:1121
-#: plugin.py:1483
+#: plugin.py:600 plugin.py:892 plugin.py:1136 plugin.py:1501
 msgid "Sort Default"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:597 plugin.py:617
+#: plugin.py:630
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
 "are you sure you want to continue?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:637 ⁨plugin - Copia.py⁩:887 plugin.py:657 plugin.py:907
+#: plugin.py:670 plugin.py:921
 msgid "Error: No Data Find."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1269 ⁨plugin - Copia.py⁩:1282 ⁨plugin - Copia.py⁩:1982
-#: ⁨plugin - Copia.py⁩:1995 plugin.py:1289 plugin.py:1302 plugin.py:2009
-#: plugin.py:2022
+#: plugin.py:1307 plugin.py:1320 plugin.py:2029 plugin.py:2042
 msgid "Do you want to Order LCN Bouquet?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1300 ⁨plugin - Copia.py⁩:2013 plugin.py:1320 plugin.py:2040
+#: plugin.py:1338 plugin.py:2060
 msgid ""
 "[LCNScanner] LCN scan finished\n"
 "Channels Ordered!"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1311 plugin.py:1331
+#: plugin.py:1349
 msgid ""
 "[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
 "Do you really want to continue?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1506 plugin.py:1526
+#: plugin.py:1544
 #, python-format
 msgid ""
 "I am NOT responsible for any issues you may\n"
@@ -357,30 +341,30 @@ msgid ""
 "Do you want to execute %s?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1512 plugin.py:1532
+#: plugin.py:1550
 #, python-format
 msgid ""
 "Executing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1527 plugin.py:1547
+#: plugin.py:1565
 msgid "Do you want add Cline?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1550 plugin.py:1570
+#: plugin.py:1588
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1559 plugin.py:1579
+#: plugin.py:1597
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1656 plugin.py:1676
+#: plugin.py:1694
 #, python-format
 msgid ""
 "Server %s added in %s\n"
@@ -391,7 +375,7 @@ msgid ""
 "Password:%s\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1661 plugin.py:1681
+#: plugin.py:1699
 #, python-format
 msgid ""
 "Server Error.\n"
@@ -400,55 +384,51 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1691 plugin.py:1711
+#: plugin.py:1730
 msgid "Install"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1692 plugin.py:1712
+#: plugin.py:1731
 msgid "Remove"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1693 plugin.py:1713
+#: plugin.py:1732
 msgid "Restart enigma"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1696 ⁨plugin - Copia.py⁩:1739 ⁨plugin - Copia.py⁩:1779
-msgid "Halign Left"
+#: plugin.py:1733
+msgid "Reload"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1698 ⁨plugin - Copia.py⁩:1742 ⁨plugin - Copia.py⁩:1781
-msgid "Halign Right"
-msgstr ""
-
-#: ⁨plugin - Copia.py⁩:1711 plugin.py:1734
+#: plugin.py:1753
 msgid "Load Category..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1751 plugin.py:1775
+#: plugin.py:1795
 msgid "Category: "
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1804 ⁨plugin - Copia.py⁩:1813 plugin.py:1831 plugin.py:1840
+#: plugin.py:1851 plugin.py:1860
 msgid "Unknow Image!"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1825 plugin.py:1852
+#: plugin.py:1872
 #, python-format
 msgid "Do you want to install %s?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1859 ⁨plugin - Copia.py⁩:2061 plugin.py:1886 plugin.py:2088
+#: plugin.py:1906 plugin.py:2108
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:1977 plugin.py:2004
+#: plugin.py:2024
 msgid "Download page get failed ..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2023 plugin.py:2050
+#: plugin.py:2070
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
@@ -458,24 +438,24 @@ msgid ""
 "Do you want to install?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2066 plugin.py:2093
+#: plugin.py:2113
 msgid "Settings Not Installed ..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2079 plugin.py:2106
+#: plugin.py:2126
 msgid "Do you want to remove?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2093 plugin.py:2120
+#: plugin.py:2140
 #, python-format
 msgid "Removing %s"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2098 plugin.py:2125
+#: plugin.py:2145
 msgid "Do you want to restart Gui Interface?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2220
+#: plugin.py:2294
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -485,11 +465,11 @@ msgid ""
 "Press the green button to start the update."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2224 plugin.py:2252
+#: plugin.py:2298
 msgid "Update"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2233 plugin.py:2319
+#: plugin.py:2305
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -499,62 +479,62 @@ msgid ""
 "Do you want to install it now?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2237 plugin.py:2323
+#: plugin.py:2318
 msgid "Congrats! You already have the latest version..."
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2248 plugin.py:2334
+#: plugin.py:2331
 #, python-format
 msgid "Do you want to install update ( %s ) now?"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2255 plugin.py:2341
+#: plugin.py:2338
 msgid "Update Aborted!"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2278 plugin.py:2361
+#: plugin.py:2365
 msgid "Unable to download updates!"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2462 plugin.py:2503
+#: plugin.py:2514
 msgid ""
 "Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2463 plugin.py:2504
+#: plugin.py:2515
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2464 plugin.py:2505
+#: plugin.py:2516
 msgid "Designs and Graphics by @oktus\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2465 plugin.py:2506
+#: plugin.py:2517
 msgid ""
 "Support on: Linuxsat-support.com\n"
 "\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2466 plugin.py:2507
+#: plugin.py:2518
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2467 plugin.py:2508
+#: plugin.py:2519
 msgid ""
 "A coffee costs nothing.\n"
 "\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2468 plugin.py:2509
+#: plugin.py:2520
 msgid "If you think it is a useful tool for your box\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2469 plugin.py:2510
+#: plugin.py:2521
 msgid "please make a donation:\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2471 plugin.py:2512
+#: plugin.py:2523
 msgid ""
 "make donation on Linuxsat-support.com\n"
 "\n"
@@ -563,32 +543,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2472 plugin.py:2513
+#: plugin.py:2524
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2489 plugin.py:2530
+#: plugin.py:2541
 msgid "Check Connection!"
 msgstr ""
 
-#: ⁨plugin - Copia.py⁩:2510 plugin.py:2551
+#: plugin.py:2562
 msgid "Linuxsat Panel"
-msgstr ""
-
-#: plugin.py:1714
-msgid "Reload"
-msgstr ""
-
-#: plugin.py:2246
-msgid ""
-"New version: {} available\n"
-"\n"
-"Changelog:\n"
-"{}\n"
-"\n"
-"Press the green button to start the update."
-msgstr ""
-
-#: plugin.py:2261
-msgid "Error during version control: {}"
 msgstr ""

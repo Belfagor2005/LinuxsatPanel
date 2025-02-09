@@ -3,7 +3,7 @@
 	<ePixmap position="0,0" zPosition="0" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/panel2.png" backgroundColor="#25062748" alphatest="on" />
 	<eLabel position="0,0" zPosition="-10" size="1280,720" backgroundColor="black" />
 	<!-- list -->
-	<widget name="list" position="55,170" size="680,425" zPosition="4" scrollbarMode="showOnDemand" itemCornerRadius="19" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="5" />
+	<widget name="list" position="55,170" size="680,425" zPosition="4" scrollbarMode="showOnDemand" backgroundColor="#54111112" foregroundColor="white" backgroundColorSelected="#54111112" foregroundColorSelected="#fec51b" scrollbarForegroundColor="#ffffff" scrollbarBorderWidth="1" scrollbarBorderColor="#ffffff" scrollbarWidth="5" />
 	<widget name="info" position="57,115" zPosition="4" size="678,52" font="lsat; 24" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
 	<widget name="fspace" position="57,604" size="678,44" zPosition="4" font="lbsat;22" foregroundColor="#0049bbff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
 	<widget name="sort" position="836,651" zPosition="4" size="429,44" font="lsat; 24" foregroundColor="#0049bbff" backgroundColor="dark" transparent="1" halign="left" valign="center" />

@@ -9,7 +9,6 @@ from . import (
     add_skin_fonts,
     b64decoder,
     checkGZIP,
-    descplug,
     developer_url,
     # fetch_url,
     freespace,
@@ -95,8 +94,11 @@ global HALIGN
 global setx
 global skin_path
 global has_dpkg
+global descplug
+global currversion
 
-currversion = '2.7.3'
+currversion = '2.7.4'
+descplug = "Linuxsat-Support.com (Addons Panel)"
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
                               "Extensions/{}".format('LinuxsatPanel')
@@ -319,6 +321,7 @@ def add_menu_item(menu_list, titles, pics, urls, title, pic_name, url=""):
 class LinuxsatPanel(Screen):
 
     def __init__(self, session):
+        global descplug, currversion
         Screen.__init__(self, session)
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
@@ -672,6 +675,7 @@ class LSskin(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        global descplug, currversion
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -922,6 +926,7 @@ class LSChannel(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        global descplug, currversion
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -1157,6 +1162,7 @@ class ScriptInstaller(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        global descplug, currversion
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -1699,6 +1705,7 @@ class addInstall(Screen):
 
     def __init__(self, session, data, name, dest):
         Screen.__init__(self, session)
+        global descplug, currversion
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -1756,10 +1763,11 @@ class addInstall(Screen):
                                      'blue': self.restart,
                                      'yellow': self.remove}, -2)
         self.timer = eTimer()
-        if has_dpkg:
-            self.timer_conn = self.timer.timeout.connect(self.getfreespace)
-        else:
+        try:
             self.timer.callback.append(self.getfreespace)
+
+        except:
+            self.timer_conn = self.timer.timeout.connect(self.getfreespace)
         self.timer.start(1000, 1)
 
         if self.dest is not None:
@@ -1791,7 +1799,7 @@ class addInstall(Screen):
             print(e)
 
     def openTest(self):
-        print('self.xml: ', self.fxml)
+        # print('self.xml: ', self.fxml)
         regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
         match = compile(regex, DOTALL).findall(self.fxml)
         self.names = []
@@ -2156,6 +2164,7 @@ class LSinfo(Screen):
 
     def __init__(self, session, name):
         Screen.__init__(self, session)
+        global descplug, currversion
         try:
             Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
         except:
@@ -2202,19 +2211,30 @@ class LSinfo(Screen):
                                                                    'red': self.close}, -1)
 
         self.Update = False
+
         self.timerz = eTimer()
-        if has_dpkg:
-            self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-        else:
+        """
+        # try:
+            # self.timerz.callback.append(self.check_vers)
+        # except:
+            # self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
+        """
+        if hasattr(self.timerz, "callback"):
             self.timerz.callback.append(self.check_vers)
+        else:
+            if exists("/usr/bin/apt-get"):
+                self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
+            print("[Version Check] ERROR: eTimer does not support callback.append()")
+
         self.timerz.start(200, 1)
 
         self.timer = eTimer()
-        if has_dpkg:
-            self.timer_conn = self.timer.timeout.connect(self.startRun)
-        else:
+        try:
             self.timer.callback.append(self.startRun)
+        except:
+            self.timer_conn = self.timer.timeout.connect(self.startRun)
         self.timer.start(1000, 1)
+
         self.onLayoutFinish.append(self.pas)
 
     def pas(self):
@@ -2242,37 +2262,41 @@ class LSinfo(Screen):
 
             with urlopen(req, timeout=15) as response:
                 if response.getcode() != 200:
-                    raise URLError("HTTP Status: {}".format(response.getcode()))
+                    raise URLError("HTTP Status: %d" % response.getcode())
 
                 data = response.read().decode('utf-8')
 
                 if data:
                     lines = data.split("\n")
+                    self.remote_version = '0.0'
+                    self.remote_changelog = 'No changelog available'
+
                     for line in lines:
                         if line.startswith("version"):
                             parts = line.split("=")
                             if len(parts) > 1:
-                                remote_version = parts[1].strip().strip("'")
+                                self.remote_version = parts[1].strip().strip("'")
                         if line.startswith("changelog"):
                             parts = line.split("=")
                             if len(parts) > 1:
-                                remote_changelog = parts[1].strip().strip("'")
+                                self.remote_changelog = parts[1].strip().strip("'")
                                 break
 
-                self.new_version = remote_version
-                self.new_changelog = remote_changelog
+                    self.new_version = self.remote_version or "Unknown"
+                    self.new_changelog = self.remote_changelog or "No changelog available"
 
-                if currversion < remote_version:
-                    self.Update = True
-                    print('New version online:', self.new_version)
-                    self.mbox = self.session.open(
-                        MessageBox,
-                        _('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
-                        MessageBox.TYPE_INFO,
-                        timeout=5
-                    )
-                    self['key_green'].setText(_('Update'))
-                    self["pixmap"].show()
+                    if currversion < self.remote_version:
+                        self.Update = True
+                        print('New version online:', self.new_version)
+
+                        self.mbox = self.session.open(
+                            MessageBox,
+                            _('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
+                            MessageBox.TYPE_INFO,
+                            timeout=5
+                        )
+                        self['key_green'].setText(_('Update'))
+                        self["pixmap"].show()
         except Exception as e:
             print("Error while checking version:", e)
 
@@ -2320,55 +2344,66 @@ class LSinfo(Screen):
 
     def startRun(self):
         try:
+            # print("self.name =", repr(self.name))  # Aggiungi questa linea per il debug
             if self.name == " Information ":
-                # self.infoBox()
+                print("Running openinfo method...")
                 self.openinfo()
+
             elif self.name == " About ":
-                with open(join(plugin_path, 'LICENSE'), 'r') as filer:
+                print("Opening LICENSE file...")
+                with open(join(plugin_path, 'LICENSE'), 'r', encoding='utf-8') as filer:
                     info = filer.read()
+                    info = info.replace('\r', '')
+                    info = info.strip()
+                    # print("Read LICENSE content successfully.")
                     self['list'].setText(info)
             else:
+                print("Unknown name value:", self.name)
                 return
         except Exception as e:
-            print(e)
+            print("Error in startRun: ", e)
             self['list'].setText(_('Unable to download updates!'))
 
-    def openinfo(self, callback=''):
+    def openinfo(self):
         from .addons.stbinfo import stbinfo
         try:
             header = "Suggested by: @masterG - @oktus - @pcd\n"
             header += "All code was rewritten by @Lululla - 2024.07.20\n"
             header += "Designs and Graphics by @oktus\n"
             header += "Support on: Linuxsat-support.com\n\n"
+            print('stbinfo initialized:', stbinfo)
+            stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
             base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
                 descplug,
                 currversion,
                 header,
-                stbinfo.to_string()
+                stbinfo_str
             )
+
             with open('/tmp/output.txt', 'w', encoding='utf-8') as file:
                 file.write(base_content)
-        except IOError as e:
-            print("File write error (base info): {0}".format(str(e)))
-            return
 
-        info_path = join(plugin_path, 'info.txt')
-        if fileExists(info_path):
+            info_path = join(plugin_path, 'info.txt')
+            if fileExists(info_path):
+                try:
+                    with open(info_path, 'r', encoding='utf-8') as info_file:
+                        with open('/tmp/output.txt', 'a', encoding='utf-8') as output_file:
+                            output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
+                except Exception as e:
+                    print("Error appending info.txt: {0}".format(str(e)))
+            else:
+                print("Info file not found: {0}".format(info_path))
+
             try:
-                with open(info_path, 'r', encoding='utf-8') as info_file:
-                    with open('/tmp/output.txt', 'a', encoding='utf-8') as output_file:
-                        output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
+                with open('/tmp/output.txt', 'r', encoding='utf-8') as filer:
+                    self['list'].setText(filer.read())
             except Exception as e:
-                print("Error appending info.txt: {0}".format(str(e)))
-        else:
-            print("Info file not found: {0}".format(info_path))
+                print("Final read/display error: {0}".format(str(e)))
+                self['list'].setText("Error loading system information")
 
-        try:
-            with open('/tmp/output.txt', 'r', encoding='utf-8') as filer:
-                self['list'].setText(filer.read())
         except Exception as e:
-            print("Final read/display error: {0}".format(str(e)))
-            self['list'].setText("Error loading system information")
+            print("Error in openinfo:", e)
+            self['list'].setText("Error loading information")
 
     def cancel(self):
         self.close()
@@ -2387,6 +2422,7 @@ class startLP(Screen):
     def __init__(self, session):
         self.session = session
         global _session, first
+        global descplug, currversion
         _session = session
         first = True
         Screen.__init__(self, session)
@@ -2421,17 +2457,18 @@ class startLP(Screen):
 
     def loadDefaultImage(self):
         self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
+
         self.timer = eTimer()
-        if has_dpkg:
-            self.timer_conn = self.timer.timeout.connect(self.decodeImage)
-        else:
+        try:
             self.timer.callback.append(self.decodeImage)
+        except:
+            self.timer_conn = self.timer.timeout.connect(self.decodeImage)
         self.timer.start(100, True)
 
         self.timerx = eTimer()
-        if has_dpkg:
+        try:
             self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
-        else:
+        except:
             self.timerx.callback.append(self.clsgo)
         self.timerx.start(2500, True)
 
@@ -2459,6 +2496,7 @@ class startLP(Screen):
 class AboutLSS(Screen):
     def __init__(self, session):
         global _session, first
+        global descplug, currversion
         _session = session
         first = False
         Screen.__init__(self, session)
