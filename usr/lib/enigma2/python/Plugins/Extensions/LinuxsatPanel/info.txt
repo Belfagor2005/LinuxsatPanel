@@ -136,4 +136,11 @@ Changelog:
 Changelog:
 -- fix pick screen
 -- fix info-about (New ATV Image)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250219 2.7.5 version is online
+
+Changelog:
+-- add other provider
+-- add Ciefp Addons
 

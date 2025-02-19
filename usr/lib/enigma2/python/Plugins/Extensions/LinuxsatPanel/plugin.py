@@ -97,7 +97,7 @@ global has_dpkg
 global descplug
 global currversion
 
-currversion = '2.7.4'
+currversion = '2.7.5'
 descplug = "Linuxsat-Support.com (Addons Panel)"
 
 plugin_path = resolveFilename(SCOPE_PLUGINS,
@@ -1192,6 +1192,19 @@ class ScriptInstaller(Screen):
 
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Biss Feed Autokey", "BissFeedAutokey.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Bissfeedautokey.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Chocholousek Picons", "ChocholousekPicons.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Chocholousek_picons.sh?inline=false" -O - | /bin/sh')
+
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor", "ciefp.png", "wget https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
