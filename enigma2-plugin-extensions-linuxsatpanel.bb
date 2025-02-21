@@ -21,6 +21,6 @@ S = "${WORKDIR}/git"
 FILES_${PN} = "/usr/*"
 
 do_install() {
-    cp -rp ${S}/usr* ${D}/ 
+    cp -af --no-preserve=ownership ${S}/usr* ${D}/
 }
 
