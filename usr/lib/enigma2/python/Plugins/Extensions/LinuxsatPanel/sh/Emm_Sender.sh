@@ -1,16 +1,38 @@
 #!/bin/bash
 #DESCRIPTION=send emm
-# mod by lululla 24/08/2023
+# mod by lululla 22/02/2025
 # Aggiornato il $(date +"%d/%m/%Y")
+# bash -x /usr/lib/enigma2/python/Plugins/Extensions/tvManager/data/emm_sender.sh
 
 set -e
-
+set -x
 ## Funzione di cleanup
 cleanup() {
     rm -f /tmp/*.tmp /tmp/*.html /tmp/emm.txt
 }
 
 trap cleanup EXIT
+
+# Trova il binario di oscam in /usr/bin/ usando un pattern case-insensitive
+OSCAM_BIN=$(find /usr/bin/ -type f -iname "oscam*" 2>/dev/null | head -n 1)
+# Debug: stampa il valore di OSCAM_BIN
+echo "OSCAM_BIN: $OSCAM_BIN"
+# Se non esiste alcun binario, esce
+if [ -z "$OSCAM_BIN" ]; then
+    echo "No oscam binary found in /usr/bin/"
+    exit 1
+else
+    echo "Found oscam binary: $(basename "$OSCAM_BIN")"
+fi
+
+if ! pgrep -x "$(basename "$OSCAM_BIN")" > /dev/null; then
+    echo "Oscam is not running, starting it..."
+    killall -9 "$(basename "$OSCAM_BIN")" &
+    sleep 2
+    ${OSCAM_BIN} & 
+else
+    echo "Oscam is already running."
+fi
 
 ## Constanti
 ATR_183E='3F FF 95 00 FF 91 81 71 FE 47 00 54 49 47 45 52 36 30 31 20 52 65 76 4D 38 37 14'
@@ -37,6 +59,19 @@ OSCAM_USER=$(grep -ir "httpuser" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed
 OSCAM_PASSWD=$(grep -ir "httppwd" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed 's/^[ \t]*//')
 OSCAM_HTTPPORT=$(grep -ir "httpport" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed 's/^[ \t]*//')
 OSCAM_PORT=$(echo "$OSCAM_HTTPPORT" | sed -e 's|+||g')
+
+## check curl
+if ! command -v curl &> /dev/null; then
+    echo "Errore: curl non trovato. Installa curl prima di continuare."
+    if [ -d /etc/opkg ]; then
+        opkg update
+        opkg install curl
+    else
+        apt-get update
+        apt-get install curl
+    fi
+fi
+
 
 ## Ottieni i reader attivi
 readers=$(curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k "http://127.0.0.1:${OSCAM_PORT}/status.html" | grep "Restart Reader")
