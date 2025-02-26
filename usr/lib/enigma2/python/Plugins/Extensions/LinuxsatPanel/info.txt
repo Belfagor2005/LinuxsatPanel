@@ -143,4 +143,12 @@ Changelog:
 Changelog:
 -- add other provider
 -- add Ciefp Addons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250226 2.7.6 version is online
+
+Changelog:
+-- fix some script
+-- add Ciefp Logo
+
 

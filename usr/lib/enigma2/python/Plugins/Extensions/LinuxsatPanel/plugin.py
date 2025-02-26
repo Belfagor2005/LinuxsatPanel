@@ -2,37 +2,37 @@
 # -*- coding: utf-8 -*-
 
 from . import (
-    _,
-    AgentRequest,
-    CheckConn,
-    # initialize_global_settings,
-    add_skin_fonts,
-    b64decoder,
-    checkGZIP,
-    developer_url,
-    # fetch_url,
-    freespace,
-    # infourl,
-    installer_url,
-    isWQHD,
-    isFHD,
-    isHD,
-    RequestUrl,
-    make_request,
-    refreshPlugins,
-    xmlurl,
-    HALIGN,
+	_,
+	AgentRequest,
+	CheckConn,
+	# initialize_global_settings,
+	add_skin_fonts,
+	b64decoder,
+	checkGZIP,
+	developer_url,
+	# fetch_url,
+	freespace,
+	# infourl,
+	installer_url,
+	isWQHD,
+	isFHD,
+	isHD,
+	RequestUrl,
+	make_request,
+	refreshPlugins,
+	xmlurl,
+	HALIGN,
 )
 from .addons.NewOeSk import ctrlSkin
 from .lsConsole import lsConsole
 from .LCNScanner.plugin import LCNScanner
 from .LCNScanner.Lcn import (
-    # LCN,
-    # LCNBuildHelper,
-    ReloadBouquets,
-    copy_files_to_enigma2,
-    keepiptv,
-    terrestrial,
+	# LCN,
+	# LCNBuildHelper,
+	ReloadBouquets,
+	copy_files_to_enigma2,
+	keepiptv,
+	terrestrial,
 )
 
 from Components.ActionMap import ActionMap
@@ -63,14 +63,14 @@ import six
 import subprocess
 import base64
 from enigma import (
-    RT_VALIGN_CENTER,
-    # RT_HALIGN_LEFT,
-    RT_HALIGN_RIGHT,
-    eListboxPythonMultiContent,
-    ePicLoad,
-    eTimer,
-    gFont,
-    loadPNG,
+	RT_VALIGN_CENTER,
+	# RT_HALIGN_LEFT,
+	RT_HALIGN_RIGHT,
+	eListboxPythonMultiContent,
+	ePicLoad,
+	eTimer,
+	gFont,
+	loadPNG,
 )
 
 
@@ -97,12 +97,13 @@ global has_dpkg
 global descplug
 global currversion
 
-currversion = '2.7.5'
+currversion = '2.7.6'
 descplug = "Linuxsat-Support.com (Addons Panel)"
 
-plugin_path = resolveFilename(SCOPE_PLUGINS,
-                              "Extensions/{}".format('LinuxsatPanel')
-                              )
+plugin_path = resolveFilename(
+	SCOPE_PLUGINS,
+	"Extensions/{}".format('LinuxsatPanel')
+)
 
 PY3 = sys.version_info.major >= 3
 
@@ -116,2480 +117,2517 @@ setx = 0
 
 
 if exists("/usr/bin/apt-get"):
-    has_dpkg = True
+	has_dpkg = True
 
 
 if PY3:
-    from urllib.request import (urlopen, Request)
-    from urllib.error import URLError
-    unicode = str
-    PY3 = True
+	from urllib.request import (urlopen, Request)
+	from urllib.error import URLError
+	unicode = str
+	PY3 = True
 else:
-    from urllib2 import (urlopen, Request)
-    from urllib2 import URLError
+	from urllib2 import (urlopen, Request)
+	from urllib2 import URLError
 
 
 if sys.version_info >= (2, 7, 9):
-    try:
-        sslContext = ssl._create_unverified_context()
-    except:
-        sslContext = None
+	try:
+		sslContext = ssl._create_unverified_context()
+	except:
+		sslContext = None
 
 
 if sys.version_info[0] >= 3:
-    import html
+	import html
 
-    def decode_html(text):
-        return html.unescape(text)
+	def decode_html(text):
+		return html.unescape(text)
 else:
-    from HTMLParser import HTMLParser
-    html_parser = HTMLParser()
+	from HTMLParser import HTMLParser
+	html_parser = HTMLParser()
 
-    def decode_html(text):
-        return html_parser.unescape(text)
+	def decode_html(text):
+		return html_parser.unescape(text)
 
 
 def create_ssl_context():
-    try:
-        return ssl.create_default_context()
-    except Exception:
-        return None
+	try:
+		return ssl.create_default_context()
+	except Exception:
+		return None
 
 
 def ssl_urlopen(url):
-    sslContext = create_ssl_context()
+	sslContext = create_ssl_context()
 
-    if sslContext:
-        return urlopen(url, context=sslContext)
-    else:
-        return urlopen(url)
+	if sslContext:
+		return urlopen(url, context=sslContext)
+	else:
+		return urlopen(url)
 
 
 def run_command(cmd):
-    try:
-        return subprocess.check_output(cmd, shell=True).decode('utf-8').strip()
-    except subprocess.CalledProcessError:
-        return None
+	try:
+		return subprocess.check_output(cmd, shell=True).decode('utf-8').strip()
+	except subprocess.CalledProcessError:
+		return None
 
 
 try:
-    from twisted.internet import ssl
-    from twisted.internet._sslverify import ClientTLSOptions
-    sslverify = True
+	from twisted.internet import ssl
+	from twisted.internet._sslverify import ClientTLSOptions
+	sslverify = True
 except ImportError:
-    sslverify = False
+	sslverify = False
 
 
 if sslverify:
-    class SNIFactory(ssl.ClientContextFactory):
-        def __init__(self, hostname=None):
-            self.hostname = hostname
+	class SNIFactory(ssl.ClientContextFactory):
+		def __init__(self, hostname=None):
+			self.hostname = hostname
 
-        def getContext(self):
-            ctx = self._contextFactory(self.method)
-            if self.hostname:
-                ClientTLSOptions(self.hostname, ctx)
-            return ctx
+		def getContext(self):
+			ctx = self._contextFactory(self.method)
+			if self.hostname:
+				ClientTLSOptions(self.hostname, ctx)
+			return ctx
 
 
 def compare_versions(ver1, ver2):
-    """Confronta versioni in formato X.Y.Z gestendo numeri multi-cifra"""
-    def split_version(v):
-        parts = []
-        for part in str(v).split('.'):
-            try:
-                parts.append(int(part))
-            except ValueError:
-                parts.append(0)
-        return parts
+	"""Confronta versioni in formato X.Y.Z gestendo numeri multi-cifra"""
+	def split_version(v):
+		parts = []
+		for part in str(v).split('.'):
+			try:
+				parts.append(int(part))
+			except ValueError:
+				parts.append(0)
+		return parts
 
-    v1 = split_version(ver1)
-    v2 = split_version(ver2)
+	v1 = split_version(ver1)
+	v2 = split_version(ver2)
 
-    max_length = max(len(v1), len(v2))
-    v1 += [0] * (max_length - len(v1))
-    v2 += [0] * (max_length - len(v2))
+	max_length = max(len(v1), len(v2))
+	v1 += [0] * (max_length - len(v1))
+	v2 += [0] * (max_length - len(v2))
 
-    for a, b in zip(v1, v2):
-        if a < b:
-            return -1
-        elif a > b:
-            return 1
+	for a, b in zip(v1, v2):
+		if a < b:
+			return -1
+		elif a > b:
+			return 1
 
-    return 0
+	return 0
 
 
 if isWQHD() or isFHD():
-    skin_path = plugin_path + '/skins/fhd'
-    picfold = plugin_path + "/LSicons2/"
-    pngx = plugin_path + "/icons2/link.png"
-    nss_pic = picfold + "LSS.png"
+	skin_path = plugin_path + '/skins/fhd'
+	picfold = plugin_path + "/LSicons2/"
+	pngx = plugin_path + "/icons2/link.png"
+	nss_pic = picfold + "LSS.png"
 else:
-    skin_path = plugin_path + '/skins/hd'
-    picfold = plugin_path + "/LSicons/"
-    pngx = plugin_path + "/icons/link.png"
-    nss_pic = picfold + "LSS.png"
+	skin_path = plugin_path + '/skins/hd'
+	picfold = plugin_path + "/LSicons/"
+	pngx = plugin_path + "/icons/link.png"
+	nss_pic = picfold + "LSS.png"
 
 
 # menulist
 class LPSlist(MenuList):
-    def __init__(self, list):
-        MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-        if isWQHD() or isFHD():
-            self.l.setItemHeight(50)
-            textfont = int(34)
-            self.l.setFont(0, gFont('lsat', textfont))
-        if isHD():
-            self.l.setItemHeight(35)
-            textfont = int(22)
-            self.l.setFont(0, gFont('lsat', textfont))
+	def __init__(self, list):
+		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
+		if isWQHD() or isFHD():
+			self.l.setItemHeight(50)
+			textfont = int(34)
+			self.l.setFont(0, gFont('lsat', textfont))
+		if isHD():
+			self.l.setItemHeight(35)
+			textfont = int(22)
+			self.l.setFont(0, gFont('lsat', textfont))
 
 
 def LPListEntry(name, item):
-    res = [(name, item)]
+	res = [(name, item)]
 
-    if not fileExists(pngx):
-        return res
+	if not fileExists(pngx):
+		return res
 
-    png = loadPNG(pngx)
+	png = loadPNG(pngx)
 
-    if isWQHD() or isFHD():
-        icon_size = (40, 40)
-        text_size = (930, 50)
-        icon_x_right = 940
-        icon_x_left = 5
-        text_x_left = 55
-    else:
-        icon_size = (30, 30)
-        text_size = (590, 35)
-        icon_x_right = 640
-        icon_x_left = 5
-        text_x_left = 45
+	if isWQHD() or isFHD():
+		icon_size = (40, 40)
+		text_size = (930, 50)
+		icon_x_right = 940
+		icon_x_left = 5
+		text_x_left = 55
+	else:
+		icon_size = (30, 30)
+		text_size = (590, 35)
+		icon_x_right = 640
+		icon_x_left = 5
+		text_x_left = 45
 
-    if HALIGN == RT_HALIGN_RIGHT:
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_right, 5), size=icon_size, png=png))
-        res.append(MultiContentEntryText(pos=(5, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
-    else:
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_left, 5), size=icon_size, png=png))
-        res.append(MultiContentEntryText(pos=(text_x_left, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+	if HALIGN == RT_HALIGN_RIGHT:
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_right, 5), size=icon_size, png=png))
+		res.append(MultiContentEntryText(pos=(5, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+	else:
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_left, 5), size=icon_size, png=png))
+		res.append(MultiContentEntryText(pos=(text_x_left, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
 
-    return res
+	return res
 
 
 def LPshowlist(data, list):
-    plist = [LPListEntry(name, index) for index, name in enumerate(data)]
-    list.setList(plist)
+	plist = [LPListEntry(name, index) for index, name in enumerate(data)]
+	list.setList(plist)
 
 
 # sortlist
 class ListSortUtility:
-    @staticmethod
-    def list_sort(names, titles, pics, urls):
-        combined_data = zip(names, titles, pics, urls)
-        sorted_data = sorted(combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics, sorted_urls = zip(*sorted_data)
-        return sorted_list, sorted_titles, sorted_pics, sorted_urls
+	@staticmethod
+	def list_sort(names, titles, pics, urls):
+		combined_data = zip(names, titles, pics, urls)
+		sorted_data = sorted(combined_data, key=lambda x: x[0])
+		sorted_list, sorted_titles, sorted_pics, sorted_urls = zip(*sorted_data)
+		return sorted_list, sorted_titles, sorted_pics, sorted_urls
 
 
 # pixmaplist
 def get_positions(resolution):
-    positions = []
-    if resolution == "FHD":
-        positions = [
-            [100, 210], [310, 210], [525, 210], [735, 210], [940, 210],
-            [100, 420], [310, 420], [525, 420], [735, 420], [940, 420],
-            [100, 635], [310, 635], [525, 635], [735, 635], [940, 635],
-            [100, 835], [310, 835], [525, 835], [735, 835], [940, 835]
-        ]
-    elif resolution == "HD":
-        positions = [
-            [65, 135], [200, 135], [345, 135], [485, 135], [620, 135],
-            [65, 270], [200, 270], [345, 270], [485, 270], [620, 270],
-            [65, 405], [200, 405], [345, 405], [485, 405], [620, 405],
-            [65, 540], [200, 540], [345, 540], [485, 540], [620, 540]
-        ]
-    return positions
+	positions = []
+	if resolution == "FHD":
+		positions = [
+			[100, 210], [310, 210], [525, 210], [735, 210], [940, 210],
+			[100, 420], [310, 420], [525, 420], [735, 420], [940, 420],
+			[100, 635], [310, 635], [525, 635], [735, 635], [940, 635],
+			[100, 835], [310, 835], [525, 835], [735, 835], [940, 835]
+		]
+	elif resolution == "HD":
+		positions = [
+			[65, 135], [200, 135], [345, 135], [485, 135], [620, 135],
+			[65, 270], [200, 270], [345, 270], [485, 270], [620, 270],
+			[65, 405], [200, 405], [345, 405], [485, 405], [620, 405],
+			[65, 540], [200, 540], [345, 540], [485, 540], [620, 540]
+		]
+	return positions
 
 
 def add_menu_item(menu_list, titles, pics, urls, title, pic_name, url=""):
-    menu_list.append(title)
-    titles.append(title.strip())
-    pics.append(picfold + pic_name)
-    urls.append(url)  # add missing string for URL
+	menu_list.append(title)
+	titles.append(title.strip())
+	pics.append(picfold + pic_name)
+	urls.append(url)  # add missing string for URL
 
 
 class LinuxsatPanel(Screen):
 
-    def __init__(self, session):
-        global descplug, currversion
-        Screen.__init__(self, session)
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'LinuxsatPanel.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
+	def __init__(self, session):
+		global descplug, currversion
+		Screen.__init__(self, session)
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'LinuxsatPanel.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			self.skin = f.read()
 
-        if isWQHD() or isFHD():
-            self.pos = get_positions("FHD")
-        elif isHD():
-            self.pos = get_positions("HD")
+		if isWQHD() or isFHD():
+			self.pos = get_positions("FHD")
+		elif isHD():
+			self.pos = get_positions("HD")
 
-        self.data = checkGZIP(xmlurl)
-        menu_list = []
-        self.titles = []
-        self.pics = []
-        self.urls = []
+		self.data = checkGZIP(xmlurl)
+		menu_list = []
+		self.titles = []
+		self.pics = []
+		self.urls = []
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup Tools ", "Backup.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets Tools ", "Bouquets.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup Tools ", "Backup.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets Tools ", "Bouquets.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg Tools ", "plugin-epg.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.0 ", "Feeds2.0.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.2/2.5/2.6 ", "Feeds2.2.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg Tools ", "plugin-epg.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.0 ", "Feeds2.0.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.2/2.5/2.6 ", "Feeds2.2.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games Tools ", "Game.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv Tools ", "iptv-streaming.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.0 ", "KiddaC1.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.2/2.5/2.6 ", "KiddaC2.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games Tools ", "Game.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv Tools ", "iptv-streaming.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.0 ", "KiddaC1.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.2/2.5/2.6 ", "KiddaC2.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.2/2.5/2.6 ", "oe2.5-2.6.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Plugins OE2.2/2.5/2.6 ", "OE2.2-Plugins.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.2/2.5/2.6 ", "oe2.5-2.6.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Plugins OE2.2/2.5/2.6 ", "OE2.2-Plugins.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot Tools ", "multiboot.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia Tools ", "Multimedia.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Panels Addons ", "Panels.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Picons Tools ", "picons.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Python Library ", "Library.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Tools", "Radio.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot Tools ", "multiboot.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia Tools ", "Multimedia.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Panels Addons ", "Panels.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Picons Tools ", "picons.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Python Library ", "Library.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Tools", "Radio.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Script Installer ", "script.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Script Installer ", "script.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | TEAM ", "skinsteam.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd OE2.2/2.5/2.6 ", "OE2.2-Skins.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | TEAM ", "skinsteam.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd OE2.2/2.5/2.6 ", "OE2.2-Skins.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.0 ", "key-updater.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.2/2.5/2.6 ", "key-updater1.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.0 ", "key-updater.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.2/2.5/2.6 ", "key-updater1.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.0 ", "SOE20.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.2/2.5/2.6 ", "SOE22.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.0 ", "SOE20.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.2/2.5/2.6 ", "SOE22.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility Tools ", "utility.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Tools ", "vpn.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam Tools ", "webcam.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility Tools ", "utility.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Tools ", "vpn.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam Tools ", "webcam.png")
 
-        if not config.ParentalControl.configured.value:
-            if not has_dpkg:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.0 ", "18+deb.png")
-            else:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.2/2.5/2.6 ", "18+.png")
+		if not config.ParentalControl.configured.value:
+			if not has_dpkg:
+				add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.0 ", "18+deb.png")
+			else:
+				add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.2/2.5/2.6 ", "18+.png")
 
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.0 ", "Other.png")
-        else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.2/2.5/2.6 ", "Other1.png")
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.0 ", "Other.png")
+		else:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.2/2.5/2.6 ", "Other1.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
 
-        self.names = menu_list
-        self.sorted = False
-        # self.combined_data = list(zip(self.names, self.titles, self.pics, self.urls))
-        self["frame"] = MovingPixmap()
-        self['info'] = Label()
-        self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('Sort A-Z'))
-        self['key_red'] = Label(_('Exit'))
-        self["pixmap"] = Pixmap()
-        self["actions"] = ActionMap(["OkCancelActions",
-                                     "MenuActions",
-                                     "DirectionActions",
-                                     "NumberActions",
-                                     'ColorActions',
-                                     "EPGSelectActions",
-                                     "InfoActions"],
-                                    {"ok": self.okbuttonClick,
-                                     "cancel": self.closeNonRecursive,
-                                     "exit": self.closeRecursive,
-                                     "back": self.closeNonRecursive,
-                                     "red": self.closeNonRecursive,
-                                     "0": self.list_sort,
-                                     "left": self.key_left,
-                                     "right": self.key_right,
-                                     "up": self.key_up,
-                                     "down": self.key_down,
-                                     "info": self.key_info,
-                                     "menu": self.closeRecursive})
+		self.names = menu_list
+		self.sorted = False
+		# self.combined_data = list(zip(self.names, self.titles, self.pics, self.urls))
+		self["frame"] = MovingPixmap()
+		self['info'] = Label()
+		self['info'].setText(_('Please Wait...'))
+		self['sort'] = Label(_('Sort A-Z'))
+		self['key_red'] = Label(_('Exit'))
+		self["pixmap"] = Pixmap()
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"MenuActions",
+				"DirectionActions",
+				"NumberActions",
+				'ColorActions',
+				"EPGSelectActions",
+				"InfoActions"
+			],
+			{
+				"ok": self.okbuttonClick,
+				"cancel": self.closeNonRecursive,
+				"exit": self.closeRecursive,
+				"back": self.closeNonRecursive,
+				"red": self.closeNonRecursive,
+				"0": self.list_sort,
+				"left": self.key_left,
+				"right": self.key_right,
+				"up": self.key_up,
+				"down": self.key_down,
+				"info": self.key_info,
+				"menu": self.closeRecursive
+			},
+			-1
+		)
 
-        self.PIXMAPS_PER_PAGE = 20
-        i = 0
-        while i < self.PIXMAPS_PER_PAGE:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+		self.PIXMAPS_PER_PAGE = 20
+		i = 0
+		while i < self.PIXMAPS_PER_PAGE:
+			self["label" + str(i + 1)] = StaticText()
+			self["pixmap" + str(i + 1)] = Pixmap()
+			i += 1
 
-        self.npics = len(self.names)
-        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.index = 0
-        self.maxentry = len(menu_list) - 1
-        self.ipage = 1
-        self.onLayoutFinish.append(self.openTest)
+		self.npics = len(self.names)
+		self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		# self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.index = 0
+		self.maxentry = len(menu_list) - 1
+		self.ipage = 1
+		self.onLayoutFinish.append(self.openTest)
 
-    def paintFrame(self):
-        try:
-            # If the index exceeds the maximum number of items, it returns to the first item
-            if self.index > self.maxentry:
-                self.index = self.minentry
-            self.idx = self.index
-            name = self.names[self.idx]
-            self['info'].setText(str(name))
-            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
-            ipos = self.pos[ifr]
-            self["frame"].moveTo(ipos[0], ipos[1], 1)
-            self["frame"].startMoving()
-        except Exception as e:
-            print('Error in paintFrame: ', e)
+	def paintFrame(self):
+		try:
+			# If the index exceeds the maximum number of items, it returns to the first item
+			if self.index > self.maxentry:
+				self.index = self.minentry
+			self.idx = self.index
+			name = self.names[self.idx]
+			self['info'].setText(str(name))
+			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
+			ipos = self.pos[ifr]
+			self["frame"].moveTo(ipos[0], ipos[1], 1)
+			self["frame"].startMoving()
+		except Exception as e:
+			print('Error in paintFrame: ', e)
 
-    def openTest(self):
-        if self.ipage < self.npage:
-            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+	def openTest(self):
+		if self.ipage < self.npage:
+			self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
-        elif self.ipage == self.npage:
-            self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
-            i1 = 0
-            while i1 < self.PIXMAPS_PER_PAGE:
-                self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
-                i1 += 1
-        self.npics = len(self.pics)
-        i = 0
-        i1 = 0
-        self.picnum = 0
-        ln = self.maxentry - (self.minentry - 1)
-        while i < ln:
-            idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
-            pic = self.pics[idx]
-            if not exists(self.pics[idx]):
-                pic = nss_pic
-            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
-            i += 1
-        self.index = self.minentry
-        self.paintFrame()
+		elif self.ipage == self.npage:
+			self.maxentry = len(self.pics) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+			i1 = 0
+			while i1 < self.PIXMAPS_PER_PAGE:
+				self["label" + str(i1 + 1)].setText(" ")
+				self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+				i1 += 1
+		self.npics = len(self.pics)
+		i = 0
+		i1 = 0
+		self.picnum = 0
+		ln = self.maxentry - (self.minentry - 1)
+		while i < ln:
+			idx = self.minentry + i
+			# self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+			pic = self.pics[idx]
+			if not exists(self.pics[idx]):
+				pic = nss_pic
+			self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+			i += 1
+		self.index = self.minentry
+		self.paintFrame()
 
-    def key_left(self):
-        # Decrement the index only if we are not at the first pixmap
-        if self.index >= 0:
-            self.index -= 1
-        else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
-            self.ipage = self.npage
-            self.index = self.npics - 1
-        # Check if we need to change pages
-        if self.index < self.minentry:
-            self.ipage -= 1
-            if self.ipage < 1:  # If we go beyond the first page
-                self.ipage = self.npage
-                self.index = self.npics - 1  # Back to the last pixmap of the last page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_left(self):
+		# Decrement the index only if we are not at the first pixmap
+		if self.index >= 0:
+			self.index -= 1
+		else:
+			# If we are at the first pixmap, go back to the last pixmap of the last page
+			self.ipage = self.npage
+			self.index = self.npics - 1
+		# Check if we need to change pages
+		if self.index < self.minentry:
+			self.ipage -= 1
+			if self.ipage < 1:  # If we go beyond the first page
+				self.ipage = self.npage
+				self.index = self.npics - 1  # Back to the last pixmap of the last page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_right(self):
-        # Increment the index only if we are not at the last pixmap
-        if self.index < self.npics - 1:
-            self.index += 1
-        else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
-            self.index = 0
-            self.ipage = 1
-            self.openTest()
-        # Check if we need to change pages
-        if self.index > self.maxentry:
-            self.ipage += 1
-            if self.ipage > self.npage:  # If we exceed the number of pages
-                self.index = 0
-                self.ipage = 1  # Back to first page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_right(self):
+		# Increment the index only if we are not at the last pixmap
+		if self.index < self.npics - 1:
+			self.index += 1
+		else:
+			# If we are at the last pixmap, go back to the first pixmap of the first page
+			self.index = 0
+			self.ipage = 1
+			self.openTest()
+		# Check if we need to change pages
+		if self.index > self.maxentry:
+			self.ipage += 1
+			if self.ipage > self.npage:  # If we exceed the number of pages
+				self.index = 0
+				self.ipage = 1  # Back to first page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_up(self):
-        if self.index == 0 and self.ipage == 1:
-            self.ipage = self.npage
-            self.index = self.minentry
-            self.openTest()
+	def key_up(self):
+		if self.index == 0 and self.ipage == 1:
+			self.ipage = self.npage
+			self.index = self.minentry
+			self.openTest()
 
-        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
-            self.index -= 5
-        else:
-            if self.ipage == self.npage and self.index == self.minentry:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage = self.npage
-                self.index = self.npics - 1
-                self.openTest()
-        self.paintFrame()
+		elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
+			self.index -= 5
+		else:
+			if self.ipage == self.npage and self.index == self.minentry:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage = self.npage
+				self.index = self.npics - 1
+				self.openTest()
+		self.paintFrame()
 
-    def key_down(self):
-        if self.index <= self.maxentry - 5:
-            self.index += 5
-        else:
-            if self.ipage == self.npage:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage += 1
-                self.index = self.minentry
-                self.openTest()
+	def key_down(self):
+		if self.index <= self.maxentry - 5:
+			self.index += 5
+		else:
+			if self.ipage == self.npage:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage += 1
+				self.index = self.minentry
+				self.openTest()
 
-        self.paintFrame()
+		self.paintFrame()
 
-    def keyNumberGlobal(self, number):
-        number -= 1
-        if len(self["menu"].list) > number:
-            self["menu"].setIndex(number)
-            self.okbuttonClick()
+	def keyNumberGlobal(self, number):
+		number -= 1
+		if len(self["menu"].list) > number:
+			self["menu"].setIndex(number)
+			self.okbuttonClick()
 
-    def list_sort(self):
-        if not hasattr(self, 'original_data'):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False
+	def list_sort(self):
+		if not hasattr(self, 'original_data'):
+			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+			self.sorted = False
 
-        if self.sorted:
-            self.names, self.titles, self.pics, self.urls = self.original_data
-            self.sorted = False
-            self['sort'].setText(_('Sort A-Z'))
-        else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-            self.sorted = True
-            self['sort'].setText(_('Sort Default'))
+		if self.sorted:
+			self.names, self.titles, self.pics, self.urls = self.original_data
+			self.sorted = False
+			self['sort'].setText(_('Sort A-Z'))
+		else:
+			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+			self.sorted = True
+			self['sort'].setText(_('Sort Default'))
 
-        self.openTest()
+		self.openTest()
 
-    def refreshPlugins(self):
-        plugins.clearPluginList()
-        plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+	def refreshPlugins(self):
+		plugins.clearPluginList()
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 
-    def closeRecursive(self):
-        if not has_dpkg:
-            self.refreshPlugins()
-        self.session.openWithCallback(self.close, AboutLSS)
+	def closeRecursive(self):
+		if not has_dpkg:
+			self.refreshPlugins()
+		self.session.openWithCallback(self.close, AboutLSS)
 
-    def closeNonRecursive(self):
-        self.session.openWithCallback(self.close, AboutLSS)
+	def closeNonRecursive(self):
+		self.session.openWithCallback(self.close, AboutLSS)
 
-    def createSummary(self):
-        return
+	def createSummary(self):
+		return
 
-    def key_info(self):
-        self.session.open(LSinfo, " Information ")
+	def key_info(self):
+		self.session.open(LSinfo, " Information ")
 
-    def okbuttonClick(self):
-        self.idx = self.index
-        if self.idx is None:
-            return
-        name = self.names[self.idx]
-        if 'adult' in name.lower():
-            self.session.openWithCallback(self.cancelConfirm,
-                                          MessageBox,
-                                          _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
-        else:
-            self.okbuttonContinue(self.idx)
+	def okbuttonClick(self):
+		self.idx = self.index
+		if self.idx is None:
+			return
+		name = self.names[self.idx]
+		if 'adult' in name.lower():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
+		else:
+			self.okbuttonContinue(self.idx)
 
-    def cancelConfirm(self, result):
-        if not result:
-            return
-        else:
-            self.okbuttonContinue(result)
+	def cancelConfirm(self, result):
+		if not result:
+			return
+		else:
+			self.okbuttonContinue(result)
 
-    def okbuttonContinue(self, result):
-        self.idx = self.index
-        if self.idx is None:
-            return
-        name = self.names[self.idx]
+	def okbuttonContinue(self, result):
+		self.idx = self.index
+		if self.idx is None:
+			return
+		name = self.names[self.idx]
 
-        if name == " Information ":
-            self.session.open(LSinfo, name)
+		if name == " Information ":
+			self.session.open(LSinfo, name)
 
-        elif name == " About ":
-            self.session.open(LSinfo, name)
+		elif name == " About ":
+			self.session.open(LSinfo, name)
 
-        elif name == "Channel List ":
-            self.session.open(LSChannel, name)
+		elif name == "Channel List ":
+			self.session.open(LSChannel, name)
 
-        elif name == "Script Installer ":
-            self.session.open(ScriptInstaller, name)
+		elif name == "Script Installer ":
+			self.session.open(ScriptInstaller, name)
 
-        elif name == "Skins | TEAM ":
-            self.session.open(LSskin, name)
+		elif name == "Skins | TEAM ":
+			self.session.open(LSskin, name)
 
-        else:
-            title = self.titles[self.idx]
-            self.data = checkGZIP(xmlurl)
-            if self.data is not None:
-                n1 = self.data.find(title, 0)
-                n2 = self.data.find("</plugins>", n1)
-                url = self.data[n1:n2]
-                self.session.open(addInstall, url, name, None)
-            else:
-                self.session.open(MessageBox, _("Error: No Data Find."),
-                                  MessageBox.TYPE_ERROR)
+		else:
+			title = self.titles[self.idx]
+			self.data = checkGZIP(xmlurl)
+			if self.data is not None:
+				n1 = self.data.find(title, 0)
+				n2 = self.data.find("</plugins>", n1)
+				url = self.data[n1:n2]
+				self.session.open(addInstall, url, name, None)
+			else:
+				self.session.open(
+					MessageBox, _("Error: No Data Find."),
+					MessageBox.TYPE_ERROR
+				)
 
 
 class LSskin(Screen):
 
-    def __init__(self, session, name):
-        Screen.__init__(self, session)
-        global descplug, currversion
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'LinuxsatPanel.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
+	def __init__(self, session, name):
+		Screen.__init__(self, session)
+		global descplug, currversion
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'LinuxsatPanel.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			self.skin = f.read()
 
-        self.data = checkGZIP(xmlurl)
-        # self.data = fetch_url(xmlurl)
-        if isWQHD() or isFHD():
-            self.pos = get_positions("FHD")
-        elif isHD():
-            self.pos = get_positions("HD")
+		self.data = checkGZIP(xmlurl)
+		# self.data = fetch_url(xmlurl)
+		if isWQHD() or isFHD():
+			self.pos = get_positions("FHD")
+		elif isHD():
+			self.pos = get_positions("HD")
 
-        self.name = name
-        menu_list = []
-        self.titles = []
-        self.pics = []
-        self.urls = []
+		self.name = name
+		menu_list = []
+		self.titles = []
+		self.pics = []
+		self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins All ", "otherskins.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | HD ", "SkinHD.png")
-        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | FHD ", "SkinFHD.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Egami ", "egami.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins HDF ", "hdf.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenBh ", "openbh.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OPEN ATV ", "openatv.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenPLi ", "openpli.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenSpa ", "openspa.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins VTi ", "vti.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Oe Based ", "oebased.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins All ", "otherskins.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | HD ", "SkinHD.png")
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | FHD ", "SkinFHD.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Egami ", "egami.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins HDF ", "hdf.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenBh ", "openbh.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OPEN ATV ", "openatv.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenPLi ", "openpli.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenSpa ", "openspa.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins VTi ", "vti.png")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Oe Based ", "oebased.png")
 
-        self.names = menu_list
-        self.sorted = False
-        # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
-        self["frame"] = MovingPixmap()
-        self['info'] = Label()
-        self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('Sort A-Z'))
-        self['key_red'] = Label(_('Exit'))
-        self["pixmap"] = Pixmap()
-        self["actions"] = ActionMap(["OkCancelActions",
-                                     "MenuActions",
-                                     "DirectionActions",
-                                     "NumberActions",
-                                     'ColorActions',
-                                     "EPGSelectActions",
-                                     "InfoActions"],
-                                    {"ok": self.okbuttonClick,
-                                     "cancel": self.closeNonRecursive,
-                                     "exit": self.closeRecursive,
-                                     "back": self.closeNonRecursive,
-                                     "red": self.closeNonRecursive,
-                                     "0": self.list_sort,
-                                     "left": self.key_left,
-                                     "right": self.key_right,
-                                     "up": self.key_up,
-                                     "down": self.key_down,
-                                     "info": self.key_info,
-                                     "menu": self.closeRecursive})
+		self.names = menu_list
+		self.sorted = False
+		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
+		self["frame"] = MovingPixmap()
+		self['info'] = Label()
+		self['info'].setText(_('Please Wait...'))
+		self['sort'] = Label(_('Sort A-Z'))
+		self['key_red'] = Label(_('Exit'))
+		self["pixmap"] = Pixmap()
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"MenuActions",
+				"DirectionActions",
+				"NumberActions",
+				'ColorActions',
+				"EPGSelectActions",
+				"InfoActions"
+			],
+			{
+				"ok": self.okbuttonClick,
+				"cancel": self.closeNonRecursive,
+				"exit": self.closeRecursive,
+				"back": self.closeNonRecursive,
+				"red": self.closeNonRecursive,
+				"0": self.list_sort,
+				"left": self.key_left,
+				"right": self.key_right,
+				"up": self.key_up,
+				"down": self.key_down,
+				"info": self.key_info,
+				"menu": self.closeRecursive
+			},
+			-1
+		)
 
-        self.PIXMAPS_PER_PAGE = 20
-        i = 0
-        while i < self.PIXMAPS_PER_PAGE:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+		self.PIXMAPS_PER_PAGE = 20
+		i = 0
+		while i < self.PIXMAPS_PER_PAGE:
+			self["label" + str(i + 1)] = StaticText()
+			self["pixmap" + str(i + 1)] = Pixmap()
+			i += 1
 
-        self.npics = len(self.names)
-        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.index = 0
-        self.maxentry = len(menu_list) - 1
-        self.ipage = 1
-        self.onLayoutFinish.append(self.openTest)
+		self.npics = len(self.names)
+		# self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.index = 0
+		self.maxentry = len(menu_list) - 1
+		self.ipage = 1
+		self.onLayoutFinish.append(self.openTest)
 
-    def paintFrame(self):
-        try:
-            # If the index exceeds the maximum number of items, it returns to the first item
-            if self.index > self.maxentry:
-                self.index = self.minentry
-            self.idx = self.index
-            name = self.names[self.idx]
-            self['info'].setText(str(name))
-            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
-            ipos = self.pos[ifr]
-            self["frame"].moveTo(ipos[0], ipos[1], 1)
-            self["frame"].startMoving()
-        except Exception as e:
-            print('Error in paintFrame: ', e)
+	def paintFrame(self):
+		try:
+			# If the index exceeds the maximum number of items, it returns to the first item
+			if self.index > self.maxentry:
+				self.index = self.minentry
+			self.idx = self.index
+			name = self.names[self.idx]
+			self['info'].setText(str(name))
+			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
+			ipos = self.pos[ifr]
+			self["frame"].moveTo(ipos[0], ipos[1], 1)
+			self["frame"].startMoving()
+		except Exception as e:
+			print('Error in paintFrame: ', e)
 
-    def openTest(self):
-        if self.ipage < self.npage:
-            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+	def openTest(self):
+		if self.ipage < self.npage:
+			self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
-        elif self.ipage == self.npage:
-            self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
-            i1 = 0
-            while i1 < self.PIXMAPS_PER_PAGE:
-                self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
-                i1 += 1
-        self.npics = len(self.pics)
-        i = 0
-        i1 = 0
-        self.picnum = 0
-        ln = self.maxentry - (self.minentry - 1)
-        while i < ln:
-            idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
-            pic = self.pics[idx]
-            if not exists(self.pics[idx]):
-                pic = nss_pic
-            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
-            i += 1
-        self.index = self.minentry
-        self.paintFrame()
+		elif self.ipage == self.npage:
+			self.maxentry = len(self.pics) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+			i1 = 0
+			while i1 < self.PIXMAPS_PER_PAGE:
+				self["label" + str(i1 + 1)].setText(" ")
+				self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+				i1 += 1
+		self.npics = len(self.pics)
+		i = 0
+		i1 = 0
+		self.picnum = 0
+		ln = self.maxentry - (self.minentry - 1)
+		while i < ln:
+			idx = self.minentry + i
+			# self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+			pic = self.pics[idx]
+			if not exists(self.pics[idx]):
+				pic = nss_pic
+			self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+			i += 1
+		self.index = self.minentry
+		self.paintFrame()
 
-    def key_left(self):
-        # Decrement the index only if we are not at the first pixmap
-        if self.index >= 0:
-            self.index -= 1
-        else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
-            self.ipage = self.npage
-            self.index = self.npics - 1
-        # Check if we need to change pages
-        if self.index < self.minentry:
-            self.ipage -= 1
-            if self.ipage < 1:  # If we go beyond the first page
-                self.ipage = self.npage
-                self.index = self.npics - 1  # Back to the last pixmap of the last page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_left(self):
+		# Decrement the index only if we are not at the first pixmap
+		if self.index >= 0:
+			self.index -= 1
+		else:
+			# If we are at the first pixmap, go back to the last pixmap of the last page
+			self.ipage = self.npage
+			self.index = self.npics - 1
+		# Check if we need to change pages
+		if self.index < self.minentry:
+			self.ipage -= 1
+			if self.ipage < 1:  # If we go beyond the first page
+				self.ipage = self.npage
+				self.index = self.npics - 1  # Back to the last pixmap of the last page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_right(self):
-        # Increment the index only if we are not at the last pixmap
-        if self.index < self.npics - 1:
-            self.index += 1
-        else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
-            self.index = 0
-            self.ipage = 1
-            self.openTest()
-        # Check if we need to change pages
-        if self.index > self.maxentry:
-            self.ipage += 1
-            if self.ipage > self.npage:  # If we exceed the number of pages
-                self.index = 0
-                self.ipage = 1  # Back to first page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_right(self):
+		# Increment the index only if we are not at the last pixmap
+		if self.index < self.npics - 1:
+			self.index += 1
+		else:
+			# If we are at the last pixmap, go back to the first pixmap of the first page
+			self.index = 0
+			self.ipage = 1
+			self.openTest()
+		# Check if we need to change pages
+		if self.index > self.maxentry:
+			self.ipage += 1
+			if self.ipage > self.npage:  # If we exceed the number of pages
+				self.index = 0
+				self.ipage = 1  # Back to first page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_up(self):
-        if self.index == 0 and self.ipage == 1:
-            self.ipage = self.npage
-            self.index = self.minentry
-            self.openTest()
+	def key_up(self):
+		if self.index == 0 and self.ipage == 1:
+			self.ipage = self.npage
+			self.index = self.minentry
+			self.openTest()
 
-        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
-            self.index -= 5
-        else:
-            if self.ipage == self.npage and self.index == self.minentry:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage = self.npage
-                self.index = self.npics - 1
-                self.openTest()
-        self.paintFrame()
+		elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
+			self.index -= 5
+		else:
+			if self.ipage == self.npage and self.index == self.minentry:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage = self.npage
+				self.index = self.npics - 1
+				self.openTest()
+		self.paintFrame()
 
-    def key_down(self):
-        if self.index <= self.maxentry - 5:
-            self.index += 5
-        else:
-            if self.ipage == self.npage:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage += 1
-                self.index = self.minentry
-                self.openTest()
+	def key_down(self):
+		if self.index <= self.maxentry - 5:
+			self.index += 5
+		else:
+			if self.ipage == self.npage:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage += 1
+				self.index = self.minentry
+				self.openTest()
 
-        self.paintFrame()
+		self.paintFrame()
 
-    def keyNumberGlobal(self, number):
-        number -= 1
-        if len(self["menu"].list) > number:
-            self["menu"].setIndex(number)
-            self.okbuttonClick()
+	def keyNumberGlobal(self, number):
+		number -= 1
+		if len(self["menu"].list) > number:
+			self["menu"].setIndex(number)
+			self.okbuttonClick()
 
-    def list_sort(self):
-        if not hasattr(self, 'original_data'):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False
+	def list_sort(self):
+		if not hasattr(self, 'original_data'):
+			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+			self.sorted = False
 
-        if self.sorted:
-            self.names, self.titles, self.pics, self.urls = self.original_data
-            self.sorted = False
-            self['sort'].setText(_('Sort A-Z'))
-        else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-            self.sorted = True
-            self['sort'].setText(_('Sort Default'))
+		if self.sorted:
+			self.names, self.titles, self.pics, self.urls = self.original_data
+			self.sorted = False
+			self['sort'].setText(_('Sort A-Z'))
+		else:
+			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+			self.sorted = True
+			self['sort'].setText(_('Sort Default'))
 
-        self.openTest()
+		self.openTest()
 
-    def closeNonRecursive(self):
-        self.close(False)
+	def closeNonRecursive(self):
+		self.close(False)
 
-    def closeRecursive(self):
-        self.close(True)
+	def closeRecursive(self):
+		self.close(True)
 
-    def createSummary(self):
-        return
+	def createSummary(self):
+		return
 
-    def key_info(self):
-        self.session.open(LSinfo, " Information ")
+	def key_info(self):
+		self.session.open(LSinfo, " Information ")
 
-    def okbuttonClick(self):
-        self.idx = self.index
-        if self.idx is None:
-            return
-        name = self.names[self.idx]
-        title = self.titles[self.idx]
-        self.data = checkGZIP(xmlurl)
-        if self.data is not None:
-            n1 = self.data.find(title, 0)
-            n2 = self.data.find("</plugins>", n1)
-            url = self.data[n1:n2]
-            self.session.open(addInstall, url, name, None)
-        else:
-            self.session.open(MessageBox, _("Error: No Data Find."),
-                              MessageBox.TYPE_ERROR)
+	def okbuttonClick(self):
+		self.idx = self.index
+		if self.idx is None:
+			return
+		name = self.names[self.idx]
+		title = self.titles[self.idx]
+		self.data = checkGZIP(xmlurl)
+		if self.data is not None:
+			n1 = self.data.find(title, 0)
+			n2 = self.data.find("</plugins>", n1)
+			url = self.data[n1:n2]
+			self.session.open(addInstall, url, name, None)
+		else:
+			self.session.open(
+				MessageBox, _("Error: No Data Find."),
+				MessageBox.TYPE_ERROR
+			)
 
 
 class LSChannel(Screen):
 
-    def __init__(self, session, name):
-        Screen.__init__(self, session)
-        global descplug, currversion
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'LinuxsatPanel.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
+	def __init__(self, session, name):
+		Screen.__init__(self, session)
+		global descplug, currversion
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'LinuxsatPanel.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			self.skin = f.read()
 
-        if isWQHD() or isFHD():
-            self.pos = get_positions("FHD")
-        elif isHD():
-            self.pos = get_positions("HD")
+		if isWQHD() or isFHD():
+			self.pos = get_positions("FHD")
+		elif isHD():
+			self.pos = get_positions("HD")
 
-        self.name = name
-        menu_list = []
-        self.titles = []
-        self.pics = []
-        self.urls = []
+		self.name = name
+		menu_list = []
+		self.titles = []
+		self.pics = []
+		self.urls = []
 
-        # menu_list, titles, pics, urls, title, pic_name, url
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", 'https://github.com/ciefp/ciefpsettings-enigma2-zipped')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", 'http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", 'http://www.manutek.it/isetting/index.php')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", 'http://github.com/morpheus883/enigma2-zipped')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", 'http://www.vhannibal.net/asd.php')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", 'http://sat.alfa-tech.net/upload/settings/vhannibal/')
+		# menu_list, titles, pics, urls, title, pic_name, url
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", 'https://github.com/ciefp/ciefpsettings-enigma2-zipped')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", 'http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", 'http://www.manutek.it/isetting/index.php')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", 'http://github.com/morpheus883/enigma2-zipped')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", 'http://www.vhannibal.net/asd.php')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", 'http://sat.alfa-tech.net/upload/settings/vhannibal/')
 
-        self.names = menu_list
-        # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
-        self["frame"] = MovingPixmap()
-        self['info'] = Label()
-        self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('Sort A-Z'))
-        self['key_red'] = Label(_('Exit'))
-        self["pixmap"] = Pixmap()
-        self["actions"] = ActionMap(["OkCancelActions",
-                                     "MenuActions",
-                                     "DirectionActions",
-                                     "NumberActions",
-                                     'ColorActions',
-                                     "EPGSelectActions",
-                                     "InfoActions"],
-                                    {"ok": self.okbuttonClick,
-                                     "cancel": self.closeNonRecursive,
-                                     "exit": self.closeRecursive,
-                                     "back": self.closeNonRecursive,
-                                     "red": self.closeNonRecursive,
-                                     "0": self.list_sort,
-                                     "left": self.key_left,
-                                     "right": self.key_right,
-                                     "up": self.key_up,
-                                     "down": self.key_down,
-                                     "info": self.key_info,
-                                     "menu": self.closeRecursive})
+		self.names = menu_list
+		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
+		self["frame"] = MovingPixmap()
+		self['info'] = Label()
+		self['info'].setText(_('Please Wait...'))
+		self['sort'] = Label(_('Sort A-Z'))
+		self['key_red'] = Label(_('Exit'))
+		self["pixmap"] = Pixmap()
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"MenuActions",
+				"DirectionActions",
+				"NumberActions",
+				'ColorActions',
+				"EPGSelectActions",
+				"InfoActions"
+			],
+			{
+				"ok": self.okbuttonClick,
+				"cancel": self.closeNonRecursive,
+				"exit": self.closeRecursive,
+				"back": self.closeNonRecursive,
+				"red": self.closeNonRecursive,
+				"0": self.list_sort,
+				"left": self.key_left,
+				"right": self.key_right,
+				"up": self.key_up,
+				"down": self.key_down,
+				"info": self.key_info,
+				"menu": self.closeRecursive
+			},
+			-1
+		)
 
-        self.PIXMAPS_PER_PAGE = 20
-        i = 0
-        while i < self.PIXMAPS_PER_PAGE:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
+		self.PIXMAPS_PER_PAGE = 20
+		i = 0
+		while i < self.PIXMAPS_PER_PAGE:
+			self["label" + str(i + 1)] = StaticText()
+			self["pixmap" + str(i + 1)] = Pixmap()
+			i += 1
 
-        self.npics = len(self.names)
-        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.index = 0
-        self.maxentry = len(menu_list) - 1
-        self.ipage = 1
-        self.onLayoutFinish.append(self.openTest)
+		self.npics = len(self.names)
+		# self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.index = 0
+		self.maxentry = len(menu_list) - 1
+		self.ipage = 1
+		self.onLayoutFinish.append(self.openTest)
 
-    def paintFrame(self):
-        try:
-            # If the index exceeds the maximum number of items, it returns to the first item
-            if self.index > self.maxentry:
-                self.index = self.minentry
-            self.idx = self.index
-            name = self.names[self.idx]
-            self['info'].setText(str(name))
-            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
-            ipos = self.pos[ifr]
-            self["frame"].moveTo(ipos[0], ipos[1], 1)
-            self["frame"].startMoving()
-        except Exception as e:
-            print('Error in paintFrame: ', e)
+	def paintFrame(self):
+		try:
+			# If the index exceeds the maximum number of items, it returns to the first item
+			if self.index > self.maxentry:
+				self.index = self.minentry
+			self.idx = self.index
+			name = self.names[self.idx]
+			self['info'].setText(str(name))
+			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
+			ipos = self.pos[ifr]
+			self["frame"].moveTo(ipos[0], ipos[1], 1)
+			self["frame"].startMoving()
+		except Exception as e:
+			print('Error in paintFrame: ', e)
 
-    def openTest(self):
-        if self.ipage < self.npage:
-            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+	def openTest(self):
+		if self.ipage < self.npage:
+			self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
 
-        elif self.ipage == self.npage:
-            self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
-            i1 = 0
-            while i1 < self.PIXMAPS_PER_PAGE:
-                self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
-                i1 += 1
-        self.npics = len(self.pics)
-        i = 0
-        i1 = 0
-        self.picnum = 0
-        ln = self.maxentry - (self.minentry - 1)
-        while i < ln:
-            idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
-            pic = self.pics[idx]
-            if not exists(self.pics[idx]):
-                pic = nss_pic
-            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
-            i += 1
-        self.index = self.minentry
-        self.paintFrame()
+		elif self.ipage == self.npage:
+			self.maxentry = len(self.pics) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+			i1 = 0
+			while i1 < self.PIXMAPS_PER_PAGE:
+				self["label" + str(i1 + 1)].setText(" ")
+				self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+				i1 += 1
+		self.npics = len(self.pics)
+		i = 0
+		i1 = 0
+		self.picnum = 0
+		ln = self.maxentry - (self.minentry - 1)
+		while i < ln:
+			idx = self.minentry + i
+			# self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+			pic = self.pics[idx]
+			if not exists(self.pics[idx]):
+				pic = nss_pic
+			self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+			i += 1
+		self.index = self.minentry
+		self.paintFrame()
 
-    def key_left(self):
-        # Decrement the index only if we are not at the first pixmap
-        if self.index >= 0:
-            self.index -= 1
-        else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
-            self.ipage = self.npage
-            self.index = self.npics - 1
-        # Check if we need to change pages
-        if self.index < self.minentry:
-            self.ipage -= 1
-            if self.ipage < 1:  # If we go beyond the first page
-                self.ipage = self.npage
-                self.index = self.npics - 1  # Back to the last pixmap of the last page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_left(self):
+		# Decrement the index only if we are not at the first pixmap
+		if self.index >= 0:
+			self.index -= 1
+		else:
+			# If we are at the first pixmap, go back to the last pixmap of the last page
+			self.ipage = self.npage
+			self.index = self.npics - 1
+		# Check if we need to change pages
+		if self.index < self.minentry:
+			self.ipage -= 1
+			if self.ipage < 1:  # If we go beyond the first page
+				self.ipage = self.npage
+				self.index = self.npics - 1  # Back to the last pixmap of the last page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_right(self):
-        # Increment the index only if we are not at the last pixmap
-        if self.index < self.npics - 1:
-            self.index += 1
-        else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
-            self.index = 0
-            self.ipage = 1
-            self.openTest()
-        # Check if we need to change pages
-        if self.index > self.maxentry:
-            self.ipage += 1
-            if self.ipage > self.npage:  # If we exceed the number of pages
-                self.index = 0
-                self.ipage = 1  # Back to first page
-            self.openTest()
-        else:
-            self.paintFrame()
+	def key_right(self):
+		# Increment the index only if we are not at the last pixmap
+		if self.index < self.npics - 1:
+			self.index += 1
+		else:
+			# If we are at the last pixmap, go back to the first pixmap of the first page
+			self.index = 0
+			self.ipage = 1
+			self.openTest()
+		# Check if we need to change pages
+		if self.index > self.maxentry:
+			self.ipage += 1
+			if self.ipage > self.npage:  # If we exceed the number of pages
+				self.index = 0
+				self.ipage = 1  # Back to first page
+			self.openTest()
+		else:
+			self.paintFrame()
 
-    def key_up(self):
-        if self.index == 0 and self.ipage == 1:
-            self.ipage = self.npage
-            self.index = self.minentry
-            self.openTest()
+	def key_up(self):
+		if self.index == 0 and self.ipage == 1:
+			self.ipage = self.npage
+			self.index = self.minentry
+			self.openTest()
 
-        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
-            self.index -= 5
-        else:
-            if self.ipage == self.npage and self.index == self.minentry:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage = self.npage
-                self.index = self.npics - 1
-                self.openTest()
-        self.paintFrame()
+		elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
+			self.index -= 5
+		else:
+			if self.ipage == self.npage and self.index == self.minentry:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage = self.npage
+				self.index = self.npics - 1
+				self.openTest()
+		self.paintFrame()
 
-    def key_down(self):
-        if self.index <= self.maxentry - 5:
-            self.index += 5
-        else:
-            if self.ipage == self.npage:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage += 1
-                self.index = self.minentry
-                self.openTest()
+	def key_down(self):
+		if self.index <= self.maxentry - 5:
+			self.index += 5
+		else:
+			if self.ipage == self.npage:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage += 1
+				self.index = self.minentry
+				self.openTest()
 
-        self.paintFrame()
+		self.paintFrame()
 
-    def keyNumberGlobal(self, number):
-        number -= 1
-        if len(self["menu"].list) > number:
-            self["menu"].setIndex(number)
-            self.okbuttonClick()
+	def keyNumberGlobal(self, number):
+		number -= 1
+		if len(self["menu"].list) > number:
+			self["menu"].setIndex(number)
+			self.okbuttonClick()
 
-    def list_sort(self):
-        if not hasattr(self, 'original_data'):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False
+	def list_sort(self):
+		if not hasattr(self, 'original_data'):
+			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+			self.sorted = False
 
-        if self.sorted:
-            self.names, self.titles, self.pics, self.urls = self.original_data
-            self.sorted = False
-            self['sort'].setText(_('Sort A-Z'))
-        else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-            self.sorted = True
-            self['sort'].setText(_('Sort Default'))
+		if self.sorted:
+			self.names, self.titles, self.pics, self.urls = self.original_data
+			self.sorted = False
+			self['sort'].setText(_('Sort A-Z'))
+		else:
+			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+			self.sorted = True
+			self['sort'].setText(_('Sort Default'))
 
-        self.openTest()
+		self.openTest()
 
-    def closeNonRecursive(self):
-        self.close(False)
+	def closeNonRecursive(self):
+		self.close(False)
 
-    def closeRecursive(self):
-        self.close(True)
+	def closeRecursive(self):
+		self.close(True)
 
-    def createSummary(self):
-        return
+	def createSummary(self):
+		return
 
-    def key_info(self):
-        self.session.open(LSinfo, " Information ")
+	def key_info(self):
+		self.session.open(LSinfo, " Information ")
 
-    def okbuttonClick(self):
-        self.idx = self.index
-        if self.idx is None:
-            return
-        name = self.names[self.idx]
-        url = self.urls[self.idx]
-        self.session.open(addInstall, url, name, '')
+	def okbuttonClick(self):
+		self.idx = self.index
+		if self.idx is None:
+			return
+		name = self.names[self.idx]
+		url = self.urls[self.idx]
+		self.session.open(addInstall, url, name, '')
 
 
 class ScriptInstaller(Screen):
 
-    def __init__(self, session, name):
-        Screen.__init__(self, session)
-        global descplug, currversion
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'LinuxsatPanel.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
-
-        if isWQHD() or isFHD():
-            self.pos = get_positions("FHD")
-        elif isHD():
-            self.pos = get_positions("HD")
-
-        self.name = name
-        menu_list = []
-        self.titles = []
-        self.pics = []
-        self.urls = []
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Libssl Libcrypto", "AddLibssl.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Symlink Libssl", "AddSymlink.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ajpanel AMAJamry", "Ajpanel.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Arabic Savior", "arabicsav.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/fairbird/ArabicSavior/main/installer.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Biss Feed Autokey", "BissFeedAutokey.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Bissfeedautokey.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Chocholousek Picons", "ChocholousekPicons.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Chocholousek_picons.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor", "ciefp.png", "wget https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MOHAMED", "E2playerMOHAMED.png", 'wget -qO- --no-check-certificate https://mohamed_os.gitlab.io/e2iplayer/online-setup -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport - source", "epgsource.png", 'wget -q- --no-check-certificate "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Historyzapselector_dorik.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Ipaudiopro_1.4.sh?inline=false" -O - | /bin/sh')
-        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Adder", "keysadd.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | /bin/sh')
-        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko Biko", "Multistalker.png", 'wget -q --no-check-certificate  "https://raw.githubusercontent.com/biko-73/Multi-Stalker/main/pro/installer.sh -O - | /bin/sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
-        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/refs/heads/main/installer.sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/multisalker_pro12_eliesat.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator LINGSAT", "lingsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_lyngsat.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator KINGOFSAT", "kingofsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_kingofsat.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator SATELINATV", "satelinatv.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_satelitnatv.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator TWOJEIP", "twojeip.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_twojeip.sh?inline=false" -O - | /bin/sh')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WireGuard Vpn", "WireGuard.png", 'wget -q --no-check-certificate "wget -qO /tmp/WireGuard.sh "https://raw.githubusercontent.com/m4dhouse/Wireguard-Vpn/python-3.12/WireGuard.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xstreamity", "xstreamity.png", 'wget -q --no-check-certificate https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xtraevent", "xtraevent.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Xtraevent.sh?inline=false" -O - | /bin/sh')
-
-        # add_menu_item(menu_list, self.titles, self.pics, self.urls, "X-Klass", "xklass.png", 'wget -qO- --no-check-certificate "https://gitlab.com/MOHAMED_OS/dz_store/-/raw/main/XKlass/online-setup" | -O - | /bin/sh')
-
-        # Adding more options without URLs
-        if not has_dpkg:
-            menu_list.append("Lcn Scanner")
-            self.titles.append("Search Scanner Lcn channels ")
-            self.pics.append(picfold + "LcnSearch.png")
-            self.urls.append('')
-
-        menu_list.append("Check Skin Conponent")
-        self.titles.append("Search Skin Conponent Image Necessary ")
-        self.pics.append(picfold + "CheckSkin.png")
-        self.urls.append('')
-
-        menu_list.append("Send Cline -> CCcam.cfg")
-        self.titles.append("Send CCcline CCcam ")
-        self.pics.append(picfold + "cccamfreee.png")
-        self.urls.append('')
-
-        menu_list.append("Send Cline -> oscam.server")
-        self.titles.append("Send CCcline Oscam ")
-        self.pics.append(picfold + "oscamfree.png")
-        self.urls.append('')
-
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
-        if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
-
-        self.names = menu_list
-        self.sorted = False
-        # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
-        self["frame"] = MovingPixmap()
-        self['info'] = Label()
-        self['info'].setText(_('Please Wait...'))
-        self['sort'] = Label(_('Sort A-Z'))
-        self['key_red'] = Label(_('Exit'))
-        self["pixmap"] = Pixmap()
-        self["actions"] = ActionMap(["OkCancelActions",
-                                     "MenuActions",
-                                     "DirectionActions",
-                                     "NumberActions",
-                                     'ColorActions',
-                                     "EPGSelectActions",
-                                     "InfoActions"],
-                                    {"ok": self.okbuttonClick,
-                                     "cancel": self.closeNonRecursive,
-                                     "exit": self.closeRecursive,
-                                     "back": self.closeNonRecursive,
-                                     "red": self.closeNonRecursive,
-                                     "0": self.list_sort,
-                                     "left": self.key_left,
-                                     "right": self.key_right,
-                                     "up": self.key_up,
-                                     "down": self.key_down,
-                                     "info": self.key_info,
-                                     "menu": self.closeRecursive})
-
-        self.PIXMAPS_PER_PAGE = 20
-        i = 0
-        while i < self.PIXMAPS_PER_PAGE:
-            self["label" + str(i + 1)] = StaticText()
-            self["pixmap" + str(i + 1)] = Pixmap()
-            i += 1
-
-        self.npics = len(self.names)
-        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
-        self.index = 0
-        self.maxentry = len(menu_list) - 1
-        self.ipage = 1
-        self.onLayoutFinish.append(self.openTest)
-
-    def Lcn(self, answer=None):
-        if answer is None:
-            self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
-                                          MessageBox.TYPE_YESNO)
-        else:
-            print('Starting LCN scan...')
-            try:
-                from .LCNScanner.Terrestrial import PluginSetup
-                self.session.open(PluginSetup)
-            except Exception as e:
-                print("Exception during LCN scan:", e)
-
-    def LcnXX(self, answer=None):
-        if answer is None:
-            self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
-                                          MessageBox.TYPE_YESNO)
-        else:
-            print('Starting LCN scan...')
-            try:
-                lcn_scanner_instance = LCNScanner()
-                LCN = lcn_scanner_instance.lcnScan()
-                print("LCN Scanner returned:", LCN)
-
-                if LCN:
-                    self.session.open(LCN)
-                else:
-                    print("Error: LCN scan did not return a valid screen.")
-            except Exception as e:
-                print("Exception during LCN scan:", e)
-
-            try:
-                self.session.openWithCallback(self._onLCNScanFinished,
-                                              MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                                              MessageBox.TYPE_INFO, timeout=5)
-            except RuntimeError as re:
-                print("RuntimeError during MessageBox display:", re)
-
-    def _onLCNScanFinished(self, result=None):
-        pass
-
-    def Checkskin(self, answer=None):
-        if answer is None:
-            self.session.openWithCallback(self.Checkskin,
-                                          MessageBox, _("[Checkskin] This operation checks if the skin has its components (is not sure)..\nDo you really want to continue?"),
-                                          MessageBox.TYPE_YESNO)
-        else:
-            from .addons import checkskin
-            self.check_module = eTimer()
-            check = checkskin.check_module_skin()
-            try:
-                self.check_module_conn = self.check_module.timeout.connect(check)
-            except:
-                self.check_module.callback.append(check)
-            self.check_module.start(100, True)
-            self.openVi()
-
-    def openVi(self, callback=''):
-        from .addons.File_Commander import File_Commander
-        user_log = '/tmp/my_debug.log'
-        if fileExists(user_log):
-            self.session.open(File_Commander, user_log)
-
-    def paintFrame(self):
-        try:
-            # If the index exceeds the maximum number of items, it returns to the first item
-            if self.index > self.maxentry:
-                self.index = self.minentry
-            self.idx = self.index
-            name = self.names[self.idx]
-            self['info'].setText(str(name))
-            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
-            ipos = self.pos[ifr]
-            self["frame"].moveTo(ipos[0], ipos[1], 1)
-            self["frame"].startMoving()
-        except Exception as e:
-            print('Error in paintFrame: ', e)
-
-    def openTest(self):
-        if self.ipage < self.npage:
-            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
-
-        elif self.ipage == self.npage:
-            self.maxentry = len(self.pics) - 1
-            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
-            i1 = 0
-            while i1 < self.PIXMAPS_PER_PAGE:
-                self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
-                i1 += 1
-        self.npics = len(self.pics)
-        i = 0
-        i1 = 0
-        self.picnum = 0
-        ln = self.maxentry - (self.minentry - 1)
-        while i < ln:
-            idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
-            pic = self.pics[idx]
-            if not exists(self.pics[idx]):
-                pic = nss_pic
-            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
-            i += 1
-        self.index = self.minentry
-        self.paintFrame()
-
-    def key_left(self):
-        # Decrement the index only if we are not at the first pixmap
-        if self.index >= 0:
-            self.index -= 1
-        else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
-            self.ipage = self.npage
-            self.index = self.npics - 1
-        # Check if we need to change pages
-        if self.index < self.minentry:
-            self.ipage -= 1
-            if self.ipage < 1:  # If we go beyond the first page
-                self.ipage = self.npage
-                self.index = self.npics - 1  # Back to the last pixmap of the last page
-            self.openTest()
-        else:
-            self.paintFrame()
-
-    def key_right(self):
-        # Increment the index only if we are not at the last pixmap
-        if self.index < self.npics - 1:
-            self.index += 1
-        else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
-            self.index = 0
-            self.ipage = 1
-            self.openTest()
-        # Check if we need to change pages
-        if self.index > self.maxentry:
-            self.ipage += 1
-            if self.ipage > self.npage:  # If we exceed the number of pages
-                self.index = 0
-                self.ipage = 1  # Back to first page
-            self.openTest()
-        else:
-            self.paintFrame()
-
-    def key_up(self):
-        if self.index == 0 and self.ipage == 1:
-            self.ipage = self.npage
-            self.index = self.minentry
-            self.openTest()
-
-        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
-            self.index -= 5
-        else:
-            if self.ipage == self.npage and self.index == self.minentry:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage = self.npage
-                self.index = self.npics - 1
-                self.openTest()
-        self.paintFrame()
-
-    def key_down(self):
-        if self.index <= self.maxentry - 5:
-            self.index += 5
-        else:
-            if self.ipage == self.npage:
-                self.ipage = 1
-                self.index = 0
-                self.openTest()
-            else:
-                self.ipage += 1
-                self.index = self.minentry
-                self.openTest()
-
-        self.paintFrame()
-
-    def keyNumberGlobal(self, number):
-        number -= 1
-        if len(self["menu"].list) > number:
-            self["menu"].setIndex(number)
-            self.okbuttonClick()
-
-    def list_sort(self):
-        if not hasattr(self, 'original_data'):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
-            self.sorted = False
-
-        if self.sorted:
-            self.names, self.titles, self.pics, self.urls = self.original_data
-            self.sorted = False
-            self['sort'].setText(_('Sort A-Z'))
-        else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
-            self.sorted = True
-            self['sort'].setText(_('Sort Default'))
-
-        self.openTest()
-
-    def closeNonRecursive(self):
-        self.close(False)
-
-    def closeRecursive(self):
-        self.close(True)
-
-    def createSummary(self):
-        return
-
-    def key_info(self):
-        self.session.open(LSinfo, " Information ")
-
-    def okbuttonClick(self):
-        idx = self.index
-        print('[okbuttonClick] idx', idx)
-        if idx is None:
-            return
-        self.namev = self.names[idx]
-        self.url = self.urls[idx]
-        print('[okbuttonClick] self.namev', self.namev)
-        print('[okbuttonClick] self.url', self.url)
-
-        if 'cccam.cfg' in self.namev.lower():
-            self.askForFcl()
-            return
-
-        if 'oscam.serv' in self.namev.lower():
-            self.getcl('Oscam')
-            return
-
-        if 'lcn scanner' in self.namev.lower():
-            self.Lcn()
-            return
-
-        if 'check skin conponent' in self.namev.lower():
-            self.Checkskin()
-            return
-
-        self.session.openWithCallback(self.okClicked,
-                                      MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
-                                                    However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev,
-                                      MessageBox.TYPE_YESNO, default=True)
-
-    def okClicked(self, answer=False):
-        if answer:
-            title = (_("Executing %s\nPlease Wait...") % self.namev)
-            keywords = ['google', 'cloudfaire', 'quad9', 'emm', 'keys']
-            lower_namev = self.namev.lower()
-            keyword_found = any(keyword in lower_namev for keyword in keywords)
-            if keyword_found:
-                cmd = str(self.url) + ' > /tmp/my_debug.log'
-                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
-            else:
-                cmd = str(self.url) + ' > /tmp/my_debug.log'
-                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
-        else:
-            return
-
-    def askForFcl(self):
-        self.session.openWithCallback(self.runScriptWithConsole,
-                                      MessageBox, _("Do you want add Cline?"),
-                                      MessageBox.TYPE_YESNO)
-
-    def runScriptWithConsole(self, confirmed):
-        if confirmed:
-            script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
-            url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
-            try:
-                import requests
-                response = requests.get(url)
-                response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
-                with open(script_path, 'w') as file:
-                    file.write(response.text)
-                chmod(script_path, 0o777)
-            except Exception as e:
-                print("Failed to update script: {e}. Using existing script.", e)
-
-            self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
-
-    def getcl(self, config_type):
-        if config_type == 'CCcam':
-            dest = '/etc/CCcam.cfg'
-            src = plugin_path + '/sh/CCcam.cfg'
-            not_found_msg = _('File not found /etc/CCcam.cfg!\nRestart please...')
-            write_format = '\nC: {} {} {} {}\n'
-
-        elif config_type == 'Oscam':
-            dest_dir = '/etc/tuxbox/config'
-            if not exists(dest_dir):
-                makedirs(dest_dir)
-            dest = join(dest_dir, 'oscam.server')
-            src = plugin_path + '/sh/oscam.server'
-            not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
-            write_format = ('\n[reader]\n'
-                            'label = Server_{}\n'  # host
-                            'enable= 1\n'
-                            'protocol = cccam\n'
-                            'device = {}, {}\n'  # host, port,
-                            'user = {}\n'  # user
-                            'password = {}\n'  # pasw
-                            'inactivitytimeout = 30\n'
-                            'group = 1\n'
-                            'cccversion = 2.1.2\n'
-                            'cccmaxhops = 1\n'
-                            'ccckeepalive = 1\n'
-                            'audisabled = 1\n\n')
-        else:
-            print('unknow actions')
-            return
-
-        if not exists(dest):
-            shutil.copy2(src, dest)
-            self.session.open(MessageBox, not_found_msg,
-                              type=MessageBox.TYPE_INFO,
-                              timeout=8)
-            return
-
-        try:
-            dat = RequestUrl()
-            print('Request Server url is:', dat)
-            data = make_request(dat)
-
-            if PY3:
-                data = six.ensure_str(data)
-
-            if 'bosscccam' in data:  # ok
-                print('bosscccam pattern')
-                regex_patterns = [
-                    r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>",
-                ]
-            elif 'cccambird' in data:  # ok
-                print('cccambird pattern')
-                regex_patterns = [
-                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
-                ]
-            elif 'cccamia' in data:  # ok
-                print('cccamia pattern')
-                regex_patterns = [
-                    r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
-                ]
-            elif 'cccam.net' in data:  # ok
-                print('cccam.net pattern')
-                regex_patterns = [
-                    r'b>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)',
-                ]
-            elif 'iptv-15days' in data:  # ok cccamia
-                print('15days pattern')
-                regex_patterns = [
-                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
-                ]
-            else:
-                print('generic pattern')
-                regex_patterns = [
-                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>',
-                    r'<strong>c:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
-                    r'cline">\s*C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
-                    r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
-                    r'"C: (.*?) (.*?) (.*?) (.*?)"',
-                    r'"c: (.*?) (.*?) (.*?) (.*?)"',
-                ]
-            host = None
-            pas = None
-            user = None
-            for pattern in regex_patterns:
-                url1 = search(pattern, data)
-                if url1:
-                    host = url1.group(1)
-                    port = url1.group(2)
-                    user = url1.group(3)
-                    pas = url1.group(4)
-
-                pas = pas.replace('</h1>', '').replace('</b>', '')
-                pasw = pas.replace('</div>', '').replace('</span>', '')
-
-                host = str(host) if host is not None else ""
-                port = str(port) if port is not None else ""
-                user = str(user) if user is not None else ""
-                pasw = str(pasw) if pasw is not None else ""
-
-                if config_type == 'CCcam':
-                    print('write cccam file')
-                    with open(dest, 'a') as cfgdok:
-                        cfgdok.write(write_format.format(host, port, user, pasw))
-
-                if config_type == 'Oscam':
-                    print('write Oscam file')
-                    with open(dest, 'a') as cfgdok:
-                        cfgdok.write(write_format.format(host, host, port, user, pasw))
-
-                text = _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw)
-                if not PY3:
-                    text = text.encode('utf-8')
-                self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
-        except Exception as e:
-            self.session.open(MessageBox, _("Server Error.\n\nTry again, you'll be luckier!\n%s") % str(e),
-                              type=MessageBox.TYPE_INFO,
-                              timeout=8)
+	def __init__(self, session, name):
+		Screen.__init__(self, session)
+		global descplug, currversion
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'LinuxsatPanel.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			self.skin = f.read()
+
+		if isWQHD() or isFHD():
+			self.pos = get_positions("FHD")
+		elif isHD():
+			self.pos = get_positions("HD")
+
+		self.name = name
+		menu_list = []
+		self.titles = []
+		self.pics = []
+		self.urls = []
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Libssl Libcrypto", "AddLibssl.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Symlink Libssl", "AddSymlink.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ajpanel AMAJamry", "Ajpanel.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Arabic Savior", "arabicsav.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/fairbird/ArabicSavior/main/installer.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Biss Feed Autokey", "BissFeedAutokey.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Bissfeedautokey.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Chocholousek Picons", "ChocholousekPicons.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Chocholousek_picons.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader", "csd.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor", "csm.png", "wget https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite", "css.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater", "cbu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter", "cec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay", "cws.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "cssp3.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "cssp2.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis", "csta.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "cstapli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel", "csp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MOHAMED", "E2playerMOHAMED.png", 'wget -qO- --no-check-certificate https://mohamed_os.gitlab.io/e2iplayer/online-setup -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport - source", "epgsource.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Historyzapselector_dorik.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Ipaudiopro_1.4.sh?inline=false" -O - | /bin/sh')
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Adder", "keysadd.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | /bin/sh')
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko Biko", "Multistalker.png", 'wget -q --no-check-certificate  "https://raw.githubusercontent.com/biko-73/Multi-Stalker/main/pro/installer.sh -O - | /bin/sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/refs/heads/main/installer.sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/multisalker_pro12_eliesat.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator LINGSAT", "lingsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_lyngsat.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator KINGOFSAT", "kingofsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_kingofsat.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator SATELINATV", "satelinatv.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_satelitnatv.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator TWOJEIP", "twojeip.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_twojeip.sh?inline=false" -O - | /bin/sh')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "WireGuard Vpn", "WireGuard.png", 'wget -q --no-check-certificate "wget -qO /tmp/WireGuard.sh "https://raw.githubusercontent.com/m4dhouse/Wireguard-Vpn/python-3.12/WireGuard.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xstreamity", "xstreamity.png", 'wget -q --no-check-certificate https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xtraevent", "xtraevent.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Xtraevent.sh?inline=false" -O - | /bin/sh')
+
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "X-Klass", "xklass.png", 'wget -qO- --no-check-certificate "https://gitlab.com/MOHAMED_OS/dz_store/-/raw/main/XKlass/online-setup" | -O - | /bin/sh')
+
+		# Adding more options without URLs
+		if not has_dpkg:
+			menu_list.append("Lcn Scanner")
+			self.titles.append("Search Scanner Lcn channels ")
+			self.pics.append(picfold + "LcnSearch.png")
+			self.urls.append('')
+
+		menu_list.append("Check Skin Conponent")
+		self.titles.append("Search Skin Conponent Image Necessary ")
+		self.pics.append(picfold + "CheckSkin.png")
+		self.urls.append('')
+
+		menu_list.append("Send Cline -> CCcam.cfg")
+		self.titles.append("Send CCcline CCcam ")
+		self.pics.append(picfold + "cccamfreee.png")
+		self.urls.append('')
+
+		menu_list.append("Send Cline -> oscam.server")
+		self.titles.append("Send CCcline Oscam ")
+		self.pics.append(picfold + "oscamfree.png")
+		self.urls.append('')
+
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
+		if not has_dpkg:
+			add_menu_item(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
+
+		self.names = menu_list
+		self.sorted = False
+		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
+		self["frame"] = MovingPixmap()
+		self['info'] = Label()
+		self['info'].setText(_('Please Wait...'))
+		self['sort'] = Label(_('Sort A-Z'))
+		self['key_red'] = Label(_('Exit'))
+		self["pixmap"] = Pixmap()
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"MenuActions",
+				"DirectionActions",
+				"NumberActions",
+				'ColorActions',
+				"EPGSelectActions",
+				"InfoActions"
+			],
+			{
+				"ok": self.okbuttonClick,
+				"cancel": self.closeNonRecursive,
+				"exit": self.closeRecursive,
+				"back": self.closeNonRecursive,
+				"red": self.closeNonRecursive,
+				"0": self.list_sort,
+				"left": self.key_left,
+				"right": self.key_right,
+				"up": self.key_up,
+				"down": self.key_down,
+				"info": self.key_info,
+				"menu": self.closeRecursive
+			},
+			-1
+		)
+
+		self.PIXMAPS_PER_PAGE = 20
+		i = 0
+		while i < self.PIXMAPS_PER_PAGE:
+			self["label" + str(i + 1)] = StaticText()
+			self["pixmap" + str(i + 1)] = Pixmap()
+			i += 1
+
+		self.npics = len(self.names)
+		# self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+		self.index = 0
+		self.maxentry = len(menu_list) - 1
+		self.ipage = 1
+		self.onLayoutFinish.append(self.openTest)
+
+	def Lcn(self, answer=None):
+		if answer is None:
+			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+		else:
+			print('Starting LCN scan...')
+			try:
+				from .LCNScanner.Terrestrial import PluginSetup
+				self.session.open(PluginSetup)
+			except Exception as e:
+				print("Exception during LCN scan:", e)
+
+	def LcnXX(self, answer=None):
+		if answer is None:
+			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+		else:
+			print('Starting LCN scan...')
+			try:
+				lcn_scanner_instance = LCNScanner()
+				LCN = lcn_scanner_instance.lcnScan()
+				print("LCN Scanner returned:", LCN)
+
+				if LCN:
+					self.session.open(LCN)
+				else:
+					print("Error: LCN scan did not return a valid screen.")
+			except Exception as e:
+				print("Exception during LCN scan:", e)
+
+			try:
+				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'), MessageBox.TYPE_INFO, timeout=5)
+			except RuntimeError as re:
+				print("RuntimeError during MessageBox display:", re)
+
+	def _onLCNScanFinished(self, result=None):
+		pass
+
+	def Checkskin(self, answer=None):
+		if answer is None:
+			self.session.openWithCallback(
+				self.Checkskin,
+				MessageBox,
+				_("[Checkskin] This operation checks if the skin has its components (is not sure)..\nDo you really want to continue?"),
+				MessageBox.TYPE_YESNO
+			)
+
+		else:
+			from .addons import checkskin
+			self.check_module = eTimer()
+			check = checkskin.check_module_skin()
+			try:
+				self.check_module_conn = self.check_module.timeout.connect(check)
+			except:
+				self.check_module.callback.append(check)
+			self.check_module.start(100, True)
+			self.openVi()
+
+	def openVi(self, callback=''):
+		from .addons.File_Commander import File_Commander
+		user_log = '/tmp/my_debug.log'
+		if fileExists(user_log):
+			self.session.open(File_Commander, user_log)
+
+	def paintFrame(self):
+		try:
+			# If the index exceeds the maximum number of items, it returns to the first item
+			if self.index > self.maxentry:
+				self.index = self.minentry
+			self.idx = self.index
+			name = self.names[self.idx]
+			self['info'].setText(str(name))
+			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
+			ipos = self.pos[ifr]
+			self["frame"].moveTo(ipos[0], ipos[1], 1)
+			self["frame"].startMoving()
+		except Exception as e:
+			print('Error in paintFrame: ', e)
+
+	def openTest(self):
+		if self.ipage < self.npage:
+			self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+
+		elif self.ipage == self.npage:
+			self.maxentry = len(self.pics) - 1
+			self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+			i1 = 0
+			while i1 < self.PIXMAPS_PER_PAGE:
+				self["label" + str(i1 + 1)].setText(" ")
+				self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+				i1 += 1
+		self.npics = len(self.pics)
+		i = 0
+		i1 = 0
+		self.picnum = 0
+		ln = self.maxentry - (self.minentry - 1)
+		while i < ln:
+			idx = self.minentry + i
+			# self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+			pic = self.pics[idx]
+			if not exists(self.pics[idx]):
+				pic = nss_pic
+			self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+			i += 1
+		self.index = self.minentry
+		self.paintFrame()
+
+	def key_left(self):
+		# Decrement the index only if we are not at the first pixmap
+		if self.index >= 0:
+			self.index -= 1
+		else:
+			# If we are at the first pixmap, go back to the last pixmap of the last page
+			self.ipage = self.npage
+			self.index = self.npics - 1
+		# Check if we need to change pages
+		if self.index < self.minentry:
+			self.ipage -= 1
+			if self.ipage < 1:  # If we go beyond the first page
+				self.ipage = self.npage
+				self.index = self.npics - 1  # Back to the last pixmap of the last page
+			self.openTest()
+		else:
+			self.paintFrame()
+
+	def key_right(self):
+		# Increment the index only if we are not at the last pixmap
+		if self.index < self.npics - 1:
+			self.index += 1
+		else:
+			# If we are at the last pixmap, go back to the first pixmap of the first page
+			self.index = 0
+			self.ipage = 1
+			self.openTest()
+		# Check if we need to change pages
+		if self.index > self.maxentry:
+			self.ipage += 1
+			if self.ipage > self.npage:  # If we exceed the number of pages
+				self.index = 0
+				self.ipage = 1  # Back to first page
+			self.openTest()
+		else:
+			self.paintFrame()
+
+	def key_up(self):
+		if self.index == 0 and self.ipage == 1:
+			self.ipage = self.npage
+			self.index = self.minentry
+			self.openTest()
+
+		elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
+			self.index -= 5
+		else:
+			if self.ipage == self.npage and self.index == self.minentry:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage = self.npage
+				self.index = self.npics - 1
+				self.openTest()
+		self.paintFrame()
+
+	def key_down(self):
+		if self.index <= self.maxentry - 5:
+			self.index += 5
+		else:
+			if self.ipage == self.npage:
+				self.ipage = 1
+				self.index = 0
+				self.openTest()
+			else:
+				self.ipage += 1
+				self.index = self.minentry
+				self.openTest()
+
+		self.paintFrame()
+
+	def keyNumberGlobal(self, number):
+		number -= 1
+		if len(self["menu"].list) > number:
+			self["menu"].setIndex(number)
+			self.okbuttonClick()
+
+	def list_sort(self):
+		if not hasattr(self, 'original_data'):
+			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+			self.sorted = False
+
+		if self.sorted:
+			self.names, self.titles, self.pics, self.urls = self.original_data
+			self.sorted = False
+			self['sort'].setText(_('Sort A-Z'))
+		else:
+			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+			self.sorted = True
+			self['sort'].setText(_('Sort Default'))
+
+		self.openTest()
+
+	def closeNonRecursive(self):
+		self.close(False)
+
+	def closeRecursive(self):
+		self.close(True)
+
+	def createSummary(self):
+		return
+
+	def key_info(self):
+		self.session.open(LSinfo, " Information ")
+
+	def okbuttonClick(self):
+		idx = self.index
+		print('[okbuttonClick] idx', idx)
+		if idx is None:
+			return
+		self.namev = self.names[idx]
+		self.url = self.urls[idx]
+		print('[okbuttonClick] self.namev', self.namev)
+		print('[okbuttonClick] self.url', self.url)
+
+		if 'cccam.cfg' in self.namev.lower():
+			self.askForFcl()
+			return
+
+		if 'oscam.serv' in self.namev.lower():
+			self.getcl('Oscam')
+			return
+
+		if 'lcn scanner' in self.namev.lower():
+			self.Lcn()
+			return
+
+		if 'check skin conponent' in self.namev.lower():
+			self.Checkskin()
+			return
+
+		self.session.openWithCallback(self.okClicked, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
+										However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev, MessageBox.TYPE_YESNO, default=True)
+
+	def okClicked(self, answer=False):
+		if answer:
+			title = (_("Executing %s\nPlease Wait...") % self.namev)
+			keywords = ['google', 'cloudfaire', 'quad9', 'emm', 'keys', 'source']
+			lower_namev = self.namev.lower()
+			keyword_found = any(keyword in lower_namev for keyword in keywords)
+			if keyword_found:
+				cmd = str(self.url) + ' > /tmp/my_debug.log 2>&1'
+				self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
+			else:
+				cmd = str(self.url) + ' > /tmp/my_debug.log 2>&1'
+				self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
+		else:
+			return
+
+	def askForFcl(self):
+		self.session.openWithCallback(self.runScriptWithConsole, MessageBox, _("Do you want add Cline?"), MessageBox.TYPE_YESNO)
+
+	def runScriptWithConsole(self, confirmed):
+		if confirmed:
+			script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+			url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+			try:
+				import requests
+				response = requests.get(url)
+				response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
+				with open(script_path, 'w') as file:
+					file.write(response.text)
+				chmod(script_path, 0o777)
+			except Exception as e:
+				print("Failed to update script: {e}. Using existing script.", e)
+
+			self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
+
+	def getcl(self, config_type):
+		if config_type == 'CCcam':
+			dest = '/etc/CCcam.cfg'
+			src = plugin_path + '/sh/CCcam.cfg'
+			not_found_msg = _('File not found /etc/CCcam.cfg!\nRestart please...')
+			write_format = '\nC: {} {} {} {}\n'
+
+		elif config_type == 'Oscam':
+			dest_dir = '/etc/tuxbox/config'
+			if not exists(dest_dir):
+				makedirs(dest_dir)
+			dest = join(dest_dir, 'oscam.server')
+			src = plugin_path + '/sh/oscam.server'
+			not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
+			write_format = (
+				'\n[reader]\n'
+				'label = Server_{}\n'  # host
+				'enable= 1\n'
+				'protocol = cccam\n'
+				'device = {}, {}\n'  # host, port
+				'user = {}\n'  # user
+				'password = {}\n'  # password
+				'inactivitytimeout = 30\n'
+				'group = 1\n'
+				'cccversion = 2.1.2\n'
+				'cccmaxhops = 1\n'
+				'ccckeepalive = 1\n'
+				'audisabled = 1\n\n'
+			)
+		else:
+			print('unknow actions')
+			return
+
+		if not exists(dest):
+			shutil.copy2(src, dest)
+			self.session.open(MessageBox, not_found_msg, type=MessageBox.TYPE_INFO, timeout=8)
+			return
+
+		try:
+			dat = RequestUrl()
+			print('Request Server url is:', dat)
+			data = make_request(dat)
+
+			if PY3:
+				data = six.ensure_str(data)
+
+			if 'bosscccam' in data:  # ok
+				print('bosscccam pattern')
+				regex_patterns = [
+					r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>",
+				]
+			elif 'cccambird' in data:  # ok
+				print('cccambird pattern')
+				regex_patterns = [
+					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
+				]
+			elif 'cccamia' in data:  # ok
+				print('cccamia pattern')
+				regex_patterns = [
+					r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
+				]
+			elif 'cccam.net' in data:  # ok
+				print('cccam.net pattern')
+				regex_patterns = [
+					r'b>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)',
+				]
+			elif 'iptv-15days' in data:  # ok cccamia
+				print('15days pattern')
+				regex_patterns = [
+					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
+				]
+			else:
+				print('generic pattern')
+				regex_patterns = [
+					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>',
+					r'<strong>c:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
+					r'cline">\s*C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*'
+					r'<h1>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
+					r'"C: (.*?) (.*?) (.*?) (.*?)"',
+					r'"c: (.*?) (.*?) (.*?) (.*?)"',
+				]
+			host = None
+			pas = None
+			user = None
+			for pattern in regex_patterns:
+				url1 = search(pattern, data)
+				if url1:
+					host = url1.group(1)
+					port = url1.group(2)
+					user = url1.group(3)
+					pas = url1.group(4)
+
+				pas = pas.replace('</h1>', '').replace('</b>', '')
+				pasw = pas.replace('</div>', '').replace('</span>', '')
+
+				host = str(host) if host is not None else ""
+				port = str(port) if port is not None else ""
+				user = str(user) if user is not None else ""
+				pasw = str(pasw) if pasw is not None else ""
+
+				if config_type == 'CCcam':
+					print('write cccam file')
+					with open(dest, 'a') as cfgdok:
+						cfgdok.write(write_format.format(host, port, user, pasw))
+
+				if config_type == 'Oscam':
+					print('write Oscam file')
+					with open(dest, 'a') as cfgdok:
+						cfgdok.write(write_format.format(host, host, port, user, pasw))
+
+				text = _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw)
+				if not PY3:
+					text = text.encode('utf-8')
+				self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
+		except Exception as e:
+			self.session.open(
+				MessageBox,
+				_("Server Error.\n\nTry again, you'll be luckier!\n%s") % str(e),
+				type=MessageBox.TYPE_INFO,
+				timeout=8
+			)
 
 
 class addInstall(Screen):
 
-    def __init__(self, session, data, name, dest):
-        Screen.__init__(self, session)
-        global descplug, currversion
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'addInstall.xml')
-        '''
-        if has_dpkg:
-            skin = join(skin_path, 'addInstall-os.xml')  # now i have ctrlSkin for check
-        '''
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            skin = f.read()
+	def __init__(self, session, data, name, dest):
+		Screen.__init__(self, session)
+		global descplug, currversion
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'addInstall.xml')
+		'''
+		if has_dpkg:
+			skin = join(skin_path, 'addInstall-os.xml')  # now i have ctrlSkin for check
+		'''
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			skin = f.read()
 
-        self.skin = ctrlSkin('addInstall', skin)
+		self.skin = ctrlSkin('addInstall', skin)
 
-        self.fxml = str(data)
-        self.name = name
-        self.dest = dest
-        self['key_red'] = Label(_('Exit'))
-        self['key_green'] = Label(_('Install'))
-        self['key_yellow'] = Label(_('Remove'))
-        self['key_blue'] = Label(_('Restart enigma'))
-        self['sort'] = Label(_('Reload'))
-        """
-        if HALIGN == RT_HALIGN_RIGHT:
-            self['sort'].setText(_('Halign Left'))
-        else:
-            self['sort'].setText(_('Halign Right'))
-        """
-        '''
-        self.LcnOn = False
-        if exists('/etc/enigma2/lcndb') and lngx == 'it':
-            self['key_yellow'].setText('Lcn')
-            self.LcnOn = True
-            print('LcnOn = True')
-        '''
+		self.fxml = str(data)
+		self.name = name
+		self.dest = dest
+		self['key_red'] = Label(_('Exit'))
+		self['key_green'] = Label(_('Install'))
+		self['key_yellow'] = Label(_('Remove'))
+		self['key_blue'] = Label(_('Restart enigma'))
+		self['sort'] = Label(_('Reload'))
+		"""
+		if HALIGN == RT_HALIGN_RIGHT:
+			self['sort'].setText(_('Halign Left'))
+		else:
+			self['sort'].setText(_('Halign Right'))
+		"""
+		'''
+		self.LcnOn = False
+		if exists('/etc/enigma2/lcndb') and lngx == 'it':
+			self['key_yellow'].setText('Lcn')
+			self.LcnOn = True
+			print('LcnOn = True')
+		'''
 
-        self.list = []
-        self["list"] = LPSlist([])
-        self['fspace'] = Label()
-        self['fspace'].setText(_('Please Wait...'))
-        self['info'] = Label()
-        self['info'].setText(_('Load Category...'))
-        self.downloading = False
-        self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'NumberActions'],
-                                    {'ok': self.message,
-                                     '0': self.arabicx,
-                                     '5': self.Lcn,
-                                     '6': self.LcnXX,
-                                     'green': self.message,
-                                     'cancel': self.exitnow,
-                                     'red': self.exitnow,
-                                     'blue': self.restart,
-                                     'yellow': self.remove}, -2)
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.getfreespace)
+		self.list = []
+		self["list"] = LPSlist([])
+		self['fspace'] = Label()
+		self['fspace'].setText(_('Please Wait...'))
+		self['info'] = Label()
+		self['info'].setText(_('Load Category...'))
+		self.downloading = False
+		self['actions'] = ActionMap(
+			[
+				'SetupActions',
+				'ColorActions',
+				'NumberActions'
+			],
+			{
+				'ok': self.message,
+				'0': self.arabicx,
+				'5': self.Lcn,
+				'6': self.LcnXX,
+				'green': self.message,
+				'cancel': self.exitnow,
+				'red': self.exitnow,
+				'blue': self.restart,
+				'yellow': self.remove
+			},
+			-2
+		)
+		self.timer = eTimer()
+		try:
+			self.timer.callback.append(self.getfreespace)
 
-        except:
-            self.timer_conn = self.timer.timeout.connect(self.getfreespace)
-        self.timer.start(1000, 1)
+		except:
+			self.timer_conn = self.timer.timeout.connect(self.getfreespace)
+		self.timer.start(1000, 1)
 
-        if self.dest is not None:
-            self.onLayoutFinish.append(self.downxmlpage)
-        else:
-            self.onLayoutFinish.append(self.openTest)
+		if self.dest is not None:
+			self.onLayoutFinish.append(self.downxmlpage)
+		else:
+			self.onLayoutFinish.append(self.openTest)
 
-    def arabicx(self):
-        """
-        global HALIGN
-        if HALIGN == RT_HALIGN_LEFT:
-            HALIGN = RT_HALIGN_RIGHT
-            self['sort'].setText(_('Halign Left'))
-        elif HALIGN == RT_HALIGN_RIGHT:
-            HALIGN = RT_HALIGN_LEFT
-            self['sort'].setText(_('Halign Right'))
-        """
-        if self.dest is not None:
-            self.downxmlpage()
-        else:
-            self.openTest()
+	def arabicx(self):
+		"""
+		global HALIGN
+		if HALIGN == RT_HALIGN_LEFT:
+			HALIGN = RT_HALIGN_RIGHT
+			self['sort'].setText(_('Halign Left'))
+		elif HALIGN == RT_HALIGN_RIGHT:
+			HALIGN = RT_HALIGN_LEFT
+			self['sort'].setText(_('Halign Right'))
+		"""
+		if self.dest is not None:
+			self.downxmlpage()
+		else:
+			self.openTest()
 
-    def getfreespace(self):
-        try:
-            self['info'].setText(_('Category: ') + self.name)
-            fspace = freespace()
-            self['fspace'].setText(str(fspace))
-        except Exception as e:
-            print(e)
+	def getfreespace(self):
+		try:
+			self['info'].setText(_('Category: ') + self.name)
+			fspace = freespace()
+			self['fspace'].setText(str(fspace))
+		except Exception as e:
+			print(e)
 
-    def openTest(self):
-        # print('self.xml: ', self.fxml)
-        regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
-        match = compile(regex, DOTALL).findall(self.fxml)
-        self.names = []
-        self.urls = []
-        items = []
-        for name, url in match:
-            item = name + "###" + url
-            items.append(item)
-        items.sort()
-        for item in items:
-            name = item.split('###')[0]
-            url = item.split('###')[1]
+	def openTest(self):
+		# print('self.xml: ', self.fxml)
+		regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
+		match = compile(regex, DOTALL).findall(self.fxml)
+		self.names = []
+		self.urls = []
+		items = []
+		for name, url in match:
+			item = name + "###" + url
+			items.append(item)
+		items.sort()
+		for item in items:
+			name = item.split('###')[0]
+			url = item.split('###')[1]
 
-            self.names.append(name)
-            self.urls.append(url)
-        LPshowlist(self.names, self["list"])
-        # self.buttons()
+			self.names.append(name)
+			self.urls.append(url)
+		LPshowlist(self.names, self["list"])
+		# self.buttons()
 
-    def buttons(self):
-        """
-        if HALIGN == RT_HALIGN_RIGHT:
-            self['sort'].setText(_('Halign Left'))
-        else:
-            self['sort'].setText(_('Halign Right'))
+	def buttons(self):
+		"""
+		if HALIGN == RT_HALIGN_RIGHT:
+			self['sort'].setText(_('Halign Left'))
+		else:
+			self['sort'].setText(_('Halign Right'))
 
-        # if self.LcnOn is True:
-        # # self.LcnOn = False
-        # # if exists('/etc/enigma2/lcndb') and lngx == 'it':
-            # self['key_yellow'].setText('Lcn')
-            # # self.LcnOn = True
-            # print('LcnOn 2 = True')
-        # else:
-            # self['key_yellow'].setText(_('Remove'))
-        """
-        return
+		# if self.LcnOn is True:
+		# # self.LcnOn = False
+		# # if exists('/etc/enigma2/lcndb') and lngx == 'it':
+			# self['key_yellow'].setText('Lcn')
+			# # self.LcnOn = True
+			# print('LcnOn 2 = True')
+		# else:
+			# self['key_yellow'].setText(_('Remove'))
+		"""
+		return
 
-    def message(self):
-        if self.dest is not None:
-            print('go okRun')
-            self.okRun()
-        else:
-            idx = self["list"].getSelectionIndex()
-            self.url = self.urls[idx]
-            n1 = self.url.rfind("/")
-            self.plug = self.url[(n1 + 1):]
-            self.iname = ''
-            if ".deb" in self.plug:
-                if not has_dpkg:
-                    self.session.open(MessageBox, _('Unknow Image!'),
-                                      MessageBox.TYPE_INFO,
-                                      timeout=5)
-                    return
-                n2 = self.plug.find("_", 0)
-                self.iname = self.plug[:n2]
+	def message(self):
+		if self.dest is not None:
+			print('go okRun')
+			self.okRun()
+		else:
+			idx = self["list"].getSelectionIndex()
+			self.url = self.urls[idx]
+			n1 = self.url.rfind("/")
+			self.plug = self.url[(n1 + 1):]
+			self.iname = ''
+			if ".deb" in self.plug:
+				if not has_dpkg:
+					self.session.open(MessageBox, _('Unknow Image!'), MessageBox.TYPE_INFO, timeout=5)
+					return
+				n2 = self.plug.find("_", 0)
+				self.iname = self.plug[:n2]
 
-            if ".ipk" in self.plug:
-                if has_dpkg:
-                    self.session.open(MessageBox, _('Unknow Image!'),
-                                      MessageBox.TYPE_INFO,
-                                      timeout=5)
-                    return
-                n2 = self.plug.find("_", 0)
-                self.iname = self.plug[:n2]
-            elif ".zip" in self.plug:
-                self.iname = self.plug
-            elif ".tar" in self.plug or ".gz" in self.plug or "bz2" in self.plug:
-                self.iname = self.plug
+			if ".ipk" in self.plug:
+				if has_dpkg:
+					self.session.open(MessageBox, _('Unknow Image!'), MessageBox.TYPE_INFO, timeout=5)
+					return
+				n2 = self.plug.find("_", 0)
+				self.iname = self.plug[:n2]
+			elif ".zip" in self.plug:
+				self.iname = self.plug
+			elif ".tar" in self.plug or ".gz" in self.plug or "bz2" in self.plug:
+				self.iname = self.plug
 
-            self.session.openWithCallback(self.okClicked,
-                                          MessageBox, _("Do you want to install %s?") % self.iname,
-                                          MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.okClicked, MessageBox, _("Do you want to install %s?") % self.iname, MessageBox.TYPE_YESNO)
 
-    def retfile(self, dest):
-        import requests
-        response = requests.get(self.url)
-        if response.status_code == 200:
-            with open(dest, 'wb') as f:
-                f.write(response.content)
-            print("File downloaded successfully.")
-            return True
-        else:
-            print("Error downloading the file.")
-        return False
+	def retfile(self, dest):
+		import requests
+		response = requests.get(self.url)
+		if response.status_code == 200:
+			with open(dest, 'wb') as f:
+				f.write(response.content)
+			print("File downloaded successfully.")
+			return True
+		else:
+			print("Error downloading the file.")
+		return False
 
-    def okClicked(self, answer=False):
-        if answer:
-            dest = "/tmp"
-            if not exists(dest):
-                system('ln -sf  /var/volatile/tmp /tmp')
-            folddest = '/tmp/' + self.plug
-            if self.retfile(folddest):
-                cmd2 = ''
-                if ".deb" in self.plug:
-                    cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
-                if ".ipk" in self.plug:
-                    cmd2 = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
-                elif ".zip" in self.plug:
-                    cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
-                elif ".tar" in self.plug and "gz" in self.plug:
-                    cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
-                elif ".bz2" in self.plug and "gz" in self.plug:
-                    cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-                # print('cmd:', cmd)
-                title = (_("Installing %s\nPlease Wait...") % self.iname)
-                self.session.open(lsConsole, _(title), cmdlist=[cmd2], closeOnSuccess=False)
+	def okClicked(self, answer=False):
+		if answer:
+			dest = "/tmp"
+			if not exists(dest):
+				system('ln -sf  /var/volatile/tmp /tmp')
+			folddest = '/tmp/' + self.plug
+			if self.retfile(folddest):
+				cmd2 = ''
+				if ".deb" in self.plug:
+					cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
+				if ".ipk" in self.plug:
+					cmd2 = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
+				elif ".zip" in self.plug:
+					cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
+				elif ".tar" in self.plug and "gz" in self.plug:
+					cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
+				elif ".bz2" in self.plug and "gz" in self.plug:
+					cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
+				# print('cmd:', cmd)
+				title = (_("Installing %s\nPlease Wait...") % self.iname)
+				self.session.open(lsConsole, _(title), cmdlist=[cmd2], closeOnSuccess=False)
 
-    def downxmlpage(self):
-        self.downloading = False
-        r = make_request(self.fxml)
-        if r is None:
-            print("Error: No data received from make_request")
-            return
-        self.names = []
-        self.urls = []
-        items = []
-        name = url = date = ''
-        try:
-            if 'ciefp' in self.name.lower():
-                n1 = r.find('title="README.txt', 0)
-                n2 = r.find('href="#readme">', n1)
-                r = r[n1:n2]
-                regex = r'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
-                match = compile(regex).findall(r)
-                for name, url in match:
-                    if url.find('.zip') != -1:
-                        url = url.replace('blob', 'raw')
-                        url = 'https://github.com' + url
-                        name = decode_html(name)
-                        self.downloading = True
-                    item = name + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
+	def downxmlpage(self):
+		self.downloading = False
+		r = make_request(self.fxml)
+		if r is None:
+			print("Error: No data received from make_request")
+			return
+		self.names = []
+		self.urls = []
+		items = []
+		name = url = date = ''
+		try:
+			if 'ciefp' in self.name.lower():
+				n1 = r.find('title="README.txt', 0)
+				n2 = r.find('href="#readme">', n1)
+				r = r[n1:n2]
+				regex = r'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
+				match = compile(regex).findall(r)
+				for name, url in match:
+					if url.find('.zip') != -1:
+						url = url.replace('blob', 'raw')
+						url = 'https://github.com' + url
+						name = decode_html(name)
+						self.downloading = True
+					item = name + "###" + str(url)
+					items.append(item)
+					# items.sort()
 
-            if 'cyrus' in self.name.lower():
-                n1 = r.find('name="Sat">', 0)
-                n2 = r.find("/ruleset>", n1)
-                r = r[n1:n2]
-                regex = r'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
-                match = compile(regex).findall(r)
-                for name, url, date in match:
-                    if url.find('.zip') != -1:
-                        if 'ddt' in name.lower():
-                            continue
-                        if 'Sat' in name.lower():
-                            continue
-                        name = decode_html(name) + ' ' + date
-                        self.downloading = True
-                    item = name + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
+			if 'cyrus' in self.name.lower():
+				n1 = r.find('name="Sat">', 0)
+				n2 = r.find("/ruleset>", n1)
+				r = r[n1:n2]
+				regex = r'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
+				match = compile(regex).findall(r)
+				for name, url, date in match:
+					if url.find('.zip') != -1:
+						if 'ddt' in name.lower():
+							continue
+						if 'Sat' in name.lower():
+							continue
+						name = decode_html(name) + ' ' + date
+						self.downloading = True
+					item = name + "###" + str(url)
+					items.append(item)
+					# items.sort()
 
-            if 'manutek' in self.name.lower():
-                regex = r'href="/isetting/.*?file=(.+?).zip">'
-                match = compile(regex).findall(r)
-                for url in match:
-                    name = url
-                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
-                    url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
-                    self.downloading = True
-                    item = decode_html(name) + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
+			if 'manutek' in self.name.lower():
+				regex = r'href="/isetting/.*?file=(.+?).zip">'
+				match = compile(regex).findall(r)
+				for url in match:
+					name = url
+					name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
+					url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
+					self.downloading = True
+					item = decode_html(name) + "###" + str(url)
+					items.append(item)
+					# items.sort()
 
-            if 'morpheus' in self.name.lower():
-                regex = r'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
-                # n1 = r.find('title="README.txt', 0)
-                # n2 = r.find('href="#readme">', n1)
-                # r = r[n1:n2]
-                match = compile(regex).findall(r)
-                for name, url in match:
-                    if url.find('.zip') != -1:
-                        name = 'Morph883 ' + decode_html(name)
-                        url = url.replace('blob', 'raw')
-                        url = 'https://github.com' + url
-                        self.downloading = True
-                    item = name + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
+			if 'morpheus' in self.name.lower():
+				regex = r'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
+				# n1 = r.find('title="README.txt', 0)
+				# n2 = r.find('href="#readme">', n1)
+				# r = r[n1:n2]
+				match = compile(regex).findall(r)
+				for name, url in match:
+					if url.find('.zip') != -1:
+						name = 'Morph883 ' + decode_html(name)
+						url = url.replace('blob', 'raw')
+						url = 'https://github.com' + url
+						self.downloading = True
+					item = name + "###" + str(url)
+					items.append(item)
+					# items.sort()
 
-            if 'vhannibal net' in self.name.lower():
-                pattern = compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
-                matches = pattern.findall(r)
-                for match in matches:
-                    url = match[0]
-                    name = match[1]
-                    if isinstance(name, bytes):
-                        name = name.decode('utf-8', errors='replace')
-                    name = decode_html(match[1])
-                    date = match[2]
-                    name = str(name).replace('&#127381;', '').replace("%20", " ").replace("..", "").strip() + ' ' + date
-                    url = "https://www.vhannibal.net/" + url
-                    self.downloading = True
-                    item = name + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
+			if 'vhannibal net' in self.name.lower():
+				pattern = compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
+				matches = pattern.findall(r)
+				for match in matches:
+					url = match[0]
+					name = match[1]
+					if isinstance(name, bytes):
+						name = name.decode('utf-8', errors='replace')
+					name = decode_html(match[1])
+					date = match[2]
+					name = str(name).replace('&#127381;', '').replace("%20", " ").replace("..", "").strip() + ' ' + date
+					url = "https://www.vhannibal.net/" + url
+					self.downloading = True
+					item = name + "###" + str(url)
+					items.append(item)
+					# items.sort()
 
-            if 'vhannibal tek' in self.name.lower():
-                regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
-                match = compile(regex).findall(r)
-                for url, date in match:
-                    if '.php' in url.lower():
-                        continue
-                    name = decode_html(url).replace('&#127381;', '').replace("%20", " ") + ' ' + date
-                    url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
-                    self.downloading = True
-                    item = name + "###" + str(url)
-                    items.append(item)
-                    # items.sort()
-            items.sort()
-            for item in items:
-                name = item.split('###')[0]
-                url = item.split('###')[1]
-                if name in self.names:
-                    continue
-                name = str(decode_html(name))
-                url = str(url)
-                self.names.append(name.strip())
-                self.urls.append(url.strip())
-            LPshowlist(self.names, self["list"])
-        except Exception as e:
-            print('downxmlpage get failed: ', str(e))
-            self['info'].setText(_('Download page get failed ...'))
+			if 'vhannibal tek' in self.name.lower():
+				regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
+				match = compile(regex).findall(r)
+				for url, date in match:
+					if '.php' in url.lower():
+						continue
+					name = decode_html(url).replace('&#127381;', '').replace("%20", " ") + ' ' + date
+					url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
+					self.downloading = True
+					item = name + "###" + str(url)
+					items.append(item)
+					# items.sort()
+			items.sort()
+			for item in items:
+				name = item.split('###')[0]
+				url = item.split('###')[1]
+				if name in self.names:
+					continue
+				name = str(decode_html(name))
+				url = str(url)
+				self.names.append(name.strip())
+				self.urls.append(url.strip())
+			LPshowlist(self.names, self["list"])
+		except Exception as e:
+			print('downxmlpage get failed: ', str(e))
+			self['info'].setText(_('Download page get failed ...'))
 
-    def Lcn(self, answer=None):
-        if answer is None:
-            self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
-                                          MessageBox.TYPE_YESNO)
-        else:
-            print('Starting LCN scan...')
-            try:
-                from .LCNScanner.Terrestrial import PluginSetup
-                self.session.open(PluginSetup)
-            except Exception as e:
-                print("Exception during LCN scan:", e)
+	def Lcn(self, answer=None):
+		if answer is None:
+			self.session.openWithCallback(
+				self.Lcn,
+				MessageBox,
+				_("Do you want to Order LCN Bouquet?"),
+				MessageBox.TYPE_YESNO
+			)
+		else:
+			print('Starting LCN scan...')
+			try:
+				from .LCNScanner.Terrestrial import PluginSetup
+				self.session.open(PluginSetup)
+			except Exception as e:
+				print("Exception during LCN scan:", e)
 
-    def LcnXX(self, answer=None):
-        if answer is None:
-            self.session.openWithCallback(self.Lcn,
-                                          MessageBox, _("Do you want to Order LCN Bouquet?"),
-                                          MessageBox.TYPE_YESNO)
-        else:
-            print('Starting LCN scan...')
-            try:
-                lcn_scanner_instance = LCNScanner()
-                LCN = lcn_scanner_instance.lcnScan()
-                print("LCN Scanner returned:", LCN)
+	def LcnXX(self, answer=None):
+		if answer is None:
+			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+		else:
+			print('Starting LCN scan...')
+			try:
+				lcn_scanner_instance = LCNScanner()
+				LCN = lcn_scanner_instance.lcnScan()
+				print("LCN Scanner returned:", LCN)
 
-                if LCN:
-                    self.session.open(LCN)
-                else:
-                    print("Error: LCN scan did not return a valid screen.")
-            except Exception as e:
-                print("Exception during LCN scan:", e)
+				if LCN:
+					self.session.open(LCN)
+				else:
+					print("Error: LCN scan did not return a valid screen.")
+			except Exception as e:
+				print("Exception during LCN scan:", e)
 
-            try:
-                self.session.openWithCallback(self._onLCNScanFinished,
-                                              MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'),
-                                              MessageBox.TYPE_INFO, timeout=5)
-            except RuntimeError as re:
-                print("RuntimeError during MessageBox display:", re)
+			try:
+				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'), MessageBox.TYPE_INFO, timeout=5)
+			except RuntimeError as re:
+				print("RuntimeError during MessageBox display:", re)
 
-    def _onLCNScanFinished(self, result=None):
-        pass
+	def _onLCNScanFinished(self, result=None):
+		pass
 
-    def okRun(self):
-        self.session.openWithCallback(self.okRun1,
-                                      MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
-                                                    However, if required, you can get help to resolve the issue.\n\n\nDo you want to install?"),
-                                      MessageBox.TYPE_YESNO)
+	def okRun(self):
+		self.session.openWithCallback(self.okRun1, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\nHowever, if required, you can get help to resolve the issue.\n\n\nDo you want to install?"), MessageBox.TYPE_YESNO)
 
-    def okRun1(self, answer=False):
-        dest = "/tmp/settings.zip"
-        if answer:
-            global setx
-            if self.downloading is True:
-                idx = self["list"].getSelectionIndex()
-                url = self.urls[idx]
-                self.namel = ''
-                if 'dtt' not in url.lower():
-                    setx = 1
-                    terrestrial()
-                if keepiptv():
-                    print('-----save iptv channels-----')
+	def okRun1(self, answer=False):
+		dest = "/tmp/settings.zip"
+		if answer:
+			global setx
+			if self.downloading is True:
+				idx = self["list"].getSelectionIndex()
+				url = self.urls[idx]
+				self.namel = ''
+				if 'dtt' not in url.lower():
+					setx = 1
+					terrestrial()
+				if keepiptv():
+					print('-----save iptv channels-----')
 
-                from six.moves.urllib.request import urlretrieve
-                urlretrieve(url, dest)
-                if exists(dest) and '.zip' in dest:
-                    fdest1 = "/tmp/unzipped"
-                    fdest2 = "/etc/enigma2"
-                    if exists("/tmp/unzipped"):
-                        system('rm -rf /tmp/unzipped')
-                    makedirs('/tmp/unzipped')
-                    cmd2 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
-                    system(cmd2)
-                    for root, dirs, files in walk(fdest1):
-                        for name in dirs:
-                            self.namel = name
-                    system('rm -rf /etc/enigma2/lamedb')
-                    system('rm -rf /etc/enigma2/*.radio')
-                    system('rm -rf /etc/enigma2/*.tv')
-                    system('rm -rf /etc/enigma2/*.del')
-                    system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
-                    system("rm -rf /tmp/unzipped")
-                    system("rm -rf /tmp/settings.zip")
-                    title = (_("Installing %s\nPlease Wait...") % self.name)
-                    self.session.openWithCallback(self.yes, lsConsole, title=_(title),
-                                                  cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
-                                                  closeOnSuccess=False)
-            else:
-                self['info'].setText(_('Settings Not Installed ...'))
+				from six.moves.urllib.request import urlretrieve
+				urlretrieve(url, dest)
+				if exists(dest) and '.zip' in dest:
+					fdest1 = "/tmp/unzipped"
+					fdest2 = "/etc/enigma2"
+					if exists("/tmp/unzipped"):
+						system('rm -rf /tmp/unzipped')
+					makedirs('/tmp/unzipped')
+					cmd2 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
+					system(cmd2)
+					for root, dirs, files in walk(fdest1):
+						for name in dirs:
+							self.namel = name
+					system('rm -rf /etc/enigma2/lamedb')
+					system('rm -rf /etc/enigma2/*.radio')
+					system('rm -rf /etc/enigma2/*.tv')
+					system('rm -rf /etc/enigma2/*.del')
+					system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
+					system("rm -rf /tmp/unzipped")
+					system("rm -rf /tmp/settings.zip")
+					title = (_("Installing %s\nPlease Wait...") % self.name)
+					self.session.openWithCallback(self.yes, lsConsole, title=_(title), cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"], closeOnSuccess=False)
+			else:
+				self['info'].setText(_('Settings Not Installed ...'))
 
-    def pas(self, call=None):
-        pass
+	def pas(self, call=None):
+		pass
 
-    def yes(self, call=None):
-        print('^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^')
-        copy_files_to_enigma2()
-        print('^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^')
-        ReloadBouquets(setx)
+	def yes(self, call=None):
+		print('^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^')
+		copy_files_to_enigma2()
+		print('^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^')
+		ReloadBouquets(setx)
 
-    def remove(self):
-        self.session.openWithCallback(self.removenow,
-                                      MessageBox, _("Do you want to remove?"),
-                                      MessageBox.TYPE_YESNO)
+	def remove(self):
+		self.session.openWithCallback(self.removenow, MessageBox, _("Do you want to remove?"), MessageBox.TYPE_YESNO)
 
-    def removenow(self, answer=False):
-        if answer:
-            idx = self["list"].getSelectionIndex()
-            url = self.urls[idx]
-            n1 = url.rfind("/")
-            ipk = url[(n1 + 1):]
-            if ".zip" in ipk:
-                return
-            n2 = ipk.find("_", 0)
-            self.iname = ipk[:n2]
-            cmd = "opkg remove '" + self.iname + "'"
-            title = (_("Removing %s") % self.iname)
-            self.session.open(lsConsole, _(title), cmdlist=[cmd])
+	def removenow(self, answer=False):
+		if answer:
+			idx = self["list"].getSelectionIndex()
+			url = self.urls[idx]
+			n1 = url.rfind("/")
+			ipk = url[(n1 + 1):]
+			if ".zip" in ipk:
+				return
+			n2 = ipk.find("_", 0)
+			self.iname = ipk[:n2]
+			cmd = "opkg remove '" + self.iname + "'"
+			title = (_("Removing %s") % self.iname)
+			self.session.open(lsConsole, _(title), cmdlist=[cmd])
 
-    def restart(self):
-        self.session.openWithCallback(self.restartnow,
-                                      MessageBox, _("Do you want to restart Gui Interface?"),
-                                      MessageBox.TYPE_YESNO)
+	def restart(self):
+		self.session.openWithCallback(self.restartnow, MessageBox, _("Do you want to restart Gui Interface?"), MessageBox.TYPE_YESNO)
 
-    def restartnow(self, answer=False):
-        if answer:
-            self.session.open(TryQuitMainloop, 3)
+	def restartnow(self, answer=False):
+		if answer:
+			self.session.open(TryQuitMainloop, 3)
 
-    def exitnow(self):
+	def exitnow(self):
 
-        try:
-            if not has_dpkg:
-                refreshPlugins()
-        except Exception as e:
-            print('error on exit!', e)
+		try:
+			if not has_dpkg:
+				refreshPlugins()
+		except Exception as e:
+			print('error on exit!', e)
 
-        self.close()
+		self.close()
 
 
 class LSinfo(Screen):
 
-    def __init__(self, session, name):
-        Screen.__init__(self, session)
-        global descplug, currversion
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'LSinfo.xml')
+	def __init__(self, session, name):
+		Screen.__init__(self, session)
+		global descplug, currversion
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'LSinfo.xml')
 
-        '''
-        if has_dpkg:
-            skin = join(skin_path, 'LSinfo-os.xml')  # now i have ctrlSkin for check
-        '''
+		'''
+		if has_dpkg:
+			skin = join(skin_path, 'LSinfo-os.xml')  # now i have ctrlSkin for check
+		'''
 
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            skin = f.read()
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			skin = f.read()
 
-        self.skin = ctrlSkin('LSinfo', skin)
+		self.skin = ctrlSkin('LSinfo', skin)
 
-        self.name = name
-        info = _('Please Wait...')
-        self['list'] = ScrollLabel(info)
-        self['key_green'] = Label()
-        self["pixmap"] = Pixmap()
-        self["pixmap"].hide()
-        self['actions'] = ActionMap(['OkCancelActions',
-                                     'DirectionActions',
-                                     'HotkeyActions',
-                                     'InfobarEPGActions',
-                                     'ColorActions',
-                                     'ChannelSelectBaseActions'], {'ok': self.close,
-                                                                   'back': self.close,
-                                                                   'cancel': self.close,
-                                                                   'up': self.Up,
-                                                                   'down': self.Down,
-                                                                   'left': self.Up,
-                                                                   'right': self.Down,
-                                                                   # 'yellow': self.update_me,
-                                                                   'green': self.update_me,
-                                                                   'yellow_long': self.update_dev,
-                                                                   'info_long': self.update_dev,
-                                                                   'infolong': self.update_dev,
-                                                                   'showEventInfoPlugin': self.update_dev,
-                                                                   'red': self.close}, -1)
+		self.name = name
+		info = _('Please Wait...')
+		self['list'] = ScrollLabel(info)
+		self['key_green'] = Label()
+		self["pixmap"] = Pixmap()
+		self["pixmap"].hide()
+		self['actions'] = ActionMap(
+			[
+				'OkCancelActions',
+				'DirectionActions',
+				'HotkeyActions',
+				'InfobarEPGActions',
+				'ColorActions',
+				'ChannelSelectBaseActions'
+			],
+			{
+				'ok': self.close,
+				'back': self.close,
+				'cancel': self.close,
+				'up': self.Up,
+				'down': self.Down,
+				'left': self.Up,
+				'right': self.Down,
+				# 'yellow': self.update_me,
+				'green': self.update_me,
+				'yellow_long': self.update_dev,
+				'info_long': self.update_dev,
+				'infolong': self.update_dev,
+				'showEventInfoPlugin': self.update_dev,
+				'red': self.close
+			},
+			-1
+		)
 
-        self.Update = False
+		self.Update = False
 
-        self.timerz = eTimer()
-        """
-        # try:
-            # self.timerz.callback.append(self.check_vers)
-        # except:
-            # self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-        """
-        if hasattr(self.timerz, "callback"):
-            self.timerz.callback.append(self.check_vers)
-        else:
-            if exists("/usr/bin/apt-get"):
-                self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-            print("[Version Check] ERROR: eTimer does not support callback.append()")
+		self.timerz = eTimer()
+		"""
+		# try:
+			# self.timerz.callback.append(self.check_vers)
+		# except:
+			# self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
+		"""
+		if hasattr(self.timerz, "callback"):
+			self.timerz.callback.append(self.check_vers)
+		else:
+			if exists("/usr/bin/apt-get"):
+				self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
+			print("[Version Check] ERROR: eTimer does not support callback.append()")
 
-        self.timerz.start(200, 1)
+		self.timerz.start(200, 1)
 
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.startRun)
-        except:
-            self.timer_conn = self.timer.timeout.connect(self.startRun)
-        self.timer.start(1000, 1)
+		self.timer = eTimer()
+		try:
+			self.timer.callback.append(self.startRun)
+		except:
+			self.timer_conn = self.timer.timeout.connect(self.startRun)
+		self.timer.start(1000, 1)
 
-        self.onLayoutFinish.append(self.pas)
+		self.onLayoutFinish.append(self.pas)
 
-    def pas(self):
-        pass
+	def pas(self):
+		pass
 
-    def check_vers(self):
-        """Controllo versione con gestione avanzata formato numerico"""
-        print('[Version Check] Starting...')
-        self.Update = False
-        self.remote_version = '0.0'
-        self.remote_changelog = 'No changelog available'
+	def check_vers(self):
+		"""Controllo versione con gestione avanzata formato numerico"""
+		print('[Version Check] Starting...')
+		self.Update = False
+		self.remote_version = '0.0'
+		self.remote_changelog = 'No changelog available'
 
-        try:
-            decoded_url = base64.b64decode(installer_url).decode('utf-8')
-            if not decoded_url.startswith(('http://', 'https://')):
-                raise ValueError("Invalid URL protocol")
+		try:
+			decoded_url = base64.b64decode(installer_url).decode('utf-8')
+			if not decoded_url.startswith(('http://', 'https://')):
+				raise ValueError("Invalid URL protocol")
 
-            req = Request(
-                decoded_url,
-                headers={
-                    'User-Agent': AgentRequest,
-                    'Cache-Control': 'no-cache'
-                }
-            )
+			req = Request(
+				decoded_url,
+				headers={
+					'User-Agent': AgentRequest,
+					'Cache-Control': 'no-cache'
+				}
+			)
 
-            with urlopen(req, timeout=15) as response:
-                if response.getcode() != 200:
-                    raise URLError("HTTP Status: %d" % response.getcode())
+			with urlopen(req, timeout=15) as response:
+				if response.getcode() != 200:
+					raise URLError("HTTP Status: %d" % response.getcode())
 
-                data = response.read().decode('utf-8')
+				data = response.read().decode('utf-8')
 
-                if data:
-                    lines = data.split("\n")
-                    self.remote_version = '0.0'
-                    self.remote_changelog = 'No changelog available'
+				if data:
+					lines = data.split("\n")
+					self.remote_version = '0.0'
+					self.remote_changelog = 'No changelog available'
 
-                    for line in lines:
-                        if line.startswith("version"):
-                            parts = line.split("=")
-                            if len(parts) > 1:
-                                self.remote_version = parts[1].strip().strip("'")
-                        if line.startswith("changelog"):
-                            parts = line.split("=")
-                            if len(parts) > 1:
-                                self.remote_changelog = parts[1].strip().strip("'")
-                                break
+					for line in lines:
+						if line.startswith("version"):
+							parts = line.split("=")
+							if len(parts) > 1:
+								self.remote_version = parts[1].strip().strip("'")
+						if line.startswith("changelog"):
+							parts = line.split("=")
+							if len(parts) > 1:
+								self.remote_changelog = parts[1].strip().strip("'")
+								break
 
-                    self.new_version = self.remote_version or "Unknown"
-                    self.new_changelog = self.remote_changelog or "No changelog available"
+					self.new_version = self.remote_version or "Unknown"
+					self.new_changelog = self.remote_changelog or "No changelog available"
 
-                    if currversion < self.remote_version:
-                        self.Update = True
-                        print('New version online:', self.new_version)
+					if currversion < self.remote_version:
+						self.Update = True
+						print('New version online:', self.new_version)
 
-                        self.mbox = self.session.open(
-                            MessageBox,
-                            _('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
-                            MessageBox.TYPE_INFO,
-                            timeout=5
-                        )
-                        self['key_green'].setText(_('Update'))
-                        self["pixmap"].show()
-        except Exception as e:
-            print("Error while checking version:", e)
+						self.mbox = self.session.open(
+							MessageBox,
+							_('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
+							MessageBox.TYPE_INFO,
+							timeout=5
+						)
+						self['key_green'].setText(_('Update'))
+						self["pixmap"].show()
+		except Exception as e:
+			print("Error while checking version:", e)
 
-    def update_me(self):
-        if self.Update:
-            message = _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (
-                self.new_version,
-                self.new_changelog
-            )
-            self.session.openWithCallback(
-                self.install_update,
-                MessageBox,
-                message,
-                MessageBox.TYPE_YESNO
-            )
-        else:
-            self.session.open(
-                MessageBox,
-                _("Congrats! You already have the latest version..."),
-                MessageBox.TYPE_INFO,
-                timeout=10
-            )
+	def update_me(self):
+		if self.Update:
+			message = _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (
+				self.new_version,
+				self.new_changelog
+			)
+			self.session.openWithCallback(
+				self.install_update,
+				MessageBox,
+				message,
+				MessageBox.TYPE_YESNO
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("Congrats! You already have the latest version..."),
+				MessageBox.TYPE_INFO,
+				timeout=10
+			)
 
-    def update_dev(self):
-        req = Request(b64decoder(developer_url), headers={'User-Agent': AgentRequest})
-        page = urlopen(req).read()
-        data = json.loads(page)
-        remote_date = data['pushed_at']
-        strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
-        remote_date = strp_remote_date.strftime('%Y-%m-%d')
-        self.session.openWithCallback(self.install_update,
-                                      MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date),
-                                      MessageBox.TYPE_YESNO)
+	def update_dev(self):
+		req = Request(b64decoder(developer_url), headers={'User-Agent': AgentRequest})
+		page = urlopen(req).read()
+		data = json.loads(page)
+		remote_date = data['pushed_at']
+		strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
+		remote_date = strp_remote_date.strftime('%Y-%m-%d')
+		self.session.openWithCallback(self.install_update, MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date), MessageBox.TYPE_YESNO)
 
-    def install_update(self, answer=False):
-        if answer:
-            self.session.open(lsConsole, 'Upgrading...', cmdlist=['wget -q --no-check-certificate ' + b64decoder(installer_url) + ' -O - | /bin/sh'], finishedCallback=self.myCallback, closeOnSuccess=False)
-        else:
-            self.session.open(MessageBox, _("Update Aborted!"),
-                              MessageBox.TYPE_INFO, timeout=3)
+	def install_update(self, answer=False):
+		if answer:
+			self.session.open(lsConsole, 'Upgrading...', cmdlist=['wget -q --no-check-certificate ' + b64decoder(installer_url) + ' -O - | /bin/sh'], finishedCallback=self.myCallback, closeOnSuccess=False)
+		else:
+			self.session.open(MessageBox, _("Update Aborted!"), MessageBox.TYPE_INFO, timeout=3)
 
-    def myCallback(self, result=None):
-        print('result:', result)
-        return
+	def myCallback(self, result=None):
+		print('result:', result)
+		return
 
-    def startRun(self):
-        try:
-            # print("self.name =", repr(self.name))  # Aggiungi questa linea per il debug
-            if self.name == " Information ":
-                print("Running openinfo method...")
-                self.openinfo()
+	def startRun(self):
+		try:
+			# print("self.name =", repr(self.name))  # Aggiungi questa linea per il debug
+			if self.name == " Information ":
+				print("Running openinfo method...")
+				self.openinfo()
 
-            elif self.name == " About ":
-                print("Opening LICENSE file...")
-                with open(join(plugin_path, 'LICENSE'), 'r', encoding='utf-8') as filer:
-                    info = filer.read()
-                    info = info.replace('\r', '')
-                    info = info.strip()
-                    # print("Read LICENSE content successfully.")
-                    self['list'].setText(info)
-            else:
-                print("Unknown name value:", self.name)
-                return
-        except Exception as e:
-            print("Error in startRun: ", e)
-            self['list'].setText(_('Unable to download updates!'))
+			elif self.name == " About ":
+				print("Opening LICENSE file...")
+				with open(join(plugin_path, 'LICENSE'), 'r', encoding='utf-8') as filer:
+					info = filer.read()
+					info = info.replace('\r', '')
+					info = info.strip()
+					# print("Read LICENSE content successfully.")
+					self['list'].setText(info)
+			else:
+				print("Unknown name value:", self.name)
+				return
+		except Exception as e:
+			print("Error in startRun: ", e)
+			self['list'].setText(_('Unable to download updates!'))
 
-    def openinfo(self):
-        from .addons.stbinfo import stbinfo
-        try:
-            header = "Suggested by: @masterG - @oktus - @pcd\n"
-            header += "All code was rewritten by @Lululla - 2024.07.20\n"
-            header += "Designs and Graphics by @oktus\n"
-            header += "Support on: Linuxsat-support.com\n\n"
-            print('stbinfo initialized:', stbinfo)
-            stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
-            base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
-                descplug,
-                currversion,
-                header,
-                stbinfo_str
-            )
+	def openinfo(self):
+		from .addons.stbinfo import stbinfo
+		try:
+			header = "Suggested by: @masterG - @oktus - @pcd\n"
+			header += "All code was rewritten by @Lululla - 2024.07.20\n"
+			header += "Designs and Graphics by @oktus\n"
+			header += "Support on: Linuxsat-support.com\n\n"
+			print('stbinfo initialized:', stbinfo)
+			stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
+			base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
+				descplug,
+				currversion,
+				header,
+				stbinfo_str
+			)
 
-            with open('/tmp/output.txt', 'w', encoding='utf-8') as file:
-                file.write(base_content)
+			with open('/tmp/output.txt', 'w', encoding='utf-8') as file:
+				file.write(base_content)
 
-            info_path = join(plugin_path, 'info.txt')
-            if fileExists(info_path):
-                try:
-                    with open(info_path, 'r', encoding='utf-8') as info_file:
-                        with open('/tmp/output.txt', 'a', encoding='utf-8') as output_file:
-                            output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
-                except Exception as e:
-                    print("Error appending info.txt: {0}".format(str(e)))
-            else:
-                print("Info file not found: {0}".format(info_path))
+			info_path = join(plugin_path, 'info.txt')
+			if fileExists(info_path):
+				try:
+					with open(info_path, 'r', encoding='utf-8') as info_file:
+						with open('/tmp/output.txt', 'a', encoding='utf-8') as output_file:
+							output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
+				except Exception as e:
+					print("Error appending info.txt: {0}".format(str(e)))
+			else:
+				print("Info file not found: {0}".format(info_path))
 
-            try:
-                with open('/tmp/output.txt', 'r', encoding='utf-8') as filer:
-                    self['list'].setText(filer.read())
-            except Exception as e:
-                print("Final read/display error: {0}".format(str(e)))
-                self['list'].setText("Error loading system information")
+			try:
+				with open('/tmp/output.txt', 'r', encoding='utf-8') as filer:
+					self['list'].setText(filer.read())
+			except Exception as e:
+				print("Final read/display error: {0}".format(str(e)))
+				self['list'].setText("Error loading system information")
 
-        except Exception as e:
-            print("Error in openinfo:", e)
-            self['list'].setText("Error loading information")
+		except Exception as e:
+			print("Error in openinfo:", e)
+			self['list'].setText("Error loading information")
 
-    def cancel(self):
-        self.close()
+	def cancel(self):
+		self.close()
 
-    def ok(self):
-        self.close()
+	def ok(self):
+		self.close()
 
-    def Down(self):
-        self['list'].pageDown()
+	def Down(self):
+		self['list'].pageDown()
 
-    def Up(self):
-        self['list'].pageUp()
+	def Up(self):
+		self['list'].pageUp()
 
 
 class startLP(Screen):
-    def __init__(self, session):
-        self.session = session
-        global _session, first
-        global descplug, currversion
-        _session = session
-        first = True
-        Screen.__init__(self, session)
+	def __init__(self, session):
+		self.session = session
+		global _session, first
+		global descplug, currversion
+		_session = session
+		first = True
+		Screen.__init__(self, session)
 
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
 
-        skin = join(skin_path, 'startLP.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            self.skin = f.read()
-        # self.skin = ctrlSkin('startLP', skin)
-        self["poster"] = Pixmap()
-        self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
-        self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
-        self.onLayoutFinish.append(self.loadDefaultImage)
+		skin = join(skin_path, 'startLP.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			self.skin = f.read()
+		# self.skin = ctrlSkin('startLP', skin)
+		self["poster"] = Pixmap()
+		self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
+		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
+		self.onLayoutFinish.append(self.loadDefaultImage)
 
-    def clsgo(self):
-        if first is True:
-            self.session.openWithCallback(self.passe, LinuxsatPanel)
-        else:
-            self.close()
+	def clsgo(self):
+		if first is True:
+			self.session.openWithCallback(self.passe, LinuxsatPanel)
+		else:
+			self.close()
 
-    def passe(self, rest=None):
-        global first
-        first = False
-        self.close()
+	def passe(self, rest=None):
+		global first
+		first = False
+		self.close()
 
-    def loadDefaultImage(self):
-        self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
+	def loadDefaultImage(self):
+		self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
 
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.decodeImage)
-        except:
-            self.timer_conn = self.timer.timeout.connect(self.decodeImage)
-        self.timer.start(100, True)
+		self.timer = eTimer()
+		try:
+			self.timer.callback.append(self.decodeImage)
+		except:
+			self.timer_conn = self.timer.timeout.connect(self.decodeImage)
+		self.timer.start(100, True)
 
-        self.timerx = eTimer()
-        try:
-            self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
-        except:
-            self.timerx.callback.append(self.clsgo)
-        self.timerx.start(2500, True)
+		self.timerx = eTimer()
+		try:
+			self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
+		except:
+			self.timerx.callback.append(self.clsgo)
+		self.timerx.start(2500, True)
 
-    def decodeImage(self):
-        pixmapx = self.fldpng
-        if fileExists(pixmapx):
-            size = self['poster'].instance.size()
-            if not self.picload:
-                self.picload = ePicLoad()
-            self.scale = AVSwitch().getFramebufferScale()
-            self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
-            # _l = self.picload.PictureData.get()
-            # del self.picload
-            if has_dpkg:
-                self.picload.startDecode(pixmapx, False)
-            else:
-                self.picload.startDecode(pixmapx, 0, 0, False)
-            ptr = self.picload.getData()
-            if ptr is not None:
-                self['poster'].instance.setPixmap(ptr)
-                self['poster'].show()
-        return
+	def decodeImage(self):
+		pixmapx = self.fldpng
+		if fileExists(pixmapx):
+			size = self['poster'].instance.size()
+			if not self.picload:
+				self.picload = ePicLoad()
+			self.scale = AVSwitch().getFramebufferScale()
+			self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
+			# _l = self.picload.PictureData.get()
+			# del self.picload
+			if has_dpkg:
+				self.picload.startDecode(pixmapx, False)
+			else:
+				self.picload.startDecode(pixmapx, 0, 0, False)
+			ptr = self.picload.getData()
+			if ptr is not None:
+				self['poster'].instance.setPixmap(ptr)
+				self['poster'].show()
+		return
 
 
 class AboutLSS(Screen):
-    def __init__(self, session):
-        global _session, first
-        global descplug, currversion
-        _session = session
-        first = False
-        Screen.__init__(self, session)
-        try:
-            Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
-        except:
-            try:
-                self.setTitle(_('%s') % descplug + ' V.' + currversion)
-            except:
-                pass
-        skin = join(skin_path, 'AboutLSS.xml')
-        with codecs.open(skin, "r", encoding="utf-8") as f:
-            skin = f.read()
-        self.skin = ctrlSkin('AboutLSS', skin)
-        credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
-        credit += _('Suggested by: @masterG - @oktus - @pcd\n')
-        credit += _('Designs and Graphics by @oktus\n')
-        credit += _('Support on: Linuxsat-support.com\n\n')
-        credit += _('The Plugin lives thanks to the donations of each of you.\n')
-        credit += _('A coffee costs nothing.\n\n')
-        credit += _('If you think it is a useful tool for your box\n')
-        credit += _('please make a donation:\n')
-        credit += 'http://paypal.com/paypalme/belfagor2005\n'
-        credit += _('make donation on Linuxsat-support.com\n\n\n\n\n')
-        credit += _('All code was rewritten by @Lululla - 2024.07.20\n')
-        self['Info'] = Label(_(credit))
-        self['key_red'] = Label(_('Exit'))
-        self["pixmap"] = Pixmap()
-        self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-                                    {"ok": self.close,
-                                     "cancel": self.close,
-                                     "exit": self.close,
-                                     "back": self.close,
-                                     "red": self.close}, -1)
+	def __init__(self, session):
+		global _session, first
+		global descplug, currversion
+		_session = session
+		first = False
+		Screen.__init__(self, session)
+		try:
+			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+		except:
+			try:
+				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+			except:
+				pass
+		skin = join(skin_path, 'AboutLSS.xml')
+		with codecs.open(skin, "r", encoding="utf-8") as f:
+			skin = f.read()
+		self.skin = ctrlSkin('AboutLSS', skin)
+		credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
+		credit += _('Suggested by: @masterG - @oktus - @pcd\n')
+		credit += _('Designs and Graphics by @oktus\n')
+		credit += _('Support on: Linuxsat-support.com\n\n')
+		credit += _('The Plugin lives thanks to the donations of each of you.\n')
+		credit += _('A coffee costs nothing.\n\n')
+		credit += _('If you think it is a useful tool for your box\n')
+		credit += _('please make a donation:\n')
+		credit += 'http://paypal.com/paypalme/belfagor2005\n'
+		credit += _('make donation on Linuxsat-support.com\n\n\n\n\n')
+		credit += _('All code was rewritten by @Lululla - 2024.07.20\n')
+		self['Info'] = Label(_(credit))
+		self['key_red'] = Label(_('Exit'))
+		self["pixmap"] = Pixmap()
+		self["actions"] = ActionMap(
+			[
+				"OkCancelActions",
+				"ColorActions"
+			],
+			{
+				"ok": self.close,
+				"cancel": self.close,
+				"exit": self.close,
+				"back": self.close,
+				"red": self.close
+			},
+			-1
+		)
 
 
 def menustart():
-    try:
-        if CheckConn():
-            _session.open(startLP)
-        else:
-            _session.open(MessageBox, _('Check Connection!'),
-                          MessageBox.TYPE_INFO,
-                          timeout=5)
-    except:
-        import traceback
-        traceback.print_exc()
-        pass
+	try:
+		if CheckConn():
+			_session.open(startLP)
+		else:
+			_session.open(
+				MessageBox,
+				_('Check Connection!'),
+				MessageBox.TYPE_INFO,
+				timeout=5
+			)
+
+	except:
+		import traceback
+		traceback.print_exc()
+		pass
 
 
 def main(session, **kwargs):
-    try:
-        global _session
-        _session = session
-        menustart()
-    except:
-        import traceback
-        traceback.print_exc()
-        pass
+	try:
+		global _session
+		_session = session
+		menustart()
+	except:
+		import traceback
+		traceback.print_exc()
+		pass
 
 
 def menu(menuid, **kwargs):
-    return [(_('Linuxsat Panel'), main, descplug, 44)] if menuid == "mainmenu" else []
+	return [(_('Linuxsat Panel'), main, descplug, 44)] if menuid == "mainmenu" else []
 
 
 def Plugins(**kwargs):
-    # initialize_global_settings()  # Initialize the necessary fonts
-    add_skin_fonts()
-    return [
-        PluginDescriptor(
-            name="Linuxsat Panel",
-            description=descplug,
-            icon="LinuxsatPanel.png",
-            where=PluginDescriptor.WHERE_PLUGINMENU,
-            fnc=main
-        ),
-        PluginDescriptor(
-            name="Linuxsat Panel",
-            description=descplug,
-            where=PluginDescriptor.WHERE_MENU,
-            fnc=menu
-        )
-    ]
+	# initialize_global_settings()  # Initialize the necessary fonts
+	add_skin_fonts()
+	return [
+		PluginDescriptor(
+			name="Linuxsat Panel",
+			description=descplug,
+			icon="LinuxsatPanel.png",
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			fnc=main
+		),
+		PluginDescriptor(
+			name="Linuxsat Panel",
+			description=descplug,
+			where=PluginDescriptor.WHERE_MENU,
+			fnc=menu
+		)
+	]

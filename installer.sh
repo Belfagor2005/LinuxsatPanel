@@ -3,8 +3,8 @@
 ## setup command=wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/bash
 
 ## Only This 2 lines to edit with new version ######
-version='2.7.5'
-changelog="\n-- add other provider\nadd Ciefp Addons"
+version='2.7.6'
+changelog="\n-- fix some script\n-- add Ciefp Logo"
 
 ##############################################################
 
