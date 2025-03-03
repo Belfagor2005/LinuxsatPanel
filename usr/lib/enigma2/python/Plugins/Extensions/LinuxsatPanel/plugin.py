@@ -433,23 +433,56 @@ class LinuxsatPanel(Screen):
 		self.index = 0
 		self.maxentry = len(menu_list) - 1
 		self.ipage = 1
-		self.onLayoutFinish.append(self.start_check_version)
 		self.onLayoutFinish.append(self.openTest)
+		# self.onLayoutFinish.append(self.start_check_version)
 
 	def start_check_version(self):
+		self.Update = False
 		new_version, new_changelog, update_available = check_version(
 			currversion, installer_url, AgentRequest
 		)
 		if update_available:
+			self.Update = True
 			print("A new version is available:", new_version)
-			self.session.open(
-				MessageBox,
-				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
-				MessageBox.TYPE_INFO,
-				timeout=5
-			)
+
+			# Check if current screen is modal before opening the MessageBox
+			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
+				# If the screen is modal, open a message box with the update info
+				self.session.open(
+					MessageBox,
+					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+					MessageBox.TYPE_INFO,
+					timeout=5
+				)
+			else:
+				# If the screen is not modal, show a different message and log it
+				self.session.open(
+					MessageBox,
+					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (new_version, new_changelog),
+					MessageBox.TYPE_INFO,
+					timeout=5
+				)
+				# Handle the case when the screen is not modal, possibly opening a non-modal dialog
+				print("Cannot open modal MessageBox. The current screen is not modal.")
 		else:
 			print("No new version available.")
+
+	"""
+	# def start_check_version(self):
+		# new_version, new_changelog, update_available = check_version(
+			# currversion, installer_url, AgentRequest
+		# )
+		# if update_available:
+			# print("A new version is available:", new_version)
+			# self.session.open(
+				# MessageBox,
+				# _("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+				# MessageBox.TYPE_INFO,
+				# timeout=5
+			# )
+		# else:
+			# print("No new version available.")
+	"""
 
 	def paintFrame(self):
 		try:
@@ -2281,20 +2314,37 @@ class LSinfo(Screen):
 		pass
 
 	def check_vers(self):
-		# Chiamata alla funzione separata
 		new_version, new_changelog, update_available = check_version(
 			currversion, installer_url, AgentRequest
 		)
+
 		if update_available:
 			print("A new version is available:", new_version)
-			self.session.open(
-				MessageBox,
-				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
-				MessageBox.TYPE_INFO,
-				timeout=5
-			)
+			self.Update = True
+
+			# Check if the current screen is modal before opening the MessageBox
+			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
+				# Open the message box if the screen is modal
+				self.session.open(
+					MessageBox,
+					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+					MessageBox.TYPE_INFO,
+					timeout=5
+				)
+			else:
+				# Show a message box indicating that the update is not downloadable if the screen is not modal
+				self.session.open(
+					MessageBox,
+					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (new_version, new_changelog),
+					MessageBox.TYPE_INFO,
+					timeout=5
+				)
+				print("Cannot open modal MessageBox. The current screen is not modal.")
+
+			# Update the button text and show the pixmap for the update
 			self["key_green"].setText(_("Update"))
 			self["pixmap"].show()
+
 		else:
 			print("No new version available.")
 
@@ -2434,11 +2484,19 @@ class startLP(Screen):
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.clsgo, "cancel": self.clsgo}, -1)
 		self.onLayoutFinish.append(self.loadDefaultImage)
 
+	# def clsgo(self):
+		# if first is True:
+			# self.session.openWithCallback(self.passe, LinuxsatPanel)
+		# else:
+			# self.close()
+
 	def clsgo(self):
+		# if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
 		if first is True:
 			self.session.openWithCallback(self.passe, LinuxsatPanel)
 		else:
-			self.close()
+			# self.close()
+			print("Cannot open modal screen. The current screen is not modal.")
 
 	def passe(self, rest=None):
 		global first
@@ -2450,7 +2508,7 @@ class startLP(Screen):
 		self.timer = setup_timer(self.decodeImage)
 		self.timer.start(100, True)
 		self.timerx = setup_timer(self.clsgo)
-		self.timerx.start(2500, True)
+		self.timerx.start(2000, True)
 
 	def decodeImage(self):
 		pixmapx = self.fldpng
