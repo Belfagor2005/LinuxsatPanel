@@ -151,4 +151,11 @@ Changelog:
 -- fix some script
 -- add Ciefp Logo
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250303 2.7.7 version is online
+
+Changelog:
+-- fix installation
+-- clear code
 

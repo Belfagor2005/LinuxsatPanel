@@ -9,6 +9,7 @@ from . import (
 	add_skin_fonts,
 	b64decoder,
 	checkGZIP,
+	check_version,
 	developer_url,
 	# fetch_url,
 	freespace,
@@ -20,6 +21,7 @@ from . import (
 	RequestUrl,
 	make_request,
 	refreshPlugins,
+	setup_timer,
 	xmlurl,
 	HALIGN,
 )
@@ -51,17 +53,15 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
-from Tools.Directories import (fileExists, resolveFilename, SCOPE_PLUGINS)
-from datetime import datetime
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from datetime import datetime as dt
 from re import compile, search, DOTALL
 import codecs
-import json
-import ssl
-import sys
-import shutil
+from json import loads
+from sys import version_info
+from shutil import copy2
 import six
-import subprocess
-import base64
+from subprocess import check_output, CalledProcessError
 from enigma import (
 	RT_VALIGN_CENTER,
 	# RT_HALIGN_LEFT,
@@ -97,22 +97,18 @@ global has_dpkg
 global descplug
 global currversion
 
-currversion = '2.7.6'
+currversion = "2.7.7"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 
 plugin_path = resolveFilename(
 	SCOPE_PLUGINS,
-	"Extensions/{}".format('LinuxsatPanel')
+	"Extensions/{}".format("LinuxsatPanel")
 )
 
-PY3 = sys.version_info.major >= 3
-
-skin_path = ''
-
+PY3 = version_info.major >= 3
+skin_path = ""
 _session = None
-
 has_dpkg = False
-
 setx = 0
 
 
@@ -121,28 +117,13 @@ if exists("/usr/bin/apt-get"):
 
 
 if PY3:
-	from urllib.request import (urlopen, Request)
-	from urllib.error import URLError
-	unicode = str
-	PY3 = True
-else:
-	from urllib2 import (urlopen, Request)
-	from urllib2 import URLError
-
-
-if sys.version_info >= (2, 7, 9):
-	try:
-		sslContext = ssl._create_unverified_context()
-	except:
-		sslContext = None
-
-
-if sys.version_info[0] >= 3:
 	import html
+	from urllib.request import urlopen, Request
 
 	def decode_html(text):
 		return html.unescape(text)
 else:
+	from urllib2 import urlopen, Request
 	from HTMLParser import HTMLParser
 	html_parser = HTMLParser()
 
@@ -150,8 +131,17 @@ else:
 		return html_parser.unescape(text)
 
 
+if version_info >= (2, 7, 9):
+	try:
+		import ssl
+		sslContext = ssl._create_unverified_context()
+	except:
+		sslContext = None
+
+
 def create_ssl_context():
 	try:
+		import ssl
 		return ssl.create_default_context()
 	except Exception:
 		return None
@@ -168,8 +158,8 @@ def ssl_urlopen(url):
 
 def run_command(cmd):
 	try:
-		return subprocess.check_output(cmd, shell=True).decode('utf-8').strip()
-	except subprocess.CalledProcessError:
+		return check_output(cmd, shell=True).decode("utf-8").strip()
+	except CalledProcessError:
 		return None
 
 
@@ -193,40 +183,13 @@ if sslverify:
 			return ctx
 
 
-def compare_versions(ver1, ver2):
-	"""Confronta versioni in formato X.Y.Z gestendo numeri multi-cifra"""
-	def split_version(v):
-		parts = []
-		for part in str(v).split('.'):
-			try:
-				parts.append(int(part))
-			except ValueError:
-				parts.append(0)
-		return parts
-
-	v1 = split_version(ver1)
-	v2 = split_version(ver2)
-
-	max_length = max(len(v1), len(v2))
-	v1 += [0] * (max_length - len(v1))
-	v2 += [0] * (max_length - len(v2))
-
-	for a, b in zip(v1, v2):
-		if a < b:
-			return -1
-		elif a > b:
-			return 1
-
-	return 0
-
-
 if isWQHD() or isFHD():
-	skin_path = plugin_path + '/skins/fhd'
+	skin_path = plugin_path + "/skins/fhd"
 	picfold = plugin_path + "/LSicons2/"
 	pngx = plugin_path + "/icons2/link.png"
 	nss_pic = picfold + "LSS.png"
 else:
-	skin_path = plugin_path + '/skins/hd'
+	skin_path = plugin_path + "/skins/hd"
 	picfold = plugin_path + "/LSicons/"
 	pngx = plugin_path + "/icons/link.png"
 	nss_pic = picfold + "LSS.png"
@@ -239,11 +202,11 @@ class LPSlist(MenuList):
 		if isWQHD() or isFHD():
 			self.l.setItemHeight(50)
 			textfont = int(34)
-			self.l.setFont(0, gFont('lsat', textfont))
+			self.l.setFont(0, gFont("lsat", textfont))
 		if isHD():
 			self.l.setItemHeight(35)
 			textfont = int(22)
-			self.l.setFont(0, gFont('lsat', textfont))
+			self.l.setFont(0, gFont("lsat", textfont))
 
 
 def LPListEntry(name, item):
@@ -325,13 +288,13 @@ class LinuxsatPanel(Screen):
 		global descplug, currversion
 		Screen.__init__(self, session)
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'LinuxsatPanel.xml')
+		skin = join(skin_path, "LinuxsatPanel.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			self.skin = f.read()
 
@@ -425,10 +388,10 @@ class LinuxsatPanel(Screen):
 		self.sorted = False
 		# self.combined_data = list(zip(self.names, self.titles, self.pics, self.urls))
 		self["frame"] = MovingPixmap()
-		self['info'] = Label()
-		self['info'].setText(_('Please Wait...'))
-		self['sort'] = Label(_('Sort A-Z'))
-		self['key_red'] = Label(_('Exit'))
+		self["info"] = Label()
+		self["info"].setText(_("Please Wait..."))
+		self["sort"] = Label(_("Sort A-Z"))
+		self["key_red"] = Label(_("Exit"))
 		self["pixmap"] = Pixmap()
 		self["actions"] = ActionMap(
 			[
@@ -436,7 +399,7 @@ class LinuxsatPanel(Screen):
 				"MenuActions",
 				"DirectionActions",
 				"NumberActions",
-				'ColorActions',
+				"ColorActions",
 				"EPGSelectActions",
 				"InfoActions"
 			],
@@ -470,7 +433,23 @@ class LinuxsatPanel(Screen):
 		self.index = 0
 		self.maxentry = len(menu_list) - 1
 		self.ipage = 1
+		self.onLayoutFinish.append(self.start_check_version)
 		self.onLayoutFinish.append(self.openTest)
+
+	def start_check_version(self):
+		new_version, new_changelog, update_available = check_version(
+			currversion, installer_url, AgentRequest
+		)
+		if update_available:
+			print("A new version is available:", new_version)
+			self.session.open(
+				MessageBox,
+				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+				MessageBox.TYPE_INFO,
+				timeout=5
+			)
+		else:
+			print("No new version available.")
 
 	def paintFrame(self):
 		try:
@@ -479,13 +458,13 @@ class LinuxsatPanel(Screen):
 				self.index = self.minentry
 			self.idx = self.index
 			name = self.names[self.idx]
-			self['info'].setText(str(name))
+			self["info"].setText(str(name))
 			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
 			ipos = self.pos[ifr]
 			self["frame"].moveTo(ipos[0], ipos[1], 1)
 			self["frame"].startMoving()
 		except Exception as e:
-			print('Error in paintFrame: ', e)
+			print("Error in paintFrame: ", e)
 
 	def openTest(self):
 		if self.ipage < self.npage:
@@ -594,18 +573,18 @@ class LinuxsatPanel(Screen):
 			self.okbuttonClick()
 
 	def list_sort(self):
-		if not hasattr(self, 'original_data'):
+		if not hasattr(self, "original_data"):
 			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
 			self.sorted = False
 
 		if self.sorted:
 			self.names, self.titles, self.pics, self.urls = self.original_data
 			self.sorted = False
-			self['sort'].setText(_('Sort A-Z'))
+			self["sort"].setText(_("Sort A-Z"))
 		else:
 			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
 			self.sorted = True
-			self['sort'].setText(_('Sort Default'))
+			self["sort"].setText(_("Sort Default"))
 
 		self.openTest()
 
@@ -632,8 +611,8 @@ class LinuxsatPanel(Screen):
 		if self.idx is None:
 			return
 		name = self.names[self.idx]
-		if 'adult' in name.lower():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _('These Panel may contain Adult content\n\nare you sure you want to continue?'))
+		if "adult" in name.lower():
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("These Panel may contain Adult content\n\nare you sure you want to continue?"))
 		else:
 			self.okbuttonContinue(self.idx)
 
@@ -685,13 +664,13 @@ class LSskin(Screen):
 		Screen.__init__(self, session)
 		global descplug, currversion
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'LinuxsatPanel.xml')
+		skin = join(skin_path, "LinuxsatPanel.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			self.skin = f.read()
 
@@ -724,10 +703,10 @@ class LSskin(Screen):
 		self.sorted = False
 		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
 		self["frame"] = MovingPixmap()
-		self['info'] = Label()
-		self['info'].setText(_('Please Wait...'))
-		self['sort'] = Label(_('Sort A-Z'))
-		self['key_red'] = Label(_('Exit'))
+		self["info"] = Label()
+		self["info"].setText(_("Please Wait..."))
+		self["sort"] = Label(_("Sort A-Z"))
+		self["key_red"] = Label(_("Exit"))
 		self["pixmap"] = Pixmap()
 		self["actions"] = ActionMap(
 			[
@@ -735,7 +714,7 @@ class LSskin(Screen):
 				"MenuActions",
 				"DirectionActions",
 				"NumberActions",
-				'ColorActions',
+				"ColorActions",
 				"EPGSelectActions",
 				"InfoActions"
 			],
@@ -778,13 +757,13 @@ class LSskin(Screen):
 				self.index = self.minentry
 			self.idx = self.index
 			name = self.names[self.idx]
-			self['info'].setText(str(name))
+			self["info"].setText(str(name))
 			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
 			ipos = self.pos[ifr]
 			self["frame"].moveTo(ipos[0], ipos[1], 1)
 			self["frame"].startMoving()
 		except Exception as e:
-			print('Error in paintFrame: ', e)
+			print("Error in paintFrame: ", e)
 
 	def openTest(self):
 		if self.ipage < self.npage:
@@ -893,18 +872,18 @@ class LSskin(Screen):
 			self.okbuttonClick()
 
 	def list_sort(self):
-		if not hasattr(self, 'original_data'):
+		if not hasattr(self, "original_data"):
 			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
 			self.sorted = False
 
 		if self.sorted:
 			self.names, self.titles, self.pics, self.urls = self.original_data
 			self.sorted = False
-			self['sort'].setText(_('Sort A-Z'))
+			self["sort"].setText(_("Sort A-Z"))
 		else:
 			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
 			self.sorted = True
-			self['sort'].setText(_('Sort Default'))
+			self["sort"].setText(_("Sort Default"))
 
 		self.openTest()
 
@@ -945,13 +924,13 @@ class LSChannel(Screen):
 		Screen.__init__(self, session)
 		global descplug, currversion
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'LinuxsatPanel.xml')
+		skin = join(skin_path, "LinuxsatPanel.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			self.skin = f.read()
 
@@ -967,20 +946,20 @@ class LSChannel(Screen):
 		self.urls = []
 
 		# menu_list, titles, pics, urls, title, pic_name, url
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", 'https://github.com/ciefp/ciefpsettings-enigma2-zipped')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", 'http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", 'http://www.manutek.it/isetting/index.php')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", 'http://github.com/morpheus883/enigma2-zipped')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", 'http://www.vhannibal.net/asd.php')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", 'http://sat.alfa-tech.net/upload/settings/vhannibal/')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", "https://github.com/ciefp/ciefpsettings-enigma2-zipped")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", "http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", "http://www.manutek.it/isetting/index.php")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", "http://github.com/morpheus883/enigma2-zipped")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", "http://www.vhannibal.net/asd.php")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", "http://sat.alfa-tech.net/upload/settings/vhannibal/")
 
 		self.names = menu_list
 		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
 		self["frame"] = MovingPixmap()
-		self['info'] = Label()
-		self['info'].setText(_('Please Wait...'))
-		self['sort'] = Label(_('Sort A-Z'))
-		self['key_red'] = Label(_('Exit'))
+		self["info"] = Label()
+		self["info"].setText(_("Please Wait..."))
+		self["sort"] = Label(_("Sort A-Z"))
+		self["key_red"] = Label(_("Exit"))
 		self["pixmap"] = Pixmap()
 		self["actions"] = ActionMap(
 			[
@@ -988,7 +967,7 @@ class LSChannel(Screen):
 				"MenuActions",
 				"DirectionActions",
 				"NumberActions",
-				'ColorActions',
+				"ColorActions",
 				"EPGSelectActions",
 				"InfoActions"
 			],
@@ -1031,13 +1010,13 @@ class LSChannel(Screen):
 				self.index = self.minentry
 			self.idx = self.index
 			name = self.names[self.idx]
-			self['info'].setText(str(name))
+			self["info"].setText(str(name))
 			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
 			ipos = self.pos[ifr]
 			self["frame"].moveTo(ipos[0], ipos[1], 1)
 			self["frame"].startMoving()
 		except Exception as e:
-			print('Error in paintFrame: ', e)
+			print("Error in paintFrame: ", e)
 
 	def openTest(self):
 		if self.ipage < self.npage:
@@ -1146,18 +1125,18 @@ class LSChannel(Screen):
 			self.okbuttonClick()
 
 	def list_sort(self):
-		if not hasattr(self, 'original_data'):
+		if not hasattr(self, "original_data"):
 			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
 			self.sorted = False
 
 		if self.sorted:
 			self.names, self.titles, self.pics, self.urls = self.original_data
 			self.sorted = False
-			self['sort'].setText(_('Sort A-Z'))
+			self["sort"].setText(_("Sort A-Z"))
 		else:
 			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
 			self.sorted = True
-			self['sort'].setText(_('Sort Default'))
+			self["sort"].setText(_("Sort Default"))
 
 		self.openTest()
 
@@ -1179,7 +1158,7 @@ class LSChannel(Screen):
 			return
 		name = self.names[self.idx]
 		url = self.urls[self.idx]
-		self.session.open(addInstall, url, name, '')
+		self.session.open(addInstall, url, name, "")
 
 
 class ScriptInstaller(Screen):
@@ -1188,13 +1167,13 @@ class ScriptInstaller(Screen):
 		Screen.__init__(self, session)
 		global descplug, currversion
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'LinuxsatPanel.xml')
+		skin = join(skin_path, "LinuxsatPanel.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			self.skin = f.read()
 
@@ -1271,22 +1250,22 @@ class ScriptInstaller(Screen):
 			menu_list.append("Lcn Scanner")
 			self.titles.append("Search Scanner Lcn channels ")
 			self.pics.append(picfold + "LcnSearch.png")
-			self.urls.append('')
+			self.urls.append("")
 
 		menu_list.append("Check Skin Conponent")
 		self.titles.append("Search Skin Conponent Image Necessary ")
 		self.pics.append(picfold + "CheckSkin.png")
-		self.urls.append('')
+		self.urls.append("")
 
 		menu_list.append("Send Cline -> CCcam.cfg")
 		self.titles.append("Send CCcline CCcam ")
 		self.pics.append(picfold + "cccamfreee.png")
-		self.urls.append('')
+		self.urls.append("")
 
 		menu_list.append("Send Cline -> oscam.server")
 		self.titles.append("Send CCcline Oscam ")
 		self.pics.append(picfold + "oscamfree.png")
-		self.urls.append('')
+		self.urls.append("")
 
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
@@ -1298,10 +1277,10 @@ class ScriptInstaller(Screen):
 		self.sorted = False
 		# self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
 		self["frame"] = MovingPixmap()
-		self['info'] = Label()
-		self['info'].setText(_('Please Wait...'))
-		self['sort'] = Label(_('Sort A-Z'))
-		self['key_red'] = Label(_('Exit'))
+		self["info"] = Label()
+		self["info"].setText(_("Please Wait..."))
+		self["sort"] = Label(_("Sort A-Z"))
+		self["key_red"] = Label(_("Exit"))
 		self["pixmap"] = Pixmap()
 		self["actions"] = ActionMap(
 			[
@@ -1309,7 +1288,7 @@ class ScriptInstaller(Screen):
 				"MenuActions",
 				"DirectionActions",
 				"NumberActions",
-				'ColorActions',
+				"ColorActions",
 				"EPGSelectActions",
 				"InfoActions"
 			],
@@ -1349,7 +1328,7 @@ class ScriptInstaller(Screen):
 		if answer is None:
 			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
 		else:
-			print('Starting LCN scan...')
+			print("Starting LCN scan...")
 			try:
 				from .LCNScanner.Terrestrial import PluginSetup
 				self.session.open(PluginSetup)
@@ -1360,7 +1339,7 @@ class ScriptInstaller(Screen):
 		if answer is None:
 			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
 		else:
-			print('Starting LCN scan...')
+			print("Starting LCN scan...")
 			try:
 				lcn_scanner_instance = LCNScanner()
 				LCN = lcn_scanner_instance.lcnScan()
@@ -1374,7 +1353,7 @@ class ScriptInstaller(Screen):
 				print("Exception during LCN scan:", e)
 
 			try:
-				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'), MessageBox.TYPE_INFO, timeout=5)
+				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _("[LCNScanner] LCN scan finished\nChannels Ordered!"), MessageBox.TYPE_INFO, timeout=5)
 			except RuntimeError as re:
 				print("RuntimeError during MessageBox display:", re)
 
@@ -1394,16 +1373,13 @@ class ScriptInstaller(Screen):
 			from .addons import checkskin
 			self.check_module = eTimer()
 			check = checkskin.check_module_skin()
-			try:
-				self.check_module_conn = self.check_module.timeout.connect(check)
-			except:
-				self.check_module.callback.append(check)
+			self.check_module = setup_timer(check)
 			self.check_module.start(100, True)
 			self.openVi()
 
-	def openVi(self, callback=''):
+	def openVi(self, callback=""):
 		from .addons.File_Commander import File_Commander
-		user_log = '/tmp/my_debug.log'
+		user_log = "/tmp/my_debug.log"
 		if fileExists(user_log):
 			self.session.open(File_Commander, user_log)
 
@@ -1414,13 +1390,13 @@ class ScriptInstaller(Screen):
 				self.index = self.minentry
 			self.idx = self.index
 			name = self.names[self.idx]
-			self['info'].setText(str(name))
+			self["info"].setText(str(name))
 			ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
 			ipos = self.pos[ifr]
 			self["frame"].moveTo(ipos[0], ipos[1], 1)
 			self["frame"].startMoving()
 		except Exception as e:
-			print('Error in paintFrame: ', e)
+			print("Error in paintFrame: ", e)
 
 	def openTest(self):
 		if self.ipage < self.npage:
@@ -1529,18 +1505,18 @@ class ScriptInstaller(Screen):
 			self.okbuttonClick()
 
 	def list_sort(self):
-		if not hasattr(self, 'original_data'):
+		if not hasattr(self, "original_data"):
 			self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
 			self.sorted = False
 
 		if self.sorted:
 			self.names, self.titles, self.pics, self.urls = self.original_data
 			self.sorted = False
-			self['sort'].setText(_('Sort A-Z'))
+			self["sort"].setText(_("Sort A-Z"))
 		else:
 			self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
 			self.sorted = True
-			self['sort'].setText(_('Sort Default'))
+			self["sort"].setText(_("Sort Default"))
 
 		self.openTest()
 
@@ -1558,27 +1534,27 @@ class ScriptInstaller(Screen):
 
 	def okbuttonClick(self):
 		idx = self.index
-		print('[okbuttonClick] idx', idx)
+		print("[okbuttonClick] idx", idx)
 		if idx is None:
 			return
 		self.namev = self.names[idx]
 		self.url = self.urls[idx]
-		print('[okbuttonClick] self.namev', self.namev)
-		print('[okbuttonClick] self.url', self.url)
+		print("[okbuttonClick] self.namev", self.namev)
+		print("[okbuttonClick] self.url", self.url)
 
-		if 'cccam.cfg' in self.namev.lower():
+		if "cccam.cfg" in self.namev.lower():
 			self.askForFcl()
 			return
 
-		if 'oscam.serv' in self.namev.lower():
-			self.getcl('Oscam')
+		if "oscam.serv" in self.namev.lower():
+			self.getcl("Oscam")
 			return
 
-		if 'lcn scanner' in self.namev.lower():
+		if "lcn scanner" in self.namev.lower():
 			self.Lcn()
 			return
 
-		if 'check skin conponent' in self.namev.lower():
+		if "check skin conponent" in self.namev.lower():
 			self.Checkskin()
 			return
 
@@ -1588,14 +1564,14 @@ class ScriptInstaller(Screen):
 	def okClicked(self, answer=False):
 		if answer:
 			title = (_("Executing %s\nPlease Wait...") % self.namev)
-			keywords = ['google', 'cloudfaire', 'quad9', 'emm', 'keys', 'source']
+			keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
 			lower_namev = self.namev.lower()
 			keyword_found = any(keyword in lower_namev for keyword in keywords)
 			if keyword_found:
-				cmd = str(self.url) + ' > /tmp/my_debug.log 2>&1'
+				cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
 				self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
 			else:
-				cmd = str(self.url) + ' > /tmp/my_debug.log 2>&1'
+				cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
 				self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
 		else:
 			return
@@ -1611,7 +1587,7 @@ class ScriptInstaller(Screen):
 				import requests
 				response = requests.get(url)
 				response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
-				with open(script_path, 'w') as file:
+				with open(script_path, "w") as file:
 					file.write(response.text)
 				chmod(script_path, 0o777)
 			except Exception as e:
@@ -1620,78 +1596,78 @@ class ScriptInstaller(Screen):
 			self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
 
 	def getcl(self, config_type):
-		if config_type == 'CCcam':
-			dest = '/etc/CCcam.cfg'
-			src = plugin_path + '/sh/CCcam.cfg'
-			not_found_msg = _('File not found /etc/CCcam.cfg!\nRestart please...')
-			write_format = '\nC: {} {} {} {}\n'
+		if config_type == "CCcam":
+			dest = "/etc/CCcam.cfg"
+			src = plugin_path + "/sh/CCcam.cfg"
+			not_found_msg = _("File not found /etc/CCcam.cfg!\nRestart please...")
+			write_format = "\nC: {} {} {} {}\n"
 
-		elif config_type == 'Oscam':
-			dest_dir = '/etc/tuxbox/config'
+		elif config_type == "Oscam":
+			dest_dir = "/etc/tuxbox/config"
 			if not exists(dest_dir):
 				makedirs(dest_dir)
-			dest = join(dest_dir, 'oscam.server')
-			src = plugin_path + '/sh/oscam.server'
-			not_found_msg = _('File not found /etc/tuxbox/config/oscam.server!\nRestart please...')
+			dest = join(dest_dir, "oscam.server")
+			src = plugin_path + "/sh/oscam.server"
+			not_found_msg = _("File not found /etc/tuxbox/config/oscam.server!\nRestart please...")
 			write_format = (
-				'\n[reader]\n'
-				'label = Server_{}\n'  # host
-				'enable= 1\n'
-				'protocol = cccam\n'
-				'device = {}, {}\n'  # host, port
-				'user = {}\n'  # user
-				'password = {}\n'  # password
-				'inactivitytimeout = 30\n'
-				'group = 1\n'
-				'cccversion = 2.1.2\n'
-				'cccmaxhops = 1\n'
-				'ccckeepalive = 1\n'
-				'audisabled = 1\n\n'
+				"\n[reader]\n"
+				"label = Server_{}\n"  # host
+				"enable= 1\n"
+				"protocol = cccam\n"
+				"device = {}, {}\n"  # host, port
+				"user = {}\n"  # user
+				"password = {}\n"  # password
+				"inactivitytimeout = 30\n"
+				"group = 1\n"
+				"cccversion = 2.1.2\n"
+				"cccmaxhops = 1\n"
+				"ccckeepalive = 1\n"
+				"audisabled = 1\n\n"
 			)
 		else:
-			print('unknow actions')
+			print("unknow actions")
 			return
 
 		if not exists(dest):
-			shutil.copy2(src, dest)
+			copy2(src, dest)
 			self.session.open(MessageBox, not_found_msg, type=MessageBox.TYPE_INFO, timeout=8)
 			return
 
 		try:
 			dat = RequestUrl()
-			print('Request Server url is:', dat)
+			print("Request Server url is:", dat)
 			data = make_request(dat)
 
 			if PY3:
 				data = six.ensure_str(data)
 
-			if 'bosscccam' in data:  # ok
-				print('bosscccam pattern')
+			if "bosscccam" in data:  # ok
+				print("bosscccam pattern")
 				regex_patterns = [
 					r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>",
 				]
-			elif 'cccambird' in data:  # ok
-				print('cccambird pattern')
+			elif "cccambird" in data:  # ok
+				print("cccambird pattern")
 				regex_patterns = [
 					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
 				]
-			elif 'cccamia' in data:  # ok
-				print('cccamia pattern')
+			elif "cccamia" in data:  # ok
+				print("cccamia pattern")
 				regex_patterns = [
 					r'>?C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*',
 				]
-			elif 'cccam.net' in data:  # ok
-				print('cccam.net pattern')
+			elif "cccam.net" in data:  # ok
+				print("cccam.net pattern")
 				regex_patterns = [
 					r'b>C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)',
 				]
-			elif 'iptv-15days' in data:  # ok cccamia
-				print('15days pattern')
+			elif "iptv-15days" in data:  # ok cccamia
+				print("15days pattern")
 				regex_patterns = [
 					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
 				]
 			else:
-				print('generic pattern')
+				print("generic pattern")
 				regex_patterns = [
 					r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</h3>',
 					r'<strong>c:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</strong',
@@ -1711,27 +1687,26 @@ class ScriptInstaller(Screen):
 					user = url1.group(3)
 					pas = url1.group(4)
 
-				pas = pas.replace('</h1>', '').replace('</b>', '')
-				pasw = pas.replace('</div>', '').replace('</span>', '')
-
+				pas = pas.replace("</h1>", "").replace("</b>", "")
+				pasw = pas.replace("</div>", "").replace("</span>", "")
 				host = str(host) if host is not None else ""
 				port = str(port) if port is not None else ""
 				user = str(user) if user is not None else ""
 				pasw = str(pasw) if pasw is not None else ""
 
-				if config_type == 'CCcam':
-					print('write cccam file')
-					with open(dest, 'a') as cfgdok:
+				if config_type == "CCcam":
+					print("write cccam file")
+					with open(dest, "a") as cfgdok:
 						cfgdok.write(write_format.format(host, port, user, pasw))
 
-				if config_type == 'Oscam':
-					print('write Oscam file')
-					with open(dest, 'a') as cfgdok:
+				if config_type == "Oscam":
+					print("write Oscam file")
+					with open(dest, "a") as cfgdok:
 						cfgdok.write(write_format.format(host, host, port, user, pasw))
 
-				text = _('Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n') % (host, dest, host, port, user, pasw)
+				text = _("Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n") % (host, dest, host, port, user, pasw)
 				if not PY3:
-					text = text.encode('utf-8')
+					text = text.encode("utf-8")
 				self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
 		except Exception as e:
 			self.session.open(
@@ -1748,13 +1723,13 @@ class addInstall(Screen):
 		Screen.__init__(self, session)
 		global descplug, currversion
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'addInstall.xml')
+		skin = join(skin_path, "addInstall.xml")
 		'''
 		if has_dpkg:
 			skin = join(skin_path, 'addInstall-os.xml')  # now i have ctrlSkin for check
@@ -1762,21 +1737,21 @@ class addInstall(Screen):
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			skin = f.read()
 
-		self.skin = ctrlSkin('addInstall', skin)
+		self.skin = ctrlSkin("addInstall", skin)
 
 		self.fxml = str(data)
 		self.name = name
 		self.dest = dest
-		self['key_red'] = Label(_('Exit'))
-		self['key_green'] = Label(_('Install'))
-		self['key_yellow'] = Label(_('Remove'))
-		self['key_blue'] = Label(_('Restart enigma'))
-		self['sort'] = Label(_('Reload'))
+		self["key_red"] = Label(_("Exit"))
+		self["key_green"] = Label(_("Install"))
+		self["key_yellow"] = Label(_("Remove"))
+		self["key_blue"] = Label(_("Restart enigma"))
+		self["sort"] = Label(_("Reload"))
 		"""
 		if HALIGN == RT_HALIGN_RIGHT:
-			self['sort'].setText(_('Halign Left'))
+			self["sort"].setText(_("Halign Left"))
 		else:
-			self['sort'].setText(_('Halign Right'))
+			self["sort"].setText(_("Halign Right"))
 		"""
 		'''
 		self.LcnOn = False
@@ -1788,38 +1763,32 @@ class addInstall(Screen):
 
 		self.list = []
 		self["list"] = LPSlist([])
-		self['fspace'] = Label()
-		self['fspace'].setText(_('Please Wait...'))
-		self['info'] = Label()
-		self['info'].setText(_('Load Category...'))
+		self["fspace"] = Label()
+		self["fspace"].setText(_("Please Wait..."))
+		self["info"] = Label()
+		self["info"].setText(_("Load Category..."))
 		self.downloading = False
-		self['actions'] = ActionMap(
+		self["actions"] = ActionMap(
 			[
-				'SetupActions',
-				'ColorActions',
-				'NumberActions'
+				"SetupActions",
+				"ColorActions",
+				"NumberActions"
 			],
 			{
-				'ok': self.message,
-				'0': self.arabicx,
-				'5': self.Lcn,
-				'6': self.LcnXX,
-				'green': self.message,
-				'cancel': self.exitnow,
-				'red': self.exitnow,
-				'blue': self.restart,
-				'yellow': self.remove
+				"ok": self.message,
+				"0": self.arabicx,
+				"5": self.Lcn,
+				"6": self.LcnXX,
+				"green": self.message,
+				"cancel": self.exitnow,
+				"red": self.exitnow,
+				"blue": self.restart,
+				"yellow": self.remove
 			},
 			-2
 		)
-		self.timer = eTimer()
-		try:
-			self.timer.callback.append(self.getfreespace)
-
-		except:
-			self.timer_conn = self.timer.timeout.connect(self.getfreespace)
+		self.timer = setup_timer(self.getfreespace)
 		self.timer.start(1000, 1)
-
 		if self.dest is not None:
 			self.onLayoutFinish.append(self.downxmlpage)
 		else:
@@ -1830,10 +1799,10 @@ class addInstall(Screen):
 		global HALIGN
 		if HALIGN == RT_HALIGN_LEFT:
 			HALIGN = RT_HALIGN_RIGHT
-			self['sort'].setText(_('Halign Left'))
+			self["sort"].setText(_("Halign Left"))
 		elif HALIGN == RT_HALIGN_RIGHT:
 			HALIGN = RT_HALIGN_LEFT
-			self['sort'].setText(_('Halign Right'))
+			self["sort"].setText(_("Halign Right"))
 		"""
 		if self.dest is not None:
 			self.downxmlpage()
@@ -1842,14 +1811,14 @@ class addInstall(Screen):
 
 	def getfreespace(self):
 		try:
-			self['info'].setText(_('Category: ') + self.name)
+			self["info"].setText(_("Category: ") + self.name)
 			fspace = freespace()
-			self['fspace'].setText(str(fspace))
+			self["fspace"].setText(str(fspace))
 		except Exception as e:
 			print(e)
 
 	def openTest(self):
-		# print('self.xml: ', self.fxml)
+		# print("self.xml: ", self.fxml)
 		regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
 		match = compile(regex, DOTALL).findall(self.fxml)
 		self.names = []
@@ -1860,8 +1829,8 @@ class addInstall(Screen):
 			items.append(item)
 		items.sort()
 		for item in items:
-			name = item.split('###')[0]
-			url = item.split('###')[1]
+			name = item.split("###")[0]
+			url = item.split("###")[1]
 
 			self.names.append(name)
 			self.urls.append(url)
@@ -1871,84 +1840,138 @@ class addInstall(Screen):
 	def buttons(self):
 		"""
 		if HALIGN == RT_HALIGN_RIGHT:
-			self['sort'].setText(_('Halign Left'))
+			self["sort"].setText(_("Halign Left"))
 		else:
-			self['sort'].setText(_('Halign Right'))
+			self["sort"].setText(_("Halign Right"))
 
 		# if self.LcnOn is True:
 		# # self.LcnOn = False
-		# # if exists('/etc/enigma2/lcndb') and lngx == 'it':
-			# self['key_yellow'].setText('Lcn')
+		# # if exists("/etc/enigma2/lcndb") and lngx == "it":
+			# self["key_yellow"].setText("Lcn")
 			# # self.LcnOn = True
-			# print('LcnOn 2 = True')
+			# print("LcnOn 2 = True")
 		# else:
-			# self['key_yellow'].setText(_('Remove'))
+			# self["key_yellow"].setText(_("Remove"))
 		"""
 		return
 
 	def message(self):
 		if self.dest is not None:
-			print('go okRun')
+			print("go okRun")
 			self.okRun()
-		else:
-			idx = self["list"].getSelectionIndex()
-			self.url = self.urls[idx]
-			n1 = self.url.rfind("/")
-			self.plug = self.url[(n1 + 1):]
-			self.iname = ''
+			return
+
+		idx = self["list"].getSelectionIndex()
+		self.url = self.urls[idx]
+		n1 = self.url.rfind("/")
+		self.plug = self.url[(n1 + 1):]
+		self.iname = ""
+
+		if ".deb" in self.plug:
+			if not has_dpkg:
+				self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+				return
+			self.iname = self.plug.split("_")[0]
+
+		elif ".ipk" in self.plug:
+			if has_dpkg:
+				self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+				return
+
+			self.iname = self.plug.split("_")[0] if "_" in self.plug else self.plug
+
+		elif ".zip" in self.plug or ".tar" in self.plug or ".gz" in self.plug or ".bz2" in self.plug:
+			self.iname = self.plug
+
+		path = "/var/lib/dpkg/info" if exists("/var/lib/dpkg/info") else "/var/lib/opkg/info"
+		resp = "Is NOT installed.\n"
+		self.plug_name = self.plug.split("_")[0].lower()
+
+		for root, dirs, files in walk(path):
+			if files is not None:
+				for name in files:
+					name = name.lower()
+					if name.endswith((".postinst", ".preinst", ".prerm", ".postrm", ".md5sums", ".conffiles", "~")):
+						continue
+					if exists("/var/lib/dpkg/info"):
+						if name.endswith(".list"):
+							name = name.replace(".list", "")
+					else:
+						if name.endswith(".control"):
+							name = name.replace(".control", "")
+						if name.endswith(".list"):
+							continue
+
+					print("name url=", self.plug_name, self.url)
+					if name.startswith(self.plug_name):
+						resp = "Is ALREADY installed.\n"
+						break
+
+		self.session.openWithCallback(
+			lambda result: self.okClicked(result, self.plug_name, self.url),
+			MessageBox,
+			self.plug_name + "\n\n" + resp + "\nDo you want to Install, Remove, or Cancel?",
+			MessageBox.TYPE_YESNO,
+			default=False,
+			simple=True,
+			list=[("Install", "install"), ("Remove", "uninstall"), ("Cancel", "cancel")]
+		)
+
+	def okClicked(self, choice, name, url):
+		n2 = self.plug.find("_")
+		iname = self.plug[:n2] if n2 != -1 else self.plug
+		if choice == "install":
+			folddest = "/tmp/" + self.plug
+			if self.retfile(folddest):
+				command = ""
+				if ".deb" in self.plug:
+					command = "dpkg -i '/tmp/" + self.plug + "'"
+				elif ".ipk" in self.plug:
+					command = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
+				elif ".zip" in self.plug:
+					command = "unzip -o -q '/tmp/" + self.plug + "' -d /"
+				elif ".tar" in self.plug:
+					command = "tar -xvf '/tmp/" + self.plug + "' -C /"
+				elif ".gz" in self.plug:
+					command = "tar -xzvf '/tmp/" + self.plug + "' -C /"
+				elif ".bz2" in self.plug:
+					command = "tar -xjvf '/tmp/" + self.plug + "' -C /"
+				else:
+					return
+				self.session.open(lsConsole, "Installing Extension", [command], closeOnSuccess=False)
+
+		elif choice == "uninstall":
 			if ".deb" in self.plug:
 				if not has_dpkg:
-					self.session.open(MessageBox, _('Unknow Image!'), MessageBox.TYPE_INFO, timeout=5)
+					self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
 					return
-				n2 = self.plug.find("_", 0)
-				self.iname = self.plug[:n2]
+				command = "dpkg -r " + iname.lower()
 
-			if ".ipk" in self.plug:
+			elif ".ipk" in self.plug:
 				if has_dpkg:
-					self.session.open(MessageBox, _('Unknow Image!'), MessageBox.TYPE_INFO, timeout=5)
+					self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
 					return
-				n2 = self.plug.find("_", 0)
-				self.iname = self.plug[:n2]
-			elif ".zip" in self.plug:
-				self.iname = self.plug
-			elif ".tar" in self.plug or ".gz" in self.plug or "bz2" in self.plug:
-				self.iname = self.plug
+				command = "opkg remove --force-depends " + iname.lower()
 
-			self.session.openWithCallback(self.okClicked, MessageBox, _("Do you want to install %s?") % self.iname, MessageBox.TYPE_YESNO)
+			else:
+				return
+
+			self.session.open(lsConsole, "Execution Command", [command], closeOnSuccess=False)
+
+		else:
+			self.session.open(MessageBox, "Action Aborted.", MessageBox.TYPE_INFO, timeout=4)
 
 	def retfile(self, dest):
 		import requests
 		response = requests.get(self.url)
 		if response.status_code == 200:
-			with open(dest, 'wb') as f:
+			with open(dest, "wb") as f:
 				f.write(response.content)
 			print("File downloaded successfully.")
 			return True
 		else:
 			print("Error downloading the file.")
 		return False
-
-	def okClicked(self, answer=False):
-		if answer:
-			dest = "/tmp"
-			if not exists(dest):
-				system('ln -sf  /var/volatile/tmp /tmp')
-			folddest = '/tmp/' + self.plug
-			if self.retfile(folddest):
-				cmd2 = ''
-				if ".deb" in self.plug:
-					cmd2 = "dpkg -i /tmp/" + self.plug  # + "'"
-				if ".ipk" in self.plug:
-					cmd2 = "opkg install --force-reinstall --force-overwrite '/tmp/" + self.plug + "'"
-				elif ".zip" in self.plug:
-					cmd2 = "unzip -o -q '/tmp/" + self.plug + "' -d /"
-				elif ".tar" in self.plug and "gz" in self.plug:
-					cmd2 = "tar -xvf '/tmp/" + self.plug + "' -C /"
-				elif ".bz2" in self.plug and "gz" in self.plug:
-					cmd2 = "tar -xjvf '/tmp/" + self.plug + "' -C /"
-				# print('cmd:', cmd)
-				title = (_("Installing %s\nPlease Wait...") % self.iname)
-				self.session.open(lsConsole, _(title), cmdlist=[cmd2], closeOnSuccess=False)
 
 	def downxmlpage(self):
 		self.downloading = False
@@ -1959,113 +1982,107 @@ class addInstall(Screen):
 		self.names = []
 		self.urls = []
 		items = []
-		name = url = date = ''
+		name = url = date = ""
 		try:
-			if 'ciefp' in self.name.lower():
+			if "ciefp" in self.name.lower():
 				n1 = r.find('title="README.txt', 0)
 				n2 = r.find('href="#readme">', n1)
 				r = r[n1:n2]
 				regex = r'title="ciefp-E2-(.*?).zip".*?href="(.*?)"'
 				match = compile(regex).findall(r)
 				for name, url in match:
-					if url.find('.zip') != -1:
-						url = url.replace('blob', 'raw')
-						url = 'https://github.com' + url
+					if url.find(".zip") != -1:
+						url = url.replace("blob", "raw")
+						url = "https://github.com" + url
 						name = decode_html(name)
 						self.downloading = True
 					item = name + "###" + str(url)
 					items.append(item)
-					# items.sort()
 
-			if 'cyrus' in self.name.lower():
+			if "cyrus" in self.name.lower():
 				n1 = r.find('name="Sat">', 0)
 				n2 = r.find("/ruleset>", n1)
 				r = r[n1:n2]
 				regex = r'Name="(.*?)".*?Link="(.*?)".*?Date="(.*?)"><'
 				match = compile(regex).findall(r)
 				for name, url, date in match:
-					if url.find('.zip') != -1:
-						if 'ddt' in name.lower():
+					if url.find(".zip") != -1:
+						if "ddt" in name.lower():
 							continue
-						if 'Sat' in name.lower():
+						if "Sat" in name.lower():
 							continue
-						name = decode_html(name) + ' ' + date
+						name = decode_html(name) + " " + date
 						self.downloading = True
 					item = name + "###" + str(url)
 					items.append(item)
-					# items.sort()
 
-			if 'manutek' in self.name.lower():
+			if "manutek" in self.name.lower():
 				regex = r'href="/isetting/.*?file=(.+?).zip">'
 				match = compile(regex).findall(r)
 				for url in match:
 					name = url
 					name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
-					url = 'http://www.manutek.it/isetting/enigma2/' + url + '.zip'
+					url = "http://www.manutek.it/isetting/enigma2/" + url + ".zip"
 					self.downloading = True
 					item = decode_html(name) + "###" + str(url)
 					items.append(item)
-					# items.sort()
 
-			if 'morpheus' in self.name.lower():
+			if "morpheus" in self.name.lower():
 				regex = r'title="E2_Morph883_(.*?).zip".*?href="(.*?)"'
-				# n1 = r.find('title="README.txt', 0)
-				# n2 = r.find('href="#readme">', n1)
-				# r = r[n1:n2]
 				match = compile(regex).findall(r)
 				for name, url in match:
-					if url.find('.zip') != -1:
-						name = 'Morph883 ' + decode_html(name)
-						url = url.replace('blob', 'raw')
-						url = 'https://github.com' + url
+					if url.find(".zip") != -1:
+						name = "Morph883 " + decode_html(name)
+						url = url.replace("blob", "raw")
+						url = "https://github.com" + url
 						self.downloading = True
 					item = name + "###" + str(url)
 					items.append(item)
-					# items.sort()
 
-			if 'vhannibal net' in self.name.lower():
+			if "vhannibal net" in self.name.lower():
 				pattern = compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
 				matches = pattern.findall(r)
 				for match in matches:
 					url = match[0]
 					name = match[1]
 					if isinstance(name, bytes):
-						name = name.decode('utf-8', errors='replace')
+						name = name.decode("utf-8", errors="replace")
 					name = decode_html(match[1])
 					date = match[2]
-					name = str(name).replace('&#127381;', '').replace("%20", " ").replace("..", "").strip() + ' ' + date
+					name = str(name).replace("&#127381;", "").replace("%20", " ").replace("..", "").strip() + " " + date
 					url = "https://www.vhannibal.net/" + url
 					self.downloading = True
 					item = name + "###" + str(url)
 					items.append(item)
-					# items.sort()
 
-			if 'vhannibal tek' in self.name.lower():
+			if "vhannibal tek" in self.name.lower():
 				regex = r'<a href="Vhannibal(.*?).zip".*?right">(.*?) </td'
 				match = compile(regex).findall(r)
 				for url, date in match:
-					if '.php' in url.lower():
+					if ".php" in url.lower():
 						continue
-					name = decode_html(url).replace('&#127381;', '').replace("%20", " ") + ' ' + date
-					url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + '.zip'
+					name = decode_html(url).replace("&#127381;", "").replace("%20", " ") + " " + date
+					url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + ".zip"
 					self.downloading = True
 					item = name + "###" + str(url)
 					items.append(item)
-					# items.sort()
+
 			items.sort()
 			for item in items:
-				name = item.split('###')[0]
-				url = item.split('###')[1]
+				name = item.split("###")[0]
+				url = item.split("###")[1]
 				if name in self.names:
 					continue
 				name = str(decode_html(name))
 				url = str(url)
 				self.names.append(name.strip())
 				self.urls.append(url.strip())
+
 			LPshowlist(self.names, self["list"])
+
 		except Exception as e:
-			print('downxmlpage get failed: ', str(e))
-			self['info'].setText(_('Download page get failed ...'))
+			print("downxmlpage get failed: ", str(e))
+			self["info"].setText(_("Download page get failed ..."))
 
 	def Lcn(self, answer=None):
 		if answer is None:
@@ -2076,7 +2093,7 @@ class addInstall(Screen):
 				MessageBox.TYPE_YESNO
 			)
 		else:
-			print('Starting LCN scan...')
+			print("Starting LCN scan...")
 			try:
 				from .LCNScanner.Terrestrial import PluginSetup
 				self.session.open(PluginSetup)
@@ -2087,7 +2104,7 @@ class addInstall(Screen):
 		if answer is None:
 			self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
 		else:
-			print('Starting LCN scan...')
+			print("Starting LCN scan...")
 			try:
 				lcn_scanner_instance = LCNScanner()
 				LCN = lcn_scanner_instance.lcnScan()
@@ -2101,7 +2118,7 @@ class addInstall(Screen):
 				print("Exception during LCN scan:", e)
 
 			try:
-				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _('[LCNScanner] LCN scan finished\nChannels Ordered!'), MessageBox.TYPE_INFO, timeout=5)
+				self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _("[LCNScanner] LCN scan finished\nChannels Ordered!"), MessageBox.TYPE_INFO, timeout=5)
 			except RuntimeError as re:
 				print("RuntimeError during MessageBox display:", re)
 
@@ -2118,45 +2135,45 @@ class addInstall(Screen):
 			if self.downloading is True:
 				idx = self["list"].getSelectionIndex()
 				url = self.urls[idx]
-				self.namel = ''
-				if 'dtt' not in url.lower():
+				self.namel = ""
+				if "dtt" not in url.lower():
 					setx = 1
 					terrestrial()
 				if keepiptv():
-					print('-----save iptv channels-----')
+					print("-----save iptv channels-----")
 
 				from six.moves.urllib.request import urlretrieve
 				urlretrieve(url, dest)
-				if exists(dest) and '.zip' in dest:
+				if exists(dest) and ".zip" in dest:
 					fdest1 = "/tmp/unzipped"
 					fdest2 = "/etc/enigma2"
 					if exists("/tmp/unzipped"):
-						system('rm -rf /tmp/unzipped')
-					makedirs('/tmp/unzipped')
+						system("rm -rf /tmp/unzipped")
+					makedirs("/tmp/unzipped")
 					cmd2 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
 					system(cmd2)
 					for root, dirs, files in walk(fdest1):
 						for name in dirs:
 							self.namel = name
-					system('rm -rf /etc/enigma2/lamedb')
-					system('rm -rf /etc/enigma2/*.radio')
-					system('rm -rf /etc/enigma2/*.tv')
-					system('rm -rf /etc/enigma2/*.del')
+					system("rm -rf /etc/enigma2/lamedb")
+					system("rm -rf /etc/enigma2/*.radio")
+					system("rm -rf /etc/enigma2/*.tv")
+					system("rm -rf /etc/enigma2/*.del")
 					system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
 					system("rm -rf /tmp/unzipped")
 					system("rm -rf /tmp/settings.zip")
 					title = (_("Installing %s\nPlease Wait...") % self.name)
 					self.session.openWithCallback(self.yes, lsConsole, title=_(title), cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"], closeOnSuccess=False)
 			else:
-				self['info'].setText(_('Settings Not Installed ...'))
+				self["info"].setText(_("Settings Not Installed ..."))
 
 	def pas(self, call=None):
 		pass
 
 	def yes(self, call=None):
-		print('^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^')
+		print("^^^^^^^^^^^^^^ add file to bouquet ^^^^^^^^^^^^^^")
 		copy_files_to_enigma2()
-		print('^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^')
+		print("^^^^^^^^^^^^^^^ reloads bouquets ^^^^^^^^^^^^^^^")
 		ReloadBouquets(setx)
 
 	def remove(self):
@@ -2189,7 +2206,7 @@ class addInstall(Screen):
 			if not has_dpkg:
 				refreshPlugins()
 		except Exception as e:
-			print('error on exit!', e)
+			print("error on exit!", e)
 
 		self.close()
 
@@ -2200,13 +2217,13 @@ class LSinfo(Screen):
 		Screen.__init__(self, session)
 		global descplug, currversion
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'LSinfo.xml')
+		skin = join(skin_path, "LSinfo.xml")
 
 		'''
 		if has_dpkg:
@@ -2216,65 +2233,46 @@ class LSinfo(Screen):
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			skin = f.read()
 
-		self.skin = ctrlSkin('LSinfo', skin)
+		self.skin = ctrlSkin("LSinfo", skin)
 
 		self.name = name
-		info = _('Please Wait...')
-		self['list'] = ScrollLabel(info)
-		self['key_green'] = Label()
+		info = _("Please Wait...")
+		self["list"] = ScrollLabel(info)
+		self["key_green"] = Label()
 		self["pixmap"] = Pixmap()
 		self["pixmap"].hide()
-		self['actions'] = ActionMap(
+		self["actions"] = ActionMap(
 			[
-				'OkCancelActions',
-				'DirectionActions',
-				'HotkeyActions',
-				'InfobarEPGActions',
-				'ColorActions',
-				'ChannelSelectBaseActions'
+				"OkCancelActions",
+				"DirectionActions",
+				"HotkeyActions",
+				"InfobarEPGActions",
+				"ColorActions",
+				"ChannelSelectBaseActions"
 			],
 			{
-				'ok': self.close,
-				'back': self.close,
-				'cancel': self.close,
-				'up': self.Up,
-				'down': self.Down,
-				'left': self.Up,
-				'right': self.Down,
-				# 'yellow': self.update_me,
-				'green': self.update_me,
-				'yellow_long': self.update_dev,
-				'info_long': self.update_dev,
-				'infolong': self.update_dev,
-				'showEventInfoPlugin': self.update_dev,
-				'red': self.close
+				"ok": self.close,
+				"back": self.close,
+				"cancel": self.close,
+				"up": self.Up,
+				"down": self.Down,
+				"left": self.Up,
+				"right": self.Down,
+				# "yellow": self.update_me,
+				"green": self.update_me,
+				"yellow_long": self.update_dev,
+				"info_long": self.update_dev,
+				"infolong": self.update_dev,
+				"showEventInfoPlugin": self.update_dev,
+				"red": self.close
 			},
 			-1
 		)
 
 		self.Update = False
-
-		self.timerz = eTimer()
-		"""
-		# try:
-			# self.timerz.callback.append(self.check_vers)
-		# except:
-			# self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-		"""
-		if hasattr(self.timerz, "callback"):
-			self.timerz.callback.append(self.check_vers)
-		else:
-			if exists("/usr/bin/apt-get"):
-				self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-			print("[Version Check] ERROR: eTimer does not support callback.append()")
-
+		self.timerz = setup_timer(self.check_vers)
 		self.timerz.start(200, 1)
-
-		self.timer = eTimer()
-		try:
-			self.timer.callback.append(self.startRun)
-		except:
-			self.timer_conn = self.timer.timeout.connect(self.startRun)
+		self.timer = setup_timer(self.startRun)
 		self.timer.start(1000, 1)
 
 		self.onLayoutFinish.append(self.pas)
@@ -2283,64 +2281,22 @@ class LSinfo(Screen):
 		pass
 
 	def check_vers(self):
-		"""Controllo versione con gestione avanzata formato numerico"""
-		print('[Version Check] Starting...')
-		self.Update = False
-		self.remote_version = '0.0'
-		self.remote_changelog = 'No changelog available'
-
-		try:
-			decoded_url = base64.b64decode(installer_url).decode('utf-8')
-			if not decoded_url.startswith(('http://', 'https://')):
-				raise ValueError("Invalid URL protocol")
-
-			req = Request(
-				decoded_url,
-				headers={
-					'User-Agent': AgentRequest,
-					'Cache-Control': 'no-cache'
-				}
+		# Chiamata alla funzione separata
+		new_version, new_changelog, update_available = check_version(
+			currversion, installer_url, AgentRequest
+		)
+		if update_available:
+			print("A new version is available:", new_version)
+			self.session.open(
+				MessageBox,
+				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+				MessageBox.TYPE_INFO,
+				timeout=5
 			)
-
-			with urlopen(req, timeout=15) as response:
-				if response.getcode() != 200:
-					raise URLError("HTTP Status: %d" % response.getcode())
-
-				data = response.read().decode('utf-8')
-
-				if data:
-					lines = data.split("\n")
-					self.remote_version = '0.0'
-					self.remote_changelog = 'No changelog available'
-
-					for line in lines:
-						if line.startswith("version"):
-							parts = line.split("=")
-							if len(parts) > 1:
-								self.remote_version = parts[1].strip().strip("'")
-						if line.startswith("changelog"):
-							parts = line.split("=")
-							if len(parts) > 1:
-								self.remote_changelog = parts[1].strip().strip("'")
-								break
-
-					self.new_version = self.remote_version or "Unknown"
-					self.new_changelog = self.remote_changelog or "No changelog available"
-
-					if currversion < self.remote_version:
-						self.Update = True
-						print('New version online:', self.new_version)
-
-						self.mbox = self.session.open(
-							MessageBox,
-							_('New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.') % (self.new_version, self.new_changelog),
-							MessageBox.TYPE_INFO,
-							timeout=5
-						)
-						self['key_green'].setText(_('Update'))
-						self["pixmap"].show()
-		except Exception as e:
-			print("Error while checking version:", e)
+			self["key_green"].setText(_("Update"))
+			self["pixmap"].show()
+		else:
+			print("No new version available.")
 
 	def update_me(self):
 		if self.Update:
@@ -2363,45 +2319,43 @@ class LSinfo(Screen):
 			)
 
 	def update_dev(self):
-		req = Request(b64decoder(developer_url), headers={'User-Agent': AgentRequest})
+		req = Request(b64decoder(developer_url), headers={"User-Agent": AgentRequest})
 		page = urlopen(req).read()
-		data = json.loads(page)
-		remote_date = data['pushed_at']
-		strp_remote_date = datetime.strptime(remote_date, '%Y-%m-%dT%H:%M:%SZ')
-		remote_date = strp_remote_date.strftime('%Y-%m-%d')
+		data = loads(page)
+		remote_date = data["pushed_at"]
+		strp_remote_date = dt.strptime(remote_date, "%Y-%m-%dT%H:%M:%SZ")
+		remote_date = strp_remote_date.strftime("%Y-%m-%d")
 		self.session.openWithCallback(self.install_update, MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date), MessageBox.TYPE_YESNO)
 
 	def install_update(self, answer=False):
 		if answer:
-			self.session.open(lsConsole, 'Upgrading...', cmdlist=['wget -q --no-check-certificate ' + b64decoder(installer_url) + ' -O - | /bin/sh'], finishedCallback=self.myCallback, closeOnSuccess=False)
+			self.session.open(lsConsole, "Upgrading...", cmdlist=["wget -q --no-check-certificate " + b64decoder(installer_url) + " -O - | /bin/sh"], finishedCallback=self.myCallback, closeOnSuccess=False)
 		else:
 			self.session.open(MessageBox, _("Update Aborted!"), MessageBox.TYPE_INFO, timeout=3)
 
 	def myCallback(self, result=None):
-		print('result:', result)
+		print("result:", result)
 		return
 
 	def startRun(self):
 		try:
-			# print("self.name =", repr(self.name))  # Aggiungi questa linea per il debug
 			if self.name == " Information ":
 				print("Running openinfo method...")
 				self.openinfo()
 
 			elif self.name == " About ":
 				print("Opening LICENSE file...")
-				with open(join(plugin_path, 'LICENSE'), 'r', encoding='utf-8') as filer:
+				with open(join(plugin_path, "LICENSE"), "r", encoding="utf-8") as filer:
 					info = filer.read()
-					info = info.replace('\r', '')
+					info = info.replace("\r", "")
 					info = info.strip()
-					# print("Read LICENSE content successfully.")
-					self['list'].setText(info)
+					self["list"].setText(info)
 			else:
 				print("Unknown name value:", self.name)
 				return
 		except Exception as e:
 			print("Error in startRun: ", e)
-			self['list'].setText(_('Unable to download updates!'))
+			self["list"].setText(_("Unable to download updates!"))
 
 	def openinfo(self):
 		from .addons.stbinfo import stbinfo
@@ -2410,7 +2364,7 @@ class LSinfo(Screen):
 			header += "All code was rewritten by @Lululla - 2024.07.20\n"
 			header += "Designs and Graphics by @oktus\n"
 			header += "Support on: Linuxsat-support.com\n\n"
-			print('stbinfo initialized:', stbinfo)
+			print("stbinfo initialized:", stbinfo)
 			stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
 			base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
 				descplug,
@@ -2418,31 +2372,28 @@ class LSinfo(Screen):
 				header,
 				stbinfo_str
 			)
-
-			with open('/tmp/output.txt', 'w', encoding='utf-8') as file:
+			with open("/tmp/output.txt", "w", encoding="utf-8") as file:
 				file.write(base_content)
-
-			info_path = join(plugin_path, 'info.txt')
+			info_path = join(plugin_path, "info.txt")
 			if fileExists(info_path):
 				try:
-					with open(info_path, 'r', encoding='utf-8') as info_file:
-						with open('/tmp/output.txt', 'a', encoding='utf-8') as output_file:
+					with open(info_path, "r", encoding="utf-8") as info_file:
+						with open("/tmp/output.txt", "a", encoding="utf-8") as output_file:
 							output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
 				except Exception as e:
 					print("Error appending info.txt: {0}".format(str(e)))
 			else:
 				print("Info file not found: {0}".format(info_path))
-
 			try:
-				with open('/tmp/output.txt', 'r', encoding='utf-8') as filer:
-					self['list'].setText(filer.read())
+				with open("/tmp/output.txt", "r", encoding="utf-8") as filer:
+					self["list"].setText(filer.read())
 			except Exception as e:
 				print("Final read/display error: {0}".format(str(e)))
-				self['list'].setText("Error loading system information")
+				self["list"].setText("Error loading system information")
 
 		except Exception as e:
 			print("Error in openinfo:", e)
-			self['list'].setText("Error loading information")
+			self["list"].setText("Error loading information")
 
 	def cancel(self):
 		self.close()
@@ -2451,10 +2402,10 @@ class LSinfo(Screen):
 		self.close()
 
 	def Down(self):
-		self['list'].pageDown()
+		self["list"].pageDown()
 
 	def Up(self):
-		self['list'].pageUp()
+		self["list"].pageUp()
 
 
 class startLP(Screen):
@@ -2467,20 +2418,20 @@ class startLP(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
 
-		skin = join(skin_path, 'startLP.xml')
+		skin = join(skin_path, "startLP.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			self.skin = f.read()
-		# self.skin = ctrlSkin('startLP', skin)
+		# self.skin = ctrlSkin("startLP", skin)
 		self["poster"] = Pixmap()
-		self["version"] = Label('Wait Please... Linuxsat Panel V.' + currversion)
-		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.clsgo, 'cancel': self.clsgo}, -1)
+		self["version"] = Label("Wait Please... Linuxsat Panel V." + currversion)
+		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.clsgo, "cancel": self.clsgo}, -1)
 		self.onLayoutFinish.append(self.loadDefaultImage)
 
 	def clsgo(self):
@@ -2495,30 +2446,20 @@ class startLP(Screen):
 		self.close()
 
 	def loadDefaultImage(self):
-		self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format('LinuxsatPanel'))
-
-		self.timer = eTimer()
-		try:
-			self.timer.callback.append(self.decodeImage)
-		except:
-			self.timer_conn = self.timer.timeout.connect(self.decodeImage)
+		self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format("LinuxsatPanel"))
+		self.timer = setup_timer(self.decodeImage)
 		self.timer.start(100, True)
-
-		self.timerx = eTimer()
-		try:
-			self.timerx_conn = self.timerx.timeout.connect(self.clsgo)
-		except:
-			self.timerx.callback.append(self.clsgo)
+		self.timerx = setup_timer(self.clsgo)
 		self.timerx.start(2500, True)
 
 	def decodeImage(self):
 		pixmapx = self.fldpng
 		if fileExists(pixmapx):
-			size = self['poster'].instance.size()
+			size = self["poster"].instance.size()
 			if not self.picload:
 				self.picload = ePicLoad()
 			self.scale = AVSwitch().getFramebufferScale()
-			self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, '#00000000'])
+			self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, "#00000000"])
 			# _l = self.picload.PictureData.get()
 			# del self.picload
 			if has_dpkg:
@@ -2527,8 +2468,8 @@ class startLP(Screen):
 				self.picload.startDecode(pixmapx, 0, 0, False)
 			ptr = self.picload.getData()
 			if ptr is not None:
-				self['poster'].instance.setPixmap(ptr)
-				self['poster'].show()
+				self["poster"].instance.setPixmap(ptr)
+				self["poster"].show()
 		return
 
 
@@ -2540,29 +2481,29 @@ class AboutLSS(Screen):
 		first = False
 		Screen.__init__(self, session)
 		try:
-			Screen.setTitle(self, _('%s') % descplug + ' V.' + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
 			try:
-				self.setTitle(_('%s') % descplug + ' V.' + currversion)
+				self.setTitle(_("%s") % descplug + " V." + currversion)
 			except:
 				pass
-		skin = join(skin_path, 'AboutLSS.xml')
+		skin = join(skin_path, "AboutLSS.xml")
 		with codecs.open(skin, "r", encoding="utf-8") as f:
 			skin = f.read()
-		self.skin = ctrlSkin('AboutLSS', skin)
-		credit = _('Thank you for choosing plugin for management of your Enigma Box.\n\n')
-		credit += _('Suggested by: @masterG - @oktus - @pcd\n')
-		credit += _('Designs and Graphics by @oktus\n')
-		credit += _('Support on: Linuxsat-support.com\n\n')
-		credit += _('The Plugin lives thanks to the donations of each of you.\n')
-		credit += _('A coffee costs nothing.\n\n')
-		credit += _('If you think it is a useful tool for your box\n')
-		credit += _('please make a donation:\n')
-		credit += 'http://paypal.com/paypalme/belfagor2005\n'
-		credit += _('make donation on Linuxsat-support.com\n\n\n\n\n')
-		credit += _('All code was rewritten by @Lululla - 2024.07.20\n')
-		self['Info'] = Label(_(credit))
-		self['key_red'] = Label(_('Exit'))
+		self.skin = ctrlSkin("AboutLSS", skin)
+		credit = _("Thank you for choosing plugin for management of your Enigma Box.\n\n")
+		credit += _("Suggested by: @masterG - @oktus - @pcd\n")
+		credit += _("Designs and Graphics by @oktus\n")
+		credit += _("Support on: Linuxsat-support.com\n\n")
+		credit += _("The Plugin lives thanks to the donations of each of you.\n")
+		credit += _("A coffee costs nothing.\n\n")
+		credit += _("If you think it is a useful tool for your box\n")
+		credit += _("please make a donation:\n")
+		credit += "http://paypal.com/paypalme/belfagor2005\n"
+		credit += _("make donation on Linuxsat-support.com\n\n\n\n\n")
+		credit += _("All code was rewritten by @Lululla - 2024.07.20\n")
+		self["Info"] = Label(_(credit))
+		self["key_red"] = Label(_("Exit"))
 		self["pixmap"] = Pixmap()
 		self["actions"] = ActionMap(
 			[
@@ -2587,7 +2528,7 @@ def menustart():
 		else:
 			_session.open(
 				MessageBox,
-				_('Check Connection!'),
+				_("Check Connection!"),
 				MessageBox.TYPE_INFO,
 				timeout=5
 			)
@@ -2610,7 +2551,7 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-	return [(_('Linuxsat Panel'), main, descplug, 44)] if menuid == "mainmenu" else []
+	return [(_("Linuxsat Panel"), main, descplug, 44)] if menuid == "mainmenu" else []
 
 
 def Plugins(**kwargs):
