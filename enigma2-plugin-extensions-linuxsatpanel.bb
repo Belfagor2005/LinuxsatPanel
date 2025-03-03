@@ -11,7 +11,7 @@ inherit gitpkgv
 SRCREV = "${AUTOREV}"
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
-VER ="2.4"
+VER ="2.7"
 PR = "r0"
 
 SRC_URI = "git://github.com/Belfagor2005/LinuxsatPanel.git;protocol=https;branch=main"
