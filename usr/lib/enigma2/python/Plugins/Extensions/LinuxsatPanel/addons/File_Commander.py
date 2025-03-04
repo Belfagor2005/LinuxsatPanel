@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Components
+from .. import _
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -107,7 +108,7 @@ class File_Commander(Screen):
             "back": self.exitEditor,
             "red": self.exitEditor,
             "yellow": self.del_Line,
-            "blue": self.ins_Line,
+            "blue": self.del_Line,
             "chplus": self.posStart,
             "chminus": self.posEnd,
         }, -1)
