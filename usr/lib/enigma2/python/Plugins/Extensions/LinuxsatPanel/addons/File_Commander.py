@@ -107,7 +107,7 @@ class File_Commander(Screen):
             "back": self.exitEditor,
             "red": self.exitEditor,
             "yellow": self.del_Line,
-            "blue": self.del_Line,
+            "blue": self.ins_Line,
             "chplus": self.posStart,
             "chminus": self.posEnd,
         }, -1)
