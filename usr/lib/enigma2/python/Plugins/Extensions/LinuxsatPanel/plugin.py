@@ -438,19 +438,19 @@ class LinuxsatPanel(Screen):
 
 	def start_check_version(self):
 		self.Update = False
-		new_version, new_changelog, update_available = check_version(
+		self.new_version, self.new_changelog, update_available = check_version(
 			currversion, installer_url, AgentRequest
 		)
 		if update_available:
 			self.Update = True
-			print("A new version is available:", new_version)
+			print("A new version is available:", self.new_version)
 
 			# Check if current screen is modal before opening the MessageBox
 			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
 				# If the screen is modal, open a message box with the update info
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (self.new_version, self.new_changelog),
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
@@ -458,7 +458,7 @@ class LinuxsatPanel(Screen):
 				# If the screen is not modal, show a different message and log it
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (new_version, new_changelog),
+					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (self.new_version, self.new_changelog),
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
@@ -2314,12 +2314,12 @@ class LSinfo(Screen):
 		pass
 
 	def check_vers(self):
-		new_version, new_changelog, update_available = check_version(
+		self.new_version, self.new_changelog, update_available = check_version(
 			currversion, installer_url, AgentRequest
 		)
 
 		if update_available:
-			print("A new version is available:", new_version)
+			print("A new version is available:", self.new_version)
 			self.Update = True
 
 			# Check if the current screen is modal before opening the MessageBox
@@ -2327,7 +2327,7 @@ class LSinfo(Screen):
 				# Open the message box if the screen is modal
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
+					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (self.new_version, self.new_changelog),
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
@@ -2335,7 +2335,7 @@ class LSinfo(Screen):
 				# Show a message box indicating that the update is not downloadable if the screen is not modal
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (new_version, new_changelog),
+					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (self.new_version, self.new_changelog),
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
