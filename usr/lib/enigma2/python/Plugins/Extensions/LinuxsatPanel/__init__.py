@@ -31,41 +31,43 @@ from enigma import (
 	getDesktop,
 )
 from os.path import exists, dirname, join
-from os import popen, environ, statvfs
+from os import popen, environ, statvfs, system
 import gettext
 import sys
+
+
+def check_and_install_requests():
+	try:
+		import requests
+		return
+	except ImportError:
+		pass
+	python_version = sys.version_info[0]
+	if exists("/usr/bin/apt-get"):  # Dreambox
+		pkg_manager = "apt-get -y install "
+	else:  # OpenPLi Atv
+		pkg_manager = "opkg install "
+
+	if python_version == 2:
+		package = "python-requests"
+	else:
+		package = "python3-requests"
+	system(pkg_manager + package)
+
+
+check_and_install_requests()
+
 
 PY3 = False
 if sys.version_info[0] >= 3:
 	PY3 = True
 	from urllib.request import urlopen
 	from urllib.error import URLError
-	import urllib.request as urllib2
+	from urllib.request import Request
 else:
 	from urllib2 import urlopen
 	from urllib2 import URLError
-	import urllib.request as urllib2
-
-
-# try:
-	# from urlparse import urlparse, urljoin
-	# from urllib import urlencode, quote_plus, addinfourl
-	# import cookielib
-	# import urllib2
-	# from cStringIO import StringIO
-	# from HTMLParser import HTMLParser
-	# unescape = HTMLParser().unescape
-	# HTTPError = urllib2.HTTPError
-
-# # Py3:
-# except ImportError:
-	# from http import cookiejar as cookielib
-	# from html import unescape
-	# import urllib.request as urllib2
-	# from io import StringIO
-	# from urllib.parse import urlparse, urljoin,  urlencode, quote_plus
-	# from urllib.response import addinfourl
-	# from urllib.error import HTTPError
+	from urllib2 import Request
 
 
 descplug = "Linuxsat-Support.com (Addons Panel)"
@@ -126,13 +128,14 @@ def check_version(currversion, installer_url, AgentRequest):
 		if not decoded_url.startswith(("http://", "https://")):
 			raise ValueError("Invalid URL protocol")
 
-		req = urllib2.Request(
+		req = Request(
 			decoded_url,
 			headers={
 				"User-Agent": AgentRequest,
 				"Cache-Control": "no-cache"
 			}
 		)
+
 		with urlopen(req, timeout=15) as response:
 			if response.getcode() != 200:
 				raise URLError("HTTP Status: %d" % response.getcode())
@@ -416,8 +419,8 @@ global lngx
 global HALIGN
 HALIGN = RT_HALIGN_LEFT
 locl = ("ar", "ae", "bh", "dz", "eg", "in", "iq", "jo",
-					"kw", "lb", "ly", "ma", "om", "qa", "sa", "sd",
-					"ss", "sy", "tn", "ye")
+		"kw", "lb", "ly", "ma", "om", "qa", "sa", "sd",
+		"ss", "sy", "tn", "ye")
 
 FNTPath = join(plugin_path, "fonts")
 lngx = 'en'
