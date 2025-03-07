@@ -4,14 +4,14 @@
 # mod Lululla 20240720
 
 from __future__ import print_function
-from . import _
+# from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Screens.MessageBox import MessageBox
-from Tools.Directories import (SCOPE_PLUGINS, resolveFilename)
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 from enigma import getDesktop
 import sys
 import codecs
@@ -51,7 +51,7 @@ class lsConsole(Screen):
             self.skin = f.read()
 
         self.errorOcurred = False
-        # lastpage = ''
+        lastpage = ''
         self['text'] = ScrollLabel('')
         self['key_red'] = Label(_('Cancel'))
         self['key_green'] = Label(_('Hide/Show'))
@@ -89,8 +89,9 @@ class lsConsole(Screen):
         if self.showStartStopText:
             self['text'].setText(_('Execution progress\n\n'))
         print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
+        print("[Console] Executing command:", self.cmdlist[self.run])  # Aggiungi questo print
         if self.container.execute(self.cmdlist[self.run]):
-            self['text'].setText(self.cmdlist[self.run])  # add
+            self['text'].setText(self.cmdlist[self.run])
             self.runFinished(-1)
 
     def runFinished(self, retval):
@@ -104,12 +105,10 @@ class lsConsole(Screen):
         else:
             self.show()
             self.finished = True
-            '''
-            # try:
-                # lastpage = self['text'].isAtLastPage()
-            # except:
-                # lastpage = self['text']
-            '''
+            try:
+                lastpage = self['text'].isAtLastPage()
+            except:
+                lastpage = self['text']
             if self.cancel_msg:
                 self.cancel_msg.close()
             if self.showStartStopText:
@@ -163,9 +162,11 @@ class lsConsole(Screen):
 
     def dataAvail(self, str):
         if PY3:
-            self['text'].appendText(str.decode())
+            data = str.decode()
         else:
-            self['text'].appendText(str)
+            data = str
+        print("[Console] Data received: ", data)
+        self['text'].appendText(data)
 
     def restartenigma(self):
         from Screens.Standby import TryQuitMainloop

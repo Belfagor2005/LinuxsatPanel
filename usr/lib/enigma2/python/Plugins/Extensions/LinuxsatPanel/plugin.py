@@ -467,23 +467,6 @@ class LinuxsatPanel(Screen):
 		else:
 			print("No new version available.")
 
-	"""
-	# def start_check_version(self):
-		# new_version, new_changelog, update_available = check_version(
-			# currversion, installer_url, AgentRequest
-		# )
-		# if update_available:
-			# print("A new version is available:", new_version)
-			# self.session.open(
-				# MessageBox,
-				# _("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (new_version, new_changelog),
-				# MessageBox.TYPE_INFO,
-				# timeout=5
-			# )
-		# else:
-			# print("No new version available.")
-	"""
-
 	def paintFrame(self):
 		try:
 			# If the index exceeds the maximum number of items, it returns to the first item
