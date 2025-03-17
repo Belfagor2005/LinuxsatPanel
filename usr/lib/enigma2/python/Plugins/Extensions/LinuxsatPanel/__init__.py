@@ -45,7 +45,7 @@ def check_and_install_requests():
 	python_version = sys.version_info[0]
 	if exists("/usr/bin/apt-get"):  # Dreambox
 		pkg_manager = "apt-get -y install "
-	else:  # OpenPLi Atv
+	else:  # OpenPLi Atv - pli
 		pkg_manager = "opkg install "
 
 	if python_version == 2:
@@ -81,10 +81,12 @@ xmlurl = 'https://raw.githubusercontent.com/Belfagor2005/upload/main/fill/addons
 installer_url = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JlbGZhZ29yMjAwNS9MaW51eHNhdFBhbmVsL21haW4vaW5zdGFsbGVyLnNo'
 developer_url = 'aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9CZWxmYWdvcjIwMDUvTGludXhzYXRQYW5lbA=='
 
-ListUrl = ['https://bosscccam.co/Test.php',
-		   'https://iptv-15days.blogspot.com',
-		   'https://cccamia.com/free-cccam',
-		   'https://cccam.net/freecccam']
+ListUrl = [
+	"https://bosscccam.co/Test.php",
+	"https://iptv-15days.blogspot.com",
+	"https://cccamia.com/free-cccam",
+	"https://cccam.net/freecccam"
+]
 
 
 isDreamOS = False
@@ -106,13 +108,13 @@ def CheckConn(host='www.google.com', port=80, timeout=3):
 def setup_timer(callback_method):
 	from enigma import eTimer
 	timer = eTimer()
-	if hasattr(timer, "callback"):
+	try:
+		# Let's try to use Py3 (DreamOS) with timeout.connect()
+		timer.timeout.connect(callback_method)
+	except:
+		# In case of failure, we use Py2 (OpenPLi) with callback.append()
 		timer.callback.append(callback_method)
-	else:
-		if exists("/usr/bin/apt-get"):
-			timer.timeout.connect(callback_method)
-		else:
-			print("[Version Check] ERROR: eTimer does not support callback.append()")
+	# Restituiamo il timer senza avviarlo, così puoi decidere tu quando chiamare start()
 	return timer
 
 
@@ -418,9 +420,12 @@ def make_request(url, max_retries=3, base_delay=1):
 global lngx
 global HALIGN
 HALIGN = RT_HALIGN_LEFT
-locl = ("ar", "ae", "bh", "dz", "eg", "in", "iq", "jo",
-		"kw", "lb", "ly", "ma", "om", "qa", "sa", "sd",
-		"ss", "sy", "tn", "ye")
+locl = (
+	"ar", "ae", "bh", "dz", "eg", "in", "iq", "jo",
+	"kw", "lb", "ly", "ma", "om", "qa", "sa", "sd",
+	"ss", "sy", "tn", "ye"
+)
+
 
 FNTPath = join(plugin_path, "fonts")
 lngx = 'en'

@@ -159,3 +159,14 @@ Changelog:
 -- fix installation
 -- clear code
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+20250317 2.7.8 version is online
+
+Changelog:
+-- major fix on dreamOs
+-- change code on install/remove
+-- about/info fixed
+-- timer fixed
+
+

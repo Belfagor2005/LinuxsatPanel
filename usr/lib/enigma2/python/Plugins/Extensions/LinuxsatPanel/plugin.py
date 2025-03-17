@@ -21,7 +21,6 @@ from . import (
 	RequestUrl,
 	make_request,
 	refreshPlugins,
-	setup_timer,
 	xmlurl,
 	HALIGN,
 )
@@ -47,12 +46,14 @@ from Components.Pixmap import (Pixmap, MovingPixmap)
 from Components.PluginComponent import plugins
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
-from os import chmod, makedirs, system, walk
+from os import chmod, makedirs, system, walk, access, R_OK
 from os.path import exists, join
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
+from six.moves.urllib.request import Request, urlopen
+from six.moves.urllib.error import URLError
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from datetime import datetime as dt
 from re import compile, search, DOTALL
@@ -72,6 +73,8 @@ from enigma import (
 	gFont,
 	loadPNG,
 )
+import requests
+import io
 
 
 # ======================================================================
@@ -97,7 +100,7 @@ global has_dpkg
 global descplug
 global currversion
 
-currversion = "2.7.7"
+currversion = "2.7.8"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 
 plugin_path = resolveFilename(
@@ -118,12 +121,12 @@ if exists("/usr/bin/apt-get"):
 
 if PY3:
 	import html
-	from urllib.request import urlopen, Request
+	# from urllib.request import urlopen, Request
 
 	def decode_html(text):
 		return html.unescape(text)
 else:
-	from urllib2 import urlopen, Request
+	# from urllib2 import urlopen, Request
 	from HTMLParser import HTMLParser
 	html_parser = HTMLParser()
 
@@ -1387,10 +1390,13 @@ class ScriptInstaller(Screen):
 
 		else:
 			from .addons import checkskin
-			self.check_module = eTimer()
 			check = checkskin.check_module_skin()
-			self.check_module = setup_timer(check)
-			self.check_module.start(100, True)
+			self.timer = eTimer()
+			try:
+				self.timer_conn = self.timer.timeout.connect(check)
+			except:
+				self.timer.callback.append(check)
+			self.timer.start(100, True)
 			self.openVi()
 
 	def openVi(self, callback=""):
@@ -1600,16 +1606,43 @@ class ScriptInstaller(Screen):
 			script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
 			url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
 			try:
-				import requests
 				response = requests.get(url)
-				response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
-				with open(script_path, "w") as file:
+				response.raise_for_status()
+				with io.open(script_path, "w", encoding="utf-8") as file:
 					file.write(response.text)
 				chmod(script_path, 0o777)
+				print("Script updated successfully: {}".format(script_path))
+			except requests.exceptions.HTTPError as e:
+				print("HTTP error while downloading the script: {}".format(e))
+			except requests.exceptions.RequestException as e:
+				print("Error while downloading the script: {}".format(e))
+			except IOError as e:
+				print("Error while saving the script: {}".format(e))
 			except Exception as e:
-				print("Failed to update script: {e}. Using existing script.", e)
+				print("Unexpected error while updating the script: {}".format(e))
 
-			self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
+			try:
+				self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
+			except Exception as e:
+				print("Error while executing the script: {}".format(e))
+
+	"""
+	# def runScriptWithConsole(self, confirmed):
+		# if confirmed:
+			# script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+			# url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
+			# try:
+				# import requests, io
+				# response = requests.get(url)
+				# response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
+				# with io.open(script_path, "w") as file:
+					# file.write(response.text)
+				# chmod(script_path, 0o777)
+			# except Exception as e:
+				# print("Failed to update script: {e}. Using existing script.", e)
+
+			# self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
+	"""
 
 	def getcl(self, config_type):
 		if config_type == "CCcam":
@@ -1692,9 +1725,12 @@ class ScriptInstaller(Screen):
 					r'"C: (.*?) (.*?) (.*?) (.*?)"',
 					r'"c: (.*?) (.*?) (.*?) (.*?)"',
 				]
+
 			host = None
-			pas = None
+			port = None
 			user = None
+			pas = None
+
 			for pattern in regex_patterns:
 				url1 = search(pattern, data)
 				if url1:
@@ -1703,31 +1739,34 @@ class ScriptInstaller(Screen):
 					user = url1.group(3)
 					pas = url1.group(4)
 
-				pas = pas.replace("</h1>", "").replace("</b>", "")
-				pasw = pas.replace("</div>", "").replace("</span>", "")
-				host = str(host) if host is not None else ""
-				port = str(port) if port is not None else ""
-				user = str(user) if user is not None else ""
-				pasw = str(pasw) if pasw is not None else ""
+					pas = pas.replace("</h1>", "").replace("</b>", "")
+					pasw = pas.replace("</div>", "").replace("</span>", "")
 
-				if config_type == "CCcam":
-					print("write cccam file")
-					with open(dest, "a") as cfgdok:
-						cfgdok.write(write_format.format(host, port, user, pasw))
+					host = str(host) if host is not None else ""
+					port = str(port) if port is not None else ""
+					user = str(user) if user is not None else ""
+					pasw = str(pasw) if pasw is not None else ""
 
-				if config_type == "Oscam":
-					print("write Oscam file")
-					with open(dest, "a") as cfgdok:
-						cfgdok.write(write_format.format(host, host, port, user, pasw))
+					if config_type == "CCcam":
+						print("Writing CCcam file")
+						with open(dest, "a") as cfgdok:
+							cfgdok.write(write_format.format(host, port, user, pasw))
 
-				text = _("Server %s added in %s\n\nServer:%s\nPort:%s\nUser:%s\nPassword:%s\n") % (host, dest, host, port, user, pasw)
-				if not PY3:
-					text = text.encode("utf-8")
-				self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
+					elif config_type == "Oscam":
+						print("Writing Oscam file")
+						with open(dest, "a") as cfgdok:
+							cfgdok.write(write_format.format(host, host, port, user, pasw))
+
+					text = _("Server %s added to %s\n\nServer: %s\nPort: %s\nUser: %s\nPassword: %s\n") % (host, dest, host, port, user, pasw)
+					if not PY3:
+						text = text.encode("utf-8")
+					self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
+
 		except Exception as e:
+			# Error handling
 			self.session.open(
 				MessageBox,
-				_("Server Error.\n\nTry again, you'll be luckier!\n%s") % str(e),
+				_("Server error.\n\nTry again, you might get lucky!\n%s") % str(e),
 				type=MessageBox.TYPE_INFO,
 				timeout=8
 			)
@@ -1803,7 +1842,11 @@ class addInstall(Screen):
 			},
 			-2
 		)
-		self.timer = setup_timer(self.getfreespace)
+		self.timer = eTimer()
+		try:
+			self.timer_conn = self.timer.timeout.connect(self.getfreespace)
+		except:
+			self.timer.callback.append(self.getfreespace)
 		self.timer.start(1000, 1)
 		if self.dest is not None:
 			self.onLayoutFinish.append(self.downxmlpage)
@@ -1834,7 +1877,6 @@ class addInstall(Screen):
 			print(e)
 
 	def openTest(self):
-		# print("self.xml: ", self.fxml)
 		regex = '<plugin name="(.*?)".*?url>"(.*?)"</url'
 		match = compile(regex, DOTALL).findall(self.fxml)
 		self.names = []
@@ -1893,7 +1935,6 @@ class addInstall(Screen):
 			if has_dpkg:
 				self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
 				return
-
 			self.iname = self.plug.split("_")[0] if "_" in self.plug else self.plug
 
 		elif ".zip" in self.plug or ".tar" in self.plug or ".gz" in self.plug or ".bz2" in self.plug:
@@ -1918,24 +1959,34 @@ class addInstall(Screen):
 						if name.endswith(".list"):
 							continue
 
-					print("name url=", self.plug_name, self.url)
 					if name.startswith(self.plug_name):
 						resp = "Is ALREADY installed.\n"
 						break
 
+		choices = [
+			("Install", "install"),
+			("Remove", "uninstall"),
+			("Cancel", "cancel")
+		]
+		from Screens.ChoiceBox import ChoiceBox
 		self.session.openWithCallback(
-			lambda result: self.okClicked(result, self.plug_name, self.url),
-			MessageBox,
-			self.plug_name + "\n\n" + resp + "\nDo you want to Install, Remove, or Cancel?",
-			MessageBox.TYPE_YESNO,
-			default=False,
-			simple=True,
-			list=[("Install", "install"), ("Remove", "uninstall"), ("Cancel", "cancel")]
+			self.choiceCallback,
+			ChoiceBox,
+			title=self.plug_name + "\n\n" + resp + "\nDo you want to Install, Remove, or Cancel?",
+			list=choices
 		)
+
+	def choiceCallback(self, result):
+		if result is not None:
+			choice, action = result
+			self.okClicked(action, self.plug_name, self.url)
+		else:
+			print("User canceled the operation")
 
 	def okClicked(self, choice, name, url):
 		n2 = self.plug.find("_")
 		iname = self.plug[:n2] if n2 != -1 else self.plug
+
 		if choice == "install":
 			folddest = "/tmp/" + self.plug
 			if self.retfile(folddest):
@@ -1954,6 +2005,7 @@ class addInstall(Screen):
 					command = "tar -xjvf '/tmp/" + self.plug + "' -C /"
 				else:
 					return
+
 				self.session.open(lsConsole, "Installing Extension", [command], closeOnSuccess=False)
 
 		elif choice == "uninstall":
@@ -2286,10 +2338,19 @@ class LSinfo(Screen):
 		)
 
 		self.Update = False
-		self.timerz = setup_timer(self.check_vers)
-		self.timerz.start(200, 1)
-		self.timer = setup_timer(self.startRun)
-		self.timer.start(1000, 1)
+		self.timer = eTimer()
+		try:
+			self.timer_conn = self.timer.timeout.connect(self.startRun)
+		except:
+			self.timer.callback.append(self.startRun)
+		self.timer.start(100, 1)
+
+		self.timerz = eTimer()
+		try:
+			self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
+		except:
+			self.timerz.callback.append(self.check_vers)
+		self.timerz.start(1000, 1)
 
 		self.onLayoutFinish.append(self.pas)
 
@@ -2305,9 +2366,7 @@ class LSinfo(Screen):
 			print("A new version is available:", self.new_version)
 			self.Update = True
 
-			# Check if the current screen is modal before opening the MessageBox
 			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-				# Open the message box if the screen is modal
 				self.session.open(
 					MessageBox,
 					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (self.new_version, self.new_changelog),
@@ -2315,7 +2374,6 @@ class LSinfo(Screen):
 					timeout=5
 				)
 			else:
-				# Show a message box indicating that the update is not downloadable if the screen is not modal
 				self.session.open(
 					MessageBox,
 					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (self.new_version, self.new_changelog),
@@ -2324,7 +2382,6 @@ class LSinfo(Screen):
 				)
 				print("Cannot open modal MessageBox. The current screen is not modal.")
 
-			# Update the button text and show the pixmap for the update
 			self["key_green"].setText(_("Update"))
 			self["pixmap"].show()
 
@@ -2352,13 +2409,48 @@ class LSinfo(Screen):
 			)
 
 	def update_dev(self):
-		req = Request(b64decoder(developer_url), headers={"User-Agent": AgentRequest})
-		page = urlopen(req).read()
-		data = loads(page)
-		remote_date = data["pushed_at"]
-		strp_remote_date = dt.strptime(remote_date, "%Y-%m-%dT%H:%M:%SZ")
-		remote_date = strp_remote_date.strftime("%Y-%m-%d")
-		self.session.openWithCallback(self.install_update, MessageBox, _("Do you want to install update ( %s ) now?") % (remote_date), MessageBox.TYPE_YESNO)
+		try:
+			url = b64decoder(developer_url)
+			req = Request(url, headers={"User-Agent": AgentRequest})
+			try:
+				response = urlopen(req)
+				page = response.read()
+			except URLError as e:
+				print("Error fetching data from GitHub:", e)
+				self.session.open(MessageBox, _("Failed to fetch update information. Please check your internet connection."), MessageBox.TYPE_ERROR)
+				return
+
+			try:
+				data = loads(page)
+			except ValueError as e:
+				print("Error parsing JSON data:", e)
+				self.session.open(MessageBox, _("Failed to parse update information. Please try again later."), MessageBox.TYPE_ERROR)
+				return
+
+			remote_date = data.get("pushed_at")
+			if not remote_date:
+				print("No 'pushed_at' field found in the response.")
+				self.session.open(MessageBox, _("No update information available."), MessageBox.TYPE_INFO)
+				return
+
+			try:
+				strp_remote_date = dt.strptime(remote_date, "%Y-%m-%dT%H:%M:%SZ")
+				formatted_date = strp_remote_date.strftime("%Y-%m-%d")
+			except ValueError as e:
+				print("Error parsing date:", e)
+				self.session.open(MessageBox, _("Invalid date format in update information."), MessageBox.TYPE_ERROR)
+				return
+
+			self.session.openWithCallback(
+				self.install_update,
+				MessageBox,
+				_("Do you want to install update (%s) now?") % formatted_date,
+				MessageBox.TYPE_YESNO
+			)
+
+		except Exception as e:
+			print("Unexpected error in update_dev:", e)
+			self.session.open(MessageBox, _("An unexpected error occurred. Please try again later."), MessageBox.TYPE_ERROR)
 
 	def install_update(self, answer=False):
 		if answer:
@@ -2378,11 +2470,31 @@ class LSinfo(Screen):
 
 			elif self.name == " About ":
 				print("Opening LICENSE file...")
-				with open(join(plugin_path, "LICENSE"), "r", encoding="utf-8") as filer:
-					info = filer.read()
-					info = info.replace("\r", "")
-					info = info.strip()
-					self["list"].setText(info)
+				license_path = join(plugin_path, "LICENSE")
+				try:
+
+					if not exists(license_path):
+						print("License file does not exist: {}".format(license_path))
+						self["list"].setText("Error: LICENSE file not found.")
+						return
+
+					if not access(license_path, R_OK):
+						print("License file is not readable: {}".format(license_path))
+						self["list"].setText("Error: LICENSE file is not readable.")
+						return
+
+					with io.open(license_path, "r", encoding="utf-8") as filer:
+						info = filer.read()
+						info = info.replace("\r", "")
+						info = str(info).strip()
+						self["list"].setText(info)
+
+				except IOError as e:
+					print("Error reading LICENSE file: {}".format(e))
+					self["list"].setText("Error: Could not read LICENSE file.")
+				except Exception as e:
+					print("Unexpected error: {}".format(e))
+					self["list"].setText("Error: An unexpected error occurred.")
 			else:
 				print("Unknown name value:", self.name)
 				return
@@ -2405,21 +2517,52 @@ class LSinfo(Screen):
 				header,
 				stbinfo_str
 			)
-			with open("/tmp/output.txt", "w", encoding="utf-8") as file:
-				file.write(base_content)
+
+			try:
+				# Python 3
+				with open("/tmp/output.txt", "w", encoding="utf-8") as file:
+					file.write(base_content)
+			except TypeError:
+				# Python 2
+				with open("/tmp/output.txt", "w") as file:
+					file.write(base_content.encode("utf-8"))
+
 			info_path = join(plugin_path, "info.txt")
 			if fileExists(info_path):
 				try:
-					with open(info_path, "r", encoding="utf-8") as info_file:
+					try:
+						# Python 3
+						with open(info_path, "r", encoding="utf-8") as info_file:
+							additional_info = info_file.read()
+					except TypeError:
+						# Python 2
+						with open(info_path, "r") as info_file:
+							additional_info = info_file.read().decode("utf-8")
+
+					try:
+						# Python 3
 						with open("/tmp/output.txt", "a", encoding="utf-8") as output_file:
-							output_file.write("\nAdditional Info:\n{0}".format(info_file.read()))
+							output_file.write("\nAdditional Info:\n{0}".format(additional_info))
+					except TypeError:
+						# Python 2
+						with open("/tmp/output.txt", "a") as output_file:
+							output_file.write("\nAdditional Info:\n{0}".format(additional_info.encode("utf-8")))
 				except Exception as e:
 					print("Error appending info.txt: {0}".format(str(e)))
 			else:
 				print("Info file not found: {0}".format(info_path))
+
 			try:
-				with open("/tmp/output.txt", "r", encoding="utf-8") as filer:
-					self["list"].setText(filer.read())
+				try:
+					# Python 3
+					with open("/tmp/output.txt", "r", encoding="utf-8") as filer:
+						content = filer.read()
+				except TypeError:
+					# Python 2
+					with open("/tmp/output.txt", "r") as filer:
+						content = filer.read().decode("utf-8")
+
+				self["list"].setText(str(content))
 			except Exception as e:
 				print("Final read/display error: {0}".format(str(e)))
 				self["list"].setText("Error loading system information")
@@ -2444,10 +2587,9 @@ class LSinfo(Screen):
 class startLP(Screen):
 	def __init__(self, session):
 		self.session = session
-		global _session, first
+		global _session
 		global descplug, currversion
 		_session = session
-		first = True
 		Screen.__init__(self, session)
 
 		try:
@@ -2467,37 +2609,34 @@ class startLP(Screen):
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.clsgo, "cancel": self.clsgo}, -1)
 		self.onLayoutFinish.append(self.loadDefaultImage)
 
-	# def clsgo(self):
-		# if first is True:
-			# self.session.openWithCallback(self.passe, LinuxsatPanel)
-		# else:
-			# self.close()
-
-	def clsgo(self):
-		# if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-		if first is True:
-			self.session.openWithCallback(self.passe, LinuxsatPanel)
-		else:
-			# self.close()
-			print("Cannot open modal screen. The current screen is not modal.")
-
-	def passe(self, rest=None):
-		global first
-		first = False
+	def clsgo(self, *args):
+		print("[startLP] Opening LinuxsatPanel...")
+		self["actions"].setEnabled(False)
+		self.session.open(LinuxsatPanel)
 		self.close()
 
 	def loadDefaultImage(self):
 		self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format("LinuxsatPanel"))
-		self.timer = setup_timer(self.decodeImage)
-		self.timer.start(100, True)
-		self.timerx = setup_timer(self.clsgo)
-		self.timerx.start(2000, True)
 
-	def decodeImage(self):
+		self.timer = eTimer()
+		try:
+			self.timer_conn = self.timer.timeout.connect(self.decodeImage)
+		except:
+			self.timer.callback.append(self.decodeImage)  # Py2 (OpenPLi)
+		self.timer.start(100, True)
+
+		self.delayedTimer = eTimer()
+		try:
+			self.delayedTimer_conn = self.delayedTimer.timeout.connect(self.clsgo)
+		except:
+			self.delayedTimer.callback.append(self.clsgo)
+		self.delayedTimer.start(1000, True)
+
+	def decodeImage(self, *args):
 		pixmapx = self.fldpng
 		if fileExists(pixmapx):
 			size = self["poster"].instance.size()
-			if not self.picload:
+			if not hasattr(self, "picload") or not self.picload:
 				self.picload = ePicLoad()
 			self.scale = AVSwitch().getFramebufferScale()
 			self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, "#00000000"])

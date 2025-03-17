@@ -3,8 +3,8 @@
 ## setup command=wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/bash
 
 ## Only This 2 lines to edit with new version ######
-version='2.7.7'
-changelog="\n-- fix installation\n-- clear code"
+version='2.7.8'
+changelog="\n-- major fix\n--fix DreamOs code\n--fix timer\n--fix info/about"
 
 ##############################################################
 
