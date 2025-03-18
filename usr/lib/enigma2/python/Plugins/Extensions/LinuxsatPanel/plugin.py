@@ -2350,7 +2350,7 @@ class LSinfo(Screen):
 			self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
 		except:
 			self.timerz.callback.append(self.check_vers)
-		self.timerz.start(1000, 1)
+		self.timerz.start(2000, 1)
 
 		self.onLayoutFinish.append(self.pas)
 
@@ -2358,35 +2358,61 @@ class LSinfo(Screen):
 		pass
 
 	def check_vers(self):
-		self.new_version, self.new_changelog, update_available = check_version(
-			currversion, installer_url, AgentRequest
-		)
+		remote_version = '0.0'
+		remote_changelog = ''
+		page = ''
 
-		if update_available:
-			print("A new version is available:", self.new_version)
+		try:
+			req = Request(b64decoder(installer_url), headers={'User-Agent': 'Mozilla/5.0'})
+			page = urlopen(req).read().decode("utf-8")  # Decodifica diretta
+		except Exception as e:
+			print("[ERROR] Unable to fetch version info:", str(e))
+			return
+
+		if page:
+			for line in page.split("\n"):
+				line = line.strip()
+				if line.startswith("version"):
+					remote_version = line.split("=")[-1].strip().strip("'").strip('"')
+				elif line.startswith("changelog"):
+					remote_changelog = line.split("=")[-1].strip().strip("'").strip('"')
+					break
+
+		self.new_version = remote_version
+		self.new_changelog = remote_changelog
+		if not isinstance(self.new_changelog, str):
+			self.new_changelog = str(self.new_changelog)
+		if not isinstance(self.new_version, str):
+			self.new_version = str(self.new_version)
+		# if float(currversion) < float(remote_version):
+		if currversion < remote_version:
 			self.Update = True
+			self.show_update_message()
 
-			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-				self.session.open(
-					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (self.new_version, self.new_changelog),
-					MessageBox.TYPE_INFO,
-					timeout=5
-				)
-			else:
-				self.session.open(
-					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (self.new_version, self.new_changelog),
-					MessageBox.TYPE_INFO,
-					timeout=5
-				)
-				print("Cannot open modal MessageBox. The current screen is not modal.")
+	def show_update_message(self):
+		"""Mostra un MessageBox con le informazioni sull'aggiornamento"""
+		if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
+			self.session.open(
+				MessageBox,
+				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (
+					self.new_version, self.new_changelog
+				),
+				MessageBox.TYPE_INFO,
+				timeout=10  # Aumenta il timeout per dare più tempo all'utente
+			)
+		else:
+			self.session.open(
+				MessageBox,
+				_("New version %s available\n\nChangelog: %s") % (
+					self.new_version, self.new_changelog
+				),
+				MessageBox.TYPE_INFO,
+				timeout=10
+			)
+			print("Cannot open modal MessageBox. The current screen is not modal.")
 
 			self["key_green"].setText(_("Update"))
 			self["pixmap"].show()
-
-		else:
-			print("No new version available.")
 
 	def update_me(self):
 		if self.Update:

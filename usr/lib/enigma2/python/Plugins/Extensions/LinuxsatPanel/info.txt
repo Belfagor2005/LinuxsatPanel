@@ -168,5 +168,6 @@ Changelog:
 -- change code on install/remove
 -- about/info fixed
 -- timer fixed
+-- update online fixed
 
 
