@@ -22,8 +22,8 @@ DEFAULT_MODULE_NAME = __name__.split(".")[-1]
 # by lululla
 
 
-pname = _("File Commander - Addon")
-pdesc = _("play/show Files")
+pname = "File Commander - Addon"
+pdesc = "play/show Files"
 pversion = "1.0-r3"
 
 
@@ -85,10 +85,10 @@ class File_Commander(Screen):
 			# "chminus": self.posEnd,
 		}, -1)
 		self["list_head"] = Label(self.file_name)
-		self["key_red"] = Label(_("Exit"))
-		self["key_green"] = Label(_("Save"))
-		self["key_yellow"] = Label(_("Del Line"))
-		self["key_blue"] = Label(_("Ins Line"))
+		self["key_red"] = Label("Exit")
+		self["key_green"] = Label("Save")
+		self["key_yellow"] = Label("Del Line")
+		self["key_blue"] = Label("Ins Line")
 		self.selLine = None
 		self.oldLine = None
 		self.isChanged = False
