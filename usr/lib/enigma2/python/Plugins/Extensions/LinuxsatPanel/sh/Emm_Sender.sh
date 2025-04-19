@@ -1,11 +1,11 @@
 #!/bin/bash
 #DESCRIPTION=send emm
-# mod by lululla 22/02/2025
+# mod by lululla 21/02/2025
 # Aggiornato il $(date +"%d/%m/%Y")
 # bash -x /usr/lib/enigma2/python/Plugins/Extensions/tvManager/data/emm_sender.sh
 
 set -e
-set -x
+# set -x
 ## Funzione di cleanup
 cleanup() {
     rm -f /tmp/*.tmp /tmp/*.html /tmp/emm.txt
@@ -13,30 +13,12 @@ cleanup() {
 
 trap cleanup EXIT
 
-# Trova il binario di oscam in /usr/bin/ usando un pattern case-insensitive
-OSCAM_BIN=$(find /usr/bin/ -type f -iname "oscam*" 2>/dev/null | head -n 1)
-# Debug: stampa il valore di OSCAM_BIN
-echo "OSCAM_BIN: $OSCAM_BIN"
-# Se non esiste alcun binario, esce
-if [ -z "$OSCAM_BIN" ]; then
-    echo "No oscam binary found in /usr/bin/"
-    exit 1
-else
-    echo "Found oscam binary: $(basename "$OSCAM_BIN")"
-fi
-
-if ! pgrep -x "$(basename "$OSCAM_BIN")" > /dev/null; then
-    echo "Oscam is not running, starting it..."
-    killall -9 "$(basename "$OSCAM_BIN")" &
-    sleep 2
-    ${OSCAM_BIN} & 
-else
-    echo "Oscam is already running."
-fi
-
 ## Constanti
 ATR_183E='3F FF 95 00 FF 91 81 71 FE 47 00 54 49 47 45 52 36 30 31 20 52 65 76 4D 38 37 14'
 atr_string='aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L0I5N0hDOGll'
+SECONDARY_ATR_STRING='aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L2FWaVJ3TjVy'
+IP='127.0.0.1'
+CAID='183E'
 
 ## Trova la directory di configurazione di OSCam
 OSCAM_VERSION=$(find /tmp/ -name oscam.version | sed -n 1p)
@@ -51,30 +33,47 @@ if [ ! -d "$OSCAM_CONFIG_DIR" ]; then
     exit 1
 fi
 
-OSCAM_CONF="${OSCAM_CONFIG_DIR}oscam.conf"
-emm_file=$(echo "$atr_string" | base64 -d)
+OSCAM_CONF="${OSCAM_CONFIG_DIR}/oscam.conf"
+LOCAL_EMM_FILE="${OSCAM_CONFIG_DIR}/emm"
 
 ## Estrai credenziali e porta HTTP di OSCam
 OSCAM_USER=$(grep -ir "httpuser" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed 's/^[ \t]*//')
 OSCAM_PASSWD=$(grep -ir "httppwd" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed 's/^[ \t]*//')
 OSCAM_HTTPPORT=$(grep -ir "httpport" "$OSCAM_CONF" | awk -F "=" '{ print $2 }' | sed 's/^[ \t]*//')
-OSCAM_PORT=$(echo "$OSCAM_HTTPPORT" | sed -e 's|+||g')
+PROTOCOL=$([[ $OSCAM_HTTPPORT == *"+"* ]] && echo "https" || echo "http")
+PORT=$(echo "$OSCAM_HTTPPORT" | sed 's/+//g' | sed 's/^[ \t]*//;s/[ \t]*$//')
 
-## check curl
-if ! command -v curl &> /dev/null; then
-    echo "Errore: curl non trovato. Installa curl prima di continuare."
-    if [ -d /etc/opkg ]; then
-        opkg update
-        opkg install curl
+## Verifica se curl è installato
+if ! command -v curl &>/dev/null; then
+    echo "curl non trovato. Tentativo di installazione..."
+    if uname -m | grep -qE 'sh4|mips|armv7l'; then
+        opkg install curl || { echo "Installazione di curl fallita. Uscita."; exit 1; }
     else
-        apt-get update
-        apt-get install curl
+        apt update && apt install -y curl || { echo "Installazione di curl fallita. Uscita."; exit 1; }
     fi
 fi
 
+## Scarica l'EMM
+emm_url=$(echo "$atr_string" | base64 -d)
+REMOTE_EMM_CONTENT=$(curl -s "$emm_url")
+
+if [ -z "$REMOTE_EMM_CONTENT" ]; then
+    echo "URL primario fallito. Provo con URL alternativo..."
+    emm_url=$(echo "$SECONDARY_ATR_STRING" | base64 -d)
+    REMOTE_EMM_CONTENT=$(curl -s "$emm_url")
+    if [ -z "$REMOTE_EMM_CONTENT" ]; then
+        echo "Entrambi gli URL hanno fallito. Uscita."
+        exit 1
+    fi
+fi
+
+## Salva EMM locale se diverso da remoto
+if [ ! -f "$LOCAL_EMM_FILE" ] || ! diff <(echo "$REMOTE_EMM_CONTENT") "$LOCAL_EMM_FILE" >/dev/null; then
+    echo "$REMOTE_EMM_CONTENT" > "$LOCAL_EMM_FILE"
+fi
 
 ## Ottieni i reader attivi
-readers=$(curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k "http://127.0.0.1:${OSCAM_PORT}/status.html" | grep "Restart Reader")
+readers=$(curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k "${PROTOCOL}://${IP}:${PORT}/status.html" | grep "Restart Reader")
 if [ -z "$readers" ]; then
     echo "Nessun reader attivo trovato."
     exit 1
@@ -84,48 +83,31 @@ echo "$readers" | sed -e 's|<TD CLASS="statuscol1"><A HREF="status.html?action=r
     sed 's/^[ \t]*//' | 
     awk -F "\"" '{ print $1 }' > /tmp/active_readers.tmp
 
-## Scarica l'EMM
-if ! curl -s -o /tmp/emm.txt "$emm_file"; then
-    echo "Errore nel download del file EMM. Uscita."
-    exit 1
-fi
-
-if [ ! -s /tmp/emm.txt ]; then
-    echo "Errore: il file EMM è vuoto o non è stato scaricato correttamente."
-    exit 1
-fi
-
 ## Itera sui reader attivi
 while IFS= read -r label; do
-    curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k "http://127.0.0.1:${OSCAM_PORT}/entitlements.html?label=${label}" > "/tmp/${label}_entitlements.html"
-    atr=$(sed -n 's/.*<TD COLSPAN="4">\(.*\)<\/TD>.*/\1/p' "/tmp/${label}_entitlements.html" | sed 's/.$//g')
+    entitlements=$(curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k "${PROTOCOL}://${IP}:${PORT}/entitlements.html?label=${label}")
+    atr=$(echo "$entitlements" | sed -n 's/.*<TD COLSPAN="4">\(.*\)<\/TD>.*/\1/p' | sed 's/.$//g')
 
     atr_cleaned=$(echo "$atr" | tr -d '[:space:]')
     ATR_183E_cleaned=$(echo "$ATR_183E" | tr -d '[:space:]')
 
     if [ "$ATR_183E_cleaned" == "$atr_cleaned" ]; then
-        echo "Invio nuovi EMM alla carta $label"
-        emm=$(cat /tmp/emm.txt)
-        response=$(curl -s -k --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth \
-            -d "label=${label}" \
-            -d "emmcaid=183E" \
-            -d "ep=$(< /tmp/emm.txt)" \
-            -d "action=Launch" \
-            "http://127.0.0.1:${OSCAM_PORT}/emm_running.html")
-																																													   
-        echo "Risposta del server: $response"
-        if [[ $response == *"success"* ]]; then
-            echo "EMM inviata con successo alla carta $label."
-        else
-            echo "Errore nell'invio dell'EMM alla carta $label."
-        fi
+        echo "Invio EMM alla carta $label"
+        
+        while IFS= read -r EMM; do
+            EMM=$(echo "$EMM" | tr -d '\r' | xargs)
+            if [[ ${EMM:0:24} == "82708E0000000000D3875411" ]]; then
+                curl -s --user "${OSCAM_USER}:${OSCAM_PASSWD}" --anyauth -k \
+                    "${PROTOCOL}://${IP}:${PORT}/emm_running.html?label=${label}&emmcaid=${CAID}&ep=${EMM}&action=Launch" >/dev/null
+                echo "EMM inviata: ${EMM:0:20}..."  # Mostra solo l'inizio per brevità
+            fi
+            sleep 1
+        done < "$LOCAL_EMM_FILE"
+
+        # Notifica su schermo OSCam
+        curl -s "http://${IP}/web/message?text=EMM+inviate+a+${label}&type=2&timeout=5" >/dev/null
     fi
-
-    rm -f "/tmp/${label}_entitlements.html"  # Pulizia del file temporaneo
 done < /tmp/active_readers.tmp
-
-## Pulizia finale
-cleanup
 
 echo "Aggiornamento EMM completato."
 exit 0
