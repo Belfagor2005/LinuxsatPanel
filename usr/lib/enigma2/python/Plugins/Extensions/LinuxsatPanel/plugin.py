@@ -24,6 +24,7 @@ from six.moves.urllib.request import Request, urlopen
 # enigma2 import
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
+from components config import config
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryPixmapAlphaTest, MultiContentEntryText
