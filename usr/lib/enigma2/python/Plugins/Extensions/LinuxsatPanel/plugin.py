@@ -1,6 +1,52 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# standard import
+import codecs
+import io
+from datetime import datetime as dt
+from json import loads
+from re import compile, search, DOTALL
+from shutil import copy2
+from subprocess import CalledProcessError, check_output
+from sys import version_info
+
+# os import
+from os import R_OK, access, chmod, makedirs, system, walk
+from os.path import exists, join
+
+# third-party import
+import six
+import requests
+from six.moves.urllib.error import URLError
+from six.moves.urllib.request import Request, urlopen
+
+# enigma2 import
+from Components.ActionMap import ActionMap
+from Components.AVSwitch import AVSwitch
+from Components.Label import Label
+from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryPixmapAlphaTest, MultiContentEntryText
+from Components.Pixmap import MovingPixmap, Pixmap
+from Components.PluginComponent import plugins
+from Components.ScrollLabel import ScrollLabel
+from Components.Sources.StaticText import StaticText
+from Plugins.Plugin import PluginDescriptor
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
+from Tools.Directories import SCOPE_PLUGINS, fileExists, resolveFilename
+from enigma import (
+	RT_HALIGN_RIGHT,
+	RT_VALIGN_CENTER,
+	eListboxPythonMultiContent,
+	ePicLoad,
+	eTimer,
+	gFont,
+	loadPNG,
+)
+
+# local import
 from . import (
 	_,
 	AgentRequest,
@@ -36,46 +82,6 @@ from .LCNScanner.Lcn import (
 	terrestrial,
 )
 
-from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
-from Components.config import config
-from Components.Label import Label
-from Components.MenuList import MenuList
-from Components.MultiContent import (MultiContentEntryText, MultiContentEntryPixmapAlphaTest)
-from Components.Pixmap import (Pixmap, MovingPixmap)
-from Components.PluginComponent import plugins
-from Components.ScrollLabel import ScrollLabel
-from Components.Sources.StaticText import StaticText
-from os import chmod, makedirs, system, walk, access, R_OK
-from os.path import exists, join
-from Plugins.Plugin import PluginDescriptor
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-from Screens.Standby import TryQuitMainloop
-from six.moves.urllib.request import Request, urlopen
-from six.moves.urllib.error import URLError
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
-from datetime import datetime as dt
-from re import compile, search, DOTALL
-import codecs
-from json import loads
-from sys import version_info
-from shutil import copy2
-import six
-from subprocess import check_output, CalledProcessError
-from enigma import (
-	RT_VALIGN_CENTER,
-	# RT_HALIGN_LEFT,
-	RT_HALIGN_RIGHT,
-	eListboxPythonMultiContent,
-	ePicLoad,
-	eTimer,
-	gFont,
-	loadPNG,
-)
-import requests
-import io
-
 
 # ======================================================================
 # LinuxsatPanel Plugin
@@ -97,9 +103,9 @@ global HALIGN
 global setx
 global skin_path
 global has_dpkg
-global descplug
-global currversion
 
+
+# constants
 currversion = "2.7.8"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 
@@ -107,6 +113,7 @@ plugin_path = resolveFilename(
 	SCOPE_PLUGINS,
 	"Extensions/{}".format("LinuxsatPanel")
 )
+
 
 PY3 = version_info.major >= 3
 skin_path = ""
@@ -121,12 +128,10 @@ if exists("/usr/bin/apt-get"):
 
 if PY3:
 	import html
-	# from urllib.request import urlopen, Request
 
 	def decode_html(text):
 		return html.unescape(text)
 else:
-	# from urllib2 import urlopen, Request
 	from HTMLParser import HTMLParser
 	html_parser = HTMLParser()
 
@@ -288,7 +293,7 @@ def add_menu_item(menu_list, titles, pics, urls, title, pic_name, url=""):
 class LinuxsatPanel(Screen):
 
 	def __init__(self, session):
-		global descplug, currversion
+
 		Screen.__init__(self, session)
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
@@ -681,7 +686,7 @@ class LSskin(Screen):
 
 	def __init__(self, session, name):
 		Screen.__init__(self, session)
-		global descplug, currversion
+
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
@@ -941,7 +946,7 @@ class LSChannel(Screen):
 
 	def __init__(self, session, name):
 		Screen.__init__(self, session)
-		global descplug, currversion
+
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
@@ -1184,7 +1189,7 @@ class ScriptInstaller(Screen):
 
 	def __init__(self, session, name):
 		Screen.__init__(self, session)
-		global descplug, currversion
+
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
@@ -1776,7 +1781,7 @@ class addInstall(Screen):
 
 	def __init__(self, session, data, name, dest):
 		Screen.__init__(self, session)
-		global descplug, currversion
+
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
@@ -2283,7 +2288,7 @@ class LSinfo(Screen):
 
 	def __init__(self, session, name):
 		Screen.__init__(self, session)
-		global descplug, currversion
+
 		try:
 			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
 		except:
@@ -2614,7 +2619,7 @@ class startLP(Screen):
 	def __init__(self, session):
 		self.session = session
 		global _session
-		global descplug, currversion
+
 		_session = session
 		Screen.__init__(self, session)
 
@@ -2682,7 +2687,7 @@ class startLP(Screen):
 class AboutLSS(Screen):
 	def __init__(self, session):
 		global _session, first
-		global descplug, currversion
+
 		_session = session
 		first = False
 		Screen.__init__(self, session)
