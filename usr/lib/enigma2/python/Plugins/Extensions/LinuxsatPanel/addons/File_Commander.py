@@ -1,8 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import, print_function
+# ═════════════════════════════════════════════════════════════════════
+#
+#  UTILITY SKIN
+#  Version: 5.4
+#  Created by Lululla (https://github.com/Belfagor2005)
+#  License: CC BY-NC-SA 4.0
+#  https://creativecommons.org/licenses/by-nc-sa/4.0
+#
+#  Last Modified: "15:14 - 20250423"
+#
+#  Credits:
+#
+# 👨‍💻 Original Developers: Lululla
+# ✍️ (2024-07-20)
+#
+# ⚖️ License: GNU General Public License (v2 or later)
+#    You must NOT remove credits and must share modified code.
+# ═════════════════════════════════════════════════════════════════════
 # Components
-# from Components.config import config
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList

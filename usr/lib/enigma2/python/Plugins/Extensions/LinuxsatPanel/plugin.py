@@ -1,5 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# ═════════════════════════════════════════════════════════════════════
+# 📦 LinuxsatPanel Plugin
+#
+# 👨‍💻 Original Developers: masterG, oktus, pcd
+# ✍️ Rewritten by: Lululla (2024-07-20)
+#
+# ⚖️ License: GNU General Public License (v2 or later)
+#    You must NOT remove credits and must share modified code.
+# ═════════════════════════════════════════════════════════════════════
 
 # standard import
 import codecs
@@ -8,7 +17,6 @@ from datetime import datetime as dt
 from json import loads
 from re import compile, search, DOTALL
 from shutil import copy2
-from subprocess import CalledProcessError, check_output
 from sys import version_info
 
 # os import
@@ -65,6 +73,7 @@ from . import (
 	isWQHD,
 	isFHD,
 	isHD,
+	PY3,
 	RequestUrl,
 	make_request,
 	refreshPlugins,
@@ -84,22 +93,6 @@ from .LCNScanner.Lcn import (
 )
 
 
-# ======================================================================
-# LinuxsatPanel Plugin
-# Coded by masterG - oktus - pcd
-#
-# rewritten by Lululla at 20240720
-#
-# ATTENTION PLEASE...
-# This is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2, or (at your option) any later
-# version.
-# You must not remove the credits at
-# all and you must make the modified
-# code open to everyone. by Lululla
-# ======================================================================
-
 global HALIGN
 global setx
 global skin_path
@@ -109,22 +102,16 @@ global has_dpkg
 # constants
 currversion = "2.7.8"
 descplug = "Linuxsat-Support.com (Addons Panel)"
-
+_session = None
+has_dpkg = False
+setx = 0
+skin_path = ""
+if exists("/usr/bin/apt-get"):
+	has_dpkg = True
 plugin_path = resolveFilename(
 	SCOPE_PLUGINS,
 	"Extensions/{}".format("LinuxsatPanel")
 )
-
-
-PY3 = version_info.major >= 3
-skin_path = ""
-_session = None
-has_dpkg = False
-setx = 0
-
-
-if exists("/usr/bin/apt-get"):
-	has_dpkg = True
 
 
 if PY3:
@@ -146,30 +133,6 @@ if version_info >= (2, 7, 9):
 		sslContext = ssl._create_unverified_context()
 	except:
 		sslContext = None
-
-
-def create_ssl_context():
-	try:
-		import ssl
-		return ssl.create_default_context()
-	except Exception:
-		return None
-
-
-def ssl_urlopen(url):
-	sslContext = create_ssl_context()
-
-	if sslContext:
-		return urlopen(url, context=sslContext)
-	else:
-		return urlopen(url)
-
-
-def run_command(cmd):
-	try:
-		return check_output(cmd, shell=True).decode("utf-8").strip()
-	except CalledProcessError:
-		return None
 
 
 try:
@@ -1232,6 +1195,8 @@ class ScriptInstaller(Screen):
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis", "csta.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "cstapli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel", "csp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager", "csp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
+
 
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')

@@ -1,22 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-# ======================================================================
-# LinuxsatPanel Plugin
-# Coded by masterG - oktus - pcd
+from __future__ import absolute_import, print_function
+# ═════════════════════════════════════════════════════════════════════
 #
-# rewritten by Lululla at 20240720
+#  UTILITY SKIN
+#  Version: 5.4
+#  Created by Lululla (https://github.com/Belfagor2005)
+#  License: CC BY-NC-SA 4.0
+#  https://creativecommons.org/licenses/by-nc-sa/4.0
 #
-# ATTENTION PLEASE...
-# This is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2, or (at your option) any later
-# version.
-# You must not remove the credits at
-# all and you must make the modified
-# code open to everyone. by Lululla
-# ======================================================================
-from __future__ import absolute_import
+#  Last Modified: "15:14 - 20250423"
+#
+#  Credits:
+#
+# 👨‍💻 Original Developers: Lululla
+# ✍️ (2024-07-20)
+#
+# ⚖️ License: GNU General Public License (v2 or later)
+#    You must NOT remove credits and must share modified code.
+# ═════════════════════════════════════════════════════════════════════
 __author__ = "Lululla"
 __email__ = "ekekaz@gmail.com"
 __copyright__ = 'Copyright (c) 2024 Lululla'
@@ -42,25 +44,23 @@ def check_and_install_requests():
 		return
 	except ImportError:
 		pass
-	python_version = sys.version_info[0]
-	if exists("/usr/bin/apt-get"):  # Dreambox
-		pkg_manager = "apt-get -y install "
-	else:  # OpenPLi Atv - pli
-		pkg_manager = "opkg install "
 
-	if python_version == 2:
-		package = "python-requests"
+	python_version = sys.version_info[0]
+
+	if exists("/usr/bin/apt-get"):
+		pkg_manager_cmd = "apt-get -y install "
 	else:
-		package = "python3-requests"
-	system(pkg_manager + package)
+		pkg_manager_cmd = "opkg install "
+
+	package_name = "python-requests" if python_version == 2 else "python3-requests"
+	system(pkg_manager_cmd + package_name)
 
 
 check_and_install_requests()
 
 
-PY3 = False
-if sys.version_info[0] >= 3:
-	PY3 = True
+PY3 = sys.version_info[0] >= 3
+if PY3:
 	from urllib.request import urlopen
 	from urllib.error import URLError
 	from urllib.request import Request
@@ -89,9 +89,7 @@ ListUrl = [
 ]
 
 
-isDreamOS = False
-if exists("/usr/bin/apt-get"):
-	isDreamOS = True
+isDreamOS = not exists("/usr/bin/apt-get")
 
 
 def CheckConn(host='www.google.com', port=80, timeout=3):

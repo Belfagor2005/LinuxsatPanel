@@ -1,24 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-# ======================================================================
-# LinuxsatPanel Plugin
-# Coded by masterG - oktus - pcd
+from __future__ import absolute_import, print_function
+# ═════════════════════════════════════════════════════════════════════
 #
-# rewritten by Lululla at 20240720
+#  UTILITY SKIN
+#  Version: 5.4
+#  Created by Lululla (https://github.com/Belfagor2005)
+#  License: CC BY-NC-SA 4.0
+#  https://creativecommons.org/licenses/by-nc-sa/4.0
 #
-# ATTENTION PLEASE...
-# This is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2, or (at your option) any later
-# version.
-# You must not remove the credits at
-# all and you must make the modified
-# code open to everyone. by Lululla
-# ======================================================================
-from __future__ import absolute_import
-from __future__ import print_function
-from os.path import isfile
+#  Last Modified: "15:14 - 20250423"
+#
+#  Credits:
+#
+# 👨‍💻 Original Developers: Lululla
+# ✍️ (2024-07-20)
+#
+# ⚖️ License: GNU General Public License (v2 or later)
+#    You must NOT remove credits and must share modified code.
+# ═════════════════════════════════════════════════════════════════════
 from re import search
 __author__ = "Lululla"
 __email__ = "ekekaz@gmail.com"

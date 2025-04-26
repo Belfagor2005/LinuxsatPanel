@@ -1,173 +1,177 @@
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WELCOME TO 
+🎉 WELCOME TO 
 
 LINUXSAT-SUPPORT PANEL ADDONS
 
-2024.07.20 INIT RECODE PANEL PLUGIN
+🗓️ 2024.07.20 INIT RECODE PANEL PLUGIN
 
-Thank you Lululla 
+🙏 Thank you Lululla 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Support on: linuxsat-support.com
+🔗 Support on: linuxsat-support.com
 
-I am NOT responsible for any issues you may
+⚠️ I am NOT responsible for any issues you may
 encounter once you install the plugins and skins.
 However, if required, you can get help to resolve the issue.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Init version 2.0 
+
+🚀 Init version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20240809 2.1 version is online
+🆕 20240809 - 2.1 version is online
 
-Changelog:
-For Plugin Upgrade:
-yellow_long: FORCE UPDATE
-info_long: FORCE UPDATE
-green: UPDATE REQUEST
-Changelog:
---add Skins Team
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20240820 2.2 version is online
-
-Changelog:
---add Script Panel
---button fix
---skin hd/fhd fix
---minor fix
+📋 Changelog:
+🟡 Yellow (long press): FORCE UPDATE  
+ℹ️ Info (long press): FORCE UPDATE  
+🟢 Green: UPDATE REQUEST  
+➕ Added Skins Team
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20240905 2.3 version is online
+🆕 20240820 - 2.2 version is online
 
-Changelog:
---fix get_positions and paintFrame (80%)
---fix list_sort_utility
---fix make_request
---fix regex_patterns cline on cccam and oscam
---reduced source code
---lcn fix (on test button 5) (only Italy)
+📋 Changelog:
+➕ Added Script Panel  
+🛠️ Fixed button  
+🛠️ Fixed skin HD/FHD  
+🛠️ Minor fixes
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20241011 2.4 version is online
+🆕 20240905 - 2.3 version is online
 
-Changelog:
---Remove code unecessary
---fix Script Url
---fix make_request
---fix regex_patterns
---reduced source code
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20241019 2.5 version is online
-
-Changelog:
---fix MenuList
---reduced source code
+📋 Changelog:
+🛠️ Fixed get_positions and paintFrame (80%)  
+🛠️ Fixed list_sort_utility  
+🛠️ Fixed make_request  
+🛠️ Fixed regex_patterns (Cline on CCCam and Oscam)  
+🧹 Reduced source code  
+🛠️ LCN fix (Test button 5) (only Italy)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20241118 2.6 - 2.6.1 - 2.6.2 version is online
+🆕 20241011 - 2.4 version is online
 
-Changelog:
---Order List Category
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20241129 2.6.3 version is online
-
-Changelog:
---Fix Terrestrial Order
+📋 Changelog:
+🧹 Removed unnecessary code  
+🛠️ Fixed Script URL  
+🛠️ Fixed make_request  
+🛠️ Fixed regex_patterns  
+🧹 Further reduced source code
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20241212 2.6.5 version is online
+🆕 20241019 - 2.5 version is online
 
-Changelog:
---Removed skin check on NewEnigma and DreamOs
---Fix Execution Script
---Add Info on Exit
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20241224 2.6.6 version is online
-
-Changelog:
---Fix Other Execution Script
---Add Info PopUP
+📋 Changelog:
+🛠️ Fixed MenuList  
+🧹 Reduced source code
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20250105 2.6.7 version is online
+🆕 20241118 - 2.6 / 2.6.1 / 2.6.2 versions are online
 
-Changelog:
---Removed Christmas Bot
---Fix Arabic menulist
---Fix Command utility_Get
---Fix Screen
---Fix Sort & Halign
---Minor fix
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250201 2.7.2 version is online
-
-Changelog:
---Removed Arabic menulist
---Removed Halign
---Minor fix
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250202 2.7.3 version is online
-
-Changelog:
--- add WireGuard Vpn
--- add EPGImport Source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250209 2.7.4 version is online
-
-Changelog:
--- fix pick screen
--- fix info-about (New ATV Image)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250219 2.7.5 version is online
-
-Changelog:
--- add other provider
--- add Ciefp Addons
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-20250226 2.7.6 version is online
-
-Changelog:
--- fix some script
--- add Ciefp Logo
+📋 Changelog:
+➕ Order List Category
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20250303 2.7.7 version is online
+🆕 20241129 - 2.6.3 version is online
 
-Changelog:
--- fix installation
--- clear code
+📋 Changelog:
+🛠️ Fixed Terrestrial Order
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20250317 2.7.8 version is online
+🆕 20241212 - 2.6.5 version is online
 
-Changelog:
--- major fix on dreamOs
--- change code on install/remove
--- about/info fixed
--- timer fixed
--- update online fixed
+📋 Changelog:
+🧹 Removed skin check on NewEnigma and DreamOS  
+🛠️ Fixed Execution Script  
+➕ Added Info on Exit
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20241224 - 2.6.6 version is online
+
+📋 Changelog:
+🛠️ Fixed Other Execution Script  
+➕ Added Info PopUp
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250105 - 2.6.7 version is online
+
+📋 Changelog:
+🧹 Removed Christmas Bot  
+🛠️ Fixed Arabic menulist  
+🛠️ Fixed Command utility_Get  
+🛠️ Fixed Screen  
+🛠️ Fixed Sort & Halign  
+🛠️ Minor fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250201 - 2.7.2 version is online
+
+📋 Changelog:
+🧹 Removed Arabic menulist  
+🧹 Removed Halign  
+🛠️ Minor fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250202 - 2.7.3 version is online
+
+📋 Changelog:
+➕ Added WireGuard VPN  
+➕ Added EPGImport Source
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250209 - 2.7.4 version is online
+
+📋 Changelog:
+🛠️ Fixed pick screen  
+🛠️ Fixed info-about (New ATV Image)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250219 - 2.7.5 version is online
+
+📋 Changelog:
+➕ Added other provider  
+➕ Added Ciefp Addons
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250226 - 2.7.6 version is online
+
+📋 Changelog:
+🛠️ Fixed some scripts  
+➕ Added Ciefp Logo
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250303 - 2.7.7 version is online
+
+📋 Changelog:
+🛠️ Fixed installation  
+🧹 Cleared code
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250317 - 2.7.8 version is online
+
+📋 Changelog:
+🛠️ Major fix on DreamOS  
+🛠️ Changed code on install/remove  
+🛠️ Fixed about/info  
+🛠️ Fixed timer  
+🛠️ Fixed online update
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
