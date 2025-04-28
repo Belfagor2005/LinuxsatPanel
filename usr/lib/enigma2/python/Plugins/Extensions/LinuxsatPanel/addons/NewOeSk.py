@@ -20,6 +20,8 @@ from __future__ import absolute_import, print_function
 #    You must NOT remove credits and must share modified code.
 # ═════════════════════════════════════════════════════════════════════
 from re import search
+from os.path import isfile
+
 __author__ = "Lululla"
 __email__ = "ekekaz@gmail.com"
 __copyright__ = 'Copyright (c) 2024 Lululla'
