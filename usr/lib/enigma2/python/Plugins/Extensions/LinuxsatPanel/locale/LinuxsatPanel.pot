@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-03-17 21:48+0100\n"
+"POT-Creation-Date: 2025-05-07 22:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Lululla\n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -34,10 +34,8 @@ msgstr ""
 msgid "Rebuild"
 msgstr ""
 
-#: LCNScanner/Lcn.py:483 addons/File_Commander.py:88 plugin.py:393
-#: plugin.py:724 plugin.py:977 plugin.py:1298 plugin.py:1763 plugin.py:2558
-#: plugin~.py:431 plugin~.py:730 plugin~.py:983 plugin~.py:1304 plugin~.py:1770
-#: plugin~.py:2565
+#: LCNScanner/Lcn.py:483 plugin.py:374 plugin.py:708 plugin.py:961
+#: plugin.py:1212 plugin.py:1547 plugin.py:2045 plugin.py:2957
 msgid "Exit"
 msgstr ""
 
@@ -243,59 +241,33 @@ msgstr ""
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
 msgstr ""
 
-#: __init__.py:270 __init__.py:274
+#: __init__.py:268 __init__.py:272
 msgid "Free Space:"
 msgstr ""
 
-#: __init__.py:270 __init__.py:274
+#: __init__.py:268 __init__.py:272
 msgid "of"
 msgstr ""
 
-#: addons/File_Commander.py:25
-msgid "File Commander - Addon"
-msgstr ""
-
-#: addons/File_Commander.py:26
-msgid "play/show Files"
-msgstr ""
-
-#: addons/File_Commander.py:89
-msgid "Save"
-msgstr ""
-
-#: addons/File_Commander.py:90
-msgid "Del Line"
-msgstr ""
-
-#: addons/File_Commander.py:91
-msgid "Ins Line"
-msgstr ""
-
-#: plugin.py:290 plugin.py:293 plugin.py:682 plugin.py:685 plugin.py:942
-#: plugin.py:945 plugin.py:1185 plugin.py:1188 plugin.py:1744 plugin.py:1747
-#: plugin.py:2242 plugin.py:2245 plugin.py:2468 plugin.py:2471 plugin.py:2536
-#: plugin.py:2539 plugin~.py:328 plugin~.py:331 plugin~.py:688 plugin~.py:691
-#: plugin~.py:948 plugin~.py:951 plugin~.py:1191 plugin~.py:1194
-#: plugin~.py:1751 plugin~.py:1754 plugin~.py:2203 plugin~.py:2206
-#: plugin~.py:2470 plugin~.py:2473 plugin~.py:2543 plugin~.py:2546
+#: plugin.py:271 plugin.py:274 plugin.py:666 plugin.py:669 plugin.py:926
+#: plugin.py:929 plugin.py:1169 plugin.py:1172 plugin.py:1446 plugin.py:1449
+#: plugin.py:2026 plugin.py:2029 plugin.py:2533 plugin.py:2536 plugin.py:2867
+#: plugin.py:2870 plugin.py:2935 plugin.py:2938
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: plugin.py:391 plugin.py:722 plugin.py:975 plugin.py:1296 plugin.py:1785
-#: plugin.py:2261 plugin~.py:429 plugin~.py:728 plugin~.py:981 plugin~.py:1302
-#: plugin~.py:1792 plugin~.py:2222
+#: plugin.py:372 plugin.py:706 plugin.py:959 plugin.py:1210 plugin.py:1545
+#: plugin.py:2067 plugin.py:2552
 msgid "Please Wait..."
 msgstr ""
 
-#: plugin.py:392 plugin.py:598 plugin.py:723 plugin.py:897 plugin.py:976
-#: plugin.py:1150 plugin.py:1297 plugin.py:1533 plugin~.py:430 plugin~.py:604
-#: plugin~.py:729 plugin~.py:903 plugin~.py:982 plugin~.py:1156 plugin~.py:1303
-#: plugin~.py:1539
+#: plugin.py:373 plugin.py:579 plugin.py:707 plugin.py:881 plugin.py:960
+#: plugin.py:1134 plugin.py:1211 plugin.py:1391 plugin.py:1546 plugin.py:1782
 msgid "Sort A-Z"
 msgstr ""
 
-#: plugin.py:452 plugin.py:2328 plugin~.py:2336
+#: plugin.py:433 plugin.py:2642
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -305,7 +277,7 @@ msgid ""
 "Press the green button to start the update."
 msgstr ""
 
-#: plugin.py:460 plugin.py:2336
+#: plugin.py:441
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -315,40 +287,22 @@ msgid ""
 "But Not downloadable!!!"
 msgstr ""
 
-#: plugin.py:602 plugin.py:901 plugin.py:1154 plugin.py:1537 plugin~.py:608
-#: plugin~.py:907 plugin~.py:1160 plugin~.py:1543
+#: plugin.py:583 plugin.py:885 plugin.py:1138 plugin.py:1395 plugin.py:1786
 msgid "Sort Default"
 msgstr ""
 
-#: plugin.py:630 plugin~.py:636
+#: plugin.py:611
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
 "are you sure you want to continue?"
 msgstr ""
 
-#: plugin.py:671 plugin.py:931 plugin~.py:677 plugin~.py:937
+#: plugin.py:655 plugin.py:915
 msgid "Error: No Data Find."
 msgstr ""
 
-#: plugin.py:1344 plugin.py:1355 plugin.py:2114 plugin.py:2127 plugin~.py:1350
-#: plugin~.py:1361 plugin~.py:2075 plugin~.py:2088
-msgid "Do you want to Order LCN Bouquet?"
-msgstr ""
-
-#: plugin.py:1371 plugin.py:2143 plugin~.py:1377 plugin~.py:2104
-msgid ""
-"[LCNScanner] LCN scan finished\n"
-"Channels Ordered!"
-msgstr ""
-
-#: plugin.py:1383 plugin~.py:1389
-msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
-"Do you really want to continue?"
-msgstr ""
-
-#: plugin.py:1579 plugin~.py:1585
+#: plugin.py:1421 plugin.py:1828
 #, python-format
 msgid ""
 "I am NOT responsible for any issues you may\n"
@@ -359,82 +313,98 @@ msgid ""
 "Do you want to execute %s?"
 msgstr ""
 
-#: plugin.py:1584 plugin~.py:1590
+#: plugin.py:1426 plugin.py:1833
 #, python-format
 msgid ""
 "Executing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:1598 plugin~.py:1604
+#: plugin.py:1593 plugin.py:1604 plugin.py:2405 plugin.py:2418
+msgid "Do you want to Order LCN Bouquet?"
+msgstr ""
+
+#: plugin.py:1620 plugin.py:2434
+msgid ""
+"[LCNScanner] LCN scan finished\n"
+"Channels Ordered!"
+msgstr ""
+
+#: plugin.py:1632
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+
+#: plugin.py:1847
 msgid "Do you want add Cline?"
 msgstr ""
 
-#: plugin.py:1620 plugin~.py:1626
+#: plugin.py:1896
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
 msgstr ""
 
-#: plugin.py:1629 plugin~.py:1635
+#: plugin.py:1905
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
 msgstr ""
 
-#: plugin.py:1725 plugin~.py:1732
+#: plugin.py:2005
 #, python-format
 msgid ""
-"Server %s added in %s\n"
+"Server %s added to %s\n"
 "\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
+"Server: %s\n"
+"Port: %s\n"
+"User: %s\n"
+"Password: %s\n"
 msgstr ""
 
-#: plugin.py:1732 plugin~.py:1739
+#: plugin.py:2014
 #, python-format
 msgid ""
-"Server Error.\n"
+"Server error.\n"
 "\n"
-"Try again, you'll be luckier!\n"
+"Try again, you might get lucky!\n"
 "%s"
 msgstr ""
 
-#: plugin.py:1764 plugin~.py:1771
+#: plugin.py:2046
 msgid "Install"
 msgstr ""
 
-#: plugin.py:1765 plugin~.py:1772
+#: plugin.py:2047
 msgid "Remove"
 msgstr ""
 
-#: plugin.py:1766 plugin~.py:1773
+#: plugin.py:2048
 msgid "Restart enigma"
 msgstr ""
 
-#: plugin.py:1767 plugin~.py:1774
+#: plugin.py:2049
 msgid "Reload"
 msgstr ""
 
-#: plugin.py:1787 plugin~.py:1794
+#: plugin.py:2069
 msgid "Load Category..."
 msgstr ""
 
-#: plugin.py:1836 plugin~.py:1845
+#: plugin.py:2118
 msgid "Category: "
 msgstr ""
 
-#: plugin.py:1894 plugin.py:1900 plugin.py:1968 plugin.py:1974
+#: plugin.py:2175 plugin.py:2181 plugin.py:2259 plugin.py:2265
 msgid "Unknown Image!"
 msgstr ""
 
-#: plugin.py:2107 plugin~.py:2068
+#: plugin.py:2398
 msgid "Download page get failed ..."
 msgstr ""
 
-#: plugin.py:2151 plugin~.py:2112
+#: plugin.py:2442
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
@@ -444,35 +414,43 @@ msgid ""
 "Do you want to install?"
 msgstr ""
 
-#: plugin.py:2187 plugin~.py:1950 plugin~.py:2148
+#: plugin.py:2478
 #, python-format
 msgid ""
 "Installing %s\n"
 "Please Wait..."
 msgstr ""
 
-#: plugin.py:2190 plugin~.py:2151
+#: plugin.py:2481
 msgid "Settings Not Installed ..."
 msgstr ""
 
-#: plugin.py:2202 plugin~.py:2163
+#: plugin.py:2493
 msgid "Do you want to remove?"
 msgstr ""
 
-#: plugin.py:2215 plugin~.py:2176
+#: plugin.py:2506
 #, python-format
 msgid "Removing %s"
 msgstr ""
 
-#: plugin.py:2219 plugin~.py:2180
+#: plugin.py:2510
 msgid "Do you want to restart Gui Interface?"
 msgstr ""
 
-#: plugin.py:2343 plugin~.py:2340
+#: plugin.py:2651
+#, python-format
+msgid ""
+"New version %s available\n"
+"\n"
+"Changelog: %s"
+msgstr ""
+
+#: plugin.py:2659
 msgid "Update"
 msgstr ""
 
-#: plugin.py:2351 plugin~.py:2347
+#: plugin.py:2664
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -482,62 +460,82 @@ msgid ""
 "Do you want to install it now?"
 msgstr ""
 
-#: plugin.py:2364 plugin~.py:2360
+#: plugin.py:2677
 msgid "Congrats! You already have the latest version..."
 msgstr ""
 
-#: plugin.py:2376 plugin~.py:2372
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
+#: plugin.py:2691
+msgid "Failed to fetch update information. Please check your internet connection."
 msgstr ""
 
-#: plugin.py:2382 plugin~.py:2378
+#: plugin.py:2698
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+#: plugin.py:2704
+msgid "No update information available."
+msgstr ""
+
+#: plugin.py:2712
+msgid "Invalid date format in update information."
+msgstr ""
+
+#: plugin.py:2718
+#, python-format
+msgid "Do you want to install update (%s) now?"
+msgstr ""
+
+#: plugin.py:2724
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+#: plugin.py:2730
 msgid "Update Aborted!"
 msgstr ""
 
-#: plugin.py:2406 plugin~.py:2404
+#: plugin.py:2774
 msgid "Unable to download updates!"
 msgstr ""
 
-#: plugin.py:2546 plugin~.py:2553
+#: plugin.py:2945
 msgid ""
 "Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
 msgstr ""
 
-#: plugin.py:2547 plugin~.py:2554
+#: plugin.py:2946
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr ""
 
-#: plugin.py:2548 plugin~.py:2555
+#: plugin.py:2947
 msgid "Designs and Graphics by @oktus\n"
 msgstr ""
 
-#: plugin.py:2549 plugin~.py:2556
+#: plugin.py:2948
 msgid ""
 "Support on: Linuxsat-support.com\n"
 "\n"
 msgstr ""
 
-#: plugin.py:2550 plugin~.py:2557
+#: plugin.py:2949
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr ""
 
-#: plugin.py:2551 plugin~.py:2558
+#: plugin.py:2950
 msgid ""
 "A coffee costs nothing.\n"
 "\n"
 msgstr ""
 
-#: plugin.py:2552 plugin~.py:2559
+#: plugin.py:2951
 msgid "If you think it is a useful tool for your box\n"
 msgstr ""
 
-#: plugin.py:2553 plugin~.py:2560
+#: plugin.py:2952
 msgid "please make a donation:\n"
 msgstr ""
 
-#: plugin.py:2555 plugin~.py:2562
+#: plugin.py:2954
 msgid ""
 "make donation on Linuxsat-support.com\n"
 "\n"
@@ -546,23 +544,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: plugin.py:2556 plugin~.py:2563
+#: plugin.py:2955
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr ""
 
-#: plugin.py:2583 plugin~.py:2590
+#: plugin.py:2982
 msgid "Check Connection!"
 msgstr ""
 
-#: plugin.py:2606 plugin~.py:2613
+#: plugin.py:3005
 msgid "Linuxsat Panel"
-msgstr ""
-
-#: plugin~.py:1901 plugin~.py:1908
-msgid "Unknow Image!"
-msgstr ""
-
-#: plugin~.py:1917
-#, python-format
-msgid "Do you want to install %s?"
 msgstr ""

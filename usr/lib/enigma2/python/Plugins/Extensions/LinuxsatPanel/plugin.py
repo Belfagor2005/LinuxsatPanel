@@ -1188,7 +1188,7 @@ class CiefpInstaller(Screen):
 		self.urls = []
 	
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater", "ciefp_bu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager", "ciefp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager", "ciefp_cman.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter", "ciefp_ec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpIptvBouquets", "ciefp_ib.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor", "ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")

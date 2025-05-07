@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-03-03 20:27+0100\n"
+"POT-Creation-Date: 2025-05-07 22:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -33,11 +33,8 @@ msgstr "Regole LCN:"
 msgid "Rebuild"
 msgstr "Ricostruzione"
 
-#: LCNScanner/Lcn.py:483 addons/File_Commander.py:72
-#: addons/File_Commander.py:73 addons/File_Commander.py:75 lsConsole.py:123
-#: plugin.py:394 plugin.py:709 plugin.py:962 plugin.py:1283 plugin.py:1745
-#: plugin.py:2506 plugin~.py:431 plugin~.py:730 plugin~.py:983 plugin~.py:1304
-#: plugin~.py:1770 plugin~.py:2565
+#: LCNScanner/Lcn.py:483 plugin.py:374 plugin.py:708 plugin.py:961
+#: plugin.py:1212 plugin.py:1547 plugin.py:2045 plugin.py:2957
 msgid "Exit"
 msgstr "Esci"
 
@@ -268,71 +265,33 @@ msgstr ""
 "Crea un bouquet ordinato di servizi terrestri basato sui dati LCN del tuo "
 "trasmettitore locale."
 
-#: __init__.py:265 __init__.py:269
+#: __init__.py:268 __init__.py:272
 msgid "Free Space:"
 msgstr "Spazio Libero:"
 
-#: __init__.py:265 __init__.py:269
+#: __init__.py:268 __init__.py:272
 msgid "of"
 msgstr ""
 
-#: addons/File_Commander.py:16
-msgid "File Commander - Addon"
-msgstr "File Commander - Addon"
-
-#: addons/File_Commander.py:17
-msgid "play/show Files"
-msgstr "play/show Files"
-
-#: addons/File_Commander.py:74
-msgid "Save"
-msgstr "Salva"
-
-#: lsConsole.py:56
-msgid "Cancel"
-msgstr "Annulla"
-
-#: lsConsole.py:57
-msgid "Hide/Show"
-msgstr "Nascondi/Mostra"
-
-#: lsConsole.py:58
-msgid "Restart"
-msgstr "Riavvia"
-
-#: lsConsole.py:90
-msgid ""
-"Execution progress\n"
-"\n"
-msgstr ""
-"Esecuzione in corso\n"
-"\n"
-
-#: plugin.py:291 plugin.py:294 plugin.py:667 plugin.py:670 plugin.py:927
-#: plugin.py:930 plugin.py:1170 plugin.py:1173 plugin.py:1726 plugin.py:1729
-#: plugin.py:2220 plugin.py:2223 plugin.py:2421 plugin.py:2424 plugin.py:2484
-#: plugin.py:2487 plugin~.py:328 plugin~.py:331 plugin~.py:688 plugin~.py:691
-#: plugin~.py:948 plugin~.py:951 plugin~.py:1191 plugin~.py:1194
-#: plugin~.py:1751 plugin~.py:1754 plugin~.py:2203 plugin~.py:2206
-#: plugin~.py:2470 plugin~.py:2473 plugin~.py:2543 plugin~.py:2546
+#: plugin.py:271 plugin.py:274 plugin.py:666 plugin.py:669 plugin.py:926
+#: plugin.py:929 plugin.py:1169 plugin.py:1172 plugin.py:1446 plugin.py:1449
+#: plugin.py:2026 plugin.py:2029 plugin.py:2533 plugin.py:2536 plugin.py:2867
+#: plugin.py:2870 plugin.py:2935 plugin.py:2938
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: plugin.py:392 plugin.py:707 plugin.py:960 plugin.py:1281 plugin.py:1767
-#: plugin.py:2239 plugin~.py:429 plugin~.py:728 plugin~.py:981 plugin~.py:1302
-#: plugin~.py:1792 plugin~.py:2222
+#: plugin.py:372 plugin.py:706 plugin.py:959 plugin.py:1210 plugin.py:1545
+#: plugin.py:2067 plugin.py:2552
 msgid "Please Wait..."
 msgstr "Attendi Prego..."
 
-#: plugin.py:393 plugin.py:583 plugin.py:708 plugin.py:882 plugin.py:961
-#: plugin.py:1135 plugin.py:1282 plugin.py:1515 plugin~.py:430 plugin~.py:604
-#: plugin~.py:729 plugin~.py:903 plugin~.py:982 plugin~.py:1156 plugin~.py:1303
-#: plugin~.py:1539
+#: plugin.py:373 plugin.py:579 plugin.py:707 plugin.py:881 plugin.py:960
+#: plugin.py:1134 plugin.py:1211 plugin.py:1391 plugin.py:1546 plugin.py:1782
 msgid "Sort A-Z"
 msgstr "Ordinamento A-Z"
 
-#: plugin.py:447 plugin.py:2292 plugin~.py:2336
+#: plugin.py:433 plugin.py:2642
 #, python-format
 msgid ""
 "New version %s available\n"
@@ -347,12 +306,26 @@ msgstr ""
 "\n"
 "Premere il pulsante verde per avviare l'aggiornamento."
 
-#: plugin.py:587 plugin.py:886 plugin.py:1139 plugin.py:1519 plugin~.py:608
-#: plugin~.py:907 plugin~.py:1160 plugin~.py:1543
+#: plugin.py:441
+#, python-format
+msgid ""
+"New version %s available\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"But Not downloadable!!!"
+msgstr ""
+"Nuova versione %s disponibile\n"
+"\n"
+"Changelog: %s\n"
+"\n"
+"Ma non scaricabile!!!"
+
+#: plugin.py:583 plugin.py:885 plugin.py:1138 plugin.py:1395 plugin.py:1786
 msgid "Sort Default"
 msgstr "Ordinamento Predefinito"
 
-#: plugin.py:615 plugin~.py:636
+#: plugin.py:611
 msgid ""
 "These Panel may contain Adult content\n"
 "\n"
@@ -362,34 +335,11 @@ msgstr ""
 "\n"
 "Sei sicuro di voler continuare?"
 
-#: plugin.py:656 plugin.py:916 plugin~.py:677 plugin~.py:937
+#: plugin.py:655 plugin.py:915
 msgid "Error: No Data Find."
 msgstr ""
 
-#: plugin.py:1329 plugin.py:1340 plugin.py:2092 plugin.py:2105 plugin~.py:1350
-#: plugin~.py:1361 plugin~.py:2075 plugin~.py:2088
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Vuoi ordinare il bouquet LCN?"
-
-#: plugin.py:1356 plugin.py:2121 plugin~.py:1377 plugin~.py:2104
-msgid ""
-"[LCNScanner] LCN scan finished\n"
-"Channels Ordered!"
-msgstr ""
-"[LCNScanner] Scansione LCN completata\n"
-"Canali ordinati!"
-
-#: plugin.py:1368 plugin~.py:1389
-msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not "
-"sure)..\n"
-"Do you really want to continue?"
-msgstr ""
-"[Checkskin] Questa operazione controlla se la skin ha i suoi componenti (non "
-"è sicuro).\n"
-"Vuoi davvero continuare?"
-
-#: plugin.py:1561 plugin~.py:1585
+#: plugin.py:1421 plugin.py:1828
 #, python-format
 msgid ""
 "I am NOT responsible for any issues you may\n"
@@ -408,7 +358,7 @@ msgstr ""
 "\n"
 "Vuoi eseguire %s?"
 
-#: plugin.py:1566 plugin~.py:1590
+#: plugin.py:1426 plugin.py:1833
 #, python-format
 msgid ""
 "Executing %s\n"
@@ -417,11 +367,33 @@ msgstr ""
 "Eseguo %s\n"
 "Attendere Prego..."
 
-#: plugin.py:1580 plugin~.py:1604
+#: plugin.py:1593 plugin.py:1604 plugin.py:2405 plugin.py:2418
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Vuoi ordinare il bouquet LCN?"
+
+#: plugin.py:1620 plugin.py:2434
+msgid ""
+"[LCNScanner] LCN scan finished\n"
+"Channels Ordered!"
+msgstr ""
+"[LCNScanner] Scansione LCN completata\n"
+"Canali ordinati!"
+
+#: plugin.py:1632
+msgid ""
+"[Checkskin] This operation checks if the skin has its components (is not "
+"sure)..\n"
+"Do you really want to continue?"
+msgstr ""
+"[Checkskin] Questa operazione controlla se la skin ha i suoi componenti (non "
+"è sicuro).\n"
+"Vuoi davvero continuare?"
+
+#: plugin.py:1847
 msgid "Do you want add Cline?"
 msgstr "Vuoi aggiungere Cine?"
 
-#: plugin.py:1602 plugin~.py:1626
+#: plugin.py:1896
 msgid ""
 "File not found /etc/CCcam.cfg!\n"
 "Restart please..."
@@ -429,7 +401,7 @@ msgstr ""
 "File non trovato /etc/CCcam.cfg!\n"
 "Riavvia prego..."
 
-#: plugin.py:1611 plugin~.py:1635
+#: plugin.py:1905
 msgid ""
 "File not found /etc/tuxbox/config/oscam.server!\n"
 "Restart please..."
@@ -437,69 +409,69 @@ msgstr ""
 "File non trovato /etc/tuxbox/config/oscam.server!\n"
 "Riavvia prego..."
 
-#: plugin.py:1707 plugin~.py:1732
+#: plugin.py:2005
 #, python-format
 msgid ""
-"Server %s added in %s\n"
+"Server %s added to %s\n"
 "\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
+"Server: %s\n"
+"Port: %s\n"
+"User: %s\n"
+"Password: %s\n"
 msgstr ""
-"Server %s added in %s\n"
+"Server %s aggiunto a %s\n"
 "\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
+"Server: %s\n"
+"Porta: %s\n"
+"Utente: %s\n"
+"Password: %s\n"
 
-#: plugin.py:1714 plugin~.py:1739
+#: plugin.py:2014
 #, python-format
 msgid ""
-"Server Error.\n"
+"Server error.\n"
 "\n"
-"Try again, you'll be luckier!\n"
+"Try again, you might get lucky!\n"
 "%s"
 msgstr ""
-"Server Error.\n"
+"Errore del server.\n"
 "\n"
-"Riprova, sarai più fortunato!\n"
+"Riprova, potresti essere fortunato!\n"
 "%s"
 
-#: plugin.py:1746 plugin~.py:1771
+#: plugin.py:2046
 msgid "Install"
 msgstr "Installa/Aggiorna"
 
-#: plugin.py:1747 plugin~.py:1772
+#: plugin.py:2047
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: plugin.py:1748 plugin~.py:1773
+#: plugin.py:2048
 msgid "Restart enigma"
 msgstr "Riavvia Enigma"
 
-#: plugin.py:1749 plugin~.py:1774
+#: plugin.py:2049
 msgid "Reload"
 msgstr "Ricarica"
 
-#: plugin.py:1769 plugin~.py:1794
+#: plugin.py:2069
 msgid "Load Category..."
 msgstr "Carico Categoria..."
 
-#: plugin.py:1814 plugin~.py:1845
+#: plugin.py:2118
 msgid "Category: "
 msgstr "Categoria: "
 
-#: plugin.py:1872 plugin.py:1878 plugin.py:1946 plugin.py:1952
+#: plugin.py:2175 plugin.py:2181 plugin.py:2259 plugin.py:2265
 msgid "Unknown Image!"
 msgstr "Immagine non corretta!"
 
-#: plugin.py:2085 plugin~.py:2068
+#: plugin.py:2398
 msgid "Download page get failed ..."
 msgstr "La pagina di download non è riuscita ..."
 
-#: plugin.py:2129 plugin~.py:2112
+#: plugin.py:2442
 msgid ""
 "I am NOT responsible for any issues you may\n"
 "encounter once you install the plugins and skins.\n"
@@ -516,7 +488,7 @@ msgstr ""
 "\n"
 "Vuoi installare?"
 
-#: plugin.py:2165 plugin~.py:1950 plugin~.py:2148
+#: plugin.py:2478
 #, python-format
 msgid ""
 "Installing %s\n"
@@ -525,28 +497,39 @@ msgstr ""
 "Installa %s\n"
 "Attendere Prego..."
 
-#: plugin.py:2168 plugin~.py:2151
+#: plugin.py:2481
 msgid "Settings Not Installed ..."
 msgstr "Liste canali non installate..."
 
-#: plugin.py:2180 plugin~.py:2163
+#: plugin.py:2493
 msgid "Do you want to remove?"
 msgstr "Vuoi rimuovere ?"
 
-#: plugin.py:2193 plugin~.py:2176
+#: plugin.py:2506
 #, python-format
 msgid "Removing %s"
 msgstr "Rimuovo %s"
 
-#: plugin.py:2197 plugin~.py:2180
+#: plugin.py:2510
 msgid "Do you want to restart Gui Interface?"
 msgstr "Vuoi riavviare l'Interfaccia Grafica?"
 
-#: plugin.py:2296 plugin~.py:2340
+#: plugin.py:2651
+#, python-format
+msgid ""
+"New version %s available\n"
+"\n"
+"Changelog: %s"
+msgstr ""
+"Nuova versione %s disponibile\n"
+"\n"
+"Changelog: %s"
+
+#: plugin.py:2659
 msgid "Update"
 msgstr "Aggiornare"
 
-#: plugin.py:2303 plugin~.py:2347
+#: plugin.py:2664
 #, python-format
 msgid ""
 "New version %s is available.\n"
@@ -561,24 +544,48 @@ msgstr ""
 "\n"
 "Vuoi installarla ora?"
 
-#: plugin.py:2316 plugin~.py:2360
+#: plugin.py:2677
 msgid "Congrats! You already have the latest version..."
 msgstr "Congratulazioni! Hai già l'ultima versione..."
 
-#: plugin.py:2328 plugin~.py:2372
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Vuoi installare l'aggiornamento (%s)ora ?"
+#: plugin.py:2691
+msgid ""
+"Failed to fetch update information. Please check your internet connection."
+msgstr ""
+"Impossibile recuperare le informazioni di aggiornamento. Controlla la tua "
+"connessione internet."
 
-#: plugin.py:2334 plugin~.py:2378
+#: plugin.py:2698
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+"Impossibile analizzare le informazioni di aggiornamento. Riprova più tardi."
+
+#: plugin.py:2704
+msgid "No update information available."
+msgstr "Nessuna informazione disponibile sugli aggiornamenti."
+
+#: plugin.py:2712
+msgid "Invalid date format in update information."
+msgstr "Formato data non valido nelle informazioni di aggiornamento."
+
+#: plugin.py:2718
+#, python-format
+msgid "Do you want to install update (%s) now?"
+msgstr "Vuoi installare l'aggiornamento (%s) adesso?"
+
+#: plugin.py:2724
+msgid "An unexpected error occurred. Please try again later."
+msgstr "Si è verificato un errore imprevisto. Riprova più tardi."
+
+#: plugin.py:2730
 msgid "Update Aborted!"
 msgstr "Aggionamento Annullato!"
 
-#: plugin.py:2358 plugin~.py:2404
+#: plugin.py:2774
 msgid "Unable to download updates!"
 msgstr "Impossibile scaricare aggiornamento!"
 
-#: plugin.py:2494 plugin~.py:2553
+#: plugin.py:2945
 msgid ""
 "Thank you for choosing plugin for management of your Enigma Box.\n"
 "\n"
@@ -586,15 +593,15 @@ msgstr ""
 "Grazie per aver scelto il plugin per la gestione del tuo Enigma Box.\n"
 "\n"
 
-#: plugin.py:2495 plugin~.py:2554
+#: plugin.py:2946
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr "Suggerito da: @masterG - @oktus - @pcd\n"
 
-#: plugin.py:2496 plugin~.py:2555
+#: plugin.py:2947
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Design e grafica di @oktus\n"
 
-#: plugin.py:2497 plugin~.py:2556
+#: plugin.py:2948
 msgid ""
 "Support on: Linuxsat-support.com\n"
 "\n"
@@ -602,11 +609,11 @@ msgstr ""
 "Supporto su: Linuxsat-support.com\n"
 "\n"
 
-#: plugin.py:2498 plugin~.py:2557
+#: plugin.py:2949
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr "Il Plugin vive grazie alle donazioni di ognuno di voi.\n"
 
-#: plugin.py:2499 plugin~.py:2558
+#: plugin.py:2950
 msgid ""
 "A coffee costs nothing.\n"
 "\n"
@@ -615,15 +622,15 @@ msgstr ""
 "\n"
 "\n"
 
-#: plugin.py:2500 plugin~.py:2559
+#: plugin.py:2951
 msgid "If you think it is a useful tool for your box\n"
 msgstr "Se pensi che sia uno strumento utile per il tuo box\n"
 
-#: plugin.py:2501 plugin~.py:2560
+#: plugin.py:2952
 msgid "please make a donation:\n"
 msgstr "per favore fai una donazione:\n"
 
-#: plugin.py:2503 plugin~.py:2562
+#: plugin.py:2954
 msgid ""
 "make donation on Linuxsat-support.com\n"
 "\n"
@@ -637,26 +644,49 @@ msgstr ""
 "\n"
 "\n"
 
-#: plugin.py:2504 plugin~.py:2563
+#: plugin.py:2955
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr "Tutto il codice è stato riscritto da @Lululla - 2024.07.20\n"
 
-#: plugin.py:2531 plugin~.py:2590
+#: plugin.py:2982
 msgid "Check Connection!"
 msgstr "Controlla Connessione!"
 
-#: plugin.py:2554 plugin~.py:2613
+#: plugin.py:3005
 msgid "Linuxsat Panel"
 msgstr "Linuxsat Panel"
 
-#: plugin~.py:1901 plugin~.py:1908
-msgid "Unknow Image!"
-msgstr "Immagine non corretta!"
+#~ msgid "File Commander - Addon"
+#~ msgstr "File Commander - Addon"
 
-#: plugin~.py:1917
+#~ msgid "play/show Files"
+#~ msgstr "play/show Files"
+
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
+
+#~ msgid "Hide/Show"
+#~ msgstr "Nascondi/Mostra"
+
+#~ msgid "Restart"
+#~ msgstr "Riavvia"
+
+#~ msgid ""
+#~ "Execution progress\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Esecuzione in corso\n"
+#~ "\n"
+
+#~ msgid "Unknow Image!"
+#~ msgstr "Immagine non corretta!"
+
 #, python-format
-msgid "Do you want to install %s?"
-msgstr "Vuoi installare %s ?"
+#~ msgid "Do you want to install %s?"
+#~ msgstr "Vuoi installare %s ?"
 
 #~ msgid "Halign Left"
 #~ msgstr "Allinea Sx"
