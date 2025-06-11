@@ -108,7 +108,7 @@ global has_dpkg
 
 
 # constants
-currversion = "2.7.9"
+currversion = "2.8.0"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 _session = None
 has_dpkg = False
@@ -1476,10 +1476,10 @@ class ScriptInstaller(Screen):
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
 
-		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MOHAMED", "E2playerMOHAMED.png", 'wget -qO- --no-check-certificate https://mohamed_os.gitlab.io/e2iplayer/online-setup -O - | /bin/sh')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -qO- --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q- --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q- --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player BYKO-73", "E2playerBiko-73.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/biko-73/E2IPlayer/main/installer-tar.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -q --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+		# add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
 
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport - source", "epgsource.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false" -O - | /bin/sh')
 

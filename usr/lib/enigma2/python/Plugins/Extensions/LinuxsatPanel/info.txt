@@ -175,3 +175,17 @@ However, if required, you can get help to resolve the issue.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+🆕 20250317 - 2.7.9 version is online
+
+📋 Changelog:
+🛠️ Fixed screen  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250317 - 2.8.0 version is online
+
+📋 Changelog:
+🛠️ Add Biko-73 E2player Script
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
