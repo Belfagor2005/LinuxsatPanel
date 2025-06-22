@@ -189,3 +189,10 @@ However, if required, you can get help to resolve the issue.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+🆕 20250621 - 2.8.1 version is online
+
+📋 Changelog:
+🛠️ Minor fix  
+🛠️ Add script  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

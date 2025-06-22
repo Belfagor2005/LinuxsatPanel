@@ -3,8 +3,8 @@
 ## setup command=wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/bash
 
 ## Only This 2 lines to edit with new version ######
-version='2.8.0'
-changelog="\n-- E2player BYKO-73 add"
+version='2.8.1'
+changelog="\n--add Script"
 
 ##############################################################
 
