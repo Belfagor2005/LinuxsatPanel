@@ -196,3 +196,11 @@ However, if required, you can get help to resolve the issue.
 🛠️ Add script  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20250812 - 2.8.2 version is online
+
+📋 Changelog:
+🛠️ Minor fix  
+🛠️ Add script  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

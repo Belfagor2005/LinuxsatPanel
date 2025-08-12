@@ -1,7 +1,7 @@
 #!/bin/bash
 ## setup command=wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/installer.sh -O - | /bin/bash
 
-version='2.8.1'
+version='2.8.2'
 changelog="\n--add Script"
 TMPPATH=/tmp/LinuxsatPanel-main
 FILEPATH=/tmp/linuxsatpanel.tar.gz
