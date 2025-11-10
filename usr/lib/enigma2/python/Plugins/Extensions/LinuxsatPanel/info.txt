@@ -204,3 +204,11 @@ However, if required, you can get help to resolve the issue.
 🛠️ Add script  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20251110 - 2.8.3 version is online
+
+📋 Changelog:
+🛠️ Minor fix  
+🛠️ Add script  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

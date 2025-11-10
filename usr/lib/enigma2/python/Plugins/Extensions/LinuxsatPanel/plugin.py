@@ -108,7 +108,7 @@ global has_dpkg
 
 
 # constants
-currversion = "2.8.2"
+currversion = "2.8.3"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 _session = None
 has_dpkg = False
@@ -632,7 +632,7 @@ class LinuxsatPanel(Screen):
 
 		elif name == "Ciefp ":
 			self.session.open(CiefpInstaller, name)
-			
+
 		elif name == "Channel List ":
 			self.session.open(LSChannel, name)
 
@@ -1186,15 +1186,16 @@ class CiefpInstaller(Screen):
 		self.titles = []
 		self.pics = []
 		self.urls = []
-	
+
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater", "ciefp_bu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager", "ciefp_cman.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter", "ciefp_ec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpIptvBouquets", "ciefp_ib.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpMojTvEPG", "ciefp_mojtvepg.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpMojTvEPG/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOpenDirectory", "ciefp_opdir.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOpenDirectories/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOscamEditor", "ciefp_oe.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor", "ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteAnalizer", "ciefp_satan.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteAnalyzer/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor", "ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite", "ciefp_ss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader", "ciefp_sd.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "ciefp_sr2.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")

@@ -1,15 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# RAED & mfaraj57 &  (c) 2018
+# mod Lululla 20240720
+
 from __future__ import print_function
-# ═════════════════════════════════════════════════════════════════════
-# 📦 LinuxsatPanel Plugin
-#
-# 👨‍💻 Original Developers: RAED & mfaraj57 &  (c) 2018
-# ✍️ Rewritten by: Lululla (2024-07-20)
-#
-# ⚖️ License: GNU General Public License (v2 or later)
-#    You must NOT remove credits and must share modified code.
-# ═════════════════════════════════════════════════════════════════════
+# from . import _
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -61,20 +56,16 @@ class lsConsole(Screen):
 		self['key_green'] = Label('Hide/Show')
 		self['key_blue'] = Label('Restart')
 
-		self["actions"] = ActionMap(
-			["WizardActions", "DirectionActions", "ColorActions"],
-			{
-				"ok": self.cancel,
-				"up": self["text"].pageUp,
-				"down": self["text"].pageDown,
-				"red": self.cancel,
-				"green": self.toggleHideShow,
-				"blue": self.restartenigma,
-				"exit": self.cancel,
-			},
-			-1
-		)
-
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
+									{
+									"ok": self.cancel,
+									"up": self["text"].pageUp,
+									"down": self["text"].pageDown,
+									"red": self.cancel,
+									"green": self.toggleHideShow,
+									"blue": self.restartenigma,
+									"exit": self.cancel,
+									}, -1)
 		self.newtitle = title == 'Linuxsat-support Console' and ('Console') or title
 		self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
 		self.cancel_msg = None
