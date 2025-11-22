@@ -21,194 +21,156 @@ However, if required, you can get help to resolve the issue.
 🚀 Init version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-🆕 20240809 - 2.1 version is online
-
+🆕 20251122 - 2.8.4 version is online
 📋 Changelog:
-🟡 Yellow (long press): FORCE UPDATE  
-ℹ️ Info (long press): FORCE UPDATE  
-🟢 Green: UPDATE REQUEST  
-➕ Added Skins Team
+🛠️ Add script
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+🆕 20251110 - 2.8.3 version is online  
+📋 Changelog:  
+🛠️ Minor fix  
+🛠️ Add script  
+```
 
-🆕 20240820 - 2.2 version is online
-
+🆕 20250812 - 2.8.2 version is online
 📋 Changelog:
-➕ Added Script Panel  
-🛠️ Fixed button  
-🛠️ Fixed skin HD/FHD  
+🛠️ Minor fix
+🛠️ Add script
+
+```
+🆕 20250621 - 2.8.1 version is online  
+📋 Changelog:  
+🛠️ Minor fix  
+🛠️ Add script  
+```
+
+🆕 20250317 - 2.8.0 version is online
+📋 Changelog:
+🛠️ Add Biko-73 E2player Script
+
+```
+🆕 20250317 - 2.7.9 version is online  
+📋 Changelog:  
+🛠️ Fixed screen  
+```
+
+🆕 20250317 - 2.7.8 version is online
+📋 Changelog:
+🛠️ Major fix on DreamOS
+🛠️ Changed code on install/remove
+🛠️ Fixed about/info
+🛠️ Fixed timer
+🛠️ Fixed online update
+
+```
+🆕 20250303 - 2.7.7 version is online  
+📋 Changelog:  
+🛠️ Fixed installation  
+🧹 Cleared code  
+```
+
+🆕 20250226 - 2.7.6 version is online
+📋 Changelog:
+🛠️ Fixed some scripts
+➕ Added Ciefp Logo
+
+```
+🆕 20250219 - 2.7.5 version is online  
+📋 Changelog:  
+➕ Added other provider  
+➕ Added Ciefp Addons  
+```
+
+🆕 20250209 - 2.7.4 version is online
+📋 Changelog:
+🛠️ Fixed pick screen
+🛠️ Fixed info-about (New ATV Image)
+
+```
+🆕 20250202 - 2.7.3 version is online  
+📋 Changelog:  
+➕ Added WireGuard VPN  
+➕ Added EPGImport Source  
+```
+
+🆕 20250201 - 2.7.2 version is online
+📋 Changelog:
+🧹 Removed Arabic menulist
+🧹 Removed Halign
 🛠️ Minor fixes
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20240905 - 2.3 version is online
-
-📋 Changelog:
-🛠️ Fixed get_positions and paintFrame (80%)  
-🛠️ Fixed list_sort_utility  
-🛠️ Fixed make_request  
-🛠️ Fixed regex_patterns (Cline on CCCam and Oscam)  
-🧹 Reduced source code  
-🛠️ LCN fix (Test button 5) (only Italy)
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241011 - 2.4 version is online
-
-📋 Changelog:
-🧹 Removed unnecessary code  
-🛠️ Fixed Script URL  
-🛠️ Fixed make_request  
-🛠️ Fixed regex_patterns  
-🧹 Further reduced source code
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241019 - 2.5 version is online
-
-📋 Changelog:
-🛠️ Fixed MenuList  
-🧹 Reduced source code
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241118 - 2.6 / 2.6.1 / 2.6.2 versions are online
-
-📋 Changelog:
-➕ Order List Category
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241129 - 2.6.3 version is online
-
-📋 Changelog:
-🛠️ Fixed Terrestrial Order
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241212 - 2.6.5 version is online
-
-📋 Changelog:
-🧹 Removed skin check on NewEnigma and DreamOS  
-🛠️ Fixed Execution Script  
-➕ Added Info on Exit
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20241224 - 2.6.6 version is online
-
-📋 Changelog:
-🛠️ Fixed Other Execution Script  
-➕ Added Info PopUp
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250105 - 2.6.7 version is online
-
-📋 Changelog:
+```
+🆕 20250105 - 2.6.7 version is online  
+📋 Changelog:  
 🧹 Removed Christmas Bot  
 🛠️ Fixed Arabic menulist  
 🛠️ Fixed Command utility_Get  
 🛠️ Fixed Screen  
 🛠️ Fixed Sort & Halign  
-🛠️ Minor fixes
+🛠️ Minor fixes  
+```
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250201 - 2.7.2 version is online
-
+🆕 20241224 - 2.6.6 version is online
 📋 Changelog:
-🧹 Removed Arabic menulist  
-🧹 Removed Halign  
-🛠️ Minor fixes
+🛠️ Fixed Other Execution Script
+➕ Added Info PopUp
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+🆕 20241212 - 2.6.5 version is online  
+📋 Changelog:  
+🧹 Removed skin check on NewEnigma and DreamOS  
+🛠️ Fixed Execution Script  
+➕ Added Info on Exit  
+```
 
-🆕 20250202 - 2.7.3 version is online
-
+🆕 20241129 - 2.6.3 version is online
 📋 Changelog:
-➕ Added WireGuard VPN  
-➕ Added EPGImport Source
+🛠️ Fixed Terrestrial Order
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+🆕 20241118 - 2.6 / 2.6.1 / 2.6.2 versions are online  
+📋 Changelog:  
+➕ Order List Category  
+```
 
-🆕 20250209 - 2.7.4 version is online
-
+🆕 20241019 - 2.5 version is online
 📋 Changelog:
-🛠️ Fixed pick screen  
-🛠️ Fixed info-about (New ATV Image)
+🛠️ Fixed MenuList
+🧹 Reduced source code
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+🆕 20241011 - 2.4 version is online  
+📋 Changelog:  
+🧹 Removed unnecessary code  
+🛠️ Fixed Script URL  
+🛠️ Fixed make_request  
+🛠️ Fixed regex_patterns  
+🧹 Further reduced source code  
+```
 
-🆕 20250219 - 2.7.5 version is online
-
+🆕 20240905 - 2.3 version is online
 📋 Changelog:
-➕ Added other provider  
-➕ Added Ciefp Addons
+🛠️ Fixed get_positions and paintFrame (80%)
+🛠️ Fixed list_sort_utility
+🛠️ Fixed make_request
+🛠️ Fixed regex_patterns (Cline on CCCam and Oscam)
+🧹 Reduced source code
+🛠️ LCN fix (Test button 5) (only Italy)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+🆕 20240820 - 2.2 version is online  
+📋 Changelog:  
+➕ Added Script Panel  
+🛠️ Fixed button  
+🛠️ Fixed skin HD/FHD  
+🛠️ Minor fixes  
+```
 
-🆕 20250226 - 2.7.6 version is online
-
+🆕 20240809 - 2.1 version is online
 📋 Changelog:
-🛠️ Fixed some scripts  
-➕ Added Ciefp Logo
+🟡 Yellow (long press): FORCE UPDATE
+ℹ️ Info (long press): FORCE UPDATE
+🟢 Green: UPDATE REQUEST
+➕ Added Skins Team
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250303 - 2.7.7 version is online
-
-📋 Changelog:
-🛠️ Fixed installation  
-🧹 Cleared code
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250317 - 2.7.8 version is online
-
-📋 Changelog:
-🛠️ Major fix on DreamOS  
-🛠️ Changed code on install/remove  
-🛠️ Fixed about/info  
-🛠️ Fixed timer  
-🛠️ Fixed online update
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250317 - 2.7.9 version is online
-
-📋 Changelog:
-🛠️ Fixed screen  
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250317 - 2.8.0 version is online
-
-📋 Changelog:
-🛠️ Add Biko-73 E2player Script
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250621 - 2.8.1 version is online
-
-📋 Changelog:
-🛠️ Minor fix  
-🛠️ Add script  
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20250812 - 2.8.2 version is online
-
-📋 Changelog:
-🛠️ Minor fix  
-🛠️ Add script  
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-🆕 20251110 - 2.8.3 version is online
-
-📋 Changelog:
-🛠️ Minor fix  
-🛠️ Add script  
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---

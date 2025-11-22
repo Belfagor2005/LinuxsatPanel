@@ -108,7 +108,7 @@ global has_dpkg
 
 
 # constants
-currversion = "2.8.3"
+currversion = "2.8.4"
 descplug = "Linuxsat-Support.com (Addons Panel)"
 _session = None
 has_dpkg = False
@@ -1206,6 +1206,7 @@ class CiefpInstaller(Screen):
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay",	"ciefp_wls.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor",			"ciefp_sm.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
 		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel",			"ciefp_sp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "WebCamE2PrenjSF",				"ciefp_webcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/WebCamE2PrenjSF/main/installer.sh -O - | /bin/sh")
 
 		self.names = menu_list
 		self.sorted = False
