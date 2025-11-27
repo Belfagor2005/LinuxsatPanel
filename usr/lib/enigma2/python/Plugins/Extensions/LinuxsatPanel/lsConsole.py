@@ -165,23 +165,32 @@ class lsConsole(Screen):
 
     def dataAvail(self, data):
         try:
-            # Prova UTF-8 normale
-            text = data.decode('utf-8')
-        except UnicodeDecodeError:
-            try:
-                # Fallback 1: Latin-1 (accetta qualsiasi byte)
-                text = data.decode('latin-1')
-            except:
+            if isinstance(data, str):
+                text = data
+            else:
                 try:
-                    # Fallback 2: Ignora caratteri problematici
-                    text = data.decode('utf-8', errors='ignore')
-                except:
-                    # Ultima risorsa: replacement
-                    text = data.decode('utf-8', errors='replace')
-        
-        data += text
-        print("[Console] Data received: ", data)
-        self['text'].appendText(data)
+                    text = data.decode('utf-8')
+                except UnicodeDecodeError:
+                    try:
+                        text = data.decode('latin-1')
+                    except:
+                        try:
+                            text = data.decode('utf-8', errors='ignore')
+                        except:
+                            text = data.decode('utf-8', errors='replace')
+
+            print("[Console] Data received: ", text)
+            self['text'].appendText(text)
+
+        except Exception as e:
+            print("Error in dataAvail:", str(e))
+            try:
+                if isinstance(data, bytes):
+                    self['text'].appendText(data.decode('utf-8', errors='ignore'))
+                else:
+                    self['text'].appendText(str(data))
+            except:
+                self['text'].appendText("Data output")
 
     def restartenigma(self):
         from Screens.Standby import TryQuitMainloop
