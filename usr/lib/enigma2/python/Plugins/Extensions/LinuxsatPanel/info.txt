@@ -20,6 +20,11 @@ However, if required, you can get help to resolve the issue.
 
 🚀 Init version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+🆕 20251122 - 2.8.5 version is online
+📋 Changelog:
+🛠️ Add script
+
+```
 
 🆕 20251122 - 2.8.4 version is online
 📋 Changelog:
