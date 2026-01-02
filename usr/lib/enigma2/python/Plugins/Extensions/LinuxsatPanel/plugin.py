@@ -1,27 +1,201 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""
+###########################################################
+#  Linuxsat Panel v2.8.5 - Professional Addons Manager    #
+#  Created by: masterG, oktus, pcd                        #
+#  Rewritten by: Lululla (2024-07-20)                     #
+###########################################################
 
-# standard import
+MAIN FEATURES:
+• Comprehensive plugin/skin/script installer for Enigma2
+• Support for both OE2.0 (ipkg) and OE2.2/2.5/2.6 (dpkg) systems
+• Multi-resolution support (HD, FHD, WQHD)
+• Interactive grid-based navigation with visual feedback
+• Integrated console output viewer for installation logs
+• Free server line integration (CCcam/Oscam)
+• LCN Scanner for channel ordering
+• Skin component checker
+• Direct script execution from GitHub repositories
+
+NEW IN v2.8.4:
+UNIVERSAL ICON NAVIGATION - 20-icon grid with wrap-around navigation
+INTELLIGENT CATEGORY SORTING - A-Z sorting with preservation of original order
+REAL-TIME SPACE MONITORING - Free space display during installation
+AUTO-UPDATE CHECKER - Background version checking with notification
+MULTI-SOURCE SUPPORT - XML-based plugin database + direct GitHub scripts
+ADVANCED ERROR HANDLING - Comprehensive error reporting and recovery
+
+KEY CONTROLS - MAIN GRID:
+OK     - Open selected category/execute action
+EXIT   - Open About/Exit panel
+RED    - Exit to About screen
+0      - Toggle A-Z/Default sorting
+LEFT   - Move left in grid (wrap-around)
+RIGHT  - Move right in grid (wrap-around) 
+UP     - Move up 5 positions (wrap-around)
+DOWN   - Move down 5 positions (wrap-around)
+INFO   - Show system information
+MENU   - Open About/Exit panel
+
+UNIVERSAL NAVIGATION CONTROLS (ALL SCREENS):
+• 20-item grid with visual frame indicator
+• Multi-page support for large categories
+• Page indicators and position tracking
+• Quick jump to first/last item
+• Position-based highlighting
+
+INSTALLATION SYSTEM:
+• Support for .ipk (OE2.0), .deb (OE2.2+), .zip, .tar, .gz, .bz2
+• Automatic dependency handling
+• Installation status checking (already installed detection)
+• Safe removal with dependency checking
+• Console output capture and display
+
+SPECIAL FEATURES:
+• Ciefp Installer - Direct installation of all Ciefp plugins
+• Channel Lists - Multiple provider support (CIEFP, CYRUS, MANUTEK, etc.)
+• Script Installer - One-click installation of 40+ community scripts
+• Free Line Integration - Automatic C-line retrieval and configuration
+• LCN Scanner - Automatic channel numbering for terrestrial
+• Skin Checker - Verify skin component availability
+• File Commander - Integrated file browser for logs
+
+CATEGORY STRUCTURE:
+1.  Backup Tools (OE2.0 only)
+2.  Bouquets Tools (OE2.0 only)
+3.  Channel List (multi-provider)
+4.  Ciefp (specialized installer)
+5.  DvbUsb Tuners Drivers (OE2.0 only)
+6.  Epg Tools (OE2.0 only)
+7.  Feeds Image (OE2.0 / OE2.2+)
+8.  Games Tools (OE2.0 only)
+9.  Iptv Tools (OE2.0 only)
+10. KiddaC (OE2.0 / OE2.2+)
+11. Lululla Zone (OE2.0 / OE2.2+)
+12. Mediaplayer-Youtube (OE2.0 only)
+13. MultiBoot Tools (OE2.0 only)
+14. Multimedia Tools (OE2.0 only)
+15. Panels Addons (OE2.0 only)
+16. Picons Tools (OE2.0 only)
+17. Python Library (OE2.0 only)
+18. Radio Tools (OE2.0 only)
+19. Script Installer (universal)
+20. Skins (TEAM / FHD-HD)
+21. Keys Tools (OE2.0 / OE2.2+)
+22. Softcams (OE2.0 / OE2.2+)
+23. Sport Tools (OE2.0 only)
+24. Streamlink Tools (OE2.0 only)
+25. Utility Tools (OE2.0 only)
+26. Vpn Tools (OE2.0 only)
+27. WeatherTools (OE2.0 only)
+28. WeatherForecast (OE2.0 only)
+29. Webcam Tools (OE2.0 only)
+30. Adult (parental control protected)
+31. Other (miscellaneous)
+32. Information (system info)
+33. About (credits & license)
+
+SCRIPT INSTALLER HIGHLIGHTS:
+• Add Libssl Libcrypto - Compatibility libraries
+• Ajpanel - Alternative panel interface
+• Arabic Savior - Arabic language support
+• Biss Feed Autokey - Automatic BISS key updates
+• Chocholousek Picons - Popular picon sets
+• DNS Services - Cloudflare, Google, Quad9
+• E2iPlayer variants - Multiple repository options
+• EPGImport sources - EPG data importers
+• History Zap Selector - Channel history navigation
+• IPaudio Pro - Audio streaming enhancements
+• Key management - Adders and updaters
+• MultiStalker Pro - IPTV streaming
+• Oscam generators - Multiple source configurations
+• QuickSignal - Signal monitoring
+• WireGuard VPN - Secure connections
+• XC Forever - IPTV client
+• Xstreamity - Streaming client
+• Xtraevent - Event system enhancements
+
+TECHNICAL ARCHITECTURE:
+• Multi-threaded XML parsing with GZIP support
+• SSL/TLS certificate handling for secure connections
+• Dynamic skin loading based on resolution
+• Font embedding for consistent typography
+• Plugin refresh system for Enigma2 integration
+• Configurable alignment (left/right) for RTL languages
+• Screen inheritance for consistent UI behavior
+• Timer-based background operations
+
+DATABASE & SOURCES:
+• Primary: XML from linuxsat-support.com (gzip compressed)
+• Secondary: Direct GitHub raw URLs
+• Tertiary: Provider-specific XML feeds
+• Local: Cached configurations and scripts
+
+CONFIGURATION:
+• Automatic detection of OE version (ipkg/dpkg)
+• Resolution detection (HD/FHD/WQHD)
+• Parental control integration
+• Network connectivity checking
+• Update notification preferences
+
+ERROR HANDLING:
+• Network timeout management
+• File system permission handling
+• Package manager compatibility checks
+• Skin component validation
+• Memory and disk space monitoring
+
+PERFORMANCE OPTIMIZATIONS:
+• Lazy loading of icons and graphics
+• Cached XML data parsing
+• Background version checking
+• Efficient grid rendering
+• Minimal memory footprint
+
+SECURITY FEATURES:
+• SSL certificate verification (optional)
+• Parental control for adult content
+• Safe script execution with user confirmation
+• File permission management
+• Input validation for URLs and commands
+
+VERSION HISTORY:
+v1.0 - Basic plugin installer
+v2.0 - Grid interface implementation
+v2.5 - Multi-version support (OE2.0/OE2.2+)
+v2.6 - Script installer integration
+v2.7 - Ciefp specialized installer
+v2.8 - Universal navigation system
+v2.8.4 - Current stable version
+v2.8.5 - Current stable version
+
+Last Updated: 2024-12-31
+Status: Production Stable
+Credits: masterG, oktus, pcd (original), Lululla (rewrite)
+Homepage: www.linuxsat-support.com
+Support: Forum @ linuxsat-support.com
+Donations: PayPal to project maintainers
+License: GPL v2
+###########################################################
+"""
+
 import codecs
 import io
 from datetime import datetime as dt
 from json import loads
 from re import compile, search, DOTALL
 from shutil import copy2
-# from subprocess import check_output, CalledProcessError
 from sys import version_info
 
-# os import
 from os import R_OK, access, chmod, makedirs, system, walk
 from os.path import exists, join
 
-# third-party import
 import six
 import requests
 from six.moves.urllib.error import URLError
 from six.moves.urllib.request import Request, urlopen
 
-# enigma2 import
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.config import config
@@ -47,20 +221,16 @@ from enigma import (
 	loadPNG,
 )
 
-# local import
 from . import (
 	_,
 	AgentRequest,
 	CheckConn,
-	# initialize_global_settings,
 	add_skin_fonts,
 	b64decoder,
 	checkGZIP,
 	check_version,
 	developer_url,
-	# fetch_url,
 	freespace,
-	# infourl,
 	installer_url,
 	isWQHD,
 	isFHD,
@@ -71,35 +241,20 @@ from . import (
 	refreshPlugins,
 	xmlurl,
 	HALIGN,
+	__version__,
+	descplug,
+	__author__
 )
 from .addons.NewOeSk import ctrlSkin
 from .lsConsole import lsConsole
 from .LCNScanner.plugin import LCNScanner
 from .LCNScanner.Lcn import (
-	# LCN,
-	# LCNBuildHelper,
 	ReloadBouquets,
 	copy_files_to_enigma2,
 	keepiptv,
 	terrestrial,
 )
 
-
-# ======================================================================
-# LinuxsatPanel Plugin
-# Coded by masterG - oktus - pcd
-#
-# rewritten by Lululla at 20240720
-#
-# ATTENTION PLEASE...
-# This is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2, or (at your option) any later
-# version.
-# You must not remove the credits at
-# all and you must make the modified
-# code open to everyone. by Lululla
-# ======================================================================
 
 global HALIGN
 global setx
@@ -108,8 +263,6 @@ global has_dpkg
 
 
 # constants
-currversion = "2.8.4"
-descplug = "Linuxsat-Support.com (Addons Panel)"
 _session = None
 has_dpkg = False
 setx = 0
@@ -268,10 +421,10 @@ class LinuxsatPanel(Screen):
 
 		Screen.__init__(self, session)
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LinuxsatPanel.xml")
@@ -419,7 +572,7 @@ class LinuxsatPanel(Screen):
 	def start_check_version(self):
 		self.Update = False
 		self.new_version, self.new_changelog, update_available = check_version(
-			currversion, installer_url, AgentRequest
+			__version__, installer_url, AgentRequest
 		)
 		if update_available:
 			self.Update = True
@@ -427,23 +580,25 @@ class LinuxsatPanel(Screen):
 
 			# Check if current screen is modal before opening the MessageBox
 			if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-				# If the screen is modal, open a message box with the update info
+				msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
+				msg = msg.replace("available", "available %s" % self.new_version)
+				msg = msg.replace("Changelog:", "Changelog: %s" % self.new_changelog)
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (self.new_version, self.new_changelog),
+					msg,
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
 			else:
-				# If the screen is not modal, show a different message and log it
+				msg = _("New version available\n\nChangelog:\n\nBut not downloadable!!!")
+				msg = msg.replace("available", "available %s" % self.new_version)
+				msg = msg.replace("Changelog:", "Changelog: %s" % self.new_changelog)
 				self.session.open(
 					MessageBox,
-					_("New version %s available\n\nChangelog: %s\n\nBut Not downloadable!!!") % (self.new_version, self.new_changelog),
+					msg,
 					MessageBox.TYPE_INFO,
 					timeout=5
 				)
-				# Handle the case when the screen is not modal, possibly opening a non-modal dialog
-				print("Cannot open modal MessageBox. The current screen is not modal.")
 		else:
 			print("No new version available.")
 
@@ -663,10 +818,10 @@ class LSskin(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LinuxsatPanel.xml")
@@ -923,10 +1078,10 @@ class LSChannel(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LinuxsatPanel.xml")
@@ -1166,10 +1321,10 @@ class CiefpInstaller(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LinuxsatPanel.xml")
@@ -1187,27 +1342,27 @@ class CiefpInstaller(Screen):
 		self.pics = []
 		self.urls = []
 
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater",			"ciefp_bu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager",			"ciefp_cman.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter",				"ciefp_ec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpIptvBouquets",			"ciefp_ib.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpMojTvEPG",				"ciefp_mojtvepg.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpMojTvEPG/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOpenDirectory",			"ciefp_opdir.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOpenDirectories/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOscamEditor",				"ciefp_oe.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteAnalizer",		"ciefp_satan.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteAnalyzer/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor",		"ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite",			"ciefp_ss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader",		"ciefp_sd.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2",	"ciefp_sr2.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3",	"ciefp_sr3.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi",	"ciefp_t2mpli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis",		"ciefp_t2m.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpTMDBSearch",				"ciefp_tmdb.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpTMDBSearch/main/installer.sh  -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpVibes",					"ciefp_vibes.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpVibes/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay",	"ciefp_wls.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor",			"ciefp_sm.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel",			"ciefp_sp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
-		add_menu_item(menu_list, self.titles, self.pics, self.urls, "WebCamE2PrenjSF",				"ciefp_webcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/WebCamE2PrenjSF/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater",          "ciefp_bu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager",          "ciefp_cman.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter",             "ciefp_ec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpIptvBouquets",            "ciefp_ib.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpMojTvEPG",                "ciefp_mojtvepg.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpMojTvEPG/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOpenDirectory",           "ciefp_opdir.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOpenDirectories/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOscamEditor",             "ciefp_oe.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteAnalizer",       "ciefp_satan.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteAnalyzer/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor",      "ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite",         "ciefp_ss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader",      "ciefp_sd.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "ciefp_sr2.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "ciefp_sr3.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "ciefp_t2mpli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis",     "ciefp_t2m.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpTMDBSearch",              "ciefp_tmdb.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpTMDBSearch/main/installer.sh  -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpVibes",                   "ciefp_vibes.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpVibes/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay",    "ciefp_wls.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor",           "ciefp_sm.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel",           "ciefp_sp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "WebCamE2PrenjSF",              "ciefp_webcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/WebCamE2PrenjSF/main/installer.sh -O - | /bin/sh")
 
 		self.names = menu_list
 		self.sorted = False
@@ -1450,10 +1605,10 @@ class ScriptInstaller(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LinuxsatPanel.xml")
@@ -2010,10 +2165,24 @@ class ScriptInstaller(Screen):
 						with open(dest, "a") as cfgdok:
 							cfgdok.write(write_format.format(host, host, port, user, pasw))
 
-					text = _("Server %s added to %s\n\nServer: %s\nPort: %s\nUser: %s\nPassword: %s\n") % (host, dest, host, port, user, pasw)
-					if not PY3:
-						text = text.encode("utf-8")
-					self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=6)
+						msg = _("Server added\n\nServer:\nPort:\nUser:\nPassword:\n")
+
+						text = msg
+						text = text.replace("Server added", "Server %s added to %s" % (host, dest))
+						text = text.replace("Server:", "Server: %s" % host)
+						text = text.replace("Port:", "Port: %s" % port)
+						text = text.replace("User:", "User: %s" % user)
+						text = text.replace("Password:", "Password: %s" % pasw)
+
+						if not PY3:
+							text = text.encode("utf-8")
+
+						self.session.open(
+							MessageBox,
+							text,
+							MessageBox.TYPE_INFO,
+							timeout=6
+						)
 
 		except Exception as e:
 			# Error handling
@@ -2031,10 +2200,10 @@ class addInstall(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "addInstall.xml")
@@ -2538,10 +2707,10 @@ class LSinfo(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "LSinfo.xml")
@@ -2637,28 +2806,37 @@ class LSinfo(Screen):
 			self.new_changelog = str(self.new_changelog)
 		if not isinstance(self.new_version, str):
 			self.new_version = str(self.new_version)
-		# if float(currversion) < float(remote_version):
-		if currversion < remote_version:
+		# if float(__version__) < float(remote_version):
+		if __version__ < remote_version:
 			self.Update = True
 			self.show_update_message()
 
 	def show_update_message(self):
 		"""Mostra un MessageBox con le informazioni sull'aggiornamento"""
-		if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-			self.session.open(
-				MessageBox,
-				_("New version %s available\n\nChangelog: %s\n\nPress the green button to start the update.") % (
-					self.new_version, self.new_changelog
-				),
-				MessageBox.TYPE_INFO,
-				timeout=10  # Aumenta il timeout per dare più tempo all'utente
-			)
+		msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
+
+		text = msg
+		text = text.replace("New version available", "New version %s available" % self.new_version)
+		text = text.replace("Changelog:", "Changelog: %s" % self.new_changelog)
+
+		self.session.open(
+			MessageBox,
+			text,
+			MessageBox.TYPE_INFO,
+			timeout=10
+		)
 		else:
+			msg = _("New version available\n\nChangelog:")
+
+			text = "%s %s\n\n%s" % (
+				msg,
+				self.new_version,
+				self.new_changelog
+			)
+
 			self.session.open(
 				MessageBox,
-				_("New version %s available\n\nChangelog: %s") % (
-					self.new_version, self.new_changelog
-				),
+				text,
 				MessageBox.TYPE_INFO,
 				timeout=10
 			)
@@ -2669,10 +2847,14 @@ class LSinfo(Screen):
 
 	def update_me(self):
 		if self.Update:
-			message = _("New version %s is available.\n\nChangelog: %s\n\nDo you want to install it now?") % (
+			msg = _("New version is available.\n\nChangelog:\n\nDo you want to install it now?")
+
+			message = "%s %s\n\n%s" % (
+				msg,
 				self.new_version,
 				self.new_changelog
 			)
+
 			self.session.openWithCallback(
 				self.install_update,
 				MessageBox,
@@ -2792,7 +2974,7 @@ class LSinfo(Screen):
 			stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
 			base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
 				descplug,
-				currversion,
+				__version__,
 				header,
 				stbinfo_str
 			)
@@ -2872,10 +3054,10 @@ class startLP(Screen):
 		Screen.__init__(self, session)
 
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 
@@ -2884,7 +3066,7 @@ class startLP(Screen):
 			self.skin = f.read()
 		# self.skin = ctrlSkin("startLP", skin)
 		self["poster"] = Pixmap()
-		self["version"] = Label("Wait Please... Linuxsat Panel V." + currversion)
+		self["version"] = Label("Wait Please... Linuxsat Panel V." + __version__)
 		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.clsgo, "cancel": self.clsgo}, -1)
 		self.onLayoutFinish.append(self.loadDefaultImage)
 
@@ -2940,10 +3122,10 @@ class AboutLSS(Screen):
 		first = False
 		Screen.__init__(self, session)
 		try:
-			Screen.setTitle(self, _("%s") % descplug + " V." + currversion)
+			Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
 		except:
 			try:
-				self.setTitle(_("%s") % descplug + " V." + currversion)
+				self.setTitle(_("%s") % descplug + " V." + __version__)
 			except:
 				pass
 		skin = join(skin_path, "AboutLSS.xml")

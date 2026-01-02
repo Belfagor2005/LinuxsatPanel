@@ -1,557 +1,289 @@
 #, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: LinuxsatPanel\n"
-"POT-Creation-Date: 2025-05-07 22:08+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: Lululla\n"
-"Language: ar\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
 
-#: LCNScanner/Lcn.py:449 LCNScanner/Lcn.py:456
-msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
-
-#: LCNScanner/Lcn.py:476
-msgid "Enable terrestrial LCN:"
-msgstr ""
-
-#: LCNScanner/Lcn.py:477
-msgid "Terrestrial bouquet:"
-msgstr ""
-
-#: LCNScanner/Lcn.py:478
-msgid "LCN rules:"
-msgstr ""
-
-#: LCNScanner/Lcn.py:482
-msgid "Rebuild"
-msgstr ""
-
-#: LCNScanner/Lcn.py:483 plugin.py:374 plugin.py:708 plugin.py:961
-#: plugin.py:1212 plugin.py:1547 plugin.py:2045 plugin.py:2957
-msgid "Exit"
-msgstr ""
-
-#: LCNScanner/Lcn.py:498
-msgid "Rebuild LCN bouquet now?"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:31 LCNScanner/Terrestrial.py:72
-msgid "Italy"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:33 LCNScanner/Terrestrial.py:59
-msgid "Entertainment"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:34 LCNScanner/Terrestrial.py:36
-msgid "Local Broadcasters"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:35
-msgid "Semi-Generalists"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:37
-msgid "Information and Culture"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:38
-msgid "Sports"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:39
-msgid "Music"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:40 LCNScanner/Terrestrial.py:43
-#: LCNScanner/Terrestrial.py:49
-msgid "Regional Broadcasters"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:41
-msgid "Test Channels"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:42
-msgid "Promo H264"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:44
-msgid "Premium"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:45
-msgid "Europe7"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:46
-msgid "Sky Channels"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:47
-msgid "SD Provisionals"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:48
-msgid "HD Channels"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:50
-msgid "Regional Radio"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:51 LCNScanner/Terrestrial.py:158
-msgid "Duplicates"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:52
-msgid "LCN Duplicates"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:56
-msgid "UK"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:60
-msgid "High Definition"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:61
-msgid "Children"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:62
-msgid "News"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:63
-msgid "BBC Interactive"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:64
-msgid "Adult"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:65
-msgid "Radio"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:68
-msgid "Australia"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:84
-msgid "Terrestrial"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:115
-msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:116
-msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:119
-msgid "There is currently no LCN data stored."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:137
-msgid "No corresponding terrestrial services found."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:207
-msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:208
-msgid "Terrestrial Bouquet setup"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:214
-msgid "Enable terrestrial bouquet"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:214
-msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:214
-msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:214
-msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:214
-msgid "Please make certain network search is enabled when scanning."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:216
-msgid "Region"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:216
-msgid "Select your region."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:217
-msgid "Create separate radio bouquet"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:217
-msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:218
-msgid "Skip duplicates"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:218
-msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:226
-msgid "Rebuild bouquet"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:233
-msgid "Terrestrial Bouquet Error"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:235
-msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:236 LCNScanner/Terrestrial.py:250
-#: LCNScanner/Terrestrial.py:265
-msgid "Terrestrial Bouquet"
-msgstr ""
-
-#: LCNScanner/Terrestrial.py:265
-msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
-
-#: __init__.py:268 __init__.py:272
-msgid "Free Space:"
-msgstr ""
-
-#: __init__.py:268 __init__.py:272
-msgid "of"
-msgstr ""
-
-#: plugin.py:271 plugin.py:274 plugin.py:666 plugin.py:669 plugin.py:926
-#: plugin.py:929 plugin.py:1169 plugin.py:1172 plugin.py:1446 plugin.py:1449
-#: plugin.py:2026 plugin.py:2029 plugin.py:2533 plugin.py:2536 plugin.py:2867
-#: plugin.py:2870 plugin.py:2935 plugin.py:2938
-#, python-format
 msgid "%s"
 msgstr ""
 
-#: plugin.py:372 plugin.py:706 plugin.py:959 plugin.py:1210 plugin.py:1545
-#: plugin.py:2067 plugin.py:2552
-msgid "Please Wait..."
+msgid "Adult"
 msgstr ""
 
-#: plugin.py:373 plugin.py:579 plugin.py:707 plugin.py:881 plugin.py:960
-#: plugin.py:1134 plugin.py:1211 plugin.py:1391 plugin.py:1546 plugin.py:1782
-msgid "Sort A-Z"
-msgstr ""
-
-#: plugin.py:433 plugin.py:2642
-#, python-format
-msgid ""
-"New version %s available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press the green button to start the update."
-msgstr ""
-
-#: plugin.py:441
-#, python-format
-msgid ""
-"New version %s available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"But Not downloadable!!!"
-msgstr ""
-
-#: plugin.py:583 plugin.py:885 plugin.py:1138 plugin.py:1395 plugin.py:1786
-msgid "Sort Default"
-msgstr ""
-
-#: plugin.py:611
-msgid ""
-"These Panel may contain Adult content\n"
-"\n"
-"are you sure you want to continue?"
-msgstr ""
-
-#: plugin.py:655 plugin.py:915
-msgid "Error: No Data Find."
-msgstr ""
-
-#: plugin.py:1421 plugin.py:1828
-#, python-format
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-" \t\t\t\t\t\t\t\t\t\tHowever, if required, you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to execute %s?"
-msgstr ""
-
-#: plugin.py:1426 plugin.py:1833
-#, python-format
-msgid ""
-"Executing %s\n"
-"Please Wait..."
-msgstr ""
-
-#: plugin.py:1593 plugin.py:1604 plugin.py:2405 plugin.py:2418
-msgid "Do you want to Order LCN Bouquet?"
-msgstr ""
-
-#: plugin.py:1620 plugin.py:2434
-msgid ""
-"[LCNScanner] LCN scan finished\n"
-"Channels Ordered!"
-msgstr ""
-
-#: plugin.py:1632
-msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
-"Do you really want to continue?"
-msgstr ""
-
-#: plugin.py:1847
-msgid "Do you want add Cline?"
-msgstr ""
-
-#: plugin.py:1896
-msgid ""
-"File not found /etc/CCcam.cfg!\n"
-"Restart please..."
-msgstr ""
-
-#: plugin.py:1905
-msgid ""
-"File not found /etc/tuxbox/config/oscam.server!\n"
-"Restart please..."
-msgstr ""
-
-#: plugin.py:2005
-#, python-format
-msgid ""
-"Server %s added to %s\n"
-"\n"
-"Server: %s\n"
-"Port: %s\n"
-"User: %s\n"
-"Password: %s\n"
-msgstr ""
-
-#: plugin.py:2014
-#, python-format
-msgid ""
-"Server error.\n"
-"\n"
-"Try again, you might get lucky!\n"
-"%s"
-msgstr ""
-
-#: plugin.py:2046
-msgid "Install"
-msgstr ""
-
-#: plugin.py:2047
-msgid "Remove"
-msgstr ""
-
-#: plugin.py:2048
-msgid "Restart enigma"
-msgstr ""
-
-#: plugin.py:2049
-msgid "Reload"
-msgstr ""
-
-#: plugin.py:2069
-msgid "Load Category..."
-msgstr ""
-
-#: plugin.py:2118
-msgid "Category: "
-msgstr ""
-
-#: plugin.py:2175 plugin.py:2181 plugin.py:2259 plugin.py:2265
-msgid "Unknown Image!"
-msgstr ""
-
-#: plugin.py:2398
-msgid "Download page get failed ..."
-msgstr ""
-
-#: plugin.py:2442
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"However, if required, you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to install?"
-msgstr ""
-
-#: plugin.py:2478
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-
-#: plugin.py:2481
-msgid "Settings Not Installed ..."
-msgstr ""
-
-#: plugin.py:2493
-msgid "Do you want to remove?"
-msgstr ""
-
-#: plugin.py:2506
-#, python-format
-msgid "Removing %s"
-msgstr ""
-
-#: plugin.py:2510
-msgid "Do you want to restart Gui Interface?"
-msgstr ""
-
-#: plugin.py:2651
-#, python-format
-msgid ""
-"New version %s available\n"
-"\n"
-"Changelog: %s"
-msgstr ""
-
-#: plugin.py:2659
-msgid "Update"
-msgstr ""
-
-#: plugin.py:2664
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-
-#: plugin.py:2677
-msgid "Congrats! You already have the latest version..."
-msgstr ""
-
-#: plugin.py:2691
-msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
-
-#: plugin.py:2698
-msgid "Failed to parse update information. Please try again later."
-msgstr ""
-
-#: plugin.py:2704
-msgid "No update information available."
-msgstr ""
-
-#: plugin.py:2712
-msgid "Invalid date format in update information."
-msgstr ""
-
-#: plugin.py:2718
-#, python-format
-msgid "Do you want to install update (%s) now?"
-msgstr ""
-
-#: plugin.py:2724
-msgid "An unexpected error occurred. Please try again later."
-msgstr ""
-
-#: plugin.py:2730
-msgid "Update Aborted!"
-msgstr ""
-
-#: plugin.py:2774
-msgid "Unable to download updates!"
-msgstr ""
-
-#: plugin.py:2945
-msgid ""
-"Thank you for choosing plugin for management of your Enigma Box.\n"
-"\n"
-msgstr ""
-
-#: plugin.py:2946
-msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
-
-#: plugin.py:2947
-msgid "Designs and Graphics by @oktus\n"
-msgstr ""
-
-#: plugin.py:2948
-msgid ""
-"Support on: Linuxsat-support.com\n"
-"\n"
-msgstr ""
-
-#: plugin.py:2949
-msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
-
-#: plugin.py:2950
-msgid ""
-"A coffee costs nothing.\n"
-"\n"
-msgstr ""
-
-#: plugin.py:2951
-msgid "If you think it is a useful tool for your box\n"
-msgstr ""
-
-#: plugin.py:2952
-msgid "please make a donation:\n"
-msgstr ""
-
-#: plugin.py:2954
-msgid ""
-"make donation on Linuxsat-support.com\n"
-"\n"
-"\n"
-"\n"
-"\n"
-msgstr ""
-
-#: plugin.py:2955
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr ""
 
-#: plugin.py:2982
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "BBC Interactive"
+msgstr ""
+
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr ""
+
+msgid "Cancel execution?"
+msgstr ""
+
+msgid "Category:"
+msgstr ""
+
 msgid "Check Connection!"
 msgstr ""
 
-#: plugin.py:3005
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr ""
+
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+msgid "Do you want add Cline?"
+msgstr ""
+
+msgid "Do you want to Order LCN Bouquet?"
+msgstr ""
+
+msgid "Do you want to install update (%s) now?"
+msgstr ""
+
+msgid "Do you want to remove?"
+msgstr ""
+
+msgid "Do you want to restart Gui Interface?"
+msgstr ""
+
+msgid "Download page get failed ..."
+msgstr ""
+
+msgid "Duplicates"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
 msgid "Linuxsat Panel"
+msgstr ""
+
+msgid "Load Category..."
+msgstr ""
+
+msgid "Local Broadcasters"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr ""
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Removing %s"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr ""
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+msgid "Sort A-Z"
+msgstr ""
+
+msgid "Sort Default"
+msgstr ""
+
+msgid "Sports"
+msgstr ""
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Terrestrial Bouquet"
+msgstr ""
+
+msgid "Terrestrial Bouquet Error"
+msgstr ""
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
+
+msgid "Terrestrial Bouquet setup"
+msgstr ""
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
+
+msgid "Terrestrial bouquet:"
+msgstr ""
+
+msgid "Test Channels"
+msgstr ""
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
+
+msgid "There is currently no LCN data stored."
+msgstr ""
+
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+
+msgid "UK"
+msgstr ""
+
+msgid "Unable to download updates!"
+msgstr ""
+
+msgid "Unknown Image!"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update Aborted!"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "please make a donation:\n"
 msgstr ""

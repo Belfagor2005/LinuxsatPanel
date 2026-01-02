@@ -1,0 +1,324 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2\n"
+"PO-Revision-Date: 2026-01-02 23:15+0100\n"
+"Last-Translator: root <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "%s"
+msgstr "%s"
+
+msgid "Adult"
+msgstr "Adult"
+
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr "All code was rewritten by @Lululla - 2024.07.20\n"
+
+msgid "An unexpected error occurred. Please try again later."
+msgstr "An unexpected error occurred. Please try again later."
+
+msgid "Australia"
+msgstr "Australia"
+
+msgid "BBC Interactive"
+msgstr "BBC Interactive"
+
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr "Build/rebuild terrestrial bouquet now based on the last scan."
+
+msgid "Cancel execution?"
+msgstr "Cancel execution?"
+
+msgid "Category:"
+msgstr "Category:"
+
+msgid "Check Connection!"
+msgstr "Check Connection!"
+
+msgid "Children"
+msgstr "Children"
+
+msgid "Congrats! You already have the latest version..."
+msgstr "Congrats! You already have the latest version..."
+
+msgid ""
+"Create an ordered bouquet of terrestrial services based on LCN data from "
+"your local transmitter."
+msgstr ""
+"Create an ordered bouquet of terrestrial services based on LCN data from "
+"your local transmitter."
+
+msgid "Create separate radio bouquet"
+msgstr "Create separate radio bouquet"
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr "Designs and Graphics by @oktus\n"
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr "Do not add duplicated or non indexed channels to the bouquet."
+
+msgid "Do you want add Cline?"
+msgstr "Do you want add Cline?"
+
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Do you want to Order LCN Bouquet?"
+
+msgid "Do you want to install update (%s) now?"
+msgstr "Do you want to install update (%s) now?"
+
+msgid "Do you want to remove?"
+msgstr "Do you want to remove?"
+
+msgid "Do you want to restart Gui Interface?"
+msgstr "Do you want to restart Gui Interface?"
+
+msgid "Download page get failed ..."
+msgstr "Download page get failed ..."
+
+msgid "Duplicates"
+msgstr "Duplicates"
+
+msgid ""
+"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
+"data."
+msgstr ""
+"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
+"data."
+
+msgid "Enable terrestrial LCN:"
+msgstr "Enable terrestrial LCN:"
+
+msgid "Enable terrestrial bouquet"
+msgstr "Enable terrestrial bouquet"
+
+msgid "Entertainment"
+msgstr "Entertainment"
+
+msgid "Error: No Data Find."
+msgstr "Error: No Data Find."
+
+msgid "Europe7"
+msgstr "Europe7"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid ""
+"Failed to fetch update information. Please check your internet connection."
+msgstr ""
+"Failed to fetch update information. Please check your internet connection."
+
+msgid "Failed to parse update information. Please try again later."
+msgstr "Failed to parse update information. Please try again later."
+
+msgid "Free Space:"
+msgstr "Free Space:"
+
+msgid "HD Channels"
+msgstr "HD Channels"
+
+msgid "High Definition"
+msgstr "High Definition"
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr "If you think it is a useful tool for your box\n"
+
+msgid "Information and Culture"
+msgstr "Information and Culture"
+
+msgid "Install"
+msgstr "Install"
+
+msgid "Invalid date format in update information."
+msgstr "Invalid date format in update information."
+
+msgid "Italy"
+msgstr "Italy"
+
+msgid "LCN Duplicates"
+msgstr "LCN Duplicates"
+
+msgid "LCN rules:"
+msgstr "LCN rules:"
+
+msgid "Linuxsat Panel"
+msgstr "Linuxsat Panel"
+
+msgid "Load Category..."
+msgstr "Load Category..."
+
+msgid "Local Broadcasters"
+msgstr "Local Broadcasters"
+
+msgid "Music"
+msgstr "Music"
+
+msgid "News"
+msgstr "News"
+
+msgid "No corresponding terrestrial services found."
+msgstr "No corresponding terrestrial services found."
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr "No entry in lcn db. Please do a service scan."
+
+msgid "No update information available."
+msgstr "No update information available."
+
+msgid ""
+"Once configured the bouquet will be updated automatically when doing a "
+"manual scan."
+msgstr ""
+"Once configured the bouquet will be updated automatically when doing a "
+"manual scan."
+
+msgid "Please Wait..."
+msgstr "Please Wait..."
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr "Please make certain network search is enabled when scanning."
+
+msgid "Premium"
+msgstr "Premium"
+
+msgid "Promo H264"
+msgstr "Promo H264"
+
+msgid ""
+"Put radio services in a separate bouquet, not the main tv bouquet. This is "
+"required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+"Put radio services in a separate bouquet, not the main tv bouquet. This is "
+"required when the provider duplicates channel numbers for tv and radio."
+
+msgid "Radio"
+msgstr "Radio"
+
+msgid "Rebuild"
+msgstr "Rebuild"
+
+msgid "Rebuild LCN bouquet now?"
+msgstr "Rebuild LCN bouquet now?"
+
+msgid "Rebuild bouquet"
+msgstr "Rebuild bouquet"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Regional Broadcasters"
+msgstr "Regional Broadcasters"
+
+msgid "Regional Radio"
+msgstr "Regional Radio"
+
+msgid "Reload"
+msgstr "Reload"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Removing %s"
+msgstr "Removing %s"
+
+msgid "Restart enigma"
+msgstr "Restart enigma"
+
+msgid "SD Provisionals"
+msgstr "SD Provisionals"
+
+msgid "Select your region."
+msgstr "Select your region."
+
+msgid "Semi-Generalists"
+msgstr "Semi-Generalists"
+
+msgid "Settings Not Installed ..."
+msgstr "Settings Not Installed ..."
+
+msgid "Skip duplicates"
+msgstr "Skip duplicates"
+
+msgid "Sky Channels"
+msgstr "Sky Channels"
+
+msgid "Sort A-Z"
+msgstr "Sort A-Z"
+
+msgid "Sort Default"
+msgstr "Sort Default"
+
+msgid "Sports"
+msgstr "Sports"
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr "Suggested by: @masterG - @oktus - @pcd\n"
+
+msgid "Terrestrial"
+msgstr "Terrestrial"
+
+msgid "Terrestrial Bouquet"
+msgstr "Terrestrial Bouquet"
+
+msgid "Terrestrial Bouquet Error"
+msgstr "Terrestrial Bouquet Error"
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr "Terrestrial Bouquet plugin is not enabled."
+
+msgid "Terrestrial Bouquet setup"
+msgstr "Terrestrial Bouquet setup"
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr "Terrestrial bouquet successfully rebuilt."
+
+msgid "Terrestrial bouquet:"
+msgstr "Terrestrial bouquet:"
+
+msgid "Test Channels"
+msgstr "Test Channels"
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr "The Plugin lives thanks to the donations of each of you.\n"
+
+msgid "There is currently no LCN data stored."
+msgstr "There is currently no LCN data stored."
+
+msgid ""
+"This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+"This plugin depends on LCN data being broadcast by your local tansmitter."
+
+msgid ""
+"Try running a manual scan of terrestrial frequencies with network scan "
+"enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+"Try running a manual scan of terrestrial frequencies with network scan "
+"enabled. If this fails maybe there is no lcn data available in your area."
+
+msgid "UK"
+msgstr "UK"
+
+msgid "Unable to download updates!"
+msgstr "Unable to download updates!"
+
+msgid "Unknown Image!"
+msgstr "Unknown Image!"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Update Aborted!"
+msgstr "Update Aborted!"
+
+msgid "of"
+msgstr "of"
+
+msgid "please make a donation:\n"
+msgstr "please make a donation:\n"

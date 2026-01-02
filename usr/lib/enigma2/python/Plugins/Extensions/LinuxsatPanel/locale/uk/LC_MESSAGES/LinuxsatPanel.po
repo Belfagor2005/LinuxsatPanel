@@ -1,0 +1,312 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma 2\n"
+"PO-Revision-Date: 2026-01-02 23:15+0100\n"
+"Last-Translator: root <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "%s"
+msgstr ""
+
+msgid "Adult"
+msgstr ""
+
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr ""
+
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "BBC Interactive"
+msgstr ""
+
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr ""
+
+msgid "Cancel execution?"
+msgstr ""
+
+msgid "Category:"
+msgstr ""
+
+msgid "Check Connection!"
+msgstr ""
+
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr ""
+
+msgid ""
+"Create an ordered bouquet of terrestrial services based on LCN data from "
+"your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+msgid "Do you want add Cline?"
+msgstr ""
+
+msgid "Do you want to Order LCN Bouquet?"
+msgstr ""
+
+msgid "Do you want to install update (%s) now?"
+msgstr ""
+
+msgid "Do you want to remove?"
+msgstr ""
+
+msgid "Do you want to restart Gui Interface?"
+msgstr ""
+
+msgid "Download page get failed ..."
+msgstr ""
+
+msgid "Duplicates"
+msgstr ""
+
+msgid ""
+"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
+"data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid ""
+"Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
+msgid "Linuxsat Panel"
+msgstr ""
+
+msgid "Load Category..."
+msgstr ""
+
+msgid "Local Broadcasters"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid ""
+"Once configured the bouquet will be updated automatically when doing a "
+"manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr ""
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid ""
+"Put radio services in a separate bouquet, not the main tv bouquet. This is "
+"required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Removing %s"
+msgstr ""
+
+msgid "Restart enigma"
+msgstr ""
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr ""
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+msgid "Sort A-Z"
+msgstr ""
+
+msgid "Sort Default"
+msgstr ""
+
+msgid "Sports"
+msgstr ""
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Terrestrial Bouquet"
+msgstr ""
+
+msgid "Terrestrial Bouquet Error"
+msgstr ""
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
+
+msgid "Terrestrial Bouquet setup"
+msgstr ""
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
+
+msgid "Terrestrial bouquet:"
+msgstr ""
+
+msgid "Test Channels"
+msgstr ""
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
+
+msgid "There is currently no LCN data stored."
+msgstr ""
+
+msgid ""
+"This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+
+msgid ""
+"Try running a manual scan of terrestrial frequencies with network scan "
+"enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+
+msgid "UK"
+msgstr ""
+
+msgid "Unable to download updates!"
+msgstr ""
+
+msgid "Unknown Image!"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update Aborted!"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "please make a donation:\n"
+msgstr ""

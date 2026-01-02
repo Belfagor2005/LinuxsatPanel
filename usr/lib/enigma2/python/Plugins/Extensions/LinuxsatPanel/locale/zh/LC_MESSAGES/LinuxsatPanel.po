@@ -13,207 +13,298 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:438 plugin.py:718 plugin.py:934 plugin.py:1295
-msgid "Please Wait..."
-msgstr "0 次序.."
+msgid "%s"
+msgstr ""
 
-#: plugin.py:439 plugin.py:719
-msgid "0 Sort"
-msgstr "0 次序"
+msgid "Adult"
+msgstr ""
 
-#: plugin.py:916
-msgid "Exit"
-msgstr "退出"
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr ""
 
-#: plugin.py:917
-msgid "Install"
-msgstr "安装"
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
 
-#: plugin.py:918
-msgid "Remove"
-msgstr "删除"
+msgid "Australia"
+msgstr ""
 
-#: plugin.py:919
-msgid "Restart enigma"
-msgstr "是否现在重新启动GUI"
+msgid "BBC Interactive"
+msgstr ""
 
-#: plugin.py:936
-msgid "Load Category..."
-msgstr "负载类别..."
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr ""
 
-#: plugin.py:960
-msgid "Category: "
+msgid "Cancel execution?"
+msgstr ""
+
+#, fuzzy
+msgid "Category:"
 msgstr "类别："
 
-#: plugin.py:993 plugin.py:1003
-msgid "Unknow Image!"
-msgstr ""
-
-#: plugin.py:1015
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "是否要安装 %s？"
-
-#: plugin.py:1039 plugin.py:1228
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"安装 %s\n"
-"请稍候。。。"
-
-#: plugin.py:1155
-msgid "Download page get failed ..."
-msgstr "下载页面失败..."
-
-#: plugin.py:1165
-msgid "Sorting Terrestrial channels with Lcn rules Completed"
-msgstr "使用 Lcn 规则对地面频道进行排序 已完成"
-
-#: plugin.py:1172
-msgid "Do you want to install?"
-msgstr "是否要安装 ?"
-
-#: plugin.py:1239
-msgid "Settings Not Installed ..."
-msgstr "设置未安装..."
-
-#: plugin.py:1256
-msgid "Do you want to remove?"
-msgstr "是否要删除？"
-
-#: plugin.py:1270
-#, python-format
-msgid "Removing %s"
-msgstr "删除 %s"
-
-#: plugin.py:1276
-msgid "Do you want to restart Gui Interface?"
-msgstr "是否要重新启动 Gui Interface？"
-
-#: plugin.py:1328
-msgid "Unable to download updates!"
-msgstr "无法下载更新！"
-
-#: plugin.py:1544
 msgid "Check Connection!"
 msgstr "检查连接！"
 
-#: plugin.py:1565
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr ""
+
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+#, fuzzy
+msgid "Do you want add Cline?"
+msgstr "是否要安装 ?"
+
+#, fuzzy
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "是否要删除？"
+
+#, fuzzy
+msgid "Do you want to install update (%s) now?"
+msgstr "是否要安装 %s？"
+
+msgid "Do you want to remove?"
+msgstr "是否要删除？"
+
+msgid "Do you want to restart Gui Interface?"
+msgstr "是否要重新启动 Gui Interface？"
+
+msgid "Download page get failed ..."
+msgstr "下载页面失败..."
+
+msgid "Duplicates"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr "安装"
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
 msgid "Linuxsat Panel"
 msgstr "Linuxsat Panel"
 
-#~ msgid "interval"
-#~ msgstr "间隔"
+msgid "Load Category..."
+msgstr "负载类别..."
 
-#~ msgid "fixed time"
-#~ msgstr "预定时间"
+msgid "Local Broadcasters"
+msgstr ""
 
-#~ msgid "Back"
-#~ msgstr "返回"
+msgid "Music"
+msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "保存"
+msgid "News"
+msgstr ""
 
-#, python-format
-#~ msgid "Last channel update: %s"
-#~ msgstr "频道更新选项: %s"
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr "0 次序.."
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr "删除"
+
+msgid "Removing %s"
+msgstr "删除 %s"
+
+msgid "Restart enigma"
+msgstr "是否现在重新启动GUI"
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr "设置未安装..."
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+msgid "Sort A-Z"
+msgstr ""
+
+msgid "Sort Default"
+msgstr ""
 
 #, fuzzy
-#~| msgid "Server for Player used"
-#~ msgid "Server for Player Used"
-#~ msgstr "使用的播放器服务器"
+msgid "Sports"
+msgstr "导出"
 
-#, fuzzy, python-format
-#~| msgid "Server for player. Use it: %s"
-#~ msgid ""
-#~ "Server for player.\n"
-#~ "Now %s"
-#~ msgstr "播放器服务器，使用: %s"
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Ipv6 state lan (On/Off), now is:"
-#~ msgid "Ipv6 State Of Lan (On/Off)"
-#~ msgstr "Ipv6状态局域网（开/关） ，现在是："
+msgid "Terrestrial"
+msgstr ""
 
-#, fuzzy, python-format
-#~| msgid "Active or Disactive lan Ipv6, now is: %s"
-#~ msgid ""
-#~ "Active or Disactive lan Ipv6.\n"
-#~ "Now %s"
-#~ msgstr "启用或禁用局域网Ipv6,当前是：%s"
+msgid "Terrestrial Bouquet"
+msgstr ""
 
-#~ msgid "Movie Services Reference"
-#~ msgstr "电影服务参考"
+msgid "Terrestrial Bouquet Error"
+msgstr ""
 
-#~ msgid "Configure service Reference Iptv-Gstreamer-Exteplayer3"
-#~ msgstr "配置服务引用Dvb-Iptv-Gstreamer-Exteplayer3"
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
 
-#~ msgid "Select Fonts"
-#~ msgstr "选择字体"
+msgid "Terrestrial Bouquet setup"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Configure Fonts. Eg:Arabic or other."
-#~ msgid ""
-#~ "Configure Fonts.\n"
-#~ "Eg:Arabic or other language."
-#~ msgstr "配置字体,例如：阿拉伯语或其他."
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
 
-#~ msgid "Link in Main Menu"
-#~ msgstr "主菜单中显示插件"
+msgid "Terrestrial bouquet:"
+msgstr ""
 
-#, fuzzy
-#~| msgid "Schedule type:"
-#~ msgid "Scheduled Bouquet Update:"
-#~ msgstr "计划类型:"
+msgid "Test Channels"
+msgstr ""
 
-#~ msgid "Active Automatic Bouquet Update"
-#~ msgstr "主动自动列表更新"
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
 
-#~ msgid "Schedule type:"
-#~ msgstr "计划类型:"
+msgid "There is currently no LCN data stored."
+msgstr ""
 
-#~ msgid "At an interval of hours or at a fixed time"
-#~ msgstr "每隔几个小时或固定时间"
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
 
-#~ msgid "Update interval (minutes):"
-#~ msgstr "更新间隔（分钟） ："
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
 
-#~ msgid "Configure every interval of minutes from now"
-#~ msgstr "从现在起每隔几分钟配置一次"
+msgid "UK"
+msgstr ""
 
-#~ msgid "Time to start update:"
-#~ msgstr "开始更新的时间："
+msgid "Unable to download updates!"
+msgstr "无法下载更新！"
 
-#~ msgid "Configure at a fixed time"
-#~ msgstr "在固定时间配置"
+msgid "Unknown Image!"
+msgstr ""
 
-#~ msgid "SELECT YOUR CHOICE"
-#~ msgstr "请选择"
+msgid "Update"
+msgstr ""
 
-#~ msgid "Ipv6 [Off]?"
-#~ msgstr "Ipv6 [关]?"
+msgid "Update Aborted!"
+msgstr ""
 
-#~ msgid "Ipv6 [On]?"
-#~ msgstr "Ipv6 [开]?"
+msgid "of"
+msgstr ""
 
-#~ msgid ""
-#~ "Settings saved successfully !\n"
-#~ "you need to restart the GUI\n"
-#~ "to apply the new configuration!\n"
-#~ "Do you want to Restart the GUI now?"
-#~ msgstr ""
-#~ "设置保存成功！\n"
-#~ "您需要重新启动GUI\n"
-#~ "应用新配置！\n"
-#~ "是否要立即重新启动GUI?"
-
-#~ msgid "Really close without saving settings?"
-#~ msgstr "是否关闭而不保存设置？"
-
-#~ msgid "HALIGN"
-#~ msgstr "HALIGN"
+msgid "please make a donation:\n"
+msgstr ""
 
 #, fuzzy, python-format
 #~| msgid ""
@@ -257,26 +348,43 @@ msgstr "Linuxsat Panel"
 #~ "服务器上没有直接流\n"
 #~ "但只有在网上找到免费频道"
 
-#~ msgid "Info Vavoo"
-#~ msgstr "Vavoo相关"
+#~ msgid "0 Sort"
+#~ msgstr "0 次序"
 
-#~ msgid "Remove all Vavoo Favorite Bouquet?"
-#~ msgstr "删除所有Vavoo收藏的分组？"
+#~ msgid "Active Automatic Bouquet Update"
+#~ msgstr "主动自动列表更新"
 
-#~ msgid "Vavoo Favorites List have been removed"
-#~ msgstr "Vavoo收藏夹列表已被删除"
+#, fuzzy, python-format
+#~| msgid "Active or Disactive lan Ipv6, now is: %s"
+#~ msgid ""
+#~ "Active or Disactive lan Ipv6.\n"
+#~ "Now %s"
+#~ msgstr "启用或禁用局域网Ipv6,当前是：%s"
 
-#~ msgid "Export"
-#~ msgstr "导出"
+#~ msgid "At an interval of hours or at a fixed time"
+#~ msgstr "每隔几个小时或固定时间"
 
-#~ msgid "Search"
-#~ msgstr "搜索"
+#~ msgid "Automatic bouquet update (schedule):"
+#~ msgstr "自动列表更新（时间表）："
 
-#~ msgid "Filter this category..."
-#~ msgstr "筛选此类别..."
+#~ msgid "Back"
+#~ msgstr "返回"
 
-#~ msgid "No channels found in search!!!"
-#~ msgstr "搜索中未找到频道！"
+#, fuzzy
+#~| msgid "Configure Fonts. Eg:Arabic or other."
+#~ msgid ""
+#~ "Configure Fonts.\n"
+#~ "Eg:Arabic or other language."
+#~ msgstr "配置字体,例如：阿拉伯语或其他."
+
+#~ msgid "Configure at a fixed time"
+#~ msgstr "在固定时间配置"
+
+#~ msgid "Configure every interval of minutes from now"
+#~ msgstr "从现在起每隔几分钟配置一次"
+
+#~ msgid "Configure service Reference Iptv-Gstreamer-Exteplayer3"
+#~ msgstr "配置服务引用Dvb-Iptv-Gstreamer-Exteplayer3"
 
 #~ msgid ""
 #~ "Do you want to Convert to favorite .tv ?\n"
@@ -289,6 +397,117 @@ msgstr "Linuxsat Panel"
 #~ "注意！ ！这可能需要一些时间\n"
 #~ "取决于包含的流数量！ ！ ！"
 
+#~ msgid "Download Error"
+#~ msgstr "下载错误"
+
+#~ msgid "Filter this category..."
+#~ msgstr "筛选此类别..."
+
+#~ msgid "HALIGN"
+#~ msgstr "HALIGN"
+
+#~ msgid "Info Vavoo"
+#~ msgstr "Vavoo相关"
+
+#, python-format
+#~ msgid ""
+#~ "Installing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "安装 %s\n"
+#~ "请稍候。。。"
+
+#, fuzzy
+#~| msgid "Ipv6 state lan (On/Off), now is:"
+#~ msgid "Ipv6 State Of Lan (On/Off)"
+#~ msgstr "Ipv6状态局域网（开/关） ，现在是："
+
+#~ msgid "Ipv6 [Off]?"
+#~ msgstr "Ipv6 [关]?"
+
+#~ msgid "Ipv6 [On]?"
+#~ msgstr "Ipv6 [开]?"
+
+#, python-format
+#~ msgid "Last channel update: %s"
+#~ msgstr "频道更新选项: %s"
+
+#~ msgid "Link in Main Menu"
+#~ msgstr "主菜单中显示插件"
+
+#~ msgid "Movie Services Reference"
+#~ msgstr "电影服务参考"
+
+#~ msgid "No channels found in search!!!"
+#~ msgstr "搜索中未找到频道！"
+
+#~ msgid "Really close without saving settings?"
+#~ msgstr "是否关闭而不保存设置？"
+
+#~ msgid "Remove all Vavoo Favorite Bouquet?"
+#~ msgstr "删除所有Vavoo收藏的分组？"
+
+#~ msgid "Resolution Change Failed"
+#~ msgstr "设置更改失败"
+
+#~ msgid "SELECT YOUR CHOICE"
+#~ msgstr "请选择"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Schedule type:"
+#~ msgstr "计划类型:"
+
+#, fuzzy
+#~| msgid "Schedule type:"
+#~ msgid "Scheduled Bouquet Update:"
+#~ msgstr "计划类型:"
+
+#~ msgid "Search"
+#~ msgstr "搜索"
+
+#~ msgid "Select Fonts"
+#~ msgstr "选择字体"
+
+#, fuzzy
+#~| msgid "Server for Player used"
+#~ msgid "Server for Player Used"
+#~ msgstr "使用的播放器服务器"
+
+#, fuzzy, python-format
+#~| msgid "Server for player. Use it: %s"
+#~ msgid ""
+#~ "Server for player.\n"
+#~ "Now %s"
+#~ msgstr "播放器服务器，使用: %s"
+
+#~ msgid ""
+#~ "Settings saved successfully !\n"
+#~ "you need to restart the GUI\n"
+#~ "to apply the new configuration!\n"
+#~ "Do you want to Restart the GUI now?"
+#~ msgstr ""
+#~ "设置保存成功！\n"
+#~ "您需要重新启动GUI\n"
+#~ "应用新配置！\n"
+#~ "是否要立即重新启动GUI?"
+
+#~ msgid "Sorting Terrestrial channels with Lcn rules Completed"
+#~ msgstr "使用 Lcn 规则对地面频道进行排序 已完成"
+
+#~ msgid "Time to start update:"
+#~ msgstr "开始更新的时间："
+
+#~ msgid "Update interval (minutes):"
+#~ msgstr "更新间隔（分钟） ："
+
+#~ msgid "Vavoo Favorites List have been removed"
+#~ msgstr "Vavoo收藏夹列表已被删除"
+
+#~ msgid "Vavoo Stream Live"
+#~ msgstr "Vavoo直播"
+
 #, python-format
 #~ msgid ""
 #~ "bouquets reloaded..\n"
@@ -297,14 +516,8 @@ msgstr "Linuxsat Panel"
 #~ "频道群已重新加载.\n"
 #~ "使用%s频道"
 
-#~ msgid "Download Error"
-#~ msgstr "下载错误"
+#~ msgid "fixed time"
+#~ msgstr "预定时间"
 
-#~ msgid "Resolution Change Failed"
-#~ msgstr "设置更改失败"
-
-#~ msgid "Vavoo Stream Live"
-#~ msgstr "Vavoo直播"
-
-#~ msgid "Automatic bouquet update (schedule):"
-#~ msgstr "自动列表更新（时间表）："
+#~ msgid "interval"
+#~ msgstr "间隔"

@@ -16,311 +16,434 @@ msgstr ""
 "X-Poedit-SearchPath-1: plugin.py\n"
 "X-Poedit-SearchPath-2: addons/File_Commander.py\n"
 
-#: addons/File_Commander.py:17
-msgid "File Commander - Addon"
-msgstr "File Commander - Dodatak"
-
-#: addons/File_Commander.py:18
-msgid "play/show Files"
-msgstr "reprodukcija/prikaz datoteka"
-
-#: addons/File_Commander.py:73 addons/File_Commander.py:74
-#: addons/File_Commander.py:75 addons/File_Commander.py:76 lsConsole.py:123
-#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
-msgid "Exit"
-msgstr "Izlaz"
-
-#: lsConsole.py:56
-msgid "Cancel"
-msgstr "Otkaži"
-
-#: lsConsole.py:57
-msgid "Hide/Show"
-msgstr "Sakrij/Prikaži"
-
-#: lsConsole.py:58
-msgid "Restart"
-msgstr "Pokreni ponovno"
-
-#: lsConsole.py:90
-msgid ""
-"Execution progress\n"
-"\n"
+msgid "%s"
 msgstr ""
-"Napredak izvršenja\n"
-"\n"
 
-#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646
-#: plugin.py:2057
-msgid "Please Wait..."
-msgstr "Molimo pričekajte..."
+msgid "Adult"
+msgstr ""
 
-#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
-#: plugin.py:1079 plugin.py:1197 plugin.py:1404
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr ""
+
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "BBC Interactive"
+msgstr ""
+
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr ""
+
+msgid "Cancel execution?"
+msgstr ""
+
 #, fuzzy
-#| msgid "0 Sort"
-msgid "0 Sort A-Z"
-msgstr "0 Sortiraj"
-
-#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
-#, fuzzy
-#| msgid "0 Sort"
-msgid "0 Sort Default"
-msgstr "0 Sortiraj"
-
-#: plugin.py:595
-msgid ""
-"These Panel may contain Adult content\n"
-"\n"
-"are you sure you want to continue?"
-msgstr ""
-"Ova Ploča može sadržavati sadržaj za odrasle\n"
-"\n"
-"Jeste li sigurni da želite nastaviti?"
-
-#: plugin.py:635 plugin.py:877
-msgid "Error: No Data Find."
-msgstr ""
-
-#: plugin.py:1238
-#, fuzzy
-#| msgid "Do you want to remove?"
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Želite li ukloniti?"
-
-#: plugin.py:1249 plugin.py:1947
-msgid ""
-"[LCNScanner] LCN scan finished\n"
-"Channels Ordered!"
-msgstr ""
-
-#: plugin.py:1256
-msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not "
-"sure)..\n"
-"Do you really want to continue?"
-msgstr ""
-
-#: plugin.py:1452
-#, python-format
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to execute %s?"
-msgstr ""
-
-#: plugin.py:1458
-#, python-format
-msgid ""
-"Executing %s\n"
-"Please Wait..."
-msgstr ""
-"Izvršavanje %s\n"
-"Molim te čekaj..."
-
-#: plugin.py:1473
-#, fuzzy
-#| msgid "Do you want to install?"
-msgid "Do you want add Cline?"
-msgstr "Želite li instalirati?"
-
-#: plugin.py:1496
-msgid ""
-"File not found /etc/CCcam.cfg!\n"
-"Restart please..."
-msgstr ""
-"Datoteka nije pronađena /etc/CCcam.cfg!\n"
-"Ponovno pokreni, molim..."
-
-#: plugin.py:1505
-msgid ""
-"File not found /etc/tuxbox/config/oscam.server!\n"
-"Restart please..."
-msgstr ""
-"Datoteka nije pronađena /etc/tuxbox/config/oscam.server!\n"
-"Ponovno pokreni, molim..."
-
-#: plugin.py:1604
-#, python-format
-msgid ""
-"Server %s added in %s\n"
-"\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
-msgstr ""
-"Poslužitelj %s dodan %s\n"
-"\n"
-"Poslužitelj:%s\n"
-"Luka:%s\n"
-"Korisnik:%s\n"
-"Lozinka:%s\n"
-
-#: plugin.py:1607
-msgid ""
-"Server Error.\n"
-"\n"
-"Try again, you'll be luckier!"
-msgstr ""
-"Pogreška poslužitelja.\n"
-"\n"
-"Pokušajte ponovno, imat ćete više sreće!"
-
-#: plugin.py:1628
-msgid "Install"
-msgstr "Instaliraj"
-
-#: plugin.py:1629
-msgid "Remove"
-msgstr "Ukloni"
-
-#: plugin.py:1630
-msgid "Restart enigma"
-msgstr "Ponovno pokretanje enigme"
-
-#: plugin.py:1633 plugin.py:1675 plugin.py:1715
-msgid "0 Halign Left"
-msgstr "0 Halign Lijevo"
-
-#: plugin.py:1635 plugin.py:1678 plugin.py:1717
-msgid "0 Halign Right"
-msgstr "0 Halign Desno"
-
-#: plugin.py:1648
-msgid "Load Category..."
-msgstr "Kategorija opterećenja..."
-
-#: plugin.py:1687
-msgid "Category: "
+msgid "Category:"
 msgstr "Kategorija: "
 
-#: plugin.py:1740 plugin.py:1749
-msgid "Unknow Image!"
-msgstr "Nepoznata slika!"
-
-#: plugin.py:1761
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "Želite li instalirati %s?"
-
-#: plugin.py:1795 plugin.py:1991
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"Instaliranje %s\n"
-"Molim te čekaj..."
-
-#: plugin.py:1931
-msgid "Download page get failed ..."
-msgstr "Stranica za preuzimanje nije uspjela ..."
-
-#: plugin.py:1936
-msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
-msgstr ""
-
-#: plugin.py:1953
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to install?"
-msgstr ""
-
-#: plugin.py:1996
-msgid "Settings Not Installed ..."
-msgstr "Postavke nisu instalirane ..."
-
-#: plugin.py:2009
-msgid "Do you want to remove?"
-msgstr "Želite li ukloniti?"
-
-#: plugin.py:2023
-#, python-format
-msgid "Removing %s"
-msgstr "Uklanjanje %s"
-
-#: plugin.py:2028
-msgid "Do you want to restart Gui Interface?"
-msgstr "Želite li ponovno pokrenuti Gui sučelje?"
-
-#: plugin.py:2129
-#, python-format
-msgid ""
-"New version %s is available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press green button to start updating"
-msgstr ""
-"Dostupna je nova verzija %s\n"
-"\n"
-"Dnevnik promjena: %s\n"
-"\n"
-"Pritisnite zeleni gumb za početak ažuriranja"
-
-#: plugin.py:2131
-msgid "Update"
-msgstr "Ažuriraj"
-
-#: plugin.py:2137
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-"Dostupna je nova verzija %s.\n"
-"\n"
-"Dnevnik promjena: %s\n"
-"\n"
-"Želite li ga instalirati sada?"
-
-#: plugin.py:2141
-msgid "Congrats! You already have the latest version..."
-msgstr "Congrats! Već imate najnoviju verziju..."
-
-#: plugin.py:2152
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Želite li sada instalirati ažuriranje ( %s ) ?"
-
-#: plugin.py:2159
-msgid "Update Aborted!"
-msgstr "Ažuriranje prekinuto!"
-
-#: plugin.py:2184
-msgid "Unable to download updates!"
-msgstr "Nije moguće preuzeti ažuriranja!"
-
-#: plugin.py:2382
 msgid "Check Connection!"
 msgstr "Provjerite vezu!"
 
-#: plugin.py:2403
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr "Congrats! Već imate najnoviju verziju..."
+
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+#, fuzzy
+msgid "Do you want add Cline?"
+msgstr "Želite li instalirati?"
+
+#, fuzzy
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Želite li ukloniti?"
+
+#, fuzzy
+msgid "Do you want to install update (%s) now?"
+msgstr "Želite li sada instalirati ažuriranje ( %s ) ?"
+
+msgid "Do you want to remove?"
+msgstr "Želite li ukloniti?"
+
+msgid "Do you want to restart Gui Interface?"
+msgstr "Želite li ponovno pokrenuti Gui sučelje?"
+
+msgid "Download page get failed ..."
+msgstr "Stranica za preuzimanje nije uspjela ..."
+
+msgid "Duplicates"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr "Izlaz"
+
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr "Instaliraj"
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
 msgid "Linuxsat Panel"
 msgstr "Linuxsat ploča"
+
+msgid "Load Category..."
+msgstr "Kategorija opterećenja..."
+
+msgid "Local Broadcasters"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr "Molimo pričekajte..."
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr "Ukloni"
+
+msgid "Removing %s"
+msgstr "Uklanjanje %s"
+
+msgid "Restart enigma"
+msgstr "Ponovno pokretanje enigme"
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr "Postavke nisu instalirane ..."
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+#, fuzzy
+msgid "Sort A-Z"
+msgstr "0 Sortiraj"
+
+#, fuzzy
+msgid "Sort Default"
+msgstr "0 Sortiraj"
+
+msgid "Sports"
+msgstr ""
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Terrestrial Bouquet"
+msgstr ""
+
+msgid "Terrestrial Bouquet Error"
+msgstr ""
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
+
+msgid "Terrestrial Bouquet setup"
+msgstr ""
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
+
+msgid "Terrestrial bouquet:"
+msgstr ""
+
+msgid "Test Channels"
+msgstr ""
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
+
+msgid "There is currently no LCN data stored."
+msgstr ""
+
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+
+msgid "UK"
+msgstr ""
+
+msgid "Unable to download updates!"
+msgstr "Nije moguće preuzeti ažuriranja!"
+
+#, fuzzy
+msgid "Unknown Image!"
+msgstr "Nepoznata slika!"
+
+msgid "Update"
+msgstr "Ažuriraj"
+
+msgid "Update Aborted!"
+msgstr "Ažuriranje prekinuto!"
+
+msgid "of"
+msgstr ""
+
+msgid "please make a donation:\n"
+msgstr ""
+
+#~ msgid "0 Halign Left"
+#~ msgstr "0 Halign Lijevo"
+
+#~ msgid "0 Halign Right"
+#~ msgstr "0 Halign Desno"
+
+#~ msgid "Cancel"
+#~ msgstr "Otkaži"
+
+#, python-format
+#~ msgid "Do you want to execute %s?"
+#~ msgstr "Želite li izvršiti %s?"
+
+#, python-format
+#~ msgid "Do you want to install %s?"
+#~ msgstr "Želite li instalirati %s?"
+
+#, python-format
+#~ msgid ""
+#~ "Executing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Izvršavanje %s\n"
+#~ "Molim te čekaj..."
+
+#~ msgid ""
+#~ "Execution progress\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Napredak izvršenja\n"
+#~ "\n"
+
+#~ msgid "File Commander - Addon"
+#~ msgstr "File Commander - Dodatak"
+
+#~ msgid ""
+#~ "File not found /etc/CCcam.cfg!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Datoteka nije pronađena /etc/CCcam.cfg!\n"
+#~ "Ponovno pokreni, molim..."
+
+#~ msgid ""
+#~ "File not found /etc/tuxbox/config/oscam.server!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Datoteka nije pronađena /etc/tuxbox/config/oscam.server!\n"
+#~ "Ponovno pokreni, molim..."
+
+#~ msgid "Hide/Show"
+#~ msgstr "Sakrij/Prikaži"
+
+#, python-format
+#~ msgid ""
+#~ "Installing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Instaliranje %s\n"
+#~ "Molim te čekaj..."
 
 #~ msgid "Linuxsat-support - File Commander"
 #~ msgstr "Linuxsat-support - File Commander"
 
 #, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Želite li izvršiti %s?"
+#~ msgid ""
+#~ "New version %s is available\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Press green button to start updating"
+#~ msgstr ""
+#~ "Dostupna je nova verzija %s\n"
+#~ "\n"
+#~ "Dnevnik promjena: %s\n"
+#~ "\n"
+#~ "Pritisnite zeleni gumb za početak ažuriranja"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available.\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Do you want to install it now?"
+#~ msgstr ""
+#~ "Dostupna je nova verzija %s.\n"
+#~ "\n"
+#~ "Dnevnik promjena: %s\n"
+#~ "\n"
+#~ "Želite li ga instalirati sada?"
+
+#~ msgid "Restart"
+#~ msgstr "Pokreni ponovno"
+
+#, python-format
+#~ msgid ""
+#~ "Server %s added in %s\n"
+#~ "\n"
+#~ "Server:%s\n"
+#~ "Port:%s\n"
+#~ "User:%s\n"
+#~ "Password:%s\n"
+#~ msgstr ""
+#~ "Poslužitelj %s dodan %s\n"
+#~ "\n"
+#~ "Poslužitelj:%s\n"
+#~ "Luka:%s\n"
+#~ "Korisnik:%s\n"
+#~ "Lozinka:%s\n"
+
+#~ msgid ""
+#~ "Server Error.\n"
+#~ "\n"
+#~ "Try again, you'll be luckier!"
+#~ msgstr ""
+#~ "Pogreška poslužitelja.\n"
+#~ "\n"
+#~ "Pokušajte ponovno, imat ćete više sreće!"
 
 #~ msgid "Sorting Terrestrial Executed!"
 #~ msgstr "Razvrstavanje zemaljskih pogubljenih!"
 
 #~ msgid "Sorting Terrestrial not Executed!"
 #~ msgstr "Razvrstavanje zemaljskih nije izvršeno!"
+
+#~ msgid ""
+#~ "These Panel may contain Adult content\n"
+#~ "\n"
+#~ "are you sure you want to continue?"
+#~ msgstr ""
+#~ "Ova Ploča može sadržavati sadržaj za odrasle\n"
+#~ "\n"
+#~ "Jeste li sigurni da želite nastaviti?"
+
+#~ msgid "play/show Files"
+#~ msgstr "reprodukcija/prikaz datoteka"

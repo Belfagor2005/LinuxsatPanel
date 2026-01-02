@@ -16,254 +16,435 @@ msgstr ""
 "X-Poedit-SearchPath-1: lsConsole.py\n"
 "X-Poedit-SearchPath-2: File-Commander.py\n"
 
-#: File-Commander.py:16
-msgid "File Commander - Addon"
-msgstr "File Commander - dodatek"
-
-#: File-Commander.py:17
-msgid "play/show Files"
-msgstr "odtwórz/pokaż pliki"
-
-#: File-Commander.py:73 File-Commander.py:74 File-Commander.py:75
-#: File-Commander.py:76 lsConsole.py:123 plugin.py:442 plugin.py:730
-#: plugin.py:965 plugin.py:1292 plugin.py:1705
-msgid "Exit"
-msgstr "Wyjście"
-
-#: File-Commander.py:82
-msgid "Linuxsat-support - File Commander"
-msgstr "Linuxsat-support - File Commander"
-
-#: lsConsole.py:56
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: lsConsole.py:57
-msgid "Hide/Show"
-msgstr "Ukryj/Pokaż"
-
-#: lsConsole.py:58
-msgid "Restart"
-msgstr "Restart"
-
-#: lsConsole.py:90
-msgid ""
-"Execution progress\n"
-"\n"
+msgid "%s"
 msgstr ""
-"Postęp wykonania\n"
-"\n"
 
-#: plugin.py:440 plugin.py:728 plugin.py:963 plugin.py:1290 plugin.py:1724
-#: plugin.py:2151
-msgid "Please Wait..."
-msgstr "Proszę czekać..."
-
-#: plugin.py:441 plugin.py:729 plugin.py:964 plugin.py:1291
-msgid "0 Sort"
-msgstr "0 Sort"
-
-#: plugin.py:621
-msgid ""
-"These Panel may contain Adult content\n"
-"\n"
-"are you sure you want to continue?"
+msgid "Adult"
 msgstr ""
-"Ten Panel może zawierać treści dla dorosłych\n"
-"\n"
-"czy na pewno chcesz kontynuować?"
 
-#: plugin.py:1551
-#, python-format
-msgid "Do you want to execute %s?"
-msgstr "Czy chcesz wykonać %s?"
-
-#: plugin.py:1556
-#, python-format
-msgid ""
-"Executing %s\n"
-"Please Wait..."
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr ""
-"Wykonywanie %s\n"
-"Proszę czekać..."
 
-#: plugin.py:1573
-msgid ""
-"File not found /etc/CCcam.cfg!\n"
-"Restart please..."
+msgid "An unexpected error occurred. Please try again later."
 msgstr ""
-"Nie znaleziono pliku /etc/CCcam.cfg!\n"
-"Proszę uruchomić ponownie..."
 
-#: plugin.py:1582
-msgid ""
-"File not found /etc/tuxbox/config/oscam.server!\n"
-"Restart please..."
+msgid "Australia"
 msgstr ""
-"Nie znaleziono pliku /etc/tuxbox/config/oscam.server!\n"
-"Proszę uruchomić ponownie..."
 
-#: plugin.py:1679
-#, python-format
-msgid ""
-"Server %s added in %s\n"
-"\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
+msgid "BBC Interactive"
 msgstr ""
-"Serwer %s dodano w %s\n"
-"\n"
-"Serwer:%s\n"
-"Port:%s\n"
-"Użytkownik:%s\n"
-"Hasło:%s\n"
 
-#: plugin.py:1681
-msgid ""
-"Server Error.\n"
-"\n"
-"Try again, you'll be luckier!"
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
 msgstr ""
-"Błąd serwera.\n"
-"\n"
-"Spróbuj ponownie, będziesz miał więcej szczęścia!"
 
-#: plugin.py:1706
-msgid "Install"
-msgstr "Instaluj"
+msgid "Cancel execution?"
+msgstr ""
 
-#: plugin.py:1707
-msgid "Remove"
-msgstr "Usuń"
-
-#: plugin.py:1708
-msgid "Restart enigma"
-msgstr "Ponowne uruchomienie enigmy"
-
-#: plugin.py:1711 plugin.py:1753 plugin.py:1793
-msgid "0 Halign Left"
-msgstr "0 Wyrównywać po lewej"
-
-#: plugin.py:1713 plugin.py:1756 plugin.py:1795
-msgid "0 Halign Right"
-msgstr "0 Wyrównaj w prawo"
-
-#: plugin.py:1726
-msgid "Load Category..."
-msgstr "Załaduj kategorię..."
-
-#: plugin.py:1765
-msgid "Category: "
+#, fuzzy
+msgid "Category:"
 msgstr "Kategoria: "
 
-#: plugin.py:1819 plugin.py:1829
-msgid "Unknow Image!"
-msgstr "Nieznany obraz!"
-
-#: plugin.py:1841
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "Czy chcesz zainstalować %s?"
-
-#: plugin.py:1876 plugin.py:2076
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"Instalowanie %s\n"
-"Proszę czekać..."
-
-#: plugin.py:2003
-msgid "Download page get failed ..."
-msgstr "Strona pobierania nie powiodła się..."
-
-#: plugin.py:2011
-msgid "Sorting Terrestrial Executed!"
-msgstr "Sortowanie Ziemi wykonane!"
-
-#: plugin.py:2016
-msgid "Sorting Terrestrial not Executed!"
-msgstr "Sortowanie naziemne nie zostało wykonane!"
-
-#: plugin.py:2039
-msgid "Do you want to install?"
-msgstr "Czy chcesz zainstalować?"
-
-#: plugin.py:2081
-msgid "Settings Not Installed ..."
-msgstr "Ustawienia nie zostały zainstalowane..."
-
-#: plugin.py:2102
-msgid "Do you want to remove?"
-msgstr "Czy chcesz usunąć?"
-
-#: plugin.py:2116
-#, python-format
-msgid "Removing %s"
-msgstr "Usuwanie %s"
-
-#: plugin.py:2122
-msgid "Do you want to restart Gui Interface?"
-msgstr "Czy chcesz ponownie uruchomić interfejs Gui?"
-
-#: plugin.py:2222
-#, python-format
-msgid ""
-"New version %s is available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press green button to start updating"
-msgstr ""
-"Dostępna jest nowa wersja %s\n"
-"\n"
-"Dziennik zmian: %s\n"
-"\n"
-"Naciśnij zielony przycisk, aby rozpocząć aktualizację"
-
-#: plugin.py:2223
-msgid "Update"
-msgstr "Aktualizuj"
-
-#: plugin.py:2228
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-"Dostępna jest nowa wersja %s.\n"
-"\n"
-"Lista zmian: %s \n"
-"\n"
-"Czy chcesz go teraz zainstalować?"
-
-#: plugin.py:2231
-msgid "Congrats! You already have the latest version..."
-msgstr "Gratulacje! Masz już najnowszą wersję..."
-
-#: plugin.py:2241
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Czy chcesz teraz zainstalować aktualizację (%s)?"
-
-#: plugin.py:2248
-msgid "Update Aborted!"
-msgstr "Aktualizacja przerwana!"
-
-#: plugin.py:2268
-msgid "Unable to download updates!"
-msgstr "Nie można pobrać aktualizacji!"
-
-#: plugin.py:2438
 msgid "Check Connection!"
 msgstr "Sprawdź połączenie!"
 
-#: plugin.py:2459
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr "Gratulacje! Masz już najnowszą wersję..."
+
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+#, fuzzy
+msgid "Do you want add Cline?"
+msgstr "Czy chcesz zainstalować?"
+
+#, fuzzy
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Czy chcesz usunąć?"
+
+#, fuzzy
+msgid "Do you want to install update (%s) now?"
+msgstr "Czy chcesz teraz zainstalować aktualizację (%s)?"
+
+msgid "Do you want to remove?"
+msgstr "Czy chcesz usunąć?"
+
+msgid "Do you want to restart Gui Interface?"
+msgstr "Czy chcesz ponownie uruchomić interfejs Gui?"
+
+msgid "Download page get failed ..."
+msgstr "Strona pobierania nie powiodła się..."
+
+msgid "Duplicates"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr "Wyjście"
+
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr "Instaluj"
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"
+
+msgid "Load Category..."
+msgstr "Załaduj kategorię..."
+
+msgid "Local Broadcasters"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr "Proszę czekać..."
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr "Usuń"
+
+msgid "Removing %s"
+msgstr "Usuwanie %s"
+
+msgid "Restart enigma"
+msgstr "Ponowne uruchomienie enigmy"
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr "Ustawienia nie zostały zainstalowane..."
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+msgid "Sort A-Z"
+msgstr ""
+
+msgid "Sort Default"
+msgstr ""
+
+msgid "Sports"
+msgstr ""
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Terrestrial Bouquet"
+msgstr ""
+
+msgid "Terrestrial Bouquet Error"
+msgstr ""
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
+
+msgid "Terrestrial Bouquet setup"
+msgstr ""
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
+
+msgid "Terrestrial bouquet:"
+msgstr ""
+
+msgid "Test Channels"
+msgstr ""
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
+
+msgid "There is currently no LCN data stored."
+msgstr ""
+
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+
+msgid "UK"
+msgstr ""
+
+msgid "Unable to download updates!"
+msgstr "Nie można pobrać aktualizacji!"
+
+#, fuzzy
+msgid "Unknown Image!"
+msgstr "Nieznany obraz!"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Update Aborted!"
+msgstr "Aktualizacja przerwana!"
+
+msgid "of"
+msgstr ""
+
+msgid "please make a donation:\n"
+msgstr ""
+
+#~ msgid "0 Halign Left"
+#~ msgstr "0 Wyrównywać po lewej"
+
+#~ msgid "0 Halign Right"
+#~ msgstr "0 Wyrównaj w prawo"
+
+#~ msgid "0 Sort"
+#~ msgstr "0 Sort"
+
+#~ msgid "Cancel"
+#~ msgstr "Anuluj"
+
+#, python-format
+#~ msgid "Do you want to execute %s?"
+#~ msgstr "Czy chcesz wykonać %s?"
+
+#, python-format
+#~ msgid "Do you want to install %s?"
+#~ msgstr "Czy chcesz zainstalować %s?"
+
+#, python-format
+#~ msgid ""
+#~ "Executing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Wykonywanie %s\n"
+#~ "Proszę czekać..."
+
+#~ msgid ""
+#~ "Execution progress\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Postęp wykonania\n"
+#~ "\n"
+
+#~ msgid "File Commander - Addon"
+#~ msgstr "File Commander - dodatek"
+
+#~ msgid ""
+#~ "File not found /etc/CCcam.cfg!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Nie znaleziono pliku /etc/CCcam.cfg!\n"
+#~ "Proszę uruchomić ponownie..."
+
+#~ msgid ""
+#~ "File not found /etc/tuxbox/config/oscam.server!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Nie znaleziono pliku /etc/tuxbox/config/oscam.server!\n"
+#~ "Proszę uruchomić ponownie..."
+
+#~ msgid "Hide/Show"
+#~ msgstr "Ukryj/Pokaż"
+
+#, python-format
+#~ msgid ""
+#~ "Installing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Instalowanie %s\n"
+#~ "Proszę czekać..."
+
+#~ msgid "Linuxsat-support - File Commander"
+#~ msgstr "Linuxsat-support - File Commander"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Press green button to start updating"
+#~ msgstr ""
+#~ "Dostępna jest nowa wersja %s\n"
+#~ "\n"
+#~ "Dziennik zmian: %s\n"
+#~ "\n"
+#~ "Naciśnij zielony przycisk, aby rozpocząć aktualizację"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available.\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Do you want to install it now?"
+#~ msgstr ""
+#~ "Dostępna jest nowa wersja %s.\n"
+#~ "\n"
+#~ "Lista zmian: %s \n"
+#~ "\n"
+#~ "Czy chcesz go teraz zainstalować?"
+
+#~ msgid "Restart"
+#~ msgstr "Restart"
+
+#, python-format
+#~ msgid ""
+#~ "Server %s added in %s\n"
+#~ "\n"
+#~ "Server:%s\n"
+#~ "Port:%s\n"
+#~ "User:%s\n"
+#~ "Password:%s\n"
+#~ msgstr ""
+#~ "Serwer %s dodano w %s\n"
+#~ "\n"
+#~ "Serwer:%s\n"
+#~ "Port:%s\n"
+#~ "Użytkownik:%s\n"
+#~ "Hasło:%s\n"
+
+#~ msgid ""
+#~ "Server Error.\n"
+#~ "\n"
+#~ "Try again, you'll be luckier!"
+#~ msgstr ""
+#~ "Błąd serwera.\n"
+#~ "\n"
+#~ "Spróbuj ponownie, będziesz miał więcej szczęścia!"
+
+#~ msgid "Sorting Terrestrial Executed!"
+#~ msgstr "Sortowanie Ziemi wykonane!"
+
+#~ msgid "Sorting Terrestrial not Executed!"
+#~ msgstr "Sortowanie naziemne nie zostało wykonane!"
+
+#~ msgid ""
+#~ "These Panel may contain Adult content\n"
+#~ "\n"
+#~ "are you sure you want to continue?"
+#~ msgstr ""
+#~ "Ten Panel może zawierać treści dla dorosłych\n"
+#~ "\n"
+#~ "czy na pewno chcesz kontynuować?"
+
+#~ msgid "play/show Files"
+#~ msgstr "odtwórz/pokaż pliki"

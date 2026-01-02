@@ -16,314 +16,437 @@ msgstr ""
 "X-Poedit-SearchPath-1: plugin.py\n"
 "X-Poedit-SearchPath-2: addons/File_Commander.py\n"
 
-#: addons/File_Commander.py:17
-msgid "File Commander - Addon"
-msgstr "File Commander - Дополнение"
-
-#: addons/File_Commander.py:18
-msgid "play/show Files"
-msgstr "воспроизведение/показ файлов"
-
-#: addons/File_Commander.py:73 addons/File_Commander.py:74
-#: addons/File_Commander.py:75 addons/File_Commander.py:76 lsConsole.py:123
-#: plugin.py:395 plugin.py:678 plugin.py:913 plugin.py:1198 plugin.py:1627
-msgid "Exit"
-msgstr "Выход"
-
-#: lsConsole.py:56
-msgid "Cancel"
-msgstr "Отмена"
-
-#: lsConsole.py:57
-msgid "Hide/Show"
-msgstr "Скрыть / Показать"
-
-#: lsConsole.py:58
-msgid "Restart"
-msgstr "Перезапуск"
-
-#: lsConsole.py:90
-msgid ""
-"Execution progress\n"
-"\n"
+msgid "%s"
 msgstr ""
-"Ход выполнения\n"
-"\n"
 
-#: plugin.py:393 plugin.py:676 plugin.py:911 plugin.py:1196 plugin.py:1646
-#: plugin.py:2057
-msgid "Please Wait..."
-msgstr "Пожалуйста, подождите..."
+msgid "Adult"
+msgstr ""
 
-#: plugin.py:394 plugin.py:561 plugin.py:677 plugin.py:844 plugin.py:912
-#: plugin.py:1079 plugin.py:1197 plugin.py:1404
+msgid "All code was rewritten by @Lululla - 2024.07.20\n"
+msgstr ""
+
+msgid "An unexpected error occurred. Please try again later."
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "BBC Interactive"
+msgstr ""
+
+msgid "Build/rebuild terrestrial bouquet now based on the last scan."
+msgstr ""
+
+msgid "Cancel execution?"
+msgstr ""
+
 #, fuzzy
-#| msgid "0 Sort"
-msgid "0 Sort A-Z"
-msgstr "0 Сортировать"
-
-#: plugin.py:565 plugin.py:848 plugin.py:1083 plugin.py:1408
-#, fuzzy
-#| msgid "0 Sort"
-msgid "0 Sort Default"
-msgstr "0 Сортировать"
-
-#: plugin.py:595
-msgid ""
-"These Panel may contain Adult content\n"
-"\n"
-"are you sure you want to continue?"
-msgstr ""
-"Эти панели могут содержать контент для взрослых\n"
-"\n"
-"Вы уверены, что хотите продолжить?"
-
-#: plugin.py:635 plugin.py:877
-msgid "Error: No Data Find."
-msgstr ""
-
-#: plugin.py:1238
-#, fuzzy
-#| msgid "Do you want to remove?"
-msgid "Do you want to Order LCN Bouquet?"
-msgstr "Вы хотите удалить?"
-
-#: plugin.py:1249 plugin.py:1947
-msgid ""
-"[LCNScanner] LCN scan finished\n"
-"Channels Ordered!"
-msgstr ""
-
-#: plugin.py:1256
-msgid ""
-"[Checkskin] This operation checks if the skin has its components (is not "
-"sure)..\n"
-"Do you really want to continue?"
-msgstr ""
-
-#: plugin.py:1452
-#, python-format
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to execute %s?"
-msgstr ""
-
-#: plugin.py:1458
-#, python-format
-msgid ""
-"Executing %s\n"
-"Please Wait..."
-msgstr ""
-"Выполнение %s\n"
-"Пожалуйста, подождите..."
-
-#: plugin.py:1473
-#, fuzzy
-#| msgid "Do you want to install?"
-msgid "Do you want add Cline?"
-msgstr "Вы хотите установить?"
-
-#: plugin.py:1496
-msgid ""
-"File not found /etc/CCcam.cfg!\n"
-"Restart please..."
-msgstr ""
-"Файл не найден /etc/CCcam.cfg!\n"
-"Перезагрузите, пожалуйста..."
-
-#: plugin.py:1505
-msgid ""
-"File not found /etc/tuxbox/config/oscam.server!\n"
-"Restart please..."
-msgstr ""
-"Файл не найден /etc/tuxbox/config/oscam.server!\n"
-"Перезагрузите, пожалуйста..."
-
-#: plugin.py:1604
-#, python-format
-msgid ""
-"Server %s added in %s\n"
-"\n"
-"Server:%s\n"
-"Port:%s\n"
-"User:%s\n"
-"Password:%s\n"
-msgstr ""
-"Сервер %s добавлен в %s\n"
-"\n"
-"Сервер:%s\n"
-"Порт:%s\n"
-"Пользователь:%s\n"
-"Пароль:%s\n"
-
-#: plugin.py:1607
-msgid ""
-"Server Error.\n"
-"\n"
-"Try again, you'll be luckier!"
-msgstr ""
-"Ошибка сервера.\n"
-"\n"
-"Попробуйте еще раз, вам повезет больше!"
-
-#: plugin.py:1628
-msgid "Install"
-msgstr "Установить"
-
-#: plugin.py:1629
-msgid "Remove"
-msgstr "Удалить"
-
-#: plugin.py:1630
-msgid "Restart enigma"
-msgstr "Перезапуск энигмы"
-
-#: plugin.py:1633 plugin.py:1675 plugin.py:1715
-msgid "0 Halign Left"
-msgstr "0 Выровнять по левому краю"
-
-#: plugin.py:1635 plugin.py:1678 plugin.py:1717
-msgid "0 Halign Right"
-msgstr "0 Выровнять по правому краю"
-
-#: plugin.py:1648
-msgid "Load Category..."
-msgstr "Категория загрузки..."
-
-#: plugin.py:1687
-msgid "Category: "
+msgid "Category:"
 msgstr "Категория: "
 
-#: plugin.py:1740 plugin.py:1749
-msgid "Unknow Image!"
-msgstr "Неизвестный Имидж!"
-
-#: plugin.py:1761
-#, python-format
-msgid "Do you want to install %s?"
-msgstr "Вы хотите установить %s?"
-
-#: plugin.py:1795 plugin.py:1991
-#, python-format
-msgid ""
-"Installing %s\n"
-"Please Wait..."
-msgstr ""
-"Установка %s\n"
-"Пожалуйста, подождите..."
-
-#: plugin.py:1931
-msgid "Download page get failed ..."
-msgstr "Страница загрузки не удалась..."
-
-#: plugin.py:1936
-msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
-msgstr ""
-
-#: plugin.py:1953
-msgid ""
-"I am NOT responsible for any issues you may\n"
-"encounter once you install the plugins and skins.\n"
-"                                                     However, if required, "
-"you can get help to resolve the issue.\n"
-"\n"
-"\n"
-"Do you want to install?"
-msgstr ""
-
-#: plugin.py:1996
-msgid "Settings Not Installed ..."
-msgstr "Настройки не установлены..."
-
-#: plugin.py:2009
-msgid "Do you want to remove?"
-msgstr "Вы хотите удалить?"
-
-#: plugin.py:2023
-#, python-format
-msgid "Removing %s"
-msgstr "Удаление %s"
-
-#: plugin.py:2028
-msgid "Do you want to restart Gui Interface?"
-msgstr "Вы хотите перезапустить интерфейс Gui?"
-
-#: plugin.py:2129
-#, python-format
-msgid ""
-"New version %s is available\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Press green button to start updating"
-msgstr ""
-"Новая версия %s доступна\n"
-"\n"
-"Журнал изменений: %s\n"
-"\n"
-"Нажмите зеленую кнопку, чтобы начать обновление"
-
-#: plugin.py:2131
-msgid "Update"
-msgstr "Обновить"
-
-#: plugin.py:2137
-#, python-format
-msgid ""
-"New version %s is available.\n"
-"\n"
-"Changelog: %s\n"
-"\n"
-"Do you want to install it now?"
-msgstr ""
-"Доступна новая версия %s.\n"
-"\n"
-"Журнал изменений: %s \n"
-"\n"
-"Хотите установить его сейчас?"
-
-#: plugin.py:2141
-msgid "Congrats! You already have the latest version..."
-msgstr "Поздравляю! У вас уже установлена последняя версия..."
-
-#: plugin.py:2152
-#, python-format
-msgid "Do you want to install update ( %s ) now?"
-msgstr "Хотите установить обновление ( %s ) сейчас?"
-
-#: plugin.py:2159
-msgid "Update Aborted!"
-msgstr "Обновление прервано!"
-
-#: plugin.py:2184
-msgid "Unable to download updates!"
-msgstr "Невозможно загрузить обновления!"
-
-#: plugin.py:2382
 msgid "Check Connection!"
 msgstr "Проверьте подключение!"
 
-#: plugin.py:2403
+msgid "Children"
+msgstr ""
+
+msgid "Congrats! You already have the latest version..."
+msgstr "Поздравляю! У вас уже установлена последняя версия..."
+
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
+msgstr ""
+
+msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Designs and Graphics by @oktus\n"
+msgstr ""
+
+msgid "Do not add duplicated or non indexed channels to the bouquet."
+msgstr ""
+
+#, fuzzy
+msgid "Do you want add Cline?"
+msgstr "Вы хотите установить?"
+
+#, fuzzy
+msgid "Do you want to Order LCN Bouquet?"
+msgstr "Вы хотите удалить?"
+
+#, fuzzy
+msgid "Do you want to install update (%s) now?"
+msgstr "Хотите установить обновление ( %s ) сейчас?"
+
+msgid "Do you want to remove?"
+msgstr "Вы хотите удалить?"
+
+msgid "Do you want to restart Gui Interface?"
+msgstr "Вы хотите перезапустить интерфейс Gui?"
+
+msgid "Download page get failed ..."
+msgstr "Страница загрузки не удалась..."
+
+msgid "Duplicates"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
+
+msgid "Enable terrestrial LCN:"
+msgstr ""
+
+msgid "Enable terrestrial bouquet"
+msgstr ""
+
+msgid "Entertainment"
+msgstr ""
+
+msgid "Error: No Data Find."
+msgstr ""
+
+msgid "Europe7"
+msgstr ""
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr ""
+
+msgid "Failed to parse update information. Please try again later."
+msgstr ""
+
+msgid "Free Space:"
+msgstr ""
+
+msgid "HD Channels"
+msgstr ""
+
+msgid "High Definition"
+msgstr ""
+
+msgid "If you think it is a useful tool for your box\n"
+msgstr ""
+
+msgid "Information and Culture"
+msgstr ""
+
+msgid "Install"
+msgstr "Установить"
+
+msgid "Invalid date format in update information."
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "LCN Duplicates"
+msgstr ""
+
+msgid "LCN rules:"
+msgstr ""
+
 msgid "Linuxsat Panel"
 msgstr "Панель Linuxsat"
+
+msgid "Load Category..."
+msgstr "Категория загрузки..."
+
+msgid "Local Broadcasters"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "No corresponding terrestrial services found."
+msgstr ""
+
+msgid "No entry in lcn db. Please do a service scan."
+msgstr ""
+
+msgid "No update information available."
+msgstr ""
+
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
+msgstr ""
+
+msgid "Please Wait..."
+msgstr "Пожалуйста, подождите..."
+
+msgid "Please make certain network search is enabled when scanning."
+msgstr ""
+
+msgid "Premium"
+msgstr ""
+
+msgid "Promo H264"
+msgstr ""
+
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
+msgstr ""
+
+msgid "Radio"
+msgstr ""
+
+msgid "Rebuild"
+msgstr ""
+
+msgid "Rebuild LCN bouquet now?"
+msgstr ""
+
+msgid "Rebuild bouquet"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Regional Broadcasters"
+msgstr ""
+
+msgid "Regional Radio"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Removing %s"
+msgstr "Удаление %s"
+
+msgid "Restart enigma"
+msgstr "Перезапуск энигмы"
+
+msgid "SD Provisionals"
+msgstr ""
+
+msgid "Select your region."
+msgstr ""
+
+msgid "Semi-Generalists"
+msgstr ""
+
+msgid "Settings Not Installed ..."
+msgstr "Настройки не установлены..."
+
+msgid "Skip duplicates"
+msgstr ""
+
+msgid "Sky Channels"
+msgstr ""
+
+#, fuzzy
+msgid "Sort A-Z"
+msgstr "0 Сортировать"
+
+#, fuzzy
+msgid "Sort Default"
+msgstr "0 Сортировать"
+
+msgid "Sports"
+msgstr ""
+
+msgid "Suggested by: @masterG - @oktus - @pcd\n"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Terrestrial Bouquet"
+msgstr ""
+
+msgid "Terrestrial Bouquet Error"
+msgstr ""
+
+msgid "Terrestrial Bouquet plugin is not enabled."
+msgstr ""
+
+msgid "Terrestrial Bouquet setup"
+msgstr ""
+
+msgid "Terrestrial bouquet successfully rebuilt."
+msgstr ""
+
+msgid "Terrestrial bouquet:"
+msgstr ""
+
+msgid "Test Channels"
+msgstr ""
+
+msgid "The Plugin lives thanks to the donations of each of you.\n"
+msgstr ""
+
+msgid "There is currently no LCN data stored."
+msgstr ""
+
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
+msgstr ""
+
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
+msgstr ""
+
+msgid "UK"
+msgstr ""
+
+msgid "Unable to download updates!"
+msgstr "Невозможно загрузить обновления!"
+
+#, fuzzy
+msgid "Unknown Image!"
+msgstr "Неизвестный Имидж!"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Update Aborted!"
+msgstr "Обновление прервано!"
+
+msgid "of"
+msgstr ""
+
+msgid "please make a donation:\n"
+msgstr ""
+
+#~ msgid "0 Halign Left"
+#~ msgstr "0 Выровнять по левому краю"
+
+#~ msgid "0 Halign Right"
+#~ msgstr "0 Выровнять по правому краю"
+
+#~ msgid "Cancel"
+#~ msgstr "Отмена"
 
 #, python-format
 #~ msgid "Do you want to execute %s?"
 #~ msgstr "Вы хотите выполнить %s?"
 
+#, python-format
+#~ msgid "Do you want to install %s?"
+#~ msgstr "Вы хотите установить %s?"
+
 #~ msgid "Do you want to install?"
 #~ msgstr "Вы хотите установить?"
 
+#, python-format
+#~ msgid ""
+#~ "Executing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Выполнение %s\n"
+#~ "Пожалуйста, подождите..."
+
+#~ msgid ""
+#~ "Execution progress\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ход выполнения\n"
+#~ "\n"
+
+#~ msgid "File Commander - Addon"
+#~ msgstr "File Commander - Дополнение"
+
+#~ msgid ""
+#~ "File not found /etc/CCcam.cfg!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Файл не найден /etc/CCcam.cfg!\n"
+#~ "Перезагрузите, пожалуйста..."
+
+#~ msgid ""
+#~ "File not found /etc/tuxbox/config/oscam.server!\n"
+#~ "Restart please..."
+#~ msgstr ""
+#~ "Файл не найден /etc/tuxbox/config/oscam.server!\n"
+#~ "Перезагрузите, пожалуйста..."
+
+#~ msgid "Hide/Show"
+#~ msgstr "Скрыть / Показать"
+
+#, python-format
+#~ msgid ""
+#~ "Installing %s\n"
+#~ "Please Wait..."
+#~ msgstr ""
+#~ "Установка %s\n"
+#~ "Пожалуйста, подождите..."
+
 #~ msgid "Linuxsat-support - File Commander"
 #~ msgstr "Linuxsat-support - Файловый коммандер"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Press green button to start updating"
+#~ msgstr ""
+#~ "Новая версия %s доступна\n"
+#~ "\n"
+#~ "Журнал изменений: %s\n"
+#~ "\n"
+#~ "Нажмите зеленую кнопку, чтобы начать обновление"
+
+#, python-format
+#~ msgid ""
+#~ "New version %s is available.\n"
+#~ "\n"
+#~ "Changelog: %s\n"
+#~ "\n"
+#~ "Do you want to install it now?"
+#~ msgstr ""
+#~ "Доступна новая версия %s.\n"
+#~ "\n"
+#~ "Журнал изменений: %s \n"
+#~ "\n"
+#~ "Хотите установить его сейчас?"
+
+#~ msgid "Restart"
+#~ msgstr "Перезапуск"
+
+#, python-format
+#~ msgid ""
+#~ "Server %s added in %s\n"
+#~ "\n"
+#~ "Server:%s\n"
+#~ "Port:%s\n"
+#~ "User:%s\n"
+#~ "Password:%s\n"
+#~ msgstr ""
+#~ "Сервер %s добавлен в %s\n"
+#~ "\n"
+#~ "Сервер:%s\n"
+#~ "Порт:%s\n"
+#~ "Пользователь:%s\n"
+#~ "Пароль:%s\n"
+
+#~ msgid ""
+#~ "Server Error.\n"
+#~ "\n"
+#~ "Try again, you'll be luckier!"
+#~ msgstr ""
+#~ "Ошибка сервера.\n"
+#~ "\n"
+#~ "Попробуйте еще раз, вам повезет больше!"
 
 #~ msgid "Sorting Terrestrial Executed!"
 #~ msgstr "Сортировка наземных объектов выполнена!"
 
 #~ msgid "Sorting Terrestrial not Executed!"
 #~ msgstr "Сортировка наземных не выполнена!"
+
+#~ msgid ""
+#~ "These Panel may contain Adult content\n"
+#~ "\n"
+#~ "are you sure you want to continue?"
+#~ msgstr ""
+#~ "Эти панели могут содержать контент для взрослых\n"
+#~ "\n"
+#~ "Вы уверены, что хотите продолжить?"
+
+#~ msgid "play/show Files"
+#~ msgstr "воспроизведение/показ файлов"
