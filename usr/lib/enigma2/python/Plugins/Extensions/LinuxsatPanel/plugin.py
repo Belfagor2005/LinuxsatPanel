@@ -32,7 +32,7 @@ EXIT   - Open About/Exit panel
 RED    - Exit to About screen
 0      - Toggle A-Z/Default sorting
 LEFT   - Move left in grid (wrap-around)
-RIGHT  - Move right in grid (wrap-around) 
+RIGHT  - Move right in grid (wrap-around)
 UP     - Move up 5 positions (wrap-around)
 DOWN   - Move down 5 positions (wrap-around)
 INFO   - Show system information
@@ -243,7 +243,7 @@ from . import (
 	HALIGN,
 	__version__,
 	descplug,
-	__author__
+	# __author__
 )
 from .addons.NewOeSk import ctrlSkin
 from .lsConsole import lsConsole
@@ -2813,18 +2813,19 @@ class LSinfo(Screen):
 
 	def show_update_message(self):
 		"""Mostra un MessageBox con le informazioni sull'aggiornamento"""
-		msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
+		if self.Update:
+			msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
 
-		text = msg
-		text = text.replace("New version available", "New version %s available" % self.new_version)
-		text = text.replace("Changelog:", "Changelog: %s" % self.new_changelog)
+			text = msg
+			text = text.replace("New version available", "New version %s available" % self.new_version)
+			text = text.replace("Changelog:", "Changelog: %s" % self.new_changelog)
 
-		self.session.open(
-			MessageBox,
-			text,
-			MessageBox.TYPE_INFO,
-			timeout=10
-		)
+			self.session.open(
+				MessageBox,
+				text,
+				MessageBox.TYPE_INFO,
+				timeout=10
+			)
 		else:
 			msg = _("New version available\n\nChangelog:")
 
