@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -17,7 +17,7 @@ msgid "%s"
 msgstr ""
 
 msgid "Adult"
-msgstr ""
+msgstr "Adulti"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
 msgstr "Tutto il codice è stato riscritto da @Lululla - 2024.07.20\n"
@@ -35,11 +35,10 @@ msgid "Build/rebuild terrestrial bouquet now based on the last scan."
 msgstr "Costruisci/ricostruisci ora il bouquet terrestre in base all'ultima scansione."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Annullare l'esecuzione?"
 
-#, fuzzy
 msgid "Category:"
-msgstr "Categoria: "
+msgstr "Categoria:"
 
 msgid "Check Connection!"
 msgstr "Controlla Connessione!"
@@ -81,7 +80,7 @@ msgid "Download page get failed ..."
 msgstr "La pagina di download non è riuscita ..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Duplicati"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
 msgstr "Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero di canale logo)."
@@ -297,7 +296,7 @@ msgid "Update Aborted!"
 msgstr "Aggionamento Annullato!"
 
 msgid "of"
-msgstr ""
+msgstr "di"
 
 msgid "please make a donation:\n"
 msgstr "per favore fai una donazione:\n"

@@ -22,8 +22,8 @@ However, if required, you can get help to resolve the issue.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 🆕 20251122 - 2.8.5 version is online
 📋 Changelog:
-🛠️ Add script
-
+🛠️ Add Lululla Category script
+🛠️ Removed folder png 100x100
 ```
 
 🆕 20251122 - 2.8.4 version is online

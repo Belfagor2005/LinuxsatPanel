@@ -18,45 +18,45 @@
 	<!-- frames -->
 	<widget name="frame" position="65,135" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/pic_frame2.png" scale="stretch" zPosition="3" alphatest="on" />
 	<widget source="label1" render="Label" position="40,220" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap1" position="65,135" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap1" position="65,135" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label2" render="Label" position="180,220" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap2" position="200,135" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap2" position="200,135" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label3" render="Label" position="323,220" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap3" position="345,135" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap3" position="345,135" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label4" render="Label" position="465,220" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap4" position="485,135" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap4" position="485,135" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label5" render="Label" position="605,220" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap5" position="620,135" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap5" position="620,135" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label6" render="Label" position="40,360" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap6" position="65,270" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap6" position="65,270" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label7" render="Label" position="180,360" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap7" position="200,270" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap7" position="200,270" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label8" render="Label" position="323,360" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap8" position="345,270" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap8" position="345,270" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label9" render="Label" position="465,360" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap9" position="485,270" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap9" position="485,270" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label10" render="Label" position="603,360" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap10" position="620,270" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap10" position="620,270" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label11" render="Label" position="40,500" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap11" position="65,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap11" position="65,405" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label12" render="Label" position="180,500" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap12" position="200,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap12" position="200,405" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label13" render="Label" position="323,500" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap13" position="345,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap13" position="345,405" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label14" render="Label" position="465,500" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap14" position="485,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap14" position="485,405" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label15" render="Label" position="605,500" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap15" position="620,405" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap15" position="620,405" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label16" render="Label" position="40,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap16" position="65,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap16" position="65,540" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label17" render="Label" position="180,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap17" position="200,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap17" position="200,540" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label18" render="Label" position="323,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap18" position="345,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap18" position="345,540" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label19" render="Label" position="465,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap19" position="485,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap19" position="485,540" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<widget source="label20" render="Label" position="606,640" size="141,40" font="lsat;20" halign="center" zPosition="2" transparent="1" noWrap="1" foregroundColor="white" />
-	<widget name="pixmap20" position="620,540" size="100,100" zPosition="2" transparent="1" alphatest="on" />
+	<widget name="pixmap20" position="620,540" size="100,100" zPosition="2" transparent="1" alphatest="on" scale="1" />
 	<!-- buttons -->
 	<widget name="key_red" position="281,660" size="220,30" valign="center" halign="center" zPosition="4" foregroundColor="#b0b0b0" font="lsat;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	<widget name="pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/icons/redk.png" position="320,682" size="140,20" zPosition="4" alphatest="on" />

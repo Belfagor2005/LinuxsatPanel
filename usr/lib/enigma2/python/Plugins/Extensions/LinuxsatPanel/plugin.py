@@ -315,17 +315,18 @@ if sslverify:
 				ClientTLSOptions(self.hostname, ctx)
 			return ctx
 
-
+picfold = plugin_path + "/LSicons2/"
+nss_pic = picfold + "LSS.png"
 if isWQHD() or isFHD():
 	skin_path = plugin_path + "/skins/fhd"
-	picfold = plugin_path + "/LSicons2/"
+	# picfold = plugin_path + "/LSicons2/"
 	pngx = plugin_path + "/icons2/link.png"
-	nss_pic = picfold + "LSS.png"
+	# nss_pic = picfold + "LSS.png"
 else:
 	skin_path = plugin_path + "/skins/hd"
-	picfold = plugin_path + "/LSicons/"
+	# picfold = plugin_path + "/LSicons/"
 	pngx = plugin_path + "/icons/link.png"
-	nss_pic = picfold + "LSS.png"
+	# nss_pic = picfold + "LSS.png"
 
 
 # menulist
@@ -462,6 +463,7 @@ class LinuxsatPanel(Screen):
 		else:
 			add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.2/2.5/2.6 ", "KiddaC2.png")
 
+		add_menu_item(menu_list, self.titles, self.pics, self.urls, "LulullaScript ", "lululla_script.png")
 		if not has_dpkg:
 			add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
 		else:
@@ -787,6 +789,9 @@ class LinuxsatPanel(Screen):
 
 		elif name == "Ciefp ":
 			self.session.open(CiefpInstaller, name)
+
+		elif name == "LulullaScript ":
+			self.session.open(LulullaScript, name)
 
 		elif name == "Channel List ":
 			self.session.open(LSChannel, name)
@@ -1313,6 +1318,306 @@ class LSChannel(Screen):
 		name = self.names[self.idx]
 		url = self.urls[self.idx]
 		self.session.open(addInstall, url, name, "")
+
+
+class LulullaScript(Screen):
+
+    def __init__(self, session, name):
+        Screen.__init__(self, session)
+
+        try:
+            Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
+        except:
+            try:
+                self.setTitle(_("%s") % descplug + " V." + __version__)
+            except:
+                pass
+        skin = join(skin_path, "LinuxsatPanel.xml")
+        with codecs.open(skin, "r", encoding="utf-8") as f:
+            self.skin = f.read()
+
+        if isWQHD() or isFHD():
+            self.pos = get_positions("FHD")
+        elif isHD():
+            self.pos = get_positions("HD")
+
+        self.name = name
+        menu_list = []
+        self.titles = []
+        self.pics = []
+        self.urls = []
+
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Acherone Script Command", "acherone_script_command.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/acherone-script/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Advanced Screeshots", "advanced_screeshots.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/AdvancedScreenshot/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Apod", "apod.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/apod/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Apsattv", "apsat.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Apsattv/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Archimede M3u Converter", "archimede_m3u_converter.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Archimede-M3UConverter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Calendar", "calendar.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Calendar/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "DDRSS Reader", "ddrss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/DDRSSReader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport 99", "epgimport_99.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh -O - | /bin/bash")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport Source", "epgsource.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false\" -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Filmon", "filmon.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Filmon/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "FilmXy", "filmxy.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/filmxy/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Freearhey", "freearhey.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/freearhey/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "HasBahCa", "hasbahca.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/HasBahCa/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Horoscope", "horoscope.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Horoscope/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "mmPicons", "mmpicons.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/mmPicons/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oroscopo Italia", "oroscopoitalia.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/oroscopo_radioitalia/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Parsa Tv", "parsa_tv.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvParsa/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio80", "radio80.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Radio-80-s/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Git", "radio_git.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RadioGit/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Rai Play", "rai_play.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RaiPlay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution Lite", "revolution_lite.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionlite/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution Pro", "revolution_pro.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionpro/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution XXX", "revolution_xxx.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionxxx/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Rss Reader", "rss_reader.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RSSReader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcam Manager", "softcam_manager.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvManager/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Stalker Portal Converter", "stalker_portal_converter.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/StalkerPortalConverter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Stvcl", "stvcl.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/S.T.V.C.L-/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvDream", "tvdream.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvDream/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TVGarden", "tvgarden.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/TVGarden/main/installer.sh\" -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvSettings", "tvsettings.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvSettings/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvToM3u", "tvtom3u.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/TvToM3u/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vavoo", "vavoo.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/vavoo/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vavoo Maker", "vavoo_maker.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/VavooMaker/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WiFi Manager", "wifi_manager.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WiFi-Manager/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Worldcam", "worldcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WorldCam/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false\" -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XXX Plugin", "xxx_plugin.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/xxxplugin/main/installer.sh -O - | /bin/sh")
+
+        self.names = menu_list
+        self.sorted = False
+        # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
+        self["frame"] = MovingPixmap()
+        self["info"] = Label()
+        self["info"].setText(_("Please Wait..."))
+        self["sort"] = Label(_("Sort A-Z"))
+        self["key_red"] = Label(_("Exit"))
+        self["pixmap"] = Pixmap()
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "MenuActions",
+                "DirectionActions",
+                "NumberActions",
+                "ColorActions",
+                "EPGSelectActions",
+                "InfoActions"
+            ],
+            {
+                "ok": self.okbuttonClick,
+                "cancel": self.closeNonRecursive,
+                "exit": self.closeRecursive,
+                "back": self.closeNonRecursive,
+                "red": self.closeNonRecursive,
+                "0": self.list_sort,
+                "left": self.key_left,
+                "right": self.key_right,
+                "up": self.key_up,
+                "down": self.key_down,
+                "info": self.key_info,
+                "menu": self.closeRecursive
+            },
+            -1
+        )
+
+        self.PIXMAPS_PER_PAGE = 20
+        i = 0
+        while i < self.PIXMAPS_PER_PAGE:
+            self["label" + str(i + 1)] = StaticText()
+            self["pixmap" + str(i + 1)] = Pixmap()
+            i += 1
+
+        self.npics = len(self.names)
+        # self.npage = int(float(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.npage = int(round(self.npics // self.PIXMAPS_PER_PAGE)) + 1
+        self.index = 0
+        self.maxentry = len(menu_list) - 1
+        self.ipage = 1
+        self.onLayoutFinish.append(self.openTest)
+
+    def openVi(self, callback=""):
+        from .addons.File_Commander import File_Commander
+        user_log = "/tmp/my_debug.log"
+        if fileExists(user_log):
+            self.session.open(File_Commander, user_log)
+
+    def paintFrame(self):
+        try:
+            # If the index exceeds the maximum number of items, it returns to the first item
+            if self.index > self.maxentry:
+                self.index = self.minentry
+            self.idx = self.index
+            name = self.names[self.idx]
+            self["info"].setText(str(name))
+            ifr = self.index - (self.PIXMAPS_PER_PAGE * (self.ipage - 1))
+            ipos = self.pos[ifr]
+            self["frame"].moveTo(ipos[0], ipos[1], 1)
+            self["frame"].startMoving()
+        except Exception as e:
+            print("Error in paintFrame: ", e)
+
+    def openTest(self):
+        if self.ipage < self.npage:
+            self.maxentry = (self.PIXMAPS_PER_PAGE * self.ipage) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+
+        elif self.ipage == self.npage:
+            self.maxentry = len(self.pics) - 1
+            self.minentry = (self.ipage - 1) * self.PIXMAPS_PER_PAGE
+            i1 = 0
+            while i1 < self.PIXMAPS_PER_PAGE:
+                self["label" + str(i1 + 1)].setText(" ")
+                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                i1 += 1
+        self.npics = len(self.pics)
+        i = 0
+        i1 = 0
+        self.picnum = 0
+        ln = self.maxentry - (self.minentry - 1)
+        while i < ln:
+            idx = self.minentry + i
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            pic = self.pics[idx]
+            if not exists(self.pics[idx]):
+                pic = nss_pic
+            self["pixmap" + str(i + 1)].instance.setPixmapFromFile(pic)
+            i += 1
+        self.index = self.minentry
+        self.paintFrame()
+
+    def key_left(self):
+        # Decrement the index only if we are not at the first pixmap
+        if self.index >= 0:
+            self.index -= 1
+        else:
+            # If we are at the first pixmap, go back to the last pixmap of the last page
+            self.ipage = self.npage
+            self.index = self.npics - 1
+        # Check if we need to change pages
+        if self.index < self.minentry:
+            self.ipage -= 1
+            if self.ipage < 1:  # If we go beyond the first page
+                self.ipage = self.npage
+                self.index = self.npics - 1  # Back to the last pixmap of the last page
+            self.openTest()
+        else:
+            self.paintFrame()
+
+    def key_right(self):
+        # Increment the index only if we are not at the last pixmap
+        if self.index < self.npics - 1:
+            self.index += 1
+        else:
+            # If we are at the last pixmap, go back to the first pixmap of the first page
+            self.index = 0
+            self.ipage = 1
+            self.openTest()
+        # Check if we need to change pages
+        if self.index > self.maxentry:
+            self.ipage += 1
+            if self.ipage > self.npage:  # If we exceed the number of pages
+                self.index = 0
+                self.ipage = 1  # Back to first page
+            self.openTest()
+        else:
+            self.paintFrame()
+
+    def key_up(self):
+        if self.index == 0 and self.ipage == 1:
+            self.ipage = self.npage
+            self.index = self.minentry
+            self.openTest()
+
+        elif self.index >= 5 and not self.ipage == self.npage and self.index == self.minentry:
+            self.index -= 5
+        else:
+            if self.ipage == self.npage and self.index == self.minentry:
+                self.ipage = 1
+                self.index = 0
+                self.openTest()
+            else:
+                self.ipage = self.npage
+                self.index = self.npics - 1
+                self.openTest()
+        self.paintFrame()
+
+    def key_down(self):
+        if self.index <= self.maxentry - 5:
+            self.index += 5
+        else:
+            if self.ipage == self.npage:
+                self.ipage = 1
+                self.index = 0
+                self.openTest()
+            else:
+                self.ipage += 1
+                self.index = self.minentry
+                self.openTest()
+
+        self.paintFrame()
+
+    def keyNumberGlobal(self, number):
+        number -= 1
+        if len(self["menu"].list) > number:
+            self["menu"].setIndex(number)
+            self.okbuttonClick()
+
+    def list_sort(self):
+        if not hasattr(self, "original_data"):
+            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.sorted = False
+
+        if self.sorted:
+            self.names, self.titles, self.pics, self.urls = self.original_data
+            self.sorted = False
+            self["sort"].setText(_("Sort A-Z"))
+        else:
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.sorted = True
+            self["sort"].setText(_("Sort Default"))
+
+        self.openTest()
+
+    def closeNonRecursive(self):
+        self.close(False)
+
+    def closeRecursive(self):
+        self.close(True)
+
+    def createSummary(self):
+        return
+
+    def key_info(self):
+        self.session.open(LSinfo, " Information ")
+
+    def okbuttonClick(self):
+        idx = self.index
+        print("[okbuttonClick] idx", idx)
+        if idx is None:
+            return
+        self.namev = self.names[idx]
+        self.url = self.urls[idx]
+        print("[okbuttonClick] self.namev", self.namev)
+        print("[okbuttonClick] self.url", self.url)
+
+        self.session.openWithCallback(self.okClicked, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
+                                        However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev, MessageBox.TYPE_YESNO, default=True)
+
+    def okClicked(self, answer=False):
+        if answer:
+            title = (_("Executing %s\nPlease Wait...") % self.namev)
+            keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
+            lower_namev = self.namev.lower()
+            keyword_found = any(keyword in lower_namev for keyword in keywords)
+            if keyword_found:
+                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
+                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
+            else:
+                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
+                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
+        else:
+            return
 
 
 class CiefpInstaller(Screen):
