@@ -1,10 +1,9 @@
 # Linuxsat-Support Panel Addons
 
-[![](https://komarev.com/ghpvc/?username=Belfagor2005)](https://github.com/Belfagor2005/LinuxsatPanel)  
+[![](https://komarev.com/ghpvc/?username=Belfagor2005)](https://github.com/Belfagor2005/LinuxsatPanel)
+[![Version](https://img.shields.io/badge/Version-2.8.5-blue.svg)](https://github.com/Belfagor2005/LinuxsatPanel)
 [![Python package](https://github.com/Belfagor2005/LinuxsatPanel/actions/workflows/pylint.yml/badge.svg)](https://github.com/Belfagor2005/LinuxsatPanel/actions/workflows/pylint.yml)
-
 ---
-
 ![Linuxsat Panel](https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/LinuxsatPanel.png)
 
 ---
