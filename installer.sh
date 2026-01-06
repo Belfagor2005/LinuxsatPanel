@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version='2.8.5'
-changelog="\n--add Lululla Category Script\n--Removed folder 100x100 png"
+version='2.8.6'
+changelog="\n--fix Lululla Category Script"
 
 TMPPATH=/tmp/LinuxsatPanel-install
 FILEPATH=/tmp/LinuxsatPanel-main.tar.gz
