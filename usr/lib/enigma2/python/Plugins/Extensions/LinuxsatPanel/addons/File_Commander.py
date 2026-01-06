@@ -207,10 +207,11 @@ class File_Commander(Screen):
                 import shutil
                 shutil.copy(self.file_name, self.file_name + ".bak")
 
-            # Use different modes for Python 2 vs 3
+            mode = "w"
+            encoding = "utf-8"
+
             if PY3:
-                # Python 3: use text mode with encoding
-                with open(self.file_name, "w", encoding="utf-8") as eFile:
+                with open(self.file_name, mode, encoding=encoding) as eFile:
                     for x in self.list:
                         if isinstance(x, tuple):
                             x = x[0]
@@ -220,8 +221,7 @@ class File_Commander(Screen):
                             text_to_save = x
                         eFile.write(text_to_save + "\n")
             else:
-                # Python 2: use binary mode and encode manually
-                with open(self.file_name, "wb") as eFile:
+                with open(self.file_name, mode) as eFile:
                     for x in self.list:
                         if isinstance(x, tuple):
                             x = x[0]
@@ -229,13 +229,7 @@ class File_Commander(Screen):
                             text_to_save = x.split(": ", 1)[1]
                         else:
                             text_to_save = x
-                        # Ensure we have a string, then encode
-                        if isinstance(text_to_save, unicode):
-                            text_to_save = text_to_save.encode("utf-8")
-                        elif isinstance(text_to_save, str):
-                            # Already a byte string in Python 2
-                            pass
-                        eFile.write(text_to_save + "\n")
+                        eFile.write(str(text_to_save) + "\n")
 
             self.isChanged = False
 
