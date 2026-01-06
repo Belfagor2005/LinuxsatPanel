@@ -25,14 +25,14 @@ from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from enigma import eLabel
 from Screens.Screen import Screen
-# from Screens.MessageBox import MessageBox
-# from Screens.HelpMenu import HelpableScreen
-
 from Tools.Directories import fileExists  # , fileReadLines
 from errno import ENOENT
 import sys
+from gettext import gettext
 
-# Aggiungi questa verifica per compatibilità
+# Set up translation function
+_ = gettext
+
 PY3 = sys.version_info[0] >= 3
 
 DEFAULT_MODULE_NAME = __name__.split(".")[-1]

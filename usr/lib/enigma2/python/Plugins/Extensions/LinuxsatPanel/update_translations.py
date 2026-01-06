@@ -3,11 +3,10 @@
 """
 ###########################################################
 LinuxsatPanel for Enigma2
-Created by: Lululla (based on Sirius0103)
+Created by: Lululla
 ###########################################################
 Last Updated: 2025-12-26
-Status: Stable with complete vCard support
-Credits: Sirius0103 (original), Lululla (modifications)
+Credits: Lululla (modifications)
 Homepage: www.corvoboys.org
           www.linuxsat-support.com
 ###########################################################
@@ -138,6 +137,7 @@ def extract_python_strings():
 
 def update_pot_file(xml_strings, py_strings):
     """Create or update the final .pot file"""
+
     # Ensure the folder exists
     try:
         os.makedirs(LOCALE_DIR)

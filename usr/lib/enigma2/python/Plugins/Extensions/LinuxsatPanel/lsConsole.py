@@ -41,9 +41,10 @@ else:
 
 class lsConsole(Screen):
 
-    def __init__(self, session, title='Linuxsat-support Console', cmdlist=None, finishedCallback=None, closeOnSuccess=False, showStartStopText=True, skin=None):
+    def __init__(self, session, title='Linuxsat-support Console', cmdlist=None, finishedCallback=None, closeOnSuccess=False, showStartStopText=True, skin=None, callback=None):
         Screen.__init__(self, session)
         self.finishedCallback = finishedCallback
+        self.callback = callback  # Add this
         self.closeOnSuccess = closeOnSuccess
         self.showStartStopText = showStartStopText
         skin = os.path.join(skin_path, 'lsConsole.xml')
@@ -115,14 +116,21 @@ class lsConsole(Screen):
         if self.showStartStopText:
             self['text'].appendText('Execution finished!!')
 
+        # MODIFY HERE: Handle callback before closing
         if self.finishedCallback:
             self.finishedCallback()
+
+        # Add support for callback when closing
+        if self.callback:
+            # Pass True if no errors, False otherwise
+            self.callback(not self.errorOcurred)
 
         if self.errorOcurred or not self.closeOnSuccess:
             self['text'].appendText('\nPress OK or Exit to abort!')
             self['key_red'].setText('Exit')
             self['key_green'].setText('')
         else:
+            # MODIFY HERE: Call closeConsole with possible callback
             self.closeConsole()
 
     def toggleHideShow(self):
