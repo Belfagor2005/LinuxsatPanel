@@ -207,39 +207,38 @@ class File_Commander(Screen):
                 import shutil
                 shutil.copy(self.file_name, self.file_name + ".bak")
 
-            # Gestione encoding per Python 2/3
+            # Use different modes for Python 2 vs 3
             if PY3:
+                # Python 3: use text mode with encoding
                 with open(self.file_name, "w", encoding="utf-8") as eFile:
                     for x in self.list:
                         if isinstance(x, tuple):
                             x = x[0]
-                        # Estrai solo il testo dopo ": "
                         if ": " in x:
                             text_to_save = x.split(": ", 1)[1]
                         else:
                             text_to_save = x
                         eFile.write(text_to_save + "\n")
             else:
-                with open(self.file_name, "w") as eFile:
+                # Python 2: use binary mode and encode manually
+                with open(self.file_name, "wb") as eFile:
                     for x in self.list:
                         if isinstance(x, tuple):
                             x = x[0]
-                        # Estrai solo il testo dopo ": "
                         if ": " in x:
                             text_to_save = x.split(": ", 1)[1]
                         else:
                             text_to_save = x
-                        # In Python 2, codifica in UTF-8
+                        # Ensure we have a string, then encode
                         if isinstance(text_to_save, unicode):
                             text_to_save = text_to_save.encode("utf-8")
+                        elif isinstance(text_to_save, str):
+                            # Already a byte string in Python 2
+                            pass
                         eFile.write(text_to_save + "\n")
 
-            # Reset del flag di modifica
             self.isChanged = False
 
         except (OSError, IOError) as e:
             print("Error saving file:", str(e))
-            # Potresti voler mostrare un messaggio all'utente qui
-            # from Screens.MessageBox import MessageBox
-            # self.session.open(MessageBox, _("Error saving file: %s") % str(e), MessageBox.TYPE_ERROR)
         self.close()
