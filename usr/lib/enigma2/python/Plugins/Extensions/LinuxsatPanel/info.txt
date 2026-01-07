@@ -20,6 +20,12 @@ However, if required, you can get help to resolve the issue.
 
 🚀 Init version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+🆕 20251122 - 2.8.6 version is online
+📋 Changelog:
+🛠️ Fix Lululla Category script
+```
+
 🆕 20251122 - 2.8.5 version is online
 📋 Changelog:
 🛠️ Add Lululla Category script

@@ -30,7 +30,6 @@ from errno import ENOENT
 import sys
 from gettext import gettext
 
-# Set up translation function
 _ = gettext
 
 PY3 = sys.version_info[0] >= 3
@@ -73,7 +72,7 @@ def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=Fals
 class File_Commander(Screen):
 
     skin = """
-        <screen name="File_Commander" position="40,80" size="1900,900" title="Lululla_Commander">
+        <screen name="File_Commander" position="40,80" size="1900,900" title="Lululla Commander">
             <widget name="list_head" position="8,10" size="1850,45" font="Regular;24" foregroundColor="#00fff000" />
             <widget name="filedata" scrollbarMode="showOnDemand" itemHeight="45" position="9,78" size="1850,725" />
             <widget name="key_red" position="95,820" zPosition="19" size="260,40" transparent="1" font="Regular;24" halign="center" />
@@ -124,7 +123,6 @@ class File_Commander(Screen):
         lines = fileReadLines(fx)
         if lines:
             for idx, line in enumerate(lines):
-                # In Python 2, assicurati che sia una stringa Unicode
                 if not PY3 and isinstance(line, bytes):
                     try:
                         line = line.decode("utf-8")
@@ -146,10 +144,8 @@ class File_Commander(Screen):
     def edit_Line(self):
         self.selLine = self["filedata"].getSelectionIndex()
         if self.selLine is not None and 0 <= self.selLine < len(self.list):
-            # Estrai il testo della linea corrente (rimuovi il numero della linea)
             current_line_full = self.list[self.selLine]
-            # Trova la posizione del primo ": " dopo il numero
-            colon_pos = current_line_full.find(": ", 4)  # Cerca dopo i 4 caratteri del numero
+            colon_pos = current_line_full.find(": ", 4)
             if colon_pos != -1:
                 current_line_text = current_line_full[colon_pos + 2:]
             else:
@@ -161,7 +157,6 @@ class File_Commander(Screen):
 
     def VirtualKeyBoardCallback(self, callback=None):
         if callback is not None:
-            # Mantieni il numero della linea e aggiorna il testo
             line_num = self.list[self.selLine][:6]  # Prendi "0001: "
             self.list[self.selLine] = line_num + callback
             self.isChanged = True
@@ -174,7 +169,6 @@ class File_Commander(Screen):
             self.isChanged = True
             del self.list[self.selLine]
             self.refreshList()
-            # Aggiusta la selezione dopo l'eliminazione
             if self.selLine >= len(self.list):
                 self.selLine = len(self.list) - 1
             if self.selLine >= 0:
@@ -192,7 +186,6 @@ class File_Commander(Screen):
     def refreshList(self):
         new_list = []
         for idx, line in enumerate(self.list):
-            # Estrai il testo senza il numero della linea
             if ": " in line:
                 text_part = line.split(": ", 1)[1]
             else:

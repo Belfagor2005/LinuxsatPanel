@@ -109,28 +109,24 @@ class lsConsole(Screen):
         # All commands have finished
         self.show()
         self.finished = True
-
+        
         if self.cancel_msg:
             self.cancel_msg.close()
-
+            
         if self.showStartStopText:
             self['text'].appendText('Execution finished!!')
-
-        # MODIFY HERE: Handle callback before closing
+        
+        if self.callback:
+            self.callback(not self.errorOcurred)
+        
         if self.finishedCallback:
             self.finishedCallback()
-
-        # Add support for callback when closing
-        if self.callback:
-            # Pass True if no errors, False otherwise
-            self.callback(not self.errorOcurred)
-
+        
         if self.errorOcurred or not self.closeOnSuccess:
             self['text'].appendText('\nPress OK or Exit to abort!')
             self['key_red'].setText('Exit')
             self['key_green'].setText('')
         else:
-            # MODIFY HERE: Call closeConsole with possible callback
             self.closeConsole()
 
     def toggleHideShow(self):

@@ -18,14 +18,6 @@ MAIN FEATURES:
 • Skin component checker
 • Direct script execution from GitHub repositories
 
-NEW IN v2.8.4:
-UNIVERSAL ICON NAVIGATION - 20-icon grid with wrap-around navigation
-INTELLIGENT CATEGORY SORTING - A-Z sorting with preservation of original order
-REAL-TIME SPACE MONITORING - Free space display during installation
-AUTO-UPDATE CHECKER - Background version checking with notification
-MULTI-SOURCE SUPPORT - XML-based plugin database + direct GitHub scripts
-ADVANCED ERROR HANDLING - Comprehensive error reporting and recovery
-
 KEY CONTROLS - MAIN GRID:
 OK     - Open selected category/execute action
 EXIT   - Open About/Exit panel
@@ -168,7 +160,8 @@ v2.6 - Script installer integration
 v2.7 - Ciefp specialized installer
 v2.8 - Universal navigation system
 v2.8.4 - Current stable version
-v2.8.5 - Current stable version
+v2.8.5 - add lululla category script
+v2.8.5 - fix lululla category script
 
 Last Updated: 2024-12-31
 Status: Production Stable
@@ -1435,7 +1428,8 @@ class LulullaScript(Screen):
         self.ipage = 1
         self.onLayoutFinish.append(self.openTest)
 
-    def openVi(self, callback=""):
+    def openVi(self):
+        """Versione semplificata senza callback"""
         from .addons.File_Commander import File_Commander
         user_log = "/tmp/my_debug.log"
         if fileExists(user_log):
@@ -1606,15 +1600,28 @@ class LulullaScript(Screen):
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
-            lower_namev = self.namev.lower()
-            keyword_found = any(keyword in lower_namev for keyword in keywords)
-            if keyword_found:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
-                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
-            else:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
-                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
+
+            cmd = str(self.url).replace(" > /tmp/my_debug.log 2>&1", " 2>&1")
+
+            print("[OKClicked] Command to execute:", cmd)
+
+            def console_closed(*args, **kwargs):
+                result = True
+                if args and len(args) > 0:
+                    result = args[0]
+                elif 'result' in kwargs:
+                    result = kwargs['result']
+
+                if result:
+                    self.openVi()
+
+            self.session.openWithCallback(
+                console_closed,
+                lsConsole,
+                title,
+                cmdlist=[cmd],
+                closeOnSuccess=True
+            )
         else:
             return
 
