@@ -26,15 +26,15 @@ import platform
 import socket
 import uuid
 import sys
+from .. import _
 
-# Import condizionale per requests (potrebbe non essere installato)
 try:
     import requests
     HAS_REQUESTS = True
 except ImportError:
     HAS_REQUESTS = False
 
-# Determina se siamo in Python 3
+
 PY3 = sys.version_info[0] >= 3
 
 
@@ -112,7 +112,6 @@ class StbInfo:
                 s = getDesktop(0).size()
                 return (s.width(), s.height())
             except:
-                # Fallback per vecchi enigma2
                 return (1920, 1080)  # Valore predefinito
 
         try:
@@ -183,10 +182,8 @@ class StbInfo:
             return 'unknown'
 
     def _get_node(self):
-        # Prova prima con OpenWebif
         ifaces = self.boxinfo.get('ifaces', [])
         if ifaces:
-            # Ordina per nome interfaccia
             ifaces_sorted = sorted(ifaces, key=lambda x: x.get('name', ''))
             for iface in ifaces_sorted:
                 mac_str = iface.get('mac', '')
@@ -204,7 +201,6 @@ class StbInfo:
         except:
             pass
 
-        # Ultimo tentativo: legge /sys/class/net/eth0/address
         try:
             with open('/sys/class/net/eth0/address', 'r') as f:
                 mac = f.read().strip().upper().replace(':', '')
@@ -269,7 +265,6 @@ class StbInfo:
             s.close()
             return ip
         except:
-            # Prova con ifconfig
             try:
                 import netifaces
                 for iface in netifaces.interfaces():
@@ -285,7 +280,6 @@ class StbInfo:
     def _is_dmm_image():
         try:
             from enigma import eTimer
-            # Prova a vedere se eTimer ha il metodo timeout
             timer = eTimer()
             # In DMM images, eTimer ha timeout.connect
             return hasattr(timer, 'timeout')
@@ -295,7 +289,6 @@ class StbInfo:
     @staticmethod
     def _is_vti_image():
         try:
-            # Importa inspect in modo compatibile
             try:
                 from inspect import getfullargspec
             except ImportError:
@@ -313,9 +306,8 @@ class StbInfo:
         for mount_point in mount_points:
             if exists(mount_point):
                 try:
-                    # Verifica se è montato e leggibile
-                    import os
-                    if os.path.ismount(mount_point):
+                    from os.path import ismount
+                    if ismount(mount_point):
                         return "Mount: %s (mounted)" % mount_point
                     else:
                         return "Mount: %s (exists)" % mount_point
@@ -325,7 +317,6 @@ class StbInfo:
         return "Mount: Not Found"
 
     def get_public_ip(self):
-        # Se requests non è disponibile, usa solo metodi nativi
         if not HAS_REQUESTS:
             return self._get_public_ip_fallback()
 
@@ -347,11 +338,9 @@ class StbInfo:
                 print("Error contacting %s: %s" % (service, str(e)))
                 continue
 
-        # Fallback ai metodi nativi
         return self._get_public_ip_fallback()
 
     def _get_public_ip_fallback(self):
-        # Metodi fallback senza dipendenze esterne
         methods = [
             ('curl -s ifconfig.me', 'curl'),
             ('wget -qO - ifconfig.me 2>/dev/null', 'wget'),
@@ -373,7 +362,6 @@ class StbInfo:
 stbinfo = StbInfo()
 
 
-# Test rapido se eseguito direttamente
 if __name__ == "__main__":
     print("=== STB Info ===")
     print(stbinfo.to_string())
