@@ -133,21 +133,30 @@ class StbInfo:
             return "Resolution: Unknown"
 
     def get_internet_status(self):
-        # Metodo compatibile con Python 2/3
+        """Check internet connection for Enigma2 - simple and safe"""
         try:
-            # Prova prima con ping
-            if system("ping -c 1 -W 2 8.8.8.8 > /dev/null 2>&1") == 0:
-                return "Internet: Connected"
+            import socket
 
-            # Fallback: prova a connettersi a un sito web
-            import urllib2
+            # Test 1: Ping Google DNS
+            if system("ping -c 1 -W 2 8.8.8.8 >/dev/null 2>&1") == 0:
+                return _("Internet: Connected")
+
+            # Test 2: TCP connection to port 80 (HTTP) of a reliable server
+            # Note: This is a pure TCP connection, HTTPS is not required
             try:
-                response = urllib2.urlopen("http://www.google.com", timeout=3)
-                return "Internet: Connected"
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(3)
+                sock.connect(("www.google.com", 80))
+                sock.close()
+                return _("Internet: Connected")
             except:
-                return "Internet: No Connection"
-        except:
-            return "Internet: Unknown"
+                pass
+
+            return _("Internet: No Connection")
+
+        except Exception as e:
+            print("Internet check error:", str(e))
+            return _("Internet: Unknown")
 
     def get_storage_info(self):
         try:

@@ -267,6 +267,9 @@ plugin_path = resolveFilename(
     "Extensions/{}".format("LinuxsatPanel")
 )
 
+file_log = '/tmp/my_debug.log'
+WARNING_MSG = "I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
+However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?"
 
 if PY3:
     import html
@@ -285,7 +288,7 @@ if version_info >= (2, 7, 9):
     try:
         import ssl
         sslContext = ssl._create_unverified_context()
-    except:
+    except BaseException:
         sslContext = None
 
 
@@ -416,10 +419,10 @@ class LinuxsatPanel(Screen):
         Screen.__init__(self, session)
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -817,10 +820,10 @@ class LSskin(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -1077,10 +1080,10 @@ class LSChannel(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -1099,11 +1102,11 @@ class LSChannel(Screen):
 
         # menu_list, titles, pics, urls, title, pic_name, url
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", "https://github.com/ciefp/ciefpsettings-enigma2-zipped")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", "http://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", "http://www.manutek.it/isetting/index.php")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", "http://github.com/morpheus883/enigma2-zipped")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", "http://www.vhannibal.net/asd.php")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", "http://sat.alfa-tech.net/upload/settings/vhannibal/")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", "https://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", "https://www.manutek.it/isetting/index.php")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", "https://github.com/morpheus883/enigma2-zipped")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", "https://www.vhannibal.net/asd.php")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", "https://sat.alfa-tech.net/upload/settings/vhannibal/")
 
         self.names = menu_list
         # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
@@ -1320,10 +1323,10 @@ class LulullaScript(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -1431,9 +1434,8 @@ class LulullaScript(Screen):
     def openVi(self):
         """Versione semplificata senza callback"""
         from .addons.File_Commander import File_Commander
-        user_log = "/tmp/my_debug.log"
-        if fileExists(user_log):
-            self.session.open(File_Commander, user_log)
+        if fileExists(file_log):
+            self.session.open(File_Commander, file_log)
 
     def paintFrame(self):
         try:
@@ -1591,18 +1593,13 @@ class LulullaScript(Screen):
             return
         self.namev = self.names[idx]
         self.url = self.urls[idx]
-        print("[okbuttonClick] self.namev", self.namev)
-        print("[okbuttonClick] self.url", self.url)
-
-        self.session.openWithCallback(self.okClicked, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
-                                        However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev, MessageBox.TYPE_YESNO, default=True)
+        translated_msg = _(WARNING_MSG)
+        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-
-            cmd = str(self.url).replace(" > /tmp/my_debug.log 2>&1", " 2>&1")
-
+            cmd = (str(self.url) % file_log).replace(" > %s 2>&1", " 2>&1")
             print("[OKClicked] Command to execute:", cmd)
 
             def console_closed(*args, **kwargs):
@@ -1633,10 +1630,10 @@ class CiefpInstaller(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -1728,9 +1725,8 @@ class CiefpInstaller(Screen):
 
     def openVi(self, callback=""):
         from .addons.File_Commander import File_Commander
-        user_log = "/tmp/my_debug.log"
-        if fileExists(user_log):
-            self.session.open(File_Commander, user_log)
+        if fileExists(file_log):
+            self.session.open(File_Commander, file_log)
 
     def paintFrame(self):
         try:
@@ -1888,11 +1884,8 @@ class CiefpInstaller(Screen):
             return
         self.namev = self.names[idx]
         self.url = self.urls[idx]
-        print("[okbuttonClick] self.namev", self.namev)
-        print("[okbuttonClick] self.url", self.url)
-
-        self.session.openWithCallback(self.okClicked, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
-                                        However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev, MessageBox.TYPE_YESNO, default=True)
+        translated_msg = _(WARNING_MSG)
+        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
@@ -1900,11 +1893,10 @@ class CiefpInstaller(Screen):
             keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
+            cmd = str(self.url) + " > %s 2>&1" % file_log
             if keyword_found:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
                 self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
         else:
             return
@@ -1917,10 +1909,10 @@ class ScriptInstaller(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LinuxsatPanel.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -2007,7 +1999,7 @@ class ScriptInstaller(Screen):
 
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "http://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "https://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
         if not has_dpkg:
             add_menu_item(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
 
@@ -2113,16 +2105,15 @@ class ScriptInstaller(Screen):
             self.timer = eTimer()
             try:
                 self.timer_conn = self.timer.timeout.connect(check)
-            except:
+            except BaseException:
                 self.timer.callback.append(check)
             self.timer.start(100, True)
             self.openVi()
 
     def openVi(self, callback=""):
         from .addons.File_Commander import File_Commander
-        user_log = "/tmp/my_debug.log"
-        if fileExists(user_log):
-            self.session.open(File_Commander, user_log)
+        if fileExists(file_log):
+            self.session.open(File_Commander, file_log)
 
     def paintFrame(self):
         try:
@@ -2280,8 +2271,6 @@ class ScriptInstaller(Screen):
             return
         self.namev = self.names[idx]
         self.url = self.urls[idx]
-        print("[okbuttonClick] self.namev", self.namev)
-        print("[okbuttonClick] self.url", self.url)
 
         if "cccam.cfg" in self.namev.lower():
             self.askForFcl()
@@ -2299,8 +2288,8 @@ class ScriptInstaller(Screen):
             self.Checkskin()
             return
 
-        self.session.openWithCallback(self.okClicked, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\n \
-                                        However, if required, you can get help to resolve the issue.\n\n\nDo you want to execute %s?") % self.namev, MessageBox.TYPE_YESNO, default=True)
+        translated_msg = _(WARNING_MSG)
+        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
@@ -2308,11 +2297,10 @@ class ScriptInstaller(Screen):
             keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
+            cmd = str(self.url) + " > %s 2>&1" % file_log
             if keyword_found:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:
-                cmd = str(self.url) + " > /tmp/my_debug.log 2>&1"
                 self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
         else:
             return
@@ -2329,7 +2317,7 @@ class ScriptInstaller(Screen):
                 response.raise_for_status()
                 with io.open(script_path, "w", encoding="utf-8") as file:
                     file.write(response.text)
-                chmod(script_path, 0o777)
+                chmod(script_path, 0o755)
                 print("Script updated successfully: {}".format(script_path))
             except requests.exceptions.HTTPError as e:
                 print("HTTP error while downloading the script: {}".format(e))
@@ -2344,24 +2332,6 @@ class ScriptInstaller(Screen):
                 self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
             except Exception as e:
                 print("Error while executing the script: {}".format(e))
-
-    """
-    # def runScriptWithConsole(self, confirmed):
-        # if confirmed:
-            # script_path = "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
-            # url = "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Fcl.sh"
-            # try:
-                # import requests, io
-                # response = requests.get(url)
-                # response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
-                # with io.open(script_path, "w") as file:
-                    # file.write(response.text)
-                # chmod(script_path, 0o777)
-            # except Exception as e:
-                # print("Failed to update script: {e}. Using existing script.", e)
-
-            # self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
-    """
 
     def getcl(self, config_type):
         if config_type == "CCcam":
@@ -2512,10 +2482,10 @@ class addInstall(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "addInstall.xml")
         '''
@@ -2578,7 +2548,7 @@ class addInstall(Screen):
         self.timer = eTimer()
         try:
             self.timer_conn = self.timer.timeout.connect(self.getfreespace)
-        except:
+        except BaseException:
             self.timer.callback.append(self.getfreespace)
         self.timer.start(1000, 1)
         if self.dest is not None:
@@ -2823,7 +2793,7 @@ class addInstall(Screen):
                 for url in match:
                     name = url
                     name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
-                    url = "http://www.manutek.it/isetting/enigma2/" + url + ".zip"
+                    url = "https://www.manutek.it/isetting/enigma2/" + url + ".zip"
                     self.downloading = True
                     item = decode_html(name) + "###" + str(url)
                     items.append(item)
@@ -2863,7 +2833,7 @@ class addInstall(Screen):
                     if ".php" in url.lower():
                         continue
                     name = decode_html(url).replace("&#127381;", "").replace("%20", " ") + " " + date
-                    url = "http://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + ".zip"
+                    url = "https://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + ".zip"
                     self.downloading = True
                     item = name + "###" + str(url)
                     items.append(item)
@@ -3019,10 +2989,10 @@ class LSinfo(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "LSinfo.xml")
 
@@ -3074,14 +3044,14 @@ class LSinfo(Screen):
         self.timer = eTimer()
         try:
             self.timer_conn = self.timer.timeout.connect(self.startRun)
-        except:
+        except BaseException:
             self.timer.callback.append(self.startRun)
         self.timer.start(100, 1)
 
         self.timerz = eTimer()
         try:
             self.timerz_conn = self.timerz.timeout.connect(self.check_vers)
-        except:
+        except BaseException:
             self.timerz.callback.append(self.check_vers)
         self.timerz.start(2000, 1)
 
@@ -3367,10 +3337,10 @@ class startLP(Screen):
 
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
 
         skin = join(skin_path, "startLP.xml")
@@ -3394,14 +3364,14 @@ class startLP(Screen):
         self.timer = eTimer()
         try:
             self.timer_conn = self.timer.timeout.connect(self.decodeImage)
-        except:
+        except BaseException:
             self.timer.callback.append(self.decodeImage)  # Py2 (OpenPLi)
         self.timer.start(100, True)
 
         self.delayedTimer = eTimer()
         try:
             self.delayedTimer_conn = self.delayedTimer.timeout.connect(self.clsgo)
-        except:
+        except BaseException:
             self.delayedTimer.callback.append(self.clsgo)
         self.delayedTimer.start(1000, True)
 
@@ -3435,10 +3405,10 @@ class AboutLSS(Screen):
         Screen.__init__(self, session)
         try:
             Screen.setTitle(self, _("%s") % descplug + " V." + __version__)
-        except:
+        except BaseException:
             try:
                 self.setTitle(_("%s") % descplug + " V." + __version__)
-            except:
+            except BaseException:
                 pass
         skin = join(skin_path, "AboutLSS.xml")
         with codecs.open(skin, "r", encoding="utf-8") as f:
@@ -3452,7 +3422,7 @@ class AboutLSS(Screen):
         credit += _("A coffee costs nothing.\n\n")
         credit += _("If you think it is a useful tool for your box\n")
         credit += _("please make a donation:\n")
-        credit += "http://paypal.com/paypalme/belfagor2005\n"
+        credit += "https://paypal.com/paypalme/belfagor2005\n"
         credit += _("make donation on Linuxsat-support.com\n\n\n\n\n")
         credit += _("All code was rewritten by @Lululla - 2024.07.20\n")
         self["Info"] = Label(_(credit))
@@ -3486,7 +3456,7 @@ def menustart():
                 timeout=5
             )
 
-    except:
+    except BaseException:
         import traceback
         traceback.print_exc()
         pass
@@ -3497,7 +3467,7 @@ def main(session, **kwargs):
         global _session
         _session = session
         menustart()
-    except:
+    except BaseException:
         import traceback
         traceback.print_exc()
         pass
