@@ -152,11 +152,14 @@ def check_version(currversion, installer_url, AgentRequest):
 						parts = line.split("=")
 						if len(parts) > 1:
 							remote_version = parts[1].strip().strip("'")
-					if line.startswith("changelog"):
-						parts = line.split("=")
-						if len(parts) > 1:
-							remote_changelog = parts[1].strip().strip("'")
-							break
+						if line.startswith("changelog"):
+							parts = line.split("=")
+							if len(parts) > 1:
+								try:
+									remote_changelog = parts[1].strip().strip("'")
+								except:
+									remote_changelog = "No changelog available"
+								break
 
 				new_version = remote_version or "Unknown"
 				new_changelog = remote_changelog or "No changelog available"

@@ -3078,7 +3078,10 @@ class LSinfo(Screen):
                 if line.startswith("version"):
                     remote_version = line.split("=")[-1].strip().strip("'").strip('"')
                 elif line.startswith("changelog"):
-                    remote_changelog = line.split("=")[-1].strip().strip("'").strip('"')
+                    try:
+                        remote_changelog = line.split("=")[-1].strip().strip("'").strip('"')
+                    except:
+                        remote_changelog = ""
                     break
 
         self.new_version = remote_version
