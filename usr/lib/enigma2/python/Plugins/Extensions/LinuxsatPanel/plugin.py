@@ -1599,7 +1599,14 @@ class LulullaScript(Screen):
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            cmd = (str(self.url) % file_log).replace(" > %s 2>&1", " 2>&1")
+            # try:
+                # cmd = (str(self.url) % file_log).replace(" > %s 2>&1", " 2>&1")
+            # except TypeError:
+                # cmd = str(self.url).replace(" > %s 2>&1", " 2>&1")
+            try:
+                cmd = str(self.url) + " > %s 2>&1" % file_log
+            except TypeError:
+                cmd = str(self.url) + " 2>&1"
             print("[OKClicked] Command to execute:", cmd)
 
             def console_closed(*args, **kwargs):
@@ -1893,7 +1900,11 @@ class CiefpInstaller(Screen):
             keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
-            cmd = str(self.url) + " > %s 2>&1" % file_log
+            # cmd = str(self.url) + " > %s 2>&1" % file_log
+            try:
+                cmd = str(self.url) + " > %s 2>&1" % file_log
+            except TypeError:
+                cmd = str(self.url) + " 2>&1"
             if keyword_found:
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:
@@ -2297,7 +2308,11 @@ class ScriptInstaller(Screen):
             keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
-            cmd = str(self.url) + " > %s 2>&1" % file_log
+            # cmd = str(self.url) + " > %s 2>&1" % file_log
+            try:
+                cmd = str(self.url) + " > %s 2>&1" % file_log
+            except TypeError:
+                cmd = str(self.url) + " 2>&1"
             if keyword_found:
                 self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
             else:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version='2.8.6'
+version='2.8.7'
 changelog="\n--fix Lululla Category Script"
 
 TMPPATH=/tmp/LinuxsatPanel-install
