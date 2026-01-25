@@ -21,6 +21,16 @@ However, if required, you can get help to resolve the issue.
 🚀 Init version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+🆕 20260125 - 2.8.8 version is online
+📋 Changelog:
+🛠️ Fix Icons by Oktus
+
+```
+🆕 20251211 - 2.8.7 version is online
+📋 Changelog:
+🛠️ Fix Category script
+```
+
 🆕 20251122 - 2.8.6 version is online
 📋 Changelog:
 🛠️ Fix Lululla Category script

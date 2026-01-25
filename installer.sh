@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version='2.8.7'
-changelog="\n--fix Lululla Category Script"
+version='2.8.8'
+changelog="\n--fix Icons by Oktus"
 
 TMPPATH=/tmp/LinuxsatPanel-install
 FILEPATH=/tmp/LinuxsatPanel-main.tar.gz
