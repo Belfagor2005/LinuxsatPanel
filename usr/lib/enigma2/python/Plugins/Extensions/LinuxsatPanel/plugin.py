@@ -1599,10 +1599,6 @@ class LulullaScript(Screen):
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            # try:
-                # cmd = (str(self.url) % file_log).replace(" > %s 2>&1", " 2>&1")
-            # except TypeError:
-                # cmd = str(self.url).replace(" > %s 2>&1", " 2>&1")
             try:
                 cmd = str(self.url) + " > %s 2>&1" % file_log
             except TypeError:
@@ -1672,6 +1668,7 @@ class CiefpInstaller(Screen):
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "ciefp_sr3.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "ciefp_t2mpli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis",     "ciefp_t2m.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
+        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefTitloviBrowser",           "TitloviBrowser.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/TitloviBrowser/main/installer.sh -O - | /bin/sh")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpTMDBSearch",              "ciefp_tmdb.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpTMDBSearch/main/installer.sh  -O - | /bin/sh")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpVibes",                   "ciefp_vibes.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpVibes/main/installer.sh -O - | /bin/sh")
         add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay",    "ciefp_wls.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
