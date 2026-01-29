@@ -14,11 +14,10 @@ PR = "r0"
 SRC_URI = "git://github.com/Belfagor2005/LinuxsatPanel.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
+FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/LinuxsatPanel"
 
 do_install() {
     install -d ${D}${libdir}/enigma2/python/Plugins/Extensions/LinuxsatPanel
     cp -r ${S}/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/* \
           ${D}${libdir}/enigma2/python/Plugins/Extensions/LinuxsatPanel/
 }
-
-FILES:${PN} = "${libdir}/enigma2/python/Plugins/Extensions/LinuxsatPanel"
