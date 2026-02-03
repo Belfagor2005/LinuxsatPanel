@@ -18,7 +18,8 @@ import os
 import gettext
 _ = gettext.gettext
 
-plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+plugin_path = resolveFilename(SCOPE_PLUGINS,
+                              "Extensions/{}".format('LinuxsatPanel'))
 PY2 = sys.version_info[0] == 2
 PY3 = sys.version_info[0] == 3
 
@@ -41,7 +42,16 @@ else:
 
 class lsConsole(Screen):
 
-    def __init__(self, session, title='Linuxsat-support Console', cmdlist=None, finishedCallback=None, closeOnSuccess=False, showStartStopText=True, skin=None, callback=None):
+    def __init__(
+            self,
+            session,
+            title='Linuxsat-support Console',
+            cmdlist=None,
+            finishedCallback=None,
+            closeOnSuccess=False,
+            showStartStopText=True,
+            skin=None,
+            callback=None):
         Screen.__init__(self, session)
         self.finishedCallback = finishedCallback
         self.callback = callback  # Add this
@@ -67,7 +77,8 @@ class lsConsole(Screen):
                 "exit": self.cancel,
             }, -1
         )
-        self.newtitle = title == 'Linuxsat-support Console' and ('Console') or title
+        self.newtitle = title == 'Linuxsat-support Console' and (
+            'Console') or title
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
         self.cancel_msg = None
         self.onShown.append(self.updateTitle)
@@ -77,9 +88,11 @@ class lsConsole(Screen):
         try:
             self.container.appClosed.append(self.runFinished)
             self.container.dataAvail.append(self.dataAvail)
-        except:
-            self.container.appClosed_conn = self.container.appClosed.connect(self.runFinished)
-            self.container.dataAvail_conn = self.container.dataAvail.connect(self.dataAvail)
+        except BaseException:
+            self.container.appClosed_conn = self.container.appClosed.connect(
+                self.runFinished)
+            self.container.dataAvail_conn = self.container.dataAvail.connect(
+                self.dataAvail)
         self.onLayoutFinish.append(self.startRun)
 
     def updateTitle(self):
@@ -88,7 +101,8 @@ class lsConsole(Screen):
     def startRun(self):
         if self.showStartStopText:
             self['text'].setText(_('Execution progress\n\n'))
-        print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
+        print('[Console] executing in run', self.run,
+              ' the command:', self.cmdlist[self.run])
         print("[Console] Executing command:", self.cmdlist[self.run])
         if self.container.execute(self.cmdlist[self.run]):
             self['text'].setText(self.cmdlist[self.run])
@@ -109,19 +123,19 @@ class lsConsole(Screen):
         # All commands have finished
         self.show()
         self.finished = True
-        
+
         if self.cancel_msg:
             self.cancel_msg.close()
-            
+
         if self.showStartStopText:
             self['text'].appendText('Execution finished!!')
-        
+
         if self.callback:
             self.callback(not self.errorOcurred)
-        
+
         if self.finishedCallback:
             self.finishedCallback()
-        
+
         if self.errorOcurred or not self.closeOnSuccess:
             self['text'].appendText('\nPress OK or Exit to abort!')
             self['key_red'].setText('Exit')
@@ -141,7 +155,12 @@ class lsConsole(Screen):
         if self.finished:
             self.closeConsole()
         else:
-            self.cancel_msg = self.session.openWithCallback(self.cancelCallback, MessageBox, _('Cancel execution?'), type=MessageBox.TYPE_YESNO, default=False)
+            self.cancel_msg = self.session.openWithCallback(
+                self.cancelCallback,
+                MessageBox,
+                _('Cancel execution?'),
+                type=MessageBox.TYPE_YESNO,
+                default=False)
 
     def cancelCallback(self, ret=None):
         self.cancel_msg = None
@@ -149,7 +168,7 @@ class lsConsole(Screen):
             try:
                 self.container.appClosed.remove(self.runFinished)
                 self.container.dataAvail.remove(self.dataAvail)
-            except:
+            except BaseException:
                 self.container.appClosed_conn = None
                 self.container.dataAvail_conn = None
             self.container.kill()
@@ -160,7 +179,7 @@ class lsConsole(Screen):
             try:
                 self.container.appClosed.remove(self.runFinished)
                 self.container.dataAvail.remove(self.dataAvail)
-            except:
+            except BaseException:
                 self.container.appClosed_conn = None
                 self.container.dataAvail_conn = None
             self.close()
@@ -177,10 +196,10 @@ class lsConsole(Screen):
                 except UnicodeDecodeError:
                     try:
                         text = data.decode('latin-1')
-                    except:
+                    except BaseException:
                         try:
                             text = data.decode('utf-8', errors='ignore')
-                        except:
+                        except BaseException:
                             text = data.decode('utf-8', errors='replace')
 
             print("[Console] Data received: ", text)
@@ -190,10 +209,11 @@ class lsConsole(Screen):
             print("Error in dataAvail:", str(e))
             try:
                 if isinstance(data, bytes):
-                    self['text'].appendText(data.decode('utf-8', errors='ignore'))
+                    self['text'].appendText(
+                        data.decode('utf-8', errors='ignore'))
                 else:
                     self['text'].appendText(str(data))
-            except:
+            except BaseException:
                 self['text'].appendText("Data output")
 
     def restartenigma(self):

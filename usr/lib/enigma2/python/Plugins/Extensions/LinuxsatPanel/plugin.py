@@ -361,11 +361,39 @@ def LPListEntry(name, item):
         text_x_left = 45
 
     if HALIGN == RT_HALIGN_RIGHT:
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_right, 5), size=icon_size, png=png))
-        res.append(MultiContentEntryText(pos=(5, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+        res.append(
+            MultiContentEntryPixmapAlphaTest(
+                pos=(
+                    icon_x_right,
+                    5),
+                size=icon_size,
+                png=png))
+        res.append(
+            MultiContentEntryText(
+                pos=(
+                    5,
+                    0),
+                size=text_size,
+                font=0,
+                text=name,
+                flags=HALIGN | RT_VALIGN_CENTER))
     else:
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(icon_x_left, 5), size=icon_size, png=png))
-        res.append(MultiContentEntryText(pos=(text_x_left, 0), size=text_size, font=0, text=name, flags=HALIGN | RT_VALIGN_CENTER))
+        res.append(
+            MultiContentEntryPixmapAlphaTest(
+                pos=(
+                    icon_x_left,
+                    5),
+                size=icon_size,
+                png=png))
+        res.append(
+            MultiContentEntryText(
+                pos=(
+                    text_x_left,
+                    0),
+                size=text_size,
+                font=0,
+                text=name,
+                flags=HALIGN | RT_VALIGN_CENTER))
 
     return res
 
@@ -381,7 +409,8 @@ class ListSortUtility:
     def list_sort(names, titles, pics, urls):
         combined_data = zip(names, titles, pics, urls)
         sorted_data = sorted(combined_data, key=lambda x: x[0])
-        sorted_list, sorted_titles, sorted_pics, sorted_urls = zip(*sorted_data)
+        sorted_list, sorted_titles, sorted_pics, sorted_urls = zip(
+            *sorted_data)
         return sorted_list, sorted_titles, sorted_pics, sorted_urls
 
 
@@ -440,80 +469,338 @@ class LinuxsatPanel(Screen):
         self.urls = []
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Backup Tools ", "Backup.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Bouquets Tools ", "Bouquets.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Backup Tools ",
+                "Backup.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Bouquets Tools ",
+                "Bouquets.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Channel List ", "Channel-list.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ciefp ", "ciefp.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Channel List ",
+            "Channel-list.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Ciefp ",
+            "ciefp.png")
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "DvbUsb Tuners Drivers", "usb-tuner-drivers.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Epg Tools ", "plugin-epg.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.0 ", "Feeds2.0.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "DvbUsb Tuners Drivers",
+                "usb-tuner-drivers.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Epg Tools ",
+                "plugin-epg.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Feeds Image OE2.0 ",
+                "Feeds2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Feeds Image OE2.2/2.5/2.6 ", "Feeds2.2.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Feeds Image OE2.2/2.5/2.6 ",
+                "Feeds2.2.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Games Tools ", "Game.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Iptv Tools ", "iptv-streaming.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.0 ", "KiddaC1.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Games Tools ",
+                "Game.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Iptv Tools ",
+                "iptv-streaming.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "KiddaC OE2.0 ",
+                "KiddaC1.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "KiddaC OE2.2/2.5/2.6 ", "KiddaC2.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "KiddaC OE2.2/2.5/2.6 ",
+                "KiddaC2.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "LulullaScript ", "lululla_script.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "LulullaScript ",
+            "lululla_script.png")
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.0 ", "oe2.0.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Lululla Zone OE2.0 ",
+                "oe2.0.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Lululla Zone OE2.2/2.5/2.6 ", "oe2.5-2.6.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Plugins OE2.2/2.5/2.6 ", "OE2.2-Plugins.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Lululla Zone OE2.2/2.5/2.6 ",
+                "oe2.5-2.6.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Plugins OE2.2/2.5/2.6 ",
+                "OE2.2-Plugins.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mediaplayer-Youtube ", "mediayou.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "MultiBoot Tools ", "multiboot.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multimedia Tools ", "Multimedia.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Panels Addons ", "Panels.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Picons Tools ", "picons.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Python Library ", "Library.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Tools", "Radio.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Mediaplayer-Youtube ",
+                "mediayou.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "MultiBoot Tools ",
+                "multiboot.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Multimedia Tools ",
+                "Multimedia.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Panels Addons ",
+                "Panels.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Picons Tools ",
+                "picons.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Python Library ",
+                "Library.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Radio Tools",
+                "Radio.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Script Installer ", "script.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Script Installer ",
+            "script.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | TEAM ", "skinsteam.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Skins | TEAM ",
+                "skinsteam.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Fhd-Hd OE2.2/2.5/2.6 ", "OE2.2-Skins.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Skins Fhd-Hd OE2.2/2.5/2.6 ",
+                "OE2.2-Skins.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.0 ", "key-updater.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Keys Tools OE2.0 ",
+                "key-updater.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Tools OE2.2/2.5/2.6 ", "key-updater1.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Keys Tools OE2.2/2.5/2.6 ",
+                "key-updater1.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.0 ", "SOE20.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Softcams OE2.0 ",
+                "SOE20.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcams OE2.2/2.5/2.6 ", "SOE22.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Softcams OE2.2/2.5/2.6 ",
+                "SOE22.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Sport Tools ", "sport.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Streamlink Tools ", "streamlink.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Utility Tools ", "utility.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vpn Tools ", "vpn.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherTools ", "weather.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "WeatherForecast ", "weather-forecast.png")
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Webcam Tools ", "webcam.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Sport Tools ",
+                "sport.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Streamlink Tools ",
+                "streamlink.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Utility Tools ",
+                "utility.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Vpn Tools ",
+                "vpn.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "WeatherTools ",
+                "weather.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "WeatherForecast ",
+                "weather-forecast.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Webcam Tools ",
+                "webcam.png")
 
         if not config.ParentalControl.configured.value:
             if not has_dpkg:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.0 ", "18+deb.png")
+                add_menu_item(
+                    menu_list,
+                    self.titles,
+                    self.pics,
+                    self.urls,
+                    "Adult OE2.0 ",
+                    "18+deb.png")
             else:
-                add_menu_item(menu_list, self.titles, self.pics, self.urls, "Adult OE2.2/2.5/2.6 ", "18+.png")
+                add_menu_item(
+                    menu_list,
+                    self.titles,
+                    self.pics,
+                    self.urls,
+                    "Adult OE2.2/2.5/2.6 ",
+                    "18+.png")
 
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.0 ", "Other.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Other OE2.0 ",
+                "Other.png")
         else:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "Other OE2.2/2.5/2.6 ", "Other1.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "Other OE2.2/2.5/2.6 ",
+                "Other1.png")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, " Information ", "Information.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, " About ", "about.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            " Information ",
+            "Information.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            " About ",
+            "about.png")
 
         self.names = menu_list
         self.sorted = False
@@ -577,10 +864,18 @@ class LinuxsatPanel(Screen):
             print("A new version is available:", self.new_version)
 
             # Check if current screen is modal before opening the MessageBox
-            if self.session.current_dialog and getattr(self.session.current_dialog, "isModal", lambda: False)():
-                msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
-                msg = msg.replace("available", "available %s" % self.new_version)
-                msg = msg.replace("Changelog:", "Changelog: %s" % self.new_changelog)
+            if self.session.current_dialog and getattr(
+                    self.session.current_dialog, "isModal", lambda: False)():
+                msg = _(
+                    "New version available\n\nChangelog:\n\nPress the green button to start the update.")
+                msg = msg.replace(
+                    "available",
+                    "available %s" %
+                    self.new_version)
+                msg = msg.replace(
+                    "Changelog:",
+                    "Changelog: %s" %
+                    self.new_changelog)
                 self.session.open(
                     MessageBox,
                     msg,
@@ -588,9 +883,16 @@ class LinuxsatPanel(Screen):
                     timeout=5
                 )
             else:
-                msg = _("New version available\n\nChangelog:\n\nBut not downloadable!!!")
-                msg = msg.replace("available", "available %s" % self.new_version)
-                msg = msg.replace("Changelog:", "Changelog: %s" % self.new_changelog)
+                msg = _(
+                    "New version available\n\nChangelog:\n\nBut not downloadable!!!")
+                msg = msg.replace(
+                    "available",
+                    "available %s" %
+                    self.new_version)
+                msg = msg.replace(
+                    "Changelog:",
+                    "Changelog: %s" %
+                    self.new_changelog)
                 self.session.open(
                     MessageBox,
                     msg,
@@ -602,7 +904,8 @@ class LinuxsatPanel(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -626,7 +929,8 @@ class LinuxsatPanel(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -635,7 +939,8 @@ class LinuxsatPanel(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -649,7 +954,8 @@ class LinuxsatPanel(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -667,7 +973,8 @@ class LinuxsatPanel(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -723,7 +1030,11 @@ class LinuxsatPanel(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -731,7 +1042,8 @@ class LinuxsatPanel(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -761,7 +1073,8 @@ class LinuxsatPanel(Screen):
             return
         name = self.names[self.idx]
         if "adult" in name.lower():
-            self.session.openWithCallback(self.cancelConfirm, MessageBox, _("These Panel may contain Adult content\n\nare you sure you want to continue?"))
+            self.session.openWithCallback(self.cancelConfirm, MessageBox, _(
+                "These Panel may contain Adult content\n\nare you sure you want to continue?"))
         else:
             self.okbuttonContinue(self.idx)
 
@@ -842,17 +1155,77 @@ class LSskin(Screen):
         self.pics = []
         self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins All ", "otherskins.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | HD ", "SkinHD.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins All ",
+            "otherskins.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins | HD ",
+            "SkinHD.png")
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins | FHD ", "SkinFHD.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Egami ", "egami.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins HDF ", "hdf.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenBh ", "openbh.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OPEN ATV ", "openatv.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenPLi ", "openpli.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins OpenSpa ", "openspa.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins VTi ", "vti.png")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Skins Oe Based ", "oebased.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins Egami ",
+            "egami.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins HDF ",
+            "hdf.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins OpenBh ",
+            "openbh.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins OPEN ATV ",
+            "openatv.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins OpenPLi ",
+            "openpli.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins OpenSpa ",
+            "openspa.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins VTi ",
+            "vti.png")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Skins Oe Based ",
+            "oebased.png")
 
         self.names = menu_list
         self.sorted = False
@@ -907,7 +1280,8 @@ class LSskin(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -931,7 +1305,8 @@ class LSskin(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -940,7 +1315,8 @@ class LSskin(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -954,7 +1330,8 @@ class LSskin(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -972,7 +1349,8 @@ class LSskin(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -1028,7 +1406,11 @@ class LSskin(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -1036,7 +1418,8 @@ class LSskin(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -1101,12 +1484,54 @@ class LSChannel(Screen):
         self.urls = []
 
         # menu_list, titles, pics, urls, title, pic_name, url
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CIEFP ", "ciefp.png", "https://github.com/ciefp/ciefpsettings-enigma2-zipped")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CYRUS ", "cyrus.png", "https://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MANUTEK ", "manutek.png", "https://www.manutek.it/isetting/index.php")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "MORPHEUS ", "morpheus883.png", "https://github.com/morpheus883/enigma2-zipped")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL NET ", "vhannibal1.png", "https://www.vhannibal.net/asd.php")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "VHANNIBAL TEK ", "vhannibal2.png", "https://sat.alfa-tech.net/upload/settings/vhannibal/")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CIEFP ",
+            "ciefp.png",
+            "https://github.com/ciefp/ciefpsettings-enigma2-zipped")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CYRUS ",
+            "cyrus.png",
+            "https://www.cyrussettings.com/Set_29_11_2011/Dreambox-IpBox/Config.xml")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "MANUTEK ",
+            "manutek.png",
+            "https://www.manutek.it/isetting/index.php")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "MORPHEUS ",
+            "morpheus883.png",
+            "https://github.com/morpheus883/enigma2-zipped")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "VHANNIBAL NET ",
+            "vhannibal1.png",
+            "https://www.vhannibal.net/asd.php")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "VHANNIBAL TEK ",
+            "vhannibal2.png",
+            "https://sat.alfa-tech.net/upload/settings/vhannibal/")
 
         self.names = menu_list
         # self.combined_data = zip(self.names, self.titles, self.pics, self.urls)
@@ -1160,7 +1585,8 @@ class LSChannel(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -1184,7 +1610,8 @@ class LSChannel(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -1193,7 +1620,8 @@ class LSChannel(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -1207,7 +1635,8 @@ class LSChannel(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -1225,7 +1654,8 @@ class LSChannel(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -1281,7 +1711,11 @@ class LSChannel(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -1289,7 +1723,8 @@ class LSChannel(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -1343,42 +1778,294 @@ class LulullaScript(Screen):
         self.pics = []
         self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Acherone Script Command", "acherone_script_command.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/acherone-script/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Advanced Screeshots", "advanced_screeshots.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/AdvancedScreenshot/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Apod", "apod.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/apod/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Apsattv", "apsat.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Apsattv/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Archimede M3u Converter", "archimede_m3u_converter.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Archimede-M3UConverter/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Calendar", "calendar.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Calendar/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "DDRSS Reader", "ddrss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/DDRSSReader/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport 99", "epgimport_99.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh -O - | /bin/bash")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport Source", "epgsource.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false\" -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Filmon", "filmon.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Filmon/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Freearhey", "freearhey.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/freearhey/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "HasBahCa", "hasbahca.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/HasBahCa/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Horoscope", "horoscope.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Horoscope/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "mmPicons", "mmpicons.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/mmPicons/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oroscopo Italia", "oroscopoitalia.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/oroscopo_radioitalia/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Parsa Tv", "parsatv.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvParsa/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio80", "radio80.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Radio-80-s/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Radio Git", "radio_git.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RadioGit/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Rai Play", "rai_play.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RaiPlay/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution Lite", "revolutionlite.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionlite/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution Pro", "revolution_pro.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionpro/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Revolution XXX", "revolution_xxx.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionxxx/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Rss Reader", "rss_reader.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RSSReader/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Softcam Manager", "softcam_manager.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvManager/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Stalker Portal Converter", "stalker_portal_converter.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/StalkerPortalConverter/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Stvcl", "stvcl.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/S.T.V.C.L-/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvDream", "tvdream.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvDream/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TVGarden", "tvgarden.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/TVGarden/main/installer.sh\" -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvSettings", "tvsettings.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvSettings/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "TvToM3u", "tvtom3u.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/TvToM3u/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vavoo", "vavoo.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/vavoo/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Vavoo Maker", "vavoo_maker.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/VavooMaker/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WiFi Manager", "wifi_manager.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WiFi-Manager/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Worldcam", "worldcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WorldCam/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false\" -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XXX Plugin", "xxx_plugin.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/xxxplugin/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Acherone Script Command",
+            "acherone_script_command.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/acherone-script/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Advanced Screeshots",
+            "advanced_screeshots.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/AdvancedScreenshot/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Apod",
+            "apod.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/apod/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Apsattv",
+            "apsat.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Apsattv/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Archimede M3u Converter",
+            "archimede_m3u_converter.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Archimede-M3UConverter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Calendar",
+            "calendar.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Calendar/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "DDRSS Reader",
+            "ddrss.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/DDRSSReader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "EPGImport 99",
+            "epgimport_99.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh -O - | /bin/bash")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "EPGImport Source",
+            "epgsource.png",
+            "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false\" -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Filmon",
+            "filmon.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Filmon/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Freearhey",
+            "freearhey.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/freearhey/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "HasBahCa",
+            "hasbahca.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/HasBahCa/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Horoscope",
+            "horoscope.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Horoscope/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "mmPicons",
+            "mmpicons.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/mmPicons/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Oroscopo Italia",
+            "oroscopoitalia.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/oroscopo_radioitalia/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Parsa Tv",
+            "parsatv.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvParsa/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Radio80",
+            "radio80.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/Radio-80-s/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Radio Git",
+            "radio_git.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RadioGit/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Rai Play",
+            "rai_play.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RaiPlay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Revolution Lite",
+            "revolutionlite.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionlite/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Revolution Pro",
+            "revolution_pro.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionpro/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Revolution XXX",
+            "revolution_xxx.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/revolutionxxx/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Rss Reader",
+            "rss_reader.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/RSSReader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Softcam Manager",
+            "softcam_manager.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvManager/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Stalker Portal Converter",
+            "stalker_portal_converter.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/StalkerPortalConverter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Stvcl",
+            "stvcl.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/S.T.V.C.L-/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "TvDream",
+            "tvdream.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvDream/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "TVGarden",
+            "tvgarden.png",
+            "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/TVGarden/main/installer.sh\" -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "TvSettings",
+            "tvsettings.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/tvSettings/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "TvToM3u",
+            "tvtom3u.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/TvToM3u/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Vavoo",
+            "vavoo.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/vavoo/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Vavoo Maker",
+            "vavoo_maker.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/VavooMaker/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "WiFi Manager",
+            "wifi_manager.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WiFi-Manager/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Worldcam",
+            "worldcam.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/WorldCam/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "XC Forever",
+            "xc.png",
+            "wget -q --no-check-certificate \"https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false\" -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "XXX Plugin",
+            "xxx_plugin.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/xxxplugin/main/installer.sh -O - | /bin/sh")
 
         self.names = menu_list
         self.sorted = False
@@ -1439,7 +2126,8 @@ class LulullaScript(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -1463,7 +2151,8 @@ class LulullaScript(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -1472,7 +2161,8 @@ class LulullaScript(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -1486,7 +2176,8 @@ class LulullaScript(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -1504,7 +2195,8 @@ class LulullaScript(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -1560,7 +2252,11 @@ class LulullaScript(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -1568,7 +2264,8 @@ class LulullaScript(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -1594,7 +2291,9 @@ class LulullaScript(Screen):
         self.namev = self.names[idx]
         self.url = self.urls[idx]
         translated_msg = _(WARNING_MSG)
-        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
+        self.session.openWithCallback(
+            self.okClicked, MessageBox, translated_msg %
+            self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
@@ -1653,28 +2352,182 @@ class CiefpInstaller(Screen):
         self.pics = []
         self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpBouquetUpdater",          "ciefp_bu.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpChannelManager",          "ciefp_cman.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpE2Converter",             "ciefp_ec.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpIptvBouquets",            "ciefp_ib.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpMojTvEPG",                "ciefp_mojtvepg.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpMojTvEPG/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOpenDirectory",           "ciefp_opdir.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOpenDirectories/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpOscamEditor",             "ciefp_oe.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteAnalizer",       "ciefp_satan.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteAnalyzer/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSatelliteXmlEditor",      "ciefp_xed.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSelectSatellite",         "ciefp_ss.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsDownloader",      "ciefp_sd.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY2", "ciefp_sr2.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsStreamrelay PY3", "ciefp_sr3.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis PLi", "ciefp_t2mpli.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpSettingsT2miAbertis",     "ciefp_t2m.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefTitloviBrowser",           "TitloviBrowser.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/TitloviBrowser/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpTMDBSearch",              "ciefp_tmdb.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpTMDBSearch/main/installer.sh  -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpVibes",                   "ciefp_vibes.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpVibes/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpWhitelistStreamrelay",    "ciefp_wls.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsMotor",           "ciefp_sm.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "CiefpsettingsPanel",           "ciefp_sp.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WebCamE2PrenjSF",              "ciefp_webcam.png", "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/WebCamE2PrenjSF/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpBouquetUpdater",
+            "ciefp_bu.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpBouquetUpdater/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpChannelManager",
+            "ciefp_cman.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpChannelManager/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpE2Converter",
+            "ciefp_ec.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpE2Converter/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpIptvBouquets",
+            "ciefp_ib.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpMojTvEPG",
+            "ciefp_mojtvepg.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpMojTvEPG/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpOpenDirectory",
+            "ciefp_opdir.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOpenDirectories/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpOscamEditor",
+            "ciefp_oe.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSatelliteAnalizer",
+            "ciefp_satan.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteAnalyzer/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSatelliteXmlEditor",
+            "ciefp_xed.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSatelliteXmlEditor/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSelectSatellite",
+            "ciefp_ss.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSelectSatellite/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSettingsDownloader",
+            "ciefp_sd.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsDownloader/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSettingsStreamrelay PY2",
+            "ciefp_sr2.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelayPY2/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSettingsStreamrelay PY3",
+            "ciefp_sr3.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsStreamrelay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSettingsT2miAbertis PLi",
+            "ciefp_t2mpli.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertisOpenPLi/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpSettingsT2miAbertis",
+            "ciefp_t2m.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpSettingsT2miAbertis/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefTitloviBrowser",
+            "TitloviBrowser.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/TitloviBrowser/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpTMDBSearch",
+            "ciefp_tmdb.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpTMDBSearch/main/installer.sh  -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpVibes",
+            "ciefp_vibes.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpVibes/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpWhitelistStreamrelay",
+            "ciefp_wls.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpWhitelistStreamrelay/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpsettingsMotor",
+            "ciefp_sm.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsMotor/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpsettingsPanel",
+            "ciefp_sp.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpsettingsPanel/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "WebCamE2PrenjSF",
+            "ciefp_webcam.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/WebCamE2PrenjSF/main/installer.sh -O - | /bin/sh")
 
         self.names = menu_list
         self.sorted = False
@@ -1734,7 +2587,8 @@ class CiefpInstaller(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -1758,7 +2612,8 @@ class CiefpInstaller(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -1767,7 +2622,8 @@ class CiefpInstaller(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -1781,7 +2637,8 @@ class CiefpInstaller(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -1799,7 +2656,8 @@ class CiefpInstaller(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -1855,7 +2713,11 @@ class CiefpInstaller(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -1863,7 +2725,8 @@ class CiefpInstaller(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -1889,12 +2752,20 @@ class CiefpInstaller(Screen):
         self.namev = self.names[idx]
         self.url = self.urls[idx]
         translated_msg = _(WARNING_MSG)
-        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
+        self.session.openWithCallback(
+            self.okClicked, MessageBox, translated_msg %
+            self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
+            keywords = [
+                "google",
+                "cloudfaire",
+                "quad9",
+                "emm",
+                "keys",
+                "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
             # cmd = str(self.url) + " > %s 2>&1" % file_log
@@ -1903,9 +2774,18 @@ class CiefpInstaller(Screen):
             except TypeError:
                 cmd = str(self.url) + " 2>&1"
             if keyword_found:
-                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
+                self.session.open(
+                    lsConsole,
+                    _(title),
+                    cmdlist=[cmd],
+                    closeOnSuccess=False)
             else:
-                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
+                self.session.openWithCallback(
+                    self.openVi,
+                    lsConsole,
+                    _(title),
+                    cmdlist=[cmd],
+                    closeOnSuccess=True)
         else:
             return
 
@@ -1937,49 +2817,266 @@ class ScriptInstaller(Screen):
         self.pics = []
         self.urls = []
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Libssl Libcrypto", "AddLibssl.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Add Symlink Libssl", "AddSymlink.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ajpanel AMAJamry", "Ajpanel.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Arabic Savior", "arabicsav.png", 'wget --no-check-certificate "https://raw.githubusercontent.com/fairbird/ArabicSavior/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Add Libssl Libcrypto",
+            "AddLibssl.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Add_Libssl1_Libcrypto1.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Add Symlink Libssl",
+            "AddSymlink.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Symlink_Creator.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Ajpanel AMAJamry",
+            "Ajpanel.png",
+            'wget --no-check-certificate "https://raw.githubusercontent.com/biko-73/AjPanel/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Arabic Savior",
+            "arabicsav.png",
+            'wget --no-check-certificate "https://raw.githubusercontent.com/fairbird/ArabicSavior/main/installer.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Biss Feed Autokey", "BissFeedAutokey.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Bissfeedautokey.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Chocholousek Picons", "ChocholousekPicons.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Chocholousek_picons.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Biss Feed Autokey",
+            "BissFeedAutokey.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Bissfeedautokey.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Chocholousek Picons",
+            "ChocholousekPicons.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Chocholousek_picons.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Cloudfaire", "DnsCloudfaire.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Google", "DnsGoogle.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Dns Quad9", "DnsQuad9.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Dns Cloudfaire",
+            "DnsCloudfaire.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsCloudflare.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Dns Google",
+            "DnsGoogle.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsGoogle.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Dns Quad9",
+            "DnsQuad9.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/DnsQuad9.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player E2-MIRROR", "E2iPlayer.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/oe-mirrors/e2iplayer/refs/heads/python3/e2iplayer_install.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player BYKO-73", "E2playerBiko-73.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/biko-73/E2IPlayer/main/installer-tar.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player MAXBAMBY", "E2playerMAXBAMBY.png", 'wget -q --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player ZADMARIO", "E2playerZADMARIO.png", 'wget -q --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "E2player E2-MIRROR",
+            "E2iPlayer.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/oe-mirrors/e2iplayer/refs/heads/python3/e2iplayer_install.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "E2player BYKO-73",
+            "E2playerBiko-73.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/biko-73/E2IPlayer/main/installer-tar.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "E2player MAXBAMBY",
+            "E2playerMAXBAMBY.png",
+            'wget -q --no-check-certificate "https://gitlab.com/maxbambi/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "E2player ZADMARIO",
+            "E2playerZADMARIO.png",
+            'wget -q --no-check-certificate "https://gitlab.com/zadmario/e2iplayer/-/raw/master/install-e2iplayer.sh?inline=false" -O - | /bin/sh')
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "E2player XXX", "E2playerXXX.png", 'wget -q --no-check-certificate "https://gitlab.com/iptv-host-xxx/iptv-host-xxx/-/raw/master/IPTVPlayer/iptvupdate/custom/xxx.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "EPGImport - source", "epgsource.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "EPGImport - source",
+            "epgsource.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/EPGImport-99/main/installer_source.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "History Zap Selector", "HistoryZapSelector.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Historyzapselector_dorik.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Ipaudiopro_1.4.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "History Zap Selector",
+            "HistoryZapSelector.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Historyzapselector_dorik.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Ipaudio Pro",
+            "ipaudio.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Ipaudiopro_1.4.sh?inline=false" -O - | /bin/sh')
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Ipaudio Pro", "ipaudio.png", 'wget https://raw.githubusercontent.com/biko-73/ipaudio/main/ipaudiopro.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Adder", "keysadd.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Keys Update", "keys.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Levi45 Manager", "Levi45Manager.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Mountpoints", "Mountpoints.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Keys Adder",
+            "keysadd.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/KeyAdder/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Keys Update",
+            "keys.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Keys_Updater.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Levi45 Manager",
+            "Levi45Manager.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/levi-45/Manager/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Mountpoints",
+            "Mountpoints.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Mountpoints.sh?inline=false" -O - | /bin/sh')
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko Biko", "Multistalker.png", 'wget -q --no-check-certificate  "https://raw.githubusercontent.com/biko-73/Multi-Stalker/main/pro/installer.sh -O - | /bin/sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/emilnabil/multi-stalkerpro/refs/heads/main/installer.sh?inline=false" -O - | /bin/sh; wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Multistalker Pro Ziko", "MultistalkerPro.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/multisalker_pro12_eliesat.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "New VirtualKeyboard", "NewVirtualKeyboard.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Multistalker Pro Ziko",
+            "MultistalkerPro.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/refs/heads/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/multisalker_pro12_eliesat.sh?inline=false" -O - | /bin/sh;wget -q --no-check-certificate "https://gitlab.com/hmeng80/extensions/-/raw/main/multistalker/portal/Portal_multistalker.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "New VirtualKeyboard",
+            "NewVirtualKeyboard.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator LINGSAT", "lingsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_lyngsat.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator KINGOFSAT", "kingofsat.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_kingofsat.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator SATELINATV", "satelinatv.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_satelitnatv.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Oscam Generator TWOJEIP", "twojeip.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_twojeip.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Oscam Generator LINGSAT",
+            "lingsat.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_lyngsat.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Oscam Generator KINGOFSAT",
+            "kingofsat.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_kingofsat.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Oscam Generator SATELINATV",
+            "satelinatv.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_satelitnatv.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Oscam Generator TWOJEIP",
+            "twojeip.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Oscam_srvid_generator_twojeip.sh?inline=false" -O - | /bin/sh')
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Quicksignal Raed", "Quicksignal.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "WireGuard Vpn", "WireGuard.png", 'wget -q --no-check-certificate "wget -qO /tmp/WireGuard.sh "https://raw.githubusercontent.com/m4dhouse/Wireguard-Vpn/python-3.12/WireGuard.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "XC Forever", "xc.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xstreamity", "xstreamity.png", 'wget -q --no-check-certificate https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Xtraevent", "xtraevent.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Xtraevent.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Quicksignal Raed",
+            "Quicksignal.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "WireGuard Vpn",
+            "WireGuard.png",
+            'wget -q --no-check-certificate "wget -qO /tmp/WireGuard.sh "https://raw.githubusercontent.com/m4dhouse/Wireguard-Vpn/python-3.12/WireGuard.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "XC Forever",
+            "xc.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/xc_plugin_forever/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Xstreamity",
+            "xstreamity.png",
+            'wget -q --no-check-certificate https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Xtraevent",
+            "xtraevent.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Xtraevent.sh?inline=false" -O - | /bin/sh')
 
         # add_menu_item(menu_list, self.titles, self.pics, self.urls, "X-Klass", "xklass.png", 'wget -qO- --no-check-certificate "https://gitlab.com/MOHAMED_OS/dz_store/-/raw/main/XKlass/online-setup" | -O - | /bin/sh')
 
@@ -2005,11 +3102,39 @@ class ScriptInstaller(Screen):
         self.pics.append(picfold + "oscamfree.png")
         self.urls.append("")
 
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Send Emm", "SendEmm.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Subsupport addon", "SubSupportAddon.png", 'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
-        add_menu_item(menu_list, self.titles, self.pics, self.urls, "Transmission addon", "transmission.png", 'wget -q --no-check-certificate "https://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Send Emm",
+            "SendEmm.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Emm_Sender.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Subsupport addon",
+            "SubSupportAddon.png",
+            'wget -q --no-check-certificate "https://raw.githubusercontent.com/Belfagor2005/LinuxsatPanel/main/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel/sh/Subsupport_addon.sh?inline=false" -O - | /bin/sh')
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "Transmission addon",
+            "transmission.png",
+            'wget -q --no-check-certificate "https://dreambox4u.com/dreamarabia/Transmission_e2/Transmission_e2.sh?inline=false" -O - | /bin/sh')
         if not has_dpkg:
-            add_menu_item(menu_list, self.titles, self.pics, self.urls, "ServiceApp Exteplayer", "serviceapp.png", 'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
+                "ServiceApp Exteplayer",
+                "serviceapp.png",
+                'opkg update && opkg --force-reinstall --force-overwrite install ffmpeg gstplayer exteplayer3 enigma2-plugin-systemplugins-serviceapp')
 
         self.names = menu_list
         self.sorted = False
@@ -2064,7 +3189,11 @@ class ScriptInstaller(Screen):
 
     def Lcn(self, answer=None):
         if answer is None:
-            self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(
+                self.Lcn,
+                MessageBox,
+                _("Do you want to Order LCN Bouquet?"),
+                MessageBox.TYPE_YESNO)
         else:
             print("Starting LCN scan...")
             try:
@@ -2075,7 +3204,11 @@ class ScriptInstaller(Screen):
 
     def LcnXX(self, answer=None):
         if answer is None:
-            self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(
+                self.Lcn,
+                MessageBox,
+                _("Do you want to Order LCN Bouquet?"),
+                MessageBox.TYPE_YESNO)
         else:
             print("Starting LCN scan...")
             try:
@@ -2091,7 +3224,12 @@ class ScriptInstaller(Screen):
                 print("Exception during LCN scan:", e)
 
             try:
-                self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _("[LCNScanner] LCN scan finished\nChannels Ordered!"), MessageBox.TYPE_INFO, timeout=5)
+                self.session.openWithCallback(
+                    self._onLCNScanFinished,
+                    MessageBox,
+                    _("[LCNScanner] LCN scan finished\nChannels Ordered!"),
+                    MessageBox.TYPE_INFO,
+                    timeout=5)
             except RuntimeError as re:
                 print("RuntimeError during MessageBox display:", re)
 
@@ -2104,8 +3242,7 @@ class ScriptInstaller(Screen):
                 self.Checkskin,
                 MessageBox,
                 _("[Checkskin] This operation checks if the skin has its components (is not sure)..\nDo you really want to continue?"),
-                MessageBox.TYPE_YESNO
-            )
+                MessageBox.TYPE_YESNO)
 
         else:
             from .addons import checkskin
@@ -2125,7 +3262,8 @@ class ScriptInstaller(Screen):
 
     def paintFrame(self):
         try:
-            # If the index exceeds the maximum number of items, it returns to the first item
+            # If the index exceeds the maximum number of items, it returns to
+            # the first item
             if self.index > self.maxentry:
                 self.index = self.minentry
             self.idx = self.index
@@ -2149,7 +3287,8 @@ class ScriptInstaller(Screen):
             i1 = 0
             while i1 < self.PIXMAPS_PER_PAGE:
                 self["label" + str(i1 + 1)].setText(" ")
-                self["pixmap" + str(i1 + 1)].instance.setPixmapFromFile(nss_pic)
+                self["pixmap" + str(i1 + 1)
+                     ].instance.setPixmapFromFile(nss_pic)
                 i1 += 1
         self.npics = len(self.pics)
         i = 0
@@ -2158,7 +3297,8 @@ class ScriptInstaller(Screen):
         ln = self.maxentry - (self.minentry - 1)
         while i < ln:
             idx = self.minentry + i
-            # self["label" + str(i + 1)].setText(self.names[idx])  # this show label to bottom of png pixmap
+            # self["label" + str(i + 1)].setText(self.names[idx])  # this show
+            # label to bottom of png pixmap
             pic = self.pics[idx]
             if not exists(self.pics[idx]):
                 pic = nss_pic
@@ -2172,7 +3312,8 @@ class ScriptInstaller(Screen):
         if self.index >= 0:
             self.index -= 1
         else:
-            # If we are at the first pixmap, go back to the last pixmap of the last page
+            # If we are at the first pixmap, go back to the last pixmap of the
+            # last page
             self.ipage = self.npage
             self.index = self.npics - 1
         # Check if we need to change pages
@@ -2190,7 +3331,8 @@ class ScriptInstaller(Screen):
         if self.index < self.npics - 1:
             self.index += 1
         else:
-            # If we are at the last pixmap, go back to the first pixmap of the first page
+            # If we are at the last pixmap, go back to the first pixmap of the
+            # first page
             self.index = 0
             self.ipage = 1
             self.openTest()
@@ -2246,7 +3388,11 @@ class ScriptInstaller(Screen):
 
     def list_sort(self):
         if not hasattr(self, "original_data"):
-            self.original_data = (self.names[:], self.titles[:], self.pics[:], self.urls[:])
+            self.original_data = (
+                self.names[:],
+                self.titles[:],
+                self.pics[:],
+                self.urls[:])
             self.sorted = False
 
         if self.sorted:
@@ -2254,7 +3400,8 @@ class ScriptInstaller(Screen):
             self.sorted = False
             self["sort"].setText(_("Sort A-Z"))
         else:
-            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(self.names, self.titles, self.pics, self.urls)
+            self.names, self.titles, self.pics, self.urls = ListSortUtility.list_sort(
+                self.names, self.titles, self.pics, self.urls)
             self.sorted = True
             self["sort"].setText(_("Sort Default"))
 
@@ -2297,12 +3444,20 @@ class ScriptInstaller(Screen):
             return
 
         translated_msg = _(WARNING_MSG)
-        self.session.openWithCallback(self.okClicked, MessageBox, translated_msg % self.namev, MessageBox.TYPE_YESNO, default=True)
+        self.session.openWithCallback(
+            self.okClicked, MessageBox, translated_msg %
+            self.namev, MessageBox.TYPE_YESNO, default=True)
 
     def okClicked(self, answer=False):
         if answer:
             title = (_("Executing %s\nPlease Wait...") % self.namev)
-            keywords = ["google", "cloudfaire", "quad9", "emm", "keys", "source"]
+            keywords = [
+                "google",
+                "cloudfaire",
+                "quad9",
+                "emm",
+                "keys",
+                "source"]
             lower_namev = self.namev.lower()
             keyword_found = any(keyword in lower_namev for keyword in keywords)
             # cmd = str(self.url) + " > %s 2>&1" % file_log
@@ -2311,14 +3466,27 @@ class ScriptInstaller(Screen):
             except TypeError:
                 cmd = str(self.url) + " 2>&1"
             if keyword_found:
-                self.session.open(lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=False)
+                self.session.open(
+                    lsConsole,
+                    _(title),
+                    cmdlist=[cmd],
+                    closeOnSuccess=False)
             else:
-                self.session.openWithCallback(self.openVi, lsConsole, _(title), cmdlist=[cmd], closeOnSuccess=True)
+                self.session.openWithCallback(
+                    self.openVi,
+                    lsConsole,
+                    _(title),
+                    cmdlist=[cmd],
+                    closeOnSuccess=True)
         else:
             return
 
     def askForFcl(self):
-        self.session.openWithCallback(self.runScriptWithConsole, MessageBox, _("Do you want add Cline?"), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(
+            self.runScriptWithConsole,
+            MessageBox,
+            _("Do you want add Cline?"),
+            MessageBox.TYPE_YESNO)
 
     def runScriptWithConsole(self, confirmed):
         if confirmed:
@@ -2341,7 +3509,10 @@ class ScriptInstaller(Screen):
                 print("Unexpected error while updating the script: {}".format(e))
 
             try:
-                self.session.open(lsConsole, title="Executing Free Cline Access Script", cmdlist=[script_path])
+                self.session.open(
+                    lsConsole,
+                    title="Executing Free Cline Access Script",
+                    cmdlist=[script_path])
             except Exception as e:
                 print("Error while executing the script: {}".format(e))
 
@@ -2349,7 +3520,8 @@ class ScriptInstaller(Screen):
         if config_type == "CCcam":
             dest = "/etc/CCcam.cfg"
             src = plugin_path + "/sh/CCcam.cfg"
-            not_found_msg = _("File not found /etc/CCcam.cfg!\nRestart please...")
+            not_found_msg = _(
+                "File not found /etc/CCcam.cfg!\nRestart please...")
             write_format = "\nC: {} {} {} {}\n"
 
         elif config_type == "Oscam":
@@ -2358,7 +3530,8 @@ class ScriptInstaller(Screen):
                 makedirs(dest_dir)
             dest = join(dest_dir, "oscam.server")
             src = plugin_path + "/sh/oscam.server"
-            not_found_msg = _("File not found /etc/tuxbox/config/oscam.server!\nRestart please...")
+            not_found_msg = _(
+                "File not found /etc/tuxbox/config/oscam.server!\nRestart please...")
             write_format = (
                 "\n[reader]\n"
                 "label = Server_{}\n"  # host
@@ -2380,7 +3553,11 @@ class ScriptInstaller(Screen):
 
         if not exists(dest):
             copy2(src, dest)
-            self.session.open(MessageBox, not_found_msg, type=MessageBox.TYPE_INFO, timeout=8)
+            self.session.open(
+                MessageBox,
+                not_found_msg,
+                type=MessageBox.TYPE_INFO,
+                timeout=8)
             return
 
         try:
@@ -2394,13 +3571,11 @@ class ScriptInstaller(Screen):
             if "bosscccam" in data:  # ok
                 print("bosscccam pattern")
                 regex_patterns = [
-                    r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>",
-                ]
+                    r"<strong>c:\s*([\w.-]+)\s+(\d+)\s+([\w\d]+)\s+([\w.-]+)</strong>", ]
             elif "cccambird" in data:  # ok
                 print("cccambird pattern")
                 regex_patterns = [
-                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
-                ]
+                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', ]
             elif "cccamia" in data:  # ok
                 print("cccamia pattern")
                 regex_patterns = [
@@ -2414,8 +3589,7 @@ class ScriptInstaller(Screen):
             elif "iptv-15days" in data:  # ok cccamia
                 print("15days pattern")
                 regex_patterns = [
-                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>',
-                ]
+                    r'">C:\s+([\w.-]+)\s+(\d+)\s+(\w+)\s+([\w.-]+)\s*</th></tr>', ]
             else:
                 print("generic pattern")
                 regex_patterns = [
@@ -2451,17 +3625,24 @@ class ScriptInstaller(Screen):
                     if config_type == "CCcam":
                         print("Writing CCcam file")
                         with open(dest, "a") as cfgdok:
-                            cfgdok.write(write_format.format(host, port, user, pasw))
+                            cfgdok.write(
+                                write_format.format(
+                                    host, port, user, pasw))
 
                     elif config_type == "Oscam":
                         print("Writing Oscam file")
                         with open(dest, "a") as cfgdok:
-                            cfgdok.write(write_format.format(host, host, port, user, pasw))
+                            cfgdok.write(
+                                write_format.format(
+                                    host, host, port, user, pasw))
 
-                        msg = _("Server added\n\nServer:\nPort:\nUser:\nPassword:\n")
+                        msg = _(
+                            "Server added\n\nServer:\nPort:\nUser:\nPassword:\n")
 
                         text = msg
-                        text = text.replace("Server added", "Server %s added to %s" % (host, dest))
+                        text = text.replace(
+                            "Server added", "Server %s added to %s" %
+                            (host, dest))
                         text = text.replace("Server:", "Server: %s" % host)
                         text = text.replace("Port:", "Port: %s" % port)
                         text = text.replace("User:", "User: %s" % user)
@@ -2480,11 +3661,8 @@ class ScriptInstaller(Screen):
         except Exception as e:
             # Error handling
             self.session.open(
-                MessageBox,
-                _("Server error.\n\nTry again, you might get lucky!\n%s") % str(e),
-                type=MessageBox.TYPE_INFO,
-                timeout=8
-            )
+                MessageBox, _("Server error.\n\nTry again, you might get lucky!\n%s") %
+                str(e), type=MessageBox.TYPE_INFO, timeout=8)
 
 
 class addInstall(Screen):
@@ -2642,20 +3820,30 @@ class addInstall(Screen):
 
         if ".deb" in self.plug:
             if not has_dpkg:
-                self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+                self.session.open(
+                    MessageBox,
+                    _("Unknown Image!"),
+                    MessageBox.TYPE_INFO,
+                    timeout=5)
                 return
             self.iname = self.plug.split("_")[0]
 
         elif ".ipk" in self.plug:
             if has_dpkg:
-                self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+                self.session.open(
+                    MessageBox,
+                    _("Unknown Image!"),
+                    MessageBox.TYPE_INFO,
+                    timeout=5)
                 return
-            self.iname = self.plug.split("_")[0] if "_" in self.plug else self.plug
+            self.iname = self.plug.split(
+                "_")[0] if "_" in self.plug else self.plug
 
         elif ".zip" in self.plug or ".tar" in self.plug or ".gz" in self.plug or ".bz2" in self.plug:
             self.iname = self.plug
 
-        path = "/var/lib/dpkg/info" if exists("/var/lib/dpkg/info") else "/var/lib/opkg/info"
+        path = "/var/lib/dpkg/info" if exists(
+            "/var/lib/dpkg/info") else "/var/lib/opkg/info"
         resp = "Is NOT installed.\n"
         self.plug_name = self.plug.split("_")[0].lower()
 
@@ -2663,7 +3851,14 @@ class addInstall(Screen):
             if files is not None:
                 for name in files:
                     name = name.lower()
-                    if name.endswith((".postinst", ".preinst", ".prerm", ".postrm", ".md5sums", ".conffiles", "~")):
+                    if name.endswith(
+                        (".postinst",
+                         ".preinst",
+                         ".prerm",
+                         ".postrm",
+                         ".md5sums",
+                         ".conffiles",
+                         "~")):
                         continue
                     if exists("/var/lib/dpkg/info"):
                         if name.endswith(".list"):
@@ -2687,9 +3882,11 @@ class addInstall(Screen):
         self.session.openWithCallback(
             self.choiceCallback,
             ChoiceBox,
-            title=self.plug_name + "\n\n" + resp + "\nDo you want to Install, Remove, or Cancel?",
-            list=choices
-        )
+            title=self.plug_name +
+            "\n\n" +
+            resp +
+            "\nDo you want to Install, Remove, or Cancel?",
+            list=choices)
 
     def choiceCallback(self, result):
         if result is not None:
@@ -2721,28 +3918,48 @@ class addInstall(Screen):
                 else:
                     return
 
-                self.session.open(lsConsole, "Installing Extension", [command], closeOnSuccess=False)
+                self.session.open(
+                    lsConsole,
+                    "Installing Extension",
+                    [command],
+                    closeOnSuccess=False)
 
         elif choice == "uninstall":
             if ".deb" in self.plug:
                 if not has_dpkg:
-                    self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+                    self.session.open(
+                        MessageBox,
+                        _("Unknown Image!"),
+                        MessageBox.TYPE_INFO,
+                        timeout=5)
                     return
                 command = "dpkg -r " + iname.lower()
 
             elif ".ipk" in self.plug:
                 if has_dpkg:
-                    self.session.open(MessageBox, _("Unknown Image!"), MessageBox.TYPE_INFO, timeout=5)
+                    self.session.open(
+                        MessageBox,
+                        _("Unknown Image!"),
+                        MessageBox.TYPE_INFO,
+                        timeout=5)
                     return
                 command = "opkg remove --force-depends " + iname.lower()
 
             else:
                 return
 
-            self.session.open(lsConsole, "Execution Command", [command], closeOnSuccess=False)
+            self.session.open(
+                lsConsole,
+                "Execution Command",
+                [command],
+                closeOnSuccess=False)
 
         else:
-            self.session.open(MessageBox, "Action Aborted.", MessageBox.TYPE_INFO, timeout=4)
+            self.session.open(
+                MessageBox,
+                "Action Aborted.",
+                MessageBox.TYPE_INFO,
+                timeout=4)
 
     def retfile(self, dest):
         import requests
@@ -2804,7 +4021,13 @@ class addInstall(Screen):
                 match = compile(regex).findall(r)
                 for url in match:
                     name = url
-                    name = name.replace("NemoxyzRLS_Manutek_", "").replace("_", " ").replace("%20", " ")
+                    name = name.replace(
+                        "NemoxyzRLS_Manutek_",
+                        "").replace(
+                        "_",
+                        " ").replace(
+                        "%20",
+                        " ")
                     url = "https://www.manutek.it/isetting/enigma2/" + url + ".zip"
                     self.downloading = True
                     item = decode_html(name) + "###" + str(url)
@@ -2823,7 +4046,8 @@ class addInstall(Screen):
                     items.append(item)
 
             if "vhannibal net" in self.name.lower():
-                pattern = compile(r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
+                pattern = compile(
+                    r'<td><a href="(.+?)".*?>(.+?)</a>.*?<td>(.+?)</td>.*?</tr>', DOTALL)
                 matches = pattern.findall(r)
                 for match in matches:
                     url = match[0]
@@ -2832,7 +4056,13 @@ class addInstall(Screen):
                         name = name.decode("utf-8", errors="replace")
                     name = decode_html(match[1])
                     date = match[2]
-                    name = str(name).replace("&#127381;", "").replace("%20", " ").replace("..", "").strip() + " " + date
+                    name = str(name).replace(
+                        "&#127381;",
+                        "").replace(
+                        "%20",
+                        " ").replace(
+                        "..",
+                        "").strip() + " " + date
                     url = "https://www.vhannibal.net/" + url
                     self.downloading = True
                     item = name + "###" + str(url)
@@ -2844,7 +4074,9 @@ class addInstall(Screen):
                 for url, date in match:
                     if ".php" in url.lower():
                         continue
-                    name = decode_html(url).replace("&#127381;", "").replace("%20", " ") + " " + date
+                    name = decode_html(url).replace(
+                        "&#127381;", "").replace(
+                        "%20", " ") + " " + date
                     url = "https://sat.alfa-tech.net/upload/settings/vhannibal/Vhannibal" + url + ".zip"
                     self.downloading = True
                     item = name + "###" + str(url)
@@ -2885,7 +4117,11 @@ class addInstall(Screen):
 
     def LcnXX(self, answer=None):
         if answer is None:
-            self.session.openWithCallback(self.Lcn, MessageBox, _("Do you want to Order LCN Bouquet?"), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(
+                self.Lcn,
+                MessageBox,
+                _("Do you want to Order LCN Bouquet?"),
+                MessageBox.TYPE_YESNO)
         else:
             print("Starting LCN scan...")
             try:
@@ -2901,7 +4137,12 @@ class addInstall(Screen):
                 print("Exception during LCN scan:", e)
 
             try:
-                self.session.openWithCallback(self._onLCNScanFinished, MessageBox, _("[LCNScanner] LCN scan finished\nChannels Ordered!"), MessageBox.TYPE_INFO, timeout=5)
+                self.session.openWithCallback(
+                    self._onLCNScanFinished,
+                    MessageBox,
+                    _("[LCNScanner] LCN scan finished\nChannels Ordered!"),
+                    MessageBox.TYPE_INFO,
+                    timeout=5)
             except RuntimeError as re:
                 print("RuntimeError during MessageBox display:", re)
 
@@ -2909,7 +4150,11 @@ class addInstall(Screen):
         pass
 
     def okRun(self):
-        self.session.openWithCallback(self.okRun1, MessageBox, _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\nHowever, if required, you can get help to resolve the issue.\n\n\nDo you want to install?"), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(
+            self.okRun1,
+            MessageBox,
+            _("I am NOT responsible for any issues you may\nencounter once you install the plugins and skins.\nHowever, if required, you can get help to resolve the issue.\n\n\nDo you want to install?"),
+            MessageBox.TYPE_YESNO)
 
     def okRun1(self, answer=False):
         dest = "/tmp/settings.zip"
@@ -2942,11 +4187,17 @@ class addInstall(Screen):
                     system("rm -rf /etc/enigma2/*.radio")
                     system("rm -rf /etc/enigma2/*.tv")
                     system("rm -rf /etc/enigma2/*.del")
-                    system("cp -rf  '/tmp/unzipped/" + str(self.namel) + "/'* " + fdest2)
+                    system("cp -rf  '/tmp/unzipped/" +
+                           str(self.namel) + "/'* " + fdest2)
                     system("rm -rf /tmp/unzipped")
                     system("rm -rf /tmp/settings.zip")
                     title = (_("Installing %s\nPlease Wait...") % self.name)
-                    self.session.openWithCallback(self.yes, lsConsole, title=_(title), cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"], closeOnSuccess=False)
+                    self.session.openWithCallback(
+                        self.yes,
+                        lsConsole,
+                        title=_(title),
+                        cmdlist=["wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"],
+                        closeOnSuccess=False)
             else:
                 self["info"].setText(_("Settings Not Installed ..."))
 
@@ -2960,7 +4211,11 @@ class addInstall(Screen):
         ReloadBouquets(setx)
 
     def remove(self):
-        self.session.openWithCallback(self.removenow, MessageBox, _("Do you want to remove?"), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(
+            self.removenow,
+            MessageBox,
+            _("Do you want to remove?"),
+            MessageBox.TYPE_YESNO)
 
     def removenow(self, answer=False):
         if answer:
@@ -2977,7 +4232,11 @@ class addInstall(Screen):
             self.session.open(lsConsole, _(title), cmdlist=[cmd])
 
     def restart(self):
-        self.session.openWithCallback(self.restartnow, MessageBox, _("Do you want to restart Gui Interface?"), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(
+            self.restartnow,
+            MessageBox,
+            _("Do you want to restart Gui Interface?"),
+            MessageBox.TYPE_YESNO)
 
     def restartnow(self, answer=False):
         if answer:
@@ -3078,7 +4337,9 @@ class LSinfo(Screen):
         page = ''
 
         try:
-            req = Request(b64decoder(installer_url), headers={'User-Agent': 'Mozilla/5.0'})
+            req = Request(
+                b64decoder(installer_url), headers={
+                    'User-Agent': 'Mozilla/5.0'})
             page = urlopen(req).read().decode("utf-8")  # Decodifica diretta
         except Exception as e:
             print("[ERROR] Unable to fetch version info:", str(e))
@@ -3088,11 +4349,13 @@ class LSinfo(Screen):
             for line in page.split("\n"):
                 line = line.strip()
                 if line.startswith("version"):
-                    remote_version = line.split("=")[-1].strip().strip("'").strip('"')
+                    remote_version = line.split(
+                        "=")[-1].strip().strip("'").strip('"')
                 elif line.startswith("changelog"):
                     try:
-                        remote_changelog = line.split("=")[-1].strip().strip("'").strip('"')
-                    except:
+                        remote_changelog = line.split(
+                            "=")[-1].strip().strip("'").strip('"')
+                    except BaseException:
                         remote_changelog = ""
                     break
 
@@ -3110,11 +4373,18 @@ class LSinfo(Screen):
     def show_update_message(self):
         """Mostra un MessageBox con le informazioni sull'aggiornamento"""
         if self.Update:
-            msg = _("New version available\n\nChangelog:\n\nPress the green button to start the update.")
+            msg = _(
+                "New version available\n\nChangelog:\n\nPress the green button to start the update.")
 
             text = msg
-            text = text.replace("New version available", "New version %s available" % self.new_version)
-            text = text.replace("Changelog:", "Changelog: %s" % self.new_changelog)
+            text = text.replace(
+                "New version available",
+                "New version %s available" %
+                self.new_version)
+            text = text.replace(
+                "Changelog:",
+                "Changelog: %s" %
+                self.new_changelog)
 
             self.session.open(
                 MessageBox,
@@ -3144,7 +4414,8 @@ class LSinfo(Screen):
 
     def update_me(self):
         if self.Update:
-            msg = _("New version is available.\n\nChangelog:\n\nDo you want to install it now?")
+            msg = _(
+                "New version is available.\n\nChangelog:\n\nDo you want to install it now?")
 
             message = "%s %s\n\n%s" % (
                 msg,
@@ -3175,28 +4446,41 @@ class LSinfo(Screen):
                 page = response.read()
             except URLError as e:
                 print("Error fetching data from GitHub:", e)
-                self.session.open(MessageBox, _("Failed to fetch update information. Please check your internet connection."), MessageBox.TYPE_ERROR)
+                self.session.open(
+                    MessageBox,
+                    _("Failed to fetch update information. Please check your internet connection."),
+                    MessageBox.TYPE_ERROR)
                 return
 
             try:
                 data = loads(page)
             except ValueError as e:
                 print("Error parsing JSON data:", e)
-                self.session.open(MessageBox, _("Failed to parse update information. Please try again later."), MessageBox.TYPE_ERROR)
+                self.session.open(
+                    MessageBox,
+                    _("Failed to parse update information. Please try again later."),
+                    MessageBox.TYPE_ERROR)
                 return
 
             remote_date = data.get("pushed_at")
             if not remote_date:
                 print("No 'pushed_at' field found in the response.")
-                self.session.open(MessageBox, _("No update information available."), MessageBox.TYPE_INFO)
+                self.session.open(
+                    MessageBox,
+                    _("No update information available."),
+                    MessageBox.TYPE_INFO)
                 return
 
             try:
-                strp_remote_date = dt.strptime(remote_date, "%Y-%m-%dT%H:%M:%SZ")
+                strp_remote_date = dt.strptime(
+                    remote_date, "%Y-%m-%dT%H:%M:%SZ")
                 formatted_date = strp_remote_date.strftime("%Y-%m-%d")
             except ValueError as e:
                 print("Error parsing date:", e)
-                self.session.open(MessageBox, _("Invalid date format in update information."), MessageBox.TYPE_ERROR)
+                self.session.open(
+                    MessageBox,
+                    _("Invalid date format in update information."),
+                    MessageBox.TYPE_ERROR)
                 return
 
             self.session.openWithCallback(
@@ -3208,13 +4492,28 @@ class LSinfo(Screen):
 
         except Exception as e:
             print("Unexpected error in update_dev:", e)
-            self.session.open(MessageBox, _("An unexpected error occurred. Please try again later."), MessageBox.TYPE_ERROR)
+            self.session.open(
+                MessageBox,
+                _("An unexpected error occurred. Please try again later."),
+                MessageBox.TYPE_ERROR)
 
     def install_update(self, answer=False):
         if answer:
-            self.session.open(lsConsole, "Upgrading...", cmdlist=["wget -q --no-check-certificate " + b64decoder(installer_url) + " -O - | /bin/sh"], finishedCallback=self.myCallback, closeOnSuccess=False)
+            self.session.open(
+                lsConsole,
+                "Upgrading...",
+                cmdlist=[
+                    "wget -q --no-check-certificate " +
+                    b64decoder(installer_url) +
+                    " -O - | /bin/sh"],
+                finishedCallback=self.myCallback,
+                closeOnSuccess=False)
         else:
-            self.session.open(MessageBox, _("Update Aborted!"), MessageBox.TYPE_INFO, timeout=3)
+            self.session.open(
+                MessageBox,
+                _("Update Aborted!"),
+                MessageBox.TYPE_INFO,
+                timeout=3)
 
     def myCallback(self, result=None):
         print("result:", result)
@@ -3232,13 +4531,16 @@ class LSinfo(Screen):
                 try:
 
                     if not exists(license_path):
-                        print("License file does not exist: {}".format(license_path))
+                        print(
+                            "License file does not exist: {}".format(license_path))
                         self["list"].setText("Error: LICENSE file not found.")
                         return
 
                     if not access(license_path, R_OK):
-                        print("License file is not readable: {}".format(license_path))
-                        self["list"].setText("Error: LICENSE file is not readable.")
+                        print(
+                            "License file is not readable: {}".format(license_path))
+                        self["list"].setText(
+                            "Error: LICENSE file is not readable.")
                         return
 
                     with io.open(license_path, "r", encoding="utf-8") as filer:
@@ -3252,7 +4554,8 @@ class LSinfo(Screen):
                     self["list"].setText("Error: Could not read LICENSE file.")
                 except Exception as e:
                     print("Unexpected error: {}".format(e))
-                    self["list"].setText("Error: An unexpected error occurred.")
+                    self["list"].setText(
+                        "Error: An unexpected error occurred.")
             else:
                 print("Unknown name value:", self.name)
                 return
@@ -3268,7 +4571,8 @@ class LSinfo(Screen):
             header += "Designs and Graphics by @oktus\n"
             header += "Support on: Linuxsat-support.com\n\n"
             print("stbinfo initialized:", stbinfo)
-            stbinfo_str = str(stbinfo.to_string()) if stbinfo else "No info available"
+            stbinfo_str = str(
+                stbinfo.to_string()) if stbinfo else "No info available"
             base_content = "{0} V.{1}\n{2}STB info:\n{3}\n".format(
                 descplug,
                 __version__,
@@ -3300,11 +4604,14 @@ class LSinfo(Screen):
                     try:
                         # Python 3
                         with open("/tmp/output.txt", "a", encoding="utf-8") as output_file:
-                            output_file.write("\nAdditional Info:\n{0}".format(additional_info))
+                            output_file.write(
+                                "\nAdditional Info:\n{0}".format(additional_info))
                     except TypeError:
                         # Python 2
                         with open("/tmp/output.txt", "a") as output_file:
-                            output_file.write("\nAdditional Info:\n{0}".format(additional_info.encode("utf-8")))
+                            output_file.write(
+                                "\nAdditional Info:\n{0}".format(
+                                    additional_info.encode("utf-8")))
                 except Exception as e:
                     print("Error appending info.txt: {0}".format(str(e)))
             else:
@@ -3363,8 +4670,12 @@ class startLP(Screen):
             self.skin = f.read()
         # self.skin = ctrlSkin("startLP", skin)
         self["poster"] = Pixmap()
-        self["version"] = Label("Wait Please... Linuxsat Panel V." + __version__)
-        self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.clsgo, "cancel": self.clsgo}, -1)
+        self["version"] = Label(
+            "Wait Please... Linuxsat Panel V." +
+            __version__)
+        self["actions"] = ActionMap(
+            ["OkCancelActions"], {
+                "ok": self.clsgo, "cancel": self.clsgo}, -1)
         self.onLayoutFinish.append(self.loadDefaultImage)
 
     def clsgo(self, *args):
@@ -3374,7 +4685,9 @@ class startLP(Screen):
         self.close()
 
     def loadDefaultImage(self):
-        self.fldpng = resolveFilename(SCOPE_PLUGINS, "Extensions/{}/icons/pageLogo.png".format("LinuxsatPanel"))
+        self.fldpng = resolveFilename(
+            SCOPE_PLUGINS,
+            "Extensions/{}/icons/pageLogo.png".format("LinuxsatPanel"))
 
         self.timer = eTimer()
         try:
@@ -3385,7 +4698,8 @@ class startLP(Screen):
 
         self.delayedTimer = eTimer()
         try:
-            self.delayedTimer_conn = self.delayedTimer.timeout.connect(self.clsgo)
+            self.delayedTimer_conn = self.delayedTimer.timeout.connect(
+                self.clsgo)
         except BaseException:
             self.delayedTimer.callback.append(self.clsgo)
         self.delayedTimer.start(1000, True)
@@ -3397,7 +4711,8 @@ class startLP(Screen):
             if not hasattr(self, "picload") or not self.picload:
                 self.picload = ePicLoad()
             self.scale = AVSwitch().getFramebufferScale()
-            self.picload.setPara([size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, "#00000000"])
+            self.picload.setPara(
+                [size.width(), size.height(), self.scale[0], self.scale[1], 0, 1, "#00000000"])
             # _l = self.picload.PictureData.get()
             # del self.picload
             if has_dpkg:
@@ -3429,7 +4744,8 @@ class AboutLSS(Screen):
         with codecs.open(skin, "r", encoding="utf-8") as f:
             skin = f.read()
         self.skin = ctrlSkin("AboutLSS", skin)
-        credit = _("Thank you for choosing plugin for management of your Enigma Box.\n\n")
+        credit = _(
+            "Thank you for choosing plugin for management of your Enigma Box.\n\n")
         credit += _("Suggested by: @masterG - @oktus - @pcd\n")
         credit += _("Designs and Graphics by @oktus\n")
         credit += _("Support on: Linuxsat-support.com\n\n")
@@ -3489,7 +4805,8 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-    return [(_("Linuxsat Panel"), main, descplug, 44)] if menuid == "mainmenu" else []
+    return [(_("Linuxsat Panel"), main, descplug, 44)
+            ] if menuid == "mainmenu" else []
 
 
 def Plugins(**kwargs):

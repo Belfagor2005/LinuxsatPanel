@@ -43,7 +43,7 @@ class StbInfo:
         try:
             from Plugins.Extensions.OpenWebif.controllers.models.info import getInfo
             self.boxinfo = getInfo()
-        except:
+        except BaseException:
             self.boxinfo = {}
             pass
 
@@ -76,31 +76,57 @@ class StbInfo:
     def to_string(self):
         lines = []
         try:
-            lines.append('Data source: %s' % ('OpenWebif' if self.boxinfo else 'proc'))
+            lines.append(
+                'Data source: %s' %
+                ('OpenWebif' if self.boxinfo else 'proc'))
             lines.append('\n')
             lines.append('HW Info:')
-            lines.append('Vendor: %s' % str(self.hw_vendor) if self.hw_vendor else 'Unknown')
-            lines.append('Model: %s' % str(self.hw_model) if self.hw_model else 'Unknown')
-            lines.append('Chipset: %s' % str(self.hw_chipset) if self.hw_chipset else 'Unknown')
-            lines.append('Architecture: %s' % str(self.hw_arch) if self.hw_arch else 'Unknown')
-            lines.append('Local Ip: %s' % str(self.ipub) if self.ipub else 'Unknown')
-            lines.append('Public IP: %s' % str(self.pip) if self.pip else 'Unknown')
-            lines.append('Internet: %s' % str(self.internetline) if self.internetline else 'Unknown')
+            lines.append('Vendor: %s' %
+                         str(self.hw_vendor) if self.hw_vendor else 'Unknown')
+            lines.append('Model: %s' %
+                         str(self.hw_model) if self.hw_model else 'Unknown')
+            lines.append('Chipset: %s' % str(self.hw_chipset)
+                         if self.hw_chipset else 'Unknown')
+            lines.append('Architecture: %s' %
+                         str(self.hw_arch) if self.hw_arch else 'Unknown')
+            lines.append('Local Ip: %s' %
+                         str(self.ipub) if self.ipub else 'Unknown')
+            lines.append('Public IP: %s' %
+                         str(self.pip) if self.pip else 'Unknown')
+            lines.append('Internet: %s' % str(self.internetline)
+                         if self.internetline else 'Unknown')
             lines.append('\n')
             lines.append('SW Info:')
-            lines.append('Installation ID: %s' % str(self.installation_id) if self.installation_id else 'Unknown')
-            lines.append('Python version: %s' % str(self.python_version) if self.python_version else 'Unknown')
-            lines.append('Distro: %s' % str(self.sw_distro) if self.sw_distro else 'Unknown')
-            lines.append('Distro version: %s' % str(self.sw_distro_ver) if self.sw_distro_ver else 'Unknown')
-            lines.append('Enigma version: %s' % str(self.sw_enigma_ver) if self.sw_enigma_ver else 'Unknown')
-            lines.append('OE version: %s' % str(self.sw_oe_ver) if self.sw_oe_ver else 'Unknown')
+            lines.append(
+                'Installation ID: %s' % str(
+                    self.installation_id) if self.installation_id else 'Unknown')
+            lines.append(
+                'Python version: %s' % str(
+                    self.python_version) if self.python_version else 'Unknown')
+            lines.append('Distro: %s' %
+                         str(self.sw_distro) if self.sw_distro else 'Unknown')
+            lines.append(
+                'Distro version: %s' % str(
+                    self.sw_distro_ver) if self.sw_distro_ver else 'Unknown')
+            lines.append(
+                'Enigma version: %s' % str(
+                    self.sw_enigma_ver) if self.sw_enigma_ver else 'Unknown')
+            lines.append('OE version: %s' %
+                         str(self.sw_oe_ver) if self.sw_oe_ver else 'Unknown')
             lines.append('\n')
-            lines.append('Video Format: %s' % str(self.current_format) if self.current_format else 'Unknown')
-            lines.append('Mount Info: %s' % str(self.mountid) if self.mountid else 'Unknown')
-            lines.append('Storage Info: %s' % str(self.storhdd) if self.storhdd else 'Unknown')
-            lines.append('Memory Info: %s' % str(self.memin) if self.memin else 'Unknown')
-            lines.append('Is VTi image: %s' % str(self.is_vti_image) if self.is_vti_image else 'Unknown')
-            lines.append('Is DMM image: %s' % str(self.is_dmm_image) if self.is_dmm_image else 'Unknown')
+            lines.append(
+                'Video Format: %s' % str(
+                    self.current_format) if self.current_format else 'Unknown')
+            lines.append('Mount Info: %s' %
+                         str(self.mountid) if self.mountid else 'Unknown')
+            lines.append('Storage Info: %s' %
+                         str(self.storhdd) if self.storhdd else 'Unknown')
+            lines.append('Memory Info: %s' %
+                         str(self.memin) if self.memin else 'Unknown')
+            lines.append('Is VTi image: %s' % str(self.is_vti_image)
+                         if self.is_vti_image else 'Unknown')
+            lines.append('Is DMM image: %s' % str(self.is_dmm_image)
+                         if self.is_dmm_image else 'Unknown')
         except Exception as e:
             print("Error formatting info:", e)
         return '\n'.join(lines)
@@ -111,7 +137,7 @@ class StbInfo:
             try:
                 s = getDesktop(0).size()
                 return (s.width(), s.height())
-            except:
+            except BaseException:
                 return (1920, 1080)  # Valore predefinito
 
         try:
@@ -128,7 +154,7 @@ class StbInfo:
                 return "HD (1280x720)"
             else:
                 return "SD (720x576)"
-        except:
+        except BaseException:
             return "Resolution: Unknown"
 
     def get_internet_status(self):
@@ -148,7 +174,7 @@ class StbInfo:
                 sock.connect(("www.google.com", 80))
                 sock.close()
                 return _("Internet: Connected")
-            except:
+            except BaseException:
                 pass
 
             return _("Internet: No Connection")
@@ -160,11 +186,14 @@ class StbInfo:
     def get_storage_info(self):
         try:
             statvfs = statvfsx("/")
-            total_storage = (statvfs.f_blocks * statvfs.f_frsize) // (1024 * 1024)
-            free_storage = (statvfs.f_bfree * statvfs.f_frsize) // (1024 * 1024)
+            total_storage = (statvfs.f_blocks *
+                             statvfs.f_frsize) // (1024 * 1024)
+            free_storage = (statvfs.f_bfree *
+                            statvfs.f_frsize) // (1024 * 1024)
             used_storage = total_storage - free_storage
-            return "Storage: %d MB total, %d MB free, %d MB used" % (total_storage, free_storage, used_storage)
-        except:
+            return "Storage: %d MB total, %d MB free, %d MB used" % (
+                total_storage, free_storage, used_storage)
+        except BaseException:
             return "Storage Info: Unknown"
 
     def get_info_value(self, entry):
@@ -178,7 +207,7 @@ class StbInfo:
                 return value if value else 'unknown'
         except IOError:
             return 'unknown'
-        except:
+        except BaseException:
             return 'unknown'
 
     def _get_node(self):
@@ -196,9 +225,10 @@ class StbInfo:
             if not PY3:
                 node = uuid.getnode()
                 if node != uuid.getnode():  # Se non è l'indirizzo fallback
-                    mac_str = ''.join(("%012X" % node)[i:i + 2] for i in range(0, 12, 2))
+                    mac_str = ''.join(("%012X" %
+                                       node)[i:i + 2] for i in range(0, 12, 2))
                     return mac_str
-        except:
+        except BaseException:
             pass
 
         try:
@@ -206,7 +236,7 @@ class StbInfo:
                 mac = f.read().strip().upper().replace(':', '')
                 if mac and mac != '00:00:00:00:00:00':
                     return mac
-        except:
+        except BaseException:
             pass
 
         return '000000000000'
@@ -224,10 +254,12 @@ class StbInfo:
                         mem_available = int(line.split()[1]) // 1024
 
                 if mem_available > 0:
-                    return "RAM: %d MB total, %d MB available" % (mem_total, mem_available)
+                    return "RAM: %d MB total, %d MB available" % (
+                        mem_total, mem_available)
                 else:
-                    return "RAM: %d MB total, %d MB free" % (mem_total, mem_free)
-        except:
+                    return "RAM: %d MB total, %d MB free" % (
+                        mem_total, mem_free)
+        except BaseException:
             return "Memory Info: Unknown"
 
     def _get_installation_id(self):
@@ -239,7 +271,7 @@ class StbInfo:
                 return md5(node.encode('utf-8')).hexdigest()
             else:
                 return md5(node).hexdigest()
-        except:
+        except BaseException:
             return 'unknown'
 
     @staticmethod
@@ -264,7 +296,7 @@ class StbInfo:
             ip = s.getsockname()[0]
             s.close()
             return ip
-        except:
+        except BaseException:
             try:
                 import netifaces
                 for iface in netifaces.interfaces():
@@ -272,7 +304,7 @@ class StbInfo:
                         addrs = netifaces.ifaddresses(iface)
                         if netifaces.AF_INET in addrs:
                             return addrs[netifaces.AF_INET][0]['addr']
-            except:
+            except BaseException:
                 pass
             return '127.0.0.1'
 
@@ -283,7 +315,7 @@ class StbInfo:
             timer = eTimer()
             # In DMM images, eTimer ha timeout.connect
             return hasattr(timer, 'timeout')
-        except:
+        except BaseException:
             return False
 
     @staticmethod
@@ -298,11 +330,15 @@ class StbInfo:
             from skin import parseSize
             argspec = getfullargspec(parseSize)
             return len(argspec.args) == 2
-        except:
+        except BaseException:
             return False
 
     def get_mount_info(self):
-        mount_points = ["/media/hdd", "/media/usb", "/media/sda1", "/media/mmc"]
+        mount_points = [
+            "/media/hdd",
+            "/media/usb",
+            "/media/sda1",
+            "/media/mmc"]
         for mount_point in mount_points:
             if exists(mount_point):
                 try:
@@ -311,7 +347,7 @@ class StbInfo:
                         return "Mount: %s (mounted)" % mount_point
                     else:
                         return "Mount: %s (exists)" % mount_point
-                except:
+                except BaseException:
                     return "Mount: %s" % mount_point
 
         return "Mount: Not Found"
@@ -353,7 +389,7 @@ class StbInfo:
                 result = popen(command).read().strip()
                 if result and '.' in result:  # Validazione base IP
                     return "Public IP: %s (via %s)" % (result, tool)
-            except:
+            except BaseException:
                 continue
 
         return "Public IP: Unknown"

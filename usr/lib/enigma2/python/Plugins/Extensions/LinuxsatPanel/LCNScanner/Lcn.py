@@ -35,7 +35,8 @@ except ImportError:
 
 
 # plugin_path = os.path.dirname(sys.modules[__name__].__file__)
-plugin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/{}".format('LinuxsatPanel'))
+plugin_path = resolveFilename(SCOPE_PLUGINS,
+                              "Extensions/{}".format('LinuxsatPanel'))
 rules = os.path.join(plugin_path, 'LCNScanner/rules.xml')
 ServiceListNewLamedb = plugin_path + '/temp/ServiceListNewLamedb'
 TrasponderListNewLamedb = plugin_path + '/temp/TrasponderListNewLamedb'
@@ -69,8 +70,10 @@ def ReloadBouquets(x):
             db.reloadBouquets()
             print("eDVBDB: bouquets reloaded...")
     else:
-        os.system("wget -qO - http://127.0.0.1/web/servicelistreload?mode=2 > /dev/null 2>&1 &")
-        os.system("wget -qO - http://127.0.0.1/web/servicelistreload?mode=4 > /dev/null 2>&1 &")
+        os.system(
+            "wget -qO - http://127.0.0.1/web/servicelistreload?mode=2 > /dev/null 2>&1 &")
+        os.system(
+            "wget -qO - http://127.0.0.1/web/servicelistreload?mode=4 > /dev/null 2>&1 &")
         print("wGET: bouquets reloaded...")
     return
 
@@ -112,7 +115,8 @@ class LCN():
         for i in range(0, len(self.lcnlist)):
             if self.lcnlist[i][0] == lcn:
                 if self.lcnlist[i][5] > signal:
-                    self.addLcnToList(namespace, nid, tsid, sid, lcn + 16536, signal)
+                    self.addLcnToList(
+                        namespace, nid, tsid, sid, lcn + 16536, signal)
                 else:
                     znamespace = self.lcnlist[i][1]
                     znid = self.lcnlist[i][2]
@@ -124,10 +128,12 @@ class LCN():
                     self.lcnlist[i][3] = tsid
                     self.lcnlist[i][4] = sid
                     self.lcnlist[i][5] = signal
-                    self.addLcnToList(znamespace, znid, ztsid, zsid, lcn + 16536, zsignal)
+                    self.addLcnToList(
+                        znamespace, znid, ztsid, zsid, lcn + 16536, zsignal)
                 return
             elif self.lcnlist[i][0] > lcn:
-                self.lcnlist.insert(i, [lcn, namespace, nid, tsid, sid, signal])
+                self.lcnlist.insert(
+                    i, [lcn, namespace, nid, tsid, sid, signal])
                 return
         self.lcnlist.append([lcn, namespace, nid, tsid, sid, signal])
 
@@ -164,7 +170,8 @@ class LCN():
                     tmp = line.split(":")
                     if len(tmp) != 6:
                         continue
-                    self.addLcnToList(int(tmp[0], 16), int(tmp[1], 16), int(tmp[2], 16), int(tmp[3], 16), int(tmp[4]), int(tmp[5]))
+                    self.addLcnToList(int(tmp[0], 16), int(tmp[1], 16), int(
+                        tmp[2], 16), int(tmp[3], 16), int(tmp[4]), int(tmp[5]))
 
         except Exception as e:
             print("Errore durante la lettura del file:", e)
@@ -243,7 +250,8 @@ class LCN():
                 for x in self.lcnlist:
                     count += 1
                     while x[0] != count:
-                        self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
+                        self.newlist.append(
+                            [count, 11111111, 11111, 111, 111, 111111])
                         count += 1
                     if x[0] == count:
                         self.newlist.append(x)
@@ -258,16 +266,20 @@ class LCN():
                         continue
                     if len(self.markers) > 0 and x[0] > self.markers[0][0]:
                         f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-                        f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
+                        f.write(
+                            "#DESCRIPTION ------- " +
+                            self.markers[0][1] +
+                            " -------\n")
                         self.markers.pop(0)  # Rimuove il primo marker
 
-                    refstr = "1:0:1:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])
+                    refstr = "1:0:1:%x:%x:%x:%x:0:0:0:" % (
+                        x[4], x[3], x[2], x[1])
                     refsplit = eServiceReference(refstr).toString().split(":")
                     added = False
                     for tref in self.e2services:
                         tmp = tref.split(":")
-                        if (tmp[3] == refsplit[3] and tmp[4] == refsplit[4] and
-                                tmp[5] == refsplit[5] and tmp[6] == refsplit[6]):
+                        if (tmp[3] == refsplit[3] and tmp[4] == refsplit[4]
+                                and tmp[5] == refsplit[5] and tmp[6] == refsplit[6]):
                             f.write("#SERVICE " + tref + "\n")
                             added = True
                             break
@@ -287,7 +299,8 @@ class LCN():
                     return
             with open('/etc/enigma2/bouquets.tv', 'w') as f:
                 f.write(ret[0] + "\n")
-                f.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.tv" ORDER BY bouquet\n')
+                f.write(
+                    '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.tv" ORDER BY bouquet\n')
                 for line in ret[1:]:
                     f.write(line + "\n")
         except Exception as e:
@@ -301,7 +314,8 @@ class LCN():
                 for x in self.lcnlist:
                     count += 1
                     while x[0] != count:
-                        self.newlist.append([count, 11111111, 11111, 111, 111, 111111])
+                        self.newlist.append(
+                            [count, 11111111, 11111, 111, 111, 111111])
                         count += 1
                     if x[0] == count:
                         self.newlist.append(x)
@@ -317,10 +331,14 @@ class LCN():
 
                     if len(self.markers) > 0 and x[0] > self.markers[0][0]:
                         f.write("#SERVICE 1:64:0:0:0:0:0:0:0:0:\n")
-                        f.write("#DESCRIPTION ------- " + self.markers[0][1] + " -------\n")
+                        f.write(
+                            "#DESCRIPTION ------- " +
+                            self.markers[0][1] +
+                            " -------\n")
                         self.markers.pop(0)
 
-                    refstr = "1:0:2:%x:%x:%x:%x:0:0:0:" % (x[4], x[3], x[2], x[1])
+                    refstr = "1:0:2:%x:%x:%x:%x:0:0:0:" % (
+                        x[4], x[3], x[2], x[1])
                     refsplit = eServiceReference(refstr).toString().split(":")
                     added = False
 
@@ -333,7 +351,8 @@ class LCN():
 
                     if not added:
                         f.write("#SERVICE 1:832:d:0:0:0:0:0:0:0:\n")
-                        print("Servizio non trovato per riferimento: ", refsplit)
+                        print(
+                            "Servizio non trovato per riferimento: ", refsplit)
 
             self.addInRadioBouquets()
 
@@ -348,7 +367,8 @@ class LCN():
             return
         with open(radio_file, 'w') as f:
             f.write(ret[0].strip() + "\n")
-            f.write('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.radio" ORDER BY bouquet\n')
+            f.write(
+                '#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial_lcn.radio" ORDER BY bouquet\n')
             f.writelines(ret[1:])
 
     def reloadBouquets(self):
@@ -362,13 +382,18 @@ class LCNBuildHelper():
             self.bouquetlist.append((x[0], x[1]))
 
         self.rulelist = []
-        mdom = parse(os.path.dirname(sys.modules[__name__].__file__) + "/rules.xml")
+        mdom = parse(
+            os.path.dirname(
+                sys.modules[__name__].__file__) +
+            "/rules.xml")
         for x in mdom.getroot():
             if x.tag == "rules":
                 self.rulelist.append((x.get("name"), x.get("name")))
         config.lcn = ConfigSubsection()
         config.lcn.enabled = ConfigYesNo(True)
-        config.lcn.bouquet = ConfigSelection(default="userbouquet.LastScanned.tv", choices=self.bouquetlist)  # not used instead self.bouquetfile
+        config.lcn.bouquet = ConfigSelection(
+            default="userbouquet.LastScanned.tv",
+            choices=self.bouquetlist)  # not used instead self.bouquetfile
         config.lcn.rules = ConfigSelection(self.rulelist)
 
     def readBouquetsTvList(self, pwd):
@@ -446,14 +471,20 @@ class LCNBuildHelper():
             lcn.writeBouquet()
         else:
             if not suppressmessages:
-                self.session.open(MessageBox, _("No entry in lcn db. Please do a service scan."), MessageBox.TYPE_INFO)
+                self.session.open(
+                    MessageBox,
+                    _("No entry in lcn db. Please do a service scan."),
+                    MessageBox.TYPE_INFO)
 
         lcn.read("RADIO")
         if len(lcn.lcnlist) > 0:
             lcn.writeRadioBouquet()
         else:
             if not suppressmessages:
-                self.session.open(MessageBox, _("No entry in lcn db. Please do a service scan."), MessageBox.TYPE_INFO)
+                self.session.open(
+                    MessageBox,
+                    _("No entry in lcn db. Please do a service scan."),
+                    MessageBox.TYPE_INFO)
         print('reload blouquet=======')
         lcn.reloadBouquets()
 
@@ -473,10 +504,10 @@ class LCNScannerPlugin(Screen, ConfigListScreen, LCNBuildHelper):
         LCNBuildHelper.__init__(self)
 
         self.list = [
-            getConfigListEntry(_("Enable terrestrial LCN:"), config.lcn.enabled),
-            getConfigListEntry(_("Terrestrial bouquet:"), config.lcn.bouquet),
-            getConfigListEntry(_("LCN rules:"), config.lcn.rules),
-        ]
+            getConfigListEntry(
+                _("Enable terrestrial LCN:"), config.lcn.enabled), getConfigListEntry(
+                _("Terrestrial bouquet:"), config.lcn.bouquet), getConfigListEntry(
+                _("LCN rules:"), config.lcn.rules), ]
 
         ConfigListScreen.__init__(self, self.list, session=session)
         self["key_red"] = Button(_("Rebuild"))
@@ -495,7 +526,12 @@ class LCNScannerPlugin(Screen, ConfigListScreen, LCNBuildHelper):
 
     def ok(self):
         if config.lcn.enabled.value is True:
-            self.session.openWithCallback(self.confirm, MessageBox, _("Rebuild LCN bouquet now?"), MessageBox.TYPE_YESNO, default=True)
+            self.session.openWithCallback(
+                self.confirm,
+                MessageBox,
+                _("Rebuild LCN bouquet now?"),
+                MessageBox.TYPE_YESNO,
+                default=True)
         else:
             self.keySave()
             configfile.save()
@@ -506,8 +542,10 @@ def terrestrial():
     import time
     now = time.time()
     ttime = time.localtime(now)
-    tt = str('{0:02d}'.format(ttime[2])) + str('{0:02d}'.format(ttime[1])) + str(ttime[0])[2:] + '_' + str('{0:02d}'.format(ttime[3])) + str('{0:02d}'.format(ttime[4])) + str('{0:02d}'.format(ttime[5]))
-    os.system('tar -czvf /tmp/' + tt + '_enigma2settingsbackup.tar.gz' + ' -C / /etc/enigma2/*.tv /etc/enigma2/*.radio /etc/enigma2/lamedb')
+    tt = str('{0:02d}'.format(ttime[2])) + str('{0:02d}'.format(ttime[1])) + str(ttime[0])[2:] + '_' + str(
+        '{0:02d}'.format(ttime[3])) + str('{0:02d}'.format(ttime[4])) + str('{0:02d}'.format(ttime[5]))
+    os.system('tar -czvf /tmp/' + tt + '_enigma2settingsbackup.tar.gz' +
+              ' -C / /etc/enigma2/*.tv /etc/enigma2/*.radio /etc/enigma2/lamedb')
     if SavingProcessTerrestrialChannels:
         print('SavingProcessTerrestrialChannels')
     return
@@ -541,22 +579,28 @@ def terrestrial_rest():
         # terrr = os.path.join(plugin_path, 'temp/TerrestrialChannelListArchive')
         terrr = plugin_path + '/temp/TerrestrialChannelListArchive'
         if os.path.exists(terrr):
-            os.system("cp -rf " + plugin_path + "/temp/TerrestrialChannelListArchive /etc/enigma2/userbouquet.terrestrial.tv")
+            os.system(
+                "cp -rf " +
+                plugin_path +
+                "/temp/TerrestrialChannelListArchive /etc/enigma2/userbouquet.terrestrial.tv")
         os.system('cp -rf /etc/enigma2/bouquets.tv /etc/enigma2/backup_bouquets.tv')
         with open('/etc/enigma2/bouquets.tv', 'r+') as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial.tv" ORDER BY bouquet\n'
             if bouquetTvString not in f:
                 new_bouquet = open('/etc/enigma2/new_bouquets.tv', 'w')
                 new_bouquet.write('#NAME User - bouquets (TV)\n')
-                new_bouquet.write('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial.tv" ORDER BY bouquet\n')
+                new_bouquet.write(
+                    '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.terrestrial.tv" ORDER BY bouquet\n')
                 file_read = open('/etc/enigma2/bouquets.tv').readlines()
                 for line in file_read:
                     if line.startswith("#NAME"):
                         continue
                     new_bouquet.write(line)
                 new_bouquet.close()
-                os.system('cp -rf /etc/enigma2/bouquets.tv /etc/enigma2/backup_bouquets.tv')
-                os.system('mv -f /etc/enigma2/new_bouquets.tv /etc/enigma2/bouquets.tv')
+                os.system(
+                    'cp -rf /etc/enigma2/bouquets.tv /etc/enigma2/backup_bouquets.tv')
+                os.system(
+                    'mv -f /etc/enigma2/new_bouquets.tv /etc/enigma2/bouquets.tv')
         if os.path.exists(dbfile):
             lcnstart()
 
@@ -572,7 +616,8 @@ def copy_files_to_enigma2():
             dst_path = os.path.join(enigma2_folder, filename)
             shutil.copy(src_path, dst_path)
             with open(bouquet_file, "r+") as f:
-                line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(filename)
+                line = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{}" ORDER BY bouquet\n'.format(
+                    filename)
                 if line not in f:
                     f.write(line)
     print("Operazione completata!")
@@ -642,13 +687,15 @@ def StartSavingTerrestrialChannels():
                         if 'eeee' in line_lower:
                             Trasponder = True
                             if inTransponder:
-                                TrasponderListOldLamedb.write(line_lower + "\n")
+                                TrasponderListOldLamedb.write(
+                                    line_lower + "\n")
                                 for i in range(2):
                                     line = next(LamedbFile).strip()
                                     TrasponderListOldLamedb.write(line + "\n")
                             elif inService:
                                 tmp = line.split(':')
-                                ServiceListOldLamedb.write(':'.join(tmp[:5]) + ":0\n")
+                                ServiceListOldLamedb.write(
+                                    ':'.join(tmp[:5]) + ":0\n")
                                 for i in range(2):
                                     line = next(LamedbFile).strip()
                                     ServiceListOldLamedb.write(line + "\n")
@@ -669,7 +716,8 @@ def StartSavingTerrestrialChannels():
         for jx in ReadingTempServicelist:
             if jx.find('eeee') != -1:
                 String = jx.split(':')
-                WritingBouquetTemporary.write('#SERVICE 1:0:%s:%s:%s:%s:%s:0:0:0:\n' % (hex(int(String[4]))[2:], String[0], String[2], String[3], String[1]))
+                WritingBouquetTemporary.write('#SERVICE 1:0:%s:%s:%s:%s:%s:0:0:0:\n' % (
+                    hex(int(String[4]))[2:], String[0], String[2], String[3], String[1]))
         WritingBouquetTemporary.close()
 
     def SaveBouquetTerrestrial():
@@ -679,7 +727,7 @@ def StartSavingTerrestrialChannels():
         try:
             shutil.copyfile(NameDirectory, TerChArch)
             return True
-        except:
+        except BaseException:
             pass
         return
 
@@ -694,7 +742,7 @@ def StartSavingTerrestrialChannels():
 def LamedbRestore():
     try:
         with open(plugin_path + '/temp/TrasponderListNewLamedb', 'w') as TransNew, \
-             open(plugin_path + '/temp/ServiceListNewLamedb', 'w') as ServNew:
+                open(plugin_path + '/temp/ServiceListNewLamedb', 'w') as ServNew:
             inTransponder = False
             inService = False
 
@@ -752,9 +800,16 @@ def TransferBouquetTerrestrialFinal():
                 if re.search(r'^userbouquet.*\.tv$', file):
                     with open("/etc/enigma2/" + file, "r") as f:
                         content = f.read()
-                        if re.search(r'#NAME Digitale Terrestre', content, flags=re.IGNORECASE) or \
-                           re.search(r'#NAME DTT', content, flags=re.IGNORECASE) or \
-                           re.search(r'#NAME Terrestrial TV LCN', content, flags=re.IGNORECASE):
+                        if re.search(
+                            r'#NAME Digitale Terrestre',
+                            content,
+                            flags=re.IGNORECASE) or re.search(
+                            r'#NAME DTT',
+                            content,
+                            flags=re.IGNORECASE) or re.search(
+                            r'#NAME Terrestrial TV LCN',
+                            content,
+                                flags=re.IGNORECASE):
                             return "/etc/enigma2/" + file
             return None
 

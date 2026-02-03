@@ -45,7 +45,11 @@ def getTextBoundarySize(instance, font, targetSize, text):
     return eLabel.calculateTextSize(font, text, targetSize)
 
 
-def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
+def fileReadLines(
+        filename,
+        default=None,
+        source=DEFAULT_MODULE_NAME,
+        debug=False):
     lines = None
     try:
         # Python 2 non ha encoding, Python 3 sì
@@ -57,14 +61,16 @@ def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=Fals
                 lines = fd.read().decode("utf-8").splitlines()
     except (OSError, IOError) as err:
         if err.errno != ENOENT:  # ENOENT - No such file or directory.
-            print("[%s] Error %d: Unable to read lines from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
+            print(
+                "[%s] Error %d: Unable to read lines from file '%s'!  (%s)" %
+                (source, err.errno, filename, err.strerror))
         lines = default
     except UnicodeDecodeError:
         # Fallback per file non UTF-8
         try:
             with open(filename, "r") as fd:
                 lines = fd.read().splitlines()
-        except:
+        except BaseException:
             lines = default
     return lines
 
@@ -126,7 +132,7 @@ class File_Commander(Screen):
                 if not PY3 and isinstance(line, bytes):
                     try:
                         line = line.decode("utf-8")
-                    except:
+                    except BaseException:
                         line = line.decode("latin-1")
                 self.list.append(str(idx + 1).zfill(4) + ": " + line)
             self["filedata"].setList(self.list)
@@ -152,8 +158,11 @@ class File_Commander(Screen):
                 current_line_text = current_line_full
 
             from Screens.VirtualKeyBoard import VirtualKeyBoard
-            self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard,
-                                          title=_("Edit Line"), text=current_line_text)
+            self.session.openWithCallback(
+                self.VirtualKeyBoardCallback,
+                VirtualKeyBoard,
+                title=_("Edit Line"),
+                text=current_line_text)
 
     def VirtualKeyBoardCallback(self, callback=None):
         if callback is not None:
