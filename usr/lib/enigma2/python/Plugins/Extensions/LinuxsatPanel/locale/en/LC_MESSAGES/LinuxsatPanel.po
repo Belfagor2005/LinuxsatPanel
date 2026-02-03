@@ -47,15 +47,14 @@ msgstr "Children"
 msgid "Congrats! You already have the latest version..."
 msgstr "Congrats! You already have the latest version..."
 
-msgid ""
-"Create an ordered bouquet of terrestrial services based on LCN data from "
-"your local transmitter."
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
 msgstr ""
-"Create an ordered bouquet of terrestrial services based on LCN data from "
-"your local transmitter."
 
 msgid "Create separate radio bouquet"
 msgstr "Create separate radio bouquet"
+
+msgid "Del Line"
+msgstr ""
 
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Designs and Graphics by @oktus\n"
@@ -84,12 +83,11 @@ msgstr "Download page get failed ..."
 msgid "Duplicates"
 msgstr "Duplicates"
 
-msgid ""
-"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
-"data."
+msgid "Edit Line"
 msgstr ""
-"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
-"data."
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
+msgstr ""
 
 msgid "Enable terrestrial LCN:"
 msgstr "Enable terrestrial LCN:"
@@ -109,10 +107,9 @@ msgstr "Europe7"
 msgid "Exit"
 msgstr "Exit"
 
-msgid ""
-"Failed to fetch update information. Please check your internet connection."
-msgstr ""
-"Failed to fetch update information. Please check your internet connection."
+#, fuzzy
+msgid "Failed to fetch update information. Please check your internet connection."
+msgstr "Failed to parse update information. Please try again later."
 
 msgid "Failed to parse update information. Please try again later."
 msgstr "Failed to parse update information. Please try again later."
@@ -132,8 +129,21 @@ msgstr "If you think it is a useful tool for your box\n"
 msgid "Information and Culture"
 msgstr "Information and Culture"
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
 msgstr "Install"
+
+msgid "Internet: Connected"
+msgstr ""
+
+#, fuzzy
+msgid "Internet: No Connection"
+msgstr "Check Connection!"
+
+msgid "Internet: Unknown"
+msgstr ""
 
 msgid "Invalid date format in update information."
 msgstr "Invalid date format in update information."
@@ -171,12 +181,8 @@ msgstr "No entry in lcn db. Please do a service scan."
 msgid "No update information available."
 msgstr "No update information available."
 
-msgid ""
-"Once configured the bouquet will be updated automatically when doing a "
-"manual scan."
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
 msgstr ""
-"Once configured the bouquet will be updated automatically when doing a "
-"manual scan."
 
 msgid "Please Wait..."
 msgstr "Please Wait..."
@@ -190,12 +196,8 @@ msgstr "Premium"
 msgid "Promo H264"
 msgstr "Promo H264"
 
-msgid ""
-"Put radio services in a separate bouquet, not the main tv bouquet. This is "
-"required when the provider duplicates channel numbers for tv and radio."
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
 msgstr ""
-"Put radio services in a separate bouquet, not the main tv bouquet. This is "
-"required when the provider duplicates channel numbers for tv and radio."
 
 msgid "Radio"
 msgstr "Radio"
@@ -232,6 +234,9 @@ msgstr "Restart enigma"
 
 msgid "SD Provisionals"
 msgstr "SD Provisionals"
+
+msgid "Save"
+msgstr ""
 
 msgid "Select your region."
 msgstr "Select your region."
@@ -290,17 +295,11 @@ msgstr "The Plugin lives thanks to the donations of each of you.\n"
 msgid "There is currently no LCN data stored."
 msgstr "There is currently no LCN data stored."
 
-msgid ""
-"This plugin depends on LCN data being broadcast by your local tansmitter."
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
 msgstr ""
-"This plugin depends on LCN data being broadcast by your local tansmitter."
 
-msgid ""
-"Try running a manual scan of terrestrial frequencies with network scan "
-"enabled. If this fails maybe there is no lcn data available in your area."
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
 msgstr ""
-"Try running a manual scan of terrestrial frequencies with network scan "
-"enabled. If this fails maybe there is no lcn data available in your area."
 
 msgid "UK"
 msgstr "UK"

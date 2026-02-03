@@ -55,6 +55,9 @@ msgstr "Crea un bouquet ordinato di servizi terrestri basato sui dati LCN del tu
 msgid "Create separate radio bouquet"
 msgstr "Crea un bouquet radio separato"
 
+msgid "Del Line"
+msgstr ""
+
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Design e grafica di @oktus\n"
 
@@ -81,6 +84,9 @@ msgstr "La pagina di download non è riuscita ..."
 
 msgid "Duplicates"
 msgstr "Duplicati"
+
+msgid "Edit Line"
+msgstr ""
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
 msgstr "Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero di canale logo)."
@@ -124,8 +130,21 @@ msgstr "Se pensi che sia uno strumento utile per il tuo box\n"
 msgid "Information and Culture"
 msgstr "Informazioni e Cultura"
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
 msgstr "Installa/Aggiorna"
+
+msgid "Internet: Connected"
+msgstr ""
+
+#, fuzzy
+msgid "Internet: No Connection"
+msgstr "Controlla Connessione!"
+
+msgid "Internet: Unknown"
+msgstr ""
 
 msgid "Invalid date format in update information."
 msgstr "Formato data non valido nelle informazioni di aggiornamento."
@@ -216,6 +235,9 @@ msgstr "Riavvia Enigma"
 
 msgid "SD Provisionals"
 msgstr ""
+
+msgid "Save"
+msgstr "Salva"
 
 msgid "Select your region."
 msgstr "Seleziona la tua regione."
@@ -504,9 +526,6 @@ msgstr "per favore fai una donazione:\n"
 
 #~ msgid "Restart"
 #~ msgstr "Riavvia"
-
-#~ msgid "Save"
-#~ msgstr "Salva"
 
 #, python-format
 #~ msgid ""

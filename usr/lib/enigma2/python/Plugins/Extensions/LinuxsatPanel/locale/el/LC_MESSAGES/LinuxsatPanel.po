@@ -58,6 +58,9 @@ msgstr "Δημιουργήστε ένα οργανωμένο μπουκέτο ε
 msgid "Create separate radio bouquet"
 msgstr "Δημιουργήστε ξεχωριστό ραδιοφωνικό μπουκέτο"
 
+msgid "Del Line"
+msgstr ""
+
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Σχεδιασμοί και γραφικά από τον @oktus\n"
 
@@ -85,6 +88,9 @@ msgstr "Η λήψη της σελίδας απέτυχε ..."
 
 msgid "Duplicates"
 msgstr "Διπλότυπα"
+
+msgid "Edit Line"
+msgstr ""
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
 msgstr "Ενεργοποιήστε τη δημιουργία ενός επίγειου μπουκέτου με βάση τα δεδομένα LCN (λογικός αριθμός καναλιού)."
@@ -128,8 +134,21 @@ msgstr "Αν νομίζετε ότι είναι ένα χρήσιμο εργαλ
 msgid "Information and Culture"
 msgstr "Πληροφόρηση και πολιτισμός"
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
 msgstr "Εγκατάσταση"
+
+msgid "Internet: Connected"
+msgstr ""
+
+#, fuzzy
+msgid "Internet: No Connection"
+msgstr "Έλεγχος σύνδεσης!"
+
+msgid "Internet: Unknown"
+msgstr ""
 
 msgid "Invalid date format in update information."
 msgstr ""
@@ -220,6 +239,9 @@ msgstr "Επανεκκίνηση enigma"
 
 msgid "SD Provisionals"
 msgstr "Προσωρινά SD"
+
+msgid "Save"
+msgstr "Αποθήκευση"
 
 msgid "Select your region."
 msgstr "Επιλέξτε την περιοχή σας."
@@ -445,9 +467,6 @@ msgstr "παρακαλώ κάντε μια δωρεά:\n"
 
 #~ msgid "Restart"
 #~ msgstr "Επανεκκίνηση"
-
-#~ msgid "Save"
-#~ msgstr "Αποθήκευση"
 
 #, python-format
 #~ msgid ""

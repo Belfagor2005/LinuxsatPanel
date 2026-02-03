@@ -57,6 +57,9 @@ msgstr ""
 msgid "Create separate radio bouquet"
 msgstr ""
 
+msgid "Del Line"
+msgstr ""
+
 msgid "Designs and Graphics by @oktus\n"
 msgstr ""
 
@@ -85,6 +88,9 @@ msgid "Download page get failed ..."
 msgstr "فشل في تحميل الصفحة ..."
 
 msgid "Duplicates"
+msgstr ""
+
+msgid "Edit Line"
 msgstr ""
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
@@ -129,8 +135,21 @@ msgstr ""
 msgid "Information and Culture"
 msgstr ""
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
 msgstr "تثبيت"
+
+msgid "Internet: Connected"
+msgstr ""
+
+#, fuzzy
+msgid "Internet: No Connection"
+msgstr "تحقق من الاتصال!"
+
+msgid "Internet: Unknown"
+msgstr ""
 
 msgid "Invalid date format in update information."
 msgstr ""
@@ -220,6 +239,9 @@ msgid "Restart enigma"
 msgstr "إعادة تشغيل إنيجما"
 
 msgid "SD Provisionals"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Select your region."

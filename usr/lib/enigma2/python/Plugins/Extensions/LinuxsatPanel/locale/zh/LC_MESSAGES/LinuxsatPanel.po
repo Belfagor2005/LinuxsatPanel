@@ -56,6 +56,9 @@ msgstr ""
 msgid "Create separate radio bouquet"
 msgstr ""
 
+msgid "Del Line"
+msgstr ""
+
 msgid "Designs and Graphics by @oktus\n"
 msgstr ""
 
@@ -84,6 +87,9 @@ msgid "Download page get failed ..."
 msgstr "下载页面失败..."
 
 msgid "Duplicates"
+msgstr ""
+
+msgid "Edit Line"
 msgstr ""
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
@@ -128,8 +134,21 @@ msgstr ""
 msgid "Information and Culture"
 msgstr ""
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
 msgstr "安装"
+
+msgid "Internet: Connected"
+msgstr ""
+
+#, fuzzy
+msgid "Internet: No Connection"
+msgstr "检查连接！"
+
+msgid "Internet: Unknown"
+msgstr ""
 
 msgid "Invalid date format in update information."
 msgstr ""
@@ -220,6 +239,9 @@ msgstr "是否现在重新启动GUI"
 
 msgid "SD Provisionals"
 msgstr ""
+
+msgid "Save"
+msgstr "保存"
 
 msgid "Select your region."
 msgstr ""
@@ -452,9 +474,6 @@ msgstr ""
 
 #~ msgid "SELECT YOUR CHOICE"
 #~ msgstr "请选择"
-
-#~ msgid "Save"
-#~ msgstr "保存"
 
 #~ msgid "Schedule type:"
 #~ msgstr "计划类型:"

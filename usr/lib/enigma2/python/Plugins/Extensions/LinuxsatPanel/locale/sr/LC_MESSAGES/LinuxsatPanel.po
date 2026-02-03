@@ -8,8 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "%s"
 msgstr ""
@@ -47,12 +46,13 @@ msgstr ""
 msgid "Congrats! You already have the latest version..."
 msgstr ""
 
-msgid ""
-"Create an ordered bouquet of terrestrial services based on LCN data from "
-"your local transmitter."
+msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
 msgstr ""
 
 msgid "Create separate radio bouquet"
+msgstr ""
+
+msgid "Del Line"
 msgstr ""
 
 msgid "Designs and Graphics by @oktus\n"
@@ -82,9 +82,10 @@ msgstr ""
 msgid "Duplicates"
 msgstr ""
 
-msgid ""
-"Enable creating a terrestrial bouquet based on LCN (logocal channel number) "
-"data."
+msgid "Edit Line"
+msgstr ""
+
+msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
 msgstr ""
 
 msgid "Enable terrestrial LCN:"
@@ -105,8 +106,7 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-msgid ""
-"Failed to fetch update information. Please check your internet connection."
+msgid "Failed to fetch update information. Please check your internet connection."
 msgstr ""
 
 msgid "Failed to parse update information. Please try again later."
@@ -127,7 +127,19 @@ msgstr ""
 msgid "Information and Culture"
 msgstr ""
 
+msgid "Ins Line"
+msgstr ""
+
 msgid "Install"
+msgstr ""
+
+msgid "Internet: Connected"
+msgstr ""
+
+msgid "Internet: No Connection"
+msgstr ""
+
+msgid "Internet: Unknown"
 msgstr ""
 
 msgid "Invalid date format in update information."
@@ -166,9 +178,7 @@ msgstr ""
 msgid "No update information available."
 msgstr ""
 
-msgid ""
-"Once configured the bouquet will be updated automatically when doing a "
-"manual scan."
+msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
 msgstr ""
 
 msgid "Please Wait..."
@@ -183,9 +193,7 @@ msgstr ""
 msgid "Promo H264"
 msgstr ""
 
-msgid ""
-"Put radio services in a separate bouquet, not the main tv bouquet. This is "
-"required when the provider duplicates channel numbers for tv and radio."
+msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
 msgstr ""
 
 msgid "Radio"
@@ -222,6 +230,9 @@ msgid "Restart enigma"
 msgstr ""
 
 msgid "SD Provisionals"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Select your region."
@@ -281,13 +292,10 @@ msgstr ""
 msgid "There is currently no LCN data stored."
 msgstr ""
 
-msgid ""
-"This plugin depends on LCN data being broadcast by your local tansmitter."
+msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
 msgstr ""
 
-msgid ""
-"Try running a manual scan of terrestrial frequencies with network scan "
-"enabled. If this fails maybe there is no lcn data available in your area."
+msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
 msgstr ""
 
 msgid "UK"
