@@ -321,3 +321,6 @@ msgstr "Aktualizácia prerušená!"
 
 msgid "of"
 msgstr "z"
+
+msgid "please make a donation:\n"
+msgstr ""
