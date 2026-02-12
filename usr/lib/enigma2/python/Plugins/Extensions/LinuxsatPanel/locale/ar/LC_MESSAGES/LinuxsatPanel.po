@@ -3,165 +3,160 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-08-02 14:00+0200\n"
-"PO-Revision-Date: 2024-08-10 14:00+0200\n"
+"PO-Revision-Date: 2026-02-12 17:40+0100\n"
 "Last-Translator: ostende\n"
 "Language-Team: ostende\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "للبالغين"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "تمت إعادة كتابة جميع التعليمات البرمجية بواسطة @Lululla - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا."
 
 msgid "Australia"
-msgstr ""
+msgstr "أستراليا"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "بي بي سي التفاعلية"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "بناء/إعادة بناء باقة الترددات الأرضية الآن بناءً على آخر فحص."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "إلغاء التنفيذ؟"
 
-#, fuzzy
 msgid "Category:"
-msgstr "الفئة: "
+msgstr "الفئة:"
 
 msgid "Check Connection!"
 msgstr "تحقق من الاتصال!"
 
 msgid "Children"
-msgstr ""
+msgstr "أطفال"
 
 msgid "Congrats! You already have the latest version..."
-msgstr ""
+msgstr "تهانينا! لديك بالفعل أحدث إصدار..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "إنشاء باقة مرتبة من الخدمات الأرضية بناءً على بيانات LCN من جهاز الإرسال المحلي الخاص بك."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "إنشاء باقة راديو منفصلة"
 
 msgid "Del Line"
-msgstr ""
+msgstr "حذف سطر"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "التصاميم والرسومات بواسطة @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "لا تقم بإضافة قنوات مكررة أو غير مفهرسة إلى الباقة."
 
-#, fuzzy
 msgid "Do you want add Cline?"
-msgstr "هل تريد التثبيت؟"
+msgstr "هل تريد إضافة Cline؟"
 
-#, fuzzy
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "هل تريد الإزالة؟"
+msgstr "هل تريد ترتيب باقة LCN؟"
 
-#, fuzzy
 msgid "Do you want to install update (%s) now?"
-msgstr "هل تريد تثبيت %s؟"
+msgstr "هل تريد تثبيت التحديث (%s) الآن؟"
 
 msgid "Do you want to remove?"
 msgstr "هل تريد الإزالة؟"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr "هل تريد إعادة تشغيل إنيجما؟"
+msgstr "هل تريد إعادة تشغيل واجهة المستخدم الرسومية؟"
 
 msgid "Download page get failed ..."
 msgstr "فشل في تحميل الصفحة ..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "مكررات"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "تعديل سطر"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "تمكين إنشاء باقة أرضية بناءً على بيانات LCN (رقم القناة المنطقي)."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "تمكين LCN الأرضي:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "تمكين الباقة الأرضية"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "ترفيه"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "خطأ: لم يتم العثور على بيانات."
 
 msgid "Europe7"
-msgstr ""
+msgstr "أوروبا7"
 
 msgid "Exit"
 msgstr "خروج"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "فشل في جلب معلومات التحديث. يرجى التحقق من اتصالك بالإنترنت."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "فشل في تحليل معلومات التحديث. يرجى المحاولة مرة أخرى لاحقًا."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "مساحة خالية:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "قنوات HD"
 
 msgid "High Definition"
-msgstr ""
+msgstr "عالية الدقة"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "إذا كنت تعتقد أنها أداة مفيدة لجهاز الاستقبال الخاص بك\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "معلومات وثقافة"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "إدراج سطر"
 
 msgid "Install"
 msgstr "تثبيت"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "الإنترنت: متصل"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "تحقق من الاتصال!"
+msgstr "الإنترنت: غير متصل"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "الإنترنت: غير معروف"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "تنسيق تاريخ غير صالح في معلومات التحديث."
 
 msgid "Italy"
-msgstr ""
+msgstr "إيطاليا"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "مكررات LCN"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "قواعد LCN:"
 
 msgid "Linuxsat Panel"
 msgstr "لوحة Linuxsat"
@@ -170,175 +165,160 @@ msgid "Load Category..."
 msgstr "تحميل الفئة..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "المذيعون المحليون"
 
 msgid "Music"
-msgstr ""
+msgstr "موسيقى"
 
 msgid "News"
-msgstr ""
+msgstr "أخبار"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "لم يتم العثور على خدمات أرضية مقابلة."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "لا يوجد إدخال في قاعدة بيانات LCN. يرجى إجراء فحص الخدمة."
 
 msgid "No update information available."
-msgstr ""
+msgstr "لا تتوفر معلومات تحديث."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "بمجرد التكوين، سيتم تحديث الباقة تلقائيًا عند إجراء فحص يدوي."
 
 msgid "Please Wait..."
 msgstr "يرجى الانتظار..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "يرجى التأكد من تمكين البحث في الشبكة عند المسح."
 
 msgid "Premium"
-msgstr ""
+msgstr "مميز"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "ترويج H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "ضع الخدمات الإذاعية في باقة منفصلة، وليس في باقة التلفزيون الرئيسية. هذا مطلوب عندما يكرر المزود أرقام القنوات للتلفزيون والراديو."
 
 msgid "Radio"
-msgstr ""
+msgstr "راديو"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "إعادة بناء"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "إعادة بناء باقة LCN الآن؟"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "إعادة بناء الباقة"
 
 msgid "Region"
-msgstr ""
+msgstr "المنطقة"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "المذيعون الإقليميون"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "راديو إقليمي"
 
 msgid "Reload"
-msgstr ""
+msgstr "إعادة تحميل"
 
 msgid "Remove"
 msgstr "إزالة"
 
 msgid "Removing %s"
-msgstr "إزالة %s"
+msgstr "جاري إزالة %s"
 
 msgid "Restart enigma"
-msgstr "إعادة تشغيل إنيجما"
+msgstr "إعادة تشغيل Enigma"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "مؤقتة SD"
 
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 msgid "Select your region."
-msgstr ""
+msgstr "اختر منطقتك."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "شبه عامة"
 
 msgid "Settings Not Installed ..."
 msgstr "لم يتم تثبيت الإعدادات ..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "تخطي المكررات"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "قنوات سكاي"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "ترتيب أ-ي"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "الترتيب الافتراضي"
 
 msgid "Sports"
-msgstr ""
+msgstr "رياضة"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "اقتراح من: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "أرضي"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "باقة أرضية"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "خطأ في الباقة الأرضية"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "الملحق الإضافي للباقة الأرضية غير مفعل."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "إعداد الباقة الأرضية"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "تم إعادة بناء الباقة الأرضية بنجاح."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "الباقة الأرضية:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "قنوات اختبار"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "يعيش هذا الملحق بفضل تبرعات كل واحد منكم.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "لا توجد بيانات LCN مخزنة حاليًا."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "يعتمد هذا الملحق على بيانات LCN التي يبثها جهاز الإرسال المحلي الخاص بك."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "حاول إجراء فحص يدوي للترددات الأرضية مع تمكين فحص الشبكة. إذا فشل ذلك، فقد لا تتوفر بيانات LCN في منطقتك."
 
 msgid "UK"
-msgstr ""
+msgstr "المملكة المتحدة"
 
 msgid "Unable to download updates!"
 msgstr "غير قادر على تنزيل التحديثات!"
 
-#, fuzzy
 msgid "Unknown Image!"
 msgstr "صورة غير معروفة!"
 
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Update Aborted!"
-msgstr ""
+msgstr "تم إلغاء التحديث!"
 
 msgid "of"
-msgstr ""
+msgstr "من"
 
 msgid "please make a donation:\n"
-msgstr ""
-
-#~ msgid "0 Sort"
-#~ msgstr "0 فرز"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "تثبيت %s\n"
-#~ "يرجى الانتظار..."
-
-#~ msgid "Sorting Terrestrial channels with Lcn rules Completed"
-#~ msgstr "تم فرز القنوات الأرضية باستخدام قواعد Lcn"
+msgstr "يرجى التبرع:\n"

@@ -3,233 +3,228 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-11-18 17:07+0100\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2026-02-12 17:39+0100\n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: lsConsole.py\n"
 "X-Poedit-SearchPath-1: plugin.py\n"
 "X-Poedit-SearchPath-2: addons/File_Commander.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Для взрослых"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "Весь код был переписан @Lululla - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Произошла непредвиденная ошибка. Пожалуйста, повторите попытку позже."
 
 msgid "Australia"
-msgstr ""
+msgstr "Австралия"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Интерактивный"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Создать/перестроить эфирный букет на основе последнего сканирования."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Отменить выполнение?"
 
-#, fuzzy
 msgid "Category:"
-msgstr "Категория: "
+msgstr "Категория:"
 
 msgid "Check Connection!"
 msgstr "Проверьте подключение!"
 
 msgid "Children"
-msgstr ""
+msgstr "Детские"
 
 msgid "Congrats! You already have the latest version..."
 msgstr "Поздравляю! У вас уже установлена последняя версия..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Создать упорядоченный букет эфирных служб на основе данных LCN от вашего местного передатчика."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Создать отдельный радио-букет"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Удалить строку"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Дизайн и графика от @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Не добавлять дублированные или неиндексированные каналы в букет."
 
-#, fuzzy
 msgid "Do you want add Cline?"
-msgstr "Вы хотите установить?"
+msgstr "Хотите добавить Cline?"
 
-#, fuzzy
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "Вы хотите удалить?"
+msgstr "Хотите упорядочить LCN букет?"
 
-#, fuzzy
 msgid "Do you want to install update (%s) now?"
-msgstr "Хотите установить обновление ( %s ) сейчас?"
+msgstr "Хотите установить обновление (%s) сейчас?"
 
 msgid "Do you want to remove?"
 msgstr "Вы хотите удалить?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr "Вы хотите перезапустить интерфейс Gui?"
+msgstr "Вы хотите перезапустить интерфейс GUI?"
 
 msgid "Download page get failed ..."
 msgstr "Страница загрузки не удалась..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Дубликаты"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Редактировать строку"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "Включить создание эфирного букета на основе данных LCN (логический номер канала)."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Включить эфирный LCN:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Включить эфирный букет"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Развлечения"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Ошибка: Данные не найдены."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Europe7"
 
 msgid "Exit"
 msgstr "Выход"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Не удалось получить информацию об обновлении. Пожалуйста, проверьте подключение к интернету."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Не удалось обработать информацию об обновлении. Пожалуйста, повторите попытку позже."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "Свободное место:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "HD каналы"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Высокое разрешение"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Если вы считаете, что это полезный инструмент для вашего ресивера\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Информация и культура"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Вставить строку"
 
 msgid "Install"
 msgstr "Установить"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Интернет: Подключен"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "Проверьте подключение!"
+msgstr "Интернет: Нет подключения"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Интернет: Неизвестно"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Неверный формат даты в информации об обновлении."
 
 msgid "Italy"
-msgstr ""
+msgstr "Италия"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "Дубликаты LCN"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "Правила LCN:"
 
 msgid "Linuxsat Panel"
 msgstr "Панель Linuxsat"
 
 msgid "Load Category..."
-msgstr "Категория загрузки..."
+msgstr "Загрузить категорию..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Местные вещатели"
 
 msgid "Music"
-msgstr ""
+msgstr "Музыка"
 
 msgid "News"
-msgstr ""
+msgstr "Новости"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "Соответствующие эфирные службы не найдены."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "Нет записи в базе данных LCN. Пожалуйста, выполните сканирование служб."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Нет доступной информации об обновлении."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "После настройки букет будет автоматически обновляться при выполнении ручного сканирования."
 
 msgid "Please Wait..."
 msgstr "Пожалуйста, подождите..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Пожалуйста, убедитесь, что при сканировании включен поиск сети."
 
 msgid "Premium"
-msgstr ""
+msgstr "Премиум"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Промо H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "Поместите радиослужбы в отдельный букет, а не в основной телевизионный букет. Это необходимо, когда провайдер дублирует номера каналов для ТВ и радио."
 
 msgid "Radio"
-msgstr ""
+msgstr "Радио"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Перестроить"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "Перестроить LCN букет сейчас?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Перестроить букет"
 
 msgid "Region"
-msgstr ""
+msgstr "Регион"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Региональные вещатели"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Региональное радио"
 
 msgid "Reload"
-msgstr ""
+msgstr "Перезагрузить"
 
 msgid "Remove"
 msgstr "Удалить"
@@ -238,88 +233,85 @@ msgid "Removing %s"
 msgstr "Удаление %s"
 
 msgid "Restart enigma"
-msgstr "Перезапуск энигмы"
+msgstr "Перезапуск Enigma"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "SD временные"
 
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Выберите ваш регион."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Полу-общие"
 
 msgid "Settings Not Installed ..."
 msgstr "Настройки не установлены..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Пропустить дубликаты"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Каналы Sky"
 
-#, fuzzy
 msgid "Sort A-Z"
-msgstr "0 Сортировать"
+msgstr "Сортировка А-Я"
 
-#, fuzzy
 msgid "Sort Default"
-msgstr "0 Сортировать"
+msgstr "Сортировка по умолчанию"
 
 msgid "Sports"
-msgstr ""
+msgstr "Спорт"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Предложено: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Эфирное"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Эфирный букет"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Ошибка эфирного букета"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "Плагин эфирного букета не включен."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Настройка эфирного букета"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "Эфирный букет успешно перестроен."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Эфирный букет:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Тестовые каналы"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "Плагин существует благодаря пожертвованиям каждого из вас.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "В настоящее время нет сохраненных данных LCN."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Этот плагин зависит от данных LCN, передаваемых вашим местным передатчиком."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Попробуйте выполнить ручное сканирование эфирных частот с включенным сетевым сканированием. Если это не удастся, возможно, в вашем регионе нет доступных данных LCN."
 
 msgid "UK"
-msgstr ""
+msgstr "Великобритания"
 
 msgid "Unable to download updates!"
 msgstr "Невозможно загрузить обновления!"
 
-#, fuzzy
 msgid "Unknown Image!"
-msgstr "Неизвестный Имидж!"
+msgstr "Неизвестный образ!"
 
 msgid "Update"
 msgstr "Обновить"
@@ -328,147 +320,7 @@ msgid "Update Aborted!"
 msgstr "Обновление прервано!"
 
 msgid "of"
-msgstr ""
+msgstr "из"
 
 msgid "please make a donation:\n"
-msgstr ""
-
-#~ msgid "0 Halign Left"
-#~ msgstr "0 Выровнять по левому краю"
-
-#~ msgid "0 Halign Right"
-#~ msgstr "0 Выровнять по правому краю"
-
-#~ msgid "Cancel"
-#~ msgstr "Отмена"
-
-#, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Вы хотите выполнить %s?"
-
-#, python-format
-#~ msgid "Do you want to install %s?"
-#~ msgstr "Вы хотите установить %s?"
-
-#~ msgid "Do you want to install?"
-#~ msgstr "Вы хотите установить?"
-
-#, python-format
-#~ msgid ""
-#~ "Executing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Выполнение %s\n"
-#~ "Пожалуйста, подождите..."
-
-#~ msgid ""
-#~ "Execution progress\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Ход выполнения\n"
-#~ "\n"
-
-#~ msgid "File Commander - Addon"
-#~ msgstr "File Commander - Дополнение"
-
-#~ msgid ""
-#~ "File not found /etc/CCcam.cfg!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "Файл не найден /etc/CCcam.cfg!\n"
-#~ "Перезагрузите, пожалуйста..."
-
-#~ msgid ""
-#~ "File not found /etc/tuxbox/config/oscam.server!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "Файл не найден /etc/tuxbox/config/oscam.server!\n"
-#~ "Перезагрузите, пожалуйста..."
-
-#~ msgid "Hide/Show"
-#~ msgstr "Скрыть / Показать"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Установка %s\n"
-#~ "Пожалуйста, подождите..."
-
-#~ msgid "Linuxsat-support - File Commander"
-#~ msgstr "Linuxsat-support - Файловый коммандер"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Press green button to start updating"
-#~ msgstr ""
-#~ "Новая версия %s доступна\n"
-#~ "\n"
-#~ "Журнал изменений: %s\n"
-#~ "\n"
-#~ "Нажмите зеленую кнопку, чтобы начать обновление"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available.\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Do you want to install it now?"
-#~ msgstr ""
-#~ "Доступна новая версия %s.\n"
-#~ "\n"
-#~ "Журнал изменений: %s \n"
-#~ "\n"
-#~ "Хотите установить его сейчас?"
-
-#~ msgid "Restart"
-#~ msgstr "Перезапуск"
-
-#, python-format
-#~ msgid ""
-#~ "Server %s added in %s\n"
-#~ "\n"
-#~ "Server:%s\n"
-#~ "Port:%s\n"
-#~ "User:%s\n"
-#~ "Password:%s\n"
-#~ msgstr ""
-#~ "Сервер %s добавлен в %s\n"
-#~ "\n"
-#~ "Сервер:%s\n"
-#~ "Порт:%s\n"
-#~ "Пользователь:%s\n"
-#~ "Пароль:%s\n"
-
-#~ msgid ""
-#~ "Server Error.\n"
-#~ "\n"
-#~ "Try again, you'll be luckier!"
-#~ msgstr ""
-#~ "Ошибка сервера.\n"
-#~ "\n"
-#~ "Попробуйте еще раз, вам повезет больше!"
-
-#~ msgid "Sorting Terrestrial Executed!"
-#~ msgstr "Сортировка наземных объектов выполнена!"
-
-#~ msgid "Sorting Terrestrial not Executed!"
-#~ msgstr "Сортировка наземных не выполнена!"
-
-#~ msgid ""
-#~ "These Panel may contain Adult content\n"
-#~ "\n"
-#~ "are you sure you want to continue?"
-#~ msgstr ""
-#~ "Эти панели могут содержать контент для взрослых\n"
-#~ "\n"
-#~ "Вы уверены, что хотите продолжить?"
-
-#~ msgid "play/show Files"
-#~ msgstr "воспроизведение/показ файлов"
+msgstr "пожалуйста, сделайте пожертвование:\n"

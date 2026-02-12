@@ -1,320 +1,326 @@
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma 2\n"
-"PO-Revision-Date: 2026-01-02 23:15+0100\n"
-"Last-Translator: root <EMAIL@ADDRESS>\n"
-"Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
+"Project-Id-Version: LinuxsatPanel\n"
+"POT-Creation-Date: 2024-09-21 16:43+0200\n"
+"PO-Revision-Date: 2026-02-12 18:00+0100\n"
+"Last-Translator: Warder <ciksa@seznam.cz>\n"
+"Language-Team: Lululla\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: plugin.py\n"
+"X-Poedit-SearchPath-1: lsConsole.py\n"
+"X-Poedit-SearchPath-2: File-Commander.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Adulți"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "Tot codul a fost rescris de @Lululla - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "A apărut o eroare neașteptată. Vă rugăm să încercați din nou mai târziu."
 
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Interactiv"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Construiește/reconstruiește buchetul terestru acum pe baza ultimei scanări."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Anulați execuția?"
 
 msgid "Category:"
-msgstr ""
+msgstr "Categorie:"
 
 msgid "Check Connection!"
-msgstr ""
+msgstr "Verificați conexiunea!"
 
 msgid "Children"
-msgstr ""
+msgstr "Copii"
 
 msgid "Congrats! You already have the latest version..."
-msgstr ""
+msgstr "Felicitări! Aveți deja cea mai recentă versiune..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Creați un buchet ordonat de servicii terestre pe baza datelor LCN de la emițătorul dvs. local."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Creați un buchet radio separat"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Șterge linie"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Design și grafică de @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Nu adăugați canale duplicate sau neindexate în buchet."
 
 msgid "Do you want add Cline?"
-msgstr ""
+msgstr "Doriți să adăugați Cline?"
 
 msgid "Do you want to Order LCN Bouquet?"
-msgstr ""
+msgstr "Doriți să ordonați buchetul LCN?"
 
 msgid "Do you want to install update (%s) now?"
-msgstr ""
+msgstr "Doriți să instalați actualizarea (%s) acum?"
 
 msgid "Do you want to remove?"
-msgstr ""
+msgstr "Doriți să eliminați?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr ""
+msgstr "Doriți să reporniți interfața grafică?"
 
 msgid "Download page get failed ..."
-msgstr ""
+msgstr "Descărcarea paginii a eșuat..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Duplicate"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Editează linie"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "Activați crearea unui buchet terestru bazat pe datele LCN (număr logic de canal)."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Activați LCN terestru:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Activați buchetul terestru"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Divertisment"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Eroare: Nu s-au găsit date."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Europa7"
 
 msgid "Exit"
-msgstr ""
+msgstr "Ieșire"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Nu s-au putut obține informațiile de actualizare. Vă rugăm să verificați conexiunea la internet."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Nu s-au putut procesa informațiile de actualizare. Vă rugăm să încercați din nou mai târziu."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "Spațiu liber:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "Canale HD"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Înaltă definiție"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Dacă credeți că este un instrument util pentru receptorul dvs.\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Informații și cultură"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Inserează linie"
 
 msgid "Install"
-msgstr ""
+msgstr "Instalează"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Internet: Conectat"
 
 msgid "Internet: No Connection"
-msgstr ""
+msgstr "Internet: Fără conexiune"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Internet: Necunoscut"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Format de dată invalid în informațiile de actualizare."
 
 msgid "Italy"
-msgstr ""
+msgstr "Italia"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "Duplicate LCN"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "Reguli LCN:"
 
 msgid "Linuxsat Panel"
-msgstr ""
+msgstr "Panou Linuxsat"
 
 msgid "Load Category..."
-msgstr ""
+msgstr "Încarcă categorie..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Radiodifuzori locali"
 
 msgid "Music"
-msgstr ""
+msgstr "Muzică"
 
 msgid "News"
-msgstr ""
+msgstr "Știri"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "Nu s-au găsit servicii terestre corespunzătoare."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "Nicio intrare în baza de date LCN. Vă rugăm să efectuați o scanare a serviciilor."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Nicio informație de actualizare disponibilă."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "Odată configurat, buchetul va fi actualizat automat la efectuarea unei scanări manuale."
 
 msgid "Please Wait..."
-msgstr ""
+msgstr "Vă rugăm așteptați..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Vă rugăm să vă asigurați că căutarea în rețea este activată în timpul scanării."
 
 msgid "Premium"
-msgstr ""
+msgstr "Premium"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promo H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "Puneți serviciile radio într-un buchet separat, nu în buchetul principal TV. Acest lucru este necesar atunci când furnizorul duplică numerele de canale pentru TV și radio."
 
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Reconstruiește"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "Reconstruiți buchetul LCN acum?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Reconstruiește buchetul"
 
 msgid "Region"
-msgstr ""
+msgstr "Regiune"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Radiodifuzori regionali"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Radio regional"
 
 msgid "Reload"
-msgstr ""
+msgstr "Reîncarcă"
 
 msgid "Remove"
-msgstr ""
+msgstr "Elimină"
 
 msgid "Removing %s"
-msgstr ""
+msgstr "Se elimină %s"
 
 msgid "Restart enigma"
-msgstr ""
+msgstr "Reporniți Enigma"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "Provizorii SD"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvează"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Selectați regiunea dvs."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Semi-generaliști"
 
 msgid "Settings Not Installed ..."
-msgstr ""
+msgstr "Setările nu sunt instalate..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Omite duplicatele"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Canale Sky"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "Sortează A-Z"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "Sortare implicită"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Sugerat de: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Terestru"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Buchet terestru"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Eroare buchet terestru"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "Pluginul pentru buchet terestru nu este activat."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Configurare buchet terestru"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "Buchetul terestru a fost reconstruit cu succes."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Buchet terestru:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Canale de test"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "Pluginul trăiește datorită donațiilor fiecăruia dintre voi.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "În prezent nu există date LCN stocate."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Acest plugin depinde de datele LCN transmise de emițătorul dvs. local."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Încercați să efectuați o scanare manuală a frecvențelor terestre cu scanarea rețelei activată. Dacă acest lucru eșuează, poate nu există date LCN disponibile în zona dvs."
 
 msgid "UK"
-msgstr ""
+msgstr "Regatul Unit"
 
 msgid "Unable to download updates!"
-msgstr ""
+msgstr "Nu se pot descărca actualizările!"
 
 msgid "Unknown Image!"
-msgstr ""
+msgstr "Imagine necunoscută!"
 
 msgid "Update"
-msgstr ""
+msgstr "Actualizare"
 
 msgid "Update Aborted!"
-msgstr ""
+msgstr "Actualizare anulată!"
 
 msgid "of"
-msgstr ""
+msgstr "din"
 
 msgid "please make a donation:\n"
-msgstr ""
+msgstr "vă rugăm să faceți o donație:\n"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2025-05-07 22:08+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2026-02-12 17:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
 msgstr "Adulti"
@@ -26,10 +26,10 @@ msgid "An unexpected error occurred. Please try again later."
 msgstr "Si è verificato un errore imprevisto. Riprova più tardi."
 
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Interattivo"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
 msgstr "Costruisci/ricostruisci ora il bouquet terrestre in base all'ultima scansione."
@@ -44,7 +44,7 @@ msgid "Check Connection!"
 msgstr "Controlla Connessione!"
 
 msgid "Children"
-msgstr ""
+msgstr "Bambini"
 
 msgid "Congrats! You already have the latest version..."
 msgstr "Congratulazioni! Hai già l'ultima versione..."
@@ -56,7 +56,7 @@ msgid "Create separate radio bouquet"
 msgstr "Crea un bouquet radio separato"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Elimina Linea"
 
 msgid "Designs and Graphics by @oktus\n"
 msgstr "Design e grafica di @oktus\n"
@@ -65,7 +65,7 @@ msgid "Do not add duplicated or non indexed channels to the bouquet."
 msgstr "Non aggiungere al bouquet canali duplicati o non indicizzati."
 
 msgid "Do you want add Cline?"
-msgstr "Vuoi aggiungere Cine?"
+msgstr "Vuoi aggiungere Cline?"
 
 msgid "Do you want to Order LCN Bouquet?"
 msgstr "Vuoi ordinare il bouquet LCN?"
@@ -74,37 +74,37 @@ msgid "Do you want to install update (%s) now?"
 msgstr "Vuoi installare l'aggiornamento (%s) adesso?"
 
 msgid "Do you want to remove?"
-msgstr "Vuoi rimuovere ?"
+msgstr "Vuoi rimuovere?"
 
 msgid "Do you want to restart Gui Interface?"
 msgstr "Vuoi riavviare l'Interfaccia Grafica?"
 
 msgid "Download page get failed ..."
-msgstr "La pagina di download non è riuscita ..."
+msgstr "Pagina di download non riuscita..."
 
 msgid "Duplicates"
 msgstr "Duplicati"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Modifica Linea"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr "Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero di canale logo)."
+msgstr "Abilita la creazione di un bouquet terrestre basato sui dati LCN (numero canale logico)."
 
 msgid "Enable terrestrial LCN:"
 msgstr "Abilita LCN terrestre:"
 
 msgid "Enable terrestrial bouquet"
-msgstr "Abilita Bouquet Terrestre"
+msgstr "Abilita bouquet terrestre"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Intrattenimento"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Errore: Nessun dato trovato."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Europa7"
 
 msgid "Exit"
 msgstr "Esci"
@@ -116,41 +116,40 @@ msgid "Failed to parse update information. Please try again later."
 msgstr "Impossibile analizzare le informazioni di aggiornamento. Riprova più tardi."
 
 msgid "Free Space:"
-msgstr "Spazio Libero:"
+msgstr "Spazio libero:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "Canali HD"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Alta Definizione"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr "Se pensi che sia uno strumento utile per il tuo box\n"
+msgstr "Se pensi che sia uno strumento utile per il tuo decoder\n"
 
 msgid "Information and Culture"
-msgstr "Informazioni e Cultura"
+msgstr "Informazione e Cultura"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Inserisci Linea"
 
 msgid "Install"
-msgstr "Installa/Aggiorna"
+msgstr "Installa"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Internet: Connesso"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "Controlla Connessione!"
+msgstr "Internet: Non connesso"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Internet: Sconosciuto"
 
 msgid "Invalid date format in update information."
 msgstr "Formato data non valido nelle informazioni di aggiornamento."
 
 msgid "Italy"
-msgstr ""
+msgstr "Italia"
 
 msgid "LCN Duplicates"
 msgstr "Duplicati LCN"
@@ -159,67 +158,67 @@ msgid "LCN rules:"
 msgstr "Regole LCN:"
 
 msgid "Linuxsat Panel"
-msgstr "Linuxsat Panel"
+msgstr "Pannello Linuxsat"
 
 msgid "Load Category..."
-msgstr "Carico Categoria..."
+msgstr "Carica categoria..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Emittenti locali"
 
 msgid "Music"
-msgstr ""
+msgstr "Musica"
 
 msgid "News"
-msgstr ""
+msgstr "Notizie"
 
 msgid "No corresponding terrestrial services found."
-msgstr "Non sono stati trovati servizi terrestri corrispondenti."
+msgstr "Nessun servizio terrestre corrispondente trovato."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr "Nessuna voce nel database LCN. Eseguire una scansione del servizio."
+msgstr "Nessuna voce nel database LCN. Eseguire una scansione dei servizi."
 
 msgid "No update information available."
-msgstr "Nessuna informazione disponibile sugli aggiornamenti."
+msgstr "Nessuna informazione di aggiornamento disponibile."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
 msgstr "Una volta configurato, il bouquet verrà aggiornato automaticamente quando si esegue una scansione manuale."
 
 msgid "Please Wait..."
-msgstr "Attendi Prego..."
+msgstr "Attendere prego..."
 
 msgid "Please make certain network search is enabled when scanning."
 msgstr "Assicurarsi che la ricerca di rete sia abilitata durante la scansione."
 
 msgid "Premium"
-msgstr ""
+msgstr "Premium"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promo H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr "Metti i servizi radio in un bouquet separato, non nel bouquet tv principale. Questo è necessario quando il provider duplica i numeri dei canali per tv e radio."
+msgstr "Inserisci i servizi radio in un bouquet separato, non nel bouquet TV principale. Questo è necessario quando il provider duplica i numeri dei canali per TV e radio."
 
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 msgid "Rebuild"
-msgstr "Ricostruzione"
+msgstr "Ricostruisci"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr "Vuoi ricostruire il bouquet LCN adesso?"
+msgstr "Ricostruire il bouquet LCN adesso?"
 
 msgid "Rebuild bouquet"
-msgstr "Ricostruire il bouquet"
+msgstr "Ricostruisci bouquet"
 
 msgid "Region"
 msgstr "Regione"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Emittenti regionali"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Radio regionali"
 
 msgid "Reload"
 msgstr "Ricarica"
@@ -228,13 +227,13 @@ msgid "Remove"
 msgstr "Rimuovi"
 
 msgid "Removing %s"
-msgstr "Rimuovo %s"
+msgstr "Rimozione %s"
 
 msgid "Restart enigma"
 msgstr "Riavvia Enigma"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "Provvisori SD"
 
 msgid "Save"
 msgstr "Salva"
@@ -243,25 +242,25 @@ msgid "Select your region."
 msgstr "Seleziona la tua regione."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Semi-generalisti"
 
 msgid "Settings Not Installed ..."
-msgstr "Liste canali non installate..."
+msgstr "Impostazioni non installate..."
 
 msgid "Skip duplicates"
-msgstr "Salta i duplicati"
+msgstr "Salta duplicati"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Canali Sky"
 
 msgid "Sort A-Z"
-msgstr "Ordinamento A-Z"
+msgstr "Ordina A-Z"
 
 msgid "Sort Default"
-msgstr "Ordinamento Predefinito"
+msgstr "Ordine predefinito"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
 msgstr "Suggerito da: @masterG - @oktus - @pcd\n"
@@ -270,361 +269,55 @@ msgid "Terrestrial"
 msgstr "Terrestre"
 
 msgid "Terrestrial Bouquet"
-msgstr "Bouquet Terrestre"
+msgstr "Bouquet terrestre"
 
 msgid "Terrestrial Bouquet Error"
-msgstr "Errore Bouquet Terrestre"
+msgstr "Errore bouquet terrestre"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr "Il plugin Terrestrial Bouquet non è abilitato."
+msgstr "Il plugin Bouquet Terrestre non è abilitato."
 
 msgid "Terrestrial Bouquet setup"
-msgstr "Setup Bouquet Terrestre"
+msgstr "Configurazione bouquet terrestre"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr "Bouquet Terrestre ricostruito con successo."
+msgstr "Bouquet terrestre ricostruito con successo."
 
 msgid "Terrestrial bouquet:"
-msgstr "Bouquet Terrestre:"
+msgstr "Bouquet terrestre:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Canali di test"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
 msgstr "Il Plugin vive grazie alle donazioni di ognuno di voi.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr "Al momento non sono archiviati dati LCN."
+msgstr "Al momento non ci sono dati LCN memorizzati."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr "Questo plugin dipende dai dati LCN trasmessi dal trasmettitore locale."
+msgstr "Questo plugin dipende dai dati LCN trasmessi dal tuo trasmettitore locale."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr "Prova a eseguire una scansione manuale delle frequenze terrestri con la scansione di rete abilitata. Se fallisce, forse non ci sono dati lcn disponibili nella tua zona."
+msgstr "Prova a eseguire una scansione manuale delle frequenze terrestri con la scansione di rete abilitata. Se fallisce, forse non ci sono dati LCN disponibili nella tua zona."
 
 msgid "UK"
-msgstr ""
+msgstr "Regno Unito"
 
 msgid "Unable to download updates!"
-msgstr "Impossibile scaricare aggiornamento!"
+msgstr "Impossibile scaricare gli aggiornamenti!"
 
 msgid "Unknown Image!"
-msgstr "Immagine non corretta!"
+msgstr "Immagine sconosciuta!"
 
 msgid "Update"
-msgstr "Aggiornare"
+msgstr "Aggiorna"
 
 msgid "Update Aborted!"
-msgstr "Aggionamento Annullato!"
+msgstr "Aggiornamento annullato!"
 
 msgid "of"
 msgstr "di"
 
 msgid "please make a donation:\n"
 msgstr "per favore fai una donazione:\n"
-
-#~ msgid "0 Halign Left"
-#~ msgstr "0 Allinea Sx"
-
-#~ msgid "0 Halign Right"
-#~ msgstr "0 Allinea Dx"
-
-#~ msgid "0 Sort"
-#~ msgstr "Ordinamento"
-
-#~ msgid "0 Sort A-Z"
-#~ msgstr "0 Ordinamento A-Z"
-
-#~ msgid "0 Sort Default"
-#~ msgstr "0 Ordinamento Predefinito"
-
-#~ msgid ""
-#~ "A coffee costs nothing.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Un caffè non costa nulla.\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid "Cancel"
-#~ msgstr "Annulla"
-
-#~ msgid "Do you want to Order LCN Bouquet"
-#~ msgstr "Vuoi ordinare il bouquet LCN"
-
-#, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Vuoi eseguire %s ?"
-
-#, python-format
-#~ msgid "Do you want to install %s?"
-#~ msgstr "Vuoi installare %s ?"
-
-#~ msgid "Do you want to install?"
-#~ msgstr "Vuoi installare ?"
-
-#, python-format
-#~ msgid ""
-#~ "Executing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Eseguo %s\n"
-#~ "Attendere Prego..."
-
-#~ msgid ""
-#~ "Execution progress\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Esecuzione in corso\n"
-#~ "\n"
-
-#~ msgid "File Commander - Addon"
-#~ msgstr "File Commander - Addon"
-
-#~ msgid ""
-#~ "File not found /etc/CCcam.cfg!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "File non trovato /etc/CCcam.cfg!\n"
-#~ "Riavvia prego..."
-
-#~ msgid ""
-#~ "File not found /etc/tuxbox/config/oscam.server!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "File non trovato /etc/tuxbox/config/oscam.server!\n"
-#~ "Riavvia prego..."
-
-#~ msgid "Halign Left"
-#~ msgstr "Allinea Sx"
-
-#~ msgid "Halign Right"
-#~ msgstr "Allinea Dx"
-
-#~ msgid "Hide/Show"
-#~ msgstr "Nascondi/Mostra"
-
-#, python-format
-#~ msgid ""
-#~ "I am NOT responsible for any issues you may\n"
-#~ "encounter once you install the plugins and skins.\n"
-#~ " \t\t\t\t\t\t\t\t\t\tHowever, if required, you can get help to resolve the issue.\n"
-#~ "\n"
-#~ "\n"
-#~ "Do you want to execute %s?"
-#~ msgstr ""
-#~ "NON sono responsabile per eventuali problemi che potresti\n"
-#~ "riscontrare una volta installati i plugin e le skin.\n"
-#~ "                                                     Tuttavia, se necessario, puoi ottenere assistenza per risolvere il problema.\n"
-#~ "\n"
-#~ "\n"
-#~ "Vuoi eseguire %s?"
-
-#~ msgid ""
-#~ "I am NOT responsible for any issues you may\n"
-#~ "encounter once you install the plugins and skins.\n"
-#~ "However, if required, you can get help to resolve the issue.\n"
-#~ "\n"
-#~ "\n"
-#~ "Do you want to install?"
-#~ msgstr ""
-#~ "NON sono responsabile per eventuali problemi che potresti\n"
-#~ "riscontrare una volta installati i plugin e le skin.\n"
-#~ "                                                     Tuttavia, se necessario, puoi ottenere assistenza per risolvere il problema.\n"
-#~ "\n"
-#~ "\n"
-#~ "Vuoi installare?"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Installa %s\n"
-#~ "Attendere Prego..."
-
-#, python-format
-#~ msgid ""
-#~ "New version %s available\n"
-#~ "\n"
-#~ "Changelog: %s"
-#~ msgstr ""
-#~ "Nuova versione %s disponibile\n"
-#~ "\n"
-#~ "Changelog: %s"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "But Not downloadable!!!"
-#~ msgstr ""
-#~ "Nuova versione %s disponibile\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Ma non scaricabile!!!"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Press the green button to start the update."
-#~ msgstr ""
-#~ "È disponibile la nuova versione %s\n"
-#~ "\n"
-#~ "Registro delle modifiche: %s\n"
-#~ "\n"
-#~ "Premere il pulsante verde per avviare l'aggiornamento."
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Press green button to start updating"
-#~ msgstr ""
-#~ "È disponibile la nuova versione %s\n"
-#~ "\n"
-#~ "Registro delle modifiche: %s\n"
-#~ "\n"
-#~ "Premere il pulsante verde per avviare l'aggiornamento"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available.\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Do you want to install it now?"
-#~ msgstr ""
-#~ "È disponibile la nuova versione %s.\n"
-#~ "\n"
-#~ "Registro delle modifiche: %s\n"
-#~ "\n"
-#~ "Vuoi installarla ora?"
-
-#~ msgid ""
-#~ "New version: {} available\n"
-#~ "\n"
-#~ "Changelog:\n"
-#~ "{}\n"
-#~ "\n"
-#~ "Press the green button to start the update."
-#~ msgstr ""
-#~ "Nuova versione: {} disponibile\n"
-#~ "\n"
-#~ "Changelog:\n"
-#~ "{}\n"
-#~ "\n"
-#~ "Premi il pulsante verde per avviare l'aggiornamento."
-
-#~ msgid "Restart"
-#~ msgstr "Riavvia"
-
-#, python-format
-#~ msgid ""
-#~ "Server %s added to %s\n"
-#~ "\n"
-#~ "Server: %s\n"
-#~ "Port: %s\n"
-#~ "User: %s\n"
-#~ "Password: %s\n"
-#~ msgstr ""
-#~ "Server %s aggiunto a %s\n"
-#~ "\n"
-#~ "Server: %s\n"
-#~ "Porta: %s\n"
-#~ "Utente: %s\n"
-#~ "Password: %s\n"
-
-#~ msgid ""
-#~ "Server Error.\n"
-#~ "\n"
-#~ "Try again, you'll be luckier!"
-#~ msgstr ""
-#~ "Server Error.\n"
-#~ "\n"
-#~ "Riprova, sarai più fortunato!"
-
-#, python-format
-#~ msgid ""
-#~ "Server error.\n"
-#~ "\n"
-#~ "Try again, you might get lucky!\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Errore del server.\n"
-#~ "\n"
-#~ "Riprova, potresti essere fortunato!\n"
-#~ "%s"
-
-#~ msgid "Sorting Terrestrial Executed!"
-#~ msgstr "Ordinamento Terrestre eseguito!"
-
-#~ msgid "Sorting Terrestrial not Executed!"
-#~ msgstr "Ordinamento Terrestre non eseguito!"
-
-#~ msgid ""
-#~ "Support on: Linuxsat-support.com\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Supporto su: Linuxsat-support.com\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Thank you for choosing plugin for management of your Enigma Box.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Grazie per aver scelto il plugin per la gestione del tuo Enigma Box.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "These Panel may contain Adult content\n"
-#~ "\n"
-#~ "are you sure you want to continue?"
-#~ msgstr ""
-#~ "Questi pannelli possono contenere contenuti per adulti\n"
-#~ "\n"
-#~ "Sei sicuro di voler continuare?"
-
-#~ msgid "Unknow Image!"
-#~ msgstr "Immagine non corretta!"
-
-#~ msgid ""
-#~ "[Checkskin] This operation checks if the skin has its components (is not sure)..\n"
-#~ "Do you really want to continue?"
-#~ msgstr ""
-#~ "[Checkskin] Questa operazione controlla se la skin ha i suoi componenti (non è sicuro).\n"
-#~ "Vuoi davvero continuare?"
-
-#~ msgid "[LCNScanner] Do you want to Scan Order LCN Bouquet"
-#~ msgstr "[LCNScanner] Vuoi scansionare l'ordine LCN Bouquet"
-
-#~ msgid ""
-#~ "[LCNScanner] LCN scan finished\n"
-#~ "Channels Ordered!"
-#~ msgstr ""
-#~ "[LCNScanner] Scansione LCN completata\n"
-#~ "Canali ordinati!"
-
-#~ msgid ""
-#~ "make donation on Linuxsat-support.com\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "fai una donazione su Linuxsat-support.com\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid "play/show Files"
-#~ msgstr "play/show Files"

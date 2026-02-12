@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version='2.8.8'
-changelog="\n--fix Icons by Oktus"
+version='2.8.9'
+changelog="\n--fix Locale Language"
 
 TMPPATH=/tmp/LinuxsatPanel-install
 FILEPATH=/tmp/LinuxsatPanel-main.tar.gz

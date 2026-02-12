@@ -3,167 +3,162 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-09-21 16:43+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2026-02-12 17:42+0100\n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
 "X-Poedit-SearchPath-2: File-Commander.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Pro dospělé"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "Veškerý kód byl přepsán @Lululla - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Došlo k neočekávané chybě. Prosím zkuste to znovu později."
 
 msgid "Australia"
-msgstr ""
+msgstr "Austrálie"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Interaktivní"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Vytvořit/přestavět terestrický bouquet nyní na základě posledního skenování."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Zrušit provedení?"
 
-#, fuzzy
 msgid "Category:"
-msgstr "Kategorie: "
+msgstr "Kategorie:"
 
 msgid "Check Connection!"
 msgstr "Zkontrolujte připojení!"
 
 msgid "Children"
-msgstr ""
+msgstr "Dětské"
 
 msgid "Congrats! You already have the latest version..."
 msgstr "Gratuluji! Už máte nejnovější verzi..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Vytvořit uspořádaný bouquet terestrických služeb na základě LCN dat z vašeho místního vysílače."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Vytvořit samostatný rádiový bouquet"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Smazat řádek"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Design a grafika od @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Nepřidávejte duplicitní nebo neindexované kanály do bouquetu."
 
-#, fuzzy
 msgid "Do you want add Cline?"
-msgstr "Chcete nainstalovat?"
+msgstr "Chcete přidat Cline?"
 
-#, fuzzy
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "Chcete odstranit?"
+msgstr "Chcete seřadit LCN bouquet?"
 
-#, fuzzy
 msgid "Do you want to install update (%s) now?"
-msgstr "Chcete nyní nainstalovat aktualizaci ( %s )?"
+msgstr "Chcete nainstalovat aktualizaci (%s) nyní?"
 
 msgid "Do you want to remove?"
 msgstr "Chcete odstranit?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr "Chcete restartovat rozhraní Gui?"
+msgstr "Chcete restartovat grafické rozhraní?"
 
 msgid "Download page get failed ..."
 msgstr "Stahování stránky se nezdařilo..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Duplicity"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Upravit řádek"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "Povolit vytváření terestrického bouquetu na základě LCN (logické číslo kanálu) dat."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Povolit terestrické LCN:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Povolit terestrický bouquet"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Zábava"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Chyba: Nebyla nalezena žádná data."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Evropa7"
 
 msgid "Exit"
-msgstr "Odejít"
+msgstr "Konec"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Nepodařilo se získat informace o aktualizaci. Zkontrolujte prosím své internetové připojení."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Nepodařilo se analyzovat informace o aktualizaci. Prosím zkuste to znovu později."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "Volné místo:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "HD kanály"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Vysoké rozlišení"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Pokud si myslíte, že je to užitečný nástroj pro váš přijímač\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Informace a kultura"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Vložit řádek"
 
 msgid "Install"
 msgstr "Instalovat"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Internet: Připojeno"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "Zkontrolujte připojení!"
+msgstr "Internet: Bez připojení"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Internet: Neznámý"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Neplatný formát data v informacích o aktualizaci."
 
 msgid "Italy"
-msgstr ""
+msgstr "Itálie"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "LCN duplicity"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "LCN pravidla:"
 
 msgid "Linuxsat Panel"
 msgstr "Panel Linuxsat"
@@ -172,64 +167,64 @@ msgid "Load Category..."
 msgstr "Načíst kategorii..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Místní vysílatelé"
 
 msgid "Music"
-msgstr ""
+msgstr "Hudba"
 
 msgid "News"
-msgstr ""
+msgstr "Zprávy"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "Nebyly nalezeny žádné odpovídající terestrické služby."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "Žádný záznam v LCN databázi. Prosím proveďte skenování služeb."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Nejsou k dispozici žádné informace o aktualizaci."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "Jakmile je nakonfigurován, bouquet bude automaticky aktualizován při ručním skenování."
 
 msgid "Please Wait..."
-msgstr "Prosím, čekej…"
+msgstr "Prosím čekejte..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Prosím ujistěte se, že je při skenování povoleno vyhledávání sítě."
 
 msgid "Premium"
-msgstr ""
+msgstr "Prémiové"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promo H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "Umístěte rádiové služby do samostatného bouquetu, ne do hlavního TV bouquetu. To je vyžadováno, když poskytovatel duplikuje čísla kanálů pro TV a rádio."
 
 msgid "Radio"
-msgstr ""
+msgstr "Rádio"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Přestavět"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "Přestavět LCN bouquet nyní?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Přestavět bouquet"
 
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Regionální vysílatelé"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Regionální rádio"
 
 msgid "Reload"
-msgstr ""
+msgstr "Znovu načíst"
 
 msgid "Remove"
 msgstr "Odstranit"
@@ -238,86 +233,85 @@ msgid "Removing %s"
 msgstr "Odebírání %s"
 
 msgid "Restart enigma"
-msgstr "Restartujte enigmu"
+msgstr "Restartovat Enigmu"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "SD provizorní"
 
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Vyberte svůj region."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Poloviční generalisté"
 
 msgid "Settings Not Installed ..."
 msgstr "Nastavení není nainstalováno..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Přeskočit duplicity"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Sky kanály"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "Seřadit A-Z"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "Výchozí řazení"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Navrženo: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Terestrický"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Terestrický bouquet"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Chyba terestrického bouquetu"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "Plugin pro terestrický bouquet není povolen."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Nastavení terestrického bouquetu"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "Terestrický bouquet byl úspěšně přestavěn."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Terestrický bouquet:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Testovací kanály"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "Plugin žije díky darům každého z vás.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "V současné době nejsou uložena žádná LCN data."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Tento plugin závisí na LCN datech vysílaných vaším místním vysílačem."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Zkuste provést ruční skenování terestrických frekvencí s povoleným síťovým skenováním. Pokud se to nezdaří, pravděpodobně ve vaší oblasti nejsou k dispozici žádná LCN data."
 
 msgid "UK"
-msgstr ""
+msgstr "Velká Británie"
 
 msgid "Unable to download updates!"
-msgstr "Aktualizace nelze stáhnout!"
+msgstr "Nelze stáhnout aktualizace!"
 
-#, fuzzy
 msgid "Unknown Image!"
-msgstr "Neznámý obrázek!"
+msgstr "Neznámý obraz!"
 
 msgid "Update"
 msgstr "Aktualizovat"
@@ -326,147 +320,7 @@ msgid "Update Aborted!"
 msgstr "Aktualizace zrušena!"
 
 msgid "of"
-msgstr ""
+msgstr "z"
 
 msgid "please make a donation:\n"
-msgstr ""
-
-#~ msgid "0 Halign Left"
-#~ msgstr "0 Halign vlevo"
-
-#~ msgid "0 Halign Right"
-#~ msgstr "0 Zarovnat vpravo"
-
-#~ msgid "0 Sort"
-#~ msgstr "0 Seřadit"
-
-#~ msgid "Cancel"
-#~ msgstr "Zrušit"
-
-#, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Chcete spustit %s?"
-
-#, python-format
-#~ msgid "Do you want to install %s?"
-#~ msgstr "Chcete nainstalovat %s?"
-
-#, python-format
-#~ msgid ""
-#~ "Executing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Probíhá %s\n"
-#~ "Čekejte prosím..."
-
-#~ msgid ""
-#~ "Execution progress\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Průběh exekuce\n"
-#~ "\n"
-
-#~ msgid "File Commander - Addon"
-#~ msgstr "File Commander - Addon"
-
-#~ msgid ""
-#~ "File not found /etc/CCcam.cfg!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "Soubor nenalezen /etc/CCcam.cfg!\n"
-#~ "Restartujte prosím..."
-
-#~ msgid ""
-#~ "File not found /etc/tuxbox/config/oscam.server!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "Soubor nenalezen /etc/tuxbox/config/oscam.server!\n"
-#~ "Restartujte prosím..."
-
-#~ msgid "Hide/Show"
-#~ msgstr "Skrýt/zobrazit"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Instalace aplikace %s\n"
-#~ "Prosím, čekejte..."
-
-#~ msgid "Linuxsat-support - File Commander"
-#~ msgstr "Linuxsat-support - File Commander"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Press green button to start updating"
-#~ msgstr ""
-#~ "K dispozici je nová verze %s\n"
-#~ "\n"
-#~ "Seznam změn: %s\n"
-#~ "\n"
-#~ "Stisknutím zeleného tlačítka zahájíte aktualizaci"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available.\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Do you want to install it now?"
-#~ msgstr ""
-#~ "K dispozici je nová verze %s.\n"
-#~ "\n"
-#~ "Seznam změn: %s \n"
-#~ "\n"
-#~ "Chcete jej nainstalovat nyní?"
-
-#~ msgid "Restart"
-#~ msgstr "Reštart"
-
-#, python-format
-#~ msgid ""
-#~ "Server %s added in %s\n"
-#~ "\n"
-#~ "Server:%s\n"
-#~ "Port:%s\n"
-#~ "User:%s\n"
-#~ "Password:%s\n"
-#~ msgstr ""
-#~ "Server %s přidán do %s\n"
-#~ "\n"
-#~ "Server:%s\n"
-#~ "Port:%s\n"
-#~ "Uživatel:%s\n"
-#~ "Heslo:%s\n"
-
-#~ msgid ""
-#~ "Server Error.\n"
-#~ "\n"
-#~ "Try again, you'll be luckier!"
-#~ msgstr ""
-#~ "Chyba serveru.\n"
-#~ "\n"
-#~ "Zkuste to znovu, budete mít větší štěstí!"
-
-#~ msgid "Sorting Terrestrial Executed!"
-#~ msgstr "Pozemní řazení bylo provedeno!"
-
-#~ msgid "Sorting Terrestrial not Executed!"
-#~ msgstr "Třídění pozemních nebylo provedeno!"
-
-#~ msgid ""
-#~ "These Panel may contain Adult content\n"
-#~ "\n"
-#~ "are you sure you want to continue?"
-#~ msgstr ""
-#~ "Tyto panely mohou obsahovat obsah pro dospělé\n"
-#~ "\n"
-#~ "jsi si jistý, že chceš pokračovat?"
-
-#~ msgid "play/show Files"
-#~ msgstr "přehrát/zobrazit soubory"
+msgstr "prosím přispějte:\n"

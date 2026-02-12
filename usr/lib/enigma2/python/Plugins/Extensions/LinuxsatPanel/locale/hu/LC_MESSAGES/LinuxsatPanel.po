@@ -3,167 +3,162 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-09-21 16:43+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2026-02-12 17:58+0100\n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: Lululla\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 "X-Poedit-SearchPath-1: lsConsole.py\n"
 "X-Poedit-SearchPath-2: File-Commander.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Felnőtt"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "Az összes kódot @Lululla írta újra - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Váratlan hiba történt. Kérjük, próbálja újra később."
 
 msgid "Australia"
-msgstr ""
+msgstr "Ausztrália"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Interaktív"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Földfelszíni csokor építése/újraépítése most az utolsó keresés alapján."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Megszakítja a végrehajtást?"
 
-#, fuzzy
 msgid "Category:"
-msgstr "Kategória: "
+msgstr "Kategória:"
 
 msgid "Check Connection!"
 msgstr "Ellenőrizze a kapcsolatot!"
 
 msgid "Children"
-msgstr ""
+msgstr "Gyerek"
 
 msgid "Congrats! You already have the latest version..."
-msgstr "Gratula! Már megvan a legújabb verzió..."
+msgstr "Gratulálok! Már a legújabb verzióval rendelkezik..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Rendezett csokor létrehozása a földfelszíni szolgáltatásokból a helyi adó LCN adatai alapján."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Külön rádió csokor létrehozása"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Sor törlése"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Tervezés és grafika: @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Ne adjon hozzá duplikált vagy nem indexelt csatornákat a csokorhoz."
 
-#, fuzzy
 msgid "Do you want add Cline?"
-msgstr "Szeretné telepíteni?"
+msgstr "Szeretne Cline-t hozzáadni?"
 
-#, fuzzy
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "El szeretné távolítani?"
+msgstr "Szeretné rendezni az LCN csokrot?"
 
-#, fuzzy
 msgid "Do you want to install update (%s) now?"
-msgstr "Szeretné most telepíteni a frissítést (%s)?"
+msgstr "Szeretné telepíteni a frissítést (%s) most?"
 
 msgid "Do you want to remove?"
 msgstr "El szeretné távolítani?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr "Szeretné újraindítani a Gui Interface-t?"
+msgstr "Szeretné újraindítani a grafikus felületet?"
 
 msgid "Download page get failed ..."
 msgstr "Az oldal letöltése sikertelen..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Duplikátumok"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Sor szerkesztése"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "Földfelszíni csokor létrehozásának engedélyezése LCN (logikai csatornaszám) adatok alapján."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Földfelszíni LCN engedélyezése:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Földfelszíni csokor engedélyezése"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Szórakozás"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Hiba: Nincs adat."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Európa7"
 
 msgid "Exit"
 msgstr "Kilépés"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Nem sikerült lekérni a frissítési információkat. Ellenőrizze az internetkapcsolatát."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Nem sikerült feldolgozni a frissítési információkat. Kérjük, próbálja újra később."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "Szabad hely:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "HD csatornák"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Nagy felbontás"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Ha úgy gondolja, hogy ez egy hasznos eszköz a vevőjéhez\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Információ és kultúra"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Sor beszúrása"
 
 msgid "Install"
 msgstr "Telepítés"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Internet: Csatlakoztatva"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "Ellenőrizze a kapcsolatot!"
+msgstr "Internet: Nincs kapcsolat"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Internet: Ismeretlen"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Érvénytelen dátumformátum a frissítési információkban."
 
 msgid "Italy"
-msgstr ""
+msgstr "Olaszország"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "LCN duplikátumok"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "LCN szabályok:"
 
 msgid "Linuxsat Panel"
 msgstr "Linuxsat panel"
@@ -172,64 +167,64 @@ msgid "Load Category..."
 msgstr "Kategória betöltése..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Helyi műsorszolgáltatók"
 
 msgid "Music"
-msgstr ""
+msgstr "Zene"
 
 msgid "News"
-msgstr ""
+msgstr "Hírek"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "Nem találhatók megfelelő földfelszíni szolgáltatások."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "Nincs bejegyzés az LCN adatbázisban. Kérjük, végezzen szolgáltatás-keresést."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Nincs elérhető frissítési információ."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "Beállítás után a csokor automatikusan frissül a kézi keresés során."
 
 msgid "Please Wait..."
 msgstr "Kérem várjon..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Kérjük, győződjön meg róla, hogy a hálózati keresés engedélyezve van a keresés során."
 
 msgid "Premium"
-msgstr ""
+msgstr "Prémium"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promó H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "A rádiószolgáltatásokat külön csokorba helyezze, ne a fő TV csokorba. Ez akkor szükséges, ha a szolgáltató duplikálja a csatornaszámokat a TV és rádió számára."
 
 msgid "Radio"
-msgstr ""
+msgstr "Rádió"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Újraépítés"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "Újraépíti az LCN csokrot most?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Csokor újraépítése"
 
 msgid "Region"
-msgstr ""
+msgstr "Régió"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Regionális műsorszolgáltatók"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Regionális rádió"
 
 msgid "Reload"
-msgstr ""
+msgstr "Újratöltés"
 
 msgid "Remove"
 msgstr "Eltávolítás"
@@ -241,83 +236,82 @@ msgid "Restart enigma"
 msgstr "Enigma újraindítása"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "SD ideiglenesek"
 
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Válassza ki a régióját."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Fél-általánosok"
 
 msgid "Settings Not Installed ..."
 msgstr "A beállítások nincsenek telepítve..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Duplikátumok kihagyása"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Sky csatornák"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "Rendezés A-Z"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "Alapértelmezett rendezés"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Javasolta: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Földfelszíni"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Földfelszíni csokor"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Földfelszíni csokor hiba"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "A földfelszíni csokor bővítmény nincs engedélyezve."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Földfelszíni csokor beállítása"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "A földfelszíni csokor sikeresen újraépült."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Földfelszíni csokor:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Teszt csatornák"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "A bővítmény az Önök adományainak köszönhetően él.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "Jelenleg nincs tárolt LCN adat."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Ez a bővítmény a helyi adó által sugárzott LCN adatoktól függ."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Próbáljon meg kézi keresést futtatni a földfelszíni frekvenciákon, engedélyezett hálózati kereséssel. Ha ez nem sikerül, akkor valószínűleg nem állnak rendelkezésre LCN adatok az Ön területén."
 
 msgid "UK"
-msgstr ""
+msgstr "Egyesült Királyság"
 
 msgid "Unable to download updates!"
 msgstr "Nem sikerült letölteni a frissítéseket!"
 
-#, fuzzy
 msgid "Unknown Image!"
-msgstr "Ismeretlen kép!"
+msgstr "Ismeretlen Image!"
 
 msgid "Update"
 msgstr "Frissítés"
@@ -326,147 +320,7 @@ msgid "Update Aborted!"
 msgstr "Frissítés megszakítva!"
 
 msgid "of"
-msgstr ""
+msgstr "/"
 
 msgid "please make a donation:\n"
-msgstr ""
-
-#~ msgid "0 Halign Left"
-#~ msgstr "0 Balra igazítás"
-
-#~ msgid "0 Halign Right"
-#~ msgstr "0 Igazítás jobbra"
-
-#~ msgid "0 Sort"
-#~ msgstr "0 Rendezés"
-
-#~ msgid "Cancel"
-#~ msgstr "Mégsem"
-
-#, python-format
-#~ msgid "Do you want to execute %s?"
-#~ msgstr "Szeretné végrehajtani a következőt: %s?"
-
-#, python-format
-#~ msgid "Do you want to install %s?"
-#~ msgstr "Telepíteni szeretné a következőt: %s?"
-
-#, python-format
-#~ msgid ""
-#~ "Executing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "%s végrehajtása\n"
-#~ "Kérem, várjon..."
-
-#~ msgid ""
-#~ "Execution progress\n"
-#~ "\n"
-#~ msgstr ""
-#~ "A végrehajtás előrehaladása\n"
-#~ "\n"
-
-#~ msgid "File Commander - Addon"
-#~ msgstr "File Commander - Addon"
-
-#~ msgid ""
-#~ "File not found /etc/CCcam.cfg!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "A fájl nem található /etc/CCcam.cfg!\n"
-#~ "Indítsd újra kérlek..."
-
-#~ msgid ""
-#~ "File not found /etc/tuxbox/config/oscam.server!\n"
-#~ "Restart please..."
-#~ msgstr ""
-#~ "A fájl nem található /etc/tuxbox/config/oscam.server!\n"
-#~ "Indítsd újra kérlek..."
-
-#~ msgid "Hide/Show"
-#~ msgstr "Elrejtés/Megjelenítés"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "%s telepítése\n"
-#~ "Kérlek várj..."
-
-#~ msgid "Linuxsat-support - File Commander"
-#~ msgstr "Linuxsat-support - File Commander"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Press green button to start updating"
-#~ msgstr ""
-#~ "Új verzió (%s) elérhető\n"
-#~ "\n"
-#~ "Változásnapló: %s\n"
-#~ "\n"
-#~ "Nyomja meg a zöld gombot a frissítés elindításához"
-
-#, python-format
-#~ msgid ""
-#~ "New version %s is available.\n"
-#~ "\n"
-#~ "Changelog: %s\n"
-#~ "\n"
-#~ "Do you want to install it now?"
-#~ msgstr ""
-#~ "Új verzió (%s) elérhető.\n"
-#~ "\n"
-#~ "Változásnapló: %s \n"
-#~ "\n"
-#~ "Most szeretné telepíteni?"
-
-#~ msgid "Restart"
-#~ msgstr "Újraindítás"
-
-#, python-format
-#~ msgid ""
-#~ "Server %s added in %s\n"
-#~ "\n"
-#~ "Server:%s\n"
-#~ "Port:%s\n"
-#~ "User:%s\n"
-#~ "Password:%s\n"
-#~ msgstr ""
-#~ "A(z) %s szerver hozzáadva itt: %s\n"
-#~ "\n"
-#~ "Szerver:%s\n"
-#~ "Port:%s\n"
-#~ "Felhasználó:%s\n"
-#~ "Jelszó:%s\n"
-
-#~ msgid ""
-#~ "Server Error.\n"
-#~ "\n"
-#~ "Try again, you'll be luckier!"
-#~ msgstr ""
-#~ "Szerver hiba.\n"
-#~ "\n"
-#~ "Próbálja újra, szerencsésebb lesz!"
-
-#~ msgid "Sorting Terrestrial Executed!"
-#~ msgstr "Földi rendezés végrehajtva!"
-
-#~ msgid "Sorting Terrestrial not Executed!"
-#~ msgstr "Földi rendezés nem hajtható végre!"
-
-#~ msgid ""
-#~ "These Panel may contain Adult content\n"
-#~ "\n"
-#~ "are you sure you want to continue?"
-#~ msgstr ""
-#~ "Ezek a panelek felnőtteknek szóló tartalmat tartalmazhatnak\n"
-#~ "\n"
-#~ "biztos, hogy folytatni akarod?"
-
-#~ msgid "play/show Files"
-#~ msgstr "Fájlok lejátszása/megjelenítése"
+msgstr "kérjük, adományozzon:\n"

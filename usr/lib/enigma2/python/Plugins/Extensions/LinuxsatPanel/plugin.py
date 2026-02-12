@@ -2381,6 +2381,14 @@ class CiefpInstaller(Screen):
             self.titles,
             self.pics,
             self.urls,
+            "CiefpKingSat",
+            "ciefpkingsat.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpKingSat/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
             "CiefpIptvBouquets",
             "ciefp_ib.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpIPTVBouquets/main/installer.sh -O - | /bin/sh")
@@ -2408,6 +2416,15 @@ class CiefpInstaller(Screen):
             "CiefpOscamEditor",
             "ciefp_oe.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpOscamEditor/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
+            "CiefpRottenTomatoes",
+            "ciefprottentomatoes.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpRottenTomatoes/main/installer.sh -O - | /bin/sh")
+
         add_menu_item(
             menu_list,
             self.titles,
@@ -2478,7 +2495,7 @@ class CiefpInstaller(Screen):
             self.pics,
             self.urls,
             "CiefTitloviBrowser",
-            "TitloviBrowser.png",
+            "titlovibrowser.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/TitloviBrowser/main/installer.sh -O - | /bin/sh")
         add_menu_item(
             menu_list,

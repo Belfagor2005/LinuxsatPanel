@@ -1,320 +1,322 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
-"PO-Revision-Date: 2026-01-02 23:15+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-02-12 17:55+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Vuxen"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "All kod har skrivits om av @Lululla - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Ett oväntat fel uppstod. Försök igen senare."
 
 msgid "Australia"
-msgstr ""
+msgstr "Australien"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC Interaktiv"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Bygg/återuppbygg markbunden bukett nu baserat på den senaste skanningen."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Avbryta körning?"
 
 msgid "Category:"
-msgstr ""
+msgstr "Kategori:"
 
 msgid "Check Connection!"
-msgstr ""
+msgstr "Kontrollera anslutning!"
 
 msgid "Children"
-msgstr ""
+msgstr "Barn"
 
 msgid "Congrats! You already have the latest version..."
-msgstr ""
+msgstr "Grattis! Du har redan den senaste versionen..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Skapa en ordnad bukett av markbundna tjänster baserat på LCN-data från din lokala sändare."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Skapa separat radiobukett"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Ta bort rad"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Design och grafik av @oktus\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Lägg inte till dubblerade eller icke-indexerade kanaler i buketten."
 
 msgid "Do you want add Cline?"
-msgstr ""
+msgstr "Vill du lägga till Cline?"
 
 msgid "Do you want to Order LCN Bouquet?"
-msgstr ""
+msgstr "Vill du beställa LCN-bukett?"
 
 msgid "Do you want to install update (%s) now?"
-msgstr ""
+msgstr "Vill du installera uppdatering (%s) nu?"
 
 msgid "Do you want to remove?"
-msgstr ""
+msgstr "Vill du ta bort?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr ""
+msgstr "Vill du starta om gränssnittet?"
 
 msgid "Download page get failed ..."
-msgstr ""
+msgstr "Nedladdning av sida misslyckades..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Duplikat"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Redigera rad"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "Aktivera skapande av markbunden bukett baserat på LCN-data (logiskt kanalnummer)."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Aktivera markbunden LCN:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Aktivera markbunden bukett"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Underhållning"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Fel: Inga data hittades."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Europa7"
 
 msgid "Exit"
-msgstr ""
+msgstr "Avsluta"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Misslyckades med att hämta uppdateringsinformation. Kontrollera din internetanslutning."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Misslyckades med att tolka uppdateringsinformation. Försök igen senare."
 
 msgid "Free Space:"
-msgstr ""
+msgstr "Ledigt utrymme:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "HD-kanaler"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Högupplöst"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Om du tycker att det är ett användbart verktyg för din box\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Information och kultur"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Infoga rad"
 
 msgid "Install"
-msgstr ""
+msgstr "Installera"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "Internet: Ansluten"
 
 msgid "Internet: No Connection"
-msgstr ""
+msgstr "Internet: Ingen anslutning"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "Internet: Okänd"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Ogiltigt datumformat i uppdateringsinformation."
 
 msgid "Italy"
-msgstr ""
+msgstr "Italien"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "LCN-duplikat"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "LCN-regler:"
 
 msgid "Linuxsat Panel"
-msgstr ""
+msgstr "Linuxsat-panel"
 
 msgid "Load Category..."
-msgstr ""
+msgstr "Ladda kategori..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Lokala sändare"
 
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 msgid "News"
-msgstr ""
+msgstr "Nyheter"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "Inga motsvarande markbundna tjänster hittades."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "Ingen post i LCN-databasen. Utför en tjänsteskanning."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Ingen uppdateringsinformation tillgänglig."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "När den är konfigurerad kommer buketten att uppdateras automatiskt vid manuell skanning."
 
 msgid "Please Wait..."
-msgstr ""
+msgstr "Vänligen vänta..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Se till att nätverkssökning är aktiverad vid skanning."
 
 msgid "Premium"
-msgstr ""
+msgstr "Premium"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promo H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "Placera radiotjänster i en separat bukett, inte huvud-TV-buketten. Detta krävs när leverantören duplicerar kanalnummer för TV och radio."
 
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Återuppbygg"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "Återuppbygg LCN-bukett nu?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Återuppbygg bukett"
 
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Regionala sändare"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Regional radio"
 
 msgid "Reload"
-msgstr ""
+msgstr "Ladda om"
 
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 msgid "Removing %s"
-msgstr ""
+msgstr "Tar bort %s"
 
 msgid "Restart enigma"
-msgstr ""
+msgstr "Starta om Enigma"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "SD-tillfälliga"
 
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Välj din region."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Semi-generalister"
 
 msgid "Settings Not Installed ..."
-msgstr ""
+msgstr "Inställningar inte installerade..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Hoppa över duplikat"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Sky-kanaler"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "Sortera A-Ö"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "Standardsortering"
 
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Föreslagen av: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Markbunden"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Markbunden bukett"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Fel med markbunden bukett"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "Plugin för markbunden bukett är inte aktiverad."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Installation av markbunden bukett"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "Markbunden bukett har återuppbyggts."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Markbunden bukett:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Testkanaler"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "Pluginet lever tack vare donationer från var och en av er.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "Det finns för närvarande inga LCN-data lagrade."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Detta plugin är beroende av LCN-data som sänds av din lokala sändare."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Försök att köra en manuell skanning av markbundna frekvenser med nätverkssökning aktiverad. Om detta misslyckas kanske det inte finns några LCN-data tillgängliga i ditt område."
 
 msgid "UK"
-msgstr ""
+msgstr "Storbritannien"
 
 msgid "Unable to download updates!"
-msgstr ""
+msgstr "Kan inte ladda ner uppdateringar!"
 
 msgid "Unknown Image!"
-msgstr ""
+msgstr "Okänd bild!"
 
 msgid "Update"
-msgstr ""
+msgstr "Uppdatera"
 
 msgid "Update Aborted!"
-msgstr ""
+msgstr "Uppdatering avbruten!"
 
 msgid "of"
-msgstr ""
+msgstr "av"
 
 msgid "please make a donation:\n"
-msgstr ""
+msgstr "vänligen donera:\n"

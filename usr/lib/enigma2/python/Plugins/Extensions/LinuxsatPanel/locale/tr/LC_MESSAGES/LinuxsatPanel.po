@@ -2,343 +2,323 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinuxsatPanel\n"
 "POT-Creation-Date: 2024-08-02 13:53+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2026-02-12 17:57+0100\n"
+"Last-Translator: Levi45\n"
 "Language-Team: Levi45\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Adult"
-msgstr ""
+msgstr "Yetişkin"
 
 msgid "All code was rewritten by @Lululla - 2024.07.20\n"
-msgstr ""
+msgstr "Tüm kod @Lululla tarafından yeniden yazıldı - 2024.07.20\n"
 
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin."
 
 msgid "Australia"
-msgstr ""
+msgstr "Avustralya"
 
 msgid "BBC Interactive"
-msgstr ""
+msgstr "BBC İnteraktif"
 
 msgid "Build/rebuild terrestrial bouquet now based on the last scan."
-msgstr ""
+msgstr "Son taramaya dayalı olarak karasal buketi şimdi oluştur/yeniden oluştur."
 
 msgid "Cancel execution?"
-msgstr ""
+msgstr "Yürütme iptal edilsin mi?"
 
-#, fuzzy
 msgid "Category:"
-msgstr "Kategori: "
+msgstr "Kategori:"
 
 msgid "Check Connection!"
 msgstr "Bağlantıyı kontrol et!"
 
 msgid "Children"
-msgstr ""
+msgstr "Çocuk"
 
 msgid "Congrats! You already have the latest version..."
-msgstr ""
+msgstr "Tebrikler! Zaten en son sürüme sahipsiniz..."
 
 msgid "Create an ordered bouquet of terrestrial services based on LCN data from your local transmitter."
-msgstr ""
+msgstr "Yerel vericinizden alınan LCN verilerine dayalı olarak sıralı bir karasal hizmet buketi oluşturun."
 
 msgid "Create separate radio bouquet"
-msgstr ""
+msgstr "Ayrı radyo buketi oluştur"
 
 msgid "Del Line"
-msgstr ""
+msgstr "Satırı Sil"
 
 msgid "Designs and Graphics by @oktus\n"
-msgstr ""
+msgstr "Tasarım ve Grafikler @oktus tarafından\n"
 
 msgid "Do not add duplicated or non indexed channels to the bouquet."
-msgstr ""
+msgstr "Bukete yinelenen veya indekslenmemiş kanalları eklemeyin."
 
-#, fuzzy
 msgid "Do you want add Cline?"
-msgstr "Yüklemek istiyor musunuz?"
+msgstr "Cline eklemek istiyor musunuz?"
 
-#, fuzzy
 msgid "Do you want to Order LCN Bouquet?"
-msgstr "Kaldırmak istiyor musunuz?"
+msgstr "LCN Buketini sıralamak istiyor musunuz?"
 
-#, fuzzy
 msgid "Do you want to install update (%s) now?"
-msgstr "Yüklemek istiyor musun %s?"
+msgstr "Güncellemeyi (%s) şimdi yüklemek istiyor musunuz?"
 
 msgid "Do you want to remove?"
 msgstr "Kaldırmak istiyor musunuz?"
 
 msgid "Do you want to restart Gui Interface?"
-msgstr "Gui  yeniden başlatmak istiyor musunuz?"
+msgstr "GUI arayüzünü yeniden başlatmak istiyor musunuz?"
 
 msgid "Download page get failed ..."
-msgstr "Indirme sayfasında hata olustu..."
+msgstr "İndirme sayfası alınamadı..."
 
 msgid "Duplicates"
-msgstr ""
+msgstr "Kopyalar"
 
 msgid "Edit Line"
-msgstr ""
+msgstr "Satırı Düzenle"
 
 msgid "Enable creating a terrestrial bouquet based on LCN (logocal channel number) data."
-msgstr ""
+msgstr "LCN (mantıksal kanal numarası) verilerine dayalı karasal buket oluşturmayı etkinleştir."
 
 msgid "Enable terrestrial LCN:"
-msgstr ""
+msgstr "Karasal LCN'yi etkinleştir:"
 
 msgid "Enable terrestrial bouquet"
-msgstr ""
+msgstr "Karasal buketi etkinleştir"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Eğlence"
 
 msgid "Error: No Data Find."
-msgstr ""
+msgstr "Hata: Veri Bulunamadı."
 
 msgid "Europe7"
-msgstr ""
+msgstr "Avrupa7"
 
 msgid "Exit"
-msgstr "Cıkış"
+msgstr "Çıkış"
 
 msgid "Failed to fetch update information. Please check your internet connection."
-msgstr ""
+msgstr "Güncelleme bilgileri alınamadı. Lütfen internet bağlantınızı kontrol edin."
 
 msgid "Failed to parse update information. Please try again later."
-msgstr ""
+msgstr "Güncelleme bilgileri ayrıştırılamadı. Lütfen daha sonra tekrar deneyin."
 
 msgid "Free Space:"
 msgstr "Boş alan:"
 
 msgid "HD Channels"
-msgstr ""
+msgstr "HD Kanallar"
 
 msgid "High Definition"
-msgstr ""
+msgstr "Yüksek Çözünürlük"
 
 msgid "If you think it is a useful tool for your box\n"
-msgstr ""
+msgstr "Eğer kutunuz için yararlı bir araç olduğunu düşünüyorsanız\n"
 
 msgid "Information and Culture"
-msgstr ""
+msgstr "Bilgi ve Kültür"
 
 msgid "Ins Line"
-msgstr ""
+msgstr "Satır Ekle"
 
 msgid "Install"
-msgstr "Yukle"
+msgstr "Yükle"
 
 msgid "Internet: Connected"
-msgstr ""
+msgstr "İnternet: Bağlı"
 
-#, fuzzy
 msgid "Internet: No Connection"
-msgstr "Bağlantıyı kontrol et!"
+msgstr "İnternet: Bağlantı Yok"
 
 msgid "Internet: Unknown"
-msgstr ""
+msgstr "İnternet: Bilinmiyor"
 
 msgid "Invalid date format in update information."
-msgstr ""
+msgstr "Güncelleme bilgilerinde geçersiz tarih formatı."
 
 msgid "Italy"
-msgstr ""
+msgstr "İtalya"
 
 msgid "LCN Duplicates"
-msgstr ""
+msgstr "LCN Kopyaları"
 
 msgid "LCN rules:"
-msgstr ""
+msgstr "LCN kuralları:"
 
 msgid "Linuxsat Panel"
 msgstr "Linuxsat Panel"
 
 msgid "Load Category..."
-msgstr "Kategoriyi Yükle..."
+msgstr "Kategori Yükle..."
 
 msgid "Local Broadcasters"
-msgstr ""
+msgstr "Yerel Yayıncılar"
 
 msgid "Music"
-msgstr ""
+msgstr "Müzik"
 
 msgid "News"
-msgstr ""
+msgstr "Haberler"
 
 msgid "No corresponding terrestrial services found."
-msgstr ""
+msgstr "İlgili karasal hizmet bulunamadı."
 
 msgid "No entry in lcn db. Please do a service scan."
-msgstr ""
+msgstr "LCN veritabanında giriş yok. Lütfen bir hizmet taraması yapın."
 
 msgid "No update information available."
-msgstr ""
+msgstr "Kullanılabilir güncelleme bilgisi yok."
 
 msgid "Once configured the bouquet will be updated automatically when doing a manual scan."
-msgstr ""
+msgstr "Yapılandırıldıktan sonra, manuel tarama yapıldığında buket otomatik olarak güncellenecektir."
 
 msgid "Please Wait..."
-msgstr "Lutfen Bekleyiniz..."
+msgstr "Lütfen Bekleyin..."
 
 msgid "Please make certain network search is enabled when scanning."
-msgstr ""
+msgstr "Tarama yaparken ağ aramasının etkin olduğundan emin olun."
 
 msgid "Premium"
-msgstr ""
+msgstr "Premium"
 
 msgid "Promo H264"
-msgstr ""
+msgstr "Promo H264"
 
 msgid "Put radio services in a separate bouquet, not the main tv bouquet. This is required when the provider duplicates channel numbers for tv and radio."
-msgstr ""
+msgstr "Radyo hizmetlerini ana TV buketine değil, ayrı bir bukete koyun. Bu, sağlayıcı TV ve radyo için kanal numaralarını kopyaladığında gereklidir."
 
 msgid "Radio"
-msgstr ""
+msgstr "Radyo"
 
 msgid "Rebuild"
-msgstr ""
+msgstr "Yeniden Oluştur"
 
 msgid "Rebuild LCN bouquet now?"
-msgstr ""
+msgstr "LCN buketi şimdi yeniden oluşturulsun mu?"
 
 msgid "Rebuild bouquet"
-msgstr ""
+msgstr "Buketi yeniden oluştur"
 
 msgid "Region"
-msgstr ""
+msgstr "Bölge"
 
 msgid "Regional Broadcasters"
-msgstr ""
+msgstr "Bölgesel Yayıncılar"
 
 msgid "Regional Radio"
-msgstr ""
+msgstr "Bölgesel Radyo"
 
 msgid "Reload"
-msgstr ""
+msgstr "Yeniden Yükle"
 
 msgid "Remove"
-msgstr "Kaldir"
+msgstr "Kaldır"
 
 msgid "Removing %s"
-msgstr "Kaldırılıyor %s"
+msgstr "%s kaldırılıyor"
 
 msgid "Restart enigma"
 msgstr "Enigma'yı yeniden başlat"
 
 msgid "SD Provisionals"
-msgstr ""
+msgstr "SD Geçiciler"
 
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 msgid "Select your region."
-msgstr ""
+msgstr "Bölgenizi seçin."
 
 msgid "Semi-Generalists"
-msgstr ""
+msgstr "Yarı-Genelciler"
 
 msgid "Settings Not Installed ..."
-msgstr "Kanal Listesi Yüklüdegil..."
+msgstr "Ayarlar Yüklenmemiş..."
 
 msgid "Skip duplicates"
-msgstr ""
+msgstr "Kopyaları atla"
 
 msgid "Sky Channels"
-msgstr ""
+msgstr "Sky Kanalları"
 
 msgid "Sort A-Z"
-msgstr ""
+msgstr "A-Z Sırala"
 
 msgid "Sort Default"
-msgstr ""
+msgstr "Varsayılan Sırala"
 
 msgid "Sports"
-msgstr ""
+msgstr "Spor"
 
 msgid "Suggested by: @masterG - @oktus - @pcd\n"
-msgstr ""
+msgstr "Öneren: @masterG - @oktus - @pcd\n"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Karasal"
 
 msgid "Terrestrial Bouquet"
-msgstr ""
+msgstr "Karasal Buket"
 
 msgid "Terrestrial Bouquet Error"
-msgstr ""
+msgstr "Karasal Buket Hatası"
 
 msgid "Terrestrial Bouquet plugin is not enabled."
-msgstr ""
+msgstr "Karasal Buket eklentisi etkin değil."
 
 msgid "Terrestrial Bouquet setup"
-msgstr ""
+msgstr "Karasal Buket kurulumu"
 
 msgid "Terrestrial bouquet successfully rebuilt."
-msgstr ""
+msgstr "Karasal buket başarıyla yeniden oluşturuldu."
 
 msgid "Terrestrial bouquet:"
-msgstr ""
+msgstr "Karasal buket:"
 
 msgid "Test Channels"
-msgstr ""
+msgstr "Test Kanalları"
 
 msgid "The Plugin lives thanks to the donations of each of you.\n"
-msgstr ""
+msgstr "Eklenti, her birinizin bağışları sayesinde yaşıyor.\n"
 
 msgid "There is currently no LCN data stored."
-msgstr ""
+msgstr "Şu anda depolanmış LCN verisi yok."
 
 msgid "This plugin depends on LCN data being broadcast by your local tansmitter."
-msgstr ""
+msgstr "Bu eklenti, yerel vericiniz tarafından yayınlanan LCN verilerine bağımlıdır."
 
 msgid "Try running a manual scan of terrestrial frequencies with network scan enabled. If this fails maybe there is no lcn data available in your area."
-msgstr ""
+msgstr "Ağ taraması etkinken karasal frekansların manuel taramasını çalıştırmayı deneyin. Bu başarısız olursa, bölgenizde kullanılabilir LCN verisi olmayabilir."
 
 msgid "UK"
-msgstr ""
+msgstr "Birleşik Krallık"
 
 msgid "Unable to download updates!"
 msgstr "Güncellemeler indirilemiyor!"
 
-#, fuzzy
 msgid "Unknown Image!"
-msgstr "Bilinmeyen Imaj!"
+msgstr "Bilinmeyen İmaj!"
 
 msgid "Update"
-msgstr ""
+msgstr "Güncelle"
 
 msgid "Update Aborted!"
-msgstr ""
+msgstr "Güncelleme İptal Edildi!"
 
 msgid "of"
-msgstr "yuzunden"
+msgstr "of"
 
 msgid "please make a donation:\n"
-msgstr ""
-
-#~ msgid "0 Sort"
-#~ msgstr "0 Sipariş"
-
-#, python-format
-#~ msgid ""
-#~ "Installing %s\n"
-#~ "Please Wait..."
-#~ msgstr ""
-#~ "Kuruluyor %s\n"
-#~ "Lutfen Bekleyiniz..."
-
-#~ msgid "Sorting Terrestrial channels with Lcn rules Completed"
-#~ msgstr "Karasal kanalların Lcn kurallarıyla sıralanması Tamamlandı"
+msgstr "lütfen bağış yapın:\n"
