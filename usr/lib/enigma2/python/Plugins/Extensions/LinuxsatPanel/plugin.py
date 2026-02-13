@@ -2421,6 +2421,14 @@ class CiefpInstaller(Screen):
             self.titles,
             self.pics,
             self.urls,
+            "CiefpParabolaCZ",
+            "CiefpParabolaCZ.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpParabolaCZ/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
             "CiefpRottenTomatoes",
             "ciefprottentomatoes.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpRottenTomatoes/main/installer.sh -O - | /bin/sh")
