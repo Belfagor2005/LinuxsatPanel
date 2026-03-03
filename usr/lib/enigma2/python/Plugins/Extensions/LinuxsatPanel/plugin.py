@@ -1863,6 +1863,14 @@ class LulullaScript(Screen):
             self.titles,
             self.pics,
             self.urls,
+            "ForecaOne",
+            "foreca1.png",
+            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/ForecaOne/main/installer.sh -O - | /bin/sh")
+        add_menu_item(
+            menu_list,
+            self.titles,
+            self.pics,
+            self.urls,
             "Freearhey",
             "freearhey.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/freearhey/main/installer.sh -O - | /bin/sh")
@@ -2026,14 +2034,6 @@ class LulullaScript(Screen):
             "Vavoo",
             "vavoo.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/vavoo/main/installer.sh -O - | /bin/sh")
-        add_menu_item(
-            menu_list,
-            self.titles,
-            self.pics,
-            self.urls,
-            "Vavoo Maker",
-            "vavoo_maker.png",
-            "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/VavooMaker/main/installer.sh -O - | /bin/sh")
         add_menu_item(
             menu_list,
             self.titles,
@@ -2432,7 +2432,6 @@ class CiefpInstaller(Screen):
             "CiefpRottenTomatoes",
             "ciefprottentomatoes.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/ciefp/CiefpRottenTomatoes/main/installer.sh -O - | /bin/sh")
-
         add_menu_item(
             menu_list,
             self.titles,
