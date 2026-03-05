@@ -1864,7 +1864,7 @@ class LulullaScript(Screen):
             self.pics,
             self.urls,
             "ForecaOne",
-            "foreca1.png",
+            "ForecaOne.png",
             "wget -q --no-check-certificate https://raw.githubusercontent.com/Belfagor2005/ForecaOne/main/installer.sh -O - | /bin/sh")
         add_menu_item(
             menu_list,
