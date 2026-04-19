@@ -1,6 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function
+from Components.Language import language
+from Tools.Directories import (resolveFilename, SCOPE_PLUGINS)
+from enigma import (
+    RT_HALIGN_RIGHT,
+    RT_HALIGN_LEFT,
+    getDesktop,
+)
+from os.path import exists, dirname, join
+from os import popen, environ, statvfs, system
+import gettext
+import sys
+
 # ═════════════════════════════════════════════════════════════════════
 #
 #  UTILITY SKIN
@@ -24,18 +36,6 @@ __email__ = "ekekaz@gmail.com"
 __copyright__ = 'Copyright (c) 2024 Lululla'
 __license__ = "GPL-v2"
 __version__ = "2.9.0"
-
-from Components.Language import language
-from Tools.Directories import (resolveFilename, SCOPE_PLUGINS)
-from enigma import (
-    RT_HALIGN_RIGHT,
-    RT_HALIGN_LEFT,
-    getDesktop,
-)
-from os.path import exists, dirname, join
-from os import popen, environ, statvfs, system
-import gettext
-import sys
 
 
 def check_and_install_requests():
