@@ -557,6 +557,13 @@ class LinuxsatPanel(Screen):
                 self.titles,
                 self.pics,
                 self.urls,
+                "Games Tools OE2.2/2.5/2.6 ",
+                "Game.png")
+            add_menu_item(
+                menu_list,
+                self.titles,
+                self.pics,
+                self.urls,
                 "KiddaC OE2.2/2.5/2.6 ",
                 "KiddaC2.png")
 
